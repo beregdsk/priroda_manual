@@ -422,6 +422,12 @@ that site only.
 :::
 <!-- src: 06 §7 -->
 
+A run stopped from outside, by the batch system's time limit, `scancel` or `kill`, ends its output with
+`process 0 got signal 15` (SIGTERM) and no further message. Give long jobs enough wall time: in a version 25 test,
+the analytic Hessian of a 22-atom copper complex with L2 basis and a fine grid did not finish within an hour on one
+core, after a 6-step optimization that had taken most of that hour.
+<!-- src: 08 t72 -->
+
 ## Input file requirements
 
 The input is a plain text file. Write it in a plain-text editor, not a word processor.

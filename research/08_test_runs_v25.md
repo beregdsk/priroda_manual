@@ -9,7 +9,7 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 5: `git show 192f430:tests/runs/20261017-131420/<file>`;
 - round 6: `git show 7d6391c:tests/runs/20261017-131753/<file>`;
 - round 7: `git show 705f5ab:tests/runs/20261017-133258/<file>`;
-- round 8: `tests/runs/20261017-135441/` (t72, unfinished: `tests/runs/20261017-141203/`).
+- round 8: `tests/runs/20261017-135441/` (t72: `tests/runs/20261017-141203/`).
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -156,7 +156,7 @@ doublet, 22 atoms, `restrict=0`, `$grid acc=1e-12`). Cr₂ is a singlet at 1.679
 | t70a | Forum SCF settings (`procedure=BFGS iterations=999,999 convergence=1e-10`): **converged**, no divergence. Coarse grid (68 416 points) for iterations 0–19, fine grid (2 182 252 points) from iteration 20 (energy jump +0.0023 hartree), then smooth convergence; `converged!` after 48 iterations, E = -2061.0966862906, 7.8 min. The 2015 divergence does not reproduce in v25. |
 | t70b | Default Newton–Raphson SCF (`restrict=0 convergence=1e-10`): converged after 10 iterations (fine grid from iteration 4), same E, 4.3 min. |
 | t71 | Restart loop with `iterations=10`: converged in the first cycle (10 iterations, same E), so no restart happened. |
-| t72 | `optimize+hessian`: unfinished when the results were pushed (output ends inside the first SCF). |
+| t72 | `optimize+hessian` (`restrict=0 convergence=1e-10`, default procedure): every SCF converged; `OPTIMIZATION CONVERGED in 6 steps!` (E -2061.0967071 → -2061.0967122); the Hessian step's SCF converged and `ANALYTIC SECOND DERIVATIVES OF SCF ENERGY` started, then the run was killed by `run.sh`'s one-hour `timeout` (exit 124; output ends with `process 0 got signal 15`). No frequencies. |
 | t73a | Cr₂ default: restricted, converged after 10 iterations, E = -2088.4673560475. |
 | t73b | Cr₂ `restrict=0`, `$guess mix=1`: converged after 14 iterations to the **restricted** solution (identical alpha and beta orbital energies, same E). |
 | t73c | The same with `procedure=bfgs`: 23 iterations, same restricted solution and E. |

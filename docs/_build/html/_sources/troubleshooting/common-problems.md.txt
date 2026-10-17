@@ -264,7 +264,9 @@ Newton–Raphson procedure in 10 iterations and about half the time. The fine-gr
   $control task=optimize+hessian $end
   $scf restrict=0 convergence=1e-10 $end
   ```
-  Each optimization step then starts from the previous wavefunction. <!-- src: 05 §7.1 (amge) --> <!-- verify -->
+  Each optimization step then starts from the previous wavefunction. In version 25 this route converged the
+  optimization of the complex in 6 steps, with every SCF converging, and the SCF of the Hessian step converged on
+  the fine grid as well. <!-- src: 05 §7.1 (amge); 08 t72 -->
 - Save the wavefunction at the start of the optimization with {ref}`save <control.save>` and read it into the Hessian
   job with `$guess read=1`. For an already optimized structure, the guess built from scratch turned out to be poor.
   <!-- src: 05 §7.1 (EvgeniX) -->
