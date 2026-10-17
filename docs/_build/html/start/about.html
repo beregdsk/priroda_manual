@@ -329,7 +329,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <ul class="simple">
 <li><p>✓: shown to work in an example input, a user report or a test run.</p></li>
 <li><p>–: not available, according to the sources.</p></li>
-<li><p>?: unverified. No source shows it working or failing.</p></li>
+<li><p>✗: failed in a version 25 test.</p></li>
 </ul>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -363,10 +363,10 @@ user reports and the test runs on version 25, not from a statement by the develo
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hessian</span></code></p></td>
 <td class="text-center"><p>✓ (2)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓ (3, 8)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓ (3)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">optimize</span></code></p></td>
 <td class="text-center"><p>✓</p></td>
@@ -378,27 +378,27 @@ user reports and the test runs on version 25, not from a statement by the develo
 </tr>
 <tr class="row-even"><td><p>TS (<code class="docutils literal notranslate"><span class="pre">saddle=1</span></code>)</p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irc</span></code></p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scan</span></code></p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✗ (9)</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nmr</span></code></p></td>
 <td class="text-center"><p>✓ (5)</p></td>
@@ -417,20 +417,19 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>–</p></td>
 </tr>
 <tr class="row-odd"><td><p>MD (<code class="docutils literal notranslate"><span class="pre">thermostat</span></code>)</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
-<!-- verify: the ? cells are tests/ round 7 (t65-t69) -->
+<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68; MD: 08 t69; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
 <p>Notes to the table:</p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p>A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the developer’s 2011 note on a bug
 fix that names the CCSD(T) gradient. <!-- src: 04 #146; 03 §1 --></p></li>
 <li><p>Analytic second derivatives. <!-- src: 06 §3; 05 §10 --></p></li>
@@ -444,7 +443,18 @@ energy. Users report that relativistic (<code class="docutils literal notranslat
 <li><p>There is no hybrid TDDFT. See <a class="reference internal" href="#what-priroda-does-not-do"><span class="std std-ref">What Priroda does not do</span></a>.</p></li>
 <li><p>Excited states at the coupled-cluster level use a different <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value, <code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code> (linear-response CCSD, RHF
 only), whose status is undocumented. <!-- src: 06 §3; 03 §11 --></p></li>
+<li><p>The Hessian of the excited state given by <code class="docutils literal notranslate"><span class="pre">state=</span></code> (version 25, water, <code class="docutils literal notranslate"><span class="pre">state=1,3</span></code>): numerical, with two
+imaginary modes at the ground-state geometry, as expected for an excited state away from its own minimum.</p>
+<!-- src: 08 t65a -->
+</li>
+<li><p>A TDDFT scan of NH3 failed in version 25: the excited-state equations diverged (<code class="docutils literal notranslate"><span class="pre">g=</span> <span class="pre">-nan</span></code>) and the run stopped
+with <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">write</span> <span class="pre">td.XK(…)?</span></code>. A TDDFT TS search and IRC on the same molecule worked.</p>
+<!-- src: 08 t68d, t66d, t67d -->
+</li>
 </ol>
+<p>The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they
+show that the combination runs and ends normally, not how well it behaves on real problems.</p>
+<!-- src: 08 t65-t69 -->
 <p>The scalar-relativistic option <code class="docutils literal notranslate"><span class="pre">four=1</span></code> has been used with <code class="docutils literal notranslate"><span class="pre">dft</span></code>, <code class="docutils literal notranslate"><span class="pre">ridft</span></code> and <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>. The full list of <code class="docutils literal notranslate"><span class="pre">theory=</span></code>
 values, including the undocumented ones, is in <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
 <!-- src: 01 §5.6; 06 §3 (UO2F2 riDFT, O2 riMP2 examples); 05 §14 -->

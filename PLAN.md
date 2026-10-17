@@ -129,4 +129,5 @@ wrongly for `tddft`), 7 (yes; the last `$Energy` group wins), 8 (imaginary as `8
 4f. ~~Round 4 (t21, t41b, t50, t53, t55, t56, t57).~~ Run on v25; folded in. Parallel launch settled (bundled `mpiexec`).
 4g. ~~Rounds 5 and 6 (t58–t64).~~ Run on v25; folded in. Remaining `verify` marks need Windows, a batch system or hard cases.
 4d. Repository `README.md` added.
+4h. ~~Round 7: capability matrix (t65–t69).~~ Run on v25; every `?` cell filled (TDDFT scan fails).
 5. Write the Part II chapters in task order, then Part III, then the appendices.

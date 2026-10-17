@@ -70,23 +70,22 @@ user reports and the test runs on version 25, not from a statement by the develo
 
 - ✓: shown to work in an example input, a user report or a test run.
 - –: not available, according to the sources.
-- ?: unverified. No source shows it working or failing.
+- ✗: failed in a version 25 test.
 
 | Task | `dft` | `ridft` | `tddft` | `rimp2` | `ccsd` / `ccsd4t` | `qm_n3` |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
 | `energy` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `gradient` | ✓ | ✓ | ✓ | ✓ | ✓ (1) | ✓ |
-| `hessian` | ✓ (2) | ✓ (3) | ? | ✓ (3) | ✓ (3) | ? |
+| `hessian` | ✓ (2) | ✓ (3) | ✓ (3, 8) | ✓ (3) | ✓ (3) | ✓ (3) |
 | `optimize` | ✓ | ✓ | ✓ (4) | ✓ | ✓ (1) | ✓ |
-| TS (`saddle=1`) | ✓ | ? | ? | ? | ? | ? |
-| `irc` | ✓ | ? | ? | ? | ? | ? |
-| `scan` | ✓ | ? | ? | ? | ? | ? |
+| TS (`saddle=1`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `irc` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `scan` | ✓ | ✓ | ✗ (9) | ✓ | ✓ | ✓ |
 | `nmr` | ✓ (5) | – | – | – | – | – |
 | TDDFT excited states | – | – (6) | ✓ | – | – (7) | – |
-| MD (`thermostat`) | ? | ? | ? | ? | ? | ✓ |
+| MD (`thermostat`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
-<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
-<!-- verify: the ? cells are tests/ round 7 (t65-t69) -->
+<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68; MD: 08 t69; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
 
 Notes to the table:
 
@@ -103,6 +102,16 @@ Notes to the table:
 6. There is no hybrid TDDFT. See {ref}`what-priroda-does-not-do`.
 7. Excited states at the coupled-cluster level use a different `theory=` value, `ccsdsd` (linear-response CCSD, RHF
    only), whose status is undocumented. <!-- src: 06 §3; 03 §11 -->
+8. The Hessian of the excited state given by `state=` (version 25, water, `state=1,3`): numerical, with two
+   imaginary modes at the ground-state geometry, as expected for an excited state away from its own minimum.
+   <!-- src: 08 t65a -->
+9. A TDDFT scan of NH3 failed in version 25: the excited-state equations diverged (`g= -nan`) and the run stopped
+   with `0: write td.XK(…)?`. A TDDFT TS search and IRC on the same molecule worked.
+   <!-- src: 08 t68d, t66d, t67d -->
+
+The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they
+show that the combination runs and ends normally, not how well it behaves on real problems.
+<!-- src: 08 t65-t69 -->
 
 The scalar-relativistic option `four=1` has been used with `dft`, `ridft` and `rimp2`. The full list of `theory=`
 values, including the undocumented ones, is in {ref}`$control theory <control.theory>`.

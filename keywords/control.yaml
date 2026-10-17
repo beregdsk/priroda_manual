@@ -24,7 +24,7 @@ keywords:
       - {value: conical, en: "Conical intersection of states 0 and 1 (v9 banner). Untested.", status: undocumented}
       - {value: anharmonic, en: Anharmonic corrections to vibrational energies; slow., status: undocumented}
       - {value: opt_n1, en: "Optimizer for very large systems (used for 8060 atoms with `theory=qm_n2`). Pairs with `$optimize mod=1`.", status: undocumented}
-      - {value: thermostat, en: "Molecular dynamics with a thermostat; see `$dynamic`.", status: undocumented}
+      - {value: thermostat, en: "Molecular dynamics with a thermostat; see `$dynamic`. Ran with every tested theory in version 25.", status: undocumented}
       - {value: uniq, en: "Filter duplicate structures among several `$molecule` blocks; see `$uniq`.", status: undocumented}
     description:
       en: Job type.

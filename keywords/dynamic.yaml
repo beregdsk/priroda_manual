@@ -8,6 +8,11 @@ body:
     Known only from the official example inputs and a third-party input generator. Every meaning below is
     inferred, except `file`.
 
+    In version 25, `task=thermostat` with `e=0.001 d=0.03 n=20,5 m=10 i=1` ran with every tested theory (`dft`,
+    `ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`). The output has one line per step, `point N: s … E … g …`, where
+    negative point numbers are equilibration steps (the second value of `n`) and positive ones the production steps
+    (the first value). In the program, `d` and `h` are prefixes of the keywords `dx` and `hb`.
+
     ```text
     $dynamic
      e=0.001

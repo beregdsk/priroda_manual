@@ -280,7 +280,7 @@ use the node-local scratch disk instead.
 :::
 <!-- src: input.txt; 06 §3, §7 -->
 
-Priroda is sensitive to disk speed. Priroda's own documentation (`input.txt`) warns that for all methods except GGA DFT, performance
+Priroda is sensitive to disk speed. The unofficial keyword list `input.txt` warns that for all methods except GGA DFT, performance
 "will be degraded terribly" if more than one process reads and writes large files on the same physical drive. In
 order of preference:
 <!-- src: input.txt; 04 #181, #293 -->

@@ -5,7 +5,7 @@ RI-DFT, RI-MP2 and coupled-cluster methods, TDDFT, scalar-relativistic calculati
 optimization, transition states, IRC and scans, Hessians and thermochemistry.
 
 Priroda has no complete official manual. This one is **unofficial**: it was not written or reviewed by the developer.
-It is compiled from the program's own files, the short keyword list that ships with it, user pages and forum threads,
+It is compiled from the files on the official site, unofficial keyword lists, user pages and forum threads,
 and test runs on Priroda 25 (2025.02.28). The program itself is not part of this repository; it can be downloaded
 from the official site, <https://rad.chem.msu.ru/~laikov/p_w/>.
 

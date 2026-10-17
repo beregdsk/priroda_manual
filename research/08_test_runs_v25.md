@@ -2,10 +2,15 @@
 
 Three verification rounds: the inputs in `tests/inputs/`, run by the project owner with `tests/run.sh` on
 2026-10-17 on one Linux machine (`node 0: 'arch'`), serial unless stated. Each round reran all earlier tests;
-the outputs of rounds 1–3 were last in `tests/runs/20261017-124819/` (removed from the working tree in commit
-`9332498`; still in git history, e.g. `git show ef39f62:tests/runs/20261017-124819/t01_energy.out`); round 4 was in
-`tests/runs/20261017-130725/` (in history at commit `f04d4f5`); round 5 was in `tests/runs/20261017-131420/` (in history at commit `192f430`); round 6 is in
-`tests/runs/20261017-131753/`. Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
+each round's outputs replaced the previous ones in `tests/runs/`; older rounds are in git history:
+
+- rounds 1–3: `git show ef39f62:tests/runs/20261017-124819/<file>`;
+- round 4: `git show f04d4f5:tests/runs/20261017-130725/<file>`;
+- round 5: `git show 192f430:tests/runs/20261017-131420/<file>`;
+- round 6: `git show 7d6391c:tests/runs/20261017-131753/<file>`;
+- round 7: `tests/runs/20261017-133258/`.
+
+Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
 
 Cite as `08 tNN`. This is program output, the top of the evidence order. Each result holds for v25 only; older
@@ -124,6 +129,21 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 |---|---|
 | t64a | `$system mem=256 disk=1`, no `path=`, `TMPDIR` unset, run from a subdirectory: `Disk:   1g '/tmp'`. Scratch goes to `/tmp`, not to the current or input directory. |
 | t64b | The same with `TMPDIR` set to a directory of its own: `Disk:   1g '<that directory>'`. |
+
+## Round 7: capability matrix
+
+NH3 (planar transition state of the inversion, with the DFT Hessian of t24 appended as the starting Hessian) and
+water, `L1` basis. `tddft` inputs use `state=1,3`.
+
+| Test | Result |
+|---|---|
+| t65a | `task=hessian`, `tddft`: numerical (`NUMERICAL COMPUTATION OF SECOND DERIVATIVES`), Hessian of excited state 1 of water: 891.65i, 773.75i, 3794.87 cm⁻¹. 20 s. |
+| t65b | `task=hessian`, `qm_n3`: numerical; 1559.33, 3878.69, 4041.40 cm⁻¹. |
+| t66a–e | `saddle=1` with `ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`: all read the appended Hessian (`Lowest eigenvalues: -0.02919  0.18683`) and converge in one step to a planar structure (final E: ridft -56.4943555, rimp2 -56.3941298, ccsd -56.4079509, tddft (state 1) -56.2495461, qm_n3 -56.4184878). |
+| t67a–e | `task=irc`, `points=3`, same five theories: all print the IRC header, points 0–3 on `IRC>` lines and the summary, three converged constrained optimizations, exit 0. |
+| t68a,b,c,e | `task=scan` (the t37 scan, `points=3`) with `ridft`, `rimp2`, `ccsd`, `qm_n3`: three converged constrained optimizations and the `SCAN>` summary. |
+| t68d | `task=scan` with `tddft`: the TDDFT iterations diverge (`iter=101…104: g= -nan`), then `0: write td.XK(100800:101760)?`, stderr `MPI_Abort`, exit 1. |
+| t69a–f | `task=thermostat` with `$dynamic e=0.001 d=0.03 n=20,5 m=10 i=1` and `dft`, `ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`: all run 26 points (`point -5` … `point 20`), exit 0. Header `THERMOSTAT`, `N = 9 K = 0 ne = 8`, `e = 0.001`, `dx = 0.03`, `L = 20,-5;10`; one line per point: `point N: s … a … b … w … r … d … E … g … U … P … z …`. Negative point numbers are the equilibration steps (second value of `n`). |
 
 ## Cosmetic
 

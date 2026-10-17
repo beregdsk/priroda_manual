@@ -44,7 +44,7 @@ Job type.
 | `conical` | Conical intersection of states 0 and 1 (v9 banner). Untested. *(undocumented)* |
 | `anharmonic` | Anharmonic corrections to vibrational energies; slow. *(undocumented)* |
 | `opt_n1` | Optimizer for very large systems (used for 8060 atoms with `theory=qm_n2`). Pairs with `$optimize mod=1`. *(undocumented)* |
-| `thermostat` | Molecular dynamics with a thermostat; see `$dynamic`. *(undocumented)* |
+| `thermostat` | Molecular dynamics with a thermostat; see `$dynamic`. Ran with every tested theory in version 25. *(undocumented)* |
 | `uniq` | Filter duplicate structures among several `$molecule` blocks; see `$uniq`. *(undocumented)* |
 
 ```{note}

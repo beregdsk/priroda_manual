@@ -157,7 +157,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh
 | t62 | `t62_too_little_disk.in` | Conventional MP2 with a 1 MB RAM disk: what message does too little scratch give? | Error text (`out of disk space`?) | common-problems (disk) || `0: out of disk space (grid_W), 8213824`, exit 1. |
 | t63 | `t63_parallel_ridft_hessian.in` | Numerical `ridft` Hessian on 2 processes | Frequencies as in the serial run (round 2 t32a: 1642.79, 3910.72, 4018.26); run time | running.md (parallel performance) || Same frequencies as serial; 4.85 s vs 7.17 s. |
 
-## Round 6 (run 2026-10-17 on version 25; outputs in `runs/20261017-131753/`)
+## Round 6 (run 2026-10-17 on version 25; outputs in git history, `git show 7d6391c:tests/runs/20261017-131753/<file>`)
 
 ```bash
 cd tests
@@ -169,7 +169,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t64
 | t64a | `t64_scratch_location.in` with `TMPDIR` unset | Where do scratch files go when neither `path=` nor `TMPDIR` is set: current directory or `/tmp`? | The `Disk:` line in `t64a/t64_scratch_location.out` | running.md (where scratch files go) || `/tmp`. |
 | t64b | the same with `TMPDIR` set to `t64b/tmpdir` | Is `TMPDIR` used when `path=` is not given? | The `Disk:` line in `t64b/t64_scratch_location.out` | `system.path` || Yes, `TMPDIR` is used. |
 
-## Round 7: capability matrix (not yet run)
+## Round 7: capability matrix (run 2026-10-17 on version 25; outputs in `runs/20261017-133258/`)
 
 Fills the `?` cells of the capability matrix in about.md: which `task=` values work with which `theory=`. Each test
 asks only "does this task run with this theory, and does it finish normally?". All use water or NH3 with `L1`.

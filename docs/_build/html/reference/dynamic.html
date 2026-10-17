@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -271,6 +272,10 @@
 <p><strong>Relevant when:</strong> <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">thermostat</span></code></p>
 <p>Known only from the official example inputs and a third-party input generator. Every meaning below is
 inferred, except <code class="docutils literal notranslate"><span class="pre">file</span></code>.</p>
+<p>In version 25, <code class="docutils literal notranslate"><span class="pre">task=thermostat</span></code> with <code class="docutils literal notranslate"><span class="pre">e=0.001</span> <span class="pre">d=0.03</span> <span class="pre">n=20,5</span> <span class="pre">m=10</span> <span class="pre">i=1</span></code> ran with every tested theory (<code class="docutils literal notranslate"><span class="pre">dft</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">ccsd</span></code>, <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, <code class="docutils literal notranslate"><span class="pre">qm_n3</span></code>). The output has one line per step, <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">N:</span> <span class="pre">s</span> <span class="pre">…</span> <span class="pre">E</span> <span class="pre">…</span> <span class="pre">g</span> <span class="pre">…</span></code>, where
+negative point numbers are equilibration steps (the second value of <code class="docutils literal notranslate"><span class="pre">n</span></code>) and positive ones the production steps
+(the first value). In the program, <code class="docutils literal notranslate"><span class="pre">d</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code> are prefixes of the keywords <code class="docutils literal notranslate"><span class="pre">dx</span></code> and <code class="docutils literal notranslate"><span class="pre">hb</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$dynamic
  e=0.001
  d=0.03
