@@ -1,0 +1,146 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 12:35:42 2026
+
+ node   0: 'arch'
+
+ Memory: 256m (256m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 3 atoms, 10 electrons
+
+ Atomic Coordinates:
+   8     0.00000000   0.00000000   0.11730000
+   1     0.00000000   0.75720000  -0.46920000
+   1     0.00000000  -0.75720000  -0.46920000
+ #
+  formula: H2O
+  internuclear distances:
+  O1    |  H1   : 0.95778  H2   : 0.95778
+  H1    |  O1   : 0.95778
+  H2    |  O1   : 0.95778
+     largest =    1.51440
+
+ atom   8 core =  1
+ at.d.=0
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   8  O :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -2.51, +13.32
+    2   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    3   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ +---------------------------------------
+ | Number of atoms                      3
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
+ | Theoretical Method              DFT_N4
+ | Approximation to E(xc)          LPBEVV
+ | Dimension of wavefunction basis     24
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=64,16; xmax = 0.25000; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-06)
+ d0 = 6.0e-08, 0.0e+00
+
+ grid: accuracy=1.0e-08,2.6e-06, cut=1.0e-10,1.0e-10, t=-1
+ atom    nr
+    1    56
+    8    64
+  mol   176
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  99.7%     0.0
+ time: Initial Guess                    :     0.0  99.7%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.4%     0.0
+ time: integral estimates               :     0.0  99.7%     0.0
+ ns =   26: nr =    23, n =     598, e = 0.443594772022
+ ns =   50: nr =    85, n =    4250, e = 0.001754004616
+ ns =  110: nr =    11, n =    1210, e = 0.000073201368
+ ns =  194: nr =     8, n =    1552, e = 0.000011282601
+ ns =  302: nr =    10, n =    3020, e = 0.000003765178
+ ns =  434: nr =     6, n =    2604, e = 0.000000710505
+ ns =  590: nr =    20, n =   11800, e = 0.000000069421
+ ns =  770: nr =    10, n =    7700, e = 0.000000018457
+ ns =  974: nr =     3, n =    2922, e = 0.000000001399
+ grid:    35656   53
+   0    -76.3351328790   0.0000000000   0.07148317   0.07647913      1.5
+   1    -76.3419853982  -0.0068525192   0.06241378   0.02932370      2.7
+   2    -76.3593253017  -0.0173399035   0.00266855   0.00195857      4.0
+   3    -76.3593581927  -0.0000328910   0.00029884   0.00058829      5.3
+   4    -76.3593590296  -0.0000008369   0.00007497   0.00007618      6.6
+   5    -76.3593590616  -0.0000000320   0.00001152   0.00002015      7.9
+   6    -76.3593590628  -0.0000000012   0.00000129   0.00000298      9.3
+   7    -76.3593590628  -0.0000000000   0.00000023   0.00000022     10.6
+ converged!
+   8    -76.3593590628  -0.0000000000   0.00000002   0.00000002     12.5
+ time: Coulomb-type Integrals           :     0.1  99.9%     0.1
+ time: Two-Electron Integrals           :     0.7  99.8%     0.7
+ time: Numerical Integration            :     0.7  99.8%     0.7
+ time: C6 density                       :     0.2  99.8%     0.2
+ time: C6 potential                     :     0.2  99.8%     0.2
+ time: 6D Integral                      :    10.0  99.8%    10.0
+ time: SCF Equations                    :    12.5  99.8%    12.6
+
+  E  =     -76.3593590628
+  T  =      76.03562130  V  =    -199.25501211  J  =      46.94319539
+  Ex =      -8.98664123  Ec =      -0.27995556
+  E6 =      -0.00610128  C6 =     -38.42922614
+
+  dipole =   0.758527 au (  1.927998 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -18.907336    2    -1.092034    3    -0.620574    4    -0.470708
+   5    -0.395814
+ virtual:
+   6     0.188722    7     0.279869    8     0.760047    9     0.839434
+  10     0.917633   11     0.981222   12     0.998317   13     1.317718
+
+
+eng>$Energy
+eng> E=-7.6359359062808e+01
+eng> D= 3.49943565e-15  4.53089823e-13 -7.58526994e-01
+eng>$end
+
+
+e2r6>$E2r6 E=-3.84292261e+01 $end
+
+
+ ============================================================
+
+ Memory used =     7747 KB
+  Disk  used =    16168 KB,           641 KB written,         5658 KB read
+
+ CPU  time =   12.94 sec =  0.22 min = 0.00 hr =   99.79%
+ REAL time =   12.97 sec =  0.22 min = 0.00 hr
+ ratio     =   99.79%
+
+ date: Sat Oct 17 12:35:55 2026
+
+ time: Initial Guess                    :     0.0  99.7%     0.0
+ time: atomic calculations              :     0.0  99.7%     0.0
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Coulomb-type Integrals           :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: SCF Equations                    :    12.5  99.8%    12.6
+ time: Two-Electron Integrals           :     0.7  99.8%     0.7
+ time: Numerical Integration            :     0.7  99.8%     0.7
+ time: C6 Potential                     :    11.1  99.8%    11.1
+ time: C6 density                       :     0.2  99.8%     0.2
+ time: C6 potential                     :     0.2  99.8%     0.2
+ time: 6D Integral                      :    10.0  99.8%    10.0
+ time: Orthogonalize                    :     0.0  93.0%     0.0
+ time: integral estimates               :     0.0  99.7%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Diagonalization                  :     0.0  99.4%     0.0
+ time: Rotate                           :     0.0  95.0%     0.0

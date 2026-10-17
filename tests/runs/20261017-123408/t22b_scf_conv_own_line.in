@@ -1,0 +1,18 @@
+$system mem=256 disk=1 $end
+$control
+ task=energy
+ theory=dft
+ basis=/home/egor/Programs/Priroda/basis.in
+$end
+$scf
+ convergence=1e-7
+ iterations=250
+$end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
+$end

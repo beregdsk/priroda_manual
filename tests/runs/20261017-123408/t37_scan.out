@@ -1,0 +1,2536 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 12:35:35 2026
+
+ node   0: 'arch'
+
+ Memory: 256m (256m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 4 atoms, 10 electrons
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000   0.00000000
+   1     0.00000000   0.00000000   1.00800000
+   1     0.87295400   0.00000000  -0.50400000
+   1    -0.87295400   0.00000000  -0.50400000
+ #
+  formula: H3N
+  internuclear distances:
+  N1    |  H1   : 1.00800  H2   : 1.00800  H3   : 1.00800
+  H1    |  N1   : 1.00800
+  H2    |  N1   : 1.00800
+  H3    |  N1   : 1.00800
+     largest =    1.74591
+
+ atom   7 core =  1
+ at.d.=0
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   7  N :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -2.78, +13.00
+    2   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    3   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    4   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   7  N :  40 / 100 : { 6, 4, 3, 1}                       / {10, 9, 7, 4}                       log2(a) =  -1.81, +10.54
+    2   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+    3   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+    4   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+
+ +---------------------------------------
+ | Number of atoms                      4
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
+ | Theoretical Method                 DFT
+ | Approximation to E(xc)             PBE
+ | Dimension of wavefunction basis     29
+ | Dimension of   auxiliary  basis     55
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=32,16; xmax = 0.25000; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-06)
+ inv=2: v = 1.5e-05
+ d0 = 7.6e-06, 6.1e-05
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+    1    56
+    7    64
+  mol   232
+
+ Geometry optimization options:
+ Coordinates: internal
+ Tolerance on gradient       = 0.00001000
+ Tolerance on displacement   = 0.00100000
+ Trust radius                = 0.12500000 (max), 0.01562500 (min)
+ Maximum number of steps     =        128
+ Updated hessian used
+ constrained variable: type=1 i=  1 j=  2 k=  0 l=  0, value=    1.100000,     1.100000
+ constrained variable: type=3 i=  2 j=  1 k=  4 l=  3, value= -180.000000,  -150.000000
+
+ Geometry Optimization Step 0:
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  99.6%     0.0
+ time: Initial Guess                    :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  91.6%     0.0
+
+  it          E            dE            g          x               t
+ grid:    12908   23
+   0       -56.4327500548  0.0000000000 0.09757710                 0.0
+       1                                0.02416665 0.06530009      0.0
+       2                                0.00229598 0.07788703      0.0
+   1       -56.4857221596 -0.0529721048 0.00600637                 0.1
+       1                                0.00294246 0.00573735      0.0
+       2                                0.00028032 0.00625130      0.0
+       3                                0.00000984 0.00623176      0.0
+ grid:    44372   53
+   2       -56.4876988035 -0.0019766439 0.00183528                 0.3
+       1                                0.00024957 0.00141949      0.0
+       2                                0.00006144 0.00158059      0.0
+       3                                0.00001360 0.00154614      0.1
+       4                                0.00000162 0.00154920      0.1
+   3       -56.4877103863 -0.0000115828 0.00000167                 0.4
+       1                                0.00000022 0.00000092      0.0
+   4       -56.4877103863 -0.0000000000 0.00000022                 0.4
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Grid Construction                :     0.1  99.7%     0.1
+ time: Numerical Integration            :     0.4  99.8%     0.4
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0  98.9%     0.0
+ time: Rotate                           :     0.0  96.9%     0.0
+ time: SCF Equations                    :     0.4  99.8%     0.4
+   5 F,   10 F1
+
+  E  =     -56.4877103863
+  T  =      56.18093130  V  =    -156.03729544  J  =      39.41104422
+  Ex =      -7.65828244  Ec =      -0.31791893
+
+  dipole =   0.000002 au (  0.000006 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.926135    2    -0.734389    3    -0.410447    4    -0.410446
+   5    -0.163656
+ virtual:
+   6     0.085604    7     0.177924    8     0.177924    9     0.568936
+  10     0.568936   11     0.637518   12     0.790256   13     0.790256
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6487710386335e+01
+eng> D= 1.36046938e-10  1.23926194e-14 -2.16462853e-06
+eng> G=-3.07174389e-11  9.40173572e-16 -7.43830626e-06
+eng>    6.36090160e-12 -4.36546971e-15  1.34371301e-03
+eng>    1.15954969e-03  2.15670871e-16 -6.68137357e-04
+eng>   -1.15954966e-03  3.20698832e-15 -6.68137351e-04
+eng>$end
+
+ G(max) = 0.00134371  |G| = 0.00232111
+
+
+ Geometry Optimization Step 1:
+ Energy:           -56.48771039
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0013383 (internal), 0.0013363 (cartesian)
+ max. displacement = 0.1738548 (internal), 0.0876240 (cartesian)
+ iter   0: rmax = 0.1738547909, xmax = 0.0876239613
+ iter   1: rmax = 0.0019230054, xmax = 0.0021801652
+ iter   2: rmax = 0.0000015759, xmax = 0.0000008484
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.1738548 (internal), 0.0871868 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000  -0.00000000  -0.04613728
+mol>   1    -0.00000000   0.00000000   1.05386272
+mol>   1     0.87051604   0.00000000  -0.50386272
+mol>   1    -0.87051604   0.00000000  -0.50386272
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000  -0.00000000  -0.04613728
+   1    -0.00000000   0.00000000   1.05386272
+   1     0.87051604   0.00000000  -0.50386272
+   1    -0.87051604   0.00000000  -0.50386272
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  90.2%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4783401440  0.0000000000 0.01446642                 0.0
+       1                                0.00297991 0.01464867      0.0
+       2                                0.00070127 0.01705937      0.0
+       3                                0.00016103 0.01753131      0.0
+   1       -56.4803220616 -0.0019819177 0.00020170                 0.1
+       1                                0.00008552 0.00016844      0.0
+       2                                0.00000761 0.00018874      0.0
+       3                                0.00000236 0.00017693      0.1
+       4                                0.00000024 0.00017590      0.1
+   2       -56.4803224246 -0.0000003630 0.00000023                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.5%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  88.0%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+   8 F,   17 F1
+
+  E  =     -56.4803224246
+  T  =      56.13262175  V  =    -155.72692250  J  =      39.27804696
+  Ex =      -7.64422532  Ec =      -0.31699608
+
+  dipole =   0.037411 au (  0.095090 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.929535    2    -0.731081    3    -0.423218    4    -0.390389
+   5    -0.162967
+ virtual:
+   6     0.074770    7     0.158560    8     0.189183    9     0.560820
+  10     0.578200   11     0.637902   12     0.779870   13     0.787122
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6480322424616e+01
+eng> D=-1.32761354e-11  6.92412978e-15  3.74110145e-02
+eng> G= 2.92364913e-11  7.97679905e-16 -9.02607425e-02
+eng>   -3.07762572e-12 -2.16691009e-16  6.33017850e-02
+eng>   -1.81364206e-02 -7.83461475e-16  1.34794787e-02
+eng>    1.81364206e-02  2.00225525e-16  1.34794787e-02
+eng>$end
+
+ G(max) = 0.09026074  |G| = 0.11478401
+
+
+ Geometry Optimization Step 2:
+ Energy:           -56.48032242
+ Energy change:      0.00738796 (actual)
+                    -0.00000374 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.070617, |dG - HdX| = 0.02575940
+ include g
+ max. gradient     = 0.0223259 (internal), 0.0269590 (cartesian)
+ trust test =-0.2401593, trust radius = 0.0156250
+ Lagrangian multiplier =   0.928499
+ max. displacement = 0.0156250 (internal), 0.0107471 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0107470930
+ iter   1: rmax = 0.0000594520, xmax = 0.0000364431
+ iter   2: rmax = 0.0000000008, xmax = 0.0000000006
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0156250 (internal), 0.0107106 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000   0.00000000  -0.04265048
+mol>   1    -0.00000000   0.00000000   1.05734952
+mol>   1     0.87618387  -0.00000000  -0.50734952
+mol>   1    -0.87618387  -0.00000000  -0.50734952
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000  -0.04265048
+   1    -0.00000000   0.00000000   1.05734952
+   1     0.87618387  -0.00000000  -0.50734952
+   1    -0.87618387  -0.00000000  -0.50734952
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.4%     0.0
+ time: Orthogonalize                    :     0.0  85.6%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4809027031  0.0000000000 0.00234887                 0.0
+       1                                0.00080002 0.00138251      0.0
+       2                                0.00011205 0.00167875      0.0
+       3                                0.00002853 0.00163682      0.1
+       4                                0.00000114 0.00164171      0.1
+   1       -56.4809310116 -0.0000283085 0.00000149                 0.2
+       1                                0.00000063 0.00000135      0.0
+       2                                0.00000009 0.00000154      0.0
+   2       -56.4809310116 -0.0000000000 0.00000009                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  95.7%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  11 F,   23 F1
+
+  E  =     -56.4809310116
+  T  =      56.10190223  V  =    -155.57597386  J  =      39.21763366
+  Ex =      -7.63728533  Ec =      -0.31666800
+
+  dipole =   0.034345 au (  0.087297 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.931013    2    -0.728830    3    -0.420193    4    -0.390186
+   5    -0.162500
+ virtual:
+   6     0.073142    7     0.157229    8     0.186271    9     0.561712
+  10     0.578143   11     0.636041   12     0.779664   13     0.786048
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6480931011636e+01
+eng> D=-1.01024883e-11 -2.77623176e-15  3.43450415e-02
+eng> G= 1.83513371e-11  2.11374619e-17 -8.19262670e-02
+eng>   -3.11325268e-12  9.78978740e-18  6.34041162e-02
+eng>   -1.08027061e-02 -5.99877458e-18  9.26107543e-03
+eng>    1.08027061e-02 -2.44252167e-17  9.26107542e-03
+eng>$end
+
+ G(max) = 0.08192627  |G| = 0.10553164
+
+
+ Geometry Optimization Step 3:
+ Energy:           -56.48093101
+ Energy change:     -0.00060859 (actual)
+                    -0.00061633 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.070617, |dG - HdX| = 0.00006154
+ Hessian update: |dG| = 0.011952, |dG - HdX| = 0.00115955
+ include g
+ max. gradient     = 0.0138828 (internal), 0.0185222 (cartesian)
+ trust test = 0.0713959, trust radius = 0.0220971
+ Lagrangian multiplier =   0.109388
+ max. displacement = 0.0220971 (internal), 0.0142559 (cartesian)
+ iter   0: rmax = 0.0220970869, xmax = 0.0142559294
+ iter   1: rmax = 0.0002564360, xmax = 0.0002140862
+ iter   2: rmax = 0.0000000156, xmax = 0.0000000100
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0220971 (internal), 0.0143361 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000  -0.00000000  -0.03506416
+mol>   1    -0.00000000   0.00000000   1.06493584
+mol>   1     0.88130458   0.00000000  -0.51493584
+mol>   1    -0.88130458   0.00000000  -0.51493584
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000  -0.00000000  -0.03506416
+   1    -0.00000000   0.00000000   1.06493584
+   1     0.88130458   0.00000000  -0.51493584
+   1    -0.88130458   0.00000000  -0.51493584
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.6%     0.0
+ time: Orthogonalize                    :     0.0  87.9%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4813286117  0.0000000000 0.00345166                 0.0
+       1                                0.00123991 0.00245836      0.0
+       2                                0.00014633 0.00293341      0.0
+       3                                0.00004476 0.00287140      0.0
+       4                                0.00000200 0.00287890      0.1
+   1       -56.4813968002 -0.0000681885 0.00000340                 0.1
+       1                                0.00000127 0.00000304      0.0
+       2                                0.00000017 0.00000357      0.0
+   2       -56.4813968002 -0.0000000001 0.00000017                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.2  99.7%     0.2
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0  94.1%     0.0
+ time: Rotate                           :     0.0  97.0%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  14 F,   29 F1
+
+  E  =     -56.4813968002
+  T  =      56.05987986  V  =    -155.36659647  J  =      39.13367546
+  Ex =      -7.62768017  Ec =      -0.31620175
+
+  dipole =   0.027949 au (  0.071040 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933043    2    -0.725703    3    -0.414978    4    -0.390847
+   5    -0.161825
+ virtual:
+   6     0.070551    7     0.155877    8     0.181858    9     0.563313
+  10     0.578173   11     0.633241   12     0.778212   13     0.785951
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481396800237e+01
+eng> D=-4.92981003e-12  3.38316628e-16  2.79491990e-02
+eng> G= 6.03990063e-12  2.25862707e-16 -6.95327989e-02
+eng>   -2.26339088e-12  8.30291442e-17  6.37865943e-02
+eng>   -1.58699234e-03 -4.54468656e-17  2.87310228e-03
+eng>    1.58699233e-03 -2.65899145e-16  2.87310228e-03
+eng>$end
+
+ G(max) = 0.06953280  |G| = 0.09447267
+
+
+ Geometry Optimization Step 4:
+ Energy:           -56.48139680
+ Energy change:     -0.00046579 (actual)
+                    -0.00044404 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.011952, |dG - HdX| = 0.00000941
+ Hessian update: |dG| = 0.015856, |dG - HdX| = 0.00152130
+ include g
+ max. gradient     = 0.0027677 (internal), 0.0057462 (cartesian)
+ trust test =-0.0462218, trust radius = 0.0312500
+ max. displacement = 0.0171149 (internal), 0.0087703 (cartesian)
+ iter   0: rmax = 0.0171149127, xmax = 0.0087703047
+ iter   1: rmax = 0.0000691811, xmax = 0.0000892494
+ iter   2: rmax = 0.0000000023, xmax = 0.0000000012
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0171149 (internal), 0.0087794 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000  -0.00000000  -0.03041830
+mol>   1    -0.00000000   0.00000000   1.06958170
+mol>   1     0.88034713   0.00000000  -0.51958170
+mol>   1    -0.88034713   0.00000000  -0.51958170
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000  -0.00000000  -0.03041830
+   1    -0.00000000   0.00000000   1.06958170
+   1     0.88034713   0.00000000  -0.51958170
+   1    -0.88034713   0.00000000  -0.51958170
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.7%     0.0
+ time: Orthogonalize                    :     0.0  91.6%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4814377863  0.0000000000 0.00148946                 0.0
+       1                                0.00048923 0.00126796      0.0
+       2                                0.00004790 0.00139296      0.0
+       3                                0.00001343 0.00136549      0.0
+       4                                0.00000089 0.00136748      0.1
+   1       -56.4814514524 -0.0000136661 0.00000105                 0.1
+       1                                0.00000032 0.00000061      0.0
+   2       -56.4814514524 -0.0000000000 0.00000032                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.0%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0 100.0%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  17 F,   34 F1
+
+  E  =     -56.4814514524
+  T  =      56.04711646  V  =    -155.30250143  J  =      39.10803079
+  Ex =      -7.62474894  Ec =      -0.31605706
+
+  dipole =   0.024180 au (  0.061460 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933642    2    -0.724749    3    -0.412492    4    -0.391876
+   5    -0.161598
+ virtual:
+   6     0.069578    7     0.155838    8     0.180272    9     0.564074
+  10     0.578166   11     0.632259   12     0.776779   13     0.787135
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.7%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481451452359e+01
+eng> D=-1.26892767e-12 -1.74652394e-15  2.41798765e-02
+eng> G= 1.22763764e-12  3.26592567e-16 -6.47673367e-02
+eng>   -1.30000941e-12  7.20396018e-18  6.41094343e-02
+eng>    6.70151357e-04 -5.89763581e-17  3.28951205e-04
+eng>   -6.70151357e-04 -2.70240681e-16  3.28951206e-04
+eng>$end
+
+ G(max) = 0.06476734  |G| = 0.09113694
+
+
+ Geometry Optimization Step 5:
+ Energy:           -56.48145145
+ Energy change:     -0.00005465 (actual)
+                    -0.00004767 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.015856, |dG - HdX| = 0.00002064
+ Hessian update: |dG| = 0.004865, |dG - HdX| = 0.00124725
+ include g
+ max. gradient     = 0.0007778 (internal), 0.0006702 (cartesian)
+ trust test =-0.0277800, trust radius = 0.0242041
+ max. displacement = 0.0062022 (internal), 0.0027854 (cartesian)
+ iter   0: rmax = 0.0062022091, xmax = 0.0027853993
+ iter   1: rmax = 0.0000091508, xmax = 0.0000081351
+ iter   2: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0062022 (internal), 0.0027935 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000   0.00000000  -0.02904245
+mol>   1    -0.00000000   0.00000000   1.07095755
+mol>   1     0.87886885  -0.00000000  -0.52095755
+mol>   1    -0.87886885  -0.00000000  -0.52095755
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000  -0.02904245
+   1    -0.00000000   0.00000000   1.07095755
+   1     0.87886885  -0.00000000  -0.52095755
+   1    -0.87886885  -0.00000000  -0.52095755
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.4%     0.0
+ time: Orthogonalize                    :     0.0  93.9%     0.0
+
+  it          E            dE            g          x               t
+ grid:    42716   47
+   0       -56.4814549883  0.0000000000 0.00036160                 0.1
+       1                                0.00001694 0.00031895      0.0
+       2                                0.00000390 0.00032736      0.0
+       3                                0.00000081 0.00032776      0.0
+       4                                0.00000027 0.00032767      0.1
+   1       -56.4814559921 -0.0000010039 0.00000028                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.7%     0.0
+ time: Matrix Multiply                  :     0.0  95.8%     0.0
+ time: Rotate                           :     0.0  85.9%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  19 F,   38 F1
+
+  E  =     -56.4814559921
+  T  =      56.04692249  V  =    -155.30171557  J  =      39.10779716
+  Ex =      -7.62471731  Ec =      -0.31605567
+
+  dipole =   0.023095 au (  0.058703 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933636    2    -0.724739    3    -0.411945    4    -0.392367
+   5    -0.161586
+ virtual:
+   6     0.069483    7     0.156043    8     0.180148    9     0.564221
+  10     0.578163   11     0.632168   12     0.776208   13     0.787854
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.6%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481455992147e+01
+eng> D= 2.13939023e-12  1.49834434e-15  2.30952072e-02
+eng> G=-2.39326135e-13  9.37914790e-17 -6.39758357e-02
+eng>   -9.70292305e-13  6.39243748e-17  6.42225076e-02
+eng>    5.40720448e-04 -1.94257221e-17 -1.23335934e-04
+eng>   -5.40720447e-04 -1.38209611e-16 -1.23335933e-04
+eng>$end
+
+ G(max) = 0.06422251  |G| = 0.09065348
+
+
+ Geometry Optimization Step 6:
+ Energy:           -56.48145599
+ Energy change:     -0.00000454 (actual)
+                    -0.00000358 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0005321 (internal), 0.0005407 (cartesian)
+ max. displacement = 0.0009986 (internal), 0.0010639 (cartesian)
+ iter   0: rmax = 0.0009986045, xmax = 0.0010638543
+ iter   1: rmax = 0.0000003606, xmax = 0.0000002077
+ iter   2: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0009986 (internal), 0.0010639 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000   0.00000000  -0.02891196
+mol>   1    -0.00000000   0.00000000   1.07108804
+mol>   1     0.87830586  -0.00000000  -0.52108804
+mol>   1    -0.87830586  -0.00000000  -0.52108804
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000  -0.02891196
+   1    -0.00000000   0.00000000   1.07108804
+   1     0.87830586  -0.00000000  -0.52108804
+   1    -0.87830586  -0.00000000  -0.52108804
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.4%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  96.3%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4814566461  0.0000000000 0.00009655                 0.0
+       1                                0.00003897 0.00006711      0.0
+       2                                0.00000689 0.00006862      0.0
+       3                                0.00000091 0.00006839      0.1
+       4                                0.00000003 0.00006896      0.1
+   1       -56.4814567125 -0.0000000664 0.00000004                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.7%     0.0
+ time: Matrix Multiply                  :     0.0  98.3%     0.0
+ time: Rotate                           :     0.0  83.2%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  21 F,   42 F1
+
+  E  =     -56.4814567125
+  T  =      56.04818251  V  =    -155.30814005  J  =      39.11040824
+  Ex =      -7.62501383  Ec =      -0.31607045
+
+  dipole =   0.023005 au (  0.058473 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933569    2    -0.724836    3    -0.411960    4    -0.392482
+   5    -0.161603
+ virtual:
+   6     0.069543    7     0.156140    8     0.180264    9     0.564203
+  10     0.578171   11     0.632221   12     0.776104   13     0.788052
+ time: One-Electron Gradient            :     0.0  99.6%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481456712515e+01
+eng> D= 2.16483255e-12 -2.26645544e-16  2.30048400e-02
+eng> G= 6.13274290e-13 -2.22698614e-16 -6.41951781e-02
+eng>   -8.03574046e-13  1.03699236e-16  6.42456499e-02
+eng>    2.04446939e-04  3.89053048e-17 -2.52358969e-05
+eng>   -2.04446939e-04  7.92449338e-17 -2.52358964e-05
+eng>$end
+
+ G(max) = 0.06424565  |G| = 0.09082185
+
+
+ Geometry Optimization Step 7:
+ Energy:           -56.48145671
+ Energy change:     -0.00000072 (actual)
+                    -0.00000051 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000499, |dG - HdX| = 0.00030670
+ include g
+ max. gradient     = 0.0001907 (internal), 0.0002044 (cartesian)
+ trust test =-0.3786310, trust radius = 0.0156250
+ max. displacement = 0.0010216 (internal), 0.0008040 (cartesian)
+ iter   0: rmax = 0.0010216126, xmax = 0.0008039546
+ iter   1: rmax = 0.0000002483, xmax = 0.0000001447
+ iter   2: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0010216 (internal), 0.0008041 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000   0.00000000  -0.02873648
+mol>   1    -0.00000000   0.00000000   1.07126352
+mol>   1     0.87788036  -0.00000000  -0.52126352
+mol>   1    -0.87788036  -0.00000000  -0.52126352
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000  -0.02873648
+   1    -0.00000000   0.00000000   1.07126352
+   1     0.87788036  -0.00000000  -0.52126352
+   1    -0.87788036  -0.00000000  -0.52126352
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.2%     0.0
+ time: Orthogonalize                    :     0.0  90.2%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4814568232  0.0000000000 0.00008104                 0.0
+       1                                0.00002574 0.00004943      0.0
+       2                                0.00000487 0.00005882      0.0
+       3                                0.00000050 0.00006092      0.0
+   1       -56.4814568607 -0.0000000375 0.00000050                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.5%     0.0
+ time: Matrix Multiply                  :     0.0  99.3%     0.0
+ time: Rotate                           :     0.0  69.3%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  23 F,   45 F1
+
+  E  =     -56.4814568607
+  T  =      56.04887629  V  =    -155.31167855  J  =      39.11185328
+  Ex =      -7.62517781  Ec =      -0.31607863
+
+  dipole =   0.022870 au (  0.058129 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933530    2    -0.724889    3    -0.411927    4    -0.392582
+   5    -0.161611
+ virtual:
+   6     0.069570    7     0.156210    8     0.180319    9     0.564204
+  10     0.578174   11     0.632245   12     0.776003   13     0.788218
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481456860712e+01
+eng> D= 2.58699832e-12  1.88115468e-16  2.28696400e-02
+eng> G= 6.84247198e-13  1.26497515e-16 -6.42700926e-02
+eng>   -5.78273893e-13 -5.47975791e-17  6.42679462e-02
+eng>   -7.18810385e-07 -1.10160226e-17  1.07323477e-06
+eng>    7.18810278e-07 -6.04745200e-17  1.07323486e-06
+eng>$end
+
+ G(max) = 0.06427009  |G| = 0.09089012
+
+
+ Geometry Optimization Step 8:
+ Energy:           -56.48145686
+ Energy change:     -0.00000015 (actual)
+                    -0.00000015 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000499, |dG - HdX| = 0.00000000
+ Hessian update: |dG| = 0.000298, |dG - HdX| = 0.00000325
+ include g
+ max. gradient     = 0.0000012 (internal), 0.0000021 (cartesian)
+ trust test = 0.0029881, trust radius = 0.0156250
+ max. displacement = 0.0000083 (internal), 0.0000040 (cartesian)
+ iter   0: rmax = 0.0000082667, xmax = 0.0000040340
+ iter   1: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0000083 (internal), 0.0000040 (cartesian)
+ OPTIMIZATION CONVERGED in 7 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   7     0.00000000   0.00000000  -0.02873648
+MOL>   1    -0.00000000   0.00000000   1.07126352
+MOL>   1     0.87788036  -0.00000000  -0.52126352
+MOL>   1    -0.87788036  -0.00000000  -0.52126352
+MOL>$end
+MOL> Energy =    -56.4814568607
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000  -0.02873648
+   1    -0.00000000   0.00000000   1.07126352
+   1     0.87788036  -0.00000000  -0.52126352
+   1    -0.87788036  -0.00000000  -0.52126352
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ Geometry Optimization Step 0:
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  90.2%     0.0
+
+  it          E            dE            g          x               t
+ grid:    43976   47
+   0       -56.4814567276  0.0000000000 0.00000393                 0.1
+       1                                0.00000101 0.00000306      0.0
+       2                                0.00000006 0.00000297      0.0
+   1       -56.4814567277 -0.0000000001 0.00000006                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  98.6%     0.0
+ time: Matrix Multiply                  :     0.0  97.7%     0.0
+ time: Rotate                           :     0.0  86.7%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  25 F,   47 F1
+
+  E  =     -56.4814567277
+  T  =      56.04887769  V  =    -155.31168101  J  =      39.11185473
+  Ex =      -7.62517790  Ec =      -0.31607880
+
+  dipole =   0.022882 au (  0.058160 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933530    2    -0.724889    3    -0.411926    4    -0.392584
+   5    -0.161608
+ virtual:
+   6     0.069571    7     0.156209    8     0.180321    9     0.564204
+  10     0.578175   11     0.632245   12     0.776003   13     0.788218
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481456727677e+01
+eng> D= 2.66656575e-12  6.47728063e-17  2.28817419e-02
+eng> G= 1.41701717e-12  4.76716408e-17 -6.44305448e-02
+eng>   -5.27469088e-13 -4.63311388e-18  6.42845417e-02
+eng>   -1.01066943e-04 -2.51735273e-17  7.30015338e-05
+eng>    1.01066942e-04 -1.83936899e-17  7.30015331e-05
+eng>$end
+
+ G(max) = 0.06443054  |G| = 0.09101554
+
+
+ Geometry Optimization Step 1:
+ Energy:           -56.48145673
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0001239 (internal), 0.0001460 (cartesian)
+ Lagrangian multiplier =  14.495851
+ max. displacement = 0.1745329 (internal), 0.0733443 (cartesian)
+ iter   0: rmax = 0.1745329252, xmax = 0.0733442818
+ iter   1: rmax = 0.0047763506, xmax = 0.0025053393
+ iter   2: rmax = 0.0043918142, xmax = 0.0000004161
+ iter   3: rmax = 0.0043917224, xmax = 0.0000000003
+ iter   4: rmax = 0.0043917219, xmax = 0.0000000000
+ max. displacement = 0.1745329 (internal), 0.0735247 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00000833  -0.03890758  -0.02888032
+mol>   1     0.00001369   0.01203310   1.06993952
+mol>   1     0.87681352   0.01343724  -0.52051952
+mol>   1    -0.87681887   0.01343724  -0.52053968
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00000833  -0.03890758  -0.02888032
+   1     0.00001369   0.01203310   1.06993952
+   1     0.87681352   0.01343724  -0.52051952
+   1    -0.87681887   0.01343724  -0.52053968
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.6%     0.0
+ time: Orthogonalize                    :     0.0  81.1%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4810199092  0.0000000000 0.01206319                 0.0
+       1                                0.00267332 0.01871500      0.0
+       2                                0.00019729 0.01766660      0.0
+       3                                0.00003025 0.01772655      0.0
+   1       -56.4818322905 -0.0008123813 0.00011770                 0.1
+       1                                0.00004577 0.00006853      0.0
+       2                                0.00000333 0.00010549      0.0
+       3                                0.00000058 0.00010605      0.1
+       4                                0.00000006 0.00010719      0.1
+   2       -56.4818323573 -0.0000000668 0.00000005                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  98.7%     0.0
+ time: Matrix Multiply                  :     0.0  98.7%     0.0
+ time: Rotate                           :     0.0  87.0%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  28 F,   54 F1
+
+  E  =     -56.4818323573
+  T  =      56.05069040  V  =    -155.31376942  J  =      39.11081123
+  Ex =      -7.62531480  Ec =      -0.31607415
+
+  dipole =   0.094175 au (  0.239372 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933842    2    -0.725433    3    -0.411825    4    -0.392470
+   5    -0.162229
+ virtual:
+   6     0.069591    7     0.156034    8     0.180181    9     0.564274
+  10     0.578279   11     0.632541   12     0.775321   13     0.787429
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481832357270e+01
+eng> D= 8.79625985e-06  9.13927663e-02  2.27239980e-02
+eng> G=-4.77880089e-06  4.66559750e-03 -6.43084602e-02
+eng>    4.10804001e-06  6.18371684e-04  6.40060579e-02
+eng>   -2.33657434e-04 -2.64183662e-03  1.52780528e-04
+eng>    2.34328195e-04 -2.64213256e-03  1.49621772e-04
+eng>$end
+
+ G(max) = 0.06447748  |G| = 0.09093195
+
+
+ Geometry Optimization Step 2:
+ Energy:           -56.48183236
+ Energy change:     -0.00037563 (actual)
+                    -0.00000000 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.004289, |dG - HdX| = 0.06617932
+ include g
+ max. gradient     = 0.0004155 (internal), 0.0006661 (cartesian)
+ trust test =-1.0670013, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000237
+ max. displacement = 0.0021542 (internal), 0.0017639 (cartesian)
+ iter   0: rmax = 0.0021541527, xmax = 0.0017638554
+ iter   1: rmax = 0.0000020652, xmax = 0.0000018780
+ iter   2: rmax = 0.0000006652, xmax = 0.0000000000
+ max. displacement = 0.0021542 (internal), 0.0017635 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00028477  -0.03897286  -0.02829553
+mol>   1    -0.00046290   0.01203352   1.07052101
+mol>   1     0.87678217   0.01346130  -0.52145274
+mol>   1    -0.87660404   0.01347804  -0.52077274
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00028477  -0.03897286  -0.02829553
+   1    -0.00046290   0.01203352   1.07052101
+   1     0.87678217   0.01346130  -0.52145274
+   1    -0.87660404   0.01347804  -0.52077274
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  89.5%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4818331638  0.0000000000 0.00019066                 0.0
+       1                                0.00006521 0.00016396      0.0
+       2                                0.00000606 0.00017812      0.0
+       3                                0.00000173 0.00017437      0.0
+       4                                0.00000011 0.00017450      0.1
+   1       -56.4818334217 -0.0000002579 0.00000012                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.2%     0.0
+ time: Matrix Multiply                  :     0.0  98.1%     0.0
+ time: Rotate                           :     0.0  86.7%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  30 F,   58 F1
+
+  E  =     -56.4818334217
+  T  =      56.04906123  V  =    -155.30554037  J  =      39.10750718
+  Ex =      -7.62493737  Ec =      -0.31605556
+
+  dipole =   0.094185 au (  0.239396 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933921    2    -0.725313    3    -0.411509    4    -0.392597
+   5    -0.162202
+ virtual:
+   6     0.069465    7     0.156023    8     0.179972    9     0.564375
+  10     0.578261   11     0.632438   12     0.775133   13     0.787579
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481833421739e+01
+eng> D=-3.00049077e-04  9.15181714e-02  2.22518291e-02
+eng> G= 1.69513115e-04  4.63385484e-03 -6.36975944e-02
+eng>   -1.39318431e-04  6.06798501e-04  6.40448489e-02
+eng>    3.38245646e-05 -2.62558738e-03 -2.25213658e-04
+eng>   -6.40192485e-05 -2.61506596e-03 -1.22040888e-04
+eng>$end
+
+ G(max) = 0.06404787  |G| = 0.09052524
+
+
+ Geometry Optimization Step 3:
+ Energy:           -56.48183342
+ Energy change:     -0.00000106 (actual)
+                    -0.00000091 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.004289, |dG - HdX| = 0.00001667
+ Hessian update: |dG| = 0.000636, |dG - HdX| = 0.00015839
+ include g
+ max. gradient     = 0.0001134 (internal), 0.0001835 (cartesian)
+ trust test =-0.1150932, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000237
+ max. displacement = 0.0008407 (internal), 0.0005682 (cartesian)
+ iter   0: rmax = 0.0008406832, xmax = 0.0005682364
+ iter   1: rmax = 0.0000002119, xmax = 0.0000001789
+ iter   2: rmax = 0.0000001058, xmax = 0.0000000000
+ max. displacement = 0.0008407 (internal), 0.0005682 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00048014  -0.03899316  -0.02822445
+mol>   1    -0.00076359   0.01203740   1.07059052
+mol>   1     0.87680219   0.01346392  -0.52174104
+mol>   1    -0.87651874   0.01349184  -0.52062503
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00048014  -0.03899316  -0.02822445
+   1    -0.00076359   0.01203740   1.07059052
+   1     0.87680219   0.01346392  -0.52174104
+   1    -0.87651874   0.01349184  -0.52062503
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.5%     0.0
+ time: Orthogonalize                    :     0.0  92.7%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4818335115  0.0000000000 0.00004145                 0.0
+       1                                0.00000741 0.00003876      0.0
+       2                                0.00000073 0.00003941      0.0
+       3                                0.00000014 0.00003934      0.0
+   1       -56.4818335303 -0.0000000188 0.00000014                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.2%     0.0
+ time: Matrix Multiply                  :     0.0  99.9%     0.0
+ time: Rotate                           :     0.0  86.2%     0.0
+ time: SCF Equations                    :     0.1  99.9%     0.1
+  32 F,   61 F1
+
+  E  =     -56.4818335303
+  T  =      56.04891443  V  =    -155.30479886  J  =      39.10720918
+  Ex =      -7.62490331  Ec =      -0.31605389
+
+  dipole =   0.094216 au (  0.239475 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933928    2    -0.725302    3    -0.411475    4    -0.392614
+   5    -0.162200
+ virtual:
+   6     0.069453    7     0.156025    8     0.179952    9     0.564386
+  10     0.578259   11     0.632429   12     0.775105   13     0.787605
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481833530290e+01
+eng> D=-5.04522951e-04  9.15628879e-02  2.21957439e-02
+eng> G= 3.05334267e-04  4.63256169e-03 -6.36343234e-02
+eng>   -2.31289610e-04  6.05606351e-04  6.40495997e-02
+eng>    3.35138415e-05 -2.62857190e-03 -2.86488613e-04
+eng>   -1.07558498e-04 -2.60959614e-03 -1.28787629e-04
+eng>$end
+
+ G(max) = 0.06405288  |G| = 0.09048471
+
+
+ Geometry Optimization Step 4:
+ Energy:           -56.48183353
+ Energy change:     -0.00000011 (actual)
+                    -0.00000008 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000636, |dG - HdX| = 0.00000020
+ Hessian update: |dG| = 0.000110, |dG - HdX| = 0.00007790
+ include g
+ max. gradient     = 0.0000539 (internal), 0.0000775 (cartesian)
+ trust test =-0.3805023, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000237
+ max. displacement = 0.0005119 (internal), 0.0003668 (cartesian)
+ iter   0: rmax = 0.0005118911, xmax = 0.0003668195
+ iter   1: rmax = 0.0000000888, xmax = 0.0000000746
+ iter   2: rmax = 0.0000000195, xmax = 0.0000000000
+ max. displacement = 0.0005119 (internal), 0.0003668 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00060727  -0.03900139  -0.02825187
+mol>   1    -0.00095770   0.01204088   1.07056214
+mol>   1     0.87684494   0.01346265  -0.52185364
+mol>   1    -0.87649451   0.01349786  -0.52045663
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00060727  -0.03900139  -0.02825187
+   1    -0.00095770   0.01204088   1.07056214
+   1     0.87684494   0.01346265  -0.52185364
+   1    -0.87649451   0.01349786  -0.52045663
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  81.5%     0.0
+
+  it          E            dE            g          x               t
+ grid:    39728   47
+   0       -56.4818334013  0.0000000000 0.00002699                 0.1
+       1                                0.00000313 0.00002531      0.0
+       2                                0.00000046 0.00002538      0.0
+   1       -56.4818334084 -0.0000000071 0.00000046                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  83.3%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  34 F,   63 F1
+
+  E  =     -56.4818334084
+  T  =      56.04897882  V  =    -155.30511958  J  =      39.10733587
+  Ex =      -7.62491797  Ec =      -0.31605461
+
+  dipole =   0.094242 au (  0.239542 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933925    2    -0.725307    3    -0.411489    4    -0.392607
+   5    -0.162202
+ virtual:
+   6     0.069458    7     0.156024    8     0.179961    9     0.564380
+  10     0.578261   11     0.632434   12     0.775111   13     0.787599
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481833408427e+01
+eng> D=-6.39224617e-04  9.15837119e-02  2.22179733e-02
+eng> G= 3.96483467e-04  4.64119921e-03 -6.36533853e-02
+eng>   -2.88042481e-04  6.03350787e-04  6.40453442e-02
+eng>    6.95087324e-06 -2.62912203e-03 -2.87792369e-04
+eng>   -1.15391860e-04 -2.61542797e-03 -1.04166505e-04
+eng>$end
+
+ G(max) = 0.06404883  |G| = 0.09049621
+
+
+ Geometry Optimization Step 5:
+ Energy:           -56.48183341
+ Energy change:      0.00000012 (actual)
+                    -0.00000002 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0000153 (internal), 0.0000247 (cartesian)
+ Lagrangian multiplier =   0.000237
+ max. displacement = 0.0001014 (internal), 0.0000771 (cartesian)
+ iter   0: rmax = 0.0001014358, xmax = 0.0000770561
+ iter   1: rmax = 0.0000000035, xmax = 0.0000000027
+ iter   2: rmax = 0.0000000006, xmax = 0.0000000000
+ max. displacement = 0.0001014 (internal), 0.0000771 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00062329  -0.03900154  -0.02827083
+mol>   1    -0.00098662   0.01204157   1.07054308
+mol>   1     0.87686047   0.01346193  -0.52185639
+mol>   1    -0.87649714   0.01349805  -0.52041585
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00062329  -0.03900154  -0.02827083
+   1    -0.00098662   0.01204157   1.07054308
+   1     0.87686047   0.01346193  -0.52185639
+   1    -0.87649714   0.01349805  -0.52041585
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.2%     0.0
+ time: Orthogonalize                    :     0.0  83.5%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4818334096  0.0000000000 0.00000525                 0.0
+       1                                0.00000194 0.00000486      0.0
+       2                                0.00000014 0.00000506      0.0
+   1       -56.4818334100 -0.0000000003 0.00000014                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.1  99.9%     0.1
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  99.3%     0.0
+ time: Rotate                           :     0.0  72.3%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  36 F,   65 F1
+
+  E  =     -56.4818334100
+  T  =      56.04901697  V  =    -155.30530894  J  =      39.10741204
+  Ex =      -7.62492662  Ec =      -0.31605504
+
+  dipole =   0.094246 au (  0.239552 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933923    2    -0.725310    3    -0.411499    4    -0.392601
+   5    -0.162203
+ virtual:
+   6     0.069461    7     0.156024    8     0.179966    9     0.564377
+  10     0.578261   11     0.632437   12     0.775117   13     0.787593
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481833409962e+01
+eng> D=-6.54619823e-04  9.15838466e-02  2.22328306e-02
+eng> G= 4.02781173e-04  4.64203527e-03 -6.36698057e-02
+eng>   -2.96498046e-04  6.03795761e-04  6.40439179e-02
+eng>    2.71088051e-06 -2.62996944e-03 -2.83126173e-04
+eng>   -1.08994007e-04 -2.61586159e-03 -9.09860329e-05
+eng>$end
+
+ G(max) = 0.06404745  |G| = 0.09050685
+
+
+ Geometry Optimization Step 6:
+ Energy:           -56.48183341
+ Energy change:     -0.00000000 (actual)
+                    -0.00000000 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000018, |dG - HdX| = 0.00000605
+ include g
+ max. gradient     = 0.0000039 (internal), 0.0000067 (cartesian)
+ trust test =-0.2437010, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000237
+ max. displacement = 0.0000265 (internal), 0.0000197 (cartesian)
+ iter   0: rmax = 0.0000265180, xmax = 0.0000196640
+ iter   1: rmax = 0.0000000003, xmax = 0.0000000003
+ iter   2: rmax = 0.0000000001, xmax = 0.0000000000
+ max. displacement = 0.0000265 (internal), 0.0000197 (cartesian)
+ OPTIMIZATION CONVERGED in 5 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   7     0.00062329  -0.03900154  -0.02827083
+MOL>   1    -0.00098662   0.01204157   1.07054308
+MOL>   1     0.87686047   0.01346193  -0.52185639
+MOL>   1    -0.87649714   0.01349805  -0.52041585
+MOL>$end
+MOL> Energy =    -56.4818334100
+
+ Atomic Coordinates:
+   7     0.00062329  -0.03900154  -0.02827083
+   1    -0.00098662   0.01204157   1.07054308
+   1     0.87686047   0.01346193  -0.52185639
+   1    -0.87649714   0.01349805  -0.52041585
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ Geometry Optimization Step 0:
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.4%     0.0
+ time: Orthogonalize                    :     0.0  96.3%     0.0
+
+  it          E            dE            g          x               t
+ grid:    39728   47
+   0       -56.4818334152  0.0000000000 0.00000014                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  98.9%     0.0
+ time: Matrix Multiply                  :     0.0  98.7%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  37 F,   65 F1
+
+  E  =     -56.4818334152
+  T  =      56.04901697  V  =    -155.30530894  J  =      39.10741204
+  Ex =      -7.62492662  Ec =      -0.31605504
+
+  dipole =   0.094246 au (  0.239552 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.933923    2    -0.725310    3    -0.411499    4    -0.392601
+   5    -0.162203
+ virtual:
+   6     0.069461    7     0.156024    8     0.179966    9     0.564377
+  10     0.578262   11     0.632437   12     0.775117   13     0.787593
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6481833415239e+01
+eng> D=-6.54619831e-04  9.15838466e-02  2.22328306e-02
+eng> G= 4.02782636e-04  4.64167579e-03 -6.36697733e-02
+eng>   -2.96462397e-04  6.03801758e-04  6.40438892e-02
+eng>    2.68696237e-06 -2.62966207e-03 -2.83100359e-04
+eng>   -1.09007201e-04 -2.61581548e-03 -9.10155310e-05
+eng>$end
+
+ G(max) = 0.06404742  |G| = 0.09050678
+
+
+ Geometry Optimization Step 1:
+ Energy:           -56.48183342
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0000039 (internal), 0.0000068 (cartesian)
+ Lagrangian multiplier =   0.001358
+ max. displacement = 0.1745329 (internal), 0.0740258 (cartesian)
+ iter   0: rmax = 0.1745329252, xmax = 0.0740257847
+ iter   1: rmax = 0.0046997098, xmax = 0.0026607894
+ iter   2: rmax = 0.0045619177, xmax = 0.0000013442
+ iter   3: rmax = 0.0045627874, xmax = 0.0000000016
+ iter   4: rmax = 0.0045627851, xmax = 0.0000000000
+ max. displacement = 0.1745329 (internal), 0.0747118 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00100603  -0.07853730  -0.02819171
+mol>   1     0.00010056   0.02428451   1.06699159
+mol>   1     0.87574239   0.02717436  -0.51959252
+mol>   1    -0.87483691   0.02707843  -0.51920736
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00100603  -0.07853730  -0.02819171
+   1     0.00010056   0.02428451   1.06699159
+   1     0.87574239   0.02717436  -0.51959252
+   1    -0.87483691   0.02707843  -0.51920736
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.6%     0.0
+ time: Orthogonalize                    :     0.0  87.9%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4821118743  0.0000000000 0.01210302                 0.0
+       1                                0.00251273 0.01884578      0.0
+       2                                0.00053668 0.01800719      0.0
+       3                                0.00003025 0.01792581      0.0
+   1       -56.4829465554 -0.0008346811 0.00011448                 0.1
+       1                                0.00004577 0.00006928      0.0
+       2                                0.00000487 0.00013060      0.0
+       3                                0.00000079 0.00012885      0.0
+       4                                0.00000006 0.00013038      0.1
+   2       -56.4829466222 -0.0000000668 0.00000006                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.3%     0.0
+ time: Matrix Multiply                  :     0.0  97.6%     0.0
+ time: Rotate                           :     0.0  81.5%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  40 F,   72 F1
+
+  E  =     -56.4829466222
+  T  =      56.04709880  V  =    -155.27402255  J  =      39.08901737
+  Ex =      -7.62360011  Ec =      -0.31595495
+
+  dipole =   0.183886 au (  0.467395 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.935253    2    -0.726396    3    -0.410595    4    -0.392036
+   5    -0.164005
+ virtual:
+   6     0.069083    7     0.155107    8     0.178756    9     0.564841
+  10     0.578537   11     0.632942   12     0.773120   13     0.784724
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6482946622182e+01
+eng> D= 9.39547974e-04  1.82642240e-01  2.13309302e-02
+eng> G=-2.33619199e-03  8.47989647e-03 -6.14886889e-02
+eng>    1.68229328e-04  1.35351690e-03  6.31661689e-02
+eng>    2.42887923e-03 -4.76754302e-03 -1.38609951e-03
+eng>   -2.60916572e-04 -5.06587036e-03 -2.91380524e-04
+eng>$end
+
+ G(max) = 0.06318089  |G| = 0.08891803
+
+
+ Geometry Optimization Step 2:
+ Energy:           -56.48294662
+ Energy change:     -0.00111321 (actual)
+                    -0.00000000 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.004946, |dG - HdX| = 0.00075655
+ include g
+ max. gradient     = 0.0022823 (internal), 0.0034561 (cartesian)
+ trust test = 0.0163853, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000212
+ max. displacement = 0.0129750 (internal), 0.0074288 (cartesian)
+ iter   0: rmax = 0.0129749913, xmax = 0.0074287614
+ iter   1: rmax = 0.0000471595, xmax = 0.0000490947
+ iter   2: rmax = 0.0000510277, xmax = 0.0000000002
+ iter   3: rmax = 0.0000510275, xmax = 0.0000000000
+ max. displacement = 0.0129750 (internal), 0.0074125 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00244443  -0.07910284  -0.02718043
+mol>   1    -0.00382197   0.02439039   1.06792225
+mol>   1     0.87352246   0.02720170  -0.52314837
+mol>   1    -0.87214493   0.02751075  -0.51759345
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00244443  -0.07910284  -0.02718043
+   1    -0.00382197   0.02439039   1.06792225
+   1     0.87352246   0.02720170  -0.52314837
+   1    -0.87214493   0.02751075  -0.51759345
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.3%     0.0
+ time: Orthogonalize                    :     0.0  92.8%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4829585031  0.0000000000 0.00076670                 0.0
+       1                                0.00016362 0.00073973      0.0
+       2                                0.00003065 0.00074984      0.0
+       3                                0.00000377 0.00074118      0.0
+       4                                0.00000046 0.00074355      0.1
+   1       -56.4829646363 -0.0000061332 0.00000052                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0  98.7%     0.0
+ time: Rotate                           :     0.0  80.1%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  42 F,   76 F1
+
+  E  =     -56.4829646363
+  T  =      56.05087479  V  =    -155.29306371  J  =      39.09669818
+  Ex =      -7.62447932  Ec =      -0.31599895
+
+  dipole =   0.185215 au (  0.470774 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.935067    2    -0.726718    3    -0.410412    4    -0.392559
+   5    -0.164088
+ virtual:
+   6     0.069218    7     0.155479    8     0.179031    9     0.564840
+  10     0.578562   11     0.633135   12     0.772379   13     0.785726
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6482964636283e+01
+eng> D=-2.57070252e-03  1.84057467e-01  2.05184904e-02
+eng> G= 1.63677349e-03  8.70009967e-03 -6.18312548e-02
+eng>   -1.15808533e-03  1.32116155e-03  6.32715932e-02
+eng>   -1.94879761e-05 -5.11314017e-03 -1.09185595e-03
+eng>   -4.59200187e-04 -4.90812104e-03 -3.48482404e-04
+eng>$end
+
+ G(max) = 0.06329598  |G| = 0.08921667
+
+
+ Geometry Optimization Step 3:
+ Energy:           -56.48296464
+ Energy change:     -0.00001801 (actual)
+                    -0.00001800 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.004946, |dG - HdX| = 0.00000672
+ Hessian update: |dG| = 0.002753, |dG - HdX| = 0.00006141
+ include g
+ max. gradient     = 0.0000487 (internal), 0.0000543 (cartesian)
+ trust test = 0.0073839, trust radius = 0.0183503
+ Lagrangian multiplier =   0.000206
+ max. displacement = 0.0000987 (internal), 0.0000845 (cartesian)
+ iter   0: rmax = 0.0000986825, xmax = 0.0000845492
+ iter   1: rmax = 0.0000000012, xmax = 0.0000000006
+ iter   2: rmax = 0.0000000006, xmax = 0.0000000000
+ max. displacement = 0.0000987 (internal), 0.0000845 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00243398  -0.07910439  -0.02717254
+mol>   1    -0.00384629   0.02439034   1.06792992
+mol>   1     0.87351249   0.02720319  -0.52318112
+mol>   1    -0.87210018   0.02751086  -0.51757626
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00243398  -0.07910439  -0.02717254
+   1    -0.00384629   0.02439034   1.06792992
+   1     0.87351249   0.02720319  -0.52318112
+   1    -0.87210018   0.02751086  -0.51757626
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.4%     0.0
+ time: Orthogonalize                    :     0.0  92.7%     0.0
+
+  it          E            dE            g          x               t
+ grid:    41912   53
+   0       -56.4829634337  0.0000000000 0.00001934                 0.1
+       1                                0.00000215 0.00001794      0.0
+       2                                0.00000077 0.00001837      0.0
+       3                                0.00000011 0.00001830      0.1
+   1       -56.4829634365 -0.0000000028 0.00000011                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.6%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  86.2%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  44 F,   79 F1
+
+  E  =     -56.4829634365
+  T  =      56.05093092  V  =    -155.29333824  J  =      39.09680647
+  Ex =      -7.62449115  Ec =      -0.31599993
+
+  dipole =   0.185233 au (  0.470819 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.935065    2    -0.726722    3    -0.410412    4    -0.392562
+   5    -0.164092
+ virtual:
+   6     0.069222    7     0.155489    8     0.179036    9     0.564839
+  10     0.578562   11     0.633137   12     0.772374   13     0.785736
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6482963436547e+01
+eng> D=-2.60998313e-03  1.84076378e-01  2.05020066e-02
+eng> G= 1.86480619e-03  8.74271385e-03 -6.17988277e-02
+eng>   -1.16865018e-03  1.31955114e-03  6.32510877e-02
+eng>   -1.40752568e-04 -5.14937773e-03 -1.07888791e-03
+eng>   -5.55403450e-04 -4.91288725e-03 -3.73372107e-04
+eng>$end
+
+ G(max) = 0.06327564  |G| = 0.08919136
+
+
+ Geometry Optimization Step 4:
+ Energy:           -56.48296344
+ Energy change:      0.00000120 (actual)
+                    -0.00000000 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0001436 (internal), 0.0002782 (cartesian)
+ Lagrangian multiplier =   0.980280
+ max. displacement = 0.0000987 (internal), 0.0000661 (cartesian)
+ iter   0: rmax = 0.0000986847, xmax = 0.0000661160
+ iter   1: rmax = 0.0000000017, xmax = 0.0000000016
+ iter   2: rmax = 0.0000000009, xmax = 0.0000000000
+ max. displacement = 0.0000987 (internal), 0.0000661 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00239900  -0.07910177  -0.02717574
+mol>   1    -0.00384589   0.02438975   1.06792723
+mol>   1     0.87353134   0.02720430  -0.52318771
+mol>   1    -0.87208445   0.02750772  -0.51756378
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00239900  -0.07910177  -0.02717574
+   1    -0.00384589   0.02438975   1.06792723
+   1     0.87353134   0.02720430  -0.52318771
+   1    -0.87208445   0.02750772  -0.51756378
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  87.9%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4829634600  0.0000000000 0.00001136                 0.0
+       1                                0.00000229 0.00000971      0.0
+       2                                0.00000027 0.00001061      0.0
+   1       -56.4829634611 -0.0000000011 0.00000028                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.4%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  83.4%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  46 F,   81 F1
+
+  E  =     -56.4829634611
+  T  =      56.05093490  V  =    -155.29336842  J  =      39.09681804
+  Ex =      -7.62449245  Ec =      -0.31600000
+
+  dipole =   0.185227 au (  0.470803 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.935065    2    -0.726723    3    -0.410412    4    -0.392563
+   5    -0.164092
+ virtual:
+   6     0.069222    7     0.155489    8     0.179036    9     0.564839
+  10     0.578561   11     0.633137   12     0.772376   13     0.785734
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-5.6482963461086e+01
+eng> D=-2.57770690e-03  1.84070162e-01  2.05040939e-02
+eng> G= 1.77950492e-03  8.74276327e-03 -6.18014910e-02
+eng>   -1.16356336e-03  1.31964433e-03  6.32509241e-02
+eng>   -1.01602975e-04 -5.14395942e-03 -1.09816803e-03
+eng>   -5.14338585e-04 -4.91844818e-03 -3.51265040e-04
+eng>$end
+
+ G(max) = 0.06327539  |G| = 0.08919113
+
+
+ Geometry Optimization Step 5:
+ Energy:           -56.48296346
+ Energy change:     -0.00000002 (actual)
+                    -0.00000002 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000064, |dG - HdX| = 0.00000021
+ include g
+ max. gradient     = 0.0000966 (internal), 0.0001949 (cartesian)
+ trust test = 0.0022005, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000207
+ max. displacement = 0.0003103 (internal), 0.0002304 (cartesian)
+ iter   0: rmax = 0.0003102594, xmax = 0.0002303853
+ iter   1: rmax = 0.0000000354, xmax = 0.0000000384
+ iter   2: rmax = 0.0000000298, xmax = 0.0000000000
+ max. displacement = 0.0003103 (internal), 0.0002304 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00227708  -0.07908684  -0.02719238
+mol>   1    -0.00376562   0.02438628   1.06791346
+mol>   1     0.87356715   0.02720585  -0.52313398
+mol>   1    -0.87207862   0.02749472  -0.51758709
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00227708  -0.07908684  -0.02719238
+   1    -0.00376562   0.02438628   1.06791346
+   1     0.87356715   0.02720585  -0.52313398
+   1    -0.87207862   0.02749472  -0.51758709
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  92.7%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4829634788  0.0000000000 0.00003215                 0.0
+       1                                0.00000554 0.00002922      0.0
+       2                                0.00000094 0.00002821      0.0
+       3                                0.00000025 0.00002822      0.0
+   1       -56.4829634869 -0.0000000080 0.00000025                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0  96.1%     0.0
+ time: Rotate                           :     0.0  72.3%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  48 F,   84 F1
+
+  E  =     -56.4829634869
+  T  =      56.05095354  V  =    -155.29346159  J  =      39.09685941
+  Ex =      -7.62449699  Ec =      -0.31600022
+
+  dipole =   0.185193 au (  0.470718 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.935063    2    -0.726723    3    -0.410416    4    -0.392561
+   5    -0.164091
+ virtual:
+   6     0.069224    7     0.155489    8     0.179040    9     0.564839
+  10     0.578559   11     0.633137   12     0.772390   13     0.785722
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.7%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-5.6482963486868e+01
+eng> D=-2.45927626e-03  1.84036953e-01  2.05176044e-02
+eng> G= 1.57249098e-03  8.74207587e-03 -6.18119930e-02
+eng>   -1.12916285e-03  1.32008533e-03  6.32503870e-02
+eng>   -1.54861619e-05 -5.13052842e-03 -1.12698773e-03
+eng>   -4.27841967e-04 -4.93163278e-03 -3.11406227e-04
+eng>$end
+
+ G(max) = 0.06327424  |G| = 0.08919328
+
+
+ Geometry Optimization Step 6:
+ Energy:           -56.48296349
+ Energy change:     -0.00000003 (actual)
+                    -0.00000003 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000064, |dG - HdX| = 0.00000000
+ Hessian update: |dG| = 0.000136, |dG - HdX| = 0.00000161
+ include g
+ max. gradient     = 0.0000011 (internal), 0.0000015 (cartesian)
+ trust test = 0.0000513, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000206
+ max. displacement = 0.0000052 (internal), 0.0000043 (cartesian)
+ iter   0: rmax = 0.0000052381, xmax = 0.0000043164
+ iter   1: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0000052 (internal), 0.0000043 (cartesian)
+ OPTIMIZATION CONVERGED in 5 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   7     0.00227708  -0.07908684  -0.02719238
+MOL>   1    -0.00376562   0.02438628   1.06791346
+MOL>   1     0.87356715   0.02720585  -0.52313398
+MOL>   1    -0.87207862   0.02749472  -0.51758709
+MOL>$end
+MOL> Energy =    -56.4829634869
+
+ Atomic Coordinates:
+   7     0.00227708  -0.07908684  -0.02719238
+   1    -0.00376562   0.02438628   1.06791346
+   1     0.87356715   0.02720585  -0.52313398
+   1    -0.87207862   0.02749472  -0.51758709
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ Geometry Optimization Step 0:
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.3%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.6%     0.0
+ time: Orthogonalize                    :     0.0  90.2%     0.0
+
+  it          E            dE            g          x               t
+ grid:    41240   53
+   0       -56.4829635104  0.0000000000 0.00002498                 0.1
+       1                                0.00000202 0.00001736      0.0
+       2                                0.00000053 0.00001679      0.0
+       3                                0.00000013 0.00001670      0.0
+   1       -56.4829635126 -0.0000000021 0.00000013                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0  98.1%     0.0
+ time: Rotate                           :     0.0  89.3%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  50 F,   87 F1
+
+  E  =     -56.4829635126
+  T  =      56.05095386  V  =    -155.29346750  J  =      39.09686466
+  Ex =      -7.62449702  Ec =      -0.31599987
+
+  dipole =   0.185181 au (  0.470687 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.935062    2    -0.726723    3    -0.410417    4    -0.392563
+   5    -0.164087
+ virtual:
+   6     0.069224    7     0.155485    8     0.179040    9     0.564840
+  10     0.578560   11     0.633138   12     0.772390   13     0.785722
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6482963512573e+01
+eng> D=-2.41163532e-03  1.84024408e-01  2.05225336e-02
+eng> G= 1.18853055e-03  8.66667374e-03 -6.18977298e-02
+eng>   -1.14273476e-03  1.33939130e-03  6.32716454e-02
+eng>    1.60091816e-04 -5.06636441e-03 -1.12535873e-03
+eng>   -2.05887606e-04 -4.93970063e-03 -2.48556927e-04
+eng>$end
+
+ G(max) = 0.06329614  |G| = 0.08925087
+
+
+ Geometry Optimization Step 1:
+ Energy:           -56.48296351
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0002212 (internal), 0.0003785 (cartesian)
+ Lagrangian multiplier =  41.752589
+ max. displacement = 0.1745329 (internal), 0.0760221 (cartesian)
+ iter   0: rmax = 0.1745329253, xmax = 0.0760221017
+ iter   1: rmax = 0.0049740596, xmax = 0.0030121640
+ iter   2: rmax = 0.0050029365, xmax = 0.0000031089
+ iter   3: rmax = 0.0050061236, xmax = 0.0000000051
+ iter   4: rmax = 0.0050061164, xmax = 0.0000000000
+ max. displacement = 0.1745329 (internal), 0.0772103 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00122267  -0.11994477  -0.02687512
+mol>   1    -0.00136494   0.03706369   1.06186191
+mol>   1     0.87231617   0.04157435  -0.51908150
+mol>   1    -0.86972856   0.04130674  -0.51590529
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00122267  -0.11994477  -0.02687512
+   1    -0.00136494   0.03706369   1.06186191
+   1     0.87231617   0.04157435  -0.51908150
+   1    -0.86972856   0.04130674  -0.51590529
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  90.2%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4838818548  0.0000000000 0.01219496                 0.0
+       1                                0.00254253 0.01912325      0.0
+       2                                0.00066452 0.01860245      0.0
+       3                                0.00002792 0.01836064      0.0
+   1       -56.4847685772 -0.0008867224 0.00011346                 0.1
+       1                                0.00004363 0.00007024      0.0
+       2                                0.00000591 0.00013749      0.0
+       3                                0.00000065 0.00013544      0.0
+       4                                0.00000005 0.00013684      0.1
+   2       -56.4847686501 -0.0000000729 0.00000005                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.7%     0.0
+ time: Matrix Multiply                  :     0.0  97.2%     0.0
+ time: Rotate                           :     0.0  94.6%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  53 F,   94 F1
+
+  E  =     -56.4847686501
+  T  =      56.04498680  V  =    -155.22643109  J  =      39.05988823
+  Ex =      -7.62156710  Ec =      -0.31579716
+
+  dipole =   0.275011 au (  0.699013 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.937490    2    -0.728362    3    -0.408593    4    -0.391518
+   5    -0.167234
+ virtual:
+   6     0.068411    7     0.153751    8     0.176660    9     0.565803
+  10     0.579046   11     0.633798   12     0.769083   13     0.780564
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.7%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.7%     0.1
+
+
+eng>$Energy
+eng> E=-5.6484768650121e+01
+eng> D= 8.95070318e-04  2.74354771e-01  1.89610862e-02
+eng> G=-4.51297808e-03  1.08107730e-02 -5.77470682e-02
+eng>   -1.36740330e-04  2.35051036e-03  6.17339034e-02
+eng>    5.20386048e-03 -6.12247532e-03 -3.31618661e-03
+eng>   -5.54142068e-04 -7.03880808e-03 -6.70648508e-04
+eng>$end
+
+ G(max) = 0.06177879  |G| = 0.08610718
+
+
+ Geometry Optimization Step 2:
+ Energy:           -56.48476865
+ Energy change:     -0.00180514 (actual)
+                    -0.00000000 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.006786, |dG - HdX| = 0.00167504
+ include g
+ max. gradient     = 0.0051050 (internal), 0.0070268 (cartesian)
+ trust test =-0.1125710, trust radius = 0.0156250
+ Lagrangian multiplier =   0.091575
+ max. displacement = 0.0156231 (internal), 0.0089560 (cartesian)
+ iter   0: rmax = 0.0156231432, xmax = 0.0089560398
+ iter   1: rmax = 0.0001060576, xmax = 0.0000859079
+ iter   2: rmax = 0.0001149265, xmax = 0.0000000010
+ iter   3: rmax = 0.0001149256, xmax = 0.0000000000
+ max. displacement = 0.0156231 (internal), 0.0089259 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00344093  -0.12099506  -0.02580198
+mol>   1    -0.00608831   0.03727659   1.06271044
+mol>   1     0.86864237   0.04157110  -0.52300157
+mol>   1    -0.86599499   0.04214736  -0.51390689
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00344093  -0.12099506  -0.02580198
+   1    -0.00608831   0.03727659   1.06271044
+   1     0.86864237   0.04157110  -0.52300157
+   1    -0.86599499   0.04214736  -0.51390689
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.7%     0.0
+ time: Orthogonalize                    :     0.0  92.7%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4848209890  0.0000000000 0.00108738                 0.0
+       1                                0.00027381 0.00099758      0.0
+       2                                0.00005047 0.00102916      0.0
+       3                                0.00000674 0.00101716      0.0
+       4                                0.00000064 0.00102154      0.1
+   1       -56.4848331192 -0.0000121302 0.00000079                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.4%     0.0
+ time: Matrix Multiply                  :     0.0  98.6%     0.0
+ time: Rotate                           :     0.0  77.1%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  55 F,   98 F1
+
+  E  =     -56.4848331192
+  T  =      56.05184435  V  =    -155.26084877  J  =      39.07366025
+  Ex =      -7.62315313  Ec =      -0.31587700
+
+  dipole =   0.277600 au (  0.705593 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.937176    2    -0.728977    3    -0.408556    4    -0.392157
+   5    -0.167431
+ virtual:
+   6     0.068705    7     0.154314    8     0.177192    9     0.565734
+  10     0.579099   11     0.634240   12     0.767931   13     0.781998
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6484833119171e+01
+eng> D=-3.71107072e-03  2.76990319e-01  1.80045896e-02
+eng> G= 1.37489974e-03  1.13135981e-02 -5.86303130e-02
+eng>   -1.79284394e-03  2.30961342e-03  6.18330221e-02
+eng>    1.22571427e-03 -6.92006754e-03 -2.45220385e-03
+eng>   -8.07770068e-04 -6.70314396e-03 -7.50505212e-04
+eng>$end
+
+ G(max) = 0.06190211  |G| = 0.08660730
+
+
+ Geometry Optimization Step 3:
+ Energy:           -56.48483312
+ Energy change:     -0.00006447 (actual)
+                    -0.00006386 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.006786, |dG - HdX| = 0.00007982
+ Hessian update: |dG| = 0.004399, |dG - HdX| = 0.00038398
+ include g
+ max. gradient     = 0.0011376 (internal), 0.0017614 (cartesian)
+ trust test =-0.0595746, trust radius = 0.0220971
+ Lagrangian multiplier =   0.000155
+ max. displacement = 0.0070633 (internal), 0.0044861 (cartesian)
+ iter   0: rmax = 0.0070632935, xmax = 0.0044860717
+ iter   1: rmax = 0.0000211296, xmax = 0.0000169826
+ iter   2: rmax = 0.0000244563, xmax = 0.0000000000
+ max. displacement = 0.0070633 (internal), 0.0044810 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00540863  -0.12149523  -0.02530603
+mol>   1    -0.00845957   0.03737987   1.06307184
+mol>   1     0.86748418   0.04159259  -0.52502479
+mol>   1    -0.86443325   0.04252278  -0.51274102
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00540863  -0.12149523  -0.02530603
+   1    -0.00845957   0.03737987   1.06307184
+   1     0.86748418   0.04159259  -0.52502479
+   1    -0.86443325   0.04252278  -0.51274102
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ time: Inversion of V-Matrix            :     0.0 100.0%     0.0
+ time: Orthogonalize                    :     0.0  92.7%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4848366776  0.0000000000 0.00043525                 0.0
+       1                                0.00008175 0.00042829      0.0
+       2                                0.00001417 0.00043288      0.0
+       3                                0.00000230 0.00042916      0.0
+       4                                0.00000026 0.00043024      0.1
+   1       -56.4848386744 -0.0000019968 0.00000028                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  99.2%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  86.2%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  57 F,  102 F1
+
+  E  =     -56.4848386744
+  T  =      56.05399967  V  =    -155.27142984  J  =      39.07784902
+  Ex =      -7.62363874  Ec =      -0.31590163
+
+  dipole =   0.278799 au (  0.708642 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.937086    2    -0.729184    3    -0.408582    4    -0.392295
+   5    -0.167508
+ virtual:
+   6     0.068774    7     0.154475    8     0.177350    9     0.565665
+  10     0.579160   11     0.634439   12     0.767327   13     0.782669
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6484838674426e+01
+eng> D=-5.70941484e-03  2.78186223e-01  1.75704636e-02
+eng> G= 3.44855163e-03  1.14830781e-02 -5.88424214e-02
+eng>   -2.57145749e-03  2.28998339e-03  6.18596554e-02
+eng>   -3.93951582e-05 -7.19809445e-03 -2.32842360e-03
+eng>   -8.37698981e-04 -6.57496705e-03 -6.88810409e-04
+eng>$end
+
+ G(max) = 0.06195541  |G| = 0.08686944
+
+
+ Geometry Optimization Step 4:
+ Energy:           -56.48483867
+ Energy change:     -0.00000556 (actual)
+                    -0.00000554 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.004399, |dG - HdX| = 0.00002755
+ Hessian update: |dG| = 0.001465, |dG - HdX| = 0.00005333
+ include g
+ max. gradient     = 0.0000484 (internal), 0.0000446 (cartesian)
+ trust test = 0.0206193, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000152
+ max. displacement = 0.0001391 (internal), 0.0001292 (cartesian)
+ iter   0: rmax = 0.0001391468, xmax = 0.0001292324
+ iter   1: rmax = 0.0000000085, xmax = 0.0000000084
+ iter   2: rmax = 0.0000000079, xmax = 0.0000000000
+ max. displacement = 0.0001391 (internal), 0.0001292 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00541966  -0.12150849  -0.02526781
+mol>   1    -0.00849763   0.03737996   1.06310748
+mol>   1     0.86749013   0.04159826  -0.52509318
+mol>   1    -0.86441216   0.04253027  -0.51274650
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00541966  -0.12150849  -0.02526781
+   1    -0.00849763   0.03737996   1.06310748
+   1     0.86749013   0.04159826  -0.52509318
+   1    -0.86441216   0.04253027  -0.51274650
+ #
+
+ time: Geometry Optimization            :     0.0  99.7%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.5%     0.0
+ time: Orthogonalize                    :     0.0  97.1%     0.0
+
+  it          E            dE            g          x               t
+ grid:    43472   53
+   0       -56.4848395815  0.0000000000 0.00001457                 0.1
+       1                                0.00000394 0.00001200      0.0
+       2                                0.00000074 0.00001293      0.0
+       3                                0.00000016 0.00001268      0.0
+   1       -56.4848395830 -0.0000000014 0.00000016                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  86.2%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  59 F,  105 F1
+
+  E  =     -56.4848395830
+  T  =      56.05388661  V  =    -155.27084645  J  =      39.07761142
+  Ex =      -7.62361251  Ec =      -0.31590036
+
+  dipole =   0.278819 au (  0.708693 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.937092    2    -0.729177    3    -0.408563    4    -0.392300
+   5    -0.167508
+ virtual:
+   6     0.068765    7     0.154474    8     0.177334    9     0.565673
+  10     0.579158   11     0.634433   12     0.767312   13     0.782681
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6484839582959e+01
+eng> D=-5.71944229e-03  2.78208217e-01  1.75365117e-02
+eng> G= 3.56365352e-03  1.14521946e-02 -5.86413045e-02
+eng>   -2.57321484e-03  2.30324258e-03  6.18554509e-02
+eng>   -4.14012700e-05 -7.21854846e-03 -2.45442082e-03
+eng>   -9.49037413e-04 -6.53688876e-03 -7.59725622e-04
+eng>$end
+
+ G(max) = 0.06195178  |G| = 0.08673535
+
+
+ Geometry Optimization Step 5:
+ Energy:           -56.48483958
+ Energy change:     -0.00000091 (actual)
+                    -0.00000000 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0001224 (internal), 0.0001461 (cartesian)
+ Lagrangian multiplier =   0.754496
+ max. displacement = 0.0001391 (internal), 0.0000809 (cartesian)
+ iter   0: rmax = 0.0001391365, xmax = 0.0000809175
+ iter   1: rmax = 0.0000000079, xmax = 0.0000000072
+ iter   2: rmax = 0.0000000064, xmax = 0.0000000000
+ max. displacement = 0.0001391 (internal), 0.0000809 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00539306  -0.12149640  -0.02530495
+mol>   1    -0.00848165   0.03738015   1.06307262
+mol>   1     0.86750645   0.04159456  -0.52505036
+mol>   1    -0.86441785   0.04252169  -0.51271731
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00539306  -0.12149640  -0.02530495
+   1    -0.00848165   0.03738015   1.06307262
+   1     0.86750645   0.04159456  -0.52505036
+   1    -0.86441785   0.04252169  -0.51271731
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.4%     0.0
+ time: Orthogonalize                    :     0.0  96.3%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4848396065  0.0000000000 0.00001092                 0.0
+       1                                0.00000411 0.00000931      0.0
+       2                                0.00000055 0.00001015      0.0
+       3                                0.00000009 0.00001010      0.0
+   1       -56.4848396079 -0.0000000014 0.00000009                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0  98.6%     0.0
+ time: Matrix Multiply                  :     0.0  99.9%     0.0
+ time: Rotate                           :     0.0  86.7%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  61 F,  108 F1
+
+  E  =     -56.4848396079
+  T  =      56.05398573  V  =    -155.27135868  J  =      39.07782128
+  Ex =      -7.62363620  Ec =      -0.31590153
+
+  dipole =   0.278800 au (  0.708643 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.937086    2    -0.729183    3    -0.408580    4    -0.392294
+   5    -0.167509
+ virtual:
+   6     0.068773    7     0.154476    8     0.177347    9     0.565667
+  10     0.579159   11     0.634437   12     0.767327   13     0.782670
+ time: One-Electron Gradient            :     0.0  99.5%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.7%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6484839607878e+01
+eng> D=-5.69491220e-03  2.78187333e-01  1.75653160e-02
+eng> G= 3.51844064e-03  1.14587972e-02 -5.86791137e-02
+eng>   -2.56624080e-03  2.30530657e-03  6.18534179e-02
+eng>   -3.83629798e-05 -7.21840628e-03 -2.44232170e-03
+eng>   -9.13836862e-04 -6.54569751e-03 -7.31982587e-04
+eng>$end
+
+ G(max) = 0.06194954  |G| = 0.08675803
+
+
+ Geometry Optimization Step 6:
+ Energy:           -56.48483961
+ Energy change:     -0.00000002 (actual)
+                    -0.00000002 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000048, |dG - HdX| = 0.00000277
+ include g
+ max. gradient     = 0.0000773 (internal), 0.0001069 (cartesian)
+ trust test =-0.0255144, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000150
+ max. displacement = 0.0005611 (internal), 0.0003776 (cartesian)
+ iter   0: rmax = 0.0005610833, xmax = 0.0003776048
+ iter   1: rmax = 0.0000001404, xmax = 0.0000001099
+ iter   2: rmax = 0.0000001297, xmax = 0.0000000000
+ max. displacement = 0.0005611 (internal), 0.0003777 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00529693  -0.12144931  -0.02543881
+mol>   1    -0.00837298   0.03737969   1.06294829
+mol>   1     0.86759749   0.04157987  -0.52485051
+mol>   1    -0.86452143   0.04248975  -0.51265897
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00529693  -0.12144931  -0.02543881
+   1    -0.00837298   0.03737969   1.06294829
+   1     0.86759749   0.04157987  -0.52485051
+   1    -0.86452143   0.04248975  -0.51265897
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  79.5%     0.0
+
+  it          E            dE            g          x               t
+   0       -56.4848396283  0.0000000000 0.00003360                 0.0
+       1                                0.00000981 0.00003175      0.0
+       2                                0.00000118 0.00003249      0.0
+       3                                0.00000016 0.00003229      0.0
+   1       -56.4848396431 -0.0000000148 0.00000016                 0.1
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.1  99.8%     0.1
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0  99.5%     0.0
+ time: Rotate                           :     0.0  89.3%     0.0
+ time: SCF Equations                    :     0.1  99.8%     0.1
+  63 F,  111 F1
+
+  E  =     -56.4848396431
+  T  =      56.05417056  V  =    -155.27233834  J  =      39.07822567
+  Ex =      -7.62368132  Ec =      -0.31590377
+
+  dipole =   0.278713 au (  0.708422 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -13.937075    2    -0.729193    3    -0.408635    4    -0.392265
+   5    -0.167508
+ virtual:
+   6     0.068792    7     0.154472    8     0.177380    9     0.565652
+  10     0.579163   11     0.634442   12     0.767393   13     0.782609
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-5.6484839643124e+01
+eng> D=-5.59830838e-03  2.78095146e-01  1.76750625e-02
+eng> G= 3.41130310e-03  1.14704165e-02 -5.87800074e-02
+eng>   -2.53014521e-03  2.31277071e-03  6.18449068e-02
+eng>   -2.00172073e-05 -7.21733509e-03 -2.39205940e-03
+eng>   -8.61140681e-04 -6.56585212e-03 -6.72840026e-04
+eng>$end
+
+ G(max) = 0.06193983  |G| = 0.08681565
+
+
+ Geometry Optimization Step 7:
+ Energy:           -56.48483964
+ Energy change:     -0.00000004 (actual)
+                    -0.00000004 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000048, |dG - HdX| = 0.00000001
+ Hessian update: |dG| = 0.000106, |dG - HdX| = 0.00000119
+ include g
+ max. gradient     = 0.0000008 (internal), 0.0000008 (cartesian)
+ trust test =-0.0031442, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000151
+ max. displacement = 0.0000083 (internal), 0.0000052 (cartesian)
+ iter   0: rmax = 0.0000083180, xmax = 0.0000052150
+ iter   1: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0000083 (internal), 0.0000052 (cartesian)
+ OPTIMIZATION CONVERGED in 6 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   7     0.00529693  -0.12144931  -0.02543881
+MOL>   1    -0.00837298   0.03737969   1.06294829
+MOL>   1     0.86759749   0.04157987  -0.52485051
+MOL>   1    -0.86452143   0.04248975  -0.51265897
+MOL>$end
+MOL> Energy =    -56.4848396431
+
+ Atomic Coordinates:
+   7     0.00529693  -0.12144931  -0.02543881
+   1    -0.00837298   0.03737969   1.06294829
+   1     0.86759749   0.04157987  -0.52485051
+   1    -0.86452143   0.04248975  -0.51265897
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ Scan Structures:
+SCAN> n= 0, s=0.000000, E=   -56.48145686
+SCAN>$molecule
+SCAN> cartesian
+SCAN> set=L1
+SCAN>   7     0.00000000   0.00000000  -0.02873648
+SCAN>   1    -0.00000000   0.00000000   1.07126352
+SCAN>   1     0.87788036  -0.00000000  -0.52126352
+SCAN>   1    -0.87788036  -0.00000000  -0.52126352
+SCAN>$end
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000  -0.02873648
+   1    -0.00000000   0.00000000   1.07126352
+   1     0.87788036  -0.00000000  -0.52126352
+   1    -0.87788036  -0.00000000  -0.52126352
+ #
+
+SCAN> n= 1, s=0.333333, E=   -56.48183341
+SCAN>$molecule
+SCAN> cartesian
+SCAN> set=L1
+SCAN>   7     0.00062329  -0.03900154  -0.02827083
+SCAN>   1    -0.00098662   0.01204157   1.07054308
+SCAN>   1     0.87686047   0.01346193  -0.52185639
+SCAN>   1    -0.87649714   0.01349805  -0.52041585
+SCAN>$end
+
+ Atomic Coordinates:
+   7     0.00062329  -0.03900154  -0.02827083
+   1    -0.00098662   0.01204157   1.07054308
+   1     0.87686047   0.01346193  -0.52185639
+   1    -0.87649714   0.01349805  -0.52041585
+ #
+
+SCAN> n= 2, s=0.666667, E=   -56.48296349
+SCAN>$molecule
+SCAN> cartesian
+SCAN> set=L1
+SCAN>   7     0.00227708  -0.07908684  -0.02719238
+SCAN>   1    -0.00376562   0.02438628   1.06791346
+SCAN>   1     0.87356715   0.02720585  -0.52313398
+SCAN>   1    -0.87207862   0.02749472  -0.51758709
+SCAN>$end
+
+ Atomic Coordinates:
+   7     0.00227708  -0.07908684  -0.02719238
+   1    -0.00376562   0.02438628   1.06791346
+   1     0.87356715   0.02720585  -0.52313398
+   1    -0.87207862   0.02749472  -0.51758709
+ #
+
+SCAN> n= 3, s=1.000000, E=   -56.48483964
+SCAN>$molecule
+SCAN> cartesian
+SCAN> set=L1
+SCAN>   7     0.00529693  -0.12144931  -0.02543881
+SCAN>   1    -0.00837298   0.03737969   1.06294829
+SCAN>   1     0.86759749   0.04157987  -0.52485051
+SCAN>   1    -0.86452143   0.04248975  -0.51265897
+SCAN>$end
+
+ Atomic Coordinates:
+   7     0.00529693  -0.12144931  -0.02543881
+   1    -0.00837298   0.03737969   1.06294829
+   1     0.86759749   0.04157987  -0.52485051
+   1    -0.86452143   0.04248975  -0.51265897
+ #
+
+
+ ===========================================
+       s     |       E(s)     | E(s) - E(0) 
+ -------------------------------------------
+    0.0000000      -56.4814569     0.0000000
+    0.3333333      -56.4818334    -0.0003765
+    0.6666667      -56.4829635    -0.0015066
+    1.0000000      -56.4848396    -0.0033828
+ ===========================================
+
+ PLOT
+0--------------------------------------------------------------------------*
+|                                                                 *
+|                                        *
+*
+
+ ============================================================
+
+ Memory used =     7778 KB
+  Disk  used =    21252 KB,         21921 KB written,        36189 KB read
+
+ CPU  time =    7.51 sec =  0.13 min = 0.00 hr =   99.82%
+ REAL time =    7.52 sec =  0.13 min = 0.00 hr
+ ratio     =   99.82%
+
+ date: Sat Oct 17 12:35:42 2026
+
+ time: Geometry Optimization            :     0.0   0.0% 344998750710781360453042645773472222480660863843619259931769380141446210833645252044237746354729272661977346282103557595719219843000732436518206103674674330959297531278614050839512744236511367781245250496979787418326783620022272.0
+ time: Initial Guess                    :     0.0   0.0% 100363249704241091960007347051512219767519883816844815549033441913972642382405744170290784350499791163731164440969308949392945369909061150645721688324198433265620427030823237861007246809183624122504431792664702619746304.0
+ time: atomic calculations              :     0.0  99.6%     0.0
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Coulomb-type Integrals           :     0.4  99.8%     0.4
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  99.4%     0.0
+ time: SCF Equations                    :     4.9   0.0% 707896986634783764097792834087562382381549651055026890852391337875087494987656032676331483424939538382633366481557086095406942359789060917735791845637121235220624000701745554903327938310725173248.0
+ time: Inversion of V-Matrix            :     0.0   0.0% 2832204130262763029867961263600132581772671935051999444205568.0
+ time: Orthogonalize                    :     0.0 100.0%     0.0
+ time: Grid Construction                :     0.7  99.8%     0.7
+ time: Numerical Integration            :     4.5  99.8%     4.5
+ time: Rotate                           :     0.0  99.0%     0.0
+ time: scf x                            :     1.8  99.8%     1.8
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.1  99.8%     0.1
+ time: Ex. - Corr.  Gradient            :     1.7   0.0% 2828311202546423571565478735843926863872903602436124190965760.0
