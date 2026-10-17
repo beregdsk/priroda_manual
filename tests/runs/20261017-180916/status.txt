@@ -1,0 +1,5 @@
+t74a_o2_triplet_save exit=0
+t74b_o2_singlet_from_triplet exit=0
+t74c_o2_singlet_from_triplet_long exit=0
+t74d_o2_singlet_restricted_from_triplet exit=0
+t74e_o2_singlet_swapped_guess exit=0
