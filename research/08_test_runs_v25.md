@@ -11,7 +11,8 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 7: `git show 705f5ab:tests/runs/20261017-133258/<file>`;
 - round 8: `tests/runs/20261017-135441/` (first t72, stopped by the 1-hour limit: `tests/runs/20261017-141203/`);
 - round 9: `tests/runs/20261017-152445/` (t71b, t74); t72 on 8 processes: `tests/runs/20261017-153851/` (an interrupted attempt is in `20261017-153621/`);
-- round 10: `tests/runs/20261017-174656/` (t74a–c).
+- round 10: `tests/runs/20261017-174656/` (t74a–c);
+- round 11: `tests/runs/20261017-180916/` (t74a–e); `20261017-180746/` is an earlier run of t74a–c only, with the same energies.
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -179,9 +180,22 @@ With O₂ (t60) this makes two molecules where `$guess mix=1` gave no broken-sym
 | Test | Result |
 |---|---|
 | t74c | Singlet O2 from the triplet vectors with `iterations=300` and `print=+charges`: `converged!`, E = -150.2075771716 (0.0482 hartree below t48b, 0.0152 above the triplet). Hirshfeld spins 0.0000 on both atoms. Alpha and beta orbital lists identical; HOMO (8) -0.224237, LUMO (9) -0.168405, i.e. normal order with a π* splitting of 0.056 hartree. |
-| t48b (re-read) | The closed-shell singlet of round 3 has HOMO (8) -0.178433 and LUMO (9) **-0.219175**: the LUMO lies below the HOMO, so the default SCF converged to a non-aufbau (excited) closed-shell configuration, with the pair in the higher π* orbital. The `mix=1` runs t60a/b ended at the same energy. |
+| t48b (re-read) | The closed-shell singlet of round 3 has HOMO (8) -0.178433 and LUMO (9) **-0.219175**: the LUMO lies below the HOMO. The `mix=1` runs t60a/b ended at the same energy. (Round 10 read this as an excited configuration; round 11 shows it is not one, see below.) |
 
 Whether t74c is a broken-symmetry solution (alpha in one π*, beta in the other) or the aufbau closed-shell singlet (pair in the lower π*) cannot be told from these numbers: in O2 both have zero atomic spin populations by symmetry, and both give identical alpha and beta orbital-energy lists *(inferred)*. Round 11 t74d (`restrict=1` from the same vectors) decides it.
+
+## Round 11
+
+| Test | Result |
+|---|---|
+| t74a–c | Same energies as round 10 (triplet -150.2228124217, t74c -150.2075771716), also in the earlier run `20261017-180746`. |
+| t74d | Singlet O2 from the triplet vectors with **`restrict=1`**: `converged!` (`6 F, 28 F1` in the output), E = -150.1593098509, i.e. the closed-shell energy of t48b (difference 9·10⁻⁷ hartree, within the convergence threshold), **0.0483 hartree above t74c**. Same orbital energies as t48b: HOMO (8) -0.178434, LUMO (9) -0.219172 (LUMO below HOMO again). Hirshfeld spins 0. |
+| t74e | Default singlet run with `$guess na(8)=9,8 nb(8)=9,8` (orbitals 8 and 9 swapped in the start): `converged!` (`4 F, 15 F1`) to E = -150.1593089237, exactly t48b, with the same HOMO -0.178432 and LUMO -0.219175. The output does not show whether the swap was applied. |
+
+Conclusions:
+- **t74c is a broken-symmetry solution** (alpha electron in one π* orbital, beta in the other), not the closed-shell singlet: forced restricted from the very same starting vectors, the SCF falls back to the t48b energy. Its identical alpha and beta lists (occupied π* -0.224, empty π* -0.168 in each spin) fit that picture: each spin has one π* component filled.
+- **The restricted closed-shell singlet of O2 has no aufbau solution.** With the pair in one of two degenerate π* orbitals, the filled one is pushed up by its own Coulomb repulsion and ends above the empty one; filling the other component (t74e's swap) only gives the symmetry-equivalent state with the same energy *(inferred: standard behaviour of Kohn–Sham with integer occupations of a degenerate shell)*. So t48b is not an "excited configuration" that a different start could escape, and the round-10 reading was wrong. The swap test is not decisive for `na`/`nb` themselves: in O2 any swap of the two π* components gives an equivalent state.
+- Spin-projected estimate from these numbers (Yamaguchi, assuming ⟨S²⟩ = 1 for the broken-symmetry state and 2 for the triplet): E(singlet) ≈ 2·E(BS) − E(T) = -150.1923, a singlet–triplet gap of 0.0305 hartree (0.83 eV); the experimental a¹Δg–X³Σg⁻ gap is 0.98 eV *(my calculation, not program output)*.
 
 ## Molden check
 
