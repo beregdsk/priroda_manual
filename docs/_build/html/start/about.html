@@ -437,8 +437,8 @@ many gradient calculations. Shown for <code class="docutils literal notranslate"
 Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b --></p></li>
 <li><p>Excited-state optimization works, but Priroda has no root following, so the state can switch during the
 optimization. <!-- src: 03 §11 --></p></li>
-<li><p>NMR works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> and a non-hybrid functional. Users report that relativistic (<code class="docutils literal notranslate"><span class="pre">four=1</span></code>) NMR runs
-hang. <!-- src: input.txt; 04 #96; 03 §12 --></p></li>
+<li><p>NMR works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> and a non-hybrid functional; with <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, version 25 silently computes only the
+energy. Users report that relativistic (<code class="docutils literal notranslate"><span class="pre">four=1</span></code>) NMR runs hang. <!-- src: input.txt; 04 #96; 03 §12; 08 t57a --></p></li>
 <li><p>There is no hybrid TDDFT. See <a class="reference internal" href="#what-priroda-does-not-do"><span class="std std-ref">What Priroda does not do</span></a>.</p></li>
 <li><p>Excited states at the coupled-cluster level use a different <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value, <code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code> (linear-response CCSD, RHF
 only), whose status is undocumented. <!-- src: 06 §3; 03 §11 --></p></li>

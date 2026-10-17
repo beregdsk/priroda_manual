@@ -18,7 +18,7 @@ Job type, level of theory, basis-set file, Hamiltonian and printing.
 **Type:** enum\
 **Default:** `gradient`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09
+**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09; 08 t50, t57a
 
 Job type.
 
@@ -34,9 +34,9 @@ Job type.
 | `optimize+hessian` | Optimization followed by a Hessian at the final geometry. The only combined task that works. Present in v2 and v9 and later, absent in v6. |
 | `irc` | Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (`$Energy`). Each point is printed on `IRC>` lines with its distance and energy. |
 | `scan` | Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. The structures and energies are summarized on `SCAN>` lines at the end. |
-| `nmr` | NMR shielding tensors. Works only with `theory=dft`. |
+| `nmr` | NMR shielding tensors. Works only with `theory=dft`: with `ridft`, version 25 silently runs only the ground-state SCF. |
 | `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a `num>` block. |
-| `check` | Not a task name in the version 25 program. `task=check` sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF, presumably like any unrecognized task, which makes it a usable input check. *(undocumented)* |
+| `check` | Not a task name in the version 25 program. Like any unrecognized task, `task=check` sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF without a message, which makes it a usable input check. *(undocumented)* |
 | `extremal` | Gradient-extremal path (v9 banner "Calculation of Gradient Extremal Path"); slow. *(undocumented)* |
 | `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. *(undocumented)* |
 | `saddle` | Approximate saddle-point search from two `$molecule` blocks (start and end). *(undocumented)* |
@@ -50,6 +50,7 @@ Job type.
 ```{note}
 Two `task=` lines do not chain jobs: only the first one runs. Apart from `optimize+hessian`, sequences such
 as optimize→NMR need separate runs or an external driver script.
+**A misspelled task name gives no error**: version 25 sets up the run and stops quietly, as for `check`.
 `task=critical` does not work; density critical points come from `print=+density`.
 `task=QM` appears only in the header of the shipped `qm.in` parameter file and is not a user task.
 The binary contains further task words (`IRC4`, `PATHX`, `PATHR`, `STERIC`, `POLARIZABILITY`, `MMDYNAMIC`,
@@ -67,7 +68,7 @@ and others) that are untested or need data that is not distributed.
 **Type:** enum\
 **Default:** `dft`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46
+**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46; 08 t50b
 
 Theoretical method.
 
@@ -98,6 +99,8 @@ Theoretical method.
 | `qm_n2` | Earlier variant of the QM model, used for very large systems with `task=opt_n1`. *(undocumented)* |
 
 ```{note}
+**A misspelled theory name gives no error**: version 25 prints it in the summary box and runs Hartree–Fock.
+
 **Hybrid trap.** Hybrid functionals (`PBE1`, `B3LYP`, …) take effect only with `theory=ridft`. With `theory=dft`
 or `tddft`, older versions silently drop the exact exchange. In version 25, `theory=dft` stops right after
 printing the basis sets, with no error message in the output and exit status 1. `theory=tddft` still runs:
@@ -250,6 +253,33 @@ The leading `+` can be omitted (`print=charges+bonds`).
 ```text
 $control print=+vectors+molden $end
 ```
+
+(control.derivative)=
+## `derivative`
+
+```{index} single: derivative ($control)
+```
+
+**Type:** enum\
+**Default:** *none stated*\
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 09; 08 t53
+
+Default: analytic second derivatives where the method has them (GGA DFT), numerical otherwise.
+
+How `task=hessian` computes the second derivatives. Not in any written source; found in the program and
+tested in version 25, where `derivative=numeric` with `theory=dft` gave the same water frequencies as the
+analytic Hessian to within 0.2 cm⁻¹.
+
+```{tabularcolumns} \Y{0.3}\Y{0.7}
+```
+
+| Value | Meaning |
+|---|---|
+| `analytic` | Analytic second derivatives. |
+| `numeric` | Second derivatives by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND DERIVATIVES`). |
+
+**See also:** {ref}`steps ($d2edr2) <d2edr2.steps>`
 
 (control.save)=
 ## `save`

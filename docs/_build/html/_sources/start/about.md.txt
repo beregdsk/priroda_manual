@@ -96,8 +96,8 @@ Notes to the table:
    Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b -->
 4. Excited-state optimization works, but Priroda has no root following, so the state can switch during the
    optimization. <!-- src: 03 §11 -->
-5. NMR works only with `theory=dft` and a non-hybrid functional. Users report that relativistic (`four=1`) NMR runs
-   hang. <!-- src: input.txt; 04 #96; 03 §12 -->
+5. NMR works only with `theory=dft` and a non-hybrid functional; with `ridft`, version 25 silently computes only the
+   energy. Users report that relativistic (`four=1`) NMR runs hang. <!-- src: input.txt; 04 #96; 03 §12; 08 t57a -->
 6. There is no hybrid TDDFT. See {ref}`what-priroda-does-not-do`.
 7. Excited states at the coupled-cluster level use a different `theory=` value, `ccsdsd` (linear-response CCSD, RHF
    only), whose status is undocumented. <!-- src: 06 §3; 03 §11 -->

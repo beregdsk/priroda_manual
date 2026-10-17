@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -522,11 +523,10 @@ eng&gt;$end
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>An optimization prints an <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> block at every step, and the command above appends all of them. Append only the
-block you need, normally the one from a <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> run. In a version 25 test with two <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> groups, the
-second one was used; it was also the one that matched the geometry, so it is not certain that the last group always
-wins.</p>
+block you need, normally the one from a <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> run. If the input holds several <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> groups, the
+program uses the <strong>last</strong> one, even when an earlier one matches the geometry.</p>
 </div>
-<!-- src: 01 §7 (one eng block per optimization step); 08 t41 --> <!-- verify: last group wins (tests round 4) -->
+<!-- src: 01 §7 (one eng block per optimization step); 08 t41, t41b -->
 <p>A stored Hessian is required by <a class="reference internal" href="../reference/optimize.html#optimize-saddle"><span class="std std-ref">$optimize saddle=1</span></a> and <code class="docutils literal notranslate"><span class="pre">task=irc</span></code>. It also helps difficult
 minimizations, and it lets you redo the vibrational analysis or the thermochemistry without recomputing.</p>
 <!-- src: Dft.rtf; 06 §4, §5; energy.yaml -->
@@ -537,14 +537,17 @@ minimizations, and it lets you redo the vibrational analysis or the thermochemis
 <ul>
 <li><p>A numerical Hessian split over several runs with <a class="reference internal" href="../reference/d2edr2.html#d2edr2-steps"><span class="std std-ref">$d2edr2 steps</span></a>. Collect the <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines of
 all partial outputs into one input, add <code class="docutils literal notranslate"><span class="pre">$d2edr2</span> <span class="pre">steps=-1</span> <span class="pre">$end</span></code>, and run once more:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>grep "num&gt;" mol.out{1,2,3,4} | sed "s/\.*num&gt;//g" &gt;&gt; mol.in
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>grep -h "^num&gt;" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num&gt;//' &gt;&gt; mol.in
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">sed</span></code> expression also removes the file-name prefix that <code class="docutils literal notranslate"><span class="pre">grep</span></code> adds for several files.</p>
+<p>The lines hold numbered <code class="docutils literal notranslate"><span class="pre">$Energy000</span></code>, <code class="docutils literal notranslate"><span class="pre">$Energy001</span></code>, … groups, one per displaced geometry. The combining run does
+no SCF of its own. The command given in <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">&quot;s/\.*num&gt;//g&quot;</span></code>, leaves the file names that <code class="docutils literal notranslate"><span class="pre">grep</span></code> adds
+for several files at the start of each line; use <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-h</span></code> as above.</p>
 </li>
-<li><p>Raman intensities. A <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> run writes <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines; append them to the input of a <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> run.</p></li>
+<li><p>Raman intensities. A <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> run writes <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines; append them to the input of a <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> run, and
+the <code class="docutils literal notranslate"><span class="pre">Raman</span> <span class="pre">A.</span></code> and <code class="docutils literal notranslate"><span class="pre">Raman</span> <span class="pre">D.</span></code> columns of the frequency table are filled in.</p></li>
 </ul>
-<!-- src: input.txt; 03 §10; 04 #381 -->
+<!-- src: input.txt; 03 §10; 04 #381; 08 t55, t56 (both workflows checked on v25; the input.txt sed leaves file names) -->
 </section>
 <section id="optimized-geometry-from-mol-lines">
 <h3>Optimized geometry from <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines<a class="headerlink" href="#optimized-geometry-from-mol-lines" title="Link to this heading">¶</a></h3>
@@ -576,6 +579,11 @@ combination the program understands. Run other sequences as separate jobs.</p>
 <dt>Windows line endings (CRLF)</dt><dd><p>The run stops in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> with <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> followed by a garbled <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">?matrix</span></code> or <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code>. Convert the
 file with <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code>; see <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
 <!-- src: 04 #63-#65 -->
+</dd>
+<dt>Misspelled task or theory name</dt><dd><p>Gives no error. An unknown <code class="docutils literal notranslate"><span class="pre">task=</span></code> value sets up the run and stops quietly after the SCF and grid settings; an
+unknown <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value runs Hartree–Fock, with the misspelled name in the summary box. Check the
+<code class="docutils literal notranslate"><span class="pre">Theoretical</span> <span class="pre">Method</span></code> line and that the output goes on to an SCF.</p>
+<!-- src: 08 t50, t50b -->
 </dd>
 <dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Older versions ran without the exact exchange. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, version 25 stops after the basis-set echo with
 no message; with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> it still runs without the exact exchange and gives wrong energies. See

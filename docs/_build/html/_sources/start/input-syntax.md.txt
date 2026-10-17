@@ -260,11 +260,10 @@ The `ge` script on the official site does the same. It also skips the first bloc
 
 :::{warning}
 An optimization prints an `eng>` block at every step, and the command above appends all of them. Append only the
-block you need, normally the one from a `task=hessian` run. In a version 25 test with two `$Energy` groups, the
-second one was used; it was also the one that matched the geometry, so it is not certain that the last group always
-wins.
+block you need, normally the one from a `task=hessian` run. If the input holds several `$Energy` groups, the
+program uses the **last** one, even when an earlier one matches the geometry.
 :::
-<!-- src: 01 §7 (one eng block per optimization step); 08 t41 --> <!-- verify: last group wins (tests round 4) -->
+<!-- src: 01 §7 (one eng block per optimization step); 08 t41, t41b -->
 
 A stored Hessian is required by {ref}`$optimize saddle=1 <optimize.saddle>` and `task=irc`. It also helps difficult
 minimizations, and it lets you redo the vibrational analysis or the thermochemistry without recomputing.
@@ -278,13 +277,16 @@ Partial results of a numerical calculation are printed on lines prefixed with `n
   all partial outputs into one input, add `$d2edr2 steps=-1 $end`, and run once more:
 
   ```text
-  grep "num>" mol.out{1,2,3,4} | sed "s/\.*num>//g" >> mol.in
+  grep -h "^num>" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num>//' >> mol.in
   ```
 
-  The `sed` expression also removes the file-name prefix that `grep` adds for several files.
-- Raman intensities. A `task=dipole` run writes `num>` lines; append them to the input of a `task=hessian` run.
+  The lines hold numbered `$Energy000`, `$Energy001`, … groups, one per displaced geometry. The combining run does
+  no SCF of its own. The command given in `input.txt`, `sed "s/\.*num>//g"`, leaves the file names that `grep` adds
+  for several files at the start of each line; use `grep -h` as above.
+- Raman intensities. A `task=dipole` run writes `num>` lines; append them to the input of a `task=hessian` run, and
+  the `Raman A.` and `Raman D.` columns of the frequency table are filled in.
 
-<!-- src: input.txt; 03 §10; 04 #381 -->
+<!-- src: input.txt; 03 §10; 04 #381; 08 t55, t56 (both workflows checked on v25; the input.txt sed leaves file names) -->
 
 ### Optimized geometry from `MOL>` lines
 
@@ -318,6 +320,12 @@ Windows line endings (CRLF)
 : The run stops in `$molecule` with `molecule input: ''` followed by a garbled `' ?matrix` or `?rtesian`. Convert the
   file with `dos2unix`; see {doc}`running`.
   <!-- src: 04 #63-#65 -->
+
+Misspelled task or theory name
+: Gives no error. An unknown `task=` value sets up the run and stops quietly after the SCF and grid settings; an
+  unknown `theory=` value runs Hartree–Fock, with the misspelled name in the summary box. Check the
+  `Theoretical Method` line and that the output goes on to an SCF.
+  <!-- src: 08 t50, t50b -->
 
 Hybrid functional without `theory=ridft`
 : Older versions ran without the exact exchange. With `theory=dft`, version 25 stops after the basis-set echo with

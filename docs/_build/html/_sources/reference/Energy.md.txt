@@ -64,10 +64,11 @@ Cartesian gradient (3N values).
 **Default:** *none stated*\
 **Units:** au\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 02 §3.2; 08 t24, t25
+**Sources:** 02 §3.2; 08 t24, t25, t41, t41b
 
 Hessian as a lower triangle, 3N(3N+1)/2 values. Written by `task=hessian` on `eng>` lines; in version 25 a
-`saddle=1` optimization and an IRC read it back from an appended `$Energy` group.
+`saddle=1` optimization and an IRC read it back from an appended `$Energy` group. If the input holds several
+`$Energy` groups, the last one is used.
 
 **See also:** {ref}`saddle ($optimize) <optimize.saddle>`
 

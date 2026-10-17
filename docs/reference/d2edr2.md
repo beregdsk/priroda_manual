@@ -30,8 +30,8 @@ Step length for numerical differentiation of the potential-energy surface.
 
 **Type:** switch\
 **Default:** `2`\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t55
 
 Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.
 
@@ -53,8 +53,8 @@ Number of displacements per coordinate. More accurate numerical Hessians may als
 
 **Type:** list\
 **Default:** `0,-1`\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t55
 
 Default: `0,-1` runs every step from 0 to 3N (or 6N) in a single run.
 
@@ -63,7 +63,11 @@ geometries are 1 … 3N (one displacement) or 1 … 6N (two displacements). This
 across separate runs and then combined.
 
 ```{note}
-Not the same keyword as `$optimize steps`.
+Not the same keyword as `$optimize steps`. Tested in version 25 with water (`ridft`, `displace=1`, steps 0–9):
+two partial runs (`steps=0,4`, `steps=5,9`) and a combining run with `steps=-1` gave the same frequencies as a
+one-run Hessian to within 0.4 cm⁻¹. The combining run does no SCF. The collecting command in `input.txt`
+(`grep "num>" … | sed "s/\.*num>//g"`) leaves the file names that `grep` adds at the start of each line;
+the example uses `grep -h` instead.
 ```
 
 **Example:**
@@ -75,7 +79,7 @@ $d2edr2 disp=1 steps=10,18 $end    # mol.in2
 $d2edr2 disp=1 steps=19,27 $end    # mol.in3
 $d2edr2 disp=1 steps=28,36 $end    # mol.in4
 # collect the partial results into one input:
-grep "num>" mol.out{1,2,3,4} | sed "s/\.*num>//g" >> mol.in
+grep -h "^num>" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num>//' >> mol.in
 # add the line below and run once more to process them:
 $d2edr2 steps=-1 $end
 ```

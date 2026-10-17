@@ -103,7 +103,11 @@ Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. 
 ./mpiexec -np 4 ./p input.in output.out
 ```
 
-<!-- src: 01 §2.1 --> <!-- verify: not yet tested on version 25 -->
+<!-- src: 01 §2.1; 08 t21b (works in v25) -->
+
+The output then starts with `parallel on 4 processors` and one `node N:` line per process. A two-process test gave
+exactly the serial energy.
+<!-- src: 08 t21b -->
 
 Older versions also accepted `p -np 4 input.in output.out`, which users ran with versions 6 and 10. **Version 25 does
 not**: it takes `-np` as the input file name, prints `input file '-np'?.` and stops. One site ran version 14 as

@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -280,8 +281,8 @@
 <span id="d2edr2-displace"></span><h2><code class="docutils literal notranslate"><span class="pre">displace</span></code><a class="headerlink" href="#displace" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">2</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 08 t55</p>
 <p>Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -306,15 +307,19 @@
 <span id="d2edr2-steps"></span><h2><code class="docutils literal notranslate"><span class="pre">steps</span></code><a class="headerlink" href="#steps" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0,-1</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 08 t55</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">0,-1</span></code> runs every step from 0 to 3N (or 6N) in a single run.</p>
 <p>The first and last displacement steps to do in this run. The reference geometry is step 0, and the displaced
 geometries are 1 … 3N (one displacement) or 1 … 6N (two displacements). This lets a numerical Hessian be split
 across separate runs and then combined.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Not the same keyword as <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">steps</span></code>.</p>
+<p>Not the same keyword as <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">steps</span></code>. Tested in version 25 with water (<code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">displace=1</span></code>, steps 0–9):
+two partial runs (<code class="docutils literal notranslate"><span class="pre">steps=0,4</span></code>, <code class="docutils literal notranslate"><span class="pre">steps=5,9</span></code>) and a combining run with <code class="docutils literal notranslate"><span class="pre">steps=-1</span></code> gave the same frequencies as a
+one-run Hessian to within 0.4 cm⁻¹. The combining run does no SCF. The collecting command in <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>
+(<code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">&quot;num&gt;&quot;</span> <span class="pre">…</span> <span class="pre">|</span> <span class="pre">sed</span> <span class="pre">&quot;s/\.*num&gt;//g&quot;</span></code>) leaves the file names that <code class="docutils literal notranslate"><span class="pre">grep</span></code> adds at the start of each line;
+the example uses <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-h</span></code> instead.</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># 12-atom molecule, four inputs run in parallel on different machines:
@@ -323,7 +328,7 @@ $d2edr2 disp=1 steps=10,18 $end    # mol.in2
 $d2edr2 disp=1 steps=19,27 $end    # mol.in3
 $d2edr2 disp=1 steps=28,36 $end    # mol.in4
 # collect the partial results into one input:
-grep "num&gt;" mol.out{1,2,3,4} | sed "s/\.*num&gt;//g" &gt;&gt; mol.in
+grep -h "^num&gt;" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num&gt;//' &gt;&gt; mol.in
 # add the line below and run once more to process them:
 $d2edr2 steps=-1 $end
 </pre></div>

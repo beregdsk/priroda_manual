@@ -46,6 +46,14 @@ for f in "$here"/inputs/t*.in; do
     t27b_*)  # needs the vectors saved by t27a
       if [ ! -e "$out/t27.vec" ]; then skip "$name" "needs t27a in the same run (no t27.vec)"; continue; fi
       prep "$name" "" "$name"; run "$name" ;;
+    t59_*)  # relative basis name in a parallel run: needs MPIEXEC
+      if [ -z "${MPIEXEC:-}" ]; then skip "$name" "MPIEXEC not set"; continue; fi
+      mkdir -p "$out/t59" && cp "$BASIS" "$out/t59/basis.in" && cp "$f" "$out/t59/$name.in"
+      (cd "$out/t59" && timeout 600 "$MPIEXEC" -np 2 "$PRIRODA" "$name.in" "$name.out" > "$name.stdout" 2>&1; echo "$name exit=$?" >> "$out/status.txt")
+      rm -f "$out/t59/basis.in" ;;
+    t63_*)  # parallel run of a numerical Hessian: needs MPIEXEC
+      if [ -z "${MPIEXEC:-}" ]; then skip "$name" "MPIEXEC not set"; continue; fi
+      prep "$name" "" "$name"; run "$name" "$MPIEXEC" -np 2 ;;
     t35_*|t49_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     t39_*) if [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     *)

@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -414,7 +415,10 @@ capital letter. Version 25 writes to an output file with capital letters in its 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>./mpiexec -np 4 ./p input.in output.out
 </pre></div>
 </div>
-<!-- src: 01 §2.1 --> <!-- verify: not yet tested on version 25 -->
+<!-- src: 01 §2.1; 08 t21b (works in v25) -->
+<p>The output then starts with <code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">on</span> <span class="pre">4</span> <span class="pre">processors</span></code> and one <code class="docutils literal notranslate"><span class="pre">node</span> <span class="pre">N:</span></code> line per process. A two-process test gave
+exactly the serial energy.</p>
+<!-- src: 08 t21b -->
 <p>Older versions also accepted <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">input.in</span> <span class="pre">output.out</span></code>, which users ran with versions 6 and 10. <strong>Version 25 does
 not</strong>: it takes <code class="docutils literal notranslate"><span class="pre">-np</span></code> as the input file name, prints <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">file</span> <span class="pre">'-np'?.</span></code> and stops. One site ran version 14 as
 <code class="docutils literal notranslate"><span class="pre">mpiexec</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">p</span> <span class="pre">input.in</span></code>, with the system’s MPI launcher.</p>

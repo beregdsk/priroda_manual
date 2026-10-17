@@ -625,8 +625,9 @@ For ammonia, version 25 printed:</p>
 </div>
 <!-- src: 08 t13 (verbatim) -->
 <p>The columns are the frequency in cm⁻¹, the reduced mass in amu and the IR intensity in km/mol. The Raman columns
-stay zero in a plain Hessian run; Raman intensities need <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code>. A second table, <code class="docutils literal notranslate"><span class="pre">Normal</span> <span class="pre">Modes</span> <span class="pre">(mass-weighted)</span> <span class="pre">and</span> <span class="pre">Frequencies</span></code>, follows with the mode vectors. To print the table:</p>
-<!-- src: 08 t13; keywords/control.yaml (task=dipole for Raman) -->
+stay zero in a plain Hessian run; for Raman intensities, run <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> first and append its <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines (see
+<a class="reference internal" href="input-syntax.html"><span class="doc">Input syntax</span></a>). A second table, <code class="docutils literal notranslate"><span class="pre">Normal</span> <span class="pre">Modes</span> <span class="pre">(mass-weighted)</span> <span class="pre">and</span> <span class="pre">Frequencies</span></code>, follows with the mode vectors. To print the table:</p>
+<!-- src: 08 t13, t56; keywords/control.yaml (task=dipole for Raman) -->
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="s2">"Harmonic Frequencies"</span><span class="w"> </span>nh3_freq.out
 </pre></div>
 </div>

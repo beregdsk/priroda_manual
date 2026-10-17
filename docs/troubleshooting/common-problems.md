@@ -622,7 +622,7 @@ Version 25 must be started through an MPI launcher, such as the `mpiexec` from t
 `input file '-np'?.`. With version 10, starting through the bundled `mpiexec` once failed with
 `Error in system call mpiexec: No such file or directory` or `mpiexec could not exec p`. Use absolute paths for the
 binary, the input, the output and the basis file.
-<!-- src: 04 #150, #152-#154; 01 §2.1; 08 t21a --> <!-- verify: bundled mpiexec on version 25 -->
+<!-- src: 04 #150, #152-#154; 01 §2.1; 08 t21a, t21b (bundled mpiexec works in v25) -->
 
 The message `OOPS: semop lock failed` (with `process N received signal 2` or `6`) has two reported contexts:
 

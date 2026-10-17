@@ -2,8 +2,9 @@
 
 Three verification rounds: the inputs in `tests/inputs/`, run by the project owner with `tests/run.sh` on
 2026-10-17 on one Linux machine (`node 0: 'arch'`), serial unless stated. Each round reran all earlier tests;
-the current outputs, for all rounds, are in `tests/runs/20261017-124819/` (earlier run folders were
-`20261017-121135` and `20261017-123408`; energies were identical in every rerun). Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
+the outputs of rounds 1–3 were last in `tests/runs/20261017-124819/` (removed from the working tree in commit
+`9332498`; still in git history, e.g. `git show ef39f62:tests/runs/20261017-124819/t01_energy.out`); round 4 is in
+`tests/runs/20261017-130725/`. Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
 
 Cite as `08 tNN`. This is program output, the top of the evidence order. Each result holds for v25 only; older
@@ -87,6 +88,21 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t48 | O2 `mult=3`: 9 alpha / 7 beta, beta orbitals printed (unrestricted although the electron count is even), converged, E = -150.2228124217. |
 | t48b | O2 `mult=1`: closed shell, E = -150.1593089237, 0.0635 hartree above the triplet. |
 | t49 | `basis4.in` without `four=1`: the output ends right after `Basis set input: '…/basis4.in'` with the single line `1?`; stderr `MPI_Abort`; exit 1. |
+
+## Round 4
+
+| Test | Result |
+|---|---|
+| t21a | Again `input file '-np'?.`: `p -np` is not supported. |
+| t21b | `mpiexec -np 2 p in out` with the `mpiexec` from the official site works: `parallel on 2 processors`, one `node N:` line per process, E = -76.3653913723 (as serial). |
+| t41b | Two `$Energy` groups with the planar Hessian first and the pyramidal one last: `Lowest eigenvalues:  0.03297  0.09355`, i.e. the **last** group is used. (With that wrong Hessian the saddle search then ran the full 128 steps without converging.) |
+| t50 | `task=nosuchtask`: no message; the run sets up (geometry, basis, SCF and grid echo) and stops, exit 0, exactly like `task=check`. |
+| t50b | `theory=nosuchtheory`: no error; the summary box says `NOSUCHTHEORY`, and the run does a **Hartree–Fock** calculation (E = -76.0503595209, identical to `theory=hf`). |
+| t53 | `$control derivative=numeric` with `theory=dft`, `task=hessian`: `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`; water frequencies 1572.30, 3895.20, 4006.43 cm⁻¹ (analytic, t56: 1572.29, 3895.05, …). |
+| t55 | Split numerical Hessian (`ridft`, `$d2edr2 displace=1`): parts `steps=0,4` and `steps=5,9` each wrote 35 `num>` lines (5 SCF runs each); the combining run with `steps=-1` and both sets of lines appended did no SCF and printed the frequencies 1643.00, 3910.51, 4018.62 cm⁻¹ (one-run `ridft` Hessian with the default `displace=2`, 08 t32a: 1642.79, 3910.72, 4018.26). |
+| t56 | Analytic DFT Hessian with the `num>` lines of `task=dipole` (t36) appended: Raman activities and depolarization ratios filled in (mode 1: 4.517, 0.3925; mode 2: 67.228, 0.1346). |
+| t57a | `task=nmr` with `theory=ridft`: only the ground-state SCF; no shieldings, no message, exit 0. |
+| t57b | `$nmr standard(1)=31.0 standard(8)=300.0`: `shift = standard − isotropic shielding` (H: 31.0 − 32.7773 = −1.7773; O: −36.8797). |
 
 ## Cosmetic
 

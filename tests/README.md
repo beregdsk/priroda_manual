@@ -23,7 +23,7 @@ the Hessian from t24, and t27b reads the vectors saved by t27a, so run those gro
 After a run, record the answer in the Result column, add it to a `research/` note, then update the keyword YAML
 (`default`, `verified_against`, `status`) or the chapter text and remove the `<!-- verify -->` mark it resolves.
 
-## Round 1 (run 2026-10-17 on version 25; current outputs in `runs/20261017-124819/`)
+## Round 1 (run 2026-10-17 on version 25; outputs in git history, `git show ef39f62:tests/runs/20261017-124819/<file>`)
 
 The findings are written up in `research/08_test_runs_v25.md` and folded into the YAML and chapters.
 
@@ -54,7 +54,7 @@ The findings are written up in `research/08_test_runs_v25.md` and folded into th
 | t20 | (t01, no output file) | Does the output go to standard output when no output file is given? | `t20_stdout.stdout` | running.md || Yes. |
 | t21 | (t01 on 2 processes) | Which parallel launch works: `p -np 2 in out` (t21a) or `./mpiexec -np 2 ./p in out` (t21b, if `mpiexec` sits next to `p`)? | Both outputs; same energy as t01 | running.md (parallel runs); PLAN 3a.1 || t21a `p -np 2` failed, no output, exit 1; stderr not captured. t21b not run. |
 
-## Round 2 (run 2026-10-17 on version 25; current outputs in `runs/20261017-124819/`)
+## Round 2 (run 2026-10-17 on version 25; outputs in git history, `git show ef39f62:tests/runs/20261017-124819/<file>`)
 
 Small inputs again (water, ammonia, OH), except t32b, t33 and t36, which may take a few minutes.
 
@@ -89,7 +89,7 @@ Small inputs again (water, ammonia, OH), except t32b, t33 and t36, which may tak
 | t39 | `t39_qm_n3.in` | Semiempirical QM model with `qm.in` (needs `QMBASIS`) | Energy; run time | `control.theory` (qm_n3) || Runs; short output format of its own, no `E  =` line. |
 | t40 | `t40_coordinated_spelling.in` | Is `$optimize coordinated=` (the `input.txt` spelling) accepted? Any unique prefix of `coordinates` would be. | Error `unknown name coordinated`, or a normal run | `optimize.coordinates` || No error, but inconclusive (see t40b/t40c). |
 
-## Round 3 (run 2026-10-17 on version 25; outputs in `runs/20261017-124819/`)
+## Round 3 (run 2026-10-17 on version 25; outputs in git history, `git show ef39f62:tests/runs/20261017-124819/<file>`)
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
@@ -108,9 +108,9 @@ Small inputs again (water, ammonia, OH), except t32b, t33 and t36, which may tak
 | t49 | `t49_basis4_without_four.in` | `basis4.in` without `four=1` (needs `BASIS4`): does it stop at the `Basis set input:` line, as reported? | Where the output ends; error text | common-problems (basis file); `control.four` || Stops after the basis line with `1?`; exit 1. |
 
 
-## Round 4 (not run yet)
+## Round 4 (run 2026-10-17 on version 25; outputs in `runs/20261017-130725/`)
 
-Run only these:
+Run with:
 
 ```bash
 cd tests
@@ -127,15 +127,35 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| t21 | (t01 on 2 processes) | Does `mpiexec -np 2 p in out` (t21b) or a system `mpirun` (t21c) start a parallel run? | `t21b_*.stdout`, `t21c_*.stdout`; the process lines at the top of the output; same energy as t01 | running.md (parallel runs) | |
-| t41b | `t41b_two_energy_groups_reversed.in` | Same as t41 with the groups swapped (planar first, pyramidal last). Does the last group win? | `Lowest eigenvalues:` positive (last group used) or -0.02919 (matching group used) | input-syntax (several `$Energy` groups) | |
-| t50 | `t50_unknown_task.in` | `task=nosuchtask`: error, or setup and a quiet stop like `task=check`? The program has no `check` task (`research/09`). | Where the output ends; exit status | `control.task` (`check`) | |
-| t50b | `t50b_unknown_theory.in` | `theory=nosuchtheory`: error or a silent fallback? | Error text, or the `Theoretical Method` line | `control.theory` | |
-| t53 | `t53_numeric_hessian_dft.in` | `$control derivative=numeric` (a keyword found only in the program) with `theory=dft`: numerical Hessian instead of analytic? | `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`; frequencies as in an analytic run | `research/09`; `$d2edr2` | |
-| t55a/b/c | `t55a…`, `t55b…`, `t55c…` | Numerical Hessian split over two runs (`$d2edr2 displace=1 steps=0,4` and `5,9`), then combined with `steps=-1` and the `num>` lines of both | t55a/b: `num>` lines; t55c: frequency table, compared with a one-run `ridft` Hessian (round 2 t32a) | `d2edr2.steps`; input-syntax (`num>` lines) | |
-| t56 | `t56_raman_from_dipole.in` | Raman intensities: a Hessian run with the `num>` lines of `task=dipole` (t36) appended | Non-zero `Raman A.` and `Raman D.` columns | input-syntax (`num>` lines); getting-started (Raman) | |
-| t57a | `t57a_nmr_ridft.in` | NMR with `theory=ridft` (sources say NMR works only with `dft`) | Shielding table or an error | about.md capability matrix (note 5) | |
-| t57b | `t57b_nmr_standard.in` | `$nmr standard(1)=31.0 standard(8)=300.0`: shift = standard − shielding? | `shift=` values (H about -1.78, O about -36.88) | `nmr.standard` | |
+| t21 | (t01 on 2 processes) | Does `mpiexec -np 2 p in out` (t21b) or a system `mpirun` (t21c) start a parallel run? | `t21b_*.stdout`, `t21c_*.stdout`; the process lines at the top of the output; same energy as t01 | running.md (parallel runs) || `p -np` rejected again; **`mpiexec -np 2 p in out` works** (2 processes, same energy). |
+| t41b | `t41b_two_energy_groups_reversed.in` | Same as t41 with the groups swapped (planar first, pyramidal last). Does the last group win? | `Lowest eigenvalues:` positive (last group used) or -0.02919 (matching group used) | input-syntax (several `$Energy` groups) || Last group used (positive eigenvalues). |
+| t50 | `t50_unknown_task.in` | `task=nosuchtask`: error, or setup and a quiet stop like `task=check`? The program has no `check` task (`research/09`). | Where the output ends; exit status | `control.task` (`check`) || No error: setup, then a quiet stop, like `check`. |
+| t50b | `t50b_unknown_theory.in` | `theory=nosuchtheory`: error or a silent fallback? | Error text, or the `Theoretical Method` line | `control.theory` || **No error: runs Hartree–Fock** (E = HF energy). |
+| t53 | `t53_numeric_hessian_dft.in` | `$control derivative=numeric` (a keyword found only in the program) with `theory=dft`: numerical Hessian instead of analytic? | `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`; frequencies as in an analytic run | `research/09`; `$d2edr2` || Yes, numerical; frequencies equal the analytic ones within 0.2 cm⁻¹. |
+| t55a/b/c | `t55a…`, `t55b…`, `t55c…` | Numerical Hessian split over two runs (`$d2edr2 displace=1 steps=0,4` and `5,9`), then combined with `steps=-1` and the `num>` lines of both | t55a/b: `num>` lines; t55c: frequency table, compared with a one-run `ridft` Hessian (round 2 t32a) | `d2edr2.steps`; input-syntax (`num>` lines) || Works: 1643.00 / 3910.51 / 4018.62 cm⁻¹ (one-run: 1642.79 / 3910.72 / 4018.26). The `input.txt` sed recipe leaves file names; use `grep -h`. |
+| t56 | `t56_raman_from_dipole.in` | Raman intensities: a Hessian run with the `num>` lines of `task=dipole` (t36) appended | Non-zero `Raman A.` and `Raman D.` columns | input-syntax (`num>` lines); getting-started (Raman) || Works: Raman activities and depolarization ratios filled in. |
+| t57a | `t57a_nmr_ridft.in` | NMR with `theory=ridft` (sources say NMR works only with `dft`) | Shielding table or an error | about.md capability matrix (note 5) || No shieldings: only the SCF energy, no message. |
+| t57b | `t57b_nmr_standard.in` | `$nmr standard(1)=31.0 standard(8)=300.0`: shift = standard − shielding? | `shift=` values (H about -1.78, O about -36.88) | `nmr.standard` || Yes: shift = standard − shielding (H −1.7773, O −36.8797). |
+
+## Round 5 (not run yet)
+
+Run with (the `mpiexec` from the official site is needed for t59 and t63):
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh t58 t59 t60 t61 t62 t63
+```
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t58a | `t58a_input_syntax_example.in` | The first example of the Input syntax chapter, exactly as printed (`$system mem=512 disk=-512 path=/tmp`) | `Memory:` line with the RAM disk; `OPTIMIZATION CONVERGED` | input-syntax (first example) | |
+| t58b | `t58b_molecule_one_line_header.in` | `$molecule charge=0 mult=1 cartesian` on one line | Same energy as t01 | input-syntax (`$molecule`) | |
+| t59 | `t59_relative_basis_parallel.in` | Relative `basis=basis.in` in a 2-process run (basis file in the run directory) | Normal run, or `MPI_Abort` as in the old forum report | common-problems (basis file not found) | |
+| t60a | `t60a_broken_symmetry_dft.in` | Singlet O2 with `restrict=0` and `$guess mix=1`, pure DFT: does the solution break spin symmetry? | Spin populations; energy compared with t48b (closed-shell singlet) and t48 (triplet) | `guess.mix`; common-problems (open-shell singlets) | |
+| t60b | `t60b_broken_symmetry_ridft.in` | The same with `ridft`/PBE1 | as t60a | as t60a | |
+| t61 | `t61_too_little_memory.in` | `$system mem=2`: what message does too little memory give? | Error text (`malloc(...) failed`?) | running.md; common-problems (memory) | |
+| t62 | `t62_too_little_disk.in` | Conventional MP2 with a 1 MB RAM disk: what message does too little scratch give? | Error text (`out of disk space`?) | common-problems (disk) | |
+| t63 | `t63_parallel_ridft_hessian.in` | Numerical `ridft` Hessian on 2 processes | Frequencies as in the serial run (round 2 t32a: 1642.79, 3910.72, 4018.26); run time | running.md (parallel performance) | |
 
 ## Still not covered
 

@@ -505,8 +505,8 @@ optimization.
 
 \item {} 
 \sphinxAtStartPar
-NMR works only with \sphinxcode{\sphinxupquote{theory=dft}} and a non\sphinxhyphen{}hybrid functional. Users report that relativistic (\sphinxcode{\sphinxupquote{four=1}}) NMR runs
-hang. 
+NMR works only with \sphinxcode{\sphinxupquote{theory=dft}} and a non\sphinxhyphen{}hybrid functional; with \sphinxcode{\sphinxupquote{ridft}}, version 25 silently computes only the
+energy. Users report that relativistic (\sphinxcode{\sphinxupquote{four=1}}) NMR runs hang. 
 
 \item {} 
 \sphinxAtStartPar
@@ -1187,6 +1187,12 @@ Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 ./mpiexec \PYGZhy{}np 4 ./p input.in output.out
 \end{sphinxVerbatim}
+
+
+
+\sphinxAtStartPar
+The output then starts with \sphinxcode{\sphinxupquote{parallel on 4 processors}} and one \sphinxcode{\sphinxupquote{node N:}} line per process. A two\sphinxhyphen{}process test gave
+exactly the serial energy.
 
 
 
@@ -2270,7 +2276,8 @@ For ammonia, version 25 printed:
 
 \sphinxAtStartPar
 The columns are the frequency in cm⁻\(\sp{\text{1}}\), the reduced mass in amu and the IR intensity in km/mol. The Raman columns
-stay zero in a plain Hessian run; Raman intensities need \sphinxcode{\sphinxupquote{task=dipole}}. A second table, \sphinxcode{\sphinxupquote{Normal Modes (mass\sphinxhyphen{}weighted) and Frequencies}}, follows with the mode vectors. To print the table:
+stay zero in a plain Hessian run; for Raman intensities, run \sphinxcode{\sphinxupquote{task=dipole}} first and append its \sphinxcode{\sphinxupquote{num\textgreater{}}} lines (see
+{\hyperref[\detokenize{start/input-syntax::doc}]{\sphinxcrossref{\DUrole{doc}{Input syntax}}}}). A second table, \sphinxcode{\sphinxupquote{Normal Modes (mass\sphinxhyphen{}weighted) and Frequencies}}, follows with the mode vectors. To print the table:
 
 
 
@@ -3068,9 +3075,8 @@ The \sphinxcode{\sphinxupquote{ge}} script on the official site does the same. I
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
 An optimization prints an \sphinxcode{\sphinxupquote{eng\textgreater{}}} block at every step, and the command above appends all of them. Append only the
-block you need, normally the one from a \sphinxcode{\sphinxupquote{task=hessian}} run. In a version 25 test with two \sphinxcode{\sphinxupquote{\$Energy}} groups, the
-second one was used; it was also the one that matched the geometry, so it is not certain that the last group always
-wins.
+block you need, normally the one from a \sphinxcode{\sphinxupquote{task=hessian}} run. If the input holds several \sphinxcode{\sphinxupquote{\$Energy}} groups, the
+program uses the \sphinxstylestrong{last} one, even when an earlier one matches the geometry.
 \end{sphinxadmonition}
 
 
@@ -3093,15 +3099,18 @@ A numerical Hessian split over several runs with {\hyperref[\detokenize{referenc
 all partial outputs into one input, add \sphinxcode{\sphinxupquote{\$d2edr2 steps=\sphinxhyphen{}1 \$end}}, and run once more:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-grep \PYGZdq{}num\PYGZgt{}\PYGZdq{} mol.out\PYGZob{}1,2,3,4\PYGZcb{} | sed \PYGZdq{}s/\PYGZbs{}.*num\PYGZgt{}//g\PYGZdq{} \PYGZgt{}\PYGZgt{} mol.in
+grep \PYGZhy{}h \PYGZdq{}\PYGZca{}num\PYGZgt{}\PYGZdq{} mol.out1 mol.out2 mol.out3 mol.out4 | sed \PYGZsq{}s/\PYGZca{}num\PYGZgt{}//\PYGZsq{} \PYGZgt{}\PYGZgt{} mol.in
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{sed}} expression also removes the file\sphinxhyphen{}name prefix that \sphinxcode{\sphinxupquote{grep}} adds for several files.
+The lines hold numbered \sphinxcode{\sphinxupquote{\$Energy000}}, \sphinxcode{\sphinxupquote{\$Energy001}}, … groups, one per displaced geometry. The combining run does
+no SCF of its own. The command given in \sphinxcode{\sphinxupquote{input.txt}}, \sphinxcode{\sphinxupquote{sed "s/\textbackslash{}.*num\textgreater{}//g"}}, leaves the file names that \sphinxcode{\sphinxupquote{grep}} adds
+for several files at the start of each line; use \sphinxcode{\sphinxupquote{grep \sphinxhyphen{}h}} as above.
 
 \item {} 
 \sphinxAtStartPar
-Raman intensities. A \sphinxcode{\sphinxupquote{task=dipole}} run writes \sphinxcode{\sphinxupquote{num\textgreater{}}} lines; append them to the input of a \sphinxcode{\sphinxupquote{task=hessian}} run.
+Raman intensities. A \sphinxcode{\sphinxupquote{task=dipole}} run writes \sphinxcode{\sphinxupquote{num\textgreater{}}} lines; append them to the input of a \sphinxcode{\sphinxupquote{task=hessian}} run, and
+the \sphinxcode{\sphinxupquote{Raman A.}} and \sphinxcode{\sphinxupquote{Raman D.}} columns of the frequency table are filled in.
 
 \end{itemize}
 
@@ -3149,6 +3158,14 @@ combination the program understands. Run other sequences as separate jobs.
 \sphinxAtStartPar
 The run stops in \sphinxcode{\sphinxupquote{\$molecule}} with \sphinxcode{\sphinxupquote{molecule input: \textquotesingle{}\textquotesingle{}}} followed by a garbled \sphinxcode{\sphinxupquote{\textquotesingle{} ?matrix}} or \sphinxcode{\sphinxupquote{?rtesian}}. Convert the
 file with \sphinxcode{\sphinxupquote{dos2unix}}; see {\hyperref[\detokenize{start/running::doc}]{\sphinxcrossref{\DUrole{doc}{Installing and running}}}}.
+
+
+
+\sphinxlineitem{Misspelled task or theory name}
+\sphinxAtStartPar
+Gives no error. An unknown \sphinxcode{\sphinxupquote{task=}} value sets up the run and stops quietly after the SCF and grid settings; an
+unknown \sphinxcode{\sphinxupquote{theory=}} value runs Hartree\textendash{}Fock, with the misspelled name in the summary box. Check the
+\sphinxcode{\sphinxupquote{Theoretical Method}} line and that the output goes on to an SCF.
 
 
 
@@ -3436,7 +3453,7 @@ Job type, level of theory, basis\sphinxhyphen{}set file, Hamiltonian and printin
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{gradient}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default gradient, check); 02 \S{}3.2 (pri: default gradient); 03 \S{}5; 04 \#69\sphinxhyphen{}\#73, \#145, \#478, \#497; 01 \S{}4.2; 08 t02, t18, t26, t34, t36, t37; 09
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default gradient, check); 02 \S{}3.2 (pri: default gradient); 03 \S{}5; 04 \#69\sphinxhyphen{}\#73, \#145, \#478, \#497; 01 \S{}4.2; 08 t02, t18, t26, t34, t36, t37; 09; 08 t50, t57a
 
 \sphinxAtStartPar
 Job type.
@@ -3510,7 +3527,7 @@ Relaxed potential\sphinxhyphen{}energy\sphinxhyphen{}surface scan over the coord
 \sphinxcode{\sphinxupquote{nmr}}
 &
 \sphinxAtStartPar
-NMR shielding tensors. Works only with \sphinxcode{\sphinxupquote{theory=dft}}.
+NMR shielding tensors. Works only with \sphinxcode{\sphinxupquote{theory=dft}}: with \sphinxcode{\sphinxupquote{ridft}}, version 25 silently runs only the ground\sphinxhyphen{}state SCF.
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3524,7 +3541,7 @@ Numerical dipole polarizabilities and their derivatives with respect to nuclear 
 \sphinxcode{\sphinxupquote{check}}
 &
 \sphinxAtStartPar
-Not a task name in the version 25 program. \sphinxcode{\sphinxupquote{task=check}} sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF, presumably like any unrecognized task, which makes it a usable input check. \sphinxstyleemphasis{(undocumented)}
+Not a task name in the version 25 program. Like any unrecognized task, \sphinxcode{\sphinxupquote{task=check}} sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF without a message, which makes it a usable input check. \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3598,6 +3615,7 @@ Filter duplicate structures among several \sphinxcode{\sphinxupquote{\$molecule}
 \sphinxAtStartPar
 Two \sphinxcode{\sphinxupquote{task=}} lines do not chain jobs: only the first one runs. Apart from \sphinxcode{\sphinxupquote{optimize+hessian}}, sequences such
 as optimize\(\rightarrow\)NMR need separate runs or an external driver script.
+\sphinxstylestrong{A misspelled task name gives no error}: version 25 sets up the run and stops quietly, as for \sphinxcode{\sphinxupquote{check}}.
 \sphinxcode{\sphinxupquote{task=critical}} does not work; density critical points come from \sphinxcode{\sphinxupquote{print=+density}}.
 \sphinxcode{\sphinxupquote{task=QM}} appears only in the header of the shipped \sphinxcode{\sphinxupquote{qm.in}} parameter file and is not a user task.
 The binary contains further task words (\sphinxcode{\sphinxupquote{IRC4}}, \sphinxcode{\sphinxupquote{PATHX}}, \sphinxcode{\sphinxupquote{PATHR}}, \sphinxcode{\sphinxupquote{STERIC}}, \sphinxcode{\sphinxupquote{POLARIZABILITY}}, \sphinxcode{\sphinxupquote{MMDYNAMIC}},
@@ -3615,7 +3633,7 @@ and others) that are untested or need data that is not distributed.
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{dft}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default dft); 06 \S{}3 (v5 ab initio list); 03 \S{}5 (Evgeniy 2011 test); 04 \#96, \#99, \#307\sphinxhyphen{}\#310; 01 \S{}3.1, \S{}4.2; 08 t02, t08, t17, t31\sphinxhyphen{}t33, t38, t39, t46
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default dft); 06 \S{}3 (v5 ab initio list); 03 \S{}5 (Evgeniy 2011 test); 04 \#96, \#99, \#307\sphinxhyphen{}\#310; 01 \S{}3.1, \S{}4.2; 08 t02, t08, t17, t31\sphinxhyphen{}t33, t38, t39, t46; 08 t50b
 
 \sphinxAtStartPar
 Theoretical method.
@@ -3781,6 +3799,9 @@ Earlier variant of the QM model, used for very large systems with \sphinxcode{\s
 \sphinxattableend\end{savenotes}
 
 \begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+\sphinxstylestrong{A misspelled theory name gives no error}: version 25 prints it in the summary box and runs Hartree\textendash{}Fock.
+
 \sphinxAtStartPar
 \sphinxstylestrong{Hybrid trap.} Hybrid functionals (\sphinxcode{\sphinxupquote{PBE1}}, \sphinxcode{\sphinxupquote{B3LYP}}, …) take effect only with \sphinxcode{\sphinxupquote{theory=ridft}}. With \sphinxcode{\sphinxupquote{theory=dft}}
 or \sphinxcode{\sphinxupquote{tddft}}, older versions silently drop the exact exchange. In version 25, \sphinxcode{\sphinxupquote{theory=dft}} stops right after
@@ -4052,6 +4073,61 @@ Suppress the printout of internal coordinates. \sphinxstyleemphasis{(undocumente
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYGZdl{}control print=+vectors+molden \PYGZdl{}end
 \end{sphinxVerbatim}
+
+
+\subsection{\sphinxstyleliteralintitle{\sphinxupquote{derivative}}}
+\label{\detokenize{reference/control:derivative}}\label{\detokenize{reference/control:control-derivative}}
+\index{derivative (\$control)@\spxentry{derivative}\spxextra{\$control}}\ignorespaces 
+\sphinxAtStartPar
+\sphinxstylestrong{Type:} enum\\
+\sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
+\sphinxstylestrong{Status:} undocumented · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} 09; 08 t53
+
+\sphinxAtStartPar
+Default: analytic second derivatives where the method has them (GGA DFT), numerical otherwise.
+
+\sphinxAtStartPar
+How \sphinxcode{\sphinxupquote{task=hessian}} computes the second derivatives. Not in any written source; found in the program and
+tested in version 25, where \sphinxcode{\sphinxupquote{derivative=numeric}} with \sphinxcode{\sphinxupquote{theory=dft}} gave the same water frequencies as the
+analytic Hessian to within 0.2 cm⁻\(\sp{\text{1}}\).
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\sphinxthistablewithnovlinesstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{\Y{0.3}\Y{0.7}}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Value
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Meaning
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{analytic}}
+&
+\sphinxAtStartPar
+Analytic second derivatives.
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{numeric}}
+&
+\sphinxAtStartPar
+Second derivatives by finite differences of the gradient (\sphinxcode{\sphinxupquote{NUMERICAL COMPUTATION OF SECOND DERIVATIVES}}).
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+\sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/d2edr2:d2edr2-steps}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{steps (\$d2edr2)}}}}}
 
 
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{save}}}
@@ -5634,8 +5710,8 @@ Step length for numerical differentiation of the potential\sphinxhyphen{}energy 
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{2}}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 08 t55
 
 \sphinxAtStartPar
 Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.
@@ -5684,8 +5760,8 @@ Two displacements per coordinate. More accurate but twice as slow. (\sphinxstyle
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} list\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0,\sphinxhyphen{}1}}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 08 t55
 
 \sphinxAtStartPar
 Default: \sphinxcode{\sphinxupquote{0,\sphinxhyphen{}1}} runs every step from 0 to 3N (or 6N) in a single run.
@@ -5697,7 +5773,11 @@ across separate runs and then combined.
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-Not the same keyword as \sphinxcode{\sphinxupquote{\$optimize steps}}.
+Not the same keyword as \sphinxcode{\sphinxupquote{\$optimize steps}}. Tested in version 25 with water (\sphinxcode{\sphinxupquote{ridft}}, \sphinxcode{\sphinxupquote{displace=1}}, steps 0\textendash{}9):
+two partial runs (\sphinxcode{\sphinxupquote{steps=0,4}}, \sphinxcode{\sphinxupquote{steps=5,9}}) and a combining run with \sphinxcode{\sphinxupquote{steps=\sphinxhyphen{}1}} gave the same frequencies as a
+one\sphinxhyphen{}run Hessian to within 0.4 cm⁻\(\sp{\text{1}}\). The combining run does no SCF. The collecting command in \sphinxcode{\sphinxupquote{input.txt}}
+(\sphinxcode{\sphinxupquote{grep "num\textgreater{}" … | sed "s/\textbackslash{}.*num\textgreater{}//g"}}) leaves the file names that \sphinxcode{\sphinxupquote{grep}} adds at the start of each line;
+the example uses \sphinxcode{\sphinxupquote{grep \sphinxhyphen{}h}} instead.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -5710,7 +5790,7 @@ Not the same keyword as \sphinxcode{\sphinxupquote{\$optimize steps}}.
 \PYGZdl{}d2edr2 disp=1 steps=19,27 \PYGZdl{}end    \PYGZsh{} mol.in3
 \PYGZdl{}d2edr2 disp=1 steps=28,36 \PYGZdl{}end    \PYGZsh{} mol.in4
 \PYGZsh{} collect the partial results into one input:
-grep \PYGZdq{}num\PYGZgt{}\PYGZdq{} mol.out\PYGZob{}1,2,3,4\PYGZcb{} | sed \PYGZdq{}s/\PYGZbs{}.*num\PYGZgt{}//g\PYGZdq{} \PYGZgt{}\PYGZgt{} mol.in
+grep \PYGZhy{}h \PYGZdq{}\PYGZca{}num\PYGZgt{}\PYGZdq{} mol.out1 mol.out2 mol.out3 mol.out4 | sed \PYGZsq{}s/\PYGZca{}num\PYGZgt{}//\PYGZsq{} \PYGZgt{}\PYGZgt{} mol.in
 \PYGZsh{} add the line below and run once more to process them:
 \PYGZdl{}d2edr2 steps=\PYGZhy{}1 \PYGZdl{}end
 \end{sphinxVerbatim}
@@ -5803,7 +5883,7 @@ Reference shieldings and extra points for NMR shielding calculations.
 \sphinxstylestrong{Type:} indexed\sphinxhyphen{}array\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 04 \#69; 02 \S{}5.7; 08 t34
+\sphinxstylestrong{Sources:} input.txt; 04 \#69; 02 \S{}5.7; 08 t34; 08 t57b
 
 \sphinxAtStartPar
 Reference shielding constants, indexed by atomic number, for computing chemical shifts. Values are needed
@@ -5814,7 +5894,7 @@ only for the elements present in the molecule.
 A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
 different TMS values (e.g. \sphinxcode{\sphinxupquote{standard(1)=31.3867 standard(6)=181.9781}}) for other settings. Compute TMS with
 exactly the settings of the production run. Without \sphinxcode{\sphinxupquote{standard}}, version 25 prints \sphinxcode{\sphinxupquote{shift=}} as minus the
-isotropic shielding.
+isotropic shielding; with it, \sphinxcode{\sphinxupquote{shift = standard − isotropic shielding}}.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -5922,11 +6002,12 @@ Cartesian gradient (3N values).
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Units:} au\\
 \sphinxstylestrong{Status:} undocumented · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} 02 \S{}3.2; 08 t24, t25
+\sphinxstylestrong{Sources:} 02 \S{}3.2; 08 t24, t25, t41, t41b
 
 \sphinxAtStartPar
 Hessian as a lower triangle, 3N(3N+1)/2 values. Written by \sphinxcode{\sphinxupquote{task=hessian}} on \sphinxcode{\sphinxupquote{eng\textgreater{}}} lines; in version 25 a
-\sphinxcode{\sphinxupquote{saddle=1}} optimization and an IRC read it back from an appended \sphinxcode{\sphinxupquote{\$Energy}} group.
+\sphinxcode{\sphinxupquote{saddle=1}} optimization and an IRC read it back from an appended \sphinxcode{\sphinxupquote{\$Energy}} group. If the input holds several
+\sphinxcode{\sphinxupquote{\$Energy}} groups, the last one is used.
 
 \sphinxAtStartPar
 \sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/optimize:optimize-saddle}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{saddle (\$optimize)}}}}}
@@ -7584,7 +7665,8 @@ Not documented: \sphinxcode{\sphinxupquote{irc4}}, \sphinxcode{\sphinxupquote{di
 \end{itemize}
 
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{check}} is not a task name, although \sphinxcode{\sphinxupquote{task=check}} appears in older notes.
+\sphinxcode{\sphinxupquote{check}} is not a task name. Like any unknown task name, \sphinxcode{\sphinxupquote{task=check}} sets up the run and stops quietly, which is
+why it seems to work. An unknown \sphinxcode{\sphinxupquote{theory=}} name is worse: the program runs Hartree\textendash{}Fock without a message.
 
 
 

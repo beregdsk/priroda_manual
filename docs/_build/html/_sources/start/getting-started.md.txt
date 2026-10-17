@@ -391,9 +391,10 @@ For ammonia, version 25 printed:
 <!-- src: 08 t13 (verbatim) -->
 
 The columns are the frequency in cm⁻¹, the reduced mass in amu and the IR intensity in km/mol. The Raman columns
-stay zero in a plain Hessian run; Raman intensities need `task=dipole`. A second table, `Normal Modes
+stay zero in a plain Hessian run; for Raman intensities, run `task=dipole` first and append its `num>` lines (see
+{doc}`input-syntax`). A second table, `Normal Modes
 (mass-weighted) and Frequencies`, follows with the mode vectors. To print the table:
-<!-- src: 08 t13; keywords/control.yaml (task=dipole for Raman) -->
+<!-- src: 08 t13, t56; keywords/control.yaml (task=dipole for Raman) -->
 
 ```bash
 grep -A 12 "Harmonic Frequencies" nh3_freq.out

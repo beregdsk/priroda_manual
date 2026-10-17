@@ -89,10 +89,11 @@ Every item stays open for D4, testing against a real binary.
 
 Questions that a single run can answer. They are also tagged `<!-- verify -->` at the relevant place in `docs/`.
 `tests/` holds the minimal inputs for them, with a run script and a results table (`tests/README.md`). Round 1 ran on
-Priroda 25 (2025.02.28) on 2026-10-17; results in `research/08_test_runs_v25.md`. Answered: 2 (partly: `/tmp` echoed),
-3 (serial, cwd), 4, 5, 6 (aborts silently), 7 (yes, `eng>` for energy), 8 (except imaginary notation), 9 (not detected),
-10 (only `mol>`), 11, 12 (`core` and `mult`), 13 (partly), 14 (no such line printed in the runs). Still open: 1, 15,
-and the round-2 items.
+Priroda 25 (2025.02.28) on 2026-10-17 (rounds 1–4); results in `research/08_test_runs_v25.md`. Answered: 1 (bundled
+`mpiexec`; `p -np` rejected), 2 (partly: `/tmp` echoed), 3 (serial, cwd), 4, 5, 6 (aborts silently for `dft`, runs
+wrongly for `tddft`), 7 (yes; the last `$Energy` group wins), 8 (imaginary as `845.22i`), 9 (not detected),
+10 (only `mol>`), 11, 12, 13 (the common theories run; unknown names run HF), 14 (no such line printed). Still open: 15
+(Windows) and round 5.
 
 1. Parallel launch: `p -np N in out`, or `./mpiexec -np N ./p in out`, or `mpiexec -np N p in`?
 2. Scratch directory when neither `path=` nor `TMPDIR` is set: the current directory, the input-file directory, or `/tmp`?
@@ -125,6 +126,7 @@ and the round-2 items.
 4c. ~~Third round (t40b–t49).~~ Run on v25; folded in. t21 still needs an MPI launcher.
 4e. ~~Keyword list from the v25 executable (`p4_d`).~~ Done: `research/09`, appendix page "Keywords in the program";
     YAML names corrected (`optimize.symmetry`, `optimize.model`, `uniq.distance`).
-4f. Round 4 (t21, t41b, t50, t53, t55, t56, t57) written; waiting for runs.
+4f. ~~Round 4 (t21, t41b, t50, t53, t55, t56, t57).~~ Run on v25; folded in. Parallel launch settled (bundled `mpiexec`).
+4g. Round 5 (t58–t63) written; waiting for runs.
 4d. Repository `README.md` added.
 5. Write the Part II chapters in task order, then Part III, then the appendices.

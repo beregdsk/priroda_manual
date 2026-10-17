@@ -78,8 +78,9 @@ The program recognizes these values of {ref}`task <control.task>`. Only the firs
   `isogrid`, `functional`, `d1fit`, `df1_n4`, `df2_n4`, `df2_e_n4`, `mbf2`, `molbf`, `moldf`, `dmtype`,
   `am_integral`, and developer tests (`mpitest`, `multiply`, `etest`, `fmtest`, `ritest`, `riopt`, `test_v`).
 
-`check` is not a task name, although `task=check` appears in older notes.
-<!-- src: 09 -->
+`check` is not a task name. Like any unknown task name, `task=check` sets up the run and stops quietly, which is
+why it seems to work. An unknown `theory=` name is worse: the program runs Hartree–Fock without a message.
+<!-- src: 09; 08 t18, t50, t50b -->
 
 ## Theory names
 
