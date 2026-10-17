@@ -1,0 +1,201 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 12:48:42 2026
+
+ node   0: 'arch'
+
+ Memory: 128m (128m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 3 atoms, 10 electrons
+
+ Atomic Coordinates:
+   8     0.00000000   0.00000000   0.11730000
+   1     0.00000000   0.75720000  -0.46920000
+   1     0.00000000  -0.75720000  -0.46920000
+ #
+  formula: H2O
+  internuclear distances:
+  O1    |  H1   : 0.95778  H2   : 0.95778
+  H1    |  O1   : 0.95778
+  H2    |  O1   : 0.95778
+     largest =    1.51440
+
+ atom   8 core =  1
+ at.d.=1
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   8  O :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -2.51, +13.32
+    2   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    3   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   8  O :  40 / 100 : { 6, 4, 3, 1}                       / {10, 9, 7, 4}                       log2(a) =  -1.53, +10.86
+    2   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+    3   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+
+ +---------------------------------------
+ | Number of atoms                      3
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
+ | Theoretical Method               RIMP2
+ | Dimension of wavefunction basis     24
+ | Dimension of   auxiliary  basis     50
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=64,16; xmax = 0.12500; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-08)
+ inv=2: v = 1.5e-05
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+    1    56
+    8    64
+  mol   176
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  99.4%     0.0
+ time: Initial Guess                    :     0.0  99.7%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ s=2.0e-02
+ vmax=2e+02
+ time: Inversion of V-Matrix            :     0.0  99.0%     0.0
+ time: integral estimates               :     0.0  99.7%     0.0
+        2880 blocks,        28800 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -76.0252981072   0.0000000000   0.07252195   0.03954019      0.0
+   1    -76.0471519255  -0.0218538183   0.03393007   0.01007645      0.0
+   2    -76.0499318078  -0.0027798823   0.00570847   0.00351283      0.0
+   3    -76.0501170393  -0.0001852314   0.00159582   0.00204106      0.0
+   4    -76.0501404745  -0.0000234353   0.00039247   0.00027052      0.0
+   5    -76.0501411951  -0.0000007206   0.00011841   0.00007691      0.0
+   6    -76.0501412845  -0.0000000894   0.00002494   0.00001377      0.0
+   7    -76.0501412880  -0.0000000034   0.00000915   0.00000805      0.0
+   8    -76.0501412883  -0.0000000004   0.00000276   0.00000256      0.0
+   9    -76.0501412884  -0.0000000000   0.00000115   0.00000091      0.0
+  10    -76.0501412884  -0.0000000000   0.00000018   0.00000011      0.0
+ converged!
+  11    -76.0501412884   0.0000000000   0.00000003   0.00000002      0.0
+ time: Coulomb Matrix                   :     0.0  99.7%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.8%     0.0
+ time: Exchange Matrix                  :     0.0 100.0%     0.0
+ time: SCF Equations                    :     0.0  99.8%     0.0
+ Total   Energy =    -76.05014129
+ Kinetic Energy =     76.04747177
+ Dipole  Moment = {  0.00000,  0.00000, -0.82198} (  0.82198)
+ Quadrupole Moment = {  -5.38866;
+                         0.00000,  -3.10894;
+                        -0.00000,  -0.00000,  -4.47523}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  98.7%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  96.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.6%     0.0
+ E2aa =     -0.02838153
+ E2ab =     -0.16034095
+ E2   =     -0.21710401
+ E    =    -76.26724529
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.2%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  98.8%     0.0
+ time: Coulomb  Matrix                  :     0.0  97.8%     0.0
+ time: Exchange Matrix                  :     0.0  98.9%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.008544852, time =     0.0
+ subspace  2: g = 0.001422334, time =     0.0
+ subspace  3: g = 0.000347981, time =     0.0
+ subspace  4: g = 0.000093600, time =     0.0
+ subspace  5: g = 0.000014173, time =     0.0
+ subspace  6: g = 0.000002697, time =     0.0
+ time: CPHF Equations                   :     0.0  99.7%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.7%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  96.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.6%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.8%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  98.8%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.0%     0.0
+ time: Exchange Matrix                  :     0.0  99.7%     0.0
+ time: RI-MP2 Calculation               :     0.0  99.7%     0.0
+ Kinetic Energy =     76.38645969
+ Dipole  Moment = {  0.00000,  0.00000, -0.75952} (  0.75952)
+ Quadrupole Moment = {  -5.38778;
+                         0.00000,  -3.23382;
+                        -0.00000,  -0.00000,  -4.53214}
+ occupation numbers:
+ nc=   1: sum=  2.00000217
+   1  2.00000217
+ no=   4: sum=  7.89857908
+   2  1.98698551    3  1.97353069    4  1.96996417    5  1.96809871
+ nv=  19: sum=  0.10141875
+   6  0.02305019    7  0.02058175    8  0.01694387    9  0.01069412   10  0.00574490
+  11  0.00532750   12  0.00517337   13  0.00441407   14  0.00440081   15  0.00103707
+  16  0.00093947   17  0.00071197   18  0.00053656   19  0.00050718   20  0.00048296
+  21  0.00038336   22  0.00034460   23  0.00007363   24  0.00007138
+
+  E  =     -76.2672452938
+  T  =      76.38645969  V  =    -199.18725845  J  =      46.86497324
+  Ex =      -8.96486228  Ec =      -0.21710401
+
+  dipole =   0.759523 au (  1.930529 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -20.546745    2    -1.341307    3    -0.705521    4    -0.574093
+   5    -0.502116
+ virtual:
+   6     0.237715    7     0.338715    8     0.870646    9     0.962273
+  10     1.063071   11     1.093713   12     1.138729   13     1.499663
+  14     1.529811   15     1.716836   16     1.922072   17     2.139532
+  18     2.282247   19     2.672451   20     3.360401   21     3.410301
+  22     3.631648   23     4.437807   24     4.955788
+
+
+eng>$Energy
+eng> E=-7.6267245293806e+01
+eng> D= 6.34913428e-15  8.43379533e-12 -7.59522678e-01
+eng>$end
+
+
+ ============================================================
+
+ Memory used =     7775 KB
+  Disk  used =    16737 KB,          2099 KB written,        17472 KB read
+
+ CPU  time =    0.70 sec =  0.01 min = 0.00 hr =   99.72%
+ REAL time =    0.70 sec =  0.01 min = 0.00 hr
+ ratio     =   99.72%
+
+ date: Sat Oct 17 12:48:43 2026
+
+ time: Initial Guess                    :     0.0   0.0% 344998750710781360453042645773472222480660863843619259931769380141446210833645252044237746354729272661977346282103557595719219843000732436518206103674674330959297531278614050839512744236511367781245250496979787418326783620022272.0
+ time: atomic calculations              :     0.0   0.0% 100363249704241091960007347051512219767519883816844815549033441913972642382405744170290784350499791163731164440969308949392945369909061150645721688324198433265620427030823237861007246809183624122504431792664702619746304.0
+ time: One-Electron Integrals           :     0.0  99.5%     0.0
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Diagonalize                      :     0.0  99.4%     0.0
+ time: Matrix Multiply                  :     0.0  99.0%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.0%     0.0
+ time: integral estimates               :     0.0   0.0% 707896986634783764097792834087562382381549651055026890852391337875087494987656032676331483424939538382633366481557086095406942359789060917735791845637121235220624000701745554903327938310725173248.0
+ time: Coulomb Matrix                   :     0.0   0.0% 2832204130262763029867961263600132581772671935051999444205568.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.8%     0.0
+ time: Transformation (m|no) -> (m|oo)  :     0.0   0.0%     0.0
+ time: Exchange Matrix                  :     0.0  99.9%     0.0
+ time: SCF Equations                    :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  98.9%     0.0
+ time: Diagonalization                  :     0.0  99.4%     0.0
+ time: Rotate                           :     0.0  97.1%     0.0
+ time: RI-MP2 Calculation               :     0.0   0.0% 2828311202546423571565478735843926863872903602436124190965760.0
+ time: CPHF Equations                   :     0.0  99.7%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  96.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.6%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.8%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0   0.0% 2833381086835746688268202696617103453082092351130872479481856.0
+ time: Coulomb  Matrix                  :     0.0  99.0%     0.0

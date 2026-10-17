@@ -1,0 +1,269 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 12:48:45 2026
+
+ node   0: 'arch'
+
+ Memory: 128m (128m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 3 atoms, 10 electrons
+
+ Atomic Coordinates:
+   8     0.00000000   0.00000000   0.11730000
+   1     0.00000000   0.75720000  -0.46920000
+   1     0.00000000  -0.75720000  -0.46920000
+ #
+  formula: H2O
+  internuclear distances:
+  O1    |  H1   : 0.95778  H2   : 0.95778
+  H1    |  O1   : 0.95778
+  H2    |  O1   : 0.95778
+     largest =    1.51440
+
+ atom   8 core =  1
+ at.d.=1
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   8  O :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -2.51, +13.32
+    2   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    3   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ +---------------------------------------
+ | Number of atoms                      3
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
+ | Theoretical Method                 CIS
+ | Dimension of wavefunction basis     24
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=64,16; xmax = 0.12500; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-08)
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+    1    56
+    8    64
+  mol   176
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  98.6%     0.0
+ time: Initial Guess                    :     0.0  99.6%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ s=2.0e-02
+ time: integral estimates               :     0.0  99.6%     0.0
+        2943 blocks,        49499 integrals total
+ sparsity=0.9
+ time: Two-Electron Integrals           :     0.1  99.7%     0.1
+
+ Hartree-Fock Equations:
+ it.       energy         change         gradient     change       time
+   0    -76.0254804102   0.0000000000   0.06849397   0.05363908      0.0
+   1    -76.0432222689  -0.0177418587   0.04613026   0.01582805      0.0
+   2    -76.0502576436  -0.0070353747   0.00381099   0.00297060      0.0
+   3    -76.0503497429  -0.0000920993   0.00093976   0.00155436      0.0
+   4    -76.0503594138  -0.0000096709   0.00011829   0.00009521      0.0
+   5    -76.0503595122  -0.0000000984   0.00003477   0.00002823      0.0
+   6    -76.0503595208  -0.0000000087   0.00000371   0.00000323      0.0
+   7    -76.0503595209  -0.0000000001   0.00000117   0.00000172      0.0
+   8    -76.0503595209  -0.0000000000   0.00000026   0.00000024      0.0
+ converged!
+   9    -76.0503595209  -0.0000000000   0.00000005   0.00000006      0.0
+ time: Fock Matrix                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Diagonalization                  :     0.0  99.4%     0.0
+ time: SCF Equations                    :     0.0  99.7%     0.0
+ SCF Total Energy =    -76.0503595209
+ Kinetic   Energy =     76.04720469
+ Potential Energy =   -199.18659934
+ Dipole  Moment = { -0.00000,  0.00000, -0.82028} (  0.82028)
+ Quadrupole Moment = {  -5.38800;
+                         0.00000,  -3.10877;
+                         0.00000,   0.00000,  -4.47507}
+
+ Configuration Interaction with Single Substitutions:
+ N =   24, Na =   5, Nb =   5, Nvo =     95
+ iteration  0: subspace =   6, rmax = 1.1e-01, time =    0.0
+ E: 0.38186 0.45667 0.47809 0.55783 0.59662 0.78162
+ r:  8e-02   9e-02   5e-02   8e-02   6e-02   1e-01 
+ iteration  1: subspace =  12, rmax = 3.3e-02, time =    0.0
+ E: 0.37002 0.43609 0.46653 0.54014 0.58719 0.73425
+ r:  2e-02   1e-02   1e-02   2e-02   1e-02   3e-02 
+ iteration  2: subspace =  18, rmax = 1.8e-02, time =    0.0
+ E: 0.36950 0.43568 0.46603 0.53948 0.58677 0.72925
+ r:  4e-03   4e-03   3e-03   7e-03   3e-03   2e-02 
+ iteration  3: subspace =  24, rmax = 9.2e-03, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72898
+ r:  1e-03   2e-03   1e-03   3e-03   8e-04   9e-03 
+ iteration  4: subspace =  30, rmax = 2.0e-03, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  2e-04   3e-04   2e-04   5e-04   3e-04   2e-03 
+ iteration  5: subspace =  36, rmax = 4.1e-04, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  2e-05   6e-06   2e-05   4e-05   4e-05   4e-04 
+ iteration  6: subspace =  42, rmax = 1.3e-04, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  5e-06   2e-06   4e-06   1e-05   9e-06   1e-04 
+ iteration  7: subspace =  48, rmax = 5.0e-05, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  1e-06   7e-07   1e-06   4e-06   5e-06   5e-05 
+ iteration  8: subspace =  53, rmax = 2.5e-05, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  3e-07   7e-07   3e-07   6e-07   7e-07   2e-05 
+ iteration  9: subspace =  54, rmax = 5.7e-06, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  3e-07   7e-07   1e-07   6e-07   7e-07   6e-06 
+ iteration 10: subspace =  55, rmax = 6.9e-07, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  3e-07   7e-07   1e-07   6e-07   7e-07   4e-07 
+ iteration 11: subspace =   6, rmax = 6.9e-07, time =    0.0
+ E: 0.36948 0.43566 0.46600 0.53943 0.58676 0.72894
+ r:  3e-07   7e-07   1e-07   6e-07   7e-07   4e-07 
+ iteration  0: subspace =   6, rmax = 2.3e-02, time =    0.0
+ r:  2e-02   2e-02   2e-02   1e-02   1e-02   2e-02 
+ iteration  1: subspace =  12, rmax = 3.1e-03, time =    0.0
+ r:  1e-03   3e-03   1e-03   2e-03   1e-03   2e-03 
+ iteration  2: subspace =  18, rmax = 1.9e-04, time =    0.0
+ r:  9e-05   2e-04   1e-04   1e-04   1e-04   2e-04 
+ iteration  3: subspace =  24, rmax = 1.0e-05, time =    0.0
+ r:  1e-05   1e-05   8e-06   3e-06   3e-06   9e-06 
+ iteration  4: subspace =  30, rmax = 3.7e-07, time =    0.0
+ r:  1e-07   4e-07   3e-07   7e-08   4e-08   3e-07 
+
+ st.      Total       Excitation   Wavelength   Transition    Dipole  
+ No.      Energy      Energy         (nm)       Moment        Change  
+   1   -75.68087551   0.36948401   123.316187   0.38545085   0.855978
+   2   -75.61469533   0.43566419   104.583667   0.00000000   0.854543
+   3   -75.58435583   0.46600369    97.774674   0.63074828   0.879151
+   4   -75.51093112   0.53942840    84.466000   0.47229326   0.954771
+   5   -75.46360240   0.58675712    77.652844   1.05816528   0.734326
+   6   -75.32141958   0.72893994    62.506328   0.64720438   0.640006
+
+ dominant configurations:
+
+ st.  1 : E =   0.3694840
+
+   5 ->    6 :  0.9938229
+   5 ->   10 :  0.0794762
+
+
+ st.  2 : E =   0.4356642
+
+   5 ->    7 :  0.9881268
+   5 ->    9 :  0.1130281
+   5 ->   13 : -0.0843031
+
+
+ st.  3 : E =   0.4660037
+
+   4 ->    6 :  0.9877611
+   3 ->    7 :  0.1154036
+   4 ->    8 :  0.0489066
+
+
+ st.  4 : E =   0.5394284
+
+   4 ->    7 :  0.9819129
+   3 ->    6 :  0.1302098
+   4 ->   13 : -0.0770282
+   4 ->    9 :  0.0647793
+
+
+ st.  5 : E =   0.5867571
+
+   3 ->    6 :  0.9860147
+   4 ->    7 : -0.1307210
+   3 ->   10 :  0.0724716
+
+
+ st.  6 : E =   0.7289399
+
+   3 ->    7 :  0.9635476
+   5 ->   12 :  0.1590881
+   4 ->   10 :  0.1391942
+   4 ->    6 : -0.1074254
+   5 ->   15 :  0.0697758
+   3 ->    9 :  0.0570302
+
+ time: Integral Transformation          :     0.0  99.4%     0.0
+ time: Fock Matrix                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: CI-Singles                       :     0.0  99.5%     0.0
+ n =  10.00000000000
+ Kinetic   Energy =     76.34366261
+ Potential Energy =   -197.82153043
+ Dipole  Moment = { -0.00000,  0.00000,  0.03427} (  0.03427)
+ Quadrupole Moment = {  -5.17788;
+                         0.00000,  -7.04378;
+                         0.00000,  -0.00000,  -6.09402}
+ occupation numbers:
+ nc=   1: sum=  2.00934587
+   1  2.00934587
+ no=   4: sum=  7.00652908
+   2  2.00511146    3  2.00073396    4  2.00000028    5  1.00068338
+ nv=  19: sum=  0.98412505
+   6  0.99704709    7  0.00012931    8  0.00001717    9  0.00000015   10  0.00000000
+  11  0.00000000   12  0.00000000   13  0.00000000   14 -0.00000000   15 -0.00000000
+  16 -0.00000000   17 -0.00000000   18 -0.00000000   19 -0.00000000   20 -0.00000039
+  21 -0.00053397   22 -0.00083924   23 -0.00232513   24 -0.00936994
+
+  E  =     -75.6808755127
+  T  =      76.34366261  V  =    -197.82153043  J  =      46.86475638
+  Ex =      -8.96525567  Ec =       0.00000000
+
+  dipole =   0.034268 au (  0.087101 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -20.546880    2    -1.341320    3    -0.705539    4    -0.574205
+   5    -0.502251
+ virtual:
+   6     0.236838    7     0.338418    8     0.866148    9     0.959914
+  10     1.061036   11     1.089575   12     1.135112   13     1.494188
+  14     1.528016   15     1.715480   16     1.919415   17     2.139521
+  18     2.281011   19     2.671423   20     3.358653   21     3.408894
+  22     3.628799   23     4.434985   24     4.952939
+
+
+eng>$Energy
+eng> E=-7.5680875512744e+01
+eng> D=-4.94332548e-13  1.99124849e-10  3.42679735e-02
+eng>$end
+
+
+ ============================================================
+
+ Memory used =     7747 KB
+  Disk  used =    16859 KB,          1905 KB written,        15319 KB read
+
+ CPU  time =    0.55 sec =  0.01 min = 0.00 hr =   99.82%
+ REAL time =    0.55 sec =  0.01 min = 0.00 hr
+ ratio     =   99.82%
+
+ date: Sat Oct 17 12:48:45 2026
+
+ time: Initial Guess                    :     0.0  99.6%     0.0
+ time: atomic calculations              :     0.0  98.6%     0.0
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ time: Coulomb-type Integrals           :     0.0  99.2%     0.0
+ time: Diagonalize                      :     0.0  99.5%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: integral estimates               :     0.0  99.6%     0.0
+ time: Two-Electron Integrals           :     0.1  99.7%     0.1
+ time: SCF Equations                    :     0.0  99.7%     0.0
+ time: Fock Matrix                      :     0.0  99.7%     0.0
+ time: Plane Rotations                  :     0.0   0.0%     0.0
+ time: Diagonalization                  :     0.0  99.4%     0.0
+ time: Orthogonalize                    :     0.0  98.3%     0.0
+ time: Rotate                           :     0.0 100.0%     0.0
+ time: CI-Singles                       :     0.0  99.5%     0.0
+ time: Integral Transformation          :     0.0  99.4%     0.0

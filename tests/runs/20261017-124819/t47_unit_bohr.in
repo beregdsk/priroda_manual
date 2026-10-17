@@ -1,0 +1,15 @@
+$system mem=256 disk=1 $end
+$control
+ task=energy
+ theory=dft
+ basis=/home/egor/Programs/Priroda/basis.in
+$end
+$molecule
+ charge=0 mult=1
+ unit=b
+ cartesian
+ set=L1
+  8    0.000000    0.000000    0.221665
+  1    0.000000    1.430902   -0.886661
+  1    0.000000   -1.430902   -0.886661
+$end
