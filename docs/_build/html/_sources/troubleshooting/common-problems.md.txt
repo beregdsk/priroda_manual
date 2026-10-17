@@ -273,6 +273,7 @@ Newton–Raphson procedure in 10 iterations and about half the time. The fine-gr
   job with `$guess read=1`. For an already optimized structure, the guess built from scratch turned out to be poor.
   <!-- src: 05 §7.1 (EvgeniX) -->
 
+(troubleshooting.open-shell-singlet)=
 ### Open-shell singlets and broken symmetry
 
 For an open-shell (broken-symmetry) singlet, use an unrestricted calculation and mix the HOMO and LUMO of the guess:
@@ -294,32 +295,38 @@ In version 25 tests, `restrict=0 mix=1` converged back to the restricted solutio
 the energies equalled the closed-shell ones exactly. So `mix=1` alone does not give a broken-symmetry solution.
 <!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) -->
 
-Starting the singlet from the vectors of the triplet worked better: run the triplet with {ref}`save <control.save>`,
-then the singlet with `restrict=0` and `$guess read=1` (the program accepts vectors of another multiplicity). For O2
-this converged, after many iterations, to a singlet 0.048 hartree below the one found from the default guess. Give
-such runs plenty of {ref}`iterations <scf.iterations>`.
+Starting the singlet from the vectors of the triplet worked: run the triplet with {ref}`save <control.save>`, then
+the singlet with `restrict=0` and `$guess read=1` (the program accepts vectors of another multiplicity). For O2 this
+converged, after many iterations, to a broken-symmetry singlet 0.048 hartree below the closed-shell one and 0.015
+hartree above the triplet. Give such runs plenty of {ref}`iterations <scf.iterations>`.
 <!-- src: 08 t74a-c -->
 
-Part of that difference came from the default run converging to the wrong state (see
-{ref}`troubleshooting.wrong-state`). Whether the lower O2 solution is broken-symmetry could not be decided from the
-output: for O2 both the atomic spin populations (`print=+charges`) and the alpha and beta orbital-energy lists come
-out the same for a broken-symmetry and a closed-shell solution, because the two π* orbitals are spread equally over
-both atoms. Compare the energy with a run forced to stay restricted (`restrict=1`) from the same starting vectors.
-<!-- src: 08 t74c, t48b --> <!-- verify: t74d (restrict=1 from triplet vectors) -->
+Neither the atomic spin populations (`print=+charges`) nor the orbital energies showed that this solution was
+broken-symmetry: in O2 both came out the same for broken-symmetry and closed-shell solutions, because the two π*
+orbitals are spread equally over both atoms. What showed it was the energy of a second run from the same triplet
+vectors with `restrict=1`, which fell back to the closed-shell energy. Use the same check when the spins do not
+decide.
+<!-- src: 08 t74c, t74d -->
 
-(troubleshooting.wrong-state)=
-### SCF converged to the wrong state
+(troubleshooting.lumo-below-homo)=
+### LUMO below the HOMO
 
-A converged SCF is not always the ground state. In the orbital energies printed after the SCF, the lowest virtual
-orbital should lie above the highest occupied one. If it lies below, the SCF has converged to an excited
-configuration. In a version 25 test, closed-shell singlet O2 from the default guess ended with the HOMO at
-−0.178 and the LUMO at −0.219 hartree; started from the triplet's vectors, the same molecule reached normal
-ordering and an energy 0.048 hartree lower.
-<!-- src: 08 t48b, t74c -->
+In the orbital energies printed after the SCF, the lowest virtual orbital normally lies above the highest occupied
+one. If it lies below, either the SCF has settled in an excited configuration, or the molecule has a partly filled
+set of degenerate orbitals that a closed-shell calculation cannot fill in order.
+<!-- src: 08 t48b, t74d, t74e -->
 
-To get out of such a state, start from other vectors (`$guess read=1` with vectors of a related calculation, for
-example another multiplicity), or reorder the starting orbitals with {ref}`na <guess.na>` and {ref}`nb <guess.nb>`.
-<!-- src: 08 t74c; keywords/guess.yaml na, nb -->
+The second case happened for singlet O2 in version 25 tests. In a closed-shell (`mult=1`) run the pair occupies one
+of the two degenerate π* orbitals. The occupied orbital ended at −0.178 hartree, above the empty one at −0.219.
+Starting with the two orbitals swapped ({ref}`na <guess.na>`, {ref}`nb <guess.nb>`), or from the triplet's vectors
+with `restrict=1`, gave the same state and energy, since filling the other π* orbital is equivalent by symmetry. For such
+molecules the closed-shell energy is not a meaningful singlet energy: use an unrestricted broken-symmetry run (see
+{ref}`troubleshooting.open-shell-singlet`) or the high-spin state.
+<!-- src: 08 t48b, t74d, t74e -->
+
+In the first case, without degenerate orbitals, start from other vectors (`$guess read=1` with vectors of a related
+calculation) or reorder the starting orbitals with {ref}`na <guess.na>` and {ref}`nb <guess.nb>`.
+<!-- verify: not tested on a molecule without degenerate orbitals -->
 
 ### Heavy elements
 
