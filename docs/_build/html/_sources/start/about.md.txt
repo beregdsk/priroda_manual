@@ -100,8 +100,11 @@ Notes to the table:
 5. NMR works only with `theory=dft` and a non-hybrid functional; with `ridft`, version 25 silently computes only the
    energy. Users report that relativistic (`four=1`) NMR runs hang. <!-- src: input.txt; 04 #96; 03 §12; 08 t57a -->
 6. There is no hybrid TDDFT. See {ref}`what-priroda-does-not-do`.
-7. Excited states at the coupled-cluster level use a different `theory=` value, `ccsdsd` (linear-response CCSD, RHF
-   only), whose status is undocumented. <!-- src: 06 §3; 03 §11 -->
+7. Excited states at the coupled-cluster level use a different `theory=` value, `ccsdsd`, for closed-shell (RHF)
+   molecules, with the state chosen by `state=`. In a version 25 test on water it gave the first excited state 0.338
+   hartree (9.2 eV) above the CCSD ground state, against 0.370 hartree for CIS in the same basis. For an open-shell
+   molecule it silently computed only the UHF energy. It is not in `input.txt`; only the v5 keyword page and the
+   program itself list it. <!-- src: 06 §3; 03 §11; 09; 08 t78a-d -->
 8. The Hessian of the excited state given by `state=` (version 25, water, `state=1,3`): numerical, with two
    imaginary modes at the ground-state geometry, as expected for an excited state away from its own minimum.
    <!-- src: 08 t65a -->

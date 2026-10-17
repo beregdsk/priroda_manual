@@ -527,12 +527,19 @@ job with <code class="docutils literal notranslate"><span class="pre">$guess</sp
 </section>
 <section id="open-shell-singlets-and-broken-symmetry">
 <span id="troubleshooting-open-shell-singlet"></span><h3>Open-shell singlets and broken symmetry<a class="headerlink" href="#open-shell-singlets-and-broken-symmetry" title="Link to this heading">¶</a></h3>
-<p>For an open-shell (broken-symmetry) singlet, use an unrestricted calculation and mix the HOMO and LUMO of the guess:</p>
+<p>For an open-shell (broken-symmetry) singlet, the older sources recommend an unrestricted calculation with the HOMO
+and LUMO of the guess mixed:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf restrict=0 $end
 $guess mix=1 $end
 </pre></div>
 </div>
 <!-- src: 03 §7; 06 §10 (Alder-ene example); keywords/guess.yaml mix -->
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In version 25 tests <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> had no visible effect: no run with it broke the symmetry, not even stretched H2 with
+UHF, the textbook case. Use the triplet-vectors route described below, and check the result.</p>
+</div>
+<!-- src: 08 t60, t73, t79 -->
 <p>See <a class="reference internal" href="../reference/scf.html#scf-restrict"><span class="std std-ref">restrict</span></a> and <a class="reference internal" href="../reference/guess.html#guess-mix"><span class="std std-ref">mix</span></a>. With non-RI pure DFT (<code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, PBE or BLYP), one
 user found that <code class="docutils literal notranslate"><span class="pre">restrict=0</span> <span class="pre">mix=1</span></code> converged back to the restricted solution, with identical energies and identical
 alpha and beta orbital energies. RI-DFT broke the symmetry in his case. Another user notes that pure GGA functionals
@@ -540,13 +547,20 @@ often do not break symmetry, and suggests a hybrid (with <code class="docutils l
 <!-- src: 03 §7 (Evgeniy Feb 2011; qadir) -->
 <p>In version 25 tests, <code class="docutils literal notranslate"><span class="pre">restrict=0</span> <span class="pre">mix=1</span></code> converged back to the restricted solution for singlet O2, with both
 <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> (PBE) and <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> (PBE1), and for the Cr2 dimer with both the default and the <code class="docutils literal notranslate"><span class="pre">bfgs</span></code> procedure:
-the energies equalled the closed-shell ones exactly. So <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> alone does not give a broken-symmetry solution.</p>
-<!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) -->
+the energies equalled the closed-shell ones exactly. The same happened for H2 stretched to 2.5 Å, with both HF and
+PBE, for every integer value of <code class="docutils literal notranslate"><span class="pre">mix</span></code> tried (1, 2, −1, 10, 45, 90): the singlet stayed at the restricted energy,
+−0.8632 hartree for HF, although the triplet lies at −0.9972. An unrestricted SCF in Priroda keeps whatever symmetry
+its starting orbitals have, and <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> did not supply the asymmetry.</p>
+<!-- src: 08 t60a, t60b, t73a-c, t79a-e and the round-14 runs; t48b (closed-shell reference) -->
 <p>Starting the singlet from the vectors of the triplet worked: run the triplet with <a class="reference internal" href="../reference/control.html#control-save"><span class="std std-ref">save</span></a>, then
 the singlet with <code class="docutils literal notranslate"><span class="pre">restrict=0</span></code> and <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> (the program accepts vectors of another multiplicity). For O2 this
 converged, after many iterations, to a broken-symmetry singlet 0.048 hartree below the closed-shell one and 0.015
 hartree above the triplet. Give such runs plenty of <a class="reference internal" href="../reference/scf.html#scf-iterations"><span class="std std-ref">iterations</span></a>.</p>
 <!-- src: 08 t74a-c -->
+<p>This route works only when the triplet’s orbitals themselves give the singlet an asymmetric start. For O2 they did,
+because the two singly occupied π* orbitals are degenerate. For stretched H2 they did not: started from the
+triplet’s vectors, the singlet fell back to the restricted solution.</p>
+<!-- src: 08 round 14 (H2 from triplet vectors) -->
 <p>Neither the atomic spin populations (<code class="docutils literal notranslate"><span class="pre">print=+charges</span></code>) nor the orbital energies showed that this solution was
 broken-symmetry: in O2 both came out the same for broken-symmetry and closed-shell solutions, because the two π*
 orbitals are spread equally over both atoms. What showed it was the energy of a second run from the same triplet

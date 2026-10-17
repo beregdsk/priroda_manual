@@ -1,0 +1,5 @@
+t79a_h2_stretched_hf_unrestricted exit=1
+t79b_h2_stretched_hf_mix exit=1
+t79c_h2_stretched_dft_unrestricted exit=0
+t79d_h2_stretched_dft_mix exit=0
+t79e_h2_stretched_dft_restricted exit=0

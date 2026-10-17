@@ -423,7 +423,7 @@ and others) that are untested or need data that is not distributed.</p>
 <td><p>CCSD(T).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code></p></td>
-<td><p>Linear-response (EOM) CCSD for excited states (RHF). <em>(undocumented)</em></p></td>
+<td><p>CCSD for an excited state, closed-shell (RHF) only; the state is chosen with <code class="docutils literal notranslate"><span class="pre">state=</span></code>, as for <code class="docutils literal notranslate"><span class="pre">cis</span></code> and <code class="docutils literal notranslate"><span class="pre">tddft</span></code>. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state’s total energy in <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>. Without <code class="docutils literal notranslate"><span class="pre">state=</span></code> it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD by the v5 keyword page. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">qm_n3</span></code></p></td>
 <td><p>Laikov’s semiempirical QM model. Needs <code class="docutils literal notranslate"><span class="pre">basis=qm.in</span></code> and no <code class="docutils literal notranslate"><span class="pre">set=</span></code>; parameters exist for H, Li–F, Na–Cl, Sc–Cu. Runs in version 25, with a short output of its own (no summary box, no <code class="docutils literal notranslate"><span class="pre">E</span>&#160; <span class="pre">=</span></code> line). <em>(undocumented)</em></p></td>
@@ -564,7 +564,7 @@ The leading <code class="docutils literal notranslate"><span class="pre">+</span
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+charges</span></code></p></td>
-<td><p>Hirshfeld charges (DFT methods), printed as “Atomic partitions of the density”.</p></td>
+<td><p>Hirshfeld charges (DFT methods), printed as “Atomic partitions of the density”. With <code class="docutils literal notranslate"><span class="pre">theory=hf</span></code>, version 25 stops after the SCF with <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">read</span> <span class="pre">'Basis2'</span></code> and exit 1.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+bonds</span></code></p></td>
 <td><p>Mulliken populations and bond orders (SCF only), printed as “Overlap populations”.</p></td>

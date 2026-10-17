@@ -77,4 +77,4 @@ Record conventions:
 - Official binaries and files: https://rad.chem.msu.ru/~laikov/p_w/ (a file index only, with no prose docs)
 - limor1 user page and scripts: http://limor1.nioch.nsc.ru/priroda.html (about 25 further chemport thread links listed in `02` are not yet harvested)
 - Forums: qchem.ru (Wayback archive), chemport.ru t=28803 and t=112860
-- KNC wiki beginner FAQ and v5 keyword page (Wayback archive; written by the wiki's administrators, not by the developer); PDF mirror of the KNC docs: https://monitor.hpc.umanitoba.ca/doc/Priroda_Documentation_from_KNCWiki.pdf
+- KNC wiki beginner FAQ and v5 keyword page (Wayback archive; who wrote them is not known, so never attribute them to the developer or to anyone else); PDF mirror of the KNC docs: https://monitor.hpc.umanitoba.ca/doc/Priroda_Documentation_from_KNCWiki.pdf

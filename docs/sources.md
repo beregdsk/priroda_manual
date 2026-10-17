@@ -36,8 +36,8 @@ Input Summary (`input.txt`)
   available, but it is not an official document. A few of its Russian annotations are corrupted and cannot be read.
 
 Version 5 keyword reference (KNC wiki)
-: A keyword reference for version 5 on the wiki of the Kazan Scientific Centre computing centre, kept by the wiki's
-  administrators together with a beginner FAQ. It was not written by the developer. The wiki is offline; pages were
+: A keyword reference for version 5 on the wiki of the Kazan Scientific Centre computing centre, next to a beginner
+  FAQ. Who wrote it is not known. The wiki is offline; pages were
   recovered from the Internet Archive (captures 2008–2012). A PDF copy of the documentation page is at
   <https://monitor.hpc.umanitoba.ca/doc/Priroda_Documentation_from_KNCWiki.pdf>.
 

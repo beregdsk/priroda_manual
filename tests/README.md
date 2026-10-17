@@ -348,6 +348,18 @@ Outputs go to `runs/slurm-<date>/<test>/`; `status.txt` summarizes each job's fi
 PBS/Torque is not tested: it is hard to install on one PC. Its script in running.md differs only in the header lines
 and in reading the number of cores from `$PBS_NODEFILE`.
 
+## Round 14 (run in the cloud session; outputs in `runs/20261017-191941/`, `runs/20261017-192031/`, `runs/20261017-192046/`)
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t78a | `t78a_ccsdsd_water_states.in` | Does `theory=ccsdsd` with `state=1,3` give a coupled-cluster excited state? | Total energy; compare with t78b and t78c | `control.theory`; about.md note 7 | Yes: excitation 0.3384 hartree (9.21 eV) above CCSD. |
+| t78b | `t78b_ccsdsd_water_no_state.in` | `ccsdsd` without `state=` | Energy | `control.theory` | CCSD ground state only. |
+| t78c | `t78c_cis_water_states.in` | CIS reference for the same state | Excitation energy | about.md note 7 | 0.3695 hartree (10.05 eV). |
+| t78d | `t78d_ccsdsd_oh_uhf.in` | `ccsdsd` for an open-shell molecule | Does it run, fail, or warn? | `control.theory` | Silently stops after UHF; exit 0. |
+| t79a | `t79a_h2_stretched_hf_unrestricted.in` | H2 at 2.5 Å, UHF singlet: restricted or broken symmetry? | E; Spin Squared | `guess.mix`; common-problems | Restricted (⟨S²⟩ = 0). With `print=+charges` (first run) it crashed: `0: read 'Basis2'`. |
+| t79b | `t79b_h2_stretched_hf_mix.in` | The same with `mix=1` | E; Spin Squared | `guess.mix` | No change. |
+| t79c–e | `t79{c,d,e}_h2_stretched_dft_*.in` | PBE: unrestricted, with `mix=1`, restricted | E; spins | `guess.mix` | All identical, spins 0. |
+
 ## Windows (not run yet)
 
 These need a Windows computer with the files from the `exe64/` folder of the official site: `p1.exe` and

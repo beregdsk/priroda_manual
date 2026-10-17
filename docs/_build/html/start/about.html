@@ -441,8 +441,11 @@ optimization. <!-- src: 03 §11 --></p></li>
 <li><p>NMR works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> and a non-hybrid functional; with <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, version 25 silently computes only the
 energy. Users report that relativistic (<code class="docutils literal notranslate"><span class="pre">four=1</span></code>) NMR runs hang. <!-- src: input.txt; 04 #96; 03 §12; 08 t57a --></p></li>
 <li><p>There is no hybrid TDDFT. See <a class="reference internal" href="#what-priroda-does-not-do"><span class="std std-ref">What Priroda does not do</span></a>.</p></li>
-<li><p>Excited states at the coupled-cluster level use a different <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value, <code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code> (linear-response CCSD, RHF
-only), whose status is undocumented. <!-- src: 06 §3; 03 §11 --></p></li>
+<li><p>Excited states at the coupled-cluster level use a different <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value, <code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code>, for closed-shell (RHF)
+molecules, with the state chosen by <code class="docutils literal notranslate"><span class="pre">state=</span></code>. In a version 25 test on water it gave the first excited state 0.338
+hartree (9.2 eV) above the CCSD ground state, against 0.370 hartree for CIS in the same basis. For an open-shell
+molecule it silently computed only the UHF energy. It is not in <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>; only the v5 keyword page and the
+program itself list it. <!-- src: 06 §3; 03 §11; 09; 08 t78a-d --></p></li>
 <li><p>The Hessian of the excited state given by <code class="docutils literal notranslate"><span class="pre">state=</span></code> (version 25, water, <code class="docutils literal notranslate"><span class="pre">state=1,3</span></code>): numerical, with two
 imaginary modes at the ground-state geometry, as expected for an excited state away from its own minimum.</p>
 <!-- src: 08 t65a -->

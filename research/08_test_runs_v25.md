@@ -14,7 +14,8 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 10: `tests/runs/20261017-174656/` (t74a–c);
 - round 11: `tests/runs/20261017-180916/` (t74a–e); `20261017-180746/` is an earlier run of t74a–c only, with the same energies;
 - round 12: `tests/runs/20261017-182103/` (t75a–d);
-- round 13, run in the cloud session on `p4_d` (Linux, 4 cores): `tests/runs/20261017-182407/` (t76, t77), `20261017-183348/` (t68f); Slurm tests in `tests/runs/slurm-*`.
+- round 13, run in the cloud session on `p4_d` (Linux, 4 cores): `tests/runs/20261017-182407/` (t76, t77), `20261017-183348/` (t68f); Slurm tests in `tests/runs/slurm-*`;
+- round 14 (cloud session): `tests/runs/20261017-191941/` (t78), `20261017-192031/` (t79, with t79a/b failing on `print=+charges`), `20261017-192046/` (t79a/b rerun).
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -235,6 +236,25 @@ Water (t01) gave E = -76.3653913723 there too, identical to the project owner's 
 | t68f | The same scan with all three N–H bonds fixed at 1.1 Å: all 3 points converged (1, 1 and 3 steps), `SCAN>` summary printed. TDDFT scans work. |
 
 No early IRC stop occurred with any step size, so the forum advice to shrink the step for light-atom barriers was not needed here; it is not contradicted either.
+
+## Round 14 (cloud session): `ccsdsd` and `$guess mix`
+
+| Test | Result |
+|---|---|
+| t78a | Water, `theory=ccsdsd`, `state=1,3`: header `Theoretical Method CCSDSD`. HF, then CCSD (E(CCSD) = -76.2739715599), a CIS start for the excited state (`CIS:` iterations, 0.36949935), excited-state iterations, `E1(CCSD):`, and `Total Energy = -75.93560273`; `eng> E=-75.935602729`. Excitation energy 0.3384 hartree (9.21 eV). 3.9 s. |
+| t78b | Same without `state=`: CCSD ground state only, `eng> E=-76.273971559`. |
+| t78c | Water, `theory=cis`, `state=1,3`: first excitation 0.36949935 hartree (10.05 eV) above HF, the same number as the CIS start in t78a. |
+| t78d | OH radical (`mult=2`), `theory=ccsdsd`, `state=1,3`: UHF converged (⟨S²⟩ = 0.754), then the run ended with the UHF energy only (`eng> E=-75.414705567`), no CCSD and no excited state, exit 0. So `ccsdsd` is closed-shell only, and fails silently otherwise. |
+| t79a | H2 at 2.5 Å, `theory=hf`, `restrict=0`, `print=+charges`: SCF converged, then `0: read 'Basis2'`, `MPI_Abort`, exit 1. Without `print=+charges` (rerun): E = -0.8631529851, ⟨S²⟩ = 0.000000 (the restricted solution). |
+| t79b | Same with `$guess mix=1`: identical, ⟨S²⟩ = 0. |
+| t79c–e | Same with `theory=dft` (PBE): unrestricted, unrestricted + `mix=1`, and restricted all give E = -0.9610019624, Hirshfeld spins 0. |
+
+Further runs in the session (inputs as t79b with the change noted; not kept as test files):
+- `mix=2`, `-1`, `10`, `45`, `90`: same restricted energy, ⟨S²⟩ = 0. `mix=0.5` and `mix=0.3`: rejected as input errors (integer keyword).
+- Triplet H2 at 2.5 Å (UHF): E = -0.9972263941. Singlet with `read=1` from those vectors: `vectors from 'h2.vec'`, alpha and beta orbital lists printed separately (unrestricted), yet E = -0.8631529851, ⟨S²⟩ = 0: back to the restricted solution. `read=1` of RHF vectors plus `mix=1`: same.
+- `$guess nb(1)=2` alone: aborts during the guess (orbital 2 then appears twice). `nb(1)=2,1` (beta electron starts in σu): HF converged to E = -0.8042562278 with ⟨S²⟩ = 1.000000, the symmetric (σg)α(σu)β configuration, above the restricted singlet; PBE: E = -0.9132089567.
+
+Conclusions: `ccsdsd` works for closed shells. `$guess mix` is accepted (integer) but had no visible effect in any test; an unrestricted SCF keeps the symmetry of its starting orbitals. A broken-symmetry UHF singlet of stretched H2 should lie near the triplet energy *(inferred: standard UHF behaviour)* but was not reached by any route tried.
 
 ## Slurm tests
 

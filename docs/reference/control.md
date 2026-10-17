@@ -94,7 +94,7 @@ Theoretical method.
 | `ccd` | CCD. |
 | `ccsd` | CCSD (RHF/UHF). |
 | `ccsd4t` | CCSD(T). |
-| `ccsdsd` | Linear-response (EOM) CCSD for excited states (RHF). *(undocumented)* |
+| `ccsdsd` | CCSD for an excited state, closed-shell (RHF) only; the state is chosen with `state=`, as for `cis` and `tddft`. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state's total energy in `eng>`. Without `state=` it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD by the v5 keyword page. *(undocumented)* |
 | `qm_n3` | Laikov's semiempirical QM model. Needs `basis=qm.in` and no `set=`; parameters exist for H, Li–F, Na–Cl, Sc–Cu. Runs in version 25, with a short output of its own (no summary box, no `E  =` line). *(undocumented)* |
 | `qm_n2` | Earlier variant of the QM model, used for very large systems with `task=opt_n1`. *(undocumented)* |
 
@@ -240,7 +240,7 @@ The leading `+` can be omitted (`print=charges+bonds`).
 
 | Value | Meaning |
 |---|---|
-| `+charges` | Hirshfeld charges (DFT methods), printed as "Atomic partitions of the density". |
+| `+charges` | Hirshfeld charges (DFT methods), printed as "Atomic partitions of the density". With `theory=hf`, version 25 stops after the SCF with `0: read 'Basis2'` and exit 1. |
 | `+bonds` | Mulliken populations and bond orders (SCF only), printed as "Overlap populations". |
 | `+esr` | ESR parameters. |
 | `+vectors` | SCF vectors. |
