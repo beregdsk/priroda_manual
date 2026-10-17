@@ -1,0 +1,15 @@
+$system mem=512 disk=1 $end
+$control
+ task=energy
+ theory=dft
+ basis=@BASIS@
+$end
+$scf restrict=0 procedure=bfgs iterations=250 $end
+$guess mix=1 $end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  24    0.000000    0.000000    0.000000
+  24    0.000000    0.000000    1.679000
+$end

@@ -195,6 +195,35 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in QMBASIS=/abs/path/to/qm.in ./run.
 The Molden recipes were checked by hand: `freq>` and `mos>` files cut with the Getting started recipes open correctly
 in Molden.
 
+## Round 8: hard SCF cases (not run yet)
+
+Two molecules whose SCF is known to be difficult:
+
+- **A Cu(II) complex** (Cu with two methylamine ligands and an acetate, cation, doublet, 22 atoms), taken unchanged
+  from chemport thread 112860 (`research/05` §7.1). With OLYP/L2, `restrict=0`, `procedure=BFGS` and a very fine grid
+  (`acc=1e-12`), the forum user's SCF converged on the coarse grid and then diverged after the switch to the fine
+  grid (energy up to +29 hartree). Two experienced users proposed fixes that the manual describes but nobody has
+  confirmed. Each Cu run may take several minutes or more.
+- **Cr₂** at its equilibrium distance (1.679 Å), singlet: a textbook case of strong static correlation, where the
+  restricted and the broken-symmetry solutions differ a lot and the SCF often oscillates. Only two atoms, so fast.
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t70 t71 t73
+# optional, long (optimization + Hessian of the Cu complex, possibly hours):
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in LONG=1 ./run.sh t72
+```
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t70a | `t70a_cu_forum_scf.in` | Does the forum failure reproduce in v25? Same SCF settings (BFGS, `iterations=999,999`, `acc=1e-12`), but `task=energy` instead of `hessian`, since the failure is in the SCF | The SCF table after the second `grid:` line: does the energy oscillate and diverge, or converge? | common-problems (divergence after the switch to the fine grid) | |
+| t70b | `t70b_cu_default_nr.in` | First proposed fix, SCF part: drop `procedure=BFGS` and `iterations` (default Newton–Raphson, 32 iterations) | `converged!` or `no convergence!`; final energy compared with t70a | same | |
+| t71 | `t71_cu_restart_loop.in` (run as cycles) | The restart loop: `iterations=10` and `save=cu.vec`, then rerun with `$guess read=1` until converged (at most 8 cycles; `run.sh` does the cycling) | `status.txt`: in which cycle it converged; each cycle's last SCF energy; `Initial Guess (-1)` from cycle 2 on | common-problems (restart from saved vectors) | |
+| t72 | `t72_cu_optimize_hessian.in` (only with `LONG=1`) | Second proposed fix in full: `task=optimize+hessian` with `restrict=0 convergence=1e-10`, each step starting from the previous wavefunction | `OPTIMIZATION CONVERGED`; the Hessian SCF converges; frequency table | common-problems (fine-grid divergence fix) | |
+| t73a | `t73a_cr2_default.in` | Cr₂ singlet with default settings | `converged!` or `no convergence!`; energy; restricted (no beta orbitals printed) | common-problems (SCF; transition metals) | |
+| t73b | `t73b_cr2_broken_symmetry.in` | Cr₂ with `restrict=0` and `$guess mix=1`: does it find a broken-symmetry solution? | Alpha and beta orbital energies differ; energy below t73a; spin populations | `guess.mix`; common-problems (broken symmetry) | |
+| t73c | `t73c_cr2_bfgs.in` | The same with `procedure=bfgs` and `iterations=250` | Convergence and energy compared with t73b | `scf.procedure` | |
+
 ## Still not covered
 
 The Windows build (PLAN 3a.15), batch-system scripts, `$d2edr2` numerical
