@@ -1,0 +1,38 @@
+group: thermo
+order: 120
+summary:
+  en: Thermochemistry after a Hessian calculation.
+keywords:
+  - name: sigma
+    type: integer
+    default: null
+    description:
+      en: Rotational symmetry number for thermochemistry.
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: temperature
+    type: list
+    default: null
+    units: K
+    description:
+      en: Temperatures at which thermochemistry is printed, up to 50 values.
+    default_note:
+      en: |
+        `298.15` according to `Dft.rtf`, but posted outputs show `298.000 K` (2011, 2021) as well as `298.150 K` (2013).
+        Set `temperature=` explicitly when the exact value matters.
+    status: current
+    sources: ["input.txt", "Dft.rtf"]
+    verified_against: null
+  - name: mass
+    type: list
+    default: null
+    units: amu
+    description:
+      en: |
+        Atomic masses for vibrational analysis and thermochemistry. Use it to redo the analysis for other isotopes
+        from a stored Hessian (`$Energy`) without recomputing it.
+    see_also: [molecule.mass, Energy.H]
+    status: undocumented
+    sources: ["Dft.rtf"]
+    verified_against: null

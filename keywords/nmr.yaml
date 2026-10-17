@@ -1,0 +1,45 @@
+group: nmr
+order: 130
+summary:
+  en: Reference shieldings and extra points for NMR shielding calculations.
+relevant_when: "task = nmr (theory = dft only)"
+keywords:
+  - name: standard
+    type: indexed-array
+    default: null
+    description:
+      en: |
+        Reference shielding constants, indexed by atomic number, for computing chemical shifts. Values are needed
+        only for the elements present in the molecule.
+    example: |
+      $nmr
+       standard(1)=31.3915
+       standard(6)=181.9921
+      $end
+      # computed for Si(CH3)4; usable for a series of hydrocarbons
+    notes:
+      en: |
+        A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
+        different TMS values (e.g. `standard(1)=31.3867 standard(6)=181.9781`) for other settings. Compute TMS with
+        exactly the settings of the production run.
+    status: current
+    sources: ["input.txt", "04 #69", "02 §5.7"]
+    verified_against: null
+  - name: points
+    type: list
+    default: null
+    units: Å
+    description:
+      en: |
+        Extra points in space, given as x,y,z triples, at which magnetic shielding tensors are computed in
+        addition to the nuclear centres. This is the way to compute NICS: NICS is the negative of the isotropic
+        shielding printed for the point.
+    example: |
+      $nmr
+       points=
+            0.00000000    0.00000000    0.00000000
+            0.00000000    0.00000000    1.00000000
+      $end
+    status: current
+    sources: ["input.txt", "02 §3.2", "03 §12"]
+    verified_against: null

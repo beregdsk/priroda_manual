@@ -1,0 +1,95 @@
+group: scf
+order: 50
+summary:
+  en: Spin restriction, convergence, iteration limits and SCF solver.
+keywords:
+  - name: restrict
+    type: switch
+    default: null
+    default_note:
+      en: "`1` if the system has an even number of electrons, otherwise `0`."
+    values:
+      - {value: "0", en: Spin-unrestricted.}
+      - {value: "1", en: Spin-restricted (available only for a few methods).}
+    description:
+      en: Spin restriction.
+    see_also: [guess.mix]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: convergence
+    type: list
+    default: [1e-6, 1e-3]
+    default_note:
+      en: the first value is for SCF and the second for CP-SCF.
+    description:
+      en: |
+        SCF and CP-SCF convergence thresholds. The defaults are recommended. To save time in difficult cases you may
+        loosen the SCF value to `1e-5` for preliminary geometry optimizations.
+    notes:
+      en: |
+        Two problems are reported when `convergence` and `iterations` appear together in `$scf`. In one, the group stops
+        being read or fails with `*** error in '$scf' : unknown name erations`. In the other, the pair has no effect
+        unless `procedure=bfgs` is also given. Reports disagree on whether keyword order matters. Until this is
+        verified, check the `scf options:` echo line in the output.
+    see_also: [scf.iterations, scf.procedure]
+    status: current
+    sources: ["input.txt", "01 §4.5 (output echo)", "05 §2", "04 #322-#324"]
+    verified_against: null
+  - name: iterations
+    type: list
+    default: [16, 16]
+    description:
+      en: Maximum number of iterations and of microiterations (`iterations=it,micro`).
+    default_note:
+      en: |
+        `16,16` is what v6, v13 and v15 echo for DFT. A HF run for CCSD showed `48,16`, so the default may depend on
+        the method. `Dft.rtf` gives 30 (older version).
+    notes:
+      en: |
+        Do not raise this limit hoping for convergence: understand why SCF is not converging. A recommended
+        technique for difficult cases is to cap the run at `iterations=10`, save the vectors (`$control save=`) and
+        restart with `$guess read=1`, repeating as needed.
+    see_also: [scf.convergence, guess.read]
+    status: current
+    sources: ["input.txt", "01 §4.5", "04 #319", "05 §5", "Dft.rtf", "02 §3.2 (pri help)", "04 #306"]
+    verified_against: null
+  - name: procedure
+    type: enum
+    default: nr
+    default_note:
+      en: "`nr` for GGA DFT."
+    values:
+      - {value: nr, en: Newton–Raphson quadratically convergent. Can recover even from a wrong starting electronic configuration but may blow up in hard cases., default: true}
+      - {value: bfgs, en: BFGS Hessian update. Less prone to blowing up but usually slower and sometimes converges poorly.}
+    description:
+      en: Algorithm for solving the SCF equations. If one procedure fails, try the other.
+    example: |
+      $scf convergence=1e-7 procedure=bfgs iterations=250 $end
+      $grid accuracy=1e-9 $end
+    status: current
+    sources: ["input.txt", "Dft.rtf", "04 #320"]
+    verified_against: null
+  - name: d1small
+    type: switch
+    default: 0
+    values:
+      - {value: "1", en: "Include the small-component density in the linear equations of quadratically convergent SCF (scalar-relativistic pure DFT)."}
+      - {value: "0", en: "Discard these contributions. This is faster, but SCF may fail to converge for molecules containing the heaviest atoms.", default: true}
+    description:
+      en: Small-component density in quadratically convergent SCF.
+    see_also: [control.four]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: core
+    type: integer
+    default: null
+    default_note:
+      en: "computed from the atom table; see `$atoms core`."
+    description:
+      en: Number of core electrons for HF-based methods.
+    see_also: [atoms.core]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null

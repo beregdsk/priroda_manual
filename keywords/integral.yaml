@@ -1,0 +1,34 @@
+group: integral
+order: 80
+summary:
+  en: Integral evaluation for RI methods.
+keywords:
+  - name: direct
+    type: switch
+    default: 0
+    values:
+      - {value: "0", en: Store integrals., default: true}
+      - {value: "1", en: "Recompute Coulomb integrals (direct mode) in `theory=rimp2` and `theory=ridft`."}
+    description:
+      en: Selects direct (recomputed) Coulomb integrals for RI methods.
+    notes:
+      en: |
+        Direct mode roughly halves disk use, but it is slower. It is also the reported workaround when a small RI-MP2
+        job claims not to fit in memory, or crashes with `write VMNN(…)?`.
+    example: "$integral direct=1 rout=2 $end"
+    status: undocumented
+    sources: ["input.txt (annotation corrupted)", "03 #0, §17", "05 §2"]
+    verified_against: null
+  - name: routine
+    type: integer
+    default: 0
+    values:
+      - {value: "0", en: Default algorithm., default: true}
+      - {value: "1", en: Slightly slower but parallelizes better over many processes.}
+    description:
+      en: |
+        Algorithm for the two-electron integrals in correlated methods. `input.txt`'s example uses `rout=2`, but no
+        source explains the value 2.
+    status: undocumented
+    sources: ["input.txt (annotation corrupted)", "03 #0"]
+    verified_against: null

@@ -1,0 +1,34 @@
+group: atoms
+order: 90
+summary:
+  en: Per-element core definitions for correlated (HF-based) methods.
+keywords:
+  - name: core
+    type: indexed-array
+    default: null
+    description:
+      en: |
+        For HF-based methods, the number of core shells for L=0,1,2,3, given for each atomic number. The values are
+        used only to compute the total number of core electrons in the molecule.
+    example: |
+      $atoms core(280)=2,1,0,0 $end
+      # 1s, 2s, 2p (10 electrons) of nickel are core
+    notes:
+      en: |
+        The index in the example, 280 for Ni (Z=28), suggests the layout `core(10*Z)=…`. No source states this
+        layout, so it must be verified.
+    see_also: [scf.core, atoms.mcore]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: mcore
+    type: integer
+    default: null
+    description:
+      en: |
+        A simple way to add outer-core shells to the correlation treatment: `mcore=M` adds all shells whose principal
+        quantum number is lower than that of the outermost valence shell by less than M.
+    see_also: [atoms.core]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null

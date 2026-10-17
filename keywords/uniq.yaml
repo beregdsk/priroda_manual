@@ -1,0 +1,16 @@
+group: uniq
+order: 160
+summary:
+  en: Duplicate-structure filtering over several `$molecule` blocks.
+relevant_when: "task = uniq"
+keywords:
+  - name: dist
+    type: real
+    default: null
+    description:
+      en: |
+        Threshold for treating two structures as identical (inferred from the author's example `dist=0.01`, run on 157
+        MD snapshots, each in its own `$molecule` block).
+    status: undocumented
+    sources: ["01 §4.9"]
+    verified_against: null

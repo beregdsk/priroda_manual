@@ -1,0 +1,171 @@
+group: control
+order: 20
+summary:
+  en: Job type, level of theory, basis-set file, Hamiltonian and printing.
+keywords:
+  - name: task
+    type: enum
+    default: gradient
+    values:
+      - {value: energy, en: Energy at the given geometry.}
+      - {value: gradient, en: Energy and nuclear gradient. Costs little more than the energy., default: true}
+      - {value: hessian, en: Second derivatives (force constants) followed by vibrational analysis and thermochemistry.}
+      - {value: optimize, en: "Geometry optimization, including saddle points with `$optimize saddle=1`."}
+      - {value: optimize+hessian, en: "Optimization followed by a Hessian at the final geometry. The only combined task that works. Present in v2 and v9 and later, absent in v6."}
+      - {value: irc, en: "Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (`$Energy`)."}
+      - {value: scan, en: "Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`."}
+      - {value: nmr, en: "NMR shielding tensors. Works only with `theory=dft`."}
+      - {value: dipole, en: Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities).}
+      - {value: check, en: Process the geometry only., status: undocumented}
+      - {value: extremal, en: "Gradient-extremal path (v9 banner \"Calculation of Gradient Extremal Path\"); slow.", status: undocumented}
+      - {value: transit, en: "Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8.", status: undocumented}
+      - {value: saddle, en: "Approximate saddle-point search from two `$molecule` blocks (start and end).", status: undocumented}
+      - {value: path, en: "Minimum-energy-path optimization from two `$molecule` blocks (start and end).", status: undocumented}
+      - {value: conical, en: "Conical intersection of states 0 and 1 (v9 banner). Untested.", status: undocumented}
+      - {value: anharmonic, en: Anharmonic corrections to vibrational energies; slow., status: undocumented}
+      - {value: opt_n1, en: "Optimizer for very large systems (used for 8060 atoms with `theory=qm_n2`). Pairs with `$optimize mod=1`.", status: undocumented}
+      - {value: thermostat, en: "Molecular dynamics with a thermostat; see `$dynamic`.", status: undocumented}
+      - {value: uniq, en: "Filter duplicate structures among several `$molecule` blocks; see `$uniq`.", status: undocumented}
+    description:
+      en: Job type.
+    notes:
+      en: |
+        Two `task=` lines do not chain jobs: only the first one runs. Apart from `optimize+hessian`, sequences such
+        as optimize→NMR need separate runs or an external driver script.
+        `task=critical` does not work; density critical points come from `print=+density`.
+        `task=QM` appears only in the header of the shipped `qm.in` parameter file and is not a user task.
+        The binary contains further task words (`IRC4`, `PATHX`, `PATHR`, `STERIC`, `POLARIZABILITY`, `MMDYNAMIC`,
+        and others) that are untested or need data that is not distributed.
+    see_also: [optimize.saddle, optimize.points, control.print]
+    status: current
+    sources: ["input.txt", "Dft.rtf (default gradient, check)", "02 §3.2 (pri: default gradient)", "03 §5", "04 #69-#73, #145, #478, #497", "01 §4.2"]
+    verified_against: null
+  - name: theory
+    type: enum
+    default: dft
+    values:
+      - {value: dft, en: "GGA DFT with density fitting. Hybrid functionals are **not** applied here: see notes.", default: true}
+      - {value: ridft, en: Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals.}
+      - {value: DFT_n4, en: "Newer DFT variant, used by the author with `func=LPBEVV` (2025).", status: undocumented}
+      - {value: tddft, en: GGA time-dependent DFT (no hybrid TDDFT).}
+      - {value: rimp2, en: RI-MP2.}
+      - {value: hf, en: Hartree–Fock., status: undocumented}
+      - {value: rihf, en: RI Hartree–Fock., status: undocumented}
+      - {value: cis, en: "CIS (RHF/UHF). Slow and disk-hungry.", status: undocumented}
+      - {value: mp2, en: "Conventional MP2 (RHF, UHF, ROHF). Very disk-hungry.", status: undocumented}
+      - {value: mp3, en: MP3., status: undocumented}
+      - {value: mp4dq, en: MP4(DQ)., status: undocumented}
+      - {value: mp4sdq, en: MP4(SDQ)., status: undocumented}
+      - {value: mp4sdtq, en: MP4(SDTQ) (RHF)., status: undocumented}
+      - {value: ccs, en: CCS., status: undocumented}
+      - {value: ccd, en: CCD., status: undocumented}
+      - {value: ccsd, en: "CCSD (RHF/UHF)."}
+      - {value: ccsd4t, en: CCSD(T).}
+      - {value: ccsdsd, en: "Linear-response (EOM) CCSD for excited states (RHF).", status: undocumented}
+      - {value: qm_n3, en: "Laikov's semiempirical QM model. Needs `basis=qm.in`; parameters exist for H, Li–F, Na–Cl, Sc–Cu.", status: undocumented}
+      - {value: qm_n2, en: "Earlier variant of the QM model, used for very large systems with `task=opt_n1`.", status: undocumented}
+    description:
+      en: Theoretical method.
+    notes:
+      en: |
+        **Hybrid trap.** Hybrid functionals (`PBE1`, `B3LYP`, …) take effect only with `theory=ridft`. With `theory=dft`
+        or `tddft`, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort with
+        `MPI_Abort` after reading the basis twice.
+
+        The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. These
+        were reported **not** working in v6: `mp4`, `rimp4`, `rimp4sdtq`, `rimp4sdq`, `riccsd`, `riccsd4t`. They
+        either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
+        CCSDT, …); none has been reported working.
+    see_also: [dft.functional]
+    status: current
+    sources: ["input.txt", "Dft.rtf (default dft)", "06 §3 (v5 ab initio list)", "03 §5 (Evgeniy 2011 test)", "04 #96, #99, #307-#310", "01 §3.1, §4.2"]
+    verified_against: null
+  - name: state
+    type: list
+    default: null
+    description:
+      en: |
+        For excited-state methods. The first value is the excited state n whose properties are computed; the second
+        is the number of states N included in the iterative solution of the equations (`state=n,N`).
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: basis
+    type: string
+    default: null
+    default_note:
+      en: basis-set data are read from the input file itself.
+    description:
+      en: |
+        Name of the file containing the basis-set data (and ECPs, or QM parameters for `qm.in`). The name may be
+        double-quoted, which is needed when the path contains special characters. Use straight quotes: typographic
+        quotes break parsing.
+    notes:
+      en: |
+        Shipped files include `basis.in` (Λ/L family, default set `L1`), `basis4.in` (scalar-relativistic L family;
+        needs `four=1`), `3z.bas` (DFT only, Z ≤ 54), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
+        `b4s*.in`, and `qm.in`. An absolute path is safest. Chapter "Basis sets" has the full family list.
+    see_also: [molecule.set, control.four]
+    status: current
+    sources: ["input.txt", "Dft.rtf", "01 §4.11, §6", "03 §5", "04 §0"]
+    verified_against: null
+  - name: four
+    type: switch
+    default: 0
+    values:
+      - {value: "0", en: Non-relativistic theory., default: true}
+      - {value: "1", en: "Scalar-relativistic theory (K. G. Dyall, J. Chem. Phys. 100 (1994) 2118–2127). The output reports \"Hamiltonian: scalar-relativistic\"."}
+    description:
+      en: Four-component option.
+    notes:
+      en: "Required with the relativistic basis file `basis4.in`. Forgetting it is a common cause of failed runs with that file."
+    see_also: [control.nucleus, scf.d1small]
+    status: current
+    sources: ["input.txt", "01 §3.3", "04 #207-#208, #336"]
+    verified_against: null
+  - name: nucleus
+    type: enum
+    default: null
+    default_note:
+      en: "`finite` for four-component theory, `point` for non-relativistic theory."
+    values:
+      - {value: finite, en: "Gaussian nuclear model (L. Visscher, K. G. Dyall, At. Data Nucl. Data Tables 67 (1997) 207–224)."}
+      - {value: point, en: Point-nucleus model.}
+    description:
+      en: Nuclear model. The author's own inputs write it as `nuc=finite`.
+    notes:
+      en: A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa.
+    see_also: [control.four]
+    status: current
+    sources: ["input.txt", "01 §4.2", "06 §1"]
+    verified_against: null
+  - name: print
+    type: flags
+    default: null
+    values:
+      - {value: +charges, en: "Hirshfeld charges (DFT methods), printed as \"Atomic partitions of the density\"."}
+      - {value: +bonds, en: "Mulliken populations and bond orders (SCF only), printed as \"Overlap populations\"."}
+      - {value: +esr, en: ESR parameters.}
+      - {value: +vectors, en: SCF vectors.}
+      - {value: +molden, en: "MOLDEN data: vibrations on `freq>` lines for `task=hessian`; with `+vectors+molden` also orbitals on `mos>` lines."}
+      - {value: +density, en: Critical points of the electron density (QTAIM). Combine with `+charges` to label them., status: undocumented}
+      - {value: -internals, en: Suppress the printout of internal coordinates., status: undocumented}
+    description:
+      en: |
+        Printing options. Flags are appended one after another; `+` switches an option on and `-` switches it off.
+        The leading `+` can be omitted (`print=charges+bonds`).
+    example: "$control print=+vectors+molden $end"
+    status: current
+    sources: ["input.txt", "Dft.rtf", "06 §3", "04 #376, #460, #498-#502, #509"]
+    verified_against: null
+  - name: save
+    type: string
+    default: null
+    description:
+      en: |
+        File name for saving SCF vectors. With `$guess read=1` the vectors are read back from the same file.
+        This is the basis of the SCF restart technique.
+    see_also: [guess.read]
+    status: current
+    sources: ["input.txt", "Dft.rtf", "04 #306"]
+    verified_against: null

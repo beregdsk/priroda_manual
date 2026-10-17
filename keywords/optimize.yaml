@@ -1,0 +1,229 @@
+group: optimize
+order: 100
+summary:
+  en: Geometry optimization, saddle-point search, IRC and relaxed scans.
+relevant_when: "task = optimize | optimize+hessian | irc | scan | opt_n1"
+keywords:
+  - name: saddle
+    type: switch
+    default: 0
+    values:
+      - {value: "0", en: Optimize to a minimum., default: true}
+      - {value: "1", en: Optimize to a saddle point.}
+    description:
+      en: Type of stationary point sought.
+    notes:
+      en: |
+        A saddle-point search needs an accurate Hessian in the input: compute one with `task=hessian` and append its
+        `$Energy` block (the `eng>` lines). A usual route is scan → Hessian at the scan maximum → `saddle=1` →
+        `task=hessian` to confirm one imaginary frequency → IRC.
+    see_also: [optimize.follow, Energy.H]
+    status: current
+    sources: ["input.txt", "Dft.rtf", "04 #216", "03 §9"]
+    verified_against: null
+  - name: tolerance
+    type: list
+    default: [0.0001, 0.01]
+    units: au
+    default_note:
+      en: if only the first value is given, the second is 100 times larger (the recommended setting).
+    description:
+      en: Convergence tolerance on the gradient (first value) and on the displacement (second value).
+    see_also: [grid.accuracy]
+    status: current
+    sources: ["input.txt", "01 §4.6 (output echo)"]
+    verified_against: null
+  - name: trust
+    type: list
+    default: [0.2, 0.0125]
+    default_note:
+      en: |
+        echoed by v6, v13 and v15 as `Trust radius = 0.2 (max), 0.0125 (min)` in internal coordinates, and 0.1 / 0.00625
+        with `cartesian=1`. If only the maximum is given, the minimum is 1/16 of it and the initial value 1/4.
+        `Dft.rtf` gives 0.5 (older version).
+    description:
+      en: Trust radius (the largest allowed step), given as maximum, minimum and initial values.
+    status: current
+    sources: ["input.txt", "01 §4.6", "04 #319", "Dft.rtf"]
+    verified_against: null
+  - name: follow
+    type: integer
+    default: null
+    default_note:
+      en: "`1` according to `Dft.rtf`."
+    description:
+      en: Follow the n-th Hessian eigenvector in a saddle-point search.
+    see_also: [optimize.saddle]
+    status: current
+    sources: ["input.txt", "Dft.rtf"]
+    verified_against: null
+  - name: steps
+    type: integer
+    default: 50
+    description:
+      en: Maximum number of optimization cycles.
+    notes:
+      en: |
+        If an optimization has not converged within about 50 steps, something is probably wrong; raising `steps`
+        rarely helps. Computing a Hessian first and supplying it often does. In v6, if both `steps` and `step` are
+        given, the value of `step` is used; give only one of them.
+    see_also: [optimize.tolerance, d2edr2.steps]
+    status: current
+    sources: ["input.txt", "Dft.rtf", "03 §8 (step/steps bug)"]
+    verified_against: null
+  - name: cartesian
+    type: switch
+    default: 0
+    values:
+      - {value: "0", en: "Redundant internal coordinates.", default: true}
+      - {value: "1", en: Cartesian coordinates (last resort).}
+    description:
+      en: "Coordinate system for the optimization. The output reports `Coordinates: internal` or `cartesian`."
+    notes:
+      en: |
+        `cartesian=1` is the fix when the program crashes with `process 0 got signal 6` after a `too few` message in
+        the internal-coordinate table.
+    status: current
+    sources: ["input.txt", "01 §4.6", "04 #518"]
+    verified_against: null
+  - name: back
+    type: switch
+    default: 0
+    values:
+      - {value: "0", en: Trace the IRC path forwards., default: true}
+      - {value: "1", en: Trace the IRC path backwards.}
+    description:
+      en: |
+        IRC direction. A full IRC takes two runs, one per direction. Re-optimize the endpoints afterwards, because
+        an IRC does not end at a converged minimum.
+    see_also: [optimize.points, optimize.radius]
+    status: current
+    sources: ["input.txt", "02 §3.2", "04 §0"]
+    verified_against: null
+  - name: points
+    type: integer
+    default: null
+    description:
+      en: |
+        Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.
+    see_also: [optimize.value]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: radius
+    type: real
+    default: null
+    default_note:
+      en: "`0.2` according to `Dft.rtf` (older version)."
+    description:
+      en: |
+        Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
+        this distance apart. The IRC coordinate is reported in bohr·amu^1/2.
+    notes:
+      en: |
+        `Vicinity of a Stationary Point(?) --- STOP.` during an IRC means the energy did not decrease on that step.
+        Changing the step size is the reported fix.
+    status: current
+    sources: ["input.txt", "Dft.rtf", "04 #298"]
+    verified_against: null
+  - name: coordinates
+    type: list
+    default: null
+    default_note:
+      en: generated automatically.
+    values:
+      - {value: "1,i,j,0,0", en: Distance i–j.}
+      - {value: "2,i,j,k,0", en: Angle i–j–k.}
+      - {value: "3,i,j,k,l", en: Torsion i–j–k–l.}
+      - {value: "4,i,j,k,l", en: "Special coordinate for linear fragments. A user describes it as the angle between line l–k and the normal to plane k–j–i."}
+      - {value: "5,i,j,k,l", en: Special coordinate for linear fragments (meaning not described).}
+    description:
+      en: List of redundant internal coordinates to use, each given as five integers.
+    notes:
+      en: "`input.txt` spells this keyword `coordinated=` (apparently a typo). Verify the accepted spelling."
+    see_also: [optimize.fix]
+    status: current
+    sources: ["input.txt", "03 §5 (type 4)"]
+    verified_against: null
+  - name: fix
+    type: list
+    default: null
+    description:
+      en: |
+        Internal coordinates to keep fixed during the optimization, in the same five-integer format as
+        `coordinates`. Several entries are separated by commas or spaces.
+    notes:
+      en: |
+        Atoms cannot be frozen in Cartesian space; only internal coordinates can be fixed. Two coordinates also cannot
+        be constrained to stay equal.
+    see_also: [optimize.value, optimize.coordinates]
+    status: current
+    sources: ["input.txt", "02 §3.2", "03 §5 (wish list)", "04 #372-#373"]
+    verified_against: null
+  - name: value
+    type: indexed-array
+    default: null
+    default_note:
+      en: computed from the input geometry.
+    units: Å and degrees
+    description:
+      en: |
+        Values of the fixed internal coordinates. For `task=scan`, give all the initial values followed by all the
+        final values. `val(i)=` fills the list starting at position i, so values left unset keep their input-geometry
+        values.
+    notes:
+      en: |
+        **Priroda's dihedral angles have the opposite sign to the convention used by Molden, MOPAC and GAMESS.** Flip
+        the sign of any torsion value taken from another program, or the scan starts from a mangled geometry.
+    example: |
+      $optimize
+       fix   =1,7,9,0,0, 1,8,10,0,0, 3,8,7,9,0, 3,10,9,7,0
+       val(1)=1.6,       1.7
+       val(5)=2.0,       2.1
+       points=5
+      $end
+      # 5 optimizations: r(7-9) = 1.6 … 2.0, r(8-10) = 1.7 … 2.1;
+      # the last two fixed coordinates keep their input values
+    see_also: [optimize.fix, optimize.points]
+    status: current
+    sources: ["input.txt", "03 §5, §8", "04 #278-#279, #373"]
+    verified_against: null
+  - name: gradient
+    type: switch
+    default: null
+    description:
+      en: |
+        Set `gradient=0` when the starting second derivatives were computed with a different method or basis set.
+        This excludes the gradient terms from the internal/Cartesian transformation at the first geometry.
+        Otherwise keep the default.
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: print
+    type: switch
+    default: null
+    values:
+      - {value: "0", en: Minimal.}
+      - {value: "1", en: Detailed, including the approximate second derivatives needed for a restart.}
+    description:
+      en: Amount of optimization output.
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: sym
+    type: switch
+    default: null
+    description:
+      en: Used as `sym=1` in the author's 2023–2025 inputs, apparently to preserve molecular symmetry during the optimization.
+    see_also: [molecule.sym]
+    status: undocumented
+    sources: ["01 §4.6", "04 #481"]
+    verified_against: null
+  - name: mod
+    type: integer
+    default: null
+    description:
+      en: "Used as `mod=1` with `task=opt_n1` (very large systems). Meaning not documented."
+    status: undocumented
+    sources: ["01 §4.6"]
+    verified_against: null

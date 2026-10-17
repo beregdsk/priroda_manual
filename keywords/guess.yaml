@@ -1,0 +1,62 @@
+group: guess
+order: 40
+summary:
+  en: Initial guess for the SCF vectors.
+keywords:
+  - name: read
+    type: switch
+    default: null
+    values:
+      - {value: "1", en: "Read SCF vectors from the file named by `$control save=`."}
+      - {value: "0", en: Extended Hückel guess.}
+    description:
+      en: Source of the starting SCF vectors.
+    notes:
+      en: |
+        Reading saved vectors is the standard way to restart a stalled SCF, and to reuse converged orbitals in a
+        follow-up job such as a Hessian after an optimization.
+    see_also: [control.save, scf.iterations]
+    status: current
+    sources: ["input.txt", "04 #306", "05 §1"]
+    verified_against: null
+  - name: na
+    type: indexed-array
+    default: null
+    default_note:
+      en: "`na(1)=1,2,3,…,N` (the natural order)."
+    description:
+      en: Reordering of the starting vectors for alpha spin.
+    example: "$guess na(25)=26,25 $end    # swap the 25th and 26th vectors"
+    see_also: [guess.nb]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: nb
+    type: indexed-array
+    default: null
+    default_note:
+      en: "`nb(1)=1,2,3,…,N`."
+    description:
+      en: Reordering of the starting vectors for beta spin.
+    see_also: [guess.na]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: mix
+    type: switch
+    default: 0
+    values:
+      - {value: "0", en: No mixing., default: true}
+      - {value: "1", en: Mix the HOMO and LUMO to break alpha/beta equivalence.}
+    description:
+      en: |
+        Breaks the equivalence of the alpha and beta electrons in the highest occupied orbital. It is meant for
+        open-shell singlets (for example singlet biradicals) and is only sensible with `$scf restrict=0`.
+    notes:
+      en: |
+        Users report that with non-RI DFT, `mix=1` can converge back to the restricted solution (same energy as
+        RKS). RI-DFT, or a hybrid, broke the symmetry in the reported cases.
+    see_also: [scf.restrict]
+    status: undocumented
+    sources: ["input.txt (annotation corrupted)", "03 #0, §7", "06 §3"]
+    verified_against: null

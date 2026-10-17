@@ -1,0 +1,88 @@
+group: dynamic
+order: 150
+summary:
+  en: Molecular dynamics with a thermostat.
+relevant_when: "task = thermostat"
+body:
+  en: |
+    Known only from the author's example inputs and a third-party input generator. Every meaning below is
+    inferred, except `file`.
+
+    ```text
+    $dynamic
+     e=0.001
+     d=0.03
+     n=1000,100
+     m=10
+     i=1
+     file=H40C20/H40C20_%06d.qm.in
+    $end
+    ```
+keywords:
+  - name: e
+    type: real
+    default: null
+    units: hartree
+    description:
+      en: "Thermostat temperature as kT (inferred: a generator script sets e = T/315775)."
+    status: undocumented
+    sources: ["01 §4.8", "02 §3.2"]
+    verified_against: null
+  - name: d
+    type: real
+    default: null
+    description:
+      en: Time step (inferred).
+    status: undocumented
+    sources: ["01 §4.8", "02 §3.2"]
+    verified_against: null
+  - name: n
+    type: list
+    default: null
+    description:
+      en: Number of steps and print interval (inferred).
+    status: undocumented
+    sources: ["01 §4.8", "02 §3.2"]
+    verified_against: null
+  - name: m
+    type: integer
+    default: null
+    description:
+      en: Meaning not known.
+    status: undocumented
+    sources: ["01 §4.8", "02 §3.2"]
+    verified_against: null
+  - name: i
+    type: integer
+    default: null
+    description:
+      en: Run index or random seed (inferred).
+    status: undocumented
+    sources: ["01 §4.8", "02 §3.2"]
+    verified_against: null
+  - name: v
+    type: real
+    default: null
+    units: bohr³ per atom
+    description:
+      en: Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred).
+    status: undocumented
+    sources: ["01 §4.8", "02 §3.2"]
+    verified_against: null
+  - name: h
+    type: real
+    default: null
+    description:
+      en: Stiffness of the cavity wall (inferred).
+    status: undocumented
+    sources: ["01 §4.8", "02 §3.2"]
+    verified_against: null
+  - name: file
+    type: string
+    default: null
+    description:
+      en: |
+        printf-style pattern for snapshot files, which are written as ready-to-run inputs; `%06d` is the frame number.
+    status: undocumented
+    sources: ["01 §4.8"]
+    verified_against: null

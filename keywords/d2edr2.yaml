@@ -1,0 +1,50 @@
+group: d2edr2
+order: 110
+summary:
+  en: Numerical Hessian by finite differences of the gradient.
+keywords:
+  - name: length
+    type: real
+    default: null
+    description:
+      en: Step length for numerical differentiation of the potential-energy surface.
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: displace
+    type: switch
+    default: 2
+    values:
+      - {value: "1", en: One displacement per coordinate.}
+      - {value: "2", en: Two displacements per coordinate. More accurate but twice as slow., default: true}
+    description:
+      en: Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.
+    see_also: [scf.convergence]
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
+  - name: steps
+    type: list
+    default: [0, -1]
+    default_note:
+      en: "`0,-1` runs every step from 0 to 3N (or 6N) in a single run."
+    description:
+      en: |
+        The first and last displacement steps to do in this run. The reference geometry is step 0, and the displaced
+        geometries are 1 … 3N (one displacement) or 1 … 6N (two displacements). This lets a numerical Hessian be split
+        across separate runs and then combined.
+    example: |
+      # 12-atom molecule, four inputs run in parallel on different machines:
+      $d2edr2 disp=1 steps= 0, 9 $end    # mol.in1
+      $d2edr2 disp=1 steps=10,18 $end    # mol.in2
+      $d2edr2 disp=1 steps=19,27 $end    # mol.in3
+      $d2edr2 disp=1 steps=28,36 $end    # mol.in4
+      # collect the partial results into one input:
+      grep "num>" mol.out{1,2,3,4} | sed "s/\.*num>//g" >> mol.in
+      # add the line below and run once more to process them:
+      $d2edr2 steps=-1 $end
+    notes:
+      en: "Not the same keyword as `$optimize steps`."
+    status: current
+    sources: ["input.txt"]
+    verified_against: null
