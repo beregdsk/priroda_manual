@@ -250,6 +250,13 @@ converged on the coarse grid. After the switch to the final grid it oscillated f
 diverged, with the total energy reaching +29 hartree. BLYP behaved the same way.
 <!-- src: 05 §7.1 (EvgeniX 2015) -->
 
+:::{note}
+The same input converges in version 25: with the original BFGS settings in 48 iterations, and with the default
+Newton–Raphson procedure in 10 iterations and about half the time. The fine-grid divergence was a problem of the
+2015 build. If you meet it in a current version, the fixes below are still the ones to try.
+:::
+<!-- src: 08 t70a, t70b -->
+
 **Fixes.** Two experienced users solved it in two ways, which they considered equivalent:
 
 - Run `task=optimize+hessian` instead of a single-point Hessian, and drop `procedure=BFGS` and `iterations`:
@@ -278,11 +285,12 @@ alpha and beta orbital energies. RI-DFT broke the symmetry in his case. Another 
 often do not break symmetry, and suggests a hybrid (with `theory=ridft`) or a Hartree–Fock calculation first.
 <!-- src: 03 §7 (Evgeniy Feb 2011; qadir) -->
 
-In a version 25 test on singlet O2, `restrict=0 mix=1` converged back to the restricted solution with both
-`theory=dft` (PBE) and `theory=ridft` (PBE1): alpha and beta orbital energies were identical, and the PBE energy
-equalled the closed-shell one. So `mix=1` alone does not guarantee a broken-symmetry solution; compare the alpha and
-beta orbital energies in the output.
-<!-- src: 08 t60a, t60b; t48b (closed-shell reference) -->
+In version 25 tests, `restrict=0 mix=1` converged back to the restricted solution for singlet O2, with both
+`theory=dft` (PBE) and `theory=ridft` (PBE1), and for the Cr2 dimer with both the default and the `bfgs` procedure:
+alpha and beta orbital energies were identical, and the energies equalled the closed-shell ones. So `mix=1` alone
+does not give a broken-symmetry solution; compare the alpha and beta orbital energies in the output, and start from
+vectors of a broken-symmetry calculation (for example of the triplet) with `$guess read=1` instead.
+<!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) --> <!-- verify: triplet vectors as a broken-symmetry start (tests round 9) -->
 
 ### Heavy elements
 

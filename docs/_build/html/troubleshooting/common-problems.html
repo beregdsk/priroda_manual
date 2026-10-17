@@ -499,6 +499,13 @@ next section it may have been part of the problem.</p>
 converged on the coarse grid. After the switch to the final grid it oscillated for about 30 iterations and then
 diverged, with the total energy reaching +29 hartree. BLYP behaved the same way.</p>
 <!-- src: 05 §7.1 (EvgeniX 2015) -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The same input converges in version 25: with the original BFGS settings in 48 iterations, and with the default
+Newton–Raphson procedure in 10 iterations and about half the time. The fine-grid divergence was a problem of the
+2015 build. If you meet it in a current version, the fixes below are still the ones to try.</p>
+</div>
+<!-- src: 08 t70a, t70b -->
 <p><strong>Fixes.</strong> Two experienced users solved it in two ways, which they considered equivalent:</p>
 <ul>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> instead of a single-point Hessian, and drop <code class="docutils literal notranslate"><span class="pre">procedure=BFGS</span></code> and <code class="docutils literal notranslate"><span class="pre">iterations</span></code>:</p>
@@ -527,11 +534,12 @@ user found that <code class="docutils literal notranslate"><span class="pre">res
 alpha and beta orbital energies. RI-DFT broke the symmetry in his case. Another user notes that pure GGA functionals
 often do not break symmetry, and suggests a hybrid (with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>) or a Hartree–Fock calculation first.</p>
 <!-- src: 03 §7 (Evgeniy Feb 2011; qadir) -->
-<p>In a version 25 test on singlet O2, <code class="docutils literal notranslate"><span class="pre">restrict=0</span> <span class="pre">mix=1</span></code> converged back to the restricted solution with both
-<code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> (PBE) and <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> (PBE1): alpha and beta orbital energies were identical, and the PBE energy
-equalled the closed-shell one. So <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> alone does not guarantee a broken-symmetry solution; compare the alpha and
-beta orbital energies in the output.</p>
-<!-- src: 08 t60a, t60b; t48b (closed-shell reference) -->
+<p>In version 25 tests, <code class="docutils literal notranslate"><span class="pre">restrict=0</span> <span class="pre">mix=1</span></code> converged back to the restricted solution for singlet O2, with both
+<code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> (PBE) and <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> (PBE1), and for the Cr2 dimer with both the default and the <code class="docutils literal notranslate"><span class="pre">bfgs</span></code> procedure:
+alpha and beta orbital energies were identical, and the energies equalled the closed-shell ones. So <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> alone
+does not give a broken-symmetry solution; compare the alpha and beta orbital energies in the output, and start from
+vectors of a broken-symmetry calculation (for example of the triplet) with <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> instead.</p>
+<!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) --> <!-- verify: triplet vectors as a broken-symmetry start (tests round 9) -->
 </section>
 <section id="heavy-elements">
 <h3>Heavy elements<a class="headerlink" href="#heavy-elements" title="Link to this heading">¶</a></h3>
