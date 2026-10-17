@@ -86,10 +86,10 @@ keywords:
     values:
       - {value: b, en: Coordinates in bohr.}
     description:
-      en: Length unit of the coordinates. The default unit is Å.
+      en: Length unit of the coordinates. The default unit is Å. In version 25, water given in bohr with `unit=b` gave the same geometry and energy as in Å.
     status: undocumented
-    sources: ["01 §4.7"]
-    verified_against: null
+    sources: ["01 §4.7", "08 t47"]
+    verified_against: "25 (2025.02.28)"
   - name: sym
     type: list
     default: null
@@ -99,7 +99,7 @@ keywords:
         Newer versions report the detected point group (`symmetry: D6h`). In version 25, `sym=1,0.01` on a slightly
         distorted NH3 printed `symmetry: C3v    6, unique:    2` and echoed the geometry symmetrized. On its own it
         does not keep the symmetry during an optimization; add `$optimize sym=1` for that.
-    see_also: [optimize.sym]
+    see_also: [optimize.symmetry]
     status: undocumented
     sources: ["01 §4.7", "04 #481", "08 t15", "08 t30a"]
     verified_against: "25 (2025.02.28)"

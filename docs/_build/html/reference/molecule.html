@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -359,9 +360,9 @@ $end
 <span id="molecule-unit"></span><h2><code class="docutils literal notranslate"><span class="pre">unit</span></code><a class="headerlink" href="#unit" title="Link to this heading">¶</a></h2>
 <p id="index-5"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.7</p>
-<p>Length unit of the coordinates. The default unit is Å.</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.7; 08 t47</p>
+<p>Length unit of the coordinates. The default unit is Å. In version 25, water given in bohr with <code class="docutils literal notranslate"><span class="pre">unit=b</span></code> gave the same geometry and energy as in Å.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -387,7 +388,7 @@ $end
 Newer versions report the detected point group (<code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">D6h</span></code>). In version 25, <code class="docutils literal notranslate"><span class="pre">sym=1,0.01</span></code> on a slightly
 distorted NH3 printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span>&#160;&#160;&#160; <span class="pre">6,</span> <span class="pre">unique:</span>&#160;&#160;&#160; <span class="pre">2</span></code> and echoed the geometry symmetrized. On its own it
 does not keep the symmetry during an optimization; add <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> for that.</p>
-<p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-sym"><span class="std std-ref">sym ($optimize)</span></a></p>
+<p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-symmetry"><span class="std std-ref">symmetry ($optimize)</span></a></p>
 </section>
 </section>
 

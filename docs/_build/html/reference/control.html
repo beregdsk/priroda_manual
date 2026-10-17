@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -273,7 +274,7 @@
 <p id="index-1"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">gradient</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37</p>
+<strong>Sources:</strong> input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09</p>
 <p>Job type.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -311,7 +312,7 @@
 <td><p>Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> block.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">check</span></code></p></td>
-<td><p>Read the input and set up the run (geometry, basis sets, SCF and grid settings), then stop before the SCF. Useful to check an input.</p></td>
+<td><p>Not a task name in the version 25 program. <code class="docutils literal notranslate"><span class="pre">task=check</span></code> sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF, presumably like any unrecognized task, which makes it a usable input check. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">extremal</span></code></p></td>
 <td><p>Gradient-extremal path (v9 banner “Calculation of Gradient Extremal Path”); slow. <em>(undocumented)</em></p></td>
@@ -359,7 +360,7 @@ and others) that are untested or need data that is not distributed.</p>
 <p id="index-2"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">dft</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39</p>
+<strong>Sources:</strong> input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46</p>
 <p>Theoretical method.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -435,8 +436,11 @@ and others) that are untested or need data that is not distributed.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Hybrid trap.</strong> Hybrid functionals (<code class="docutils literal notranslate"><span class="pre">PBE1</span></code>, <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code>, …) take effect only with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>
-or <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort. Version 25
-stops right after printing the basis sets, with no error message in the output and exit status 1.</p>
+or <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, older versions silently drop the exact exchange. In version 25, <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> stops right after
+printing the basis sets, with no error message in the output and exit status 1. <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> still runs:
+it reports <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> in the summary box but leaves out the exact exchange, so the energies are wrong (water:
+<code class="docutils literal notranslate"><span class="pre">Ex</span></code> -6.61 instead of about -8.95 hartree, total energy about 2.2 hartree too high), and the run ends
+normally.</p>
 <p>The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. In version 25,
 water energies run to completion with <code class="docutils literal notranslate"><span class="pre">hf</span></code>, <code class="docutils literal notranslate"><span class="pre">rihf</span></code>, <code class="docutils literal notranslate"><span class="pre">cis</span></code>, <code class="docutils literal notranslate"><span class="pre">mp2</span></code>, <code class="docutils literal notranslate"><span class="pre">mp3</span></code>, <code class="docutils literal notranslate"><span class="pre">mp4dq</span></code>, <code class="docutils literal notranslate"><span class="pre">mp4sdq</span></code>, <code class="docutils literal notranslate"><span class="pre">mp4sdtq</span></code>, <code class="docutils literal notranslate"><span class="pre">ccs</span></code>,
 <code class="docutils literal notranslate"><span class="pre">ccd</span></code>, <code class="docutils literal notranslate"><span class="pre">ccsd</span></code> and <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code>; an <code class="docutils literal notranslate"><span class="pre">hf</span></code> optimization also worked, so HF gradients exist. For <code class="docutils literal notranslate"><span class="pre">ridft</span></code> and
@@ -483,7 +487,7 @@ runs.</p>
 <p id="index-5"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §3.3; 04 #207-#208, #336; 08 t35</p>
+<strong>Sources:</strong> input.txt; 01 §3.3; 04 #207-#208, #336; 08 t35, t49</p>
 <p>Four-component option.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -504,7 +508,7 @@ runs.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Required with the relativistic basis file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>. Forgetting it is a common cause of failed runs with that file.</p>
+<p>Required with the relativistic basis file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>. Without it, version 25 stops right after the <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> line with <code class="docutils literal notranslate"><span class="pre">1?</span></code>.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#control-nucleus"><span class="std std-ref">nucleus ($control)</span></a>, <a class="reference internal" href="scf.html#scf-d1small"><span class="std std-ref">d1small ($scf)</span></a></p>
 </section>
@@ -545,8 +549,8 @@ element.</p>
 <span id="control-print"></span><h2><code class="docutils literal notranslate"><span class="pre">print</span></code><a class="headerlink" href="#print" title="Link to this heading">¶</a></h2>
 <p id="index-7"><strong>Type:</strong> flags<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509; 08 t01, t45</p>
 <p>Printing options. Flags are appended one after another; <code class="docutils literal notranslate"><span class="pre">+</span></code> switches an option on and <code class="docutils literal notranslate"><span class="pre">-</span></code> switches it off.
 The leading <code class="docutils literal notranslate"><span class="pre">+</span></code> can be omitted (<code class="docutils literal notranslate"><span class="pre">print=charges+bonds</span></code>).</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -570,7 +574,7 @@ The leading <code class="docutils literal notranslate"><span class="pre">+</span
 <td><p>SCF vectors.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+molden</span></code></p></td>
-<td><p>MOLDEN data: vibrations on <code class="docutils literal notranslate"><span class="pre">freq&gt;</span></code> lines for <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code>; with <code class="docutils literal notranslate"><span class="pre">+vectors+molden</span></code> also orbitals on <code class="docutils literal notranslate"><span class="pre">mos&gt;</span></code> lines.</p></td>
+<td><p>MOLDEN data: vibrations on <code class="docutils literal notranslate"><span class="pre">freq&gt;</span></code> lines for <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code>; with <code class="docutils literal notranslate"><span class="pre">+vectors+molden</span></code> also orbitals on <code class="docutils literal notranslate"><span class="pre">mos&gt;</span></code> lines (<code class="docutils literal notranslate"><span class="pre">[Molden</span> <span class="pre">Format]</span></code>, <code class="docutils literal notranslate"><span class="pre">[Atoms]</span> <span class="pre">AU</span></code>, <code class="docutils literal notranslate"><span class="pre">[5D]</span></code>, <code class="docutils literal notranslate"><span class="pre">[GTO]</span></code>, <code class="docutils literal notranslate"><span class="pre">[MO]</span></code> sections).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+density</span></code></p></td>
 <td><p>Critical points of the electron density (QTAIM). Combine with <code class="docutils literal notranslate"><span class="pre">+charges</span></code> to label them. <em>(undocumented)</em></p></td>

@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -372,9 +373,9 @@ set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, �
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Hybrid functionals such as <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> or <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> need <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=ridft</span></a>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, older
-versions silently drop the exact exchange, and newer ones abort with no error message. See
-<a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
-<!-- src: 04 §0, #96, #99, #307-#310; 08 t08 -->
+versions silently drop the exact exchange, and newer ones abort with no error message. With <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>,
+version 25 still silently drops it. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+<!-- src: 04 §0, #96, #99, #307-#310; 08 t08, t46 -->
 </div>
 <p>Run it:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>p<span class="w"> </span>water.in<span class="w"> </span>water.out
@@ -600,7 +601,7 @@ step 1. <a class="reference internal" href="../reference/thermo.html#thermo-sigm
 (point group C3v) it is 3. <strong>Priroda does not work it out itself</strong>: without <code class="docutils literal notranslate"><span class="pre">sigma=</span></code> it uses 1, and the entropy comes
 out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The default temperature is 298.15 K; other temperatures go in
 <a class="reference internal" href="../reference/thermo.html#thermo-temperature"><span class="std std-ref">temperature</span></a>.</p>
-<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K) -->
+<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K), t44 (sigma=3 lowers S by R ln 3) -->
 <p>For DFT the Hessian is analytic; the output announces it with <code class="docutils literal notranslate"><span class="pre">ANALYTIC</span> <span class="pre">SECOND</span> <span class="pre">DERIVATIVES</span> <span class="pre">OF</span> <span class="pre">SCF</span> <span class="pre">ENERGY</span></code>.</p>
 <!-- src: 04 #460; 08 t13 -->
 </section>
@@ -641,13 +642,15 @@ gives one:</p>
 <section id="step-6-if-a-frequency-is-imaginary-re-optimize">
 <h3>Step 6: if a frequency is imaginary, re-optimize<a class="headerlink" href="#step-6-if-a-frequency-is-imaginary-re-optimize" title="Link to this heading">¶</a></h3>
 <p>Put the Hessian you just computed into the optimization input. It is printed as a <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group on <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> lines.
-Starting from a good Hessian, the optimizer can move off the saddle point; one extra cycle is usually enough.</p>
-<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow) -->
+Starting from a good Hessian, the optimizer can move off the saddle point. In a version 25 test that started
+exactly on a saddle point (planar ammonia), it reached the pyramidal minimum in 19 steps; from a near-symmetric
+structure it usually takes fewer.</p>
+<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow); 08 t43 -->
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">'s/task=hessian/task=optimize/'</span><span class="w"> </span>nh3_freq.in<span class="w"> </span>&gt;<span class="w"> </span>nh3_opt2.in
 sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^eng&gt;//p'</span><span class="w"> </span>nh3_freq.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>nh3_opt2.in
 </pre></div>
 </div>
-<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H; 08 t25 (an appended Hessian is read: Lowest eigenvalues line) --> <!-- verify: minimization from a saddle with the appended Hessian -->
+<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H; 08 t25 (an appended Hessian is read), t43 (minimization from the saddle) -->
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 <p>The second command appends only the last <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group, after <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>. Do not leave an older <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group in
 the file. Then run <code class="docutils literal notranslate"><span class="pre">nh3_opt2.in</span></code> and go back to step 2. (<code class="docutils literal notranslate"><span class="pre">ge</span> <span class="pre">nh3_freq</span></code> does the appending in place, if you work with
@@ -814,6 +817,7 @@ a table of bond orders. With <code class="docutils literal notranslate"><span cl
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s1">'^mos&gt;'</span><span class="w"> </span>water.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/^mos&gt;//'</span><span class="w"> </span>&gt;<span class="w"> </span>water.mos
 </pre></div>
 </div>
+<!-- src: 08 t45 (recipe checked: gives [Molden Format], [Atoms] AU, [5D], [GTO], [MO]) -->
 <p>The <code class="docutils literal notranslate"><span class="pre">+molden</span></code> part is essential: without it, there are no <code class="docutils literal notranslate"><span class="pre">mos&gt;</span></code> lines. The files are large, and Molden can be slow
 with them. <!-- src: 03 §14 (one-liner, verbatim); 04 #508-#510 --></p>
 <p><strong>Geometry.</strong> If the optimized geometry is Cartesian, this one-liner turns the <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> block into an XYZ file that

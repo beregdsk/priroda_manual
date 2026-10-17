@@ -380,11 +380,15 @@ and the keyword:</p>
 </pre></div>
 </div>
 <!-- src: 08 t06 (verbatim) -->
+<p>Only groups that the task reads are checked. In version 25, an unknown keyword in <code class="docutils literal notranslate"><span class="pre">$optimize</span></code> stopped an
+optimization (<code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">coordinated</span></code>) but was ignored in an energy run, which does not read <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. A
+clean energy run therefore does not prove that the rest of the input is correct.</p>
+<!-- src: 08 t40, t40b, t40c -->
 <p>The same message can appear for a keyword you spelled correctly. In version 25,
 <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code> stops with <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>: the value list of <code class="docutils literal notranslate"><span class="pre">convergence</span></code>
-takes the first letter of the next keyword. Put another keyword between the two, or see
-<a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">$scf convergence</span></a>.</p>
-<!-- src: 05 §5.1; 08 t07a, t07b -->
+takes the first letter of the next keyword. Give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> both of its values, or put it last in the group;
+see <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">$scf convergence</span></a>.</p>
+<!-- src: 05 §5.1; 08 t07a, t07b, t22a-c -->
 </section>
 </section>
 <section id="values">
@@ -518,10 +522,11 @@ eng&gt;$end
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>An optimization prints an <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> block at every step, and the command above appends all of them. Append only the
-block you need, normally the one from a <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> run. It is not documented what the program does with several
-<code class="docutils literal notranslate"><span class="pre">$Energy</span></code> groups in one input.</p>
+block you need, normally the one from a <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> run. In a version 25 test with two <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> groups, the
+second one was used; it was also the one that matched the geometry, so it is not certain that the last group always
+wins.</p>
 </div>
-<!-- src: 01 §7 (one eng block per optimization step) --> <!-- verify -->
+<!-- src: 01 §7 (one eng block per optimization step); 08 t41 --> <!-- verify: last group wins (tests round 4) -->
 <p>A stored Hessian is required by <a class="reference internal" href="../reference/optimize.html#optimize-saddle"><span class="std std-ref">$optimize saddle=1</span></a> and <code class="docutils literal notranslate"><span class="pre">task=irc</span></code>. It also helps difficult
 minimizations, and it lets you redo the vibrational analysis or the thermochemistry without recomputing.</p>
 <!-- src: Dft.rtf; 06 §4, §5; energy.yaml -->
@@ -572,9 +577,10 @@ combination the program understands. Run other sequences as separate jobs.</p>
 file with <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code>; see <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
 <!-- src: 04 #63-#65 -->
 </dd>
-<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Older versions ran a pure GGA; version 25 stops after the basis-set echo with no message. See
+<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Older versions ran without the exact exchange. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, version 25 stops after the basis-set echo with
+no message; with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> it still runs without the exact exchange and gives wrong energies. See
 <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
-<!-- src: 04 #96, #310; 08 t08 -->
+<!-- src: 04 #96, #310; 08 t08, t46 -->
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> without <code class="docutils literal notranslate"><span class="pre">four=1</span></code></dt><dd><p>The relativistic basis file needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>.</p>
 <!-- src: 04 #207, #208 -->

@@ -7,7 +7,7 @@ keywords:
     type: switch
     default: null
     default_note:
-      en: "`1` if the system has an even number of electrons, otherwise `0`."
+      en: "`1` for a closed-shell singlet, otherwise `0`. Version 25 ran O2 with `mult=3` (an even number of electrons) unrestricted without being told."
     values:
       - {value: "0", en: Spin-unrestricted.}
       - {value: "1", en: Spin-restricted (available only for a few methods).}
@@ -15,8 +15,8 @@ keywords:
       en: Spin restriction.
     see_also: [guess.mix]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t48"]
+    verified_against: "25 (2025.02.28)"
   - name: convergence
     type: list
     default: [1e-6, 1e-3]

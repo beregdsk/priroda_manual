@@ -273,10 +273,11 @@
 <p id="index-1"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t13</p>
+<strong>Sources:</strong> input.txt; 08 t13; 08 t44</p>
 <p>Default: 1 (version 25 does not detect the symmetry number).</p>
 <p>Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless <code class="docutils literal notranslate"><span class="pre">sigma=</span></code> is
-given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3).</p>
+given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3). With
+<code class="docutils literal notranslate"><span class="pre">sigma=3</span></code>, NH3 gave S = 46.03 cal/(mol·K) at 298.15 K.</p>
 </section>
 <section id="temperature">
 <span id="thermo-temperature"></span><h2><code class="docutils literal notranslate"><span class="pre">temperature</span></code><a class="headerlink" href="#temperature" title="Link to this heading">¶</a></h2>
@@ -284,10 +285,11 @@ given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) 
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">298.15</span></code><br />
 <strong>Units:</strong> K<br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 08 t13</p>
+<strong>Sources:</strong> input.txt; Dft.rtf; 08 t13; 08 t44</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">298.15</span></code>: version 25 prints <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span>&#160; <span class="pre">298.150</span> <span class="pre">K</span></code>, as <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> states. Older posted outputs also show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code>
 (2011, 2021), so set <code class="docutils literal notranslate"><span class="pre">temperature=</span></code> explicitly when comparing with other versions.</p>
-<p>Temperatures at which thermochemistry is printed, up to 50 values.</p>
+<p>Temperatures at which thermochemistry is printed, up to 50 values. Each temperature gets its own table:
+<code class="docutils literal notranslate"><span class="pre">temperature=200,298.15,400</span></code> printed three.</p>
 </section>
 <section id="mass">
 <span id="thermo-mass"></span><h2><code class="docutils literal notranslate"><span class="pre">mass</span></code><a class="headerlink" href="#mass" title="Link to this heading">¶</a></h2>

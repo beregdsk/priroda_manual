@@ -107,11 +107,12 @@ values, including the undocumented ones, is in {ref}`$control theory <control.th
 <!-- src: 01 §5.6; 06 §3 (UO2F2 riDFT, O2 riMP2 examples); 05 §14 -->
 
 :::{warning}
-Hybrid functionals work only with `theory=ridft`. With `theory=dft` or `theory=tddft`, older versions silently drop
-the exact exchange and run what amounts to a pure GGA, and newer versions abort. Version 25 stops right after
-printing the basis sets, with no error message in the output. See {ref}`$control theory <control.theory>`.
+Hybrid functionals work only with `theory=ridft`. With `theory=dft`, older versions silently drop the exact
+exchange, and newer versions, including version 25, stop right after printing the basis sets with no error message
+in the output. With `theory=tddft`, version 25 still runs a hybrid without its exact exchange and gives wrong
+energies with no warning. See {ref}`$control theory <control.theory>`.
 :::
-<!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08 -->
+<!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08, t46 -->
 
 (what-priroda-does-not-do)=
 ## What Priroda does not do
@@ -124,7 +125,7 @@ No use of point-group symmetry in older versions
   the official 2023–2025 example inputs use `sym=1` in `$molecule` and `$optimize`. These options are not documented.
   In version 25 tests, `$molecule sym=1,0.01` symmetrized the structure and `$optimize sym=1` kept the symmetry
   during the optimization; each option alone does only half of this. See {ref}`$molecule sym <molecule.sym>` and
-  {ref}`$optimize sym <optimize.sym>`.
+  {ref}`$optimize symmetry <optimize.symmetry>`.
   <!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15, t30a, t30b -->
 
 No continuum solvation
@@ -147,7 +148,8 @@ No dummy atoms, so no counterpoise (BSSE) correction
   <!-- src: 04 #146; input.txt -->
 
 No hybrid TDDFT
-: TDDFT is GGA only. A hybrid functional with `theory=tddft` does not give hybrid TDDFT.
+: TDDFT is GGA only. A hybrid functional with `theory=tddft` does not give hybrid TDDFT: version 25 drops the exact
+  exchange without a warning, and the energies are wrong. <!-- src: 08 t46 -->
   <!-- src: 03 §11 -->
 
 Other gaps reported by users:

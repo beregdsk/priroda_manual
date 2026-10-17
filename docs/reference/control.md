@@ -18,7 +18,7 @@ Job type, level of theory, basis-set file, Hamiltonian and printing.
 **Type:** enum\
 **Default:** `gradient`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37
+**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09
 
 Job type.
 
@@ -36,7 +36,7 @@ Job type.
 | `scan` | Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. The structures and energies are summarized on `SCAN>` lines at the end. |
 | `nmr` | NMR shielding tensors. Works only with `theory=dft`. |
 | `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a `num>` block. |
-| `check` | Read the input and set up the run (geometry, basis sets, SCF and grid settings), then stop before the SCF. Useful to check an input. |
+| `check` | Not a task name in the version 25 program. `task=check` sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF, presumably like any unrecognized task, which makes it a usable input check. *(undocumented)* |
 | `extremal` | Gradient-extremal path (v9 banner "Calculation of Gradient Extremal Path"); slow. *(undocumented)* |
 | `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. *(undocumented)* |
 | `saddle` | Approximate saddle-point search from two `$molecule` blocks (start and end). *(undocumented)* |
@@ -67,7 +67,7 @@ and others) that are untested or need data that is not distributed.
 **Type:** enum\
 **Default:** `dft`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39
+**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46
 
 Theoretical method.
 
@@ -99,8 +99,11 @@ Theoretical method.
 
 ```{note}
 **Hybrid trap.** Hybrid functionals (`PBE1`, `B3LYP`, …) take effect only with `theory=ridft`. With `theory=dft`
-or `tddft`, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort. Version 25
-stops right after printing the basis sets, with no error message in the output and exit status 1.
+or `tddft`, older versions silently drop the exact exchange. In version 25, `theory=dft` stops right after
+printing the basis sets, with no error message in the output and exit status 1. `theory=tddft` still runs:
+it reports `PBE1` in the summary box but leaves out the exact exchange, so the energies are wrong (water:
+`Ex` -6.61 instead of about -8.95 hartree, total energy about 2.2 hartree too high), and the run ends
+normally.
 
 The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. In version 25,
 water energies run to completion with `hf`, `rihf`, `cis`, `mp2`, `mp3`, `mp4dq`, `mp4sdq`, `mp4sdtq`, `ccs`,
@@ -166,7 +169,7 @@ runs.
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §3.3; 04 #207-#208, #336; 08 t35
+**Sources:** input.txt; 01 §3.3; 04 #207-#208, #336; 08 t35, t49
 
 Four-component option.
 
@@ -179,7 +182,7 @@ Four-component option.
 | `1` | Scalar-relativistic theory (K. G. Dyall, J. Chem. Phys. 100 (1994) 2118–2127). The output reports "Hamiltonian: scalar-relativistic". |
 
 ```{note}
-Required with the relativistic basis file `basis4.in`. Forgetting it is a common cause of failed runs with that file.
+Required with the relativistic basis file `basis4.in`. Without it, version 25 stops right after the `Basis set input:` line with `1?`.
 ```
 
 **See also:** {ref}`nucleus ($control) <control.nucleus>`, {ref}`d1small ($scf) <scf.d1small>`
@@ -223,8 +226,8 @@ element.
 
 **Type:** flags\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509; 08 t01, t45
 
 Printing options. Flags are appended one after another; `+` switches an option on and `-` switches it off.
 The leading `+` can be omitted (`print=charges+bonds`).
@@ -238,7 +241,7 @@ The leading `+` can be omitted (`print=charges+bonds`).
 | `+bonds` | Mulliken populations and bond orders (SCF only), printed as "Overlap populations". |
 | `+esr` | ESR parameters. |
 | `+vectors` | SCF vectors. |
-| `+molden` | MOLDEN data: vibrations on `freq>` lines for `task=hessian`; with `+vectors+molden` also orbitals on `mos>` lines. |
+| `+molden` | MOLDEN data: vibrations on `freq>` lines for `task=hessian`; with `+vectors+molden` also orbitals on `mos>` lines (`[Molden Format]`, `[Atoms] AU`, `[5D]`, `[GTO]`, `[MO]` sections). |
 | `+density` | Critical points of the electron density (QTAIM). Combine with `+charges` to label them. *(undocumented)* |
 | `-internals` | Suppress the printout of internal coordinates. *(undocumented)* |
 

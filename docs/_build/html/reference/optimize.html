@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -388,9 +389,10 @@ the internal-coordinate table.</p>
 <p id="index-7"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 02 §3.2; 04 §0; 08 t26</p>
+<strong>Sources:</strong> input.txt; 02 §3.2; 04 §0; 08 t26, t42</p>
 <p>IRC direction. A full IRC takes two runs, one per direction: version 25 with the default <code class="docutils literal notranslate"><span class="pre">back=0</span></code>
-followed one direction only (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">back</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">down</span> <span class="pre">=</span> <span class="pre">1</span></code> in the output). Re-optimize the endpoints afterwards, because
+followed one direction only (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">back</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">down</span> <span class="pre">=</span> <span class="pre">1</span></code> in the output), and <code class="docutils literal notranslate"><span class="pre">back=1</span></code> the other one
+(negative <code class="docutils literal notranslate"><span class="pre">distance</span></code> values on the <code class="docutils literal notranslate"><span class="pre">IRC&gt;</span></code> lines). Re-optimize the endpoints afterwards, because
 an IRC does not end at a converged minimum.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -442,8 +444,8 @@ decrease on a step; changing the step size is the reported fix there.</p>
 <span id="optimize-coordinates"></span><h2><code class="docutils literal notranslate"><span class="pre">coordinates</span></code><a class="headerlink" href="#coordinates" title="Link to this heading">¶</a></h2>
 <p id="index-10"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 03 §5 (type 4)</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 03 §5 (type 4); 08 t40b</p>
 <p>Default: generated automatically.</p>
 <p>List of redundant internal coordinates to use, each given as five integers.</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -474,7 +476,7 @@ decrease on a step; changing the step size is the reported fix there.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">input.txt</span></code> spells this keyword <code class="docutils literal notranslate"><span class="pre">coordinated=</span></code> (apparently a typo). Verify the accepted spelling.</p>
+<p><code class="docutils literal notranslate"><span class="pre">input.txt</span></code> spells this keyword <code class="docutils literal notranslate"><span class="pre">coordinated=</span></code>, which is a typo: version 25 stops with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$optimize'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">coordinated</span></code>. Use <code class="docutils literal notranslate"><span class="pre">coordinates=</span></code>.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-fix"><span class="std std-ref">fix ($optimize)</span></a></p>
 </section>
@@ -557,26 +559,29 @@ Otherwise keep the default.</p>
 </table>
 </div>
 </section>
-<section id="sym">
-<span id="optimize-sym"></span><h2><code class="docutils literal notranslate"><span class="pre">sym</span></code><a class="headerlink" href="#sym" title="Link to this heading">¶</a></h2>
+<section id="symmetry">
+<span id="optimize-symmetry"></span><h2><code class="docutils literal notranslate"><span class="pre">symmetry</span></code><a class="headerlink" href="#symmetry" title="Link to this heading">¶</a></h2>
 <p id="index-15"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.6; 04 #481; 08 t15; 08 t30b</p>
-<p>Used as <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in the official 2023–2025 example inputs. In version 25, together with <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code>,
+<strong>Sources:</strong> 01 §4.6; 04 #481; 09; 08 t15; 08 t30b</p>
+<p>The full name of the <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> used in the official 2023–2025 example inputs (any unique prefix is
+accepted). In version 25, together with <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code>,
 the optimizer switched to Cartesian coordinates (<code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">cartesian</span></code>), printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span> <span class="pre">(6)</span></code> at
 every step, and returned an exactly symmetric structure followed by <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">symmetry:</span> <span class="pre">C3v</span></code>. Without
 <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=</span></code>, <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> only switches to Cartesian coordinates and reports <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C1</span> <span class="pre">(1)</span></code>,
 so give both options.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-sym"><span class="std std-ref">sym ($molecule)</span></a></p>
 </section>
-<section id="mod">
-<span id="optimize-mod"></span><h2><code class="docutils literal notranslate"><span class="pre">mod</span></code><a class="headerlink" href="#mod" title="Link to this heading">¶</a></h2>
+<section id="model">
+<span id="optimize-model"></span><h2><code class="docutils literal notranslate"><span class="pre">model</span></code><a class="headerlink" href="#model" title="Link to this heading">¶</a></h2>
 <p id="index-16"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.6</p>
-<p>Used as <code class="docutils literal notranslate"><span class="pre">mod=1</span></code> with <code class="docutils literal notranslate"><span class="pre">task=opt_n1</span></code> (very large systems). Meaning not documented.</p>
+<strong>Sources:</strong> 01 §4.6; 09</p>
+<p>Used as <code class="docutils literal notranslate"><span class="pre">mod=1</span></code> with <code class="docutils literal notranslate"><span class="pre">task=opt_n1</span></code> (very large systems). In version 25, <code class="docutils literal notranslate"><span class="pre">model</span></code> is read only by the separate
+optimizer of <code class="docutils literal notranslate"><span class="pre">task=opt_n1</span></code>, together with <code class="docutils literal notranslate"><span class="pre">function</span></code>, <code class="docutils literal notranslate"><span class="pre">h0</span></code>, <code class="docutils literal notranslate"><span class="pre">delta</span></code>, <code class="docutils literal notranslate"><span class="pre">fragment</span></code>, <code class="docutils literal notranslate"><span class="pre">steps</span></code>, <code class="docutils literal notranslate"><span class="pre">trust</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tolerance</span></code> and <code class="docutils literal notranslate"><span class="pre">print</span></code>. Meaning not documented.</p>
 </section>
 </section>
 
@@ -650,8 +655,8 @@ so give both options.</p>
 <li><a class="reference internal" href="#value"><code class="docutils literal notranslate"><span class="pre">value</span></code></a></li>
 <li><a class="reference internal" href="#gradient"><code class="docutils literal notranslate"><span class="pre">gradient</span></code></a></li>
 <li><a class="reference internal" href="#print"><code class="docutils literal notranslate"><span class="pre">print</span></code></a></li>
-<li><a class="reference internal" href="#sym"><code class="docutils literal notranslate"><span class="pre">sym</span></code></a></li>
-<li><a class="reference internal" href="#mod"><code class="docutils literal notranslate"><span class="pre">mod</span></code></a></li>
+<li><a class="reference internal" href="#symmetry"><code class="docutils literal notranslate"><span class="pre">symmetry</span></code></a></li>
+<li><a class="reference internal" href="#model"><code class="docutils literal notranslate"><span class="pre">model</span></code></a></li>
 </ul>
 </li>
 </ul>

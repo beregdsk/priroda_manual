@@ -154,10 +154,11 @@ the internal-coordinate table.
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 02 §3.2; 04 §0; 08 t26
+**Sources:** input.txt; 02 §3.2; 04 §0; 08 t26, t42
 
 IRC direction. A full IRC takes two runs, one per direction: version 25 with the default `back=0`
-followed one direction only (`n = 1, back = 0, down = 1` in the output). Re-optimize the endpoints afterwards, because
+followed one direction only (`n = 1, back = 0, down = 1` in the output), and `back=1` the other one
+(negative `distance` values on the `IRC>` lines). Re-optimize the endpoints afterwards, because
 an IRC does not end at a converged minimum.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
@@ -217,8 +218,8 @@ decrease on a step; changing the step size is the reported fix there.
 
 **Type:** list\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 03 §5 (type 4)
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 03 §5 (type 4); 08 t40b
 
 Default: generated automatically.
 
@@ -236,7 +237,7 @@ List of redundant internal coordinates to use, each given as five integers.
 | `5,i,j,k,l` | Special coordinate for linear fragments (meaning not described). |
 
 ```{note}
-`input.txt` spells this keyword `coordinated=` (apparently a typo). Verify the accepted spelling.
+`input.txt` spells this keyword `coordinated=`, which is a typo: version 25 stops with `*** error in '$optimize' : unknown name coordinated`. Use `coordinates=`.
 ```
 
 **See also:** {ref}`fix ($optimize) <optimize.fix>`
@@ -336,18 +337,19 @@ Amount of optimization output.
 | `0` | Minimal. |
 | `1` | Detailed |
 
-(optimize.sym)=
-## `sym`
+(optimize.symmetry)=
+## `symmetry`
 
-```{index} single: sym ($optimize)
+```{index} single: symmetry ($optimize)
 ```
 
 **Type:** switch\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.6; 04 #481; 08 t15; 08 t30b
+**Sources:** 01 §4.6; 04 #481; 09; 08 t15; 08 t30b
 
-Used as `sym=1` in the official 2023–2025 example inputs. In version 25, together with `$molecule sym=1,0.01`,
+The full name of the `sym=1` used in the official 2023–2025 example inputs (any unique prefix is
+accepted). In version 25, together with `$molecule sym=1,0.01`,
 the optimizer switched to Cartesian coordinates (`Coordinates: cartesian`), printed `symmetry: C3v (6)` at
 every step, and returned an exactly symmetric structure followed by `MOL> symmetry: C3v`. Without
 `$molecule sym=`, `$optimize sym=1` only switches to Cartesian coordinates and reports `symmetry: C1 (1)`,
@@ -355,15 +357,17 @@ so give both options.
 
 **See also:** {ref}`sym ($molecule) <molecule.sym>`
 
-(optimize.mod)=
-## `mod`
+(optimize.model)=
+## `model`
 
-```{index} single: mod ($optimize)
+```{index} single: model ($optimize)
 ```
 
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.6
+**Sources:** 01 §4.6; 09
 
-Used as `mod=1` with `task=opt_n1` (very large systems). Meaning not documented.
+Used as `mod=1` with `task=opt_n1` (very large systems). In version 25, `model` is read only by the separate
+optimizer of `task=opt_n1`, together with `function`, `h0`, `delta`, `fragment`, `steps`, `trust`,
+`tolerance` and `print`. Meaning not documented.

@@ -527,9 +527,10 @@ values, including the undocumented ones, is in {\hyperref[\detokenize{reference/
 
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
-Hybrid functionals work only with \sphinxcode{\sphinxupquote{theory=ridft}}. With \sphinxcode{\sphinxupquote{theory=dft}} or \sphinxcode{\sphinxupquote{theory=tddft}}, older versions silently drop
-the exact exchange and run what amounts to a pure GGA, and newer versions abort. Version 25 stops right after
-printing the basis sets, with no error message in the output. See {\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$control theory}}}}}.
+Hybrid functionals work only with \sphinxcode{\sphinxupquote{theory=ridft}}. With \sphinxcode{\sphinxupquote{theory=dft}}, older versions silently drop the exact
+exchange, and newer versions, including version 25, stop right after printing the basis sets with no error message
+in the output. With \sphinxcode{\sphinxupquote{theory=tddft}}, version 25 still runs a hybrid without its exact exchange and gives wrong
+energies with no warning. See {\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$control theory}}}}}.
 \end{sphinxadmonition}
 
 
@@ -547,7 +548,7 @@ Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) p
 the official 2023\textendash{}2025 example inputs use \sphinxcode{\sphinxupquote{sym=1}} in \sphinxcode{\sphinxupquote{\$molecule}} and \sphinxcode{\sphinxupquote{\$optimize}}. These options are not documented.
 In version 25 tests, \sphinxcode{\sphinxupquote{\$molecule sym=1,0.01}} symmetrized the structure and \sphinxcode{\sphinxupquote{\$optimize sym=1}} kept the symmetry
 during the optimization; each option alone does only half of this. See {\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$molecule sym}}}}} and
-{\hyperref[\detokenize{reference/optimize:optimize-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize sym}}}}}.
+{\hyperref[\detokenize{reference/optimize:optimize-symmetry}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize symmetry}}}}}.
 
 
 
@@ -580,7 +581,8 @@ Ghost centres cannot be placed in \sphinxcode{\sphinxupquote{\$molecule}}. For N
 
 \sphinxlineitem{No hybrid TDDFT}
 \sphinxAtStartPar
-TDDFT is GGA only. A hybrid functional with \sphinxcode{\sphinxupquote{theory=tddft}} does not give hybrid TDDFT.
+TDDFT is GGA only. A hybrid functional with \sphinxcode{\sphinxupquote{theory=tddft}} does not give hybrid TDDFT: version 25 drops the exact
+exchange without a warning, and the energies are wrong. 
 
 
 
@@ -1896,8 +1898,8 @@ set of that file, and users compare it to cc\sphinxhyphen{}pVDZ in size.
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 Hybrid functionals such as \sphinxcode{\sphinxupquote{PBE1}} or \sphinxcode{\sphinxupquote{B3LYP}} need {\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{theory=ridft}}}}}. With \sphinxcode{\sphinxupquote{theory=dft}}, older
-versions silently drop the exact exchange, and newer ones abort with no error message. See
-{\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$control theory}}}}}.
+versions silently drop the exact exchange, and newer ones abort with no error message. With \sphinxcode{\sphinxupquote{theory=tddft}},
+version 25 still silently drops it. See {\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$control theory}}}}}.
 
 
 \end{sphinxadmonition}
@@ -2296,7 +2298,9 @@ gives one:
 \label{\detokenize{start/getting-started:step-6-if-a-frequency-is-imaginary-re-optimize}}
 \sphinxAtStartPar
 Put the Hessian you just computed into the optimization input. It is printed as a \sphinxcode{\sphinxupquote{\$Energy}} group on \sphinxcode{\sphinxupquote{eng\textgreater{}}} lines.
-Starting from a good Hessian, the optimizer can move off the saddle point; one extra cycle is usually enough.
+Starting from a good Hessian, the optimizer can move off the saddle point. In a version 25 test that started
+exactly on a saddle point (planar ammonia), it reached the pyramidal minimum in 19 steps; from a near\sphinxhyphen{}symmetric
+structure it usually takes fewer.
 
 
 
@@ -2588,6 +2592,8 @@ Open \sphinxcode{\sphinxupquote{nh3.freq}} in Molden to animate the normal modes
 grep\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}\PYGZca{}mos\PYGZgt{}\PYGZsq{}}\PYG{+w}{ }water.out\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }sed\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}s/\PYGZca{}mos\PYGZgt{}//\PYGZsq{}}\PYG{+w}{ }\PYGZgt{}\PYG{+w}{ }water.mos
 \end{sphinxVerbatim}
 
+
+
 \sphinxAtStartPar
 The \sphinxcode{\sphinxupquote{+molden}} part is essential: without it, there are no \sphinxcode{\sphinxupquote{mos\textgreater{}}} lines. The files are large, and Molden can be slow
 with them. 
@@ -2837,10 +2843,17 @@ and the keyword:
 
 
 \sphinxAtStartPar
+Only groups that the task reads are checked. In version 25, an unknown keyword in \sphinxcode{\sphinxupquote{\$optimize}} stopped an
+optimization (\sphinxcode{\sphinxupquote{unknown name coordinated}}) but was ignored in an energy run, which does not read \sphinxcode{\sphinxupquote{\$optimize}}. A
+clean energy run therefore does not prove that the rest of the input is correct.
+
+
+
+\sphinxAtStartPar
 The same message can appear for a keyword you spelled correctly. In version 25,
 \sphinxcode{\sphinxupquote{\$scf convergence=1e\sphinxhyphen{}7 iterations=250 \$end}} stops with \sphinxcode{\sphinxupquote{unknown name terations}}: the value list of \sphinxcode{\sphinxupquote{convergence}}
-takes the first letter of the next keyword. Put another keyword between the two, or see
-{\hyperref[\detokenize{reference/scf:scf-convergence}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$scf convergence}}}}}.
+takes the first letter of the next keyword. Give \sphinxcode{\sphinxupquote{convergence}} both of its values, or put it last in the group;
+see {\hyperref[\detokenize{reference/scf:scf-convergence}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$scf convergence}}}}}.
 
 
 
@@ -3055,8 +3068,9 @@ The \sphinxcode{\sphinxupquote{ge}} script on the official site does the same. I
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
 An optimization prints an \sphinxcode{\sphinxupquote{eng\textgreater{}}} block at every step, and the command above appends all of them. Append only the
-block you need, normally the one from a \sphinxcode{\sphinxupquote{task=hessian}} run. It is not documented what the program does with several
-\sphinxcode{\sphinxupquote{\$Energy}} groups in one input.
+block you need, normally the one from a \sphinxcode{\sphinxupquote{task=hessian}} run. In a version 25 test with two \sphinxcode{\sphinxupquote{\$Energy}} groups, the
+second one was used; it was also the one that matched the geometry, so it is not certain that the last group always
+wins.
 \end{sphinxadmonition}
 
 
@@ -3140,7 +3154,8 @@ file with \sphinxcode{\sphinxupquote{dos2unix}}; see {\hyperref[\detokenize{star
 
 \sphinxlineitem{Hybrid functional without \sphinxcode{\sphinxupquote{theory=ridft}}}
 \sphinxAtStartPar
-Older versions ran a pure GGA; version 25 stops after the basis\sphinxhyphen{}set echo with no message. See
+Older versions ran without the exact exchange. With \sphinxcode{\sphinxupquote{theory=dft}}, version 25 stops after the basis\sphinxhyphen{}set echo with
+no message; with \sphinxcode{\sphinxupquote{theory=tddft}} it still runs without the exact exchange and gives wrong energies. See
 {\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$control theory}}}}}.
 
 
@@ -3421,7 +3436,7 @@ Job type, level of theory, basis\sphinxhyphen{}set file, Hamiltonian and printin
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{gradient}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default gradient, check); 02 \S{}3.2 (pri: default gradient); 03 \S{}5; 04 \#69\sphinxhyphen{}\#73, \#145, \#478, \#497; 01 \S{}4.2; 08 t02, t18, t26, t34, t36, t37
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default gradient, check); 02 \S{}3.2 (pri: default gradient); 03 \S{}5; 04 \#69\sphinxhyphen{}\#73, \#145, \#478, \#497; 01 \S{}4.2; 08 t02, t18, t26, t34, t36, t37; 09
 
 \sphinxAtStartPar
 Job type.
@@ -3509,7 +3524,7 @@ Numerical dipole polarizabilities and their derivatives with respect to nuclear 
 \sphinxcode{\sphinxupquote{check}}
 &
 \sphinxAtStartPar
-Read the input and set up the run (geometry, basis sets, SCF and grid settings), then stop before the SCF. Useful to check an input.
+Not a task name in the version 25 program. \sphinxcode{\sphinxupquote{task=check}} sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF, presumably like any unrecognized task, which makes it a usable input check. \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3600,7 +3615,7 @@ and others) that are untested or need data that is not distributed.
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{dft}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default dft); 06 \S{}3 (v5 ab initio list); 03 \S{}5 (Evgeniy 2011 test); 04 \#96, \#99, \#307\sphinxhyphen{}\#310; 01 \S{}3.1, \S{}4.2; 08 t02, t08, t17, t31\sphinxhyphen{}t33, t38, t39
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default dft); 06 \S{}3 (v5 ab initio list); 03 \S{}5 (Evgeniy 2011 test); 04 \#96, \#99, \#307\sphinxhyphen{}\#310; 01 \S{}3.1, \S{}4.2; 08 t02, t08, t17, t31\sphinxhyphen{}t33, t38, t39, t46
 
 \sphinxAtStartPar
 Theoretical method.
@@ -3768,8 +3783,11 @@ Earlier variant of the QM model, used for very large systems with \sphinxcode{\s
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 \sphinxstylestrong{Hybrid trap.} Hybrid functionals (\sphinxcode{\sphinxupquote{PBE1}}, \sphinxcode{\sphinxupquote{B3LYP}}, …) take effect only with \sphinxcode{\sphinxupquote{theory=ridft}}. With \sphinxcode{\sphinxupquote{theory=dft}}
-or \sphinxcode{\sphinxupquote{tddft}}, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort. Version 25
-stops right after printing the basis sets, with no error message in the output and exit status 1.
+or \sphinxcode{\sphinxupquote{tddft}}, older versions silently drop the exact exchange. In version 25, \sphinxcode{\sphinxupquote{theory=dft}} stops right after
+printing the basis sets, with no error message in the output and exit status 1. \sphinxcode{\sphinxupquote{theory=tddft}} still runs:
+it reports \sphinxcode{\sphinxupquote{PBE1}} in the summary box but leaves out the exact exchange, so the energies are wrong (water:
+\sphinxcode{\sphinxupquote{Ex}} \sphinxhyphen{}6.61 instead of about \sphinxhyphen{}8.95 hartree, total energy about 2.2 hartree too high), and the run ends
+normally.
 
 \sphinxAtStartPar
 The ab initio list comes from the v6 documentation and a 2011 user test, which was energy\sphinxhyphen{}only. In version 25,
@@ -3838,7 +3856,7 @@ runs.
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 01 \S{}3.3; 04 \#207\sphinxhyphen{}\#208, \#336; 08 t35
+\sphinxstylestrong{Sources:} input.txt; 01 \S{}3.3; 04 \#207\sphinxhyphen{}\#208, \#336; 08 t35, t49
 
 \sphinxAtStartPar
 Four\sphinxhyphen{}component option.
@@ -3879,7 +3897,7 @@ Scalar\sphinxhyphen{}relativistic theory (K. G. Dyall, J. Chem. Phys. 100 (1994)
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-Required with the relativistic basis file \sphinxcode{\sphinxupquote{basis4.in}}. Forgetting it is a common cause of failed runs with that file.
+Required with the relativistic basis file \sphinxcode{\sphinxupquote{basis4.in}}. Without it, version 25 stops right after the \sphinxcode{\sphinxupquote{Basis set input:}} line with \sphinxcode{\sphinxupquote{1?}}.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -3952,8 +3970,8 @@ element.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} flags\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 06 \S{}3; 04 \#376, \#460, \#498\sphinxhyphen{}\#502, \#509
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 06 \S{}3; 04 \#376, \#460, \#498\sphinxhyphen{}\#502, \#509; 08 t01, t45
 
 \sphinxAtStartPar
 Printing options. Flags are appended one after another; \sphinxcode{\sphinxupquote{+}} switches an option on and \sphinxcode{\sphinxupquote{\sphinxhyphen{}}} switches it off.
@@ -4007,7 +4025,7 @@ SCF vectors.
 \sphinxcode{\sphinxupquote{+molden}}
 &
 \sphinxAtStartPar
-MOLDEN data: vibrations on \sphinxcode{\sphinxupquote{freq\textgreater{}}} lines for \sphinxcode{\sphinxupquote{task=hessian}}; with \sphinxcode{\sphinxupquote{+vectors+molden}} also orbitals on \sphinxcode{\sphinxupquote{mos\textgreater{}}} lines.
+MOLDEN data: vibrations on \sphinxcode{\sphinxupquote{freq\textgreater{}}} lines for \sphinxcode{\sphinxupquote{task=hessian}}; with \sphinxcode{\sphinxupquote{+vectors+molden}} also orbitals on \sphinxcode{\sphinxupquote{mos\textgreater{}}} lines (\sphinxcode{\sphinxupquote{{[}Molden Format{]}}}, \sphinxcode{\sphinxupquote{{[}Atoms{]} AU}}, \sphinxcode{\sphinxupquote{{[}5D{]}}}, \sphinxcode{\sphinxupquote{{[}GTO{]}}}, \sphinxcode{\sphinxupquote{{[}MO{]}}} sections).
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -4219,11 +4237,11 @@ combine arbitrary orbital and auxiliary sets.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} string\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} undocumented · not verified\\
-\sphinxstylestrong{Sources:} 01 \S{}4.7
+\sphinxstylestrong{Status:} undocumented · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} 01 \S{}4.7; 08 t47
 
 \sphinxAtStartPar
-Length unit of the coordinates. The default unit is Å.
+Length unit of the coordinates. The default unit is Å. In version 25, water given in bohr with \sphinxcode{\sphinxupquote{unit=b}} gave the same geometry and energy as in Å.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -4269,7 +4287,7 @@ distorted NH3 printed \sphinxcode{\sphinxupquote{symmetry: C3v    6, unique:    
 does not keep the symmetry during an optimization; add \sphinxcode{\sphinxupquote{\$optimize sym=1}} for that.
 
 \sphinxAtStartPar
-\sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/optimize:optimize-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{sym (\$optimize)}}}}}
+\sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/optimize:optimize-symmetry}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{symmetry (\$optimize)}}}}}
 
 \sphinxstepscope
 
@@ -4458,11 +4476,11 @@ Spin restriction, convergence, iteration limits and SCF solver.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 08 t48
 
 \sphinxAtStartPar
-Default: \sphinxcode{\sphinxupquote{1}} if the system has an even number of electrons, otherwise \sphinxcode{\sphinxupquote{0}}.
+Default: \sphinxcode{\sphinxupquote{1}} for a closed\sphinxhyphen{}shell singlet, otherwise \sphinxcode{\sphinxupquote{0}}. Version 25 ran O2 with \sphinxcode{\sphinxupquote{mult=3}} (an even number of electrons) unrestricted without being told.
 
 \sphinxAtStartPar
 Spin restriction.
@@ -5256,11 +5274,12 @@ the internal\sphinxhyphen{}coordinate table.
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 02 \S{}3.2; 04 \S{}0; 08 t26
+\sphinxstylestrong{Sources:} input.txt; 02 \S{}3.2; 04 \S{}0; 08 t26, t42
 
 \sphinxAtStartPar
 IRC direction. A full IRC takes two runs, one per direction: version 25 with the default \sphinxcode{\sphinxupquote{back=0}}
-followed one direction only (\sphinxcode{\sphinxupquote{n = 1, back = 0, down = 1}} in the output). Re\sphinxhyphen{}optimize the endpoints afterwards, because
+followed one direction only (\sphinxcode{\sphinxupquote{n = 1, back = 0, down = 1}} in the output), and \sphinxcode{\sphinxupquote{back=1}} the other one
+(negative \sphinxcode{\sphinxupquote{distance}} values on the \sphinxcode{\sphinxupquote{IRC\textgreater{}}} lines). Re\sphinxhyphen{}optimize the endpoints afterwards, because
 an IRC does not end at a converged minimum.
 
 
@@ -5349,8 +5368,8 @@ decrease on a step; changing the step size is the reported fix there.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} list\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 03 \S{}5 (type 4)
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 03 \S{}5 (type 4); 08 t40b
 
 \sphinxAtStartPar
 Default: generated automatically.
@@ -5415,7 +5434,7 @@ Special coordinate for linear fragments (meaning not described).
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{input.txt}} spells this keyword \sphinxcode{\sphinxupquote{coordinated=}} (apparently a typo). Verify the accepted spelling.
+\sphinxcode{\sphinxupquote{input.txt}} spells this keyword \sphinxcode{\sphinxupquote{coordinated=}}, which is a typo: version 25 stops with \sphinxcode{\sphinxupquote{*** error in \textquotesingle{}\$optimize\textquotesingle{} : unknown name coordinated}}. Use \sphinxcode{\sphinxupquote{coordinates=}}.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -5549,17 +5568,18 @@ Detailed
 \sphinxattableend\end{savenotes}
 
 
-\subsection{\sphinxstyleliteralintitle{\sphinxupquote{sym}}}
-\label{\detokenize{reference/optimize:sym}}\label{\detokenize{reference/optimize:optimize-sym}}
-\index{sym (\$optimize)@\spxentry{sym}\spxextra{\$optimize}}\ignorespaces 
+\subsection{\sphinxstyleliteralintitle{\sphinxupquote{symmetry}}}
+\label{\detokenize{reference/optimize:symmetry}}\label{\detokenize{reference/optimize:optimize-symmetry}}
+\index{symmetry (\$optimize)@\spxentry{symmetry}\spxextra{\$optimize}}\ignorespaces 
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} undocumented · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} 01 \S{}4.6; 04 \#481; 08 t15; 08 t30b
+\sphinxstylestrong{Sources:} 01 \S{}4.6; 04 \#481; 09; 08 t15; 08 t30b
 
 \sphinxAtStartPar
-Used as \sphinxcode{\sphinxupquote{sym=1}} in the official 2023\textendash{}2025 example inputs. In version 25, together with \sphinxcode{\sphinxupquote{\$molecule sym=1,0.01}},
+The full name of the \sphinxcode{\sphinxupquote{sym=1}} used in the official 2023\textendash{}2025 example inputs (any unique prefix is
+accepted). In version 25, together with \sphinxcode{\sphinxupquote{\$molecule sym=1,0.01}},
 the optimizer switched to Cartesian coordinates (\sphinxcode{\sphinxupquote{Coordinates: cartesian}}), printed \sphinxcode{\sphinxupquote{symmetry: C3v (6)}} at
 every step, and returned an exactly symmetric structure followed by \sphinxcode{\sphinxupquote{MOL\textgreater{} symmetry: C3v}}. Without
 \sphinxcode{\sphinxupquote{\$molecule sym=}}, \sphinxcode{\sphinxupquote{\$optimize sym=1}} only switches to Cartesian coordinates and reports \sphinxcode{\sphinxupquote{symmetry: C1 (1)}},
@@ -5569,17 +5589,19 @@ so give both options.
 \sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{sym (\$molecule)}}}}}
 
 
-\subsection{\sphinxstyleliteralintitle{\sphinxupquote{mod}}}
-\label{\detokenize{reference/optimize:mod}}\label{\detokenize{reference/optimize:optimize-mod}}
-\index{mod (\$optimize)@\spxentry{mod}\spxextra{\$optimize}}\ignorespaces 
+\subsection{\sphinxstyleliteralintitle{\sphinxupquote{model}}}
+\label{\detokenize{reference/optimize:model}}\label{\detokenize{reference/optimize:optimize-model}}
+\index{model (\$optimize)@\spxentry{model}\spxextra{\$optimize}}\ignorespaces 
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} integer\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} undocumented · not verified\\
-\sphinxstylestrong{Sources:} 01 \S{}4.6
+\sphinxstylestrong{Sources:} 01 \S{}4.6; 09
 
 \sphinxAtStartPar
-Used as \sphinxcode{\sphinxupquote{mod=1}} with \sphinxcode{\sphinxupquote{task=opt\_n1}} (very large systems). Meaning not documented.
+Used as \sphinxcode{\sphinxupquote{mod=1}} with \sphinxcode{\sphinxupquote{task=opt\_n1}} (very large systems). In version 25, \sphinxcode{\sphinxupquote{model}} is read only by the separate
+optimizer of \sphinxcode{\sphinxupquote{task=opt\_n1}}, together with \sphinxcode{\sphinxupquote{function}}, \sphinxcode{\sphinxupquote{h0}}, \sphinxcode{\sphinxupquote{delta}}, \sphinxcode{\sphinxupquote{fragment}}, \sphinxcode{\sphinxupquote{steps}}, \sphinxcode{\sphinxupquote{trust}},
+\sphinxcode{\sphinxupquote{tolerance}} and \sphinxcode{\sphinxupquote{print}}. Meaning not documented.
 
 \sphinxstepscope
 
@@ -5712,14 +5734,15 @@ Thermochemistry after a Hessian calculation.
 \sphinxstylestrong{Type:} integer\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{1}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 08 t13
+\sphinxstylestrong{Sources:} input.txt; 08 t13; 08 t44
 
 \sphinxAtStartPar
 Default: 1 (version 25 does not detect the symmetry number).
 
 \sphinxAtStartPar
 Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless \sphinxcode{\sphinxupquote{sigma=}} is
-given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3).
+given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3). With
+\sphinxcode{\sphinxupquote{sigma=3}}, NH3 gave S = 46.03 cal/(mol·K) at 298.15 K.
 
 
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{temperature}}}
@@ -5730,14 +5753,15 @@ given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) 
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{298.15}}\\
 \sphinxstylestrong{Units:} K\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 08 t13
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 08 t13; 08 t44
 
 \sphinxAtStartPar
 Default: \sphinxcode{\sphinxupquote{298.15}}: version 25 prints \sphinxcode{\sphinxupquote{T =  298.150 K}}, as \sphinxcode{\sphinxupquote{Dft.rtf}} states. Older posted outputs also show \sphinxcode{\sphinxupquote{298.000 K}}
 (2011, 2021), so set \sphinxcode{\sphinxupquote{temperature=}} explicitly when comparing with other versions.
 
 \sphinxAtStartPar
-Temperatures at which thermochemistry is printed, up to 50 values.
+Temperatures at which thermochemistry is printed, up to 50 values. Each temperature gets its own table:
+\sphinxcode{\sphinxupquote{temperature=200,298.15,400}} printed three.
 
 
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{mass}}}
@@ -6097,18 +6121,19 @@ Duplicate\sphinxhyphen{}structure filtering over several \sphinxcode{\sphinxupqu
 \sphinxstylestrong{Relevant when:} \sphinxcode{\sphinxupquote{task = uniq}}
 
 
-\subsection{\sphinxstyleliteralintitle{\sphinxupquote{dist}}}
-\label{\detokenize{reference/uniq:dist}}\label{\detokenize{reference/uniq:uniq-dist}}
-\index{dist (\$uniq)@\spxentry{dist}\spxextra{\$uniq}}\ignorespaces 
+\subsection{\sphinxstyleliteralintitle{\sphinxupquote{distance}}}
+\label{\detokenize{reference/uniq:distance}}\label{\detokenize{reference/uniq:uniq-distance}}
+\index{distance (\$uniq)@\spxentry{distance}\spxextra{\$uniq}}\ignorespaces 
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} real\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} undocumented · not verified\\
-\sphinxstylestrong{Sources:} 01 \S{}4.9
+\sphinxstylestrong{Sources:} 01 \S{}4.9; 09
 
 \sphinxAtStartPar
 Threshold for treating two structures as identical (inferred from the official example \sphinxcode{\sphinxupquote{dist=0.01}}, run on 157
-MD snapshots, each in its own \sphinxcode{\sphinxupquote{\$molecule}} block).
+MD snapshots, each in its own \sphinxcode{\sphinxupquote{\$molecule}} block). \sphinxcode{\sphinxupquote{dist}} is a prefix of the full name \sphinxcode{\sphinxupquote{distance}}; the group
+also reads \sphinxcode{\sphinxupquote{file}}.
 
 \sphinxstepscope
 
@@ -6219,7 +6244,8 @@ run, a relative name worked with the file in the current directory.)
 \item {} 
 \sphinxAtStartPar
 The relativistic basis file \sphinxcode{\sphinxupquote{basis4.in}} needs {\hyperref[\detokenize{reference/control:control-four}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{four=1}}}}} in {\hyperref[\detokenize{reference/control:group-control}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$control}}}}}.
-Without it the job stops at the \sphinxcode{\sphinxupquote{Basis set input:}} line. The user who reported this confirmed the fix.
+Without it the job stops right after the \sphinxcode{\sphinxupquote{Basis set input:}} line, with \sphinxcode{\sphinxupquote{1?}} as the only message (version 25).
+The user who first reported this confirmed the fix.
 
 
 
@@ -6647,7 +6673,7 @@ geometry along that mode if needed, and optimize again.
 \sphinxAtStartPar
 Version 25 can also use symmetry on purpose: \sphinxcode{\sphinxupquote{\$molecule sym=1,0.01}} detects the point group and symmetrizes the
 input geometry, and \sphinxcode{\sphinxupquote{\$optimize sym=1}} keeps that symmetry during the optimization. Both options are needed. See
-{\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$molecule sym}}}}} and {\hyperref[\detokenize{reference/optimize:optimize-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize sym}}}}}.
+{\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$molecule sym}}}}} and {\hyperref[\detokenize{reference/optimize:optimize-symmetry}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize symmetry}}}}}.
 
 
 
@@ -6733,13 +6759,25 @@ it and, according to a user who corresponded with him, did not intend to change 
 
 
 \sphinxAtStartPar
-Newer builds (reported in 2014) refuse instead: the job prints \sphinxcode{\sphinxupquote{Basis set input:}} twice and stops with
-\sphinxcode{\sphinxupquote{application called MPI\_Abort(MPI\_COMM\_WORLD, 1) \sphinxhyphen{} process 0}}, before the summary box. Several users reproduced this.
+Newer builds (reported in 2014) refuse with \sphinxcode{\sphinxupquote{theory=dft}}: the job prints \sphinxcode{\sphinxupquote{Basis set input:}} twice and stops with
+\sphinxcode{\sphinxupquote{application called MPI\_Abort(MPI\_COMM\_WORLD, 1) \sphinxhyphen{} process 0}} (on stderr), before the summary box. Several users
+reproduced this, and version 25 does the same.
+
+
+
+\begin{sphinxadmonition}{warning}{Warning:}
+\sphinxAtStartPar
+\sphinxstylestrong{With \sphinxcode{\sphinxupquote{theory=tddft}} the trap is still open in version 25.} A water run with \sphinxcode{\sphinxupquote{functional=PBE1}} showed \sphinxcode{\sphinxupquote{PBE1}} in the
+summary box, finished normally and printed excited states, but the exchange energy was −6.61 instead of about
+−8.95 hartree and the total energy was about 2.2 hartree too high: the exact\sphinxhyphen{}exchange part was simply left out. Any
+TDDFT result with a hybrid functional is wrong.
+\end{sphinxadmonition}
 
 
 
 \sphinxAtStartPar
-\sphinxstylestrong{Fix.} Use \sphinxcode{\sphinxupquote{theory=ridft}} for every hybrid functional. There is no hybrid TDDFT in Priroda.
+\sphinxstylestrong{Fix.} Use \sphinxcode{\sphinxupquote{theory=ridft}} for every hybrid ground\sphinxhyphen{}state calculation, and a pure GGA functional (PBE, the default)
+for TDDFT. There is no hybrid TDDFT in Priroda.
 
 
 
@@ -7168,6 +7206,403 @@ had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build 
 \sphinxstepscope
 
 
+\chapter{Keywords in the program}
+\label{\detokenize{binary-keywords:keywords-in-the-program}}\label{\detokenize{binary-keywords:binary-keywords}}\label{\detokenize{binary-keywords::doc}}
+\sphinxAtStartPar
+This page lists every keyword name that the Priroda 25 (2025.02.28) executable reads, found by examining the
+program file itself. Names that this manual documents are links into the {\hyperref[\detokenize{reference/index::doc}]{\sphinxcrossref{\DUrole{doc}{input reference}}}};
+the others are only known to exist. Their meaning is unknown, so do not use them in production work.
+
+
+
+\sphinxAtStartPar
+A name listed here is accepted by the program; a name that is not listed stops the run with
+\sphinxcode{\sphinxupquote{*** error in \textquotesingle{}\$group\textquotesingle{} : unknown name …}}, as long as the task reads that group. Any unique prefix of a name is
+accepted, so \sphinxcode{\sphinxupquote{sym=1}} in \sphinxcode{\sphinxupquote{\$optimize}} means \sphinxcode{\sphinxupquote{symmetry=1}} and \sphinxcode{\sphinxupquote{dist=}} in \sphinxcode{\sphinxupquote{\$uniq}} means \sphinxcode{\sphinxupquote{distance=}}.
+
+
+
+
+\section{Groups for everyday work}
+\label{\detokenize{binary-keywords:groups-for-everyday-work}}
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Group
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Keywords
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/system:group-system}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$system}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/system:system-memory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{memory}}}}}, {\hyperref[\detokenize{reference/system:system-path}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{path}}}}}, {\hyperref[\detokenize{reference/system:system-disk}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{disk}}}}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/control:group-control}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$control}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/control:control-task}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{task}}}}}, {\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{theory}}}}}, {\hyperref[\detokenize{reference/control:control-four}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{four}}}}}, \sphinxcode{\sphinxupquote{a137}}, {\hyperref[\detokenize{reference/control:control-state}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{state}}}}}, \sphinxcode{\sphinxupquote{weight}}, {\hyperref[\detokenize{reference/control:control-basis}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{basis}}}}}, {\hyperref[\detokenize{reference/control:control-nucleus}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{nucleus}}}}}, \sphinxcode{\sphinxupquote{field}}, \sphinxcode{\sphinxupquote{derivative}}, \sphinxcode{\sphinxupquote{fit}}, \sphinxcode{\sphinxupquote{wavelength}}, {\hyperref[\detokenize{reference/control:control-save}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{save}}}}}, {\hyperref[\detokenize{reference/control:control-print}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{print}}}}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/scf:group-scf}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$scf}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/scf:scf-restrict}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{restrict}}}}}, {\hyperref[\detokenize{reference/scf:scf-convergence}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{convergence}}}}}, {\hyperref[\detokenize{reference/scf:scf-iterations}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{iterations}}}}}, {\hyperref[\detokenize{reference/scf:scf-procedure}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{procedure}}}}}, {\hyperref[\detokenize{reference/scf:scf-d1small}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{d1small}}}}}, {\hyperref[\detokenize{reference/scf:scf-core}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{core}}}}}, \sphinxcode{\sphinxupquote{occupation}}, \sphinxcode{\sphinxupquote{fraction}}, \sphinxcode{\sphinxupquote{temperature}}, \sphinxcode{\sphinxupquote{ttype}}, \sphinxcode{\sphinxupquote{diagm}}, \sphinxcode{\sphinxupquote{xmax}}, \sphinxcode{\sphinxupquote{n1}}, \sphinxcode{\sphinxupquote{fitxc}}, \sphinxcode{\sphinxupquote{eemin}}, \sphinxcode{\sphinxupquote{mab}}, \sphinxcode{\sphinxupquote{aw}}, \sphinxcode{\sphinxupquote{wv}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/dft:group-dft}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$dft}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/dft:dft-functional}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{functional}}}}}, \sphinxcode{\sphinxupquote{zero}}, \sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{p}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/grid:group-grid}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$grid}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/grid:grid-accuracy}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{accuracy}}}}}, \sphinxcode{\sphinxupquote{type}}, \sphinxcode{\sphinxupquote{cutoff}}, \sphinxcode{\sphinxupquote{nradial}}, \sphinxcode{\sphinxupquote{nadd}}, \sphinxcode{\sphinxupquote{use43}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/integral:group-integral}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$integral}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/integral:integral-direct}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{direct}}}}}, {\hyperref[\detokenize{reference/integral:integral-routine}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{routine}}}}}, \sphinxcode{\sphinxupquote{storage}}, \sphinxcode{\sphinxupquote{invert}}, \sphinxcode{\sphinxupquote{cutij}}, \sphinxcode{\sphinxupquote{vcut}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/atoms:group-atoms}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$atoms}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/atoms:atoms-core}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{core}}}}}, {\hyperref[\detokenize{reference/atoms:atoms-mcore}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{mcore}}}}}, \sphinxcode{\sphinxupquote{nc}}, \sphinxcode{\sphinxupquote{no}}, \sphinxcode{\sphinxupquote{active}}, \sphinxcode{\sphinxupquote{mocc}}, \sphinxcode{\sphinxupquote{occupation}}, \sphinxcode{\sphinxupquote{diagonalize}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/guess:group-guess}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$guess}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/guess:guess-read}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{read}}}}}, {\hyperref[\detokenize{reference/guess:guess-mix}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{mix}}}}}, {\hyperref[\detokenize{reference/guess:guess-na}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{na}}}}}, {\hyperref[\detokenize{reference/guess:guess-nb}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{nb}}}}}, \sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{a}}, \sphinxcode{\sphinxupquote{type}}, \sphinxcode{\sphinxupquote{gradient}}, \sphinxcode{\sphinxupquote{localize}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/optimize:group-optimize}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/optimize:optimize-saddle}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{saddle}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-tolerance}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{tolerance}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-trust}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{trust}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-steps}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{steps}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-follow}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{follow}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-points}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{points}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-back}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{back}}}}}, \sphinxcode{\sphinxupquote{down}}, {\hyperref[\detokenize{reference/optimize:optimize-radius}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{radius}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-fix}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{fix}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-value}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{value}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-coordinates}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{coordinates}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-cartesian}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{cartesian}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-symmetry}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{symmetry}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-gradient}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{gradient}}}}}, {\hyperref[\detokenize{reference/optimize:optimize-print}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{print}}}}}, \sphinxcode{\sphinxupquote{exact}}, \sphinxcode{\sphinxupquote{bend}}, \sphinxcode{\sphinxupquote{local}}, \sphinxcode{\sphinxupquote{circle}}, \sphinxcode{\sphinxupquote{weight}}, \sphinxcode{\sphinxupquote{massweight}}, \sphinxcode{\sphinxupquote{minimize}}, \sphinxcode{\sphinxupquote{maximize}}, \sphinxcode{\sphinxupquote{cubicfit}}, \sphinxcode{\sphinxupquote{energy}}, \sphinxcode{\sphinxupquote{de0}}, \sphinxcode{\sphinxupquote{fragment}}, \sphinxcode{\sphinxupquote{noise}}, \sphinxcode{\sphinxupquote{state}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/d2edr2:group-d2edr2}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$d2edr2}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/d2edr2:d2edr2-length}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{length}}}}}, {\hyperref[\detokenize{reference/d2edr2:d2edr2-steps}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{steps}}}}}, {\hyperref[\detokenize{reference/d2edr2:d2edr2-displace}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{displace}}}}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/thermo:group-thermo}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$thermo}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/thermo:thermo-sigma}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{sigma}}}}}, {\hyperref[\detokenize{reference/thermo:thermo-temperature}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{temperature}}}}}, {\hyperref[\detokenize{reference/thermo:thermo-mass}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{mass}}}}}, \sphinxcode{\sphinxupquote{project}}, \sphinxcode{\sphinxupquote{localize}}, \sphinxcode{\sphinxupquote{diagonalize}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/nmr:group-nmr}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$nmr}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/nmr:nmr-standard}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{standard}}}}}, {\hyperref[\detokenize{reference/nmr:nmr-points}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{points}}}}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/Energy:group-energy}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$Energy}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/Energy:energy-e}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{e}}}}}, {\hyperref[\detokenize{reference/Energy:energy-g}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{g}}}}}, {\hyperref[\detokenize{reference/Energy:energy-h}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{h}}}}}, {\hyperref[\detokenize{reference/Energy:energy-d}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{d}}}}}, {\hyperref[\detokenize{reference/Energy:energy-a}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{a}}}}}, {\hyperref[\detokenize{reference/Energy:energy-dx}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{dx}}}}}, \sphinxcode{\sphinxupquote{ax}}, \sphinxcode{\sphinxupquote{r}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/uniq:group-uniq}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$uniq}}}}}
+&
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/uniq:uniq-distance}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{distance}}}}}, \sphinxcode{\sphinxupquote{file}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+{\hyperref[\detokenize{reference/dynamic:group-dynamic}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$dynamic}}}}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{t}}, {\hyperref[\detokenize{reference/dynamic:dynamic-e}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{e}}}}}, {\hyperref[\detokenize{reference/dynamic:dynamic-n}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{n}}}}}, {\hyperref[\detokenize{reference/dynamic:dynamic-m}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{m}}}}}, \sphinxcode{\sphinxupquote{a}}, \sphinxcode{\sphinxupquote{b}}, \sphinxcode{\sphinxupquote{c}}, {\hyperref[\detokenize{reference/dynamic:dynamic-i}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{i}}}}}, \sphinxcode{\sphinxupquote{o}}, \sphinxcode{\sphinxupquote{z}}, \sphinxcode{\sphinxupquote{y}}, \sphinxcode{\sphinxupquote{dx}}, \sphinxcode{\sphinxupquote{kd}}, \sphinxcode{\sphinxupquote{lw}}, \sphinxcode{\sphinxupquote{hb}}, \sphinxcode{\sphinxupquote{rb}}, \sphinxcode{\sphinxupquote{pb}}, \sphinxcode{\sphinxupquote{v1}}, \sphinxcode{\sphinxupquote{frag}}, {\hyperref[\detokenize{reference/dynamic:dynamic-file}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{file}}}}}, \sphinxcode{\sphinxupquote{fprint}}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$molecule}} is read differently from the other groups, so its keywords (\sphinxcode{\sphinxupquote{charge}}, \sphinxcode{\sphinxupquote{mult}}, \sphinxcode{\sphinxupquote{cartesian}}, \sphinxcode{\sphinxupquote{z\sphinxhyphen{}matrix}},
+\sphinxcode{\sphinxupquote{set}}, \sphinxcode{\sphinxupquote{unit}}, \sphinxcode{\sphinxupquote{sym}}) could not be listed from the program; see {\hyperref[\detokenize{reference/molecule:group-molecule}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$molecule}}}}}.
+\sphinxcode{\sphinxupquote{\$energy}} is also read as \sphinxcode{\sphinxupquote{\$energy001}}, \sphinxcode{\sphinxupquote{\$energy002}} and so on, for tasks with several structures.
+
+
+
+
+\section{Groups of undocumented tasks}
+\label{\detokenize{binary-keywords:groups-of-undocumented-tasks}}
+\sphinxAtStartPar
+These groups belong to tasks and methods that no source describes. They are listed only so that a name met in an
+example input can be recognized.
+
+
+\begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
+\centering
+\begin{tabulary}{\linewidth}[t]{TTT}
+\sphinxtoprule
+\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Group
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Keywords
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+Task or method
+\\
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$mcscf}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{core}}, \sphinxcode{\sphinxupquote{occupied}}, \sphinxcode{\sphinxupquote{virtual}}, \sphinxcode{\sphinxupquote{excitation}}, \sphinxcode{\sphinxupquote{program}}, \sphinxcode{\sphinxupquote{convergence}}, \sphinxcode{\sphinxupquote{iterations}}, \sphinxcode{\sphinxupquote{diagonalize}}
+&
+\sphinxAtStartPar
+MCSCF methods
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$ci}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{iterations}}, \sphinxcode{\sphinxupquote{ndiis}}, \sphinxcode{\sphinxupquote{ecut}}, \sphinxcode{\sphinxupquote{v4}}
+&
+\sphinxAtStartPar
+CI methods
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$espmap}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{d}}, \sphinxcode{\sphinxupquote{n}}
+&
+\sphinxAtStartPar
+electrostatic\sphinxhyphen{}potential map
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$optimize}} (second reader)
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{function}}, \sphinxcode{\sphinxupquote{model}}, \sphinxcode{\sphinxupquote{h0}}, \sphinxcode{\sphinxupquote{delta}}, \sphinxcode{\sphinxupquote{fragment}}, \sphinxcode{\sphinxupquote{steps}}, \sphinxcode{\sphinxupquote{trust}}, \sphinxcode{\sphinxupquote{tolerance}}, \sphinxcode{\sphinxupquote{print}}, \sphinxcode{\sphinxupquote{fix}}, \sphinxcode{\sphinxupquote{value}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=opt\_n1}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$path}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{distance}}, \sphinxcode{\sphinxupquote{points}}, \sphinxcode{\sphinxupquote{spring}}, \sphinxcode{\sphinxupquote{steps}}, \sphinxcode{\sphinxupquote{trust}}, \sphinxcode{\sphinxupquote{tolerance}}, \sphinxcode{\sphinxupquote{tension}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=path}}, \sphinxcode{\sphinxupquote{path0}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$chain}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{points}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=chain}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$walk}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{m}}, \sphinxcode{\sphinxupquote{e}}, \sphinxcode{\sphinxupquote{i}}, \sphinxcode{\sphinxupquote{b}}, \sphinxcode{\sphinxupquote{dx}}, \sphinxcode{\sphinxupquote{lw}}, \sphinxcode{\sphinxupquote{hb}}, \sphinxcode{\sphinxupquote{v1}}, \sphinxcode{\sphinxupquote{fp}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=walk}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$orient}}, \sphinxcode{\sphinxupquote{\$mol1}}, \sphinxcode{\sphinxupquote{\$mol2}}
+&
+\sphinxAtStartPar
+orient: \sphinxcode{\sphinxupquote{r}}, \sphinxcode{\sphinxupquote{lz}}, \sphinxcode{\sphinxupquote{nr}}, \sphinxcode{\sphinxupquote{e}}, \sphinxcode{\sphinxupquote{d0}}, \sphinxcode{\sphinxupquote{amax}}, \sphinxcode{\sphinxupquote{set}}, \sphinxcode{\sphinxupquote{list}}, \sphinxcode{\sphinxupquote{path}}, \sphinxcode{\sphinxupquote{file}}, \sphinxcode{\sphinxupquote{text}}, \sphinxcode{\sphinxupquote{print}}; mol1, mol2: \sphinxcode{\sphinxupquote{e}}, \sphinxcode{\sphinxupquote{z}}, \sphinxcode{\sphinxupquote{x}}, \sphinxcode{\sphinxupquote{q}}, \sphinxcode{\sphinxupquote{m}}, \sphinxcode{\sphinxupquote{n}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=orient}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$press}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{nadd}}, \sphinxcode{\sphinxupquote{radius}}, \sphinxcode{\sphinxupquote{steps}}, \sphinxcode{\sphinxupquote{trust}}, \sphinxcode{\sphinxupquote{tolerance}}, \sphinxcode{\sphinxupquote{sign}}, \sphinxcode{\sphinxupquote{energy}}, \sphinxcode{\sphinxupquote{vector}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=press}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$coord}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{index}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=forceconst}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$steric}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{g}}, \sphinxcode{\sphinxupquote{v}}, \sphinxcode{\sphinxupquote{w}}, \sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{r}}, \sphinxcode{\sphinxupquote{e}}, \sphinxcode{\sphinxupquote{i}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=steric}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$dimer}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{job}}, \sphinxcode{\sphinxupquote{order}}, \sphinxcode{\sphinxupquote{distance}}, \sphinxcode{\sphinxupquote{radius}}, \sphinxcode{\sphinxupquote{step}}, \sphinxcode{\sphinxupquote{trust}}, \sphinxcode{\sphinxupquote{gradient}}, \sphinxcode{\sphinxupquote{energy}}, \sphinxcode{\sphinxupquote{iterations}}, \sphinxcode{\sphinxupquote{tolerance}}, \sphinxcode{\sphinxupquote{delta}}, \sphinxcode{\sphinxupquote{analytic}}, \sphinxcode{\sphinxupquote{file}}, \sphinxcode{\sphinxupquote{print}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=dimer}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$anchor}}, \sphinxcode{\sphinxupquote{\$confine}}
+&
+\sphinxAtStartPar
+anchor: \sphinxcode{\sphinxupquote{u}}, \sphinxcode{\sphinxupquote{k}} and two more; confine: names not separated
+&
+\sphinxAtStartPar
+restraints in molecular dynamics
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$surface}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{vx}}, \sphinxcode{\sphinxupquote{x}}, \sphinxcode{\sphinxupquote{nx}}, \sphinxcode{\sphinxupquote{mv}}, \sphinxcode{\sphinxupquote{r}}, \sphinxcode{\sphinxupquote{h}}, \sphinxcode{\sphinxupquote{vo}}, \sphinxcode{\sphinxupquote{nv}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=anharmonic}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$fmatrix}}, \sphinxcode{\sphinxupquote{\$ce}}, \sphinxcode{\sphinxupquote{\$ca}}, \sphinxcode{\sphinxupquote{\$cb}}
+&
+\sphinxAtStartPar
+fmatrix: \sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{f}}, \sphinxcode{\sphinxupquote{s}}, \sphinxcode{\sphinxupquote{fa}}, \sphinxcode{\sphinxupquote{fb}}; ce: \sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{c}}, \sphinxcode{\sphinxupquote{e}}, \sphinxcode{\sphinxupquote{ca}}, \sphinxcode{\sphinxupquote{cb}}, \sphinxcode{\sphinxupquote{ea}}, \sphinxcode{\sphinxupquote{eb}}; ca, cb: \sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{c}}, \sphinxcode{\sphinxupquote{e}}
+&
+\sphinxAtStartPar
+starting orbitals given in the input
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$scf}} (QM model)
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{restrict}}, \sphinxcode{\sphinxupquote{convergence}}, \sphinxcode{\sphinxupquote{iterations}}, \sphinxcode{\sphinxupquote{direct}}, \sphinxcode{\sphinxupquote{print}}, \sphinxcode{\sphinxupquote{mc}}, \sphinxcode{\sphinxupquote{amix}}, \sphinxcode{\sphinxupquote{ijmix}}, \sphinxcode{\sphinxupquote{cut}}, \sphinxcode{\sphinxupquote{nf}}, \sphinxcode{\sphinxupquote{nmax}}, \sphinxcode{\sphinxupquote{nb}}, \sphinxcode{\sphinxupquote{bond}}, \sphinxcode{\sphinxupquote{penalty}}, \sphinxcode{\sphinxupquote{distance}}, \sphinxcode{\sphinxupquote{option}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{theory=qm\_n*}}
+\\
+\sphinxhline
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$isogrid}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{d}}, \sphinxcode{\sphinxupquote{s}}, \sphinxcode{\sphinxupquote{c}}, \sphinxcode{\sphinxupquote{r}}, \sphinxcode{\sphinxupquote{m}}, \sphinxcode{\sphinxupquote{n}}, \sphinxcode{\sphinxupquote{e}}, \sphinxcode{\sphinxupquote{p}}, \sphinxcode{\sphinxupquote{iter}}
+&
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{task=isogrid}}
+\\
+\sphinxbottomrule
+\end{tabulary}
+\sphinxtableafterendhook\par
+\sphinxattableend\end{savenotes}
+
+\sphinxAtStartPar
+Further groups (\sphinxcode{\sphinxupquote{\$molbf}}, \sphinxcode{\sphinxupquote{\$moldf}}, \sphinxcode{\sphinxupquote{\$mbf}}, \sphinxcode{\sphinxupquote{\$mdf}}, \sphinxcode{\sphinxupquote{\$esp}}, \sphinxcode{\sphinxupquote{\$bond}}, \sphinxcode{\sphinxupquote{\$e2r6}}, \sphinxcode{\sphinxupquote{\$geometry}}, \sphinxcode{\sphinxupquote{\$dmtype}}, \sphinxcode{\sphinxupquote{\$mm}}, \sphinxcode{\sphinxupquote{\$order}},
+\sphinxcode{\sphinxupquote{\$bf}}, \sphinxcode{\sphinxupquote{\$c6p}}, \sphinxcode{\sphinxupquote{\$hferror}}, \sphinxcode{\sphinxupquote{\$mpitest}}, \sphinxcode{\sphinxupquote{\$multiply}}, \sphinxcode{\sphinxupquote{\$gtest}}) serve the parametrization of the model Hamiltonians or
+the developer’s own tests.
+
+
+
+
+\section{Task names}
+\label{\detokenize{binary-keywords:task-names}}
+\sphinxAtStartPar
+The program recognizes these values of {\hyperref[\detokenize{reference/control:control-task}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{task}}}}}. Only the first group is documented or tested.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Documented: \sphinxcode{\sphinxupquote{energy}}, \sphinxcode{\sphinxupquote{gradient}}, \sphinxcode{\sphinxupquote{hessian}}, \sphinxcode{\sphinxupquote{optimize}}, \sphinxcode{\sphinxupquote{optimize+hessian}}, \sphinxcode{\sphinxupquote{irc}}, \sphinxcode{\sphinxupquote{scan}}, \sphinxcode{\sphinxupquote{nmr}}, \sphinxcode{\sphinxupquote{dipole}},
+\sphinxcode{\sphinxupquote{anharmonic}}, \sphinxcode{\sphinxupquote{thermostat}}, \sphinxcode{\sphinxupquote{uniq}}, \sphinxcode{\sphinxupquote{opt\_n1}}, \sphinxcode{\sphinxupquote{saddle}}, \sphinxcode{\sphinxupquote{transit}}, \sphinxcode{\sphinxupquote{extremal}}, \sphinxcode{\sphinxupquote{conical}}, \sphinxcode{\sphinxupquote{path}}.
+
+\item {} 
+\sphinxAtStartPar
+Not documented: \sphinxcode{\sphinxupquote{irc4}}, \sphinxcode{\sphinxupquote{dipole1}}, \sphinxcode{\sphinxupquote{dipole1x}}, \sphinxcode{\sphinxupquote{dipole2}}, \sphinxcode{\sphinxupquote{polarizability}}, \sphinxcode{\sphinxupquote{numeric}}, \sphinxcode{\sphinxupquote{loop}}, \sphinxcode{\sphinxupquote{stretch}},
+\sphinxcode{\sphinxupquote{extremal2}}, \sphinxcode{\sphinxupquote{path0}}, \sphinxcode{\sphinxupquote{pathr}}, \sphinxcode{\sphinxupquote{pathx}}, \sphinxcode{\sphinxupquote{chain}}, \sphinxcode{\sphinxupquote{press}}, \sphinxcode{\sphinxupquote{forceconst}}, \sphinxcode{\sphinxupquote{potential}}, \sphinxcode{\sphinxupquote{dynamic}}, \sphinxcode{\sphinxupquote{dynamicn2}},
+\sphinxcode{\sphinxupquote{dynamic1p}}, \sphinxcode{\sphinxupquote{walk}}, \sphinxcode{\sphinxupquote{mm0dimer}}, \sphinxcode{\sphinxupquote{dimer}}, \sphinxcode{\sphinxupquote{orient}}, \sphinxcode{\sphinxupquote{guess}}, \sphinxcode{\sphinxupquote{fragment\_guess}}, \sphinxcode{\sphinxupquote{nss\_num}}, \sphinxcode{\sphinxupquote{steric}}, \sphinxcode{\sphinxupquote{compare}},
+\sphinxcode{\sphinxupquote{isogrid}}, \sphinxcode{\sphinxupquote{functional}}, \sphinxcode{\sphinxupquote{d1fit}}, \sphinxcode{\sphinxupquote{df1\_n4}}, \sphinxcode{\sphinxupquote{df2\_n4}}, \sphinxcode{\sphinxupquote{df2\_e\_n4}}, \sphinxcode{\sphinxupquote{mbf2}}, \sphinxcode{\sphinxupquote{molbf}}, \sphinxcode{\sphinxupquote{moldf}}, \sphinxcode{\sphinxupquote{dmtype}},
+\sphinxcode{\sphinxupquote{am\_integral}}, and developer tests (\sphinxcode{\sphinxupquote{mpitest}}, \sphinxcode{\sphinxupquote{multiply}}, \sphinxcode{\sphinxupquote{etest}}, \sphinxcode{\sphinxupquote{fmtest}}, \sphinxcode{\sphinxupquote{ritest}}, \sphinxcode{\sphinxupquote{riopt}}, \sphinxcode{\sphinxupquote{test\_v}}).
+
+\end{itemize}
+
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{check}} is not a task name, although \sphinxcode{\sphinxupquote{task=check}} appears in older notes.
+
+
+
+
+\section{Theory names}
+\label{\detokenize{binary-keywords:theory-names}}
+\sphinxAtStartPar
+Besides the methods described in {\hyperref[\detokenize{reference/control:control-theory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{theory}}}}}, the program contains these method names, none of
+which is documented: \sphinxcode{\sphinxupquote{OSDFT}}, \sphinxcode{\sphinxupquote{DFT\_CNO}}, \sphinxcode{\sphinxupquote{LEDFT}}, \sphinxcode{\sphinxupquote{LE1DFT}}, \sphinxcode{\sphinxupquote{DFCIS}}, \sphinxcode{\sphinxupquote{RIHFDF}}, \sphinxcode{\sphinxupquote{MP4D}}, \sphinxcode{\sphinxupquote{PT4DQ}}, \sphinxcode{\sphinxupquote{PT4SDQ}}, \sphinxcode{\sphinxupquote{PT4SDTQ}},
+\sphinxcode{\sphinxupquote{CISD}}, \sphinxcode{\sphinxupquote{CCD4S}}, \sphinxcode{\sphinxupquote{CCD4ST}}, \sphinxcode{\sphinxupquote{CCSDSD}}, \sphinxcode{\sphinxupquote{CCD\&MP2}}, \sphinxcode{\sphinxupquote{LCCD+MP2}}, \sphinxcode{\sphinxupquote{SN\_CCD\&MP2}}, \sphinxcode{\sphinxupquote{SN\_CCSD\&MP2}}, \sphinxcode{\sphinxupquote{LEHF}}, \sphinxcode{\sphinxupquote{LEHF\_N3}},
+\sphinxcode{\sphinxupquote{LEMP2\_N3}}, \sphinxcode{\sphinxupquote{LE2HF\_N3}}, \sphinxcode{\sphinxupquote{LE2MP2\_N3}}, \sphinxcode{\sphinxupquote{MCSCF}}, \sphinxcode{\sphinxupquote{CASSCF}}, \sphinxcode{\sphinxupquote{GSCI}}, the model Hamiltonians \sphinxcode{\sphinxupquote{QM\_N2}}, \sphinxcode{\sphinxupquote{QM\_N2D}}, \sphinxcode{\sphinxupquote{QM\_N2B}},
+\sphinxcode{\sphinxupquote{QM\_N2B3}}, \sphinxcode{\sphinxupquote{QM\_N2C}}, \sphinxcode{\sphinxupquote{QM\_N2C0}}, \sphinxcode{\sphinxupquote{QM\_N2F}}, \sphinxcode{\sphinxupquote{AM\_N1}}, \sphinxcode{\sphinxupquote{MM0\_N2}}, \sphinxcode{\sphinxupquote{DM\_1}}, \sphinxcode{\sphinxupquote{BM\_1}}, \sphinxcode{\sphinxupquote{MM\_1}}, and \sphinxcode{\sphinxupquote{6\sphinxhyphen{}12}}, \sphinxcode{\sphinxupquote{FREP}}, \sphinxcode{\sphinxupquote{SCRIPT}}.
+
+
+
+\sphinxstepscope
+
+
 \chapter{Sources}
 \label{\detokenize{sources:sources}}\label{\detokenize{sources:id1}}\label{\detokenize{sources::doc}}
 \sphinxAtStartPar
@@ -7184,6 +7619,12 @@ sources it rests on.
 Small test inputs (water, ammonia, OH) run on Priroda 25 (2025.02.28) in October 2026 for this manual. Where they
 confirm or contradict an older source, the manual follows the run and says so. The inputs and outputs are kept with
 the manual’s source files.
+
+\sphinxlineitem{Version 25 executable}
+\sphinxAtStartPar
+The Linux build \sphinxcode{\sphinxupquote{p4\_d}} from the official site, whose banner matches the test runs, was examined (not run) to list
+every group, keyword, task and theory name it reads. This settles which names exist; it says nothing about what
+they do. The result is on {\hyperref[\detokenize{binary-keywords:binary-keywords}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Keywords in the program}}}}}.
 
 \end{description}
 

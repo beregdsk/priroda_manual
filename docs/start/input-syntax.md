@@ -104,11 +104,16 @@ and the keyword:
 ```
 <!-- src: 08 t06 (verbatim) -->
 
+Only groups that the task reads are checked. In version 25, an unknown keyword in `$optimize` stopped an
+optimization (`unknown name coordinated`) but was ignored in an energy run, which does not read `$optimize`. A
+clean energy run therefore does not prove that the rest of the input is correct.
+<!-- src: 08 t40, t40b, t40c -->
+
 The same message can appear for a keyword you spelled correctly. In version 25,
 `$scf convergence=1e-7 iterations=250 $end` stops with `unknown name terations`: the value list of `convergence`
-takes the first letter of the next keyword. Put another keyword between the two, or see
-{ref}`$scf convergence <scf.convergence>`.
-<!-- src: 05 §5.1; 08 t07a, t07b -->
+takes the first letter of the next keyword. Give `convergence` both of its values, or put it last in the group;
+see {ref}`$scf convergence <scf.convergence>`.
+<!-- src: 05 §5.1; 08 t07a, t07b, t22a-c -->
 
 ## Values
 
@@ -255,10 +260,11 @@ The `ge` script on the official site does the same. It also skips the first bloc
 
 :::{warning}
 An optimization prints an `eng>` block at every step, and the command above appends all of them. Append only the
-block you need, normally the one from a `task=hessian` run. It is not documented what the program does with several
-`$Energy` groups in one input.
+block you need, normally the one from a `task=hessian` run. In a version 25 test with two `$Energy` groups, the
+second one was used; it was also the one that matched the geometry, so it is not certain that the last group always
+wins.
 :::
-<!-- src: 01 §7 (one eng block per optimization step) --> <!-- verify -->
+<!-- src: 01 §7 (one eng block per optimization step); 08 t41 --> <!-- verify: last group wins (tests round 4) -->
 
 A stored Hessian is required by {ref}`$optimize saddle=1 <optimize.saddle>` and `task=irc`. It also helps difficult
 minimizations, and it lets you redo the vibrational analysis or the thermochemistry without recomputing.
@@ -314,9 +320,10 @@ Windows line endings (CRLF)
   <!-- src: 04 #63-#65 -->
 
 Hybrid functional without `theory=ridft`
-: Older versions ran a pure GGA; version 25 stops after the basis-set echo with no message. See
+: Older versions ran without the exact exchange. With `theory=dft`, version 25 stops after the basis-set echo with
+  no message; with `theory=tddft` it still runs without the exact exchange and gives wrong energies. See
   {ref}`$control theory <control.theory>`.
-  <!-- src: 04 #96, #310; 08 t08 -->
+  <!-- src: 04 #96, #310; 08 t08, t46 -->
 
 `basis4.in` without `four=1`
 : The relativistic basis file needs `four=1` in `$control`.

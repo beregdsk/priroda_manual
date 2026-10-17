@@ -23,7 +23,7 @@ the Hessian from t24, and t27b reads the vectors saved by t27a, so run those gro
 After a run, record the answer in the Result column, add it to a `research/` note, then update the keyword YAML
 (`default`, `verified_against`, `status`) or the chapter text and remove the `<!-- verify -->` mark it resolves.
 
-## Round 1 (run 2026-10-17 on version 25; rerun with round 2, outputs in `runs/20261017-123408/`)
+## Round 1 (run 2026-10-17 on version 25; current outputs in `runs/20261017-124819/`)
 
 The findings are written up in `research/08_test_runs_v25.md` and folded into the YAML and chapters.
 
@@ -54,7 +54,7 @@ The findings are written up in `research/08_test_runs_v25.md` and folded into th
 | t20 | (t01, no output file) | Does the output go to standard output when no output file is given? | `t20_stdout.stdout` | running.md || Yes. |
 | t21 | (t01 on 2 processes) | Which parallel launch works: `p -np 2 in out` (t21a) or `./mpiexec -np 2 ./p in out` (t21b, if `mpiexec` sits next to `p`)? | Both outputs; same energy as t01 | running.md (parallel runs); PLAN 3a.1 || t21a `p -np 2` failed, no output, exit 1; stderr not captured. t21b not run. |
 
-## Round 2 (run 2026-10-17 on version 25, outputs in `runs/20261017-123408/`)
+## Round 2 (run 2026-10-17 on version 25; current outputs in `runs/20261017-124819/`)
 
 Small inputs again (water, ammonia, OH), except t32b, t33 and t36, which may take a few minutes.
 
@@ -89,26 +89,53 @@ Small inputs again (water, ammonia, OH), except t32b, t33 and t36, which may tak
 | t39 | `t39_qm_n3.in` | Semiempirical QM model with `qm.in` (needs `QMBASIS`) | Energy; run time | `control.theory` (qm_n3) || Runs; short output format of its own, no `E  =` line. |
 | t40 | `t40_coordinated_spelling.in` | Is `$optimize coordinated=` (the `input.txt` spelling) accepted? Any unique prefix of `coordinates` would be. | Error `unknown name coordinated`, or a normal run | `optimize.coordinates` || No error, but inconclusive (see t40b/t40c). |
 
-## Round 3 (not run yet)
+## Round 3 (run 2026-10-17 on version 25; outputs in `runs/20261017-124819/`)
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| t21 | (t01 on 2 processes) | Parallel launch through an MPI launcher. Download `mpiexec` from the official site next to `p` (or set `MPIEXEC=`), or have `mpirun` on `PATH`. | `t21b_*.stdout`, `t21c_*.stdout`; the process lines at the top of the output; same energy as t01 | running.md (parallel runs) | |
-| t40b | `t40b_coordinated_in_optimize.in` | Is `coordinated=` (the `input.txt` spelling) accepted in an optimization? | Error `unknown name coordinated`, or a normal run | `optimize.coordinates` | |
-| t40c | `t40c_unknown_in_unused_group.in` | Is a group the task does not use (`$optimize` in an energy run) checked for unknown keywords? | Error, or a normal run (then t40 tells nothing) | input-syntax (keywords) | |
-| t41 | `t41_two_energy_groups.in` | Two `$Energy` groups (first from t13, pyramidal NH3; then from t24, planar). Which one is read? | `Lowest eigenvalues:` line: negative (t24 group) or positive (t13 group) | input-syntax (appending `$Energy`) | |
-| t42 | `t42_irc_back.in` | IRC with `back=1`: does it go the other way? | `n = 1, back = 1`; final geometry mirror image of t26 | `optimize.back` | |
-| t43 | `t43_minimize_from_saddle.in` | A plain optimization from planar NH3 with its Hessian appended: does it leave the saddle point? | Final `MOL>` geometry pyramidal, energy about -56.4989 | getting-started (step 6) | |
-| t44 | `t44_thermo_sigma_temps.in` | `$thermo sigma=3 temperature=200,298.15,400` | Three thermochemistry tables; S lower by R ln 3 = 2.18 cal/(mol·K) than t13 at 298.15 K | `thermo.sigma`, `thermo.temperature` | |
-| t45 | `t45_molden_orbitals.in` | `print=+vectors+molden`: are orbitals written as `mos>` lines? | `mos>` lines; whether Molden opens them | getting-started (viewing in Molden) | |
-| t46 | `t46_hybrid_with_tddft.in` | Hybrid functional with `theory=tddft`: abort like `dft` (t08) or run? | Error or excited states | `control.theory` (hybrid trap) | |
-| t47 | `t47_unit_bohr.in` | `$molecule unit=b`: coordinates in bohr (t01 water converted) | Same energy as t01 | `molecule.unit` | |
-| t48 | `t48_o2_triplet.in` | O2 triplet with default settings (`restrict` default for an even electron count) | Number of alpha/beta electrons; `converged!`; energy | `scf.restrict`, `molecule.mult` | |
-| t48b | `t48b_o2_singlet.in` | O2 singlet for comparison | Energy above the triplet | `molecule.mult` | |
-| t49 | `t49_basis4_without_four.in` | `basis4.in` without `four=1` (needs `BASIS4`): does it stop at the `Basis set input:` line, as reported? | Where the output ends; error text | common-problems (basis file); `control.four` | |
+| t21 | (t01 on 2 processes) | Parallel launch through an MPI launcher. Download `mpiexec` from the official site next to `p` (or set `MPIEXEC=`), or have `mpirun` on `PATH`. | `t21b_*.stdout`, `t21c_*.stdout`; the process lines at the top of the output; same energy as t01 | running.md (parallel runs) || Not run: no `mpiexec` or `mpirun` available. Moved to round 4. |
+| t40b | `t40b_coordinated_in_optimize.in` | Is `coordinated=` (the `input.txt` spelling) accepted in an optimization? | Error `unknown name coordinated`, or a normal run | `optimize.coordinates` || Rejected: `unknown name coordinated`. The keyword is `coordinates`. |
+| t40c | `t40c_unknown_in_unused_group.in` | Is a group the task does not use (`$optimize` in an energy run) checked for unknown keywords? | Error, or a normal run (then t40 tells nothing) | input-syntax (keywords) || No error: groups the task does not read are not checked. |
+| t41 | `t41_two_energy_groups.in` | Two `$Energy` groups (first from t13, pyramidal NH3; then from t24, planar). Which one is read? | `Lowest eigenvalues:` line: negative (t24 group) or positive (t13 group) | input-syntax (appending `$Energy`) || Second group (planar, t24) used, but it also matched the geometry. See t41b. |
+| t42 | `t42_irc_back.in` | IRC with `back=1`: does it go the other way? | `n = 1, back = 1`; final geometry mirror image of t26 | `optimize.back` || Yes: other direction, negative distances, mirror-image end point. |
+| t43 | `t43_minimize_from_saddle.in` | A plain optimization from planar NH3 with its Hessian appended: does it leave the saddle point? | Final `MOL>` geometry pyramidal, energy about -56.4989 | getting-started (step 6) || Yes: pyramidal minimum after 19 steps, E = -56.4988673. |
+| t44 | `t44_thermo_sigma_temps.in` | `$thermo sigma=3 temperature=200,298.15,400` | Three thermochemistry tables; S lower by R ln 3 = 2.18 cal/(mol·K) than t13 at 298.15 K | `thermo.sigma`, `thermo.temperature` || Three tables; S lower by 2.18 cal/(mol·K) (R ln 3) with `sigma=3`. |
+| t45 | `t45_molden_orbitals.in` | `print=+vectors+molden`: are orbitals written as `mos>` lines? | `mos>` lines; whether Molden opens them | getting-started (viewing in Molden) || 767 `mos>` lines in Molden format; the recipe works. Not opened in Molden. |
+| t46 | `t46_hybrid_with_tddft.in` | Hybrid functional with `theory=tddft`: abort like `dft` (t08) or run? | Error or excited states | `control.theory` (hybrid trap) || **Runs without the exact exchange**: Ex -6.61 instead of -8.95, energies wrong by about 2.2 hartree, no warning. |
+| t47 | `t47_unit_bohr.in` | `$molecule unit=b`: coordinates in bohr (t01 water converted) | Same energy as t01 | `molecule.unit` || Same geometry and energy as t01. |
+| t48 | `t48_o2_triplet.in` | O2 triplet with default settings (`restrict` default for an even electron count) | Number of alpha/beta electrons; `converged!`; energy | `scf.restrict`, `molecule.mult` || Unrestricted (9α/7β), converged, E = -150.22281. |
+| t48b | `t48b_o2_singlet.in` | O2 singlet for comparison | Energy above the triplet | `molecule.mult` || Closed shell, 0.0635 hartree above the triplet. |
+| t49 | `t49_basis4_without_four.in` | `basis4.in` without `four=1` (needs `BASIS4`): does it stop at the `Basis set input:` line, as reported? | Where the output ends; error text | common-problems (basis file); `control.four` || Stops after the basis line with `1?`; exit 1. |
 
-Run t41–t43 together with t13 and t24 (`./run.sh t13 t24 t41 t42 t43`), because they take the Hessians from those
-outputs.
+
+## Round 4 (not run yet)
+
+Run only these:
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t13 t24 t36 t41b t50 t53 t55 t56 t57
+```
+
+t13, t24 and t36 are rerun because t41b, t55c and t56 take their Hessians or `num>` lines from those outputs in the
+same run. For the parallel test, download `mpiexec` from the official site and put it next to `p` (or give its
+path), then:
+
+```bash
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh t21
+```
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t21 | (t01 on 2 processes) | Does `mpiexec -np 2 p in out` (t21b) or a system `mpirun` (t21c) start a parallel run? | `t21b_*.stdout`, `t21c_*.stdout`; the process lines at the top of the output; same energy as t01 | running.md (parallel runs) | |
+| t41b | `t41b_two_energy_groups_reversed.in` | Same as t41 with the groups swapped (planar first, pyramidal last). Does the last group win? | `Lowest eigenvalues:` positive (last group used) or -0.02919 (matching group used) | input-syntax (several `$Energy` groups) | |
+| t50 | `t50_unknown_task.in` | `task=nosuchtask`: error, or setup and a quiet stop like `task=check`? The program has no `check` task (`research/09`). | Where the output ends; exit status | `control.task` (`check`) | |
+| t50b | `t50b_unknown_theory.in` | `theory=nosuchtheory`: error or a silent fallback? | Error text, or the `Theoretical Method` line | `control.theory` | |
+| t53 | `t53_numeric_hessian_dft.in` | `$control derivative=numeric` (a keyword found only in the program) with `theory=dft`: numerical Hessian instead of analytic? | `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`; frequencies as in an analytic run | `research/09`; `$d2edr2` | |
+| t55a/b/c | `t55a…`, `t55b…`, `t55c…` | Numerical Hessian split over two runs (`$d2edr2 displace=1 steps=0,4` and `5,9`), then combined with `steps=-1` and the `num>` lines of both | t55a/b: `num>` lines; t55c: frequency table, compared with a one-run `ridft` Hessian (round 2 t32a) | `d2edr2.steps`; input-syntax (`num>` lines) | |
+| t56 | `t56_raman_from_dipole.in` | Raman intensities: a Hessian run with the `num>` lines of `task=dipole` (t36) appended | Non-zero `Raman A.` and `Raman D.` columns | input-syntax (`num>` lines); getting-started (Raman) | |
+| t57a | `t57a_nmr_ridft.in` | NMR with `theory=ridft` (sources say NMR works only with `dft`) | Shielding table or an error | about.md capability matrix (note 5) | |
+| t57b | `t57b_nmr_standard.in` | `$nmr standard(1)=31.0 standard(8)=300.0`: shift = standard − shielding? | `shift=` values (H about -1.78, O about -36.88) | `nmr.standard` | |
 
 ## Still not covered
 

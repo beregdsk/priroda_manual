@@ -13,6 +13,11 @@ Version 25 test runs
   confirm or contradict an older source, the manual follows the run and says so. The inputs and outputs are kept with
   the manual's source files.
 
+Version 25 executable
+: The Linux build `p4_d` from the official site, whose banner matches the test runs, was examined (not run) to list
+  every group, keyword, task and theory name it reads. This settles which names exist; it says nothing about what
+  they do. The result is on {ref}`binary-keywords`.
+
 ## Program files and text from the developer
 
 Official file index

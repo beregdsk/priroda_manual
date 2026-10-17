@@ -10,7 +10,7 @@
   \item \spxentry{\$control}, \hyperpage{34}
   \item \spxentry{\$d2edr2}, \hyperpage{53}
   \item \spxentry{\$dft}, \hyperpage{45}
-  \item \spxentry{\$dynamic}, \hyperpage{57}
+  \item \spxentry{\$dynamic}, \hyperpage{58}
   \item \spxentry{\$grid}, \hyperpage{46}
   \item \spxentry{\$guess}, \hyperpage{41}
   \item \spxentry{\$integral}, \hyperpage{46}
@@ -48,14 +48,14 @@
   \item \spxentry{d1small}\spxextra{\$scf}, \hyperpage{44}
   \item \spxentry{direct}\spxextra{\$integral}, \hyperpage{46}
   \item \spxentry{disk}\spxextra{\$system}, \hyperpage{33}
-  \item \spxentry{displace}\spxextra{\$d2edr2}, \hyperpage{53}
-  \item \spxentry{dist}\spxextra{\$uniq}, \hyperpage{59}
+  \item \spxentry{displace}\spxextra{\$d2edr2}, \hyperpage{54}
+  \item \spxentry{distance}\spxextra{\$uniq}, \hyperpage{59}
   \item \spxentry{Dx}\spxextra{\$Energy}, \hyperpage{57}
 
   \indexspace
   \bigletter E
   \item \spxentry{e}\spxextra{\$dynamic}, \hyperpage{58}
-  \item \spxentry{E}\spxextra{\$Energy}, \hyperpage{56}
+  \item \spxentry{E}\spxextra{\$Energy}, \hyperpage{57}
 
   \indexspace
   \bigletter F
@@ -77,7 +77,7 @@
 
   \indexspace
   \bigletter I
-  \item \spxentry{i}\spxextra{\$dynamic}, \hyperpage{58}
+  \item \spxentry{i}\spxextra{\$dynamic}, \hyperpage{59}
   \item \spxentry{iterations}\spxextra{\$scf}, \hyperpage{44}
 
   \indexspace
@@ -92,7 +92,7 @@
   \item \spxentry{mcore}\spxextra{\$atoms}, \hyperpage{48}
   \item \spxentry{memory}\spxextra{\$system}, \hyperpage{32}
   \item \spxentry{mix}\spxextra{\$guess}, \hyperpage{42}
-  \item \spxentry{mod}\spxextra{\$optimize}, \hyperpage{53}
+  \item \spxentry{model}\spxextra{\$optimize}, \hyperpage{53}
   \item \spxentry{mult}\spxextra{\$molecule}, \hyperpage{40}
 
   \indexspace
@@ -123,13 +123,13 @@
   \item \spxentry{saddle}\spxextra{\$optimize}, \hyperpage{48}
   \item \spxentry{save}\spxextra{\$control}, \hyperpage{39}
   \item \spxentry{set}\spxextra{\$molecule}, \hyperpage{40}
-  \item \spxentry{sigma}\spxextra{\$thermo}, \hyperpage{54}
+  \item \spxentry{sigma}\spxextra{\$thermo}, \hyperpage{55}
   \item \spxentry{standard}\spxextra{\$nmr}, \hyperpage{55}
   \item \spxentry{state}\spxextra{\$control}, \hyperpage{37}
   \item \spxentry{steps}\spxextra{\$d2edr2}, \hyperpage{54}
   \item \spxentry{steps}\spxextra{\$optimize}, \hyperpage{49}
   \item \spxentry{sym}\spxextra{\$molecule}, \hyperpage{41}
-  \item \spxentry{sym}\spxextra{\$optimize}, \hyperpage{53}
+  \item \spxentry{symmetry}\spxextra{\$optimize}, \hyperpage{53}
 
   \indexspace
   \bigletter T

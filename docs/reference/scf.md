@@ -17,10 +17,10 @@ Spin restriction, convergence, iteration limits and SCF solver.
 
 **Type:** switch\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t48
 
-Default: `1` if the system has an even number of electrons, otherwise `0`.
+Default: `1` for a closed-shell singlet, otherwise `0`. Version 25 ran O2 with `mult=3` (an even number of electrons) unrestricted without being told.
 
 Spin restriction.
 

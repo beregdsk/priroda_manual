@@ -117,10 +117,10 @@ $end
 
 **Type:** string\
 **Default:** *none stated*\
-**Status:** undocumented · not verified\
-**Sources:** 01 §4.7
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 01 §4.7; 08 t47
 
-Length unit of the coordinates. The default unit is Å.
+Length unit of the coordinates. The default unit is Å. In version 25, water given in bohr with `unit=b` gave the same geometry and energy as in Å.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -145,4 +145,4 @@ Newer versions report the detected point group (`symmetry: D6h`). In version 25,
 distorted NH3 printed `symmetry: C3v    6, unique:    2` and echoed the geometry symmetrized. On its own it
 does not keep the symmetry during an optimization; add `$optimize sym=1` for that.
 
-**See also:** {ref}`sym ($optimize) <optimize.sym>`
+**See also:** {ref}`symmetry ($optimize) <optimize.symmetry>`

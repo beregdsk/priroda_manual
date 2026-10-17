@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Sources" href="../sources.html"><link rel="prev" title="$uniq" href="../reference/uniq.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Keywords in the program" href="../binary-keywords.html"><link rel="prev" title="$uniq" href="../reference/uniq.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
         <title>Solving common problems - Priroda Unofficial Manual</title>
@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -332,8 +333,9 @@ run, a relative name worked with the file in the current directory.)</p>
 <!-- src: 04 #152-#154; 08 t03 --> <!-- verify: relative basis in a parallel run -->
 </li>
 <li><p>The relativistic basis file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> needs <a class="reference internal" href="../reference/control.html#control-four"><span class="std std-ref">four=1</span></a> in <a class="reference internal" href="../reference/control.html#group-control"><span class="std std-ref">$control</span></a>.
-Without it the job stops at the <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> line. The user who reported this confirmed the fix.</p>
-<!-- src: 04 #206-#208 -->
+Without it the job stops right after the <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> line, with <code class="docutils literal notranslate"><span class="pre">1?</span></code> as the only message (version 25).
+The user who first reported this confirmed the fix.</p>
+<!-- src: 04 #206-#208; 08 t49 -->
 </li>
 <li><p>The name given in <a class="reference internal" href="../reference/molecule.html#molecule-set"><span class="std std-ref">set</span></a> must exist in the basis file.</p>
 <!-- src: 06 §10 -->
@@ -597,7 +599,7 @@ geometry along that mode if needed, and optimize again.</p>
 <!-- src: 04 #254 (amge); 06 §10 (re-optimize with lasteng) -->
 <p>Version 25 can also use symmetry on purpose: <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code> detects the point group and symmetrizes the
 input geometry, and <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> keeps that symmetry during the optimization. Both options are needed. See
-<a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and <a class="reference internal" href="../reference/optimize.html#optimize-sym"><span class="std std-ref">$optimize sym</span></a>.</p>
+<a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and <a class="reference internal" href="../reference/optimize.html#optimize-symmetry"><span class="std std-ref">$optimize symmetry</span></a>.</p>
 <!-- src: 08 t15, t30a, t30b -->
 </section>
 <section id="a-scan-starts-from-a-mangled-geometry">
@@ -650,11 +652,21 @@ With <code class="docutils literal notranslate"><span class="pre">theory=dft</sp
 zero exact exchange, so the result was a pure-GGA-like calculation labelled as a hybrid. The developer was told about
 it and, according to a user who corresponded with him, did not intend to change it.</p>
 <!-- src: 03 §11 (sanya, amg); 04 #96, #99 -->
-<p>Newer builds (reported in 2014) refuse instead: the job prints <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> twice and stops with
-<code class="docutils literal notranslate"><span class="pre">application</span> <span class="pre">called</span> <span class="pre">MPI_Abort(MPI_COMM_WORLD,</span> <span class="pre">1)</span> <span class="pre">-</span> <span class="pre">process</span> <span class="pre">0</span></code>, before the summary box. Several users reproduced this.</p>
-<!-- src: 04 #307-#310 -->
-<p><strong>Fix.</strong> Use <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> for every hybrid functional. There is no hybrid TDDFT in Priroda.</p>
-<!-- src: 03 §11; 04 #310 -->
+<p>Newer builds (reported in 2014) refuse with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>: the job prints <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> twice and stops with
+<code class="docutils literal notranslate"><span class="pre">application</span> <span class="pre">called</span> <span class="pre">MPI_Abort(MPI_COMM_WORLD,</span> <span class="pre">1)</span> <span class="pre">-</span> <span class="pre">process</span> <span class="pre">0</span></code> (on stderr), before the summary box. Several users
+reproduced this, and version 25 does the same.</p>
+<!-- src: 04 #307-#310; 08 t08 -->
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>With <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> the trap is still open in version 25.</strong> A water run with <code class="docutils literal notranslate"><span class="pre">functional=PBE1</span></code> showed <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> in the
+summary box, finished normally and printed excited states, but the exchange energy was −6.61 instead of about
+−8.95 hartree and the total energy was about 2.2 hartree too high: the exact-exchange part was simply left out. Any
+TDDFT result with a hybrid functional is wrong.</p>
+</div>
+<!-- src: 08 t46 (compare t31b and t01) -->
+<p><strong>Fix.</strong> Use <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> for every hybrid ground-state calculation, and a pure GGA functional (PBE, the default)
+for TDDFT. There is no hybrid TDDFT in Priroda.</p>
+<!-- src: 03 §11; 04 #310; 08 t46 -->
 </section>
 <section id="nan-energy-or-an-optimization-that-stops-after-one-step">
 <span id="troubleshooting-nan"></span><h3>NaN energy, or an optimization that stops after one step<a class="headerlink" href="#nan-energy-or-an-optimization-that-stops-after-one-step" title="Link to this heading">¶</a></h3>
@@ -919,12 +931,12 @@ had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build 
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../sources.html">
+          <a class="next-page" href="../binary-keywords.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Sources</div>
+                <div class="title">Keywords in the program</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -108,9 +108,9 @@ Group by group:
 
 :::{note}
 Hybrid functionals such as `PBE1` or `B3LYP` need {ref}`theory=ridft <control.theory>`. With `theory=dft`, older
-versions silently drop the exact exchange, and newer ones abort with no error message. See
-{ref}`$control theory <control.theory>`.
-<!-- src: 04 §0, #96, #99, #307-#310; 08 t08 -->
+versions silently drop the exact exchange, and newer ones abort with no error message. With `theory=tddft`,
+version 25 still silently drops it. See {ref}`$control theory <control.theory>`.
+<!-- src: 04 §0, #96, #99, #307-#310; 08 t08, t46 -->
 :::
 
 Run it:
@@ -364,7 +364,7 @@ step 1. {ref}`sigma <thermo.sigma>` is the rotational symmetry number used in th
 (point group C3v) it is 3. **Priroda does not work it out itself**: without `sigma=` it uses 1, and the entropy comes
 out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The default temperature is 298.15 K; other temperatures go in
 {ref}`temperature <thermo.temperature>`.
-<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K) -->
+<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K), t44 (sigma=3 lowers S by R ln 3) -->
 
 For DFT the Hessian is analytic; the output announces it with `ANALYTIC SECOND DERIVATIVES OF SCF ENERGY`.
 <!-- src: 04 #460; 08 t13 -->
@@ -413,14 +413,16 @@ gives one:
 ### Step 6: if a frequency is imaginary, re-optimize
 
 Put the Hessian you just computed into the optimization input. It is printed as a `$Energy` group on `eng>` lines.
-Starting from a good Hessian, the optimizer can move off the saddle point; one extra cycle is usually enough.
-<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow) -->
+Starting from a good Hessian, the optimizer can move off the saddle point. In a version 25 test that started
+exactly on a saddle point (planar ammonia), it reached the pyramidal minimum in 19 steps; from a near-symmetric
+structure it usually takes fewer.
+<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow); 08 t43 -->
 
 ```bash
 sed -e 's/task=hessian/task=optimize/' nh3_freq.in > nh3_opt2.in
 sed -n 's/^eng>//p' nh3_freq.out | awk '/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}' >> nh3_opt2.in
 ```
-<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H; 08 t25 (an appended Hessian is read: Lowest eigenvalues line) --> <!-- verify: minimization from a saddle with the appended Hessian -->
+<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H; 08 t25 (an appended Hessian is read), t43 (minimization from the saddle) -->
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 
 The second command appends only the last `$Energy` group, after `$molecule`. Do not leave an older `$Energy` group in
@@ -572,6 +574,7 @@ Open `nh3.freq` in Molden to animate the normal modes. <!-- src: 06 §9 (freq re
 ```bash
 grep '^mos>' water.out | sed 's/^mos>//' > water.mos
 ```
+<!-- src: 08 t45 (recipe checked: gives [Molden Format], [Atoms] AU, [5D], [GTO], [MO]) -->
 
 The `+molden` part is essential: without it, there are no `mos>` lines. The files are large, and Molden can be slow
 with them. <!-- src: 03 §14 (one-liner, verbatim); 04 #508-#510 -->

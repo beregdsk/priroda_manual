@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -269,14 +270,15 @@
 <span id="group-uniq"></span><h1><code class="docutils literal notranslate"><span class="pre">$uniq</span></code><a class="headerlink" href="#uniq" title="Link to this heading">¶</a></h1>
 <p id="index-0">Duplicate-structure filtering over several <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks.</p>
 <p><strong>Relevant when:</strong> <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">uniq</span></code></p>
-<section id="dist">
-<span id="uniq-dist"></span><h2><code class="docutils literal notranslate"><span class="pre">dist</span></code><a class="headerlink" href="#dist" title="Link to this heading">¶</a></h2>
+<section id="distance">
+<span id="uniq-distance"></span><h2><code class="docutils literal notranslate"><span class="pre">distance</span></code><a class="headerlink" href="#distance" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.9</p>
+<strong>Sources:</strong> 01 §4.9; 09</p>
 <p>Threshold for treating two structures as identical (inferred from the official example <code class="docutils literal notranslate"><span class="pre">dist=0.01</span></code>, run on 157
-MD snapshots, each in its own <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> block).</p>
+MD snapshots, each in its own <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> block). <code class="docutils literal notranslate"><span class="pre">dist</span></code> is a prefix of the full name <code class="docutils literal notranslate"><span class="pre">distance</span></code>; the group
+also reads <code class="docutils literal notranslate"><span class="pre">file</span></code>.</p>
 </section>
 </section>
 
@@ -336,7 +338,7 @@ MD snapshots, each in its own <code class="docutils literal notranslate"><span c
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">$uniq</span></code></a><ul>
-<li><a class="reference internal" href="#dist"><code class="docutils literal notranslate"><span class="pre">dist</span></code></a></li>
+<li><a class="reference internal" href="#distance"><code class="docutils literal notranslate"><span class="pre">distance</span></code></a></li>
 </ul>
 </li>
 </ul>

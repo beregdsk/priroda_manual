@@ -72,8 +72,9 @@ followed by NMR, as separate jobs.
   run, a relative name worked with the file in the current directory.)
   <!-- src: 04 #152-#154; 08 t03 --> <!-- verify: relative basis in a parallel run -->
 - The relativistic basis file `basis4.in` needs {ref}`four=1 <control.four>` in {ref}`$control <group.control>`.
-  Without it the job stops at the `Basis set input:` line. The user who reported this confirmed the fix.
-  <!-- src: 04 #206-#208 -->
+  Without it the job stops right after the `Basis set input:` line, with `1?` as the only message (version 25).
+  The user who first reported this confirmed the fix.
+  <!-- src: 04 #206-#208; 08 t49 -->
 - The name given in {ref}`set <molecule.set>` must exist in the basis file.
   <!-- src: 06 §10 -->
 
@@ -348,7 +349,7 @@ geometry along that mode if needed, and optimize again.
 
 Version 25 can also use symmetry on purpose: `$molecule sym=1,0.01` detects the point group and symmetrizes the
 input geometry, and `$optimize sym=1` keeps that symmetry during the optimization. Both options are needed. See
-{ref}`$molecule sym <molecule.sym>` and {ref}`$optimize sym <optimize.sym>`.
+{ref}`$molecule sym <molecule.sym>` and {ref}`$optimize symmetry <optimize.symmetry>`.
 <!-- src: 08 t15, t30a, t30b -->
 
 ### A scan starts from a mangled geometry
@@ -406,12 +407,22 @@ zero exact exchange, so the result was a pure-GGA-like calculation labelled as a
 it and, according to a user who corresponded with him, did not intend to change it.
 <!-- src: 03 §11 (sanya, amg); 04 #96, #99 -->
 
-Newer builds (reported in 2014) refuse instead: the job prints `Basis set input:` twice and stops with
-`application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0`, before the summary box. Several users reproduced this.
-<!-- src: 04 #307-#310 -->
+Newer builds (reported in 2014) refuse with `theory=dft`: the job prints `Basis set input:` twice and stops with
+`application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0` (on stderr), before the summary box. Several users
+reproduced this, and version 25 does the same.
+<!-- src: 04 #307-#310; 08 t08 -->
 
-**Fix.** Use `theory=ridft` for every hybrid functional. There is no hybrid TDDFT in Priroda.
-<!-- src: 03 §11; 04 #310 -->
+:::{warning}
+**With `theory=tddft` the trap is still open in version 25.** A water run with `functional=PBE1` showed `PBE1` in the
+summary box, finished normally and printed excited states, but the exchange energy was −6.61 instead of about
+−8.95 hartree and the total energy was about 2.2 hartree too high: the exact-exchange part was simply left out. Any
+TDDFT result with a hybrid functional is wrong.
+:::
+<!-- src: 08 t46 (compare t31b and t01) -->
+
+**Fix.** Use `theory=ridft` for every hybrid ground-state calculation, and a pure GGA functional (PBE, the default)
+for TDDFT. There is no hybrid TDDFT in Priroda.
+<!-- src: 03 §11; 04 #310; 08 t46 -->
 
 (troubleshooting.nan)=
 ### NaN energy, or an optimization that stops after one step

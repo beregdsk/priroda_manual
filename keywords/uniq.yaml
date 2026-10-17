@@ -4,13 +4,14 @@ summary:
   en: Duplicate-structure filtering over several `$molecule` blocks.
 relevant_when: "task = uniq"
 keywords:
-  - name: dist
+  - name: distance
     type: real
     default: null
     description:
       en: |
         Threshold for treating two structures as identical (inferred from the official example `dist=0.01`, run on 157
-        MD snapshots, each in its own `$molecule` block).
+        MD snapshots, each in its own `$molecule` block). `dist` is a prefix of the full name `distance`; the group
+        also reads `file`.
     status: undocumented
-    sources: ["01 §4.9"]
+    sources: ["01 §4.9", "09"]
     verified_against: null

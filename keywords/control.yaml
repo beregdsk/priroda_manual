@@ -16,7 +16,7 @@ keywords:
       - {value: scan, en: "Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. The structures and energies are summarized on `SCAN>` lines at the end."}
       - {value: nmr, en: "NMR shielding tensors. Works only with `theory=dft`."}
       - {value: dipole, en: "Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a `num>` block."}
-      - {value: check, en: "Read the input and set up the run (geometry, basis sets, SCF and grid settings), then stop before the SCF. Useful to check an input."}
+      - {value: check, en: "Not a task name in the version 25 program. `task=check` sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF, presumably like any unrecognized task, which makes it a usable input check.", status: undocumented}
       - {value: extremal, en: "Gradient-extremal path (v9 banner \"Calculation of Gradient Extremal Path\"); slow.", status: undocumented}
       - {value: transit, en: "Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8.", status: undocumented}
       - {value: saddle, en: "Approximate saddle-point search from two `$molecule` blocks (start and end).", status: undocumented}
@@ -38,7 +38,7 @@ keywords:
         and others) that are untested or need data that is not distributed.
     see_also: [optimize.saddle, optimize.points, control.print]
     status: current
-    sources: ["input.txt", "Dft.rtf (default gradient, check)", "02 §3.2 (pri: default gradient)", "03 §5", "04 #69-#73, #145, #478, #497", "01 §4.2", "08 t02, t18, t26, t34, t36, t37"]
+    sources: ["input.txt", "Dft.rtf (default gradient, check)", "02 §3.2 (pri: default gradient)", "03 §5", "04 #69-#73, #145, #478, #497", "01 §4.2", "08 t02, t18, t26, t34, t36, t37", "09"]
     verified_against: "25 (2025.02.28)"
   - name: theory
     type: enum
@@ -69,8 +69,11 @@ keywords:
     notes:
       en: |
         **Hybrid trap.** Hybrid functionals (`PBE1`, `B3LYP`, …) take effect only with `theory=ridft`. With `theory=dft`
-        or `tddft`, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort. Version 25
-        stops right after printing the basis sets, with no error message in the output and exit status 1.
+        or `tddft`, older versions silently drop the exact exchange. In version 25, `theory=dft` stops right after
+        printing the basis sets, with no error message in the output and exit status 1. `theory=tddft` still runs:
+        it reports `PBE1` in the summary box but leaves out the exact exchange, so the energies are wrong (water:
+        `Ex` -6.61 instead of about -8.95 hartree, total energy about 2.2 hartree too high), and the run ends
+        normally.
 
         The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. In version 25,
         water energies run to completion with `hf`, `rihf`, `cis`, `mp2`, `mp3`, `mp4dq`, `mp4sdq`, `mp4sdtq`, `ccs`,
@@ -82,7 +85,7 @@ keywords:
         CCSDT, …); none has been reported working.
     see_also: [dft.functional]
     status: current
-    sources: ["input.txt", "Dft.rtf (default dft)", "06 §3 (v5 ab initio list)", "03 §5 (Evgeniy 2011 test)", "04 #96, #99, #307-#310", "01 §3.1, §4.2", "08 t02, t08, t17, t31-t33, t38, t39"]
+    sources: ["input.txt", "Dft.rtf (default dft)", "06 §3 (v5 ab initio list)", "03 §5 (Evgeniy 2011 test)", "04 #96, #99, #307-#310", "01 §3.1, §4.2", "08 t02, t08, t17, t31-t33, t38, t39, t46"]
     verified_against: "25 (2025.02.28)"
   - name: state
     type: list
@@ -126,10 +129,10 @@ keywords:
     description:
       en: Four-component option.
     notes:
-      en: "Required with the relativistic basis file `basis4.in`. Forgetting it is a common cause of failed runs with that file."
+      en: "Required with the relativistic basis file `basis4.in`. Without it, version 25 stops right after the `Basis set input:` line with `1?`."
     see_also: [control.nucleus, scf.d1small]
     status: current
-    sources: ["input.txt", "01 §3.3", "04 #207-#208, #336", "08 t35"]
+    sources: ["input.txt", "01 §3.3", "04 #207-#208, #336", "08 t35, t49"]
     verified_against: "25 (2025.02.28)"
   - name: nucleus
     type: enum
@@ -158,7 +161,7 @@ keywords:
       - {value: +bonds, en: "Mulliken populations and bond orders (SCF only), printed as \"Overlap populations\"."}
       - {value: +esr, en: ESR parameters.}
       - {value: +vectors, en: SCF vectors.}
-      - {value: +molden, en: "MOLDEN data: vibrations on `freq>` lines for `task=hessian`; with `+vectors+molden` also orbitals on `mos>` lines."}
+      - {value: +molden, en: "MOLDEN data: vibrations on `freq>` lines for `task=hessian`; with `+vectors+molden` also orbitals on `mos>` lines (`[Molden Format]`, `[Atoms] AU`, `[5D]`, `[GTO]`, `[MO]` sections)."}
       - {value: +density, en: Critical points of the electron density (QTAIM). Combine with `+charges` to label them., status: undocumented}
       - {value: -internals, en: Suppress the printout of internal coordinates., status: undocumented}
     description:
@@ -167,8 +170,8 @@ keywords:
         The leading `+` can be omitted (`print=charges+bonds`).
     example: "$control print=+vectors+molden $end"
     status: current
-    sources: ["input.txt", "Dft.rtf", "06 §3", "04 #376, #460, #498-#502, #509"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf", "06 §3", "04 #376, #460, #498-#502, #509", "08 t01, t45"]
+    verified_against: "25 (2025.02.28)"
   - name: save
     type: string
     default: null

@@ -51,7 +51,8 @@ for f in "$here"/inputs/t*.in; do
     *)
       # Inputs with @ENERGY_FROM_tNN@ lines get the last $Energy group of test tNN's output (same run) in its place.
       need=$(grep -o '@ENERGY_FROM_t[0-9a-z]*@' "$f" | sort -u | sed 's/@ENERGY_FROM_\(.*\)@/\1/')
-      if [ -z "$need" ]; then prep "$name" "" "$name"; run "$name"; continue; fi
+      neednum=$(grep -o '@NUM_FROM_t[0-9a-z]*@' "$f" | sed 's/@NUM_FROM_\(.*\)@/\1/')
+      if [ -z "$need$neednum" ]; then prep "$name" "" "$name"; run "$name"; continue; fi
       prep "$name" "" "$name"; ok=1
       for src in $need; do
         srcout=$(ls "$out"/${src}_*.out 2>/dev/null | head -1)
@@ -59,6 +60,15 @@ for f in "$here"/inputs/t*.in; do
         last_energy "$srcout" > "$out/energy.tmp"
         sed -i -e "/@ENERGY_FROM_$src@/r $out/energy.tmp" -e "/@ENERGY_FROM_$src@/d" "$out/$name.in"
         rm -f "$out/energy.tmp"
+      done
+      # @NUM_FROM_tNN@ lines get all num-prefixed lines of test tNN's output, prefix stripped.
+      for src in $neednum; do
+        [ $ok = 1 ] || break
+        srcout=$(ls "$out"/${src}_*.out 2>/dev/null | head -1)
+        if [ -z "$srcout" ] || [ ! -s "$srcout" ]; then skip "$name" "needs $src in the same run"; ok=0; break; fi
+        sed -n 's/^num>//p' "$srcout" > "$out/num.tmp"
+        sed -i -e "/@NUM_FROM_$src@/r $out/num.tmp" -e "/@NUM_FROM_$src@/d" "$out/$name.in"
+        rm -f "$out/num.tmp"
       done
       [ $ok = 1 ] && run "$name" ;;
   esac

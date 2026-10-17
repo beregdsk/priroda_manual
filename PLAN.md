@@ -79,7 +79,7 @@ Every item stays open for D4, testing against a real binary.
 | `$optimize steps` vs `step` | v6: `step` wins if both given | Recorded |
 | `functional` group | `$scf` (Dft.rtf) vs `$dft` (input.txt) | `$dft` is current |
 | `$atoms core(280)` index layout | 10·Z apparently | **Confirmed 10·Z** (08 t16) |
-| `$optimize coordinated=` spelling | input.txt typo? | No error with `task=energy` (08 t40), inconclusive; round 3 t40b/t40c |
+| `$optimize coordinated=` spelling | input.txt typo? | **Typo confirmed**: `unknown name coordinated` (08 t40b); the binary reads `coordinates` (09) |
 | `$molecule mult` meaning | one forum post used `-1 1` for a radical anion (04 #49) | **Confirmed 2S+1** (08 t10) |
 | Undocumented tasks and theories | 03, 01 | v25: the 12 ab initio theories in t17 and `task=check` run (08). Rest: tests round 2 |
 | Old predecessor keywords (`$SCF shift/field/fit`, `$search`, `$force`) | Dft_ansi.txt only | Not in the YAML. Goes to the "Version differences" chapter |
@@ -122,6 +122,9 @@ and the round-2 items.
    was written and then dropped (D6). The open questions are in §3a.
 4a. ~~First round of test inputs for §3a.~~ Done: `tests/`, run on v25; findings folded into the YAML and Part I/III.
 4b. ~~Second round of test inputs (t21–t40).~~ Run on v25; folded into `research/08`, the YAML and the chapters.
-4c. Third round (t40b–t49, t21 again with an MPI launcher) written; waiting for runs.
+4c. ~~Third round (t40b–t49).~~ Run on v25; folded in. t21 still needs an MPI launcher.
+4e. ~~Keyword list from the v25 executable (`p4_d`).~~ Done: `research/09`, appendix page "Keywords in the program";
+    YAML names corrected (`optimize.symmetry`, `optimize.model`, `uniq.distance`).
+4f. Round 4 (t21, t41b, t50, t53, t55, t56, t57) written; waiting for runs.
 4d. Repository `README.md` added.
 5. Write the Part II chapters in task order, then Part III, then the appendices.

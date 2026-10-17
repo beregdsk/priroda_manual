@@ -18,7 +18,7 @@ has been checked against a running binary.
   read the output), input syntax.
 - **Part II. Input reference**: every known keyword, group by group, generated from `keywords/*.yaml`.
 - **Part III. Troubleshooting**: common problems, by symptom.
-- **Appendix**: the sources.
+- **Appendix**: every keyword name found in the program file, and the sources.
 
 ## Building
 
@@ -41,7 +41,7 @@ make keywords  # only validate keywords/*.yaml and regenerate docs/reference/
 | `docs/reference/` | Input reference pages, **generated** from `keywords/` on every build. Do not edit them. |
 | `docs/_ext/priroda_keywords.py` | Sphinx extension that validates the keyword YAML and writes the reference pages. Its docstring is the YAML schema. |
 | `keywords/` | One YAML file per input group (`$control`, `$scf`, `$optimize`, …), one record per keyword. |
-| `research/` | Notes extracted from each source, numbered `00`–`08`; `08` holds the test-run results. |
+| `research/` | Notes extracted from each source, numbered `00`–`09`; `08` holds the test-run results and `09` the keyword names found in the program file. |
 | `priroda_man/` | The original documentation files as received (`input.txt`, `Dft.rtf`, `Dft_ansi.txt`). Not edited. |
 | `tests/` | Small Priroda inputs that check open questions, a script to run them, the outputs, and a results table. |
 | `PLAN.md` | Outline, decisions, known conflicts between sources, and work order. |

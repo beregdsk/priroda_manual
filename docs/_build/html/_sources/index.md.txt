@@ -41,5 +41,6 @@ troubleshooting/common-problems
 :caption: Appendix
 :maxdepth: 2
 
+binary-keywords
 sources
 ```

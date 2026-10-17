@@ -57,7 +57,7 @@ Record conventions:
   - `input.txt`: English "Input Summary", the closest thing to an official keyword reference. Its Russian annotations (lines 60–61, 75, 127–128, 419–421) were corrupted to `?` and cannot be recovered from this file.
   - `Dft.rtf`: Russian, cp1251.
   - `Dft_ansi.txt`: Russian, cp1251 + CRLF; describes the predecessor program with obsolete group names.
-- `research/`: extracted notes, one per source, numbered `00`–`08`. `08` records the test runs on Priroda 25 (program output, the strongest evidence; cite as `08 tNN`). `00_*_utf8.txt` are UTF-8 conversions of the cp1251 originals. `07` is the survey of other QC manuals (ORCA, GAMESS, TURBOMOLE, Psi4, NWChem, CP2K, Gaussian) with the recommended outline, keyword-entry template and toolchain.
+- `research/`: extracted notes, one per source, numbered `00`–`09`. `08` records the test runs on Priroda 25 (program output, the strongest evidence; cite as `08 tNN`). `09` lists every group, keyword, task and theory name found in the v25 executable (`p4_d`); it settles which names exist, not what they do. `00_*_utf8.txt` are UTF-8 conversions of the cp1251 originals. `07` is the survey of other QC manuals (ORCA, GAMESS, TURBOMOLE, Psi4, NWChem, CP2K, Gaussian) with the recommended outline, keyword-entry template and toolchain.
 - `PLAN.md`: manual outline, settled decisions, table of known conflicts, and work order with progress. Read it before writing manual content.
 - `tests/`: minimal verification inputs for the open questions (`PLAN.md` §3a), `run.sh`, and a results table in
   `tests/README.md`.

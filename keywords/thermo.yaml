@@ -9,24 +9,27 @@ keywords:
     description:
       en: |
         Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless `sigma=` is
-        given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3).
+        given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3). With
+        `sigma=3`, NH3 gave S = 46.03 cal/(mol·K) at 298.15 K.
     default_note:
       en: "1 (version 25 does not detect the symmetry number)."
     status: current
-    sources: ["input.txt", "08 t13"]
+    sources: ["input.txt", "08 t13", "08 t44"]
     verified_against: "25 (2025.02.28)"
   - name: temperature
     type: list
     default: [298.15]
     units: K
     description:
-      en: Temperatures at which thermochemistry is printed, up to 50 values.
+      en: |
+        Temperatures at which thermochemistry is printed, up to 50 values. Each temperature gets its own table:
+        `temperature=200,298.15,400` printed three.
     default_note:
       en: |
         `298.15`: version 25 prints `T =  298.150 K`, as `Dft.rtf` states. Older posted outputs also show `298.000 K`
         (2011, 2021), so set `temperature=` explicitly when comparing with other versions.
     status: current
-    sources: ["input.txt", "Dft.rtf", "08 t13"]
+    sources: ["input.txt", "Dft.rtf", "08 t13", "08 t44"]
     verified_against: "25 (2025.02.28)"
   - name: mass
     type: list

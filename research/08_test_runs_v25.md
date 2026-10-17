@@ -1,9 +1,9 @@
 # Test runs on Priroda 25 (2025.02.28)
 
-First verification round: the inputs in `tests/inputs/`, run by the project owner with `tests/run.sh` on
-2026-10-17 on one Linux machine (`node 0: 'arch'`), serial unless stated. Outputs are in
-`tests/runs/20261017-123408/` (round 1 was first run as `20261017-121135`, then rerun together
-with round 2; the round-1 energies were identical both times). Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
+Three verification rounds: the inputs in `tests/inputs/`, run by the project owner with `tests/run.sh` on
+2026-10-17 on one Linux machine (`node 0: 'arch'`), serial unless stated. Each round reran all earlier tests;
+the current outputs, for all rounds, are in `tests/runs/20261017-124819/` (earlier run folders were
+`20261017-121135` and `20261017-123408`; energies were identical in every rerun). Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
 
 Cite as `08 tNN`. This is program output, the top of the evidence order. Each result holds for v25 only; older
@@ -39,7 +39,7 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t20 | `p input` with no output file writes the output to standard output. |
 | t21a | `p -np 2 input output` failed: exit status 1 and no output file. stderr was not captured, and the bundled `mpiexec` was not next to `p`, so t21b did not run. Parallel launch is still open. |
 
-## Round 2 (same run directory)
+## Round 2
 
 | Test | Result |
 |---|---|
@@ -69,6 +69,24 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t38 | `theory=DFT_n4` with `functional=LPBEVV` runs (`DFT_N4`, `LPBEVV`, E = -76.3593590628); `ridft` with `LPBEVVV` runs (E = -76.3608742262). |
 | t39 | `theory=qm_n3` with `basis=qm.in` (no `set=`): a much shorter output with no summary box: `qm file: '…/qm.in'`, `SCF: No=4,4 N=6 N1=17`, lines `it= N: E= … g= … x= …`, `converged!`, `e: -0.45857  0.32014` (HOMO and LUMO energies *(inferred)*), `gmax = …`. No `E  =` line. E = -76.2843068727 in 0.05 s. |
 | t40 | `$optimize coordinated=1,1,2,0,0` with `task=energy`: no error. Inconclusive, because with `task=energy` the `$optimize` group may not be read at all. |
+
+## Round 3
+
+| Test | Result |
+|---|---|
+| t21 | Still not run: no bundled `mpiexec` and no `mpirun` on the test machine. |
+| t40b | `$optimize coordinated=1,1,2,0,0` in a `task=optimize` run: `*** error in '$optimize' : unknown name coordinated`, exit 1. The `input.txt` spelling is a typo; the keyword is `coordinates`. |
+| t40c | `$optimize nosuchkeyword=1` in a `task=energy` run: no error, normal energy. Groups the task does not read are not checked. |
+| t41 | Planar NH3, `saddle=1`, two `$Energy` groups appended (first from t13, pyramidal geometry; then from t24, planar). `Lowest eigenvalues: -0.02919  0.18683`, identical to t25, so the **second** group was used. It was also the one matching the geometry, so "last wins" is not yet separated from "matching geometry wins". |
+| t42 | IRC with `back=1`: `n = 1, back = 1, down = 1`, distances negative, same energies as t26 (the inversion path is symmetric), final N displaced to -z instead of +z. Ends with the same `Vicinity of a Stationary Point(?) --- STOP.` and lists the points in reverse. |
+| t43 | Plain optimization from planar NH3 with the t24 Hessian appended: leaves the saddle point, `OPTIMIZATION CONVERGED in 19 steps!`, pyramidal final structure, E = -56.4988673129 (the minimum). |
+| t44 | `$thermo sigma=3 temperature=200,298.15,400`: three tables (200.000, 298.150, 400.000 K). At 298.15 K, S = 46.0277 vs 48.2109 cal/(mol·K) without `sigma` (t13): difference 2.1832 = R ln 3. H unchanged, G shifted by T·ΔS. |
+| t45 | `print=+vectors+molden`: 767 `mos>` lines with `[Molden Format]`, `[Atoms] AU`, `[5D]`, `[GTO]`, `[MO]`. The getting-started `grep`/`sed` recipe extracts them. Not opened in Molden. |
+| t46 | `theory=tddft` with `functional=PBE1`: **runs**, summary box shows `TDDFT` and `PBE1`, exit 0, but the ground state lacks the exact exchange: `Ex = -6.61029772` (vs -8.954 with `ridft`/PBE1 and -8.950 with PBE), and the state-1 total energy is -73.876 (ground state about -74.145, i.e. about 2.2 hartree above PBE). The hybrid trap is still open for TDDFT. |
+| t47 | `$molecule unit=b` with water in bohr: geometry echoed in Å as in t01, E = -76.3653914344 (t01: -76.3653913723; difference from rounding of the converted coordinates). |
+| t48 | O2 `mult=3`: 9 alpha / 7 beta, beta orbitals printed (unrestricted although the electron count is even), converged, E = -150.2228124217. |
+| t48b | O2 `mult=1`: closed shell, E = -150.1593089237, 0.0635 hartree above the triplet. |
+| t49 | `basis4.in` without `four=1`: the output ends right after `Basis set input: '…/basis4.in'` with the single line `1?`; stderr `MPI_Abort`; exit 1. |
 
 ## Cosmetic
 

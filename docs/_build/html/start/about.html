@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -447,11 +448,12 @@ values, including the undocumented ones, is in <a class="reference internal" hre
 <!-- src: 01 §5.6; 06 §3 (UO2F2 riDFT, O2 riMP2 examples); 05 §14 -->
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Hybrid functionals work only with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> or <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>, older versions silently drop
-the exact exchange and run what amounts to a pure GGA, and newer versions abort. Version 25 stops right after
-printing the basis sets, with no error message in the output. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+<p>Hybrid functionals work only with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, older versions silently drop the exact
+exchange, and newer versions, including version 25, stop right after printing the basis sets with no error message
+in the output. With <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>, version 25 still runs a hybrid without its exact exchange and gives wrong
+energies with no warning. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
 </div>
-<!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08 -->
+<!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08, t46 -->
 </section>
 <section id="what-priroda-does-not-do">
 <span id="id1"></span><h2>What Priroda does not do<a class="headerlink" href="#what-priroda-does-not-do" title="Link to this heading">¶</a></h2>
@@ -462,7 +464,7 @@ Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) p
 the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. These options are not documented.
 In version 25 tests, <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code> symmetrized the structure and <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> kept the symmetry
 during the optimization; each option alone does only half of this. See <a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and
-<a class="reference internal" href="../reference/optimize.html#optimize-sym"><span class="std std-ref">$optimize sym</span></a>.</p>
+<a class="reference internal" href="../reference/optimize.html#optimize-symmetry"><span class="std std-ref">$optimize symmetry</span></a>.</p>
 <!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15, t30a, t30b -->
 </dd>
 <dt>No continuum solvation</dt><dd><p>No version has a continuum solvent model. Solvent can only be included as explicit molecules.</p>
@@ -480,7 +482,8 @@ inferred from their test systems and not documented.</p>
 <a class="reference internal" href="../reference/nmr.html#nmr-points"><span class="std std-ref">$nmr points</span></a> instead.</p>
 <!-- src: 04 #146; input.txt -->
 </dd>
-<dt>No hybrid TDDFT</dt><dd><p>TDDFT is GGA only. A hybrid functional with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> does not give hybrid TDDFT.</p>
+<dt>No hybrid TDDFT</dt><dd><p>TDDFT is GGA only. A hybrid functional with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> does not give hybrid TDDFT: version 25 drops the exact
+exchange without a warning, and the energies are wrong. <!-- src: 08 t46 --></p>
 <!-- src: 03 §11 -->
 </dd>
 </dl>
