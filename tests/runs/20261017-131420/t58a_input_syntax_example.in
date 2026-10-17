@@ -1,10 +1,10 @@
-$system mem=128 disk=1 $end
+$system mem=512 disk=-512 path=/tmp $end
 $control
- task=hessian
+ task=optimize
  theory=dft
  basis=/home/egor/Programs/Priroda/basis.in
- print=+molden
 $end
+$optimize tol=1e-5 steps=100 $end
 $molecule
  charge=0 mult=1
  z-matrix

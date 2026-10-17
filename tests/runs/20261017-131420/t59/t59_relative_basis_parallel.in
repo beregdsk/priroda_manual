@@ -1,8 +1,8 @@
-$system mem=256 disk=1 $end
+$system mem=128 disk=1 $end
 $control
- task=nmr
- theory=ridft
- basis=/home/egor/Programs/Priroda/basis.in
+ task=energy
+ theory=dft
+ basis=basis.in
 $end
 $molecule
  charge=0 mult=1

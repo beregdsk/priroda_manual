@@ -1,9 +1,8 @@
-$system mem=256 disk=1 $end
+$system mem=256 disk=-1 $end
 $control
- task=hessian
- theory=dft
+ task=energy
+ theory=mp2
  basis=/home/egor/Programs/Priroda/basis.in
- derivative=numeric
 $end
 $molecule
  charge=0 mult=1

@@ -1,13 +1,11 @@
 Priroda 25 (2025.02.28)
 copyright (c) Dimitri N. Laikov
 
- date: Sat Oct 17 13:08:27 2026
+ date: Sat Oct 17 13:14:23 2026
 
- parallel on 2 processors
  node   0: 'arch'
- node   1: 'arch'
 
- Memory: 128m (128m)
+ Memory: 256m (256m)
  Disk:   1g '/tmp'
 
 
@@ -65,13 +63,13 @@ copyright (c) Dimitri N. Laikov
   mol   176
 
  Initial Guess (2)
- time: atomic calculations              :     0.0  [     0.0     0.0 ]  49.1%     0.0
- time: Initial Guess                    :     0.0  [     0.0     0.0 ]  63.3%     0.0
+ time: atomic calculations              :     0.0  99.4%     0.0
+ time: Initial Guess                    :     0.0  99.0%     0.0
 
  SCF
- time: One-Electron Integrals           :     0.0  [     0.0     0.0 ]  56.9%     0.0
- time: Inversion of V-Matrix            :     0.0  [     0.0     0.0 ]  99.1%     0.0
- time: Orthogonalize                    :     0.0  [     0.0     0.0 ]  98.9%     0.0
+ time: One-Electron Integrals           :     0.0  98.4%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.6%     0.0
+ time: Orthogonalize                    :     0.0  80.1%     0.0
 
   it          E            dE            g          x               t
  grid:     9076   23
@@ -87,20 +85,20 @@ copyright (c) Dimitri N. Laikov
        2                                0.00000247 0.00007414      0.0
        3                                0.00000036 0.00007588      0.0
  grid:    34000   53
-   3       -76.3653905717 -0.0000086809 0.00037949                 0.3
+   3       -76.3653905717 -0.0000086809 0.00037949                 0.2
        1                                0.00010851 0.00021906      0.0
        2                                0.00002673 0.00025750      0.0
        3                                0.00000397 0.00023493      0.0
        4                                0.00000021 0.00023186      0.1
-   4       -76.3653913723 -0.0000008006 0.00000023                 0.4
+   4       -76.3653913723 -0.0000008006 0.00000023                 0.3
  converged!
- time: Coulomb-type Integrals           :     0.0  [     0.0     0.0 ]  64.8%     0.0
- time: Grid Construction                :     0.1  [     0.0     0.0 ]  99.8%     0.0
- time: Numerical Integration            :     0.3  [     0.2     0.2 ]  99.2%     0.2
- time: Diagonalize                      :     0.0  [     0.0     0.0 ]  50.5%     0.0
- time: Matrix Multiply                  :     0.0  [     0.0     0.0 ]  69.7%     0.0
- time: Rotate                           :     0.0  [     0.0     0.0 ]  93.0%     0.0
- time: SCF Equations                    :     0.4  [     0.2     0.2 ]  99.7%     0.2
+ time: Coulomb-type Integrals           :     0.0  99.4%     0.0
+ time: Grid Construction                :     0.1  99.6%     0.1
+ time: Numerical Integration            :     0.3  99.6%     0.3
+ time: Diagonalize                      :     0.0  99.7%     0.0
+ time: Matrix Multiply                  :     0.0  99.8%     0.0
+ time: Rotate                           :     0.0  89.3%     0.0
+ time: SCF Equations                    :     0.3  99.6%     0.3
    5 F,   12 F1
 
   E  =     -76.3653913723
@@ -117,61 +115,34 @@ copyright (c) Dimitri N. Laikov
    6     0.059088    7     0.147001    8     0.617168    9     0.692056
   10     0.763451   11     0.839548   12     0.847550   13     1.165240
 
- Overlap populations:
-  atom    charge   spin p.
- O1      -0.4167  -0.00000
- H1       0.2083  -0.00000
- H2       0.2083  -0.00000
-
-   Bond orders:
-  O1    |  H1   :  1.07  H2   :  1.07
-  H1    |  O1   :  1.07
-  H2    |  O1   :  1.07
- time: bond order                       :     0.0  [     0.0     0.0 ]  88.9%     0.0
-
- Atomic partitions of the density:
-   atom    charge    spin
-   1  O   -0.2905    0.0000
-   2  H    0.1451    0.0000
-   3  H    0.1451    0.0000
-  total   10.0003    0.0000
-
 
 eng>$Energy
 eng> E=-7.6365391372338e+01
-eng> D=-2.93218292e-14  6.91692797e-13 -7.35448725e-01
+eng> D=-2.96281302e-14  6.81315681e-13 -7.35448725e-01
 eng>$end
 
 
  ============================================================
 
  Memory used =     7775 KB
- Memory used =      705 KB
-  Disk  used =    16105 KB,           908 KB written,         2234 KB read
-  Disk  used =        0 KB,             0 KB written,         2234 KB read
- Message passing statistics:
- node     sent KB   # msg    time          received      time
-    0        1807     402     0.0         570     722     0.0
-    1         570     722     0.0        1807     402     0.7
+  Disk  used =    16105 KB,           908 KB written,         2191 KB read
 
- CPU  time =    0.90 sec =  0.02 min = 0.00 hr =   98.90%
- CPU  time =    0.91 sec =  0.02 min = 0.00 hr =   99.86%
- REAL time =    0.91 sec =  0.02 min = 0.00 hr
- ratio     =  198.75%
+ CPU  time =    1.12 sec =  0.02 min = 0.00 hr =   98.24%
+ REAL time =    1.14 sec =  0.02 min = 0.00 hr
+ ratio     =   98.24%
 
- date: Sat Oct 17 13:08:28 2026
+ date: Sat Oct 17 13:14:24 2026
 
- time: Initial Guess                    :     0.0  [     0.0     0.0 ]  63.3%     0.0
- time: atomic calculations              :     0.0  [     0.0     0.0 ]  49.1%     0.0
- time: One-Electron Integrals           :     0.0  [     0.0     0.0 ]  69.2%     0.0
- time: Coulomb-type Integrals           :     0.0  [     0.0     0.0 ]  64.8%     0.0
- time: Diagonalize                      :     0.0  [     0.0     0.0 ]  50.4%     0.0
- time: Matrix Multiply                  :     0.0  [     0.0     0.0 ]  70.0%     0.0
- time: SCF Equations                    :     0.4  [     0.2     0.2 ]  99.7%     0.2
- time: Inversion of V-Matrix            :     0.0  [     0.0     0.0 ]  99.1%     0.0
- time: Orthogonalize                    :     0.0  [     0.0     0.0 ]  98.9%     0.0
- time: Grid Construction                :     0.1  [     0.0     0.0 ]  99.8%     0.0
- time: Numerical Integration            :     0.3  [     0.2     0.2 ]  99.2%     0.2
- time: Rotate                           :     0.0  [     0.0     0.0 ]  93.0%     0.0
- time: scf x                            :     0.2  [     0.1     0.1 ]  99.6%     0.1
- time: bond order                       :     0.0  [     0.0     0.0 ]  88.9%     0.0
+ time: Initial Guess                    :     0.0   0.0% 344998750710781360453042645773472222480660863843619259931769380141446210833645252044237746354729272661977346282103557595719219843000732436518206103674674330959297531278614050839512744236511367781245250496979787418326783620022272.0
+ time: atomic calculations              :     0.0   0.0% 100363249704241091960007347051512219767519883816844815549033441913972642382405744170290784350499791163731164440969308949392945369909061150645721688324198433265620427030823237861007246809183624122504431792664702619746304.0
+ time: One-Electron Integrals           :     0.0  98.5%     0.0
+ time: Coulomb-type Integrals           :     0.0  99.4%     0.0
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0  99.6%     0.0
+ time: SCF Equations                    :     0.3  99.6%     0.3
+ time: Inversion of V-Matrix            :     0.0   0.0% 707896986634783764097792834087562382381549651055026890852391337875087494987656032676331483424939538382633366481557086095406942359789060917735791845637121235220624000701745554903327938310725173248.0
+ time: Orthogonalize                    :     0.0   0.0% 2832204130262763029867961263600132581772671935051999444205568.0
+ time: Grid Construction                :     0.1  99.6%     0.1
+ time: Numerical Integration            :     0.3  99.6%     0.3
+ time: Rotate                           :     0.0  89.3%     0.0
+ time: scf x                            :     0.2  99.6%     0.2

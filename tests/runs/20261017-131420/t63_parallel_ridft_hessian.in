@@ -4,7 +4,6 @@ $control
  theory=ridft
  basis=/home/egor/Programs/Priroda/basis.in
 $end
-$d2edr2 displace=1 steps=5,9 $end
 $molecule
  charge=0 mult=1
  cartesian

@@ -1,10 +1,9 @@
-$system mem=256 disk=1 $end
+$system mem=2 disk=1 $end
 $control
- task=nmr
+ task=energy
  theory=dft
  basis=/home/egor/Programs/Priroda/basis.in
 $end
-$nmr standard(1)=31.0 standard(8)=300.0 $end
 $molecule
  charge=0 mult=1
  cartesian

@@ -1,0 +1,32 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 13:14:29 2026
+
+ node   0: 'arch'
+
+ Memory: 2m (2m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 3 atoms, 10 electrons
+
+ Atomic Coordinates:
+   8     0.00000000   0.00000000   0.11730000
+   1     0.00000000   0.75720000  -0.46920000
+   1     0.00000000  -0.75720000  -0.46920000
+ #
+  formula: H2O
+  internuclear distances:
+  O1    |  H1   : 0.95778  H2   : 0.95778
+  H1    |  O1   : 0.95778
+  H2    |  O1   : 0.95778
+     largest =    1.51440
+
+ atom   8 core =  1
+ at.d.=0
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+
+ need 12544 + 7905408 = 7917952 bytes.
