@@ -287,6 +287,65 @@ seconds.
 | t75c | `t75c_h2o_read_excited.in` | Read the t75b vectors with no reordering: does the run stay in the excited state? | `vectors from 'h2ox.vec'`; E = t75b or t75a | common-problems (restarting from wrong vectors) |  t75b had saved ground-state vectors, so this; converged at once, E = t75a. |
 | t75d | `t75d_h2o_read_excited_swap_back.in` | Read the t75b vectors and swap 5 and 6 back: does that return to the ground state? Also shows whether `na`/`nb` act on vectors read from a file | E = t75a?; HOMO below LUMO | common-problems (the fix); `guess.na` with `read=1` |  Swap applied to the read vectors (`11 F, 35 F1`), back to the ground state, E = t75a. |
 
+## Round 13 (not run yet)
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t76 t77
+```
+
+t76 tries to reproduce the crash with `process 0 got signal 6` and `too few` at the end of the `INTERNAL COORDINATES`
+table, which one forum thread reported for an optimization, and its suggested fix `cartesian=1`. The usual trigger for
+"too few" internal coordinates is a molecule that is or becomes linear *(inferred)*. t77 tests the IRC step-size advice
+on a hydrogen shift (HCN ⇄ HNC): t77a–c find the transition state and its Hessian, t77d–h run IRCs with three step sizes.
+t77c–h take the geometry from t77b through the new `@MOL_FROM_tNN@` placeholder (the last `MOL`-prefixed `$molecule`
+group of that output), so run t77 as a whole. All runs are small; t77f and t77g may take several minutes.
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t76a | `t76a_co2_bent_internal.in` | CO2 started 10° bent, default internal coordinates: does it crash (`signal 6`, `too few`) when it straightens? | End of output; last `INTERNAL COORDINATES` table; `OPTIMIZATION CONVERGED`? | common-problems (signal 6) | |
+| t76b | `t76b_co2_bent_cartesian.in` | The same with `cartesian=1` | Converges to linear CO2? | common-problems (signal 6); `optimize.cartesian` | |
+| t76c | `t76c_c2h2_bent_internal.in` | Acetylene started trans-bent, internal coordinates | As t76a | common-problems | |
+| t76d | `t76d_c2h2_bent_cartesian.in` | The same with `cartesian=1` | As t76b | common-problems | |
+| t76e | `t76e_c2h2_linear_internal.in` | Acetylene already linear (bond lengths off), internal coordinates | As t76a; how are linear angles handled? | common-problems | |
+| t77a | `t77a_hcn_ts_guess_hessian.in` | Hessian at a guessed HCN ⇄ HNC transition state | One imaginary frequency? | (input for t77b) | |
+| t77b | `t77b_hcn_saddle.in` | Saddle search (`saddle=1`) from the guess with the t77a Hessian | Converged; final geometry (H bridging C and N) | (input for t77c–h) | |
+| t77c | `t77c_hcn_ts_hessian.in` | Hessian at the found TS | Exactly one imaginary frequency (H moving between C and N) | common-problems (IRC) | |
+| t77d | `t77d_hcn_irc_rdefault_back0.in` | IRC, default `radius` (0.1), `points=30`, one direction | Number of points; does it reach HCN or HNC; `Vicinity of a Stationary Point(?) --- STOP.` early (on the first steps)? | common-problems (IRC stops early); `optimize.radius` | |
+| t77e | `t77e_hcn_irc_rdefault_back1.in` | The same, other direction (`back=1`) | As t77d; the other minimum | `optimize.back` | |
+| t77f | `t77f_hcn_irc_r003_back0.in` | `radius=0.03`, `points=100` | Does the smaller step avoid an early stop, if t77d/e had one? Same end point? | common-problems (IRC step size) | |
+| t77g | `t77g_hcn_irc_r003_back1.in` | The same, `back=1` | As t77f | common-problems | |
+| t77h | `t77h_hcn_irc_r03_back0.in` | `radius=0.3` (larger step) | Early stop or overshoot? | common-problems | |
+
+## Slurm (not run yet)
+
+For the "Batch systems" section of running.md. The scripts in `tests/slurm/` install a single-node Slurm on an
+Ubuntu or Debian PC (the PC is both controller and compute node) and submit the manual's job script with small jobs.
+They were checked here on a real Slurm 23.11 with stand-in programs, not with Priroda.
+
+```bash
+cd tests/slurm
+sudo ./setup_slurm.sh              # once: installs slurm-wlm and munge, writes /etc/slurm/slurm.conf; sinfo shows "idle"
+PRIRODA=/path/to/p MPIEXEC=/path/to/mpiexec BASIS=/abs/path/to/basis.in ./run_slurm.sh     # about 10-15 minutes
+sudo ./setup_slurm.sh remove       # afterwards, if you do not want to keep Slurm
+```
+
+`manual.sbatch` is the script from running.md, with only its three site-specific paths (`PRIRODA`, `MPIEXEC`, the
+scratch base) taken from the environment; `manual_trap.sbatch` moves the scratch clean-up into a trap. Jobs use 2
+processes (`NP=` to change) and `/tmp/priroda-slurm/<job id>` as the node-local scratch (`SCRATCH_BASE=` to change).
+Outputs go to `runs/slurm-<date>/<test>/`; `status.txt` summarizes each job's final state and any scratch left behind.
+
+| ID | Script | Question | What to look at | Where it is used | Result |
+|---|---|---|---|---|---|
+| s01 | `manual.sbatch`, water | Does the manual's script work: `$SLURM_NTASKS` reaches `mpiexec`, scratch in the job's `TMPDIR`, removed at the end? | `s01/mol.out`: process lines (2), `Disk:` echo, E = t01; status: scratch removed | running.md (SLURM script) | |
+| s02 | `manual.sbatch`, Cu complex, `scancel` after 60 s | What does a cancelled run print, and is its scratch left behind? (The `rm` at the end of the script cannot run.) | Tail of `mol.out` (`signal 15`?); `slurm-<id>.out`; `scratch_left.txt` | running.md; common-problems (signal 15) | |
+| s03 | `manual_trap.sbatch`, same | Does the trap remove the scratch after `scancel`? | status: scratch removed | running.md (suggested script) | |
+| s04 | `manual.sbatch`, Cu complex, `--time=1` | What happens at the time limit? | Tail of `mol.out`; `DUE TO TIME LIMIT` in `slurm-<id>.out`; scratch left? | running.md | |
+| s05 | `manual.sbatch`, two water jobs with `--ntasks=1` | Do two Priroda jobs run side by side on one node, each with its own scratch? | `s05_queue.txt` (both `R`); both E = t01; both scratch removed | running.md (several independent jobs) | |
+
+PBS/Torque is not tested: it is hard to install on one PC. Its script in running.md differs only in the header lines
+and in reading the number of cores from `$PBS_NODEFILE`.
+
 ## Windows (not run yet)
 
 These need a Windows computer with the files from the `exe64/` folder of the official site: `p1.exe` and
@@ -336,6 +395,6 @@ program's folder (where Cygwin without an installation puts `/tmp` *(inferred)*)
 
 ## Still not covered
 
-Batch-system scripts, `$d2edr2` numerical
+PBS/Torque scripts, `$d2edr2` numerical
 Hessians and the split `num>` workflow, and the remaining undocumented tasks (`extremal`, `transit`, `saddle`, `path`,
 `conical`, `anharmonic`, `opt_n1`, `thermostat`, `uniq`), which need two-geometry inputs or long runs.

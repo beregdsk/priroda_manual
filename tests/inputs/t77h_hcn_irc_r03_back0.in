@@ -1,0 +1,9 @@
+$system mem=256 disk=1 $end
+$control
+ task=irc
+ theory=dft
+ basis=@BASIS@
+$end
+$optimize points=30 back=0 radius=0.3 $end
+@MOL_FROM_t77b@
+@ENERGY_FROM_t77c@

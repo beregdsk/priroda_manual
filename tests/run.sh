@@ -8,6 +8,8 @@
 #   MPIEXEC=/path/to/mpiexec     enables t21b (bundled mpiexec); mpirun on PATH enables t21c
 #   NP=N with MPIEXEC=…          run the tests on N processes, e.g. NP=8 MPIEXEC=/path/to/mpiexec
 #   TIMEOUT=seconds              time limit per run (default 3600; 0 = no limit), e.g. TIMEOUT=0 LONG=1 ./run.sh t72
+# Placeholders: @BASIS@, @THEORY@, @ENERGY_FROM_tNN@ (last $Energy group of tNN), @NUM_FROM_tNN@ (its num lines),
+# @MOL_FROM_tNN@ (its last optimized geometry); the tNN run must be in the same run.
 # Outputs go to runs/<date>/: <name>.out, plus <name>.err when the program wrote to stderr.
 # Exit statuses are collected in runs/<date>/status.txt.
 set -u
@@ -27,6 +29,8 @@ prep() {
 }
 # last_energy <output>: the last $Energy group from eng-prefixed lines, prefix stripped
 last_energy() { sed -n 's/^eng>//p' "$1" | awk '/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'; }
+# last_mol <output>: the last optimized $molecule group from MOL-prefixed lines, prefix stripped, without the Energy line
+last_mol() { sed -n 's/^MOL>//p' "$1" | awk '/^\$molecule/{buf=""} !/Energy =/{buf=buf $0 "\n"} END{printf "%s", buf}'; }
 # run <name> [command prefix...]: run <name>.in in $out, keep stderr, record the exit status
 run() {
   local name=$1; shift
@@ -96,7 +100,8 @@ for f in "$here"/inputs/t*.in; do
       # Inputs with @ENERGY_FROM_tNN@ lines get the last $Energy group of test tNN's output (same run) in its place.
       need=$(grep -o '@ENERGY_FROM_t[0-9a-z]*@' "$f" | sort -u | sed 's/@ENERGY_FROM_\(.*\)@/\1/')
       neednum=$(grep -o '@NUM_FROM_t[0-9a-z]*@' "$f" | sed 's/@NUM_FROM_\(.*\)@/\1/')
-      if [ -z "$need$neednum" ]; then prep "$name" "" "$name"; run "$name"; continue; fi
+      needmol=$(grep -o '@MOL_FROM_t[0-9a-z]*@' "$f" | sed 's/@MOL_FROM_\(.*\)@/\1/')
+      if [ -z "$need$neednum$needmol" ]; then prep "$name" "" "$name"; run "$name"; continue; fi
       prep "$name" "" "$name"; ok=1
       for src in $need; do
         srcout=$(ls "$out"/${src}_*.out 2>/dev/null | head -1)
@@ -113,6 +118,15 @@ for f in "$here"/inputs/t*.in; do
         sed -n 's/^num>//p' "$srcout" > "$out/num.tmp"
         sed -i -e "/@NUM_FROM_$src@/r $out/num.tmp" -e "/@NUM_FROM_$src@/d" "$out/$name.in"
         rm -f "$out/num.tmp"
+      done
+      # @MOL_FROM_tNN@ lines get the last optimized geometry (MOL-prefixed $molecule group) of test tNN's output.
+      for src in $needmol; do
+        [ $ok = 1 ] || break
+        srcout=$(ls "$out"/${src}_*.out 2>/dev/null | head -1)
+        if [ -z "$srcout" ] || ! grep -q '^MOL>' "$srcout"; then skip "$name" "needs an optimized geometry from $src in the same run"; ok=0; break; fi
+        last_mol "$srcout" > "$out/mol.tmp"
+        sed -i -e "/@MOL_FROM_$src@/r $out/mol.tmp" -e "/@MOL_FROM_$src@/d" "$out/$name.in"
+        rm -f "$out/mol.tmp"
       done
       [ $ok = 1 ] && run "$name" ;;
   esac

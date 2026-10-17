@@ -589,9 +589,10 @@ version.</p>
 </div>
 <!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.3 -->
 <p>Version numbers missing from the table (3, 12, 18–22, 24) do not appear in any source. The Russian file <code class="docutils literal notranslate"><span class="pre">Dft_ansi.txt</span></code>
-describes Priroda’s predecessor, which used different group names (<code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$SCF</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>, <code class="docutils literal notranslate"><span class="pre">$force</span></code>).
-Those names are not part of the current keyword list.</p>
-<!-- src: 00 (Dft_ansi.txt) --> <!-- verify -->
+describes Priroda’s predecessor, whose input had the groups <code class="docutils literal notranslate"><span class="pre">$control</span></code>, <code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$basis</span></code>, <code class="docutils literal notranslate"><span class="pre">$auxiliary</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$guess</span></code>, <code class="docutils literal notranslate"><span class="pre">$SCF</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>, <code class="docutils literal notranslate"><span class="pre">$force</span></code> and <code class="docutils literal notranslate"><span class="pre">$hessian</span></code>. Version 25 reads none of <code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$auxiliary</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$force</span></code> and <code class="docutils literal notranslate"><span class="pre">$hessian</span></code>; the geometry now goes in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>, and optimization settings in <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>.</p>
+<!-- src: 00 (Dft_ansi.txt); 09 (group list of the v25 executable) -->
 </section>
 <section id="how-to-cite">
 <span id="id2"></span><h2>How to cite<a class="headerlink" href="#how-to-cite" title="Link to this heading">¶</a></h2>
@@ -626,10 +627,9 @@ application to complex chemical problems”. PhD dissertation, Moscow State Univ
 with Gaussian basis sets. DFT2000 Conference, Menton, France, 2000. <!-- src: 06 §11 --></p></li>
 </ul>
 <p>Semiempirical QM model (<code class="docutils literal notranslate"><span class="pre">theory=qm_n*</span></code>):</p>
-<ul>
-<li><p>D. N. Laikov. <em>J. Chem. Phys.</em> <strong>135</strong> (2011) 134120. <!-- src: 01 §9 (from the literature, not from the site) --></p>
-<!-- verify -->
-</li>
+<ul class="simple">
+<li><p>D. N. Laikov. A new parametrizable model of molecular electronic structure. <em>J. Chem. Phys.</em> <strong>135</strong> (2011) 134120,
+doi:10.1063/1.3646498. <!-- src: 01 §9 (from the literature, not from the site); title and DOI checked on PubMed 21992295 --></p></li>
 </ul>
 <p>For version 6, users cited the program itself as “D. N. Laikov, PRIRODA, Electronic Structure Code, Version 6, 2006”.
 A 2014 forum suggestion adds Laikov’s home page, <a class="reference external" href="http://rad.chem.msu.ru/~laikov/">http://rad.chem.msu.ru/~laikov/</a>, as the reference for the current

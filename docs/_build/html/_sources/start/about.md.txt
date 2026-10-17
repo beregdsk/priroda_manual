@@ -200,9 +200,10 @@ version.
 <!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.3 -->
 
 Version numbers missing from the table (3, 12, 18–22, 24) do not appear in any source. The Russian file `Dft_ansi.txt`
-describes Priroda's predecessor, which used different group names (`$coordinates`, `$SCF`, `$search`, `$force`).
-Those names are not part of the current keyword list.
-<!-- src: 00 (Dft_ansi.txt) --> <!-- verify -->
+describes Priroda's predecessor, whose input had the groups `$control`, `$coordinates`, `$basis`, `$auxiliary`,
+`$guess`, `$SCF`, `$search`, `$force` and `$hessian`. Version 25 reads none of `$coordinates`, `$auxiliary`, `$search`,
+`$force` and `$hessian`; the geometry now goes in `$molecule`, and optimization settings in `$optimize`.
+<!-- src: 00 (Dft_ansi.txt); 09 (group list of the v25 executable) -->
 
 (how-to-cite)=
 ## How to cite
@@ -239,8 +240,8 @@ Scalar-relativistic DFT (`four=1`):
 
 Semiempirical QM model (`theory=qm_n*`):
 
-- D. N. Laikov. *J. Chem. Phys.* **135** (2011) 134120. <!-- src: 01 §9 (from the literature, not from the site) -->
-  <!-- verify -->
+- D. N. Laikov. A new parametrizable model of molecular electronic structure. *J. Chem. Phys.* **135** (2011) 134120,
+  doi:10.1063/1.3646498. <!-- src: 01 §9 (from the literature, not from the site); title and DOI checked on PubMed 21992295 -->
 
 For version 6, users cited the program itself as "D. N. Laikov, PRIRODA, Electronic Structure Code, Version 6, 2006".
 A 2014 forum suggestion adds Laikov's home page, <http://rad.chem.msu.ru/~laikov/>, as the reference for the current

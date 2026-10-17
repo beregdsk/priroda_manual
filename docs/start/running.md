@@ -388,7 +388,7 @@ $HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpie
 rm -rf "$TMPDIR"
 ```
 
-<!-- verify -->
+<!-- verify: tests/slurm s01-s05 -->
 
 Under PBS/Torque the same steps read the number of cores from `$PBS_NODEFILE`. PBS often provides a per-job local
 scratch directory and deletes it after the job.
@@ -409,7 +409,7 @@ $HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
 rm -rf "$TMPDIR"
 ```
 
-<!-- verify -->
+<!-- verify: PBS not testable on one PC; same steps as the tested SLURM script -->
 
 If `/tmp` on the node is small or has a quota, a large job dies writing a scratch file, for example
 `0: write file /tmp/tmp9633.11 (leAX): ...`. Point the scratch at the cluster's scratch file system or at RAM.

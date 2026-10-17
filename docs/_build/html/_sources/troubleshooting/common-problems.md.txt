@@ -389,7 +389,7 @@ $optimize cartesian=1 $end
 ```
 
 This was the answer from one experienced user; the asker did not report back.
-<!-- src: 04 #517, #518 (Jul 2026) --> <!-- verify -->
+<!-- src: 04 #517, #518 (Jul 2026) --> <!-- verify: tests t76a-e -->
 
 ### The optimization "converges" in one step
 
@@ -444,7 +444,7 @@ step size; see {ref}`radius <optimize.radius>`:
 - on a very narrow barrier, such as a proton transfer, decrease it, because a step suited to heavy atoms throws the
   proton too far.
 
-This advice comes from one experienced user. <!-- src: 04 #295, #298 --> <!-- verify -->
+This advice comes from one experienced user. <!-- src: 04 #295, #298 --> <!-- verify: tests t77d-h -->
 
 ### IRC ends near a minimum but not in it
 
