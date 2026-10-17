@@ -6,6 +6,7 @@
 #   BASIS4=/path/to/basis4.in    enables t35 (four=1)
 #   QMBASIS=/path/to/qm.in       enables t39 and the *_qm_n3 tests (theory=qm_n3)
 #   MPIEXEC=/path/to/mpiexec     enables t21b (bundled mpiexec); mpirun on PATH enables t21c
+#   NP=N with MPIEXEC=…          run the tests on N processes, e.g. NP=8 MPIEXEC=/path/to/mpiexec
 #   TIMEOUT=seconds              time limit per run (default 3600; 0 = no limit), e.g. TIMEOUT=0 LONG=1 ./run.sh t72
 # Outputs go to runs/<date>/: <name>.out, plus <name>.err when the program wrote to stderr.
 # Exit statuses are collected in runs/<date>/status.txt.
@@ -29,6 +30,11 @@ last_energy() { sed -n 's/^eng>//p' "$1" | awk '/\$Energy/{buf=""} {buf=buf $0 "
 # run <name> [command prefix...]: run <name>.in in $out, keep stderr, record the exit status
 run() {
   local name=$1; shift
+  # NP=N with MPIEXEC set: run tests that are otherwise serial on N processes
+  if [ $# -eq 0 ] && [ "${NP:-1}" -gt 1 ]; then
+    : "${MPIEXEC:?NP needs MPIEXEC (the mpiexec from the official site)}"
+    set -- "$MPIEXEC" -np "$NP"
+  fi
   (cd "$out" && timeout "${TIMEOUT:-3600}" "$@" "$PRIRODA" "$name.in" "$name.out" 2> "$name.err"; echo "$name exit=$?" >> status.txt)
   [ -s "$out/$name.err" ] || rm -f "$out/$name.err"
 }
