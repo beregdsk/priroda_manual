@@ -326,7 +326,7 @@ molecules the closed-shell energy is not a meaningful singlet energy: use an unr
 
 In the first case, without degenerate orbitals, start from other vectors (`$guess read=1` with vectors of a related
 calculation) or reorder the starting orbitals with {ref}`na <guess.na>` and {ref}`nb <guess.nb>`.
-<!-- verify: not tested on a molecule without degenerate orbitals -->
+<!-- verify: tests t75a-d (water, excited closed shell) -->
 
 ### Heavy elements
 

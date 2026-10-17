@@ -85,6 +85,11 @@ for f in "$here"/inputs/t*.in; do
       if [ ! -e "$out/o2t_triplet.vec" ]; then skip "$name" "needs t74a in the same run (no o2t.vec)"; continue; fi
       cp "$out/o2t_triplet.vec" "$out/o2t.vec"
       prep "$name" "" "$name"; run "$name" ;;
+    t75c_*|t75d_*)  # need the excited-state vectors saved by t75b; each run starts from a fresh copy of them
+      [ -e "$out/h2ox_excited.vec" ] || { [ -e "$out/h2ox.vec" ] && cp "$out/h2ox.vec" "$out/h2ox_excited.vec"; }
+      if [ ! -e "$out/h2ox_excited.vec" ]; then skip "$name" "needs t75b in the same run (no h2ox.vec)"; continue; fi
+      cp "$out/h2ox_excited.vec" "$out/h2ox.vec"
+      prep "$name" "" "$name"; run "$name" ;;
     t35_*|t49_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     t39_*) if [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     *)
@@ -135,5 +140,5 @@ if selected t21 "$@"; then  # parallel launch forms, 2 processes
   else skip t21c "no mpirun on PATH"; fi
 fi
 
-rm -f "$out"/t27.vec "$out"/o2t.vec "$out"/o2t_triplet.vec
+rm -f "$out"/t27.vec "$out"/o2t.vec "$out"/o2t_triplet.vec "$out"/h2ox.vec "$out"/h2ox_excited.vec
 echo "Outputs in $out"; cat "$out/status.txt"

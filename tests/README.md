@@ -268,6 +268,25 @@ rerun only because they share the prefix; they are quick.)
 | t74d | `t74d_o2_singlet_restricted_from_triplet.in` | Singlet O2 from the triplet vectors, but **restricted** (`restrict=1`). Same energy as t74c (-150.2075772) → t74c is the closed-shell singlet; higher → t74c is broken-symmetry | `converged!`; E; HOMO/LUMO order | common-problems (open-shell singlets) | E = -150.1593099 = t48b, 0.048 above t74c: **t74c is broken-symmetry**. LUMO below HOMO again. |
 | t74e | `t74e_o2_singlet_swapped_guess.in` | Default singlet run (like t48b) with orbitals 8 and 9 swapped in the starting guess (`na(8)=9,8 nb(8)=9,8`): does that avoid the LUMO-below-HOMO state of t48b? | E (t48b: -150.1593089; t74c: -150.2075772); HOMO below LUMO | common-problems (LUMO below the HOMO) | Same state and energy as t48b. For O2 the swap gives a symmetry-equivalent state: the closed-shell singlet has no solution with the LUMO above the HOMO. |
 
+## Round 12 (not run yet)
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t75
+```
+
+Water has no degenerate orbitals, and its HOMO (1b1) and LUMO (4a1) differ in symmetry, so a closed-shell state
+with the pair moved from the HOMO to the LUMO should be a stable SCF solution that the program can get stuck in.
+t75b makes that state on purpose; t75c and t75d start from its vectors (each from a fresh copy). All four runs take
+seconds.
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t75a | `t75a_h2o_ground.in` | Ground-state reference | E; HOMO (5) and LUMO (6) energies | common-problems (LUMO below the HOMO) | |
+| t75b | `t75b_h2o_excited_swap.in` | Start with orbitals 5 and 6 swapped (`na(5)=6,5 nb(5)=6,5`): does the SCF stay in the excited configuration, and does it then show the LUMO below the HOMO? Saves the vectors | `converged!`; E above t75a?; occupied 5 above virtual 6? | `guess.na`, `guess.nb`; common-problems | |
+| t75c | `t75c_h2o_read_excited.in` | Read the t75b vectors with no reordering: does the run stay in the excited state? | `vectors from 'h2ox.vec'`; E = t75b or t75a | common-problems (restarting from wrong vectors) | |
+| t75d | `t75d_h2o_read_excited_swap_back.in` | Read the t75b vectors and swap 5 and 6 back: does that return to the ground state? Also shows whether `na`/`nb` act on vectors read from a file | E = t75a?; HOMO below LUMO | common-problems (the fix); `guess.na` with `read=1` | |
+
 ## Still not covered
 
 The Windows build (PLAN 3a.15), batch-system scripts, `$d2edr2` numerical
