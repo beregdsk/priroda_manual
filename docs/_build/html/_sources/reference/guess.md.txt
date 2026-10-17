@@ -86,7 +86,7 @@ Reordering of the starting vectors for beta spin.
 **Type:** switch\
 **Default:** `0`\
 **Status:** undocumented · not verified\
-**Sources:** input.txt (annotation corrupted); 03 #0, §7; 06 §3; 08 t60, t73
+**Sources:** input.txt (annotation corrupted); 03 #0, §7; 06 §3; 08 t60, t73, t74
 
 Breaks the equivalence of the alpha and beta electrons in the highest occupied orbital. It is meant for
 open-shell singlets (for example singlet biradicals) and is only sensible with `$scf restrict=0`.
@@ -103,7 +103,8 @@ open-shell singlets (for example singlet biradicals) and is only sensible with `
 Users report that with non-RI DFT, `mix=1` can converge back to the restricted solution (same energy as
 RKS). RI-DFT, or a hybrid, broke the symmetry in the reported cases. In version 25, `mix=1` with
 `restrict=0` returned to the restricted solution for singlet O2 (PBE and RI-PBE1) and for Cr2 (PBE, default
-and BFGS procedures): no broken-symmetry solution was found in any test.
+and BFGS procedures): no broken-symmetry solution was found in any test. Starting the singlet from saved
+triplet vectors (`read=1`) did reach a lower singlet solution for O2.
 ```
 
 **See also:** {ref}`restrict ($scf) <scf.restrict>`

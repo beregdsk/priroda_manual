@@ -1545,7 +1545,9 @@ PBE/L1 optimization with version 10 took 81.5, 42.5, 29.8 and 29.3 s on 1\texten
 \item {} 
 \sphinxAtStartPar
 \sphinxstylestrong{Parallel results equal serial ones.} In version 25 tests on 2 processes, a water energy and a numerical
-\sphinxcode{\sphinxupquote{ridft}} Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s.
+\sphinxcode{\sphinxupquote{ridft}} Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s. An optimization plus
+analytic Hessian of a 22\sphinxhyphen{}atom copper complex (OLYP/L2, fine grid) took 32 min on 8 processes of one node; on one
+process it had not finished after an hour.
 
 
 
@@ -1690,6 +1692,14 @@ If \sphinxcode{\sphinxupquote{/tmp}} on the node is small or has a quota, a larg
 inputs submitted through them had to omit \sphinxcode{\sphinxupquote{\$system}}. Forum posts and old FAQs that mention these commands refer to
 that site only.
 \end{sphinxadmonition}
+
+
+
+\sphinxAtStartPar
+A run stopped from outside, by the batch system’s time limit, \sphinxcode{\sphinxupquote{scancel}} or \sphinxcode{\sphinxupquote{kill}}, ends its output with
+\sphinxcode{\sphinxupquote{process 0 got signal 15}} (SIGTERM) and no further message. Give long jobs enough wall time: in a version 25 test,
+the analytic Hessian of a 22\sphinxhyphen{}atom copper complex with L2 basis and a fine grid did not finish within an hour on one
+core, after a 6\sphinxhyphen{}step optimization that had taken most of that hour.
 
 
 
@@ -2608,7 +2618,7 @@ sed\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}s/\PYGZca{}freq\PYGZgt{
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-Open \sphinxcode{\sphinxupquote{nh3.freq}} in Molden to animate the normal modes.  
+Open \sphinxcode{\sphinxupquote{nh3.freq}} in Molden to animate the normal modes. 
 
 \sphinxAtStartPar
 \sphinxstylestrong{Orbitals.} Add \sphinxcode{\sphinxupquote{print=+vectors+molden}} to \sphinxcode{\sphinxupquote{\$control}}. The orbitals then appear on \sphinxcode{\sphinxupquote{mos\textgreater{}}} lines:
@@ -4503,7 +4513,7 @@ Reordering of the starting vectors for beta spin.
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0}}\\
 \sphinxstylestrong{Status:} undocumented · not verified\\
-\sphinxstylestrong{Sources:} input.txt (annotation corrupted); 03 \#0, \S{}7; 06 \S{}3
+\sphinxstylestrong{Sources:} input.txt (annotation corrupted); 03 \#0, \S{}7; 06 \S{}3; 08 t60, t73, t74
 
 \sphinxAtStartPar
 Breaks the equivalence of the alpha and beta electrons in the highest occupied orbital. It is meant for
@@ -4546,7 +4556,10 @@ Mix the HOMO and LUMO to break alpha/beta equivalence.
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 Users report that with non\sphinxhyphen{}RI DFT, \sphinxcode{\sphinxupquote{mix=1}} can converge back to the restricted solution (same energy as
-RKS). RI\sphinxhyphen{}DFT, or a hybrid, broke the symmetry in the reported cases.
+RKS). RI\sphinxhyphen{}DFT, or a hybrid, broke the symmetry in the reported cases. In version 25, \sphinxcode{\sphinxupquote{mix=1}} with
+\sphinxcode{\sphinxupquote{restrict=0}} returned to the restricted solution for singlet O2 (PBE and RI\sphinxhyphen{}PBE1) and for Cr2 (PBE, default
+and BFGS procedures): no broken\sphinxhyphen{}symmetry solution was found in any test. Starting the singlet from saved
+triplet vectors (\sphinxcode{\sphinxupquote{read=1}}) did reach a lower singlet solution for O2.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -6564,7 +6577,9 @@ Repeat until the SCF converges.
 
 \sphinxAtStartPar
 In version 25 the output of a restarted run shows \sphinxcode{\sphinxupquote{Initial Guess (\sphinxhyphen{}1)}} and \sphinxcode{\sphinxupquote{vectors from \textquotesingle{}job.vec\textquotesingle{}}}; a normal start
-shows \sphinxcode{\sphinxupquote{Initial Guess (2)}}.
+shows \sphinxcode{\sphinxupquote{Initial Guess (2)}}. Each restart continues from where the previous run stopped, and goes straight to the
+final grid instead of starting again on the coarse one. In a test on a 22\sphinxhyphen{}atom copper complex with 3 iterations per
+run, the loop converged in the fourth run, after about 12 iterations in all.
 
 
 
@@ -6620,6 +6635,15 @@ diverged, with the total energy reaching +29 hartree. BLYP behaved the same way.
 
 
 
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+The same input converges in version 25: with the original BFGS settings in 48 iterations, and with the default
+Newton\textendash{}Raphson procedure in 10 iterations and about half the time. The fine\sphinxhyphen{}grid divergence was a problem of the
+2015 build. If you meet it in a current version, the fixes below are still the ones to try.
+\end{sphinxadmonition}
+
+
+
 \sphinxAtStartPar
 \sphinxstylestrong{Fixes.} Two experienced users solved it in two ways, which they considered equivalent:
 \begin{itemize}
@@ -6633,7 +6657,9 @@ Run \sphinxcode{\sphinxupquote{task=optimize+hessian}} instead of a single\sphin
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-Each optimization step then starts from the previous wavefunction.  
+Each optimization step then starts from the previous wavefunction. In version 25 this route converged the
+optimization of the complex in 6 steps, with every SCF converging, and the SCF of the Hessian step converged on
+the fine grid as well. 
 
 \item {} 
 \sphinxAtStartPar
@@ -6666,10 +6692,19 @@ often do not break symmetry, and suggests a hybrid (with \sphinxcode{\sphinxupqu
 
 
 \sphinxAtStartPar
-In a version 25 test on singlet O2, \sphinxcode{\sphinxupquote{restrict=0 mix=1}} converged back to the restricted solution with both
-\sphinxcode{\sphinxupquote{theory=dft}} (PBE) and \sphinxcode{\sphinxupquote{theory=ridft}} (PBE1): alpha and beta orbital energies were identical, and the PBE energy
-equalled the closed\sphinxhyphen{}shell one. So \sphinxcode{\sphinxupquote{mix=1}} alone does not guarantee a broken\sphinxhyphen{}symmetry solution; compare the alpha and
-beta orbital energies in the output.
+In version 25 tests, \sphinxcode{\sphinxupquote{restrict=0 mix=1}} converged back to the restricted solution for singlet O2, with both
+\sphinxcode{\sphinxupquote{theory=dft}} (PBE) and \sphinxcode{\sphinxupquote{theory=ridft}} (PBE1), and for the Cr2 dimer with both the default and the \sphinxcode{\sphinxupquote{bfgs}} procedure:
+the energies equalled the closed\sphinxhyphen{}shell ones exactly. So \sphinxcode{\sphinxupquote{mix=1}} alone does not give a broken\sphinxhyphen{}symmetry solution.
+
+
+
+\sphinxAtStartPar
+What worked better was to start the singlet from the vectors of the triplet: run the triplet with
+{\hyperref[\detokenize{reference/control:control-save}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{save}}}}}, then the singlet with \sphinxcode{\sphinxupquote{restrict=0}} and \sphinxcode{\sphinxupquote{\$guess read=1}} (the program accepts vectors of
+another multiplicity). For O2 this gave a singlet 0.048 hartree below the closed\sphinxhyphen{}shell one, but the SCF converged
+very slowly: give it plenty of {\hyperref[\detokenize{reference/scf:scf-iterations}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{iterations}}}}}. To tell the solutions apart, compare the energy
+with the closed\sphinxhyphen{}shell one and look at the spin populations (\sphinxcode{\sphinxupquote{print=+charges}}); identical lists of alpha and beta
+orbital energies prove nothing when the open\sphinxhyphen{}shell orbitals are degenerate, as in O2.
 
 
 

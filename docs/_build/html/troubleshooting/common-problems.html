@@ -459,10 +459,12 @@ $scf iterations=10 $end
 $guess read=1 $end
 </pre></div>
 </div>
-<!-- src: 08 t27 (save and guess read=1 work in v25) --> <!-- verify: whole restart loop on a hard case -->
+<!-- src: 08 t27, t71b -->
 <p>In version 25 the output of a restarted run shows <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(-1)</span></code> and <code class="docutils literal notranslate"><span class="pre">vectors</span> <span class="pre">from</span> <span class="pre">'job.vec'</span></code>; a normal start
-shows <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(2)</span></code>.</p>
-<!-- src: 08 t27 -->
+shows <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(2)</span></code>. Each restart continues from where the previous run stopped, and goes straight to the
+final grid instead of starting again on the coarse one. In a test on a 22-atom copper complex with 3 iterations per
+run, the loop converged in the fourth run, after about 12 iterations in all.</p>
+<!-- src: 08 t27, t71b -->
 <p>Leave out the <code class="docutils literal notranslate"><span class="pre">$guess</span></code> line in the first run. Vectors from a converged run of an easier case, or of the same molecule
 at another geometry, also work as a starting point.</p>
 <!-- src: 03 §7 (sanya, amg agreed) -->
@@ -538,10 +540,15 @@ often do not break symmetry, and suggests a hybrid (with <code class="docutils l
 <!-- src: 03 §7 (Evgeniy Feb 2011; qadir) -->
 <p>In version 25 tests, <code class="docutils literal notranslate"><span class="pre">restrict=0</span> <span class="pre">mix=1</span></code> converged back to the restricted solution for singlet O2, with both
 <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> (PBE) and <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> (PBE1), and for the Cr2 dimer with both the default and the <code class="docutils literal notranslate"><span class="pre">bfgs</span></code> procedure:
-alpha and beta orbital energies were identical, and the energies equalled the closed-shell ones. So <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> alone
-does not give a broken-symmetry solution; compare the alpha and beta orbital energies in the output, and start from
-vectors of a broken-symmetry calculation (for example of the triplet) with <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> instead.</p>
-<!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) --> <!-- verify: triplet vectors as a broken-symmetry start (tests round 9) -->
+the energies equalled the closed-shell ones exactly. So <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> alone does not give a broken-symmetry solution.</p>
+<!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) -->
+<p>What worked better was to start the singlet from the vectors of the triplet: run the triplet with
+<a class="reference internal" href="../reference/control.html#control-save"><span class="std std-ref">save</span></a>, then the singlet with <code class="docutils literal notranslate"><span class="pre">restrict=0</span></code> and <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> (the program accepts vectors of
+another multiplicity). For O2 this gave a singlet 0.048 hartree below the closed-shell one, but the SCF converged
+very slowly: give it plenty of <a class="reference internal" href="../reference/scf.html#scf-iterations"><span class="std std-ref">iterations</span></a>. To tell the solutions apart, compare the energy
+with the closed-shell one and look at the spin populations (<code class="docutils literal notranslate"><span class="pre">print=+charges</span></code>); identical lists of alpha and beta
+orbital energies prove nothing when the open-shell orbitals are degenerate, as in O2.</p>
+<!-- src: 08 t74a, t74b --> <!-- verify: converged broken-symmetry O2 singlet with more iterations -->
 </section>
 <section id="heavy-elements">
 <h3>Heavy elements<a class="headerlink" href="#heavy-elements" title="Link to this heading">¶</a></h3>

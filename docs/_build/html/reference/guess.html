@@ -329,7 +329,7 @@ follow-up job such as a Hessian after an optimization.</p>
 <p id="index-4"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> input.txt (annotation corrupted); 03 #0, §7; 06 §3; 08 t60, t73</p>
+<strong>Sources:</strong> input.txt (annotation corrupted); 03 #0, §7; 06 §3; 08 t60, t73, t74</p>
 <p>Breaks the equivalence of the alpha and beta electrons in the highest occupied orbital. It is meant for
 open-shell singlets (for example singlet biradicals) and is only sensible with <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">restrict=0</span></code>.</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -354,7 +354,8 @@ open-shell singlets (for example singlet biradicals) and is only sensible with <
 <p>Users report that with non-RI DFT, <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> can converge back to the restricted solution (same energy as
 RKS). RI-DFT, or a hybrid, broke the symmetry in the reported cases. In version 25, <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> with
 <code class="docutils literal notranslate"><span class="pre">restrict=0</span></code> returned to the restricted solution for singlet O2 (PBE and RI-PBE1) and for Cr2 (PBE, default
-and BFGS procedures): no broken-symmetry solution was found in any test.</p>
+and BFGS procedures): no broken-symmetry solution was found in any test. Starting the singlet from saved
+triplet vectors (<code class="docutils literal notranslate"><span class="pre">read=1</span></code>) did reach a lower singlet solution for O2.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="scf.html#scf-restrict"><span class="std std-ref">restrict ($scf)</span></a></p>
 </section>

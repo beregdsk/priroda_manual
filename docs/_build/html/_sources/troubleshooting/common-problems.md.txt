@@ -203,11 +203,13 @@ $end
 $scf iterations=10 $end
 $guess read=1 $end
 ```
-<!-- src: 08 t27 (save and guess read=1 work in v25) --> <!-- verify: whole restart loop on a hard case -->
+<!-- src: 08 t27, t71b -->
 
 In version 25 the output of a restarted run shows `Initial Guess (-1)` and `vectors from 'job.vec'`; a normal start
-shows `Initial Guess (2)`.
-<!-- src: 08 t27 -->
+shows `Initial Guess (2)`. Each restart continues from where the previous run stopped, and goes straight to the
+final grid instead of starting again on the coarse one. In a test on a 22-atom copper complex with 3 iterations per
+run, the loop converged in the fourth run, after about 12 iterations in all.
+<!-- src: 08 t27, t71b -->
 
 Leave out the `$guess` line in the first run. Vectors from a converged run of an easier case, or of the same molecule
 at another geometry, also work as a starting point.
@@ -289,10 +291,16 @@ often do not break symmetry, and suggests a hybrid (with `theory=ridft`) or a Ha
 
 In version 25 tests, `restrict=0 mix=1` converged back to the restricted solution for singlet O2, with both
 `theory=dft` (PBE) and `theory=ridft` (PBE1), and for the Cr2 dimer with both the default and the `bfgs` procedure:
-alpha and beta orbital energies were identical, and the energies equalled the closed-shell ones. So `mix=1` alone
-does not give a broken-symmetry solution; compare the alpha and beta orbital energies in the output, and start from
-vectors of a broken-symmetry calculation (for example of the triplet) with `$guess read=1` instead.
-<!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) --> <!-- verify: triplet vectors as a broken-symmetry start (tests round 9) -->
+the energies equalled the closed-shell ones exactly. So `mix=1` alone does not give a broken-symmetry solution.
+<!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) -->
+
+What worked better was to start the singlet from the vectors of the triplet: run the triplet with
+{ref}`save <control.save>`, then the singlet with `restrict=0` and `$guess read=1` (the program accepts vectors of
+another multiplicity). For O2 this gave a singlet 0.048 hartree below the closed-shell one, but the SCF converged
+very slowly: give it plenty of {ref}`iterations <scf.iterations>`. To tell the solutions apart, compare the energy
+with the closed-shell one and look at the spin populations (`print=+charges`); identical lists of alpha and beta
+orbital energies prove nothing when the open-shell orbitals are degenerate, as in O2.
+<!-- src: 08 t74a, t74b --> <!-- verify: converged broken-symmetry O2 singlet with more iterations -->
 
 ### Heavy elements
 

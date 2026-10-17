@@ -102,13 +102,13 @@
 \contentsline {subsection}{\numberline {5.9.1}\sphinxstyleliteralintitle {\sphinxupquote {core}}}{48}{subsection.5.9.1}%
 \contentsline {subsection}{\numberline {5.9.2}\sphinxstyleliteralintitle {\sphinxupquote {mcore}}}{48}{subsection.5.9.2}%
 \contentsline {section}{\numberline {5.10}\sphinxstyleliteralintitle {\sphinxupquote {\$optimize}}}{48}{section.5.10}%
-\contentsline {subsection}{\numberline {5.10.1}\sphinxstyleliteralintitle {\sphinxupquote {saddle}}}{48}{subsection.5.10.1}%
+\contentsline {subsection}{\numberline {5.10.1}\sphinxstyleliteralintitle {\sphinxupquote {saddle}}}{49}{subsection.5.10.1}%
 \contentsline {subsection}{\numberline {5.10.2}\sphinxstyleliteralintitle {\sphinxupquote {tolerance}}}{49}{subsection.5.10.2}%
 \contentsline {subsection}{\numberline {5.10.3}\sphinxstyleliteralintitle {\sphinxupquote {trust}}}{49}{subsection.5.10.3}%
-\contentsline {subsection}{\numberline {5.10.4}\sphinxstyleliteralintitle {\sphinxupquote {follow}}}{49}{subsection.5.10.4}%
+\contentsline {subsection}{\numberline {5.10.4}\sphinxstyleliteralintitle {\sphinxupquote {follow}}}{50}{subsection.5.10.4}%
 \contentsline {subsection}{\numberline {5.10.5}\sphinxstyleliteralintitle {\sphinxupquote {steps}}}{50}{subsection.5.10.5}%
 \contentsline {subsection}{\numberline {5.10.6}\sphinxstyleliteralintitle {\sphinxupquote {cartesian}}}{50}{subsection.5.10.6}%
-\contentsline {subsection}{\numberline {5.10.7}\sphinxstyleliteralintitle {\sphinxupquote {back}}}{50}{subsection.5.10.7}%
+\contentsline {subsection}{\numberline {5.10.7}\sphinxstyleliteralintitle {\sphinxupquote {back}}}{51}{subsection.5.10.7}%
 \contentsline {subsection}{\numberline {5.10.8}\sphinxstyleliteralintitle {\sphinxupquote {points}}}{51}{subsection.5.10.8}%
 \contentsline {subsection}{\numberline {5.10.9}\sphinxstyleliteralintitle {\sphinxupquote {radius}}}{51}{subsection.5.10.9}%
 \contentsline {subsection}{\numberline {5.10.10}\sphinxstyleliteralintitle {\sphinxupquote {coordinates}}}{51}{subsection.5.10.10}%
@@ -163,14 +163,14 @@
 \contentsline {subsection}{\numberline {6.2.4}Switch the SCF procedure and tighten the grid}{64}{subsection.6.2.4}%
 \contentsline {subsection}{\numberline {6.2.5}Divergence after the switch to the fine grid (open\sphinxhyphen {}shell transition\sphinxhyphen {}metal complex)}{65}{subsection.6.2.5}%
 \contentsline {subsection}{\numberline {6.2.6}Open\sphinxhyphen {}shell singlets and broken symmetry}{65}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}Heavy elements}{65}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Cases without a known fix}{65}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.7}Heavy elements}{66}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Cases without a known fix}{66}{subsection.6.2.8}%
 \contentsline {section}{\numberline {6.3}Geometry optimization problems}{66}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}The optimization does not converge within \sphinxstyleliteralintitle {\sphinxupquote {steps}}}{66}{subsection.6.3.1}%
 \contentsline {subsection}{\numberline {6.3.2}Crash with \sphinxstyleliteralintitle {\sphinxupquote {process 0 got signal 6}} and \sphinxstyleliteralintitle {\sphinxupquote {too few}}}{66}{subsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.3.3}The optimization “converges” in one step}{66}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}A symmetric structure stays symmetric}{66}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}A scan starts from a mangled geometry}{66}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.4}A symmetric structure stays symmetric}{67}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}A scan starts from a mangled geometry}{67}{subsection.6.3.5}%
 \contentsline {subsection}{\numberline {6.3.6}IRC gives only two points, or no curve}{67}{subsection.6.3.6}%
 \contentsline {subsection}{\numberline {6.3.7}IRC stops with \sphinxstyleliteralintitle {\sphinxupquote {Vicinity of a Stationary Point(?) \sphinxhyphen {}\sphinxhyphen {}\sphinxhyphen {} STOP.}}}{67}{subsection.6.3.7}%
 \contentsline {subsection}{\numberline {6.3.8}IRC ends near a minimum but not in it}{67}{subsection.6.3.8}%
@@ -180,19 +180,19 @@
 \contentsline {subsection}{\numberline {6.4.3}TDDFT oscillator strengths are all zero}{68}{subsection.6.4.3}%
 \contentsline {subsection}{\numberline {6.4.4}The dipole moment is zero}{68}{subsection.6.4.4}%
 \contentsline {subsection}{\numberline {6.4.5}Energies differ between Priroda versions}{68}{subsection.6.4.5}%
-\contentsline {subsection}{\numberline {6.4.6}The printed energy components do not add up to E}{68}{subsection.6.4.6}%
-\contentsline {subsection}{\numberline {6.4.7}Thermochemistry of single atoms}{68}{subsection.6.4.7}%
-\contentsline {subsection}{\numberline {6.4.8}Results depend on the number of processes}{68}{subsection.6.4.8}%
-\contentsline {section}{\numberline {6.5}Memory, disk and scratch errors}{68}{section.6.5}%
+\contentsline {subsection}{\numberline {6.4.6}The printed energy components do not add up to E}{69}{subsection.6.4.6}%
+\contentsline {subsection}{\numberline {6.4.7}Thermochemistry of single atoms}{69}{subsection.6.4.7}%
+\contentsline {subsection}{\numberline {6.4.8}Results depend on the number of processes}{69}{subsection.6.4.8}%
+\contentsline {section}{\numberline {6.5}Memory, disk and scratch errors}{69}{section.6.5}%
 \contentsline {subsection}{\numberline {6.5.1}\sphinxstyleliteralintitle {\sphinxupquote {need … bytes.}}}{69}{subsection.6.5.1}%
 \contentsline {subsection}{\numberline {6.5.2}\sphinxstyleliteralintitle {\sphinxupquote {malloc(...) failed}}}{69}{subsection.6.5.2}%
 \contentsline {subsection}{\numberline {6.5.3}\sphinxstyleliteralintitle {\sphinxupquote {out of disk space}}}{69}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}A small RI\sphinxhyphen {}MP2 job does not fit in memory}{69}{subsection.6.5.4}%
-\contentsline {subsection}{\numberline {6.5.5}Where scratch files go}{69}{subsection.6.5.5}%
+\contentsline {subsection}{\numberline {6.5.4}A small RI\sphinxhyphen {}MP2 job does not fit in memory}{70}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.5}Where scratch files go}{70}{subsection.6.5.5}%
 \contentsline {subsection}{\numberline {6.5.6}Slow runs: disk speed}{70}{subsection.6.5.6}%
 \contentsline {section}{\numberline {6.6}Parallel and MPI problems}{70}{section.6.6}%
 \contentsline {subsection}{\numberline {6.6.1}A parallel RI job hangs with no message}{70}{subsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.6.2}Little or no speed\sphinxhyphen {}up from more cores}{70}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.2}Little or no speed\sphinxhyphen {}up from more cores}{71}{subsection.6.6.2}%
 \contentsline {subsection}{\numberline {6.6.3}Starting a parallel run on Linux}{71}{subsection.6.6.3}%
 \contentsline {subsection}{\numberline {6.6.4}Windows}{71}{subsection.6.6.4}%
 \contentsline {chapter}{\numberline {7}Keywords in the program}{73}{chapter.7}%

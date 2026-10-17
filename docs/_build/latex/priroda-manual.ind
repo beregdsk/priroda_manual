@@ -29,7 +29,7 @@
 
   \indexspace
   \bigletter B
-  \item \spxentry{back}\spxextra{\$optimize}, \hyperpage{50}
+  \item \spxentry{back}\spxextra{\$optimize}, \hyperpage{51}
   \item \spxentry{basis}\spxextra{\$control}, \hyperpage{37}
 
   \indexspace
@@ -62,7 +62,7 @@
   \bigletter F
   \item \spxentry{file}\spxextra{\$dynamic}, \hyperpage{60}
   \item \spxentry{fix}\spxextra{\$optimize}, \hyperpage{52}
-  \item \spxentry{follow}\spxextra{\$optimize}, \hyperpage{49}
+  \item \spxentry{follow}\spxextra{\$optimize}, \hyperpage{50}
   \item \spxentry{four}\spxextra{\$control}, \hyperpage{37}
   \item \spxentry{functional}\spxextra{\$dft}, \hyperpage{45}
 
@@ -121,7 +121,7 @@
 
   \indexspace
   \bigletter S
-  \item \spxentry{saddle}\spxextra{\$optimize}, \hyperpage{48}
+  \item \spxentry{saddle}\spxextra{\$optimize}, \hyperpage{49}
   \item \spxentry{save}\spxextra{\$control}, \hyperpage{39}
   \item \spxentry{set}\spxextra{\$molecule}, \hyperpage{41}
   \item \spxentry{sigma}\spxextra{\$thermo}, \hyperpage{55}

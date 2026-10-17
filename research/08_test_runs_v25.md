@@ -9,7 +9,8 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 5: `git show 192f430:tests/runs/20261017-131420/<file>`;
 - round 6: `git show 7d6391c:tests/runs/20261017-131753/<file>`;
 - round 7: `git show 705f5ab:tests/runs/20261017-133258/<file>`;
-- round 8: `tests/runs/20261017-135441/` (t72: `tests/runs/20261017-141203/`).
+- round 8: `tests/runs/20261017-135441/` (first t72, stopped by the 1-hour limit: `tests/runs/20261017-141203/`);
+- round 9: `tests/runs/20261017-152445/` (t71b, t74); t72 on 8 processes: `tests/runs/20261017-153851/` (an interrupted attempt is in `20261017-153621/`).
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -162,6 +163,15 @@ doublet, 22 atoms, `restrict=0`, `$grid acc=1e-12`). Cr₂ is a singlet at 1.679
 | t73c | The same with `procedure=bfgs`: 23 iterations, same restricted solution and E. |
 
 With O₂ (t60) this makes two molecules where `$guess mix=1` gave no broken-symmetry solution in v25.
+
+## Round 9
+
+| Test | Result |
+|---|---|
+| t71b | Cu complex, restart loop with `iterations=3` per cycle: cycle 1 (`Initial Guess (2)`) ran on the coarse grid (68 416 points) and then the fine grid, ending `no convergence!` at E = -2061.0944031738. Cycles 2–4 printed `Initial Guess (-1)` and `vectors from 'cu.vec'`, **started directly on the fine grid** (no coarse-grid phase), and each began at the previous cycle's last energy (cycle 2 at -2061.0944031685). Cycle 4 ended `converged!`, E = -2061.0966862873: about 12 iterations in all. The fine-grid size differed slightly between cycles (2 175 976–2 188 180 points). |
+| t74a | O2 triplet, vectors saved to `o2t.vec`: converged, E = -150.2228124217 (as t48). |
+| t74b | Singlet O2, `restrict=0`, `$guess read=1` with the **triplet** vectors: accepted (`vectors from 'o2t.vec'`, 8 alpha and 8 beta electrons). After one iteration the energy was -150.20756, 0.048 hartree **below** the closed-shell singlet (-150.1593089, t48b) and 0.015 above the triplet; then it crept down by about 4·10⁻⁸ per iteration with the gradient stuck near 2·10⁻⁶ (threshold 1·10⁻⁶), ending `no convergence!` after 32 iterations at E = -150.2075743278. The printed alpha and beta orbital energies are identical, which for O2 does not exclude a broken-symmetry solution: alpha in one π* orbital and beta in the other, degenerate one, give the same lists *(inferred)*. Spin populations were not printed. |
+| t72 | `optimize+hessian` for the Cu complex on **8 processes** (`NP=8`), no time limit: `parallel on 8 processors`; `OPTIMIZATION CONVERGED in 6 steps!`; all 20 SCF runs converged (no `no convergence`); `ANALYTIC SECOND DERIVATIVES OF SCF ENERGY` took about 1230 s of wall time; frequency table with one small imaginary mode (6.11i cm⁻¹; next 27.88, 28.09 cm⁻¹), ZPVE = 0.181703 a.u.; total REAL time 31.8 min. On one core (round 8) the same job had not finished after 60 min. |
 
 ## Molden check
 

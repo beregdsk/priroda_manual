@@ -80,9 +80,11 @@ for f in "$here"/inputs/t*.in; do
     t72_*)  # long: optimization + Hessian of a 22-atom complex; only with LONG=1
       if [ -z "${LONG:-}" ]; then skip "$name" "long run, set LONG=1"; continue; fi
       prep "$name" "" "$name"; run "$name" ;;
-    t74b_*)  # needs the triplet vectors saved by t74a
-      if [ ! -e "$out/o2t.vec" ]; then skip "$name" "needs t74a in the same run (no o2t.vec)"; continue; fi
-      prep "$name" "" "$name"; run "$name"; rm -f "$out/o2t.vec" ;;
+    t74b_*|t74c_*)  # need the triplet vectors saved by t74a; each run starts from a fresh copy of them
+      [ -e "$out/o2t_triplet.vec" ] || { [ -e "$out/o2t.vec" ] && cp "$out/o2t.vec" "$out/o2t_triplet.vec"; }
+      if [ ! -e "$out/o2t_triplet.vec" ]; then skip "$name" "needs t74a in the same run (no o2t.vec)"; continue; fi
+      cp "$out/o2t_triplet.vec" "$out/o2t.vec"
+      prep "$name" "" "$name"; run "$name" ;;
     t35_*|t49_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     t39_*) if [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     *)
@@ -133,5 +135,5 @@ if selected t21 "$@"; then  # parallel launch forms, 2 processes
   else skip t21c "no mpirun on PATH"; fi
 fi
 
-rm -f "$out"/t27.vec
+rm -f "$out"/t27.vec "$out"/o2t.vec "$out"/o2t_triplet.vec
 echo "Outputs in $out"; cat "$out/status.txt"

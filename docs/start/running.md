@@ -324,8 +324,10 @@ Users consistently report the following:
   PBE/L1 optimization with version 10 took 81.5, 42.5, 29.8 and 29.3 s on 1–4 cores.
   <!-- src: 04 #343, #344, #154 -->
 - **Parallel results equal serial ones.** In version 25 tests on 2 processes, a water energy and a numerical
-  `ridft` Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s.
-  <!-- src: 08 t21b, t63 (vs t32a) -->
+  `ridft` Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s. An optimization plus
+  analytic Hessian of a 22-atom copper complex (OLYP/L2, fine grid) took 32 min on 8 processes of one node; on one
+  process it had not finished after an hour.
+  <!-- src: 08 t21b, t63 (vs t32a), t72 (8 processes vs 1) -->
 - **Running across nodes gives no gain for DFT.** Use one node per job.
   <!-- src: 04 #344, #462; 03 §3 -->
 - **Memory per process does not drop** when you add processes, and in a parallel Hessian nearly all of the disk use is
