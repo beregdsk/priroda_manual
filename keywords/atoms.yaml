@@ -15,12 +15,13 @@ keywords:
       # 1s, 2s, 2p (10 electrons) of nickel are core
     notes:
       en: |
-        The index in the example, 280 for Ni (Z=28), suggests the layout `core(10*Z)=…`. No source states this
-        layout, so it must be verified.
+        The index is 10·Z: `core(280)` is nickel, `core(80)` oxygen. In version 25, `core(80)=0,0,0,0` removed the
+        oxygen 1s from the frozen core of an RI-MP2 run. The output reports the frozen core as `atom   8 core =  1`
+        and `Number of core electrons 1`; the number there counts core orbitals, not electrons.
     see_also: [scf.core, atoms.mcore]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t16"]
+    verified_against: "25 (2025.02.28)"
   - name: mcore
     type: integer
     default: null

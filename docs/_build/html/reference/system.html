@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$control" href="control.html"><link rel="prev" title="Input reference" href="index.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$system - Priroda User Manual</title>
+        <title>$system - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -273,25 +273,29 @@ most of the memory and all of the disk storage are used by the master process (r
 <section id="memory">
 <span id="system-memory"></span><h2><code class="docutils literal notranslate"><span class="pre">memory</span></code><a class="headerlink" href="#memory" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> list<br />
-<strong>Default:</strong> <em>none stated</em><br />
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">256</span></code><br />
 <strong>Units:</strong> MB<br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process)</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02</p>
+<p>Default: echoed by version 25 when <code class="docutils literal notranslate"><span class="pre">$system</span></code> is omitted.</p>
 <p>Memory limit in megabytes. A second value sets the limit for the other MPI ranks: <code class="docutils literal notranslate"><span class="pre">mem=2048,256</span></code> gives rank 0
 2048 MB and every other rank 256 MB. A single value applies to all ranks. The output echoes the result as
 <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">&lt;mem&gt;m</span> <span class="pre">+</span> <span class="pre">&lt;|disk|&gt;m</span> <span class="pre">(&lt;mem2&gt;m</span> <span class="pre">+</span> <span class="pre">&lt;|disk2|&gt;m)</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For DFT, the v5 documentation estimates the memory as about 8·N²·3 bytes for energy and gradient, and twice that
-for an analytic Hessian, where N is the basis dimension. <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives an old default of 16 MB.</p>
+for an analytic Hessian, where N is the basis dimension. <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives an old default of 16 MB.
+Without a <code class="docutils literal notranslate"><span class="pre">$system</span></code> group, version 25 echoes <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span> <span class="pre">(256m</span> <span class="pre">+</span> <span class="pre">512m)</span></code>: 256 MB of memory plus a
+512 MB RAM disk per process, read from the echo format.</p>
 </div>
 </section>
 <section id="disk">
 <span id="system-disk"></span><h2><code class="docutils literal notranslate"><span class="pre">disk</span></code><a class="headerlink" href="#disk" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> list<br />
-<strong>Default:</strong> <em>none stated</em><br />
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">-512</span></code><br />
 <strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (one file per GB); 01 §4.1; 04 §0, #468; 03 §17</p>
+<strong>Sources:</strong> input.txt; Dft.rtf (one file per GB); 01 §4.1; 04 §0, #468; 03 §17; 08 t02</p>
+<p>Default: a 512 MB RAM disk, read from the version 25 echo <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span></code> when <code class="docutils literal notranslate"><span class="pre">$system</span></code> is omitted.</p>
 <p>Positive values set the disk space in gigabytes; one scratch file is opened per gigabyte, which sidesteps
 per-file size limits. Negative values set the amount of memory, in megabytes, used to emulate disk
 (a RAM disk). A second value applies to the other MPI ranks, as for <code class="docutils literal notranslate"><span class="pre">memory</span></code>; the official example inputs typically give
@@ -311,8 +315,8 @@ Keeping scratch in RAM gave a 6× speed-up for RI-MP2 on one cluster.</p>
 <span id="system-path"></span><h2><code class="docutils literal notranslate"><span class="pre">path</span></code><a class="headerlink" href="#path" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 03 §2; 04 #465</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 03 §2; 04 #465; 08 t01</p>
 <p>Default: the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable, otherwise the current working directory.</p>
 <p>Directory for temporary disk files. For parallel runs you can give a colon-separated list with one path per
 process: <code class="docutils literal notranslate"><span class="pre">path=/tmpa:/tmpb:/tmpc:/tmpd</span></code> makes process 1 write to <code class="docutils literal notranslate"><span class="pre">/tmpa</span></code>, process 2 to <code class="docutils literal notranslate"><span class="pre">/tmpb</span></code>, and so on.
@@ -321,7 +325,8 @@ Those directories should be on different physical drives. The value may be doubl
 <p class="admonition-title">Note</p>
 <p>For all methods except GGA DFT, performance degrades “terribly” if more than one process reads and writes
 large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, use <code class="docutils literal notranslate"><span class="pre">path=.</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, use <code class="docutils literal notranslate"><span class="pre">path=.</span></code>. Version 25 echoed <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code> for <code class="docutils literal notranslate"><span class="pre">disk=1</span></code> without <code class="docutils literal notranslate"><span class="pre">path=</span></code>; whether <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>
+was set in that test was not recorded.</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system path=/tmpa:/tmpb:/tmpc:/tmpd $end
@@ -359,7 +364,7 @@ large files on the same physical drive. Never put temporary files on NFS. On Win
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

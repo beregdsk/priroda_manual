@@ -5,25 +5,29 @@ summary:
 keywords:
   - name: sigma
     type: integer
-    default: null
+    default: 1
     description:
-      en: Rotational symmetry number for thermochemistry.
+      en: |
+        Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless `sigma=` is
+        given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3).
+    default_note:
+      en: "1 (version 25 does not detect the symmetry number)."
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t13"]
+    verified_against: "25 (2025.02.28)"
   - name: temperature
     type: list
-    default: null
+    default: [298.15]
     units: K
     description:
       en: Temperatures at which thermochemistry is printed, up to 50 values.
     default_note:
       en: |
-        `298.15` according to `Dft.rtf`, but posted outputs show `298.000 K` (2011, 2021) as well as `298.150 K` (2013).
-        Set `temperature=` explicitly when the exact value matters.
+        `298.15`: version 25 prints `T =  298.150 K`, as `Dft.rtf` states. Older posted outputs also show `298.000 K`
+        (2011, 2021), so set `temperature=` explicitly when comparing with other versions.
     status: current
-    sources: ["input.txt", "Dft.rtf"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf", "08 t13"]
+    verified_against: "25 (2025.02.28)"
   - name: mass
     type: list
     default: null

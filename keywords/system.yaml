@@ -9,7 +9,9 @@ body:
 keywords:
   - name: memory
     type: list
-    default: null
+    default: 256
+    default_note:
+      en: "echoed by version 25 when `$system` is omitted."
     units: MB
     description:
       en: |
@@ -20,12 +22,16 @@ keywords:
       en: |
         For DFT, the v5 documentation estimates the memory as about 8·N²·3 bytes for energy and gradient, and twice that
         for an analytic Hessian, where N is the basis dimension. `Dft.rtf` gives an old default of 16 MB.
+        Without a `$system` group, version 25 echoes `Memory: 256m + 512m (256m + 512m)`: 256 MB of memory plus a
+        512 MB RAM disk per process, read from the echo format.
     status: current
-    sources: ["input.txt", "01 §4.1 (two values)", "06 §3 (estimate)", "03 §4, 04 #196 (per process)"]
-    verified_against: null
+    sources: ["input.txt", "01 §4.1 (two values)", "06 §3 (estimate)", "03 §4, 04 #196 (per process)", "08 t02"]
+    verified_against: "25 (2025.02.28)"
   - name: disk
     type: list
-    default: null
+    default: -512
+    default_note:
+      en: "a 512 MB RAM disk, read from the version 25 echo `Memory: 256m + 512m` when `$system` is omitted."
     description:
       en: |
         Positive values set the disk space in gigabytes; one scratch file is opened per gigabyte, which sidesteps
@@ -39,7 +45,7 @@ keywords:
         Keeping scratch in RAM gave a 6× speed-up for RI-MP2 on one cluster.
     example: "$system mem=2048,256 disk=-256,-1 $end"
     status: current
-    sources: ["input.txt", "Dft.rtf (one file per GB)", "01 §4.1", "04 §0, #468", "03 §17"]
+    sources: ["input.txt", "Dft.rtf (one file per GB)", "01 §4.1", "04 §0, #468", "03 §17", "08 t02"]
     verified_against: null
   - name: path
     type: string
@@ -55,8 +61,9 @@ keywords:
       en: |
         For all methods except GGA DFT, performance degrades "terribly" if more than one process reads and writes
         large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-        `/tmp`, use `path=.`.
+        `/tmp`, use `path=.`. Version 25 echoed `Disk:   1g '/tmp'` for `disk=1` without `path=`; whether `TMPDIR`
+        was set in that test was not recorded.
     example: "$system path=/tmpa:/tmpb:/tmpc:/tmpd $end"
     status: current
-    sources: ["input.txt", "03 §2", "04 #465"]
-    verified_against: null
+    sources: ["input.txt", "03 §2", "04 #465", "08 t01"]
+    verified_against: "25 (2025.02.28)"

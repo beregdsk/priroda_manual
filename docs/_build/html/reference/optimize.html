@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$d2edr2" href="d2edr2.html"><link rel="prev" title="$atoms" href="atoms.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$optimize - Priroda User Manual</title>
+        <title>$optimize - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -306,8 +306,8 @@
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.0001,0.01</span></code><br />
 <strong>Units:</strong> au<br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.6 (output echo)</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 01 §4.6 (output echo); 08 t11, t12</p>
 <p>Default: if only the first value is given, the second is 100 times larger (the recommended setting).</p>
 <p>Convergence tolerance on the gradient (first value) and on the displacement (second value).</p>
 <p><strong>See also:</strong> <a class="reference internal" href="grid.html#grid-accuracy"><span class="std std-ref">accuracy ($grid)</span></a></p>
@@ -315,11 +315,12 @@
 <section id="trust">
 <span id="optimize-trust"></span><h2><code class="docutils literal notranslate"><span class="pre">trust</span></code><a class="headerlink" href="#trust" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
-<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.2,0.0125</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.6; 04 #319; Dft.rtf</p>
-<p>Default: echoed by v6, v13 and v15 as <code class="docutils literal notranslate"><span class="pre">Trust</span> <span class="pre">radius</span> <span class="pre">=</span> <span class="pre">0.2</span> <span class="pre">(max),</span> <span class="pre">0.0125</span> <span class="pre">(min)</span></code> in internal coordinates, and 0.1 / 0.00625
-with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>. If only the maximum is given, the minimum is 1/16 of it and the initial value 1/4.
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.125,0.015625</span></code><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12</p>
+<p>Default: echoed by version 25 as <code class="docutils literal notranslate"><span class="pre">Trust</span> <span class="pre">radius</span> <span class="pre">=</span> <span class="pre">0.12500000</span> <span class="pre">(max),</span> <span class="pre">0.01562500</span> <span class="pre">(min)</span></code>, both in internal coordinates and
+with symmetry (<code class="docutils literal notranslate"><span class="pre">sym=1</span></code>). v6, v13 and v15 echoed <code class="docutils literal notranslate"><span class="pre">0.2</span> <span class="pre">(max),</span> <span class="pre">0.0125</span> <span class="pre">(min)</span></code> in internal coordinates, and
+0.1 / 0.00625 with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>. If only the maximum is given, the minimum is 1/16 of it and the initial value 1/4.
 <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.5 (older version).</p>
 <p>Trust radius (the largest allowed step), given as maximum, minimum and initial values.</p>
 </section>
@@ -336,14 +337,16 @@ with <code class="docutils literal notranslate"><span class="pre">cartesian=1</s
 <section id="steps">
 <span id="optimize-steps"></span><h2><code class="docutils literal notranslate"><span class="pre">steps</span></code><a class="headerlink" href="#steps" title="Link to this heading">¶</a></h2>
 <p id="index-5"><strong>Type:</strong> integer<br />
-<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">50</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 03 §8 (step/steps bug)</p>
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">128</span></code><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf; 03 §8 (step/steps bug); 08 t14, t15</p>
 <p>Maximum number of optimization cycles.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If an optimization has not converged within about 50 steps, something is probably wrong; raising <code class="docutils literal notranslate"><span class="pre">steps</span></code>
-rarely helps. Computing a Hessian first and supplying it often does. In v6, if both <code class="docutils literal notranslate"><span class="pre">steps</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code> are
+<p>Version 25 echoes <code class="docutils literal notranslate"><span class="pre">Maximum</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">steps</span> <span class="pre">=</span> <span class="pre">128</span></code> when <code class="docutils literal notranslate"><span class="pre">steps</span></code> is not given; older sources give 50. When the
+limit is reached the program prints no message: the output just ends, and the last geometry appears only in
+<code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code> lines, not <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code>. If an optimization has not converged within about 50 steps, something is probably
+wrong; raising <code class="docutils literal notranslate"><span class="pre">steps</span></code> rarely helps. Computing a Hessian first and supplying it often does. In v6, if both <code class="docutils literal notranslate"><span class="pre">steps</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code> are
 given, the value of <code class="docutils literal notranslate"><span class="pre">step</span></code> is used; give only one of them.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-tolerance"><span class="std std-ref">tolerance ($optimize)</span></a>, <a class="reference internal" href="d2edr2.html#d2edr2-steps"><span class="std std-ref">steps ($d2edr2)</span></a></p>
@@ -552,9 +555,11 @@ Otherwise keep the default.</p>
 <span id="optimize-sym"></span><h2><code class="docutils literal notranslate"><span class="pre">sym</span></code><a class="headerlink" href="#sym" title="Link to this heading">¶</a></h2>
 <p id="index-15"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.6; 04 #481</p>
-<p>Used as <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in the official 2023–2025 example inputs, apparently to preserve molecular symmetry during the optimization.</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.6; 04 #481; 08 t15</p>
+<p>Used as <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in the official 2023–2025 example inputs. In version 25, together with <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code>,
+the optimizer switched to Cartesian coordinates (<code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">cartesian</span></code>), printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span> <span class="pre">(6)</span></code> at
+every step, and returned an exactly symmetric structure followed by <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">symmetry:</span> <span class="pre">C3v</span></code>.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-sym"><span class="std std-ref">sym ($molecule)</span></a></p>
 </section>
 <section id="mod">
@@ -596,7 +601,7 @@ Otherwise keep the default.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

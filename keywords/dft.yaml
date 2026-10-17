@@ -36,5 +36,5 @@ keywords:
         them documented or tested.
     see_also: [control.theory]
     status: current
-    sources: ["input.txt", "01 §3.2", "03 §5 (strings)", "04 §0"]
-    verified_against: null
+    sources: ["input.txt", "01 §3.2", "03 §5 (strings)", "04 §0", "08 t02"]
+    verified_against: "25 (2025.02.28)"

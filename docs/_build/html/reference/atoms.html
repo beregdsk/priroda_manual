@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$optimize" href="optimize.html"><link rel="prev" title="$integral" href="integral.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$atoms - Priroda User Manual</title>
+        <title>$atoms - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -272,14 +272,15 @@
 <span id="atoms-core"></span><h2><code class="docutils literal notranslate"><span class="pre">core</span></code><a class="headerlink" href="#core" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 08 t16</p>
 <p>For HF-based methods, the number of core shells for L=0,1,2,3, given for each atomic number. The values are
 used only to compute the total number of core electrons in the molecule.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The index in the example, 280 for Ni (Z=28), suggests the layout <code class="docutils literal notranslate"><span class="pre">core(10*Z)=…</span></code>. No source states this
-layout, so it must be verified.</p>
+<p>The index is 10·Z: <code class="docutils literal notranslate"><span class="pre">core(280)</span></code> is nickel, <code class="docutils literal notranslate"><span class="pre">core(80)</span></code> oxygen. In version 25, <code class="docutils literal notranslate"><span class="pre">core(80)=0,0,0,0</span></code> removed the
+oxygen 1s from the frozen core of an RI-MP2 run. The output reports the frozen core as <code class="docutils literal notranslate"><span class="pre">atom</span>&#160;&#160; <span class="pre">8</span> <span class="pre">core</span> <span class="pre">=</span>&#160; <span class="pre">1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">core</span> <span class="pre">electrons</span> <span class="pre">1</span></code>; the number there counts core orbitals, not electrons.</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$atoms core(280)=2,1,0,0 $end
@@ -329,7 +330,7 @@ quantum number is lower than that of the outermost valence shell by less than M.
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

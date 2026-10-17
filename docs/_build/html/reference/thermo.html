@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$nmr" href="nmr.html"><link rel="prev" title="$d2edr2" href="d2edr2.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$thermo - Priroda User Manual</title>
+        <title>$thermo - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -271,20 +271,22 @@
 <section id="sigma">
 <span id="thermo-sigma"></span><h2><code class="docutils literal notranslate"><span class="pre">sigma</span></code><a class="headerlink" href="#sigma" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> integer<br />
-<strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
-<p>Rotational symmetry number for thermochemistry.</p>
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 08 t13</p>
+<p>Default: 1 (version 25 does not detect the symmetry number).</p>
+<p>Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless <code class="docutils literal notranslate"><span class="pre">sigma=</span></code> is
+given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3).</p>
 </section>
 <section id="temperature">
 <span id="thermo-temperature"></span><h2><code class="docutils literal notranslate"><span class="pre">temperature</span></code><a class="headerlink" href="#temperature" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> list<br />
-<strong>Default:</strong> <em>none stated</em><br />
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">298.15</span></code><br />
 <strong>Units:</strong> K<br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">298.15</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, but posted outputs show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code> (2011, 2021) as well as <code class="docutils literal notranslate"><span class="pre">298.150</span> <span class="pre">K</span></code> (2013).
-Set <code class="docutils literal notranslate"><span class="pre">temperature=</span></code> explicitly when the exact value matters.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf; 08 t13</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">298.15</span></code>: version 25 prints <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span>&#160; <span class="pre">298.150</span> <span class="pre">K</span></code>, as <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> states. Older posted outputs also show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code>
+(2011, 2021), so set <code class="docutils literal notranslate"><span class="pre">temperature=</span></code> explicitly when comparing with other versions.</p>
 <p>Temperatures at which thermochemistry is printed, up to 50 values.</p>
 </section>
 <section id="mass">
@@ -329,7 +331,7 @@ from a stored Hessian (<code class="docutils literal notranslate"><span class="p
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

@@ -49,8 +49,8 @@ A saddle-point search needs an accurate Hessian in the input: compute one with `
 **Type:** list\
 **Default:** `0.0001,0.01`\
 **Units:** au\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.6 (output echo)
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §4.6 (output echo); 08 t11, t12
 
 Default: if only the first value is given, the second is 100 times larger (the recommended setting).
 
@@ -65,12 +65,13 @@ Convergence tolerance on the gradient (first value) and on the displacement (sec
 ```
 
 **Type:** list\
-**Default:** `0.2,0.0125`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.6; 04 #319; Dft.rtf
+**Default:** `0.125,0.015625`\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12
 
-Default: echoed by v6, v13 and v15 as `Trust radius = 0.2 (max), 0.0125 (min)` in internal coordinates, and 0.1 / 0.00625
-with `cartesian=1`. If only the maximum is given, the minimum is 1/16 of it and the initial value 1/4.
+Default: echoed by version 25 as `Trust radius = 0.12500000 (max), 0.01562500 (min)`, both in internal coordinates and
+with symmetry (`sym=1`). v6, v13 and v15 echoed `0.2 (max), 0.0125 (min)` in internal coordinates, and
+0.1 / 0.00625 with `cartesian=1`. If only the maximum is given, the minimum is 1/16 of it and the initial value 1/4.
 `Dft.rtf` gives 0.5 (older version).
 
 
@@ -100,15 +101,17 @@ Follow the n-th Hessian eigenvector in a saddle-point search.
 ```
 
 **Type:** integer\
-**Default:** `50`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 03 §8 (step/steps bug)
+**Default:** `128`\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 03 §8 (step/steps bug); 08 t14, t15
 
 Maximum number of optimization cycles.
 
 ```{note}
-If an optimization has not converged within about 50 steps, something is probably wrong; raising `steps`
-rarely helps. Computing a Hessian first and supplying it often does. In v6, if both `steps` and `step` are
+Version 25 echoes `Maximum number of steps = 128` when `steps` is not given; older sources give 50. When the
+limit is reached the program prints no message: the output just ends, and the last geometry appears only in
+`mol>` lines, not `MOL>`. If an optimization has not converged within about 50 steps, something is probably
+wrong; raising `steps` rarely helps. Computing a Hessian first and supplying it often does. In v6, if both `steps` and `step` are
 given, the value of `step` is used; give only one of them.
 ```
 
@@ -335,10 +338,12 @@ Amount of optimization output.
 
 **Type:** switch\
 **Default:** *none stated*\
-**Status:** undocumented · not verified\
-**Sources:** 01 §4.6; 04 #481
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 01 §4.6; 04 #481; 08 t15
 
-Used as `sym=1` in the official 2023–2025 example inputs, apparently to preserve molecular symmetry during the optimization.
+Used as `sym=1` in the official 2023–2025 example inputs. In version 25, together with `$molecule sym=1,0.01`,
+the optimizer switched to Cartesian coordinates (`Coordinates: cartesian`), printed `symmetry: C3v (6)` at
+every step, and returned an exactly symmetric structure followed by `MOL> symmetry: C3v`.
 
 **See also:** {ref}`sym ($molecule) <molecule.sym>`
 

@@ -16,11 +16,14 @@ Thermochemistry after a Hessian calculation.
 ```
 
 **Type:** integer\
-**Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Default:** `1`\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t13
 
-Rotational symmetry number for thermochemistry.
+Default: 1 (version 25 does not detect the symmetry number).
+
+Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless `sigma=` is
+given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3).
 
 (thermo.temperature)=
 ## `temperature`
@@ -29,13 +32,13 @@ Rotational symmetry number for thermochemistry.
 ```
 
 **Type:** list\
-**Default:** *none stated*\
+**Default:** `298.15`\
 **Units:** K\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 08 t13
 
-Default: `298.15` according to `Dft.rtf`, but posted outputs show `298.000 K` (2011, 2021) as well as `298.150 K` (2013).
-Set `temperature=` explicitly when the exact value matters.
+Default: `298.15`: version 25 prints `T =  298.150 K`, as `Dft.rtf` states. Older posted outputs also show `298.000 K`
+(2011, 2021), so set `temperature=` explicitly when comparing with other versions.
 
 
 Temperatures at which thermochemistry is printed, up to 50 values.

@@ -3,9 +3,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent / "_ext"))
 
-project = "Priroda User Manual"
-author = "Priroda manual contributors"
-copyright = "2026, Priroda manual contributors"
+project = "Priroda Unofficial Manual"
+author = "Program by Dimitri Laikov"
+copyright = "2026. Program by Dimitri Laikov"
 
 extensions = [
     "myst_parser",
@@ -23,7 +23,7 @@ language = "en"
 bibtex_bibfiles = ["refs.bib"]
 
 html_theme = "furo"
-html_title = "Priroda User Manual"
+html_title = "Priroda Unofficial Manual"
 
 latex_engine = "pdflatex"
 latex_documents = [("index", "priroda-manual.tex", project, author, "manual")]
@@ -39,6 +39,7 @@ latex_elements = {
 \usepackage{amssymb}
 \DeclareUnicodeCharacter{2713}{\checkmark}
 \DeclareUnicodeCharacter{039B}{\ensuremath{\Lambda}}
+\DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}}
 \DeclareUnicodeCharacter{2264}{\ensuremath{\le}}
 \DeclareUnicodeCharacter{2212}{\ensuremath{-}}
 \DeclareUnicodeCharacter{207A}{\textsuperscript{+}}

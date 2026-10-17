@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Input reference" href="../reference/index.html"><link rel="prev" title="Getting started" href="getting-started.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>Input syntax - Priroda User Manual</title>
+        <title>Input syntax - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -310,12 +310,9 @@ $end
 <p>Groups you do not need can be left out; most keywords have sensible defaults. <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> advises changing only what
 the problem requires.</p>
 <!-- src: input.txt; 06 §2 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Every input in the sources starts each group on a new line. Whether two groups can share a line
-(<code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">conv=1e-7</span> <span class="pre">$end</span> <span class="pre">$grid</span> <span class="pre">acc=1e-9</span> <span class="pre">$end</span></code>) is not documented. Start each group on its own line.</p>
-</div>
-<!-- verify -->
+<p>Two groups can also share a line: <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">conv=1e-7</span> <span class="pre">$end</span> <span class="pre">$grid</span> <span class="pre">acc=1e-9</span> <span class="pre">$end</span></code> sets both values in version 25. Every
+input in the sources starts each group on a new line, which is easier to read.</p>
+<!-- src: 08 t04 -->
 </section>
 <section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Link to this heading">¶</a></h2>
@@ -377,10 +374,17 @@ documented. In version 6, when <code class="docutils literal notranslate"><span 
 from <code class="docutils literal notranslate"><span class="pre">step</span></code>. In inputs you keep or share, prefer the full keyword names; they are also easier to search for.</p>
 </div>
 <!-- src: 03 §8 (v6 step/steps); input.txt -->
-<p>A misspelled or unknown keyword name stops the run with a message naming the group, of the form
-<code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>. That particular message comes from a parser problem with
-<code class="docutils literal notranslate"><span class="pre">convergence</span></code> and <code class="docutils literal notranslate"><span class="pre">iterations</span></code> in the same <code class="docutils literal notranslate"><span class="pre">$scf</span></code> group; see <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">$scf convergence</span></a>.</p>
-<!-- src: 05 §5.1 --> <!-- verify -->
+<p>A misspelled or unknown keyword name stops the run right after the basis-set echo, with a message naming the group
+and the keyword:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** error in '$scf' : unknown name nosuchkeyword
+</pre></div>
+</div>
+<!-- src: 08 t06 (verbatim) -->
+<p>The same message can appear for a keyword you spelled correctly. In version 25,
+<code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code> stops with <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>: the value list of <code class="docutils literal notranslate"><span class="pre">convergence</span></code>
+takes the first letter of the next keyword. Put another keyword between the two, or see
+<a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">$scf convergence</span></a>.</p>
+<!-- src: 05 §5.1; 08 t07a, t07b -->
 </section>
 </section>
 <section id="values">
@@ -476,13 +480,10 @@ $end
 </pre></div>
 </div>
 <!-- src: 01 §4, §4.8, §4.9 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>That disabled groups and keywords are ignored is inferred from the official example files, which use this pattern
-throughout. It has not been tested what the program does with the stray <code class="docutils literal notranslate"><span class="pre">$end</span></code> that a disabled group leaves behind.
-Text inside a group is parsed as keywords, so do not put notes there.</p>
-</div>
-<!-- verify -->
+<p>In version 25 a line of text before the first group and a disabled group with its leftover <code class="docutils literal notranslate"><span class="pre">$end</span></code>
+(<code class="docutils literal notranslate"><span class="pre">integral</span> <span class="pre">dir=1</span> <span class="pre">$end</span></code>) are both ignored: the result is identical to the same input without them. Text inside a
+group is parsed as keywords, so do not put notes there.</p>
+<!-- src: 08 t05 -->
 <p>One user’s input opened a group with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">$</span></code> (<code class="docutils literal notranslate"><span class="pre">&amp;dft</span> <span class="pre">func=PBE</span> <span class="pre">$end</span></code>) and ran. That group set only the
 default functional, so the run does not show whether <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> is accepted. Always use <code class="docutils literal notranslate"><span class="pre">$</span></code>.</p>
 <!-- src: 04 #376 -->
@@ -552,9 +553,12 @@ group of the input with it. Because <code class="docutils literal notranslate"><
 <section id="common-mistakes">
 <h2>Common mistakes<a class="headerlink" href="#common-mistakes" title="Link to this heading">¶</a></h2>
 <dl class="simple myst">
-<dt>Non-integer atomic numbers</dt><dd><p><code class="docutils literal notranslate"><span class="pre">25.0</span></code> or <code class="docutils literal notranslate"><span class="pre">8.0</span></code> instead of <code class="docutils literal notranslate"><span class="pre">25</span></code> or <code class="docutils literal notranslate"><span class="pre">8</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> stops the run after <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code>, with
-<code class="docutils literal notranslate"><span class="pre">illegal</span> <span class="pre">charge/multiplicity</span></code>. Element symbols (<code class="docutils literal notranslate"><span class="pre">O</span></code>) are not accepted either.</p>
-<!-- src: 03 §5; molecule.yaml -->
+<dt>Non-integer atomic numbers</dt><dd><p><code class="docutils literal notranslate"><span class="pre">25.0</span></code> or <code class="docutils literal notranslate"><span class="pre">8.0</span></code> instead of <code class="docutils literal notranslate"><span class="pre">25</span></code> or <code class="docutils literal notranslate"><span class="pre">8</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>. The atom lines are read as a stream of numbers, so the
+rest of the group shifts. In version 25 this gives no error at all: water written with <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code> ran as an
+oxygen atom plus three empty centres with Z=0, and printed a meaningless energy. Older versions were reported to
+stop with <code class="docutils literal notranslate"><span class="pre">illegal</span> <span class="pre">charge/multiplicity</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">formula:</span></code> line near the top of the output. Element symbols
+(<code class="docutils literal notranslate"><span class="pre">O</span></code>) are not accepted either.</p>
+<!-- src: 03 §5; molecule.yaml; 08 t09 -->
 </dd>
 <dt>Typographic quotes</dt><dd><p>Word processors and some web pages turn <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> into curly or angle quotes, which break file names in <code class="docutils literal notranslate"><span class="pre">basis=</span></code> and
 <code class="docutils literal notranslate"><span class="pre">path=</span></code>. Retype them as straight quotes.</p>
@@ -568,8 +572,9 @@ combination the program understands. Run other sequences as separate jobs.</p>
 file with <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code>; see <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
 <!-- src: 04 #63-#65 -->
 </dd>
-<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Syntactically valid but wrong. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
-<!-- src: 04 #96, #310 -->
+<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Older versions ran a pure GGA; version 25 stops after the basis-set echo with no message. See
+<a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+<!-- src: 04 #96, #310; 08 t08 -->
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> without <code class="docutils literal notranslate"><span class="pre">four=1</span></code></dt><dd><p>The relativistic basis file needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>.</p>
 <!-- src: 04 #207, #208 -->
@@ -608,7 +613,7 @@ file with <code class="docutils literal notranslate"><span class="pre">dos2unix<
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

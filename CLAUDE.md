@@ -57,7 +57,7 @@ Record conventions:
   - `input.txt`: English "Input Summary", the closest thing to an official keyword reference. Its Russian annotations (lines 60–61, 75, 127–128, 419–421) were corrupted to `?` and cannot be recovered from this file.
   - `Dft.rtf`: Russian, cp1251.
   - `Dft_ansi.txt`: Russian, cp1251 + CRLF; describes the predecessor program with obsolete group names.
-- `research/`: extracted notes, one per source, numbered `00`–`07`. `00_*_utf8.txt` are UTF-8 conversions of the cp1251 originals. `07` is the survey of other QC manuals (ORCA, GAMESS, TURBOMOLE, Psi4, NWChem, CP2K, Gaussian) with the recommended outline, keyword-entry template and toolchain.
+- `research/`: extracted notes, one per source, numbered `00`–`08`. `08` records the test runs on Priroda 25 (program output, the strongest evidence; cite as `08 tNN`). `00_*_utf8.txt` are UTF-8 conversions of the cp1251 originals. `07` is the survey of other QC manuals (ORCA, GAMESS, TURBOMOLE, Psi4, NWChem, CP2K, Gaussian) with the recommended outline, keyword-entry template and toolchain.
 - `PLAN.md`: manual outline, settled decisions, table of known conflicts, and work order with progress. Read it before writing manual content.
 - `tests/`: minimal verification inputs for the open questions (`PLAN.md` §3a), `run.sh`, and a results table in
   `tests/README.md`.
@@ -65,7 +65,7 @@ Record conventions:
 
 ## Working with the sources
 
-- **Sources conflict and some are obsolete.** Before stating a default or keyword as fact, check `PLAN.md` §3 and `research/01_official_site.md` §10. The evidence order is: program output / official site files > `input.txt` > the v5 wiki docs (`06`) > `Dft.rtf` > forum posts > `Dft_ansi.txt` (predecessor).
+- **Sources conflict and some are obsolete.** Before stating a default or keyword as fact, check `PLAN.md` §3 and `research/01_official_site.md` §10. The evidence order is: program output (`08` test runs, official example outputs) / official site files > `input.txt` > the v5 wiki docs (`06`) > `Dft.rtf` > forum posts > `Dft_ansi.txt` (predecessor).
 - The research notes tag their own guesses as *(inferred)* or "my reconstruction", and tag second-hand Laikov quotes as "relayed". Keep those distinctions when moving material into the manual. Do not document a keyword as current without a source.
 - Forum notes cite posts as `#N` (chemport t=28803 has 518 posts and is by far the largest source, at 287 KB). Grep them rather than reading them whole.
 - Keywords are namespaced by group (`optimize.steps` ≠ `d2edr2.steps`), and Priroda accepts any unique prefix (`tol=` = `tolerance=`, `cart=` = `cartesian=`), so search the sources for prefixes as well as full names.

@@ -17,8 +17,8 @@ Exchange–correlation functional.
 
 **Type:** enum\
 **Default:** `PBE`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §3.2; 03 §5 (strings); 04 §0
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §3.2; 03 §5 (strings); 04 §0; 08 t02
 
 Default: `PBE` (the default GGA); `PBE1` for `theory=ridft`.
 

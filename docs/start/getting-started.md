@@ -1,17 +1,49 @@
 (start.getting-started)=
 # Getting started
 
-This chapter takes you through three things: a single-point energy of water, a geometry optimization of ammonia
-followed by a Hessian that proves the structure is a minimum, and the parts of the output you need to read along the
-way. It assumes that Priroda is installed and that you can start it from a shell. {doc}`running` covers that.
+This chapter takes you through four things: getting the program, a single-point energy of water, a geometry
+optimization of ammonia followed by a Hessian that proves the structure is a minimum, and the parts of the output
+you need to read along the way. {doc}`running` covers running the program in more detail.
 
-:::{warning}
-**The example inputs in this chapter have not been run yet.** They are assembled from inputs published by the developer
-and by experienced users, adapted to the current basis-set file `basis.in`. They follow the documented syntax, but
-nobody has checked them against a current Priroda binary. The output excerpts, by contrast, are copied verbatim from
-real outputs posted by users or shipped with the program. They come from various molecules and versions, so they
-will not match your runs number for number.
+The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. A few
+excerpts come from outputs posted by users of older versions; the text says so where it matters.
+<!-- src: 08 -->
+
+(obtaining-priroda)=
+## Obtaining Priroda
+
+Priroda is free of charge. Everything you need to run it can be downloaded from the official site,
+<https://rad.chem.msu.ru/~laikov/p_w/>: the executables, the basis-set files and the helper scripts. Put the
+executable and `basis.in` in a directory of your own. The main Linux executable, `p`, is statically linked, so a
+serial run needs no other libraries. The page is a bare file index with no documentation, license text or contact information. It holds:
+
+- Linux x86-64 executables (`p`, `p4`, `p_d`, `p4_d`), builds for particular clusters (`p_l`, `p_mvs1p1`, `p_mvs10p`,
+  `p_mvs10q`), an ARM build (`p_arm`), a bundled `mpiexec`, and the molecule viewer `xm`;
+- Windows (Cygwin, x86-64) executables in `exe64/`;
+- example inputs and outputs;
+- basis-set and parameter files (`basis.in`, `basis4.in`, `b2*.in`, `b4s*.in`, `3z.bas`, `sbk.bas`, `qm.in`);
+- small shell scripts: `ge` (append the `$Energy` block from an output to the input), `gm` (replace `$molecule` with
+  the optimized geometry) and `grx` (join two IRC halves).
+<!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
+
+Which executable to choose is described in {doc}`running`. For the examples in this chapter you need one Linux
+executable (for example `p`) and `basis.in`.
+
+Users have also obtained the program by writing to the developer, Dimitri Laikov, by e-mail. Users reported the
+address `dimitri_laikov@mail.ru` from 2010 to 2018; earlier it was `laikov@physto.se`. Users note that he does not always answer quickly.
+<!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
+
+:::{note}
+The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
+registered with Rospatent and distributed through the company OOO "Dimonta". A user reported in 2018 that the developer
+had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer's
+permission before using the program.
 :::
+<!-- src: 03 §1; 04 #2, #404, #443-#445 -->
+
+The official site has hosted builds with known defects. In 2016 it carried a note that the `w64/*.exe` builds (an
+attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.
+<!-- src: 04 #366 -->
 
 ## Before you start
 
@@ -22,13 +54,15 @@ Four practical points save most first-time failures.
   `task=scan` silently run an optimization. Convert such files with `dos2unix`.
   <!-- src: 04 §0 (CRLF symptoms) -->
 - **Give the basis file by its full path.** The {ref}`basis <control.basis>` keyword names the basis-set file.
-  Relative names have failed on Linux, and an absolute path is the safe choice. The examples below use
+  A relative name works in version 25 when the file is in the directory you run from, but relative names have
+  failed in older versions and in parallel runs, so an absolute path is the safe choice. The examples below use
   `/home/user/priroda/basis.in`; replace it with the location of `basis.in` on your machine.
-  <!-- src: 04 §0, #154 (full path to the basis file) -->
+  <!-- src: 04 §0, #154 (full path to the basis file); 08 t03 -->
 - **Atomic numbers are integers.** Each atom line in `$molecule` starts with the atomic number written as an integer
-  (`8`, not `8.0` and not `O`). <!-- src: keywords/molecule.yaml body -->
-- **Running.** A serial run is `p input output`; a parallel run on one node is `p -np 4 input output`.
-  Use full paths here too. <!-- src: 04 §0 (running); 06 §7 -->
+  (`8`, not `8.0` and not `O`). A real number such as `8.0` gives no error: the program silently reads a different
+  molecule. <!-- src: keywords/molecule.yaml body; 08 t09 -->
+- **Running.** A serial run is `p input output`. Parallel runs are described in {doc}`running`.
+  <!-- src: 04 §0 (running); 06 §7; 08 t01 -->
 
 ## A single-point energy
 
@@ -47,15 +81,14 @@ $end
 $dft functional=PBE $end
 $molecule
  charge=0 mult=1
- z-matrix
+ cartesian
  set=L1
-   8
-   1    1    0.96252725
-   1    1    0.96252725    2    102.943872
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
 $end
 ```
-<!-- verify -->
-<!-- src: geometry from input.txt ($molecule set= example, there with old sets B1/B2); $system values from 02 §4.1; basis.in + set=L1 from 01 §5.5, 04 #152 -->
+<!-- src: tests/inputs/t01_energy.in, run on version 25 (08 t01); $system values from 02 §4.1; basis.in + set=L1 from 01 §5.5, 04 #152 -->
 
 Group by group:
 
@@ -69,14 +102,15 @@ Group by group:
 - {ref}`$dft <group.dft>` selects the {ref}`functional <dft.functional>`. PBE is already the default, so this line
   only makes the choice visible. <!-- src: 01 §4.3 (default PBE) -->
 - {ref}`$molecule <group.molecule>` holds the {ref}`charge <molecule.charge>`, the
-  {ref}`multiplicity <molecule.mult>` (2S+1), the geometry as a Z-matrix (distances in Å, angles in degrees), and
-  the basis set. {ref}`set=L1 <molecule.set>` picks the set named `L1` from `basis.in`. `L1` is also the default
+  {ref}`multiplicity <molecule.mult>` (2S+1), the geometry, and the basis set. The geometry is given in Cartesian coordinates (Å), one line per atom: atomic number, then x, y,
+  z. {ref}`set=L1 <molecule.set>` picks the set named `L1` from `basis.in`. `L1` is also the default
   set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, §6.2; 04 §0 (L1 ≈ cc-pVDZ) -->
 
 :::{note}
 Hybrid functionals such as `PBE1` or `B3LYP` need {ref}`theory=ridft <control.theory>`. With `theory=dft`, older
-versions silently drop the exact exchange, and newer ones abort. See {ref}`$control theory <control.theory>`.
-<!-- src: 04 §0, #96, #99, #307-#310 -->
+versions silently drop the exact exchange, and newer ones abort with no error message. See
+{ref}`$control theory <control.theory>`.
+<!-- src: 04 §0, #96, #99, #307-#310; 08 t08 -->
 :::
 
 Run it:
@@ -87,48 +121,83 @@ p water.in water.out
 
 ### What to look for in the output
 
-Near the top, a summary box repeats what the program understood from your input. It is the quickest check that the
-charge, multiplicity, method and functional are what you meant. This box is from the C60 example on the official site:
+The excerpts below are from this input run on Priroda 25. The output starts with the version banner,
+`Priroda 25 (2025.02.28)`, and the memory and disk limits. The line `molecule input: ''` follows in every run; it is
+not an error. Then come the coordinates, the `formula:` line and a table of interatomic distances. Check the
+formula: it is the quickest way to catch a misread `$molecule` group.
+<!-- src: 08 t01, t09 -->
+
+Next, a summary box repeats what the program understood from your input. Check that the charge, multiplicity,
+method and functional are what you meant:
 
 ```text
  +---------------------------------------
- | Number of atoms                     60
+ | Number of atoms                      3
  | Charge of molecule                   0
  | Spin multiplicity                    1
- | Number of alpha electrons          180
- | Number of beta  electrons          180
- | Number of core  electrons           60
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
  | Theoretical Method                 DFT
  | Approximation to E(xc)             PBE
- | Dimension of wavefunction basis    840
- | Dimension of   auxiliary  basis   2400
+ | Dimension of wavefunction basis     24
+ | Dimension of   auxiliary  basis     50
  | Hamiltonian: non-relativistic
  +---------------------------------------
 ```
-<!-- src: 01 §7 item 5 (C60.df.l.2.out, Priroda 13) -->
+<!-- src: 08 t01 (verbatim) -->
 
-Next comes the SCF iteration table (columns for the energy, the energy change and the gradient). A successful SCF
-ends with the line `converged!`. If you see `no convergence!` or `SCF is far from convergence`, the energy is not
-usable; {ref}`troubleshooting.common-problems` lists the fixes.
-<!-- src: 02 §3.3 (SCF markers); 01 §7 item 8 -->
+The electron counts are per spin. "Number of core electrons" counts core orbitals (here the oxygen 1s); it matters
+only for correlated methods.
+<!-- src: 08 t01, t16 (inferred from the counts) -->
 
-The total energy follows, in hartree, on the line starting with `E  =`, together with its components. This excerpt
-is from a user's output:
+Two lines then echo the SCF and grid settings, including defaults you did not set:
 
 ```text
-  E  =    -232.0211375591
-  T  =     230.89636282  V  =    -944.03076786  J  =     312.67315771
-  Ex =     -33.07586264  Ec =      -1.37265420
+ scf: conv = 1.0e-06, 1.0e-03; iter=32,16; xmax = 0.25000; 0s; n1=12
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
 ```
-<!-- src: 04 #375 (verbatim) -->
+<!-- src: 08 t01 (verbatim, two non-adjacent lines) -->
+
+Next comes the SCF iteration table (columns for the energy, the energy change and the gradient, with indented
+micro-iterations). The grid is enlarged partway through, which is why the energy jumps once. A successful SCF ends
+with the line `converged!`.
+<!-- src: 08 t01; 02 §3.3 (SCF markers) -->
+
+:::{warning}
+If the SCF fails, the program prints `no convergence!` (or, in older versions, `SCF is far from convergence`) and
+then **carries on**: it prints an energy, orbitals and properties, and exits normally. The numbers are not usable.
+Always look for `converged!` before trusting a result; {ref}`troubleshooting.common-problems` lists the fixes.
+:::
+<!-- src: 08 t10 (no convergence, exit status 0); 01 §7 item 8 -->
+
+The total energy follows, in hartree, on the line starting with `E  =`, together with its components:
+
+```text
+  E  =     -76.3653913723
+  T  =      76.07611549  V  =    -199.28820003  J  =      46.93680394
+  Ex =      -8.95038631  Ec =      -0.32925888
+
+  dipole =   0.735449 au (  1.869339 D)
+```
+<!-- src: 08 t01 (verbatim) -->
+
+If your energy differs from this one in more than the last few digits, check the basis file and the version.
 
 `E` is the number you want. The components `T`, `V`, `J`, `Ex` and `Ec` do not add up to `E`, because the nuclear
 repulsion energy is not printed on these lines. This is expected and is not an error.
 <!-- src: 04 #382 (Laikov, relayed) -->
 
-Runs that compute a gradient also print the result as a restart block on lines prefixed with `eng>`, which starts
-with `eng> E=`. Whether a pure `task=energy` run prints this block as well is not documented.
-<!-- src: 01 §4.10, §7 item 8 --> <!-- verify: eng block for task=energy -->
+Every run also prints its results as a restart block on lines prefixed with `eng>`. For `task=energy` it holds the
+energy and the dipole moment; gradient and Hessian runs add more:
+
+```text
+eng>$Energy
+eng> E=-7.6365391372338e+01
+eng> D=-2.96281302e-14  6.81315681e-13 -7.35448725e-01
+eng>$end
+```
+<!-- src: 08 t01 (verbatim); 01 §4.10 -->
 
 ## Optimizing a geometry and confirming a minimum
 
@@ -168,52 +237,53 @@ $molecule
    1    1    1.02671372    2    104.144601   -3    104.150290
 $end
 ```
-<!-- verify -->
-<!-- src: adapted from 06 §2 FAQ example 1 (there basis=basis1.bas, set=B11, $grid/$scf lines); basis.in + L1 from 01 §6 -->
+<!-- src: adapted from 06 §2 FAQ example 1 (there basis=basis1.bas, set=B11, $grid/$scf lines); basis.in + L1 from 01 §6; run on version 25 as 08 t11 -->
 
 The third hydrogen is placed by one distance and two angles: the negative index `-3` means "the angle to atom 3"
 instead of a dihedral. <!-- src: 06 §2; keywords/molecule.yaml body (Z-matrix forms) -->
 
 {ref}`tol <optimize.tolerance>` is the convergence threshold on the gradient. The displacement threshold is then set
 to 100 times that value. The default is `1e-4`; the tighter `1e-5` used in most published examples is a better
-starting point for a Hessian. {ref}`steps <optimize.steps>` caps the number of cycles (default 50). If an optimization
-needs far more than 50 steps, raising the limit rarely helps; supplying a Hessian usually does.
-<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes -->
+starting point for a Hessian. {ref}`steps <optimize.steps>` caps the number of cycles (128 by default in version 25;
+older versions used 50). If an optimization needs far more than 50 steps, raising the limit rarely helps; supplying a
+Hessian usually does. The output echoes all these settings under `Geometry optimization options:`.
+<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes; 08 t11, t14 -->
 
 Run it with `p nh3.in nh3.out`.
 
 ### Step 2: check convergence
 
-Each optimization cycle starts with a line such as `Geometry Optimization Step 0:`, and ends with the maximum
-gradient (`G(max) = ...`) and displacement (`Max. Displacement = ...`). When both are below the thresholds, the program
-prints `OPTIMIZATION CONVERGED in N steps!`. Check for it:
-<!-- src: 03 §8 (step header); 06 §4 (G(max), Max. Displacement, marker) -->
+Each optimization cycle starts with a line such as `Geometry Optimization Step 1:`, followed by the energy, the
+largest gradient and the largest displacement. When both are below the thresholds, the program prints
+`OPTIMIZATION CONVERGED in N steps!`. Check for it:
+<!-- src: 03 §8 (step header); 06 §4 (marker); 08 t11 -->
 
 ```bash
 grep "OPTIMIZATION CONVERGED" nh3.out
 ```
 
 Right after the marker, the program prints the optimized geometry as a ready-made `$molecule` group, each line
-prefixed with `MOL>`, followed by the final energy. This excerpt is from the KNC wiki (a relativistic NpO2²⁺ run):
+prefixed with `MOL>`, followed by the final energy. For `nh3.in`, version 25 printed:
 
 ```text
- Max. Displacement = 0.0000040
-    
- OPTIMIZATION CONVERGED in 4 steps!
+ OPTIMIZATION CONVERGED in 6 steps!
 MOL>$molecule
-MOL> charge=2 mult=2
-MOL> cartesian
-MOL> set=L2
-MOL>  93     0.00000003  -0.00000001  -0.00000007
-MOL>   8    -0.00000002   0.00000001   1.71247831
-MOL>   8    -0.00000002   0.00000001  -1.71247823
+MOL> z-matrix
+MOL> set=L1
+MOL>   7
+MOL>   1    1    1.02753254
+MOL>   1    1    1.02744669    2    104.120811
+MOL>   1    1    1.02748748    2    104.112983   -3    104.135802
 MOL>$end
-MOL> Energy = -28944.57077327 
+MOL> Energy =    -56.4988651558
 ```
-<!-- src: 06 §4 (verbatim, [....skip....] lines removed) -->
+<!-- src: 08 t11 (verbatim) -->
 
-If the input geometry was a Z-matrix, as in `nh3.in`, the `MOL>` block reproduces the Z-matrix with the optimized
-values. <!-- src: 01 §7 item 9 -->
+The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. The
+`charge=0 mult=1` line of the input is not repeated. A KNC wiki example of a charged doublet does show
+`MOL> charge=2 mult=2`, so the line seems to be printed only for values other than the defaults; check it for
+charged or open-shell molecules.
+<!-- src: 01 §7 item 9; 08 t11; 06 §4 (NpO2 example with charge line) --> <!-- verify: charge line in MOL block -->
 
 ### Step 3: take the final geometry
 
@@ -225,8 +295,7 @@ optimized geometry:
 sed -e 's/task=optimize/task=hessian/' -e '/\$molecule/,$d' nh3.in > nh3_freq.in
 sed -n 's/^MOL>//p' nh3.out >> nh3_freq.in
 ```
-<!-- verify -->
-<!-- src: own one-liners modelled on the official gm script (01 §8); prefix-stripping idea from 06 §4 -->
+<!-- src: own one-liners modelled on the official gm script (01 §8); prefix-stripping idea from 06 §4; checked on the 08 t11 output -->
 
 The first command assumes that `$molecule` is the last group of the input, as in all examples here. The `Energy = ...`
 line that ends up after `$end` does no harm: text outside a group is ignored. A normal optimization prints the `MOL>`
@@ -234,19 +303,18 @@ block only once. A scan or an IRC prints one per point, so there you would pick 
 <!-- src: 01 §4 (text after $end ignored); 02 §3.3 (marker per point in scan/IRC) -->
 
 :::{note}
-**If the optimization did not converge**, there are no `MOL>` lines. Do not restart from the original geometry: start
-from the last one reached. The KNC wiki did this with a local script, `lastgeo`, whose code was never published.
-The limor1 scripts read the current geometry from lines prefixed with lower-case `mol>`, so this keeps the last such
-block:
+**If the optimization did not converge**, there are no `MOL>` lines, and the program prints no message about it:
+the output just ends after the last step. Do not restart from the original geometry: start from the last one
+reached. Every step prints the geometry for the next step as a `$molecule` group on lines prefixed with lower-case
+`mol>`, so this keeps the last such block:
 
 ```bash
 sed -n 's/^mol>//p' nh3.out | awk '/\$molecule/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'
 ```
 
-Whether current versions print `mol>` lines at every step is not confirmed. The official `gm` script (below) falls
-back to the input echo (lines starting with `<$molecule`) when there are no `MOL>` lines.
-<!-- src: 06 §5 step 7, §6 (lastgeo unpublished; awk pattern); 02 §3.3 (mol = current $molecule); 01 §8 (gm fallback) -->
-<!-- verify: mol lines in current output -->
+The official `gm` script (below) falls back to the input echo (lines starting with `<$molecule`) when there are no
+`MOL>` lines.
+<!-- src: 06 §5 step 7, §6 (awk pattern); 02 §3.3; 01 §8 (gm fallback); 08 t11, t12 (mol lines every step, no message at the step limit; recipe checked on t12) -->
 :::
 
 #### The official helper scripts `ge` and `gm`
@@ -290,36 +358,54 @@ $molecule
    1    1    1.02671372    2    104.144601   -3    104.150290
 $end
 ```
-<!-- verify -->
-<!-- src: structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10 -->
+<!-- src: structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10; the same input without $thermo and $optimize ran on version 25 as 08 t13 -->
 
 The `$optimize` group is ignored by a Hessian run but does no harm, and it is useful again if you have to go back to
 step 1. {ref}`sigma <thermo.sigma>` is the rotational symmetry number used in the thermochemistry; for ammonia
-(point group C3v) it is 3. Whether Priroda can work it out itself is not documented, so set it. Temperatures go in
+(point group C3v) it is 3. **Priroda does not work it out itself**: without `sigma=` it uses 1, and the entropy comes
+out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The default temperature is 298.15 K; other temperatures go in
 {ref}`temperature <thermo.temperature>`.
-<!-- src: input.txt $thermo; 03 §10 (sigma works, = R ln σ correction to S) --> <!-- verify: automatic sigma -->
+<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K) -->
 
 For DFT the Hessian is analytic; the output announces it with `ANALYTIC SECOND DERIVATIVES OF SCF ENERGY`.
-<!-- src: 04 #460 --> <!-- verify: header text in current version -->
+<!-- src: 04 #460; 08 t13 -->
 
 ### Step 5: check the frequencies
 
-The KNC wiki tells you to search for `Normal Mode`: the vibrational frequencies follow that line. For a minimum,
-**all of them must be real (positive)**. A single imaginary frequency marks a transition state; several mean a
-higher-order saddle point.
-<!-- src: 06 §5 steps 11-12, §8 -->
+For a minimum, **all frequencies must be real (positive)**. A single imaginary frequency marks a transition state;
+several mean a higher-order saddle point. The frequencies are in the table after the line `Harmonic Frequencies`.
+For ammonia, version 25 printed:
+<!-- src: 06 §5 steps 11-12, §8; 08 t13 -->
+
+```text
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
+ | Mode | Freq.   | Mass.  | IR Int. |Raman A. |Raman D.| ROA (90)  | ROA (180) |
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
+ |    1 | 1095.36 |   1.18 | 111.670 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    2 | 1635.36 |   1.06 |  12.058 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    3 | 1635.49 |   1.06 |  12.054 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    4 | 3371.36 |   1.03 |   3.443 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    5 | 3488.82 |   1.09 |   0.493 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    6 | 3488.95 |   1.09 |   0.494 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
+```
+<!-- src: 08 t13 (verbatim) -->
+
+The columns are the frequency in cm⁻¹, the reduced mass in amu and the IR intensity in km/mol. The Raman columns
+stay zero in a plain Hessian run; Raman intensities need `task=dipole`. A second table, `Normal Modes
+(mass-weighted) and Frequencies`, follows with the mode vectors. To print the table:
+<!-- src: 08 t13; keywords/control.yaml (task=dipole for Raman) -->
 
 ```bash
-grep -A 20 "Normal Mode" nh3_freq.out
+grep -A 12 "Harmonic Frequencies" nh3_freq.out
 ```
-<!-- verify -->
+<!-- src: 08 t13 (checked) -->
 
-No verbatim copy of this table has been found in the sources, so it is described here in words. In Priroda 4 and
-later it is a table with `|`-separated columns headed `Mode`, `Freq.`, `Mass.` and `IR Int.` (mode number,
-frequency in cm⁻¹, reduced mass, IR intensity), according to the parsing code of the limor1 scripts. Those scripts
-recognize imaginary frequencies by an `i` attached to the value. Check how your version prints them before relying
-on either.
-<!-- src: 02 §3.3, §5.6 (table header from pri2mol/priIR) --> <!-- verify: whole table format, imaginary notation, units -->
+:::{note}
+How imaginary frequencies are shown has not been checked. The limor1 scripts recognize them by an `i` attached to
+the value.
+:::
+<!-- src: 02 §3.3, §5.6 --> <!-- verify: imaginary notation -->
 
 ### Step 6: if a frequency is imaginary, re-optimize
 
@@ -331,7 +417,7 @@ Starting from a good Hessian, the optimizer can move off the saddle point; one e
 sed -e 's/task=hessian/task=optimize/' nh3_freq.in > nh3_opt2.in
 sed -n 's/^eng>//p' nh3_freq.out | awk '/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}' >> nh3_opt2.in
 ```
-<!-- verify -->
+<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H --> <!-- verify: re-optimization from the appended Hessian -->
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 
 The second command appends only the last `$Energy` group, after `$molecule`. Do not leave an older `$Energy` group in
@@ -341,8 +427,9 @@ the official scripts.)
 ### Step 7: read the thermochemistry
 
 Once all frequencies are real, the end of the Hessian output holds the zero-point energy and a table of thermodynamic
-functions. The KNC wiki points to the string `ZPVE`. This is a user's verbatim output (molecule not stated):
-<!-- src: 06 §5 step 14 -->
+functions. The KNC wiki points to the string `ZPVE`. Version 25 prints the table at 298.150 K by default; this
+older user output (molecule not stated) shows 298.000 K:
+<!-- src: 06 §5 step 14; 08 t13 -->
 
 ```text
  E =  -196.328936    E0 =  -196.191669
@@ -384,9 +471,9 @@ the translational contribution for atoms. Older versions were also reported to p
 monoatomic species. <!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80 -->
 :::
 
-The temperature is printed in the `T =` line. Outputs posted by users show both `298.000 K` and `298.150 K`, so check
-which value your version uses and set {ref}`temperature <thermo.temperature>` explicitly if it matters.
-<!-- src: 04 #80, #476 (298.000), #224 (298.150); keywords/thermo.yaml (298.15 per Dft.rtf) --> <!-- verify -->
+The temperature is printed in the `T =` line. Version 25 uses 298.150 K; outputs posted by users of older versions
+also show `298.000 K`. Set {ref}`temperature <thermo.temperature>` explicitly when you compare results across versions.
+<!-- src: 04 #80, #476 (298.000), #224 (298.150); 08 t13 (298.150 in v25) -->
 
 ### The one-run alternative: `task=optimize+hessian`
 
@@ -401,8 +488,7 @@ $control
  print=+molden
 $end
 ```
-<!-- verify -->
-<!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values -->
+<!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values; 08 t14 (optimize+hessian works in v25) -->
 
 This is the only combined task that works: two `task=` lines do not chain jobs, and only the first one runs.
 `optimize+hessian` existed in Priroda 2, was missing in versions 6 to 8, and is available again from version 9.
@@ -425,7 +511,7 @@ The output is plain text, and the results meant for reuse are on lines tagged wi
 | `eng>` | the `$Energy` group: energy `E=`, dipole `D=`, gradient `G=`, and the Hessian after `task=hessian` |
 | `OPTIMIZATION CONVERGED in N steps!` | a converged optimization |
 | `MOL>` | the optimized geometry as a `$molecule` group, then `Energy =` |
-| `Normal Mode` | the start of the frequency table |
+| `Harmonic Frequencies` | the frequency table (`Normal Modes` follows with the mode vectors) |
 | `ZPVE`, `T = ... K` | zero-point energy and the thermochemistry table |
 | `Overlap populations:` | Mulliken populations (`print=+bonds`) |
 | `Atomic partitions of the density:` | Hirshfeld charges (`print=+charges`) |
@@ -437,11 +523,32 @@ The output is plain text, and the results meant for reuse are on lines tagged wi
 (qs-charges)=
 ### Charges and bond orders
 
-With `print=+charges`, DFT runs print Hirshfeld charges in a block headed `Atomic partitions of the density:`. With
-`print=+bonds`, SCF runs print Mulliken populations and bond orders in a block headed `Overlap populations:`. The
-flags can be combined, as in `water.in`. The column layout of these blocks is not shown in the sources; for open-shell
-molecules the same tables are thought to carry spin populations.
-<!-- src: keywords/control.yaml print; 06 §3, §8; 04 #79 (header names) --> <!-- verify: block layout, spin columns -->
+With `print=+bonds`, SCF runs print Mulliken charges and spin populations under `Overlap populations:`, followed by
+a table of bond orders. With `print=+charges`, DFT runs print Hirshfeld charges and spins under
+`Atomic partitions of the density:`. The flags can be combined, as in `water.in`, which gives:
+
+```text
+ Overlap populations:
+  atom    charge   spin p.
+ O1      -0.4167  -0.00000
+ H1       0.2083  -0.00000
+ H2       0.2083  -0.00000
+
+   Bond orders:
+  O1    |  H1   :  1.07  H2   :  1.07
+  H1    |  O1   :  1.07
+  H2    |  O1   :  1.07
+
+ Atomic partitions of the density:
+   atom    charge    spin
+   1  O   -0.2905    0.0000
+   2  H    0.1451    0.0000
+   3  H    0.1451    0.0000
+  total   10.0003    0.0000
+```
+<!-- src: keywords/control.yaml print; 06 §3, §8; 04 #79; 08 t01 (verbatim, timing line removed) -->
+
+The `total` row of the Hirshfeld block sums the electron populations, not the charges.
 
 (qs-molden)=
 ### Viewing results in Molden
@@ -474,7 +581,7 @@ sed -n 's/^MOL>//p' job.out | awk 'BEGIN{split("H He Li Be B C N O F Ne Na Mg Al
   NF==4 && $1+0>0 {n++; l[n]=s[$1]" "$2" "$3" "$4}
   END{print n; print "optimized geometry"; for(i=1;i<=n;i++) print l[i]}' > job.xyz
 ```
-<!-- verify -->
+<!-- src: checked on Cartesian mol lines from 08 t12 -->
 <!-- src: own one-liner replacing the KNC pri2xyz (06 §6, §9); MOL line layout from 06 §4, 01 §7 -->
 
 For a Z-matrix geometry such as `nh3.in`, the `freq>` file from the Hessian run is the easier way to look at the

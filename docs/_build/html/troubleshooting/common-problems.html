@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Sources" href="../sources.html"><link rel="prev" title="$uniq" href="../reference/uniq.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>Solving common problems - Priroda User Manual</title>
+        <title>Solving common problems - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -273,17 +273,21 @@ user posted it and nobody confirmed it. Many reports date from Priroda 6 to 10 (
 have been fixed in later builds, the entry says so.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>None of the fixes below has yet been checked against a current Priroda binary.</p>
+<p>Most fixes below have not been checked against a current Priroda binary. Where a test run on version 25
+(2025.02.28) confirmed or contradicted a report, the entry says so.</p>
 </div>
 <section id="the-input-is-not-read-or-is-read-wrongly">
 <span id="troubleshooting-input"></span><h2>The input is not read, or is read wrongly<a class="headerlink" href="#the-input-is-not-read-or-is-read-wrongly" title="Link to this heading">¶</a></h2>
-<p>When Priroda cannot parse the input it usually stops early, often right after echoing <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code>, and gives
-no explanation. Before anything else, open the output and check what it echoed back: the <code class="docutils literal notranslate"><span class="pre">System</span> <span class="pre">options</span></code> block, the
-<code class="docutils literal notranslate"><span class="pre">scf</span> <span class="pre">options:</span></code> line, the <code class="docutils literal notranslate"><span class="pre">grid:</span></code> line and the summary box (number of atoms, charge, multiplicity, method,
-functional). If a value you set is not shown there, Priroda did not read it.</p>
-<!-- src: 05 §5 (echo lines), 04 #319 -->
+<p>When Priroda cannot parse the input it usually stops early, often with no explanation. Before anything else, open
+the output and check what it echoed back: the <code class="docutils literal notranslate"><span class="pre">Memory:</span></code> and <code class="docutils literal notranslate"><span class="pre">Disk:</span></code> lines, the <code class="docutils literal notranslate"><span class="pre">formula:</span></code> line, the summary box
+(number of atoms, charge, multiplicity, method, functional), the <code class="docutils literal notranslate"><span class="pre">scf:</span></code> line and the <code class="docutils literal notranslate"><span class="pre">grid:</span></code> line. If a value you set
+is not shown there, Priroda did not read it.</p>
+<!-- src: 05 §5 (echo lines), 04 #319; 08 t01 (v25 echo lines) -->
 <section id="output-stops-after-molecule-input">
 <h3>Output stops after <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code><a class="headerlink" href="#output-stops-after-molecule-input" title="Link to this heading">¶</a></h3>
+<p>The line <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> itself is printed in every run. It is a problem only when the output ends there or
+continues with garbled text.</p>
+<!-- src: 08 t01 -->
 <p><strong>Cause.</strong> In almost every reported case the input file had Windows (CRLF) line endings. The tail of the output then
 shows a mangled keyword followed by <code class="docutils literal notranslate"><span class="pre">?</span></code>, for example <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">?matrix</span></code>, <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code> or <code class="docutils literal notranslate"><span class="pre">'z-matrix'</span> <span class="pre">?</span></code>. Inputs saved as
 Unicode, or edited in Word, fail the same way. Word’s “save as text” still writes CRLF line endings.</p>
@@ -292,10 +296,15 @@ Unicode, or edited in Word, fail the same way. Word’s “save as text” still
 Notepad++ and Far Manager (Shift+F2 in the editor) can also convert line endings. Use straight quotes only. Several
 users confirmed this fix. Running <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code> on a file that already has LF endings does no harm.</p>
 <!-- src: 04 #64, #65 (confirmed), #174; 03 §2 -->
-<p>A second cause gives the same first line: atomic numbers written as real numbers (<code class="docutils literal notranslate"><span class="pre">25.0</span></code> instead of <code class="docutils literal notranslate"><span class="pre">25</span></code>) in
-<code class="docutils literal notranslate"><span class="pre">$molecule</span></code>. In that case the output continues with <code class="docutils literal notranslate"><span class="pre">illegal</span> <span class="pre">charge/multiplicity</span></code>. Write atomic numbers as integers.
-This fix was posted by one experienced user.</p>
-<!-- src: 03 §5 (Evgeniy, Aug 2011) --> <!-- verify -->
+</section>
+<section id="the-molecule-is-wrong-odd-formula-extra-atoms">
+<h3>The molecule is wrong: odd formula, extra atoms<a class="headerlink" href="#the-molecule-is-wrong-odd-formula-extra-atoms" title="Link to this heading">¶</a></h3>
+<p>Atomic numbers written as real numbers (<code class="docutils literal notranslate"><span class="pre">8.0</span></code> instead of <code class="docutils literal notranslate"><span class="pre">8</span></code>) in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>. The atom lines are read as a stream of
+numbers, so everything after the first <code class="docutils literal notranslate"><span class="pre">.0</span></code> shifts. In version 25 there is <strong>no error</strong>: water written with <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and
+<code class="docutils literal notranslate"><span class="pre">1.0</span></code> ran as four atoms, an oxygen and three empty centres with Z=0, with the formula <code class="docutils literal notranslate"><span class="pre">__3O</span></code> and a meaningless
+energy. An older version was reported to stop with <code class="docutils literal notranslate"><span class="pre">illegal</span> <span class="pre">charge/multiplicity</span></code> instead. Write atomic numbers as
+integers, and check the <code class="docutils literal notranslate"><span class="pre">formula:</span></code> line and the atom count at the top of every output.</p>
+<!-- src: 03 §5 (Evgeniy, Aug 2011); 08 t09 -->
 <p>Avoid Cyrillic letters and spaces in the computer name, directory names and file names. One user’s problem with this
 output went away after he had dealt with both line endings and such names.</p>
 <!-- src: 03 §2 (amg, Nov 2011; Dimylko resolved) -->
@@ -318,8 +327,9 @@ followed by NMR, as separate jobs.</p>
 <!-- src: 03 §2 (denis, Evgeniy); 04 #64 -->
 </li>
 <li><p>Give an absolute path to the basis file if Priroda is not started from the directory that contains it. One user’s
-parallel run aborted with <code class="docutils literal notranslate"><span class="pre">MPI_Abort</span></code> until he wrote the full basis path in the input.</p>
-<!-- src: 04 #152-#154 --> <!-- verify -->
+parallel run aborted with <code class="docutils literal notranslate"><span class="pre">MPI_Abort</span></code> until he wrote the full basis path in the input. (In a serial version 25
+run, a relative name worked with the file in the current directory.)</p>
+<!-- src: 04 #152-#154; 08 t03 --> <!-- verify: relative basis in a parallel run -->
 </li>
 <li><p>The relativistic basis file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> needs <a class="reference internal" href="../reference/control.html#control-four"><span class="std std-ref">four=1</span></a> in <a class="reference internal" href="../reference/control.html#group-control"><span class="std std-ref">$control</span></a>.
 Without it the job stops at the <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> line. The user who reported this confirmed the fix.</p>
@@ -341,10 +351,10 @@ directory in the command line simply did not exist. Work in a directory you own 
 ./p job.in job.out
 </pre></div>
 </div>
-<p>File names are case-sensitive, unlike keywords. One user saw the extra complaint <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">output</span> <span class="pre">file</span> <span class="pre">'tasK.out'?</span></code> when
-the file name contained capital letters. Using lower-case names for input and output avoids it; this is a single
-observation.</p>
-<!-- src: 04 #161; 06 §10 (case-sensitive names) --> <!-- verify -->
+<p>File names are case-sensitive, unlike keywords. One user of an older version saw the extra complaint
+<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">output</span> <span class="pre">file</span> <span class="pre">'tasK.out'?</span></code> when the file name contained capital letters. Version 25 wrote an output file with
+capital letters in its name without complaint.</p>
+<!-- src: 04 #161; 06 §10 (case-sensitive names); 08 t19 -->
 <p>On Windows, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the folder with the input before running <code class="docutils literal notranslate"><span class="pre">p.exe</span> <span class="pre">input.in</span> <span class="pre">output.out</span></code>. One user still got
 <code class="docutils literal notranslate"><span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">input</span> <span class="pre">file</span></code> after doing that, and the thread never found the cause.</p>
 <!-- src: 04 #130-#133 -->
@@ -359,24 +369,20 @@ This is the oldest known problem in both forums and the fix is well established.
 </section>
 <section id="scf-settings-are-ignored-or-rejected">
 <h3><code class="docutils literal notranslate"><span class="pre">$scf</span></code> settings are ignored or rejected<a class="headerlink" href="#scf-settings-are-ignored-or-rejected" title="Link to this heading">¶</a></h3>
-<p>Two problems are reported when <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">convergence</span></a> and <a class="reference internal" href="../reference/scf.html#scf-iterations"><span class="std std-ref">iterations</span></a> appear
-together in <a class="reference internal" href="../reference/scf.html#group-scf"><span class="std std-ref">$scf</span></a>:</p>
-<ul>
-<li><p>The parser stops with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>, or the rest of the group is silently
-skipped. One user found that the order of the two keywords mattered; another got the error in either order.</p>
-<!-- src: 05 §5.1 (EvgeniX, amge 2015) -->
-</li>
-<li><p>In a different test, the pair worked only when <a class="reference internal" href="../reference/scf.html#scf-procedure"><span class="std std-ref">procedure=bfgs</span></a> was also given.</p>
-<!-- src: 04 #322-#324 -->
-</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>These reports conflict and come from 2015 builds. Until this is checked on a current build, put <code class="docutils literal notranslate"><span class="pre">iterations</span></code> before
-<code class="docutils literal notranslate"><span class="pre">convergence</span></code> on separate lines, and confirm both values in the <code class="docutils literal notranslate"><span class="pre">scf</span> <span class="pre">options:</span></code> line of the output, for example
-<code class="docutils literal notranslate"><span class="pre">scf</span> <span class="pre">options:</span> <span class="pre">conv=1.0e-07,</span> <span class="pre">1.0e-03;</span> <span class="pre">iter=250,16</span></code>.</p>
+<p>The parser has a problem when <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">convergence</span></a> is directly followed by another keyword in
+<a class="reference internal" href="../reference/scf.html#group-scf"><span class="std std-ref">$scf</span></a>. In version 25,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf convergence=1e-7 iterations=250 $end
+</pre></div>
 </div>
-<!-- src: 05 §5, §5.1; PLAN §3 --> <!-- verify -->
+<p>stops the run after the basis-set echo with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>: the value list of
+<code class="docutils literal notranslate"><span class="pre">convergence</span></code> takes the first letter of the next keyword. With <a class="reference internal" href="../reference/scf.html#scf-procedure"><span class="std std-ref">procedure=bfgs</span></a> between them,
+<code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">procedure=bfgs</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code>, both values are read. Forum users of 2015 builds saw the
+same error as <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>, and one found that the pair worked only with <code class="docutils literal notranslate"><span class="pre">procedure=bfgs</span></code>, which this
+explains.</p>
+<!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b -->
+<p>Until the safe orders are known, put <code class="docutils literal notranslate"><span class="pre">convergence</span></code> last in the group, or give it on a line of its own, and confirm
+both values in the <code class="docutils literal notranslate"><span class="pre">scf:</span></code> echo line of the output, for example <code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">1.0e-07,</span> <span class="pre">1.0e-03;</span> <span class="pre">iter=250,16</span></code>.</p>
+<!-- verify: convergence last or on its own line (tests round 2) -->
 </section>
 </section>
 <section id="scf-does-not-converge-or-diverges">
@@ -392,11 +398,18 @@ very large basis sets, and with diffuse functions.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">hmin</span></code> values that keep growing in magnitude, or a line such as <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">-25.15!</span></code>;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lowest</span> <span class="pre">eigenvalue</span> <span class="pre">=</span> <span class="pre">...!!!</span></code> lines with large negative numbers;</p></li>
 <li><p>an energy that rises from one macro-iteration to the next;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code> followed by <code class="docutils literal notranslate"><span class="pre">SCF</span> <span class="pre">is</span> <span class="pre">far</span> <span class="pre">from</span> <span class="pre">convergence</span></code>, after which Priroda stops.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code>, in older versions followed by <code class="docutils literal notranslate"><span class="pre">SCF</span> <span class="pre">is</span> <span class="pre">far</span> <span class="pre">from</span> <span class="pre">convergence</span></code>.</p></li>
 </ul>
 <!-- src: 04 #305, #319; 02 §3.3 -->
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In version 25, a single-point run whose SCF hits the iteration limit prints <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code> and then carries on:
+it prints an energy, orbitals and properties and exits normally. An OH radical with default settings did this after
+the default 32 iterations, still creeping towards convergence. Always check for <code class="docutils literal notranslate"><span class="pre">converged!</span></code>.</p>
+</div>
+<!-- src: 08 t10 -->
 <p>The DFT SCF runs on a coarse grid first and then switches to the final grid; the switch is marked by a new
-<code class="docutils literal notranslate"><span class="pre">Grid:</span> <span class="pre">...</span> <span class="pre">points</span></code> line. A short jump in the gradient at that point is normal. Steady growth after it is not (see
+<code class="docutils literal notranslate"><span class="pre">grid:</span></code> line with the number of points. A short jump in the gradient at that point is normal. Steady growth after it is not (see
 <a class="reference internal" href="#troubleshooting-fine-grid"><span class="std std-ref">Divergence after the switch to the fine grid (open-shell transition-metal complex)</span></a>).</p>
 <!-- src: 05 §7.1 -->
 </section>
@@ -458,8 +471,9 @@ $grid
 $end
 </pre></div>
 </div>
-<!-- src: 04 #320; 04 #324 (amge: this fragment works) --> <!-- verify -->
-<p>He notes that the default 16 iterations are too few for many jobs. If you tighten <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">convergence</span></a> to <code class="docutils literal notranslate"><span class="pre">1e-8</span></code>, make the grid finer as well, <code class="docutils literal notranslate"><span class="pre">1e-9</span></code> or <code class="docutils literal notranslate"><span class="pre">1e-10</span></code> (see <a class="reference internal" href="../reference/grid.html#grid-accuracy"><span class="std std-ref">accuracy</span></a>).</p>
+<!-- src: 04 #320; 04 #324 (amge: this fragment works); 08 t07b (the same $scf keywords on one line work in v25) -->
+<p>He notes that the default 16 iterations of the versions of that time are too few for many jobs; version 25
+defaults to 32. If you tighten <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">convergence</span></a> to <code class="docutils literal notranslate"><span class="pre">1e-8</span></code>, make the grid finer as well, <code class="docutils literal notranslate"><span class="pre">1e-9</span></code> or <code class="docutils literal notranslate"><span class="pre">1e-10</span></code> (see <a class="reference internal" href="../reference/grid.html#grid-accuracy"><span class="std std-ref">accuracy</span></a>).</p>
 <!-- src: 04 #320 -->
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -529,10 +543,11 @@ unusual and may be worth changing.</p>
 <span id="troubleshooting-optimization"></span><h2>Geometry optimization problems<a class="headerlink" href="#geometry-optimization-problems" title="Link to this heading">¶</a></h2>
 <section id="the-optimization-does-not-converge-within-steps">
 <h3>The optimization does not converge within <code class="docutils literal notranslate"><span class="pre">steps</span></code><a class="headerlink" href="#the-optimization-does-not-converge-within-steps" title="Link to this heading">¶</a></h3>
-<p>The default limit is 50 steps (see <a class="reference internal" href="../reference/optimize.html#optimize-steps"><span class="std std-ref">steps</span></a>). The documentation’s advice is that an optimization
-still running after about 50 steps usually has some other problem, and raising <code class="docutils literal notranslate"><span class="pre">steps</span></code> rarely helps. What users do
-instead:</p>
-<!-- src: keywords/optimize.yaml steps; 06 §10 -->
+<p>The default limit is 128 steps in version 25 and 50 in older versions (see <a class="reference internal" href="../reference/optimize.html#optimize-steps"><span class="std std-ref">steps</span></a>). When the
+limit is reached, the output just ends: there is no message and no <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> block. The documentation’s advice is that
+an optimization still running after about 50 steps usually has some other problem, and raising <code class="docutils literal notranslate"><span class="pre">steps</span></code> rarely helps.
+What users do instead:</p>
+<!-- src: keywords/optimize.yaml steps; 06 §10; 08 t12, t14 -->
 <ul>
 <li><p><strong>Restart from the last geometry.</strong> The limor1 <code class="docutils literal notranslate"><span class="pre">pri</span></code> script restarts Priroda from the last geometry whenever an
 optimization runs out of steps. This helps when the optimizer cycles around one geometry even after 300 steps.</p>
@@ -908,7 +923,7 @@ had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build 
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -937,6 +952,7 @@ had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build 
 <li><a class="reference internal" href="#">Solving common problems</a><ul>
 <li><a class="reference internal" href="#the-input-is-not-read-or-is-read-wrongly">The input is not read, or is read wrongly</a><ul>
 <li><a class="reference internal" href="#output-stops-after-molecule-input">Output stops after <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code></a></li>
+<li><a class="reference internal" href="#the-molecule-is-wrong-odd-formula-extra-atoms">The molecule is wrong: odd formula, extra atoms</a></li>
 <li><a class="reference internal" href="#task-scan-runs-an-optimization-or-nothing-works-on-one-machine"><code class="docutils literal notranslate"><span class="pre">task=scan</span></code> runs an optimization, or nothing works on one machine</a></li>
 <li><a class="reference internal" href="#the-basis-file-is-not-found">The basis file is not found</a></li>
 <li><a class="reference internal" href="#the-input-or-output-file-cannot-be-opened">The input or output file cannot be opened</a></li>

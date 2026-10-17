@@ -9,19 +9,24 @@ user posted it and nobody confirmed it. Many reports date from Priroda 6 to 10 (
 have been fixed in later builds, the entry says so.
 
 :::{note}
-None of the fixes below has yet been checked against a current Priroda binary.
+Most fixes below have not been checked against a current Priroda binary. Where a test run on version 25
+(2025.02.28) confirmed or contradicted a report, the entry says so.
 :::
 
 (troubleshooting.input)=
 ## The input is not read, or is read wrongly
 
-When Priroda cannot parse the input it usually stops early, often right after echoing `molecule input: ''`, and gives
-no explanation. Before anything else, open the output and check what it echoed back: the `System options` block, the
-`scf options:` line, the `grid:` line and the summary box (number of atoms, charge, multiplicity, method,
-functional). If a value you set is not shown there, Priroda did not read it.
-<!-- src: 05 §5 (echo lines), 04 #319 -->
+When Priroda cannot parse the input it usually stops early, often with no explanation. Before anything else, open
+the output and check what it echoed back: the `Memory:` and `Disk:` lines, the `formula:` line, the summary box
+(number of atoms, charge, multiplicity, method, functional), the `scf:` line and the `grid:` line. If a value you set
+is not shown there, Priroda did not read it.
+<!-- src: 05 §5 (echo lines), 04 #319; 08 t01 (v25 echo lines) -->
 
 ### Output stops after `molecule input: ''`
+
+The line `molecule input: ''` itself is printed in every run. It is a problem only when the output ends there or
+continues with garbled text.
+<!-- src: 08 t01 -->
 
 **Cause.** In almost every reported case the input file had Windows (CRLF) line endings. The tail of the output then
 shows a mangled keyword followed by `?`, for example `' ?matrix`, `?rtesian` or `'z-matrix' ?`. Inputs saved as
@@ -33,10 +38,14 @@ Notepad++ and Far Manager (Shift+F2 in the editor) can also convert line endings
 users confirmed this fix. Running `dos2unix` on a file that already has LF endings does no harm.
 <!-- src: 04 #64, #65 (confirmed), #174; 03 §2 -->
 
-A second cause gives the same first line: atomic numbers written as real numbers (`25.0` instead of `25`) in
-`$molecule`. In that case the output continues with `illegal charge/multiplicity`. Write atomic numbers as integers.
-This fix was posted by one experienced user.
-<!-- src: 03 §5 (Evgeniy, Aug 2011) --> <!-- verify -->
+### The molecule is wrong: odd formula, extra atoms
+
+Atomic numbers written as real numbers (`8.0` instead of `8`) in `$molecule`. The atom lines are read as a stream of
+numbers, so everything after the first `.0` shifts. In version 25 there is **no error**: water written with `8.0` and
+`1.0` ran as four atoms, an oxygen and three empty centres with Z=0, with the formula `__3O` and a meaningless
+energy. An older version was reported to stop with `illegal charge/multiplicity` instead. Write atomic numbers as
+integers, and check the `formula:` line and the atom count at the top of every output.
+<!-- src: 03 §5 (Evgeniy, Aug 2011); 08 t09 -->
 
 Avoid Cyrillic letters and spaces in the computer name, directory names and file names. One user's problem with this
 output went away after he had dealt with both line endings and such names.
@@ -59,8 +68,9 @@ followed by NMR, as separate jobs.
   `error opening file ''3z.bas''`, and typographic quotes copied from a web page or word processor fail too.
   <!-- src: 03 §2 (denis, Evgeniy); 04 #64 -->
 - Give an absolute path to the basis file if Priroda is not started from the directory that contains it. One user's
-  parallel run aborted with `MPI_Abort` until he wrote the full basis path in the input.
-  <!-- src: 04 #152-#154 --> <!-- verify -->
+  parallel run aborted with `MPI_Abort` until he wrote the full basis path in the input. (In a serial version 25
+  run, a relative name worked with the file in the current directory.)
+  <!-- src: 04 #152-#154; 08 t03 --> <!-- verify: relative basis in a parallel run -->
 - The relativistic basis file `basis4.in` needs {ref}`four=1 <control.four>` in {ref}`$control <group.control>`.
   Without it the job stops at the `Basis set input:` line. The user who reported this confirmed the fix.
   <!-- src: 04 #206-#208 -->
@@ -80,10 +90,10 @@ cd ~/priroda
 ./p job.in job.out
 ```
 
-File names are case-sensitive, unlike keywords. One user saw the extra complaint `0: output file 'tasK.out'?` when
-the file name contained capital letters. Using lower-case names for input and output avoids it; this is a single
-observation.
-<!-- src: 04 #161; 06 §10 (case-sensitive names) --> <!-- verify -->
+File names are case-sensitive, unlike keywords. One user of an older version saw the extra complaint
+`0: output file 'tasK.out'?` when the file name contained capital letters. Version 25 wrote an output file with
+capital letters in its name without complaint.
+<!-- src: 04 #161; 06 §10 (case-sensitive names); 08 t19 -->
 
 On Windows, `cd` into the folder with the input before running `p.exe input.in output.out`. One user still got
 `cannot open input file` after doing that, and the thread never found the cause.
@@ -99,21 +109,23 @@ This is the oldest known problem in both forums and the fix is well established.
 
 ### `$scf` settings are ignored or rejected
 
-Two problems are reported when {ref}`convergence <scf.convergence>` and {ref}`iterations <scf.iterations>` appear
-together in {ref}`$scf <group.scf>`:
+The parser has a problem when {ref}`convergence <scf.convergence>` is directly followed by another keyword in
+{ref}`$scf <group.scf>`. In version 25,
 
-- The parser stops with `*** error in '$scf' : unknown name erations`, or the rest of the group is silently
-  skipped. One user found that the order of the two keywords mattered; another got the error in either order.
-  <!-- src: 05 §5.1 (EvgeniX, amge 2015) -->
-- In a different test, the pair worked only when {ref}`procedure=bfgs <scf.procedure>` was also given.
-  <!-- src: 04 #322-#324 -->
+```text
+$scf convergence=1e-7 iterations=250 $end
+```
 
-:::{warning}
-These reports conflict and come from 2015 builds. Until this is checked on a current build, put `iterations` before
-`convergence` on separate lines, and confirm both values in the `scf options:` line of the output, for example
-`scf options: conv=1.0e-07, 1.0e-03; iter=250,16`.
-:::
-<!-- src: 05 §5, §5.1; PLAN §3 --> <!-- verify -->
+stops the run after the basis-set echo with `*** error in '$scf' : unknown name terations`: the value list of
+`convergence` takes the first letter of the next keyword. With {ref}`procedure=bfgs <scf.procedure>` between them,
+`$scf convergence=1e-7 procedure=bfgs iterations=250 $end`, both values are read. Forum users of 2015 builds saw the
+same error as `unknown name erations`, and one found that the pair worked only with `procedure=bfgs`, which this
+explains.
+<!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b -->
+
+Until the safe orders are known, put `convergence` last in the group, or give it on a line of its own, and confirm
+both values in the `scf:` echo line of the output, for example `scf: conv = 1.0e-07, 1.0e-03; iter=250,16`.
+<!-- verify: convergence last or on its own line (tests round 2) -->
 
 (troubleshooting.scf)=
 ## SCF does not converge or diverges
@@ -130,11 +142,18 @@ Signs of trouble in the SCF table:
 - `hmin` values that keep growing in magnitude, or a line such as `h = -25.15!`;
 - `lowest eigenvalue = ...!!!` lines with large negative numbers;
 - an energy that rises from one macro-iteration to the next;
-- `no convergence!` followed by `SCF is far from convergence`, after which Priroda stops.
+- `no convergence!`, in older versions followed by `SCF is far from convergence`.
 <!-- src: 04 #305, #319; 02 §3.3 -->
 
+:::{warning}
+In version 25, a single-point run whose SCF hits the iteration limit prints `no convergence!` and then carries on:
+it prints an energy, orbitals and properties and exits normally. An OH radical with default settings did this after
+the default 32 iterations, still creeping towards convergence. Always check for `converged!`.
+:::
+<!-- src: 08 t10 -->
+
 The DFT SCF runs on a coarse grid first and then switches to the final grid; the switch is marked by a new
-`Grid: ... points` line. A short jump in the gradient at that point is normal. Steady growth after it is not (see
+`grid:` line with the number of points. A short jump in the gradient at that point is normal. Steady growth after it is not (see
 {ref}`troubleshooting.fine-grid`).
 <!-- src: 05 §7.1 -->
 
@@ -197,9 +216,10 @@ $grid
  accuracy=1e-9
 $end
 ```
-<!-- src: 04 #320; 04 #324 (amge: this fragment works) --> <!-- verify -->
+<!-- src: 04 #320; 04 #324 (amge: this fragment works); 08 t07b (the same $scf keywords on one line work in v25) -->
 
-He notes that the default 16 iterations are too few for many jobs. If you tighten {ref}`convergence
+He notes that the default 16 iterations of the versions of that time are too few for many jobs; version 25
+defaults to 32. If you tighten {ref}`convergence
 <scf.convergence>` to `1e-8`, make the grid finer as well, `1e-9` or `1e-10` (see {ref}`accuracy <grid.accuracy>`).
 <!-- src: 04 #320 -->
 
@@ -268,10 +288,11 @@ vectors. <!-- src: 06 §10 -->
 
 ### The optimization does not converge within `steps`
 
-The default limit is 50 steps (see {ref}`steps <optimize.steps>`). The documentation's advice is that an optimization
-still running after about 50 steps usually has some other problem, and raising `steps` rarely helps. What users do
-instead:
-<!-- src: keywords/optimize.yaml steps; 06 §10 -->
+The default limit is 128 steps in version 25 and 50 in older versions (see {ref}`steps <optimize.steps>`). When the
+limit is reached, the output just ends: there is no message and no `MOL>` block. The documentation's advice is that
+an optimization still running after about 50 steps usually has some other problem, and raising `steps` rarely helps.
+What users do instead:
+<!-- src: keywords/optimize.yaml steps; 06 §10; 08 t12, t14 -->
 
 - **Restart from the last geometry.** The limor1 `pri` script restarts Priroda from the last geometry whenever an
   optimization runs out of steps. This helps when the optimizer cycles around one geometry even after 300 steps.

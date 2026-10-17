@@ -1,4 +1,4 @@
-# Priroda User Manual
+# Priroda Unofficial Manual
 
 An unofficial user manual for Priroda, the quantum-chemistry program by Dimitri Laikov.
 

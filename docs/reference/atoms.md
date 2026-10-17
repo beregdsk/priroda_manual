@@ -17,15 +17,16 @@ Per-element core definitions for correlated (HF-based) methods.
 
 **Type:** indexed-array\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t16
 
 For HF-based methods, the number of core shells for L=0,1,2,3, given for each atomic number. The values are
 used only to compute the total number of core electrons in the molecule.
 
 ```{note}
-The index in the example, 280 for Ni (Z=28), suggests the layout `core(10*Z)=…`. No source states this
-layout, so it must be verified.
+The index is 10·Z: `core(280)` is nickel, `core(80)` oxygen. In version 25, `core(80)=0,0,0,0` removed the
+oxygen 1s from the frozen core of an RI-MP2 run. The output reports the frozen core as `atom   8 core =  1`
+and `Number of core electrons 1`; the number there counts core orbitals, not electrons.
 ```
 
 **Example:**

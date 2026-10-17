@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$guess" href="guess.html"><link rel="prev" title="$control" href="control.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$molecule - Priroda User Manual</title>
+        <title>$molecule - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -270,8 +270,11 @@
 <p id="index-0">Charge, multiplicity, geometry (Cartesian and/or Z-matrix) and per-atom basis sets.</p>
 <p>Unlike the other groups, <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> holds <strong>ordered data</strong>. It starts with <code class="docutils literal notranslate"><span class="pre">charge=</span></code> and <code class="docutils literal notranslate"><span class="pre">mult=</span></code>, then one of the
 keywords <code class="docutils literal notranslate"><span class="pre">cartesian</span></code> or <code class="docutils literal notranslate"><span class="pre">z-matrix</span></code>, followed by one line per atom.</p>
-<p>Cartesian lines: <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">z</span></code>. <strong>Z is the atomic number written as an integer</strong>: <code class="docutils literal notranslate"><span class="pre">8</span></code>, not <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">O</span></code>. A value
-such as <code class="docutils literal notranslate"><span class="pre">25.0</span></code> breaks parsing with <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code>. The coordinates are in Å unless <code class="docutils literal notranslate"><span class="pre">unit=b</span></code> is given.</p>
+<p>Cartesian lines: <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">z</span></code>. <strong>Z is the atomic number written as an integer</strong>: <code class="docutils literal notranslate"><span class="pre">8</span></code>, not <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">O</span></code>. The
+atom lines are read as a stream of numbers, so a value such as <code class="docutils literal notranslate"><span class="pre">8.0</span></code> shifts everything after it. In version 25
+this gives <strong>no error</strong>: the run continues with a wrong molecule (extra atoms with Z=0) and a meaningless
+energy. Check the <code class="docutils literal notranslate"><span class="pre">formula:</span></code> and atom-count lines at the top of the output. The coordinates are in Å unless
+<code class="docutils literal notranslate"><span class="pre">unit=b</span></code> is given.</p>
 <p>Z-matrix lines, <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">j</span> <span class="pre">r</span> <span class="pre">k</span> <span class="pre">a</span> <span class="pre">l</span> <span class="pre">b</span></code>, can combine distances, angles and torsions in four ways:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -302,7 +305,8 @@ put the Cartesian atoms first, then the remaining atoms as a Z-matrix.</p>
 <p>The program does not use or impose point-group symmetry unless the newer <code class="docutils literal notranslate"><span class="pre">sym=</span></code> option is given. Dummy atoms
 are not supported, so counterpoise (BSSE) calculations cannot be done; NICS probe points go in <code class="docutils literal notranslate"><span class="pre">$nmr</span> <span class="pre">points=</span></code>
 instead. Some tasks (<code class="docutils literal notranslate"><span class="pre">transit</span></code>, <code class="docutils literal notranslate"><span class="pre">saddle</span></code>, <code class="docutils literal notranslate"><span class="pre">path</span></code>, <code class="docutils literal notranslate"><span class="pre">uniq</span></code>) read <strong>several</strong> <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks from one input.
-Text after <code class="docutils literal notranslate"><span class="pre">$end</span></code>, such as the <code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">=</span> <span class="pre">…</span></code> lines that helper scripts append, is ignored.</p>
+Text after <code class="docutils literal notranslate"><span class="pre">$end</span></code>, such as the <code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">=</span> <span class="pre">…</span></code> lines that helper scripts append, is ignored. The line
+<code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> near the top of every output is normal and not an error.</p>
 <section id="charge">
 <span id="molecule-charge"></span><h2><code class="docutils literal notranslate"><span class="pre">charge</span></code><a class="headerlink" href="#charge" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> integer<br />
@@ -315,8 +319,8 @@ Text after <code class="docutils literal notranslate"><span class="pre">$end</sp
 <span id="molecule-mult"></span><h2><code class="docutils literal notranslate"><span class="pre">mult</span></code><a class="headerlink" href="#mult" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default)</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf (default); 08 t10</p>
 <p>Spin multiplicity, 2S+1.</p>
 </section>
 <section id="mass">
@@ -377,10 +381,11 @@ $end
 <span id="molecule-sym"></span><h2><code class="docutils literal notranslate"><span class="pre">sym</span></code><a class="headerlink" href="#sym" title="Link to this heading">¶</a></h2>
 <p id="index-6"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.7; 04 #481</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.7; 04 #481; 08 t15</p>
 <p>Used as <code class="docutils literal notranslate"><span class="pre">sym=1,0.01</span></code> in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
-Newer versions report the detected point group (<code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">D6h</span></code>).</p>
+Newer versions report the detected point group (<code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">D6h</span></code>). In version 25, <code class="docutils literal notranslate"><span class="pre">sym=1,0.01</span></code> on a slightly
+distorted NH3 printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span>&#160;&#160;&#160; <span class="pre">6,</span> <span class="pre">unique:</span>&#160;&#160;&#160; <span class="pre">2</span></code> and echoed the geometry symmetrized.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-sym"><span class="std std-ref">sym ($optimize)</span></a></p>
 </section>
 </section>
@@ -414,7 +419,7 @@ Newer versions report the detected point group (<code class="docutils literal no
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

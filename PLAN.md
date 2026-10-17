@@ -19,9 +19,9 @@ The structural model comes from `research/07_qc_manual_structures.md` §3. The c
 Every Part II chapter follows one template: *Overview → Minimal input → Key options → Advanced → Pitfalls (from forums) → Keyword summary (links into Part IV) → References.*
 
 **Part I: Introduction** (built as Part I)
-1. About Priroda: history (Laikov; versions 2 → 23), capability matrix (rows: tasks; columns: `dft`, `ridft`, `DFT_n4`, `tddft`, `rimp2`, `ccsd`, `ccsd4t`, `qm_n3`; marks for `four=1` and MPI), **what Priroda does not do** (symmetry, continuum solvation, D3, periodic systems), how to obtain it (e-mail the author; p_w/ binaries), how to cite.
+1. About Priroda: history (Laikov; versions 2 → 23), capability matrix (rows: tasks; columns: `dft`, `ridft`, `DFT_n4`, `tddft`, `rimp2`, `ccsd`, `ccsd4t`, `qm_n3`; marks for `four=1` and MPI), **what Priroda does not do** (symmetry, continuum solvation, D3, periodic systems), how to cite. ("Obtaining Priroda" moved to Getting started, 2026-10-17: download from p_w/, or e-mail the developer.)
 2. Installation and running: Linux binaries (`p`, `p4`, `_d` variants, cluster builds), `p in out`, `p -np N in out`, Windows/Cygwin (`p1.exe`, `p.exe` + OpenMPI DLLs, `dev\shm`), PBS/SLURM job scripts, `$system` (per-process `memory`/`disk`, negative disk = RAM disk, `mem=a,b` for rank 0 vs the other ranks, `path=`/`$TMPDIR`, never NFS), LF line endings.
-3. Getting started (was "Quickstart"): water energy → NH3 optimize+hessian → reading `MOL>`/thermo output. Uses the 14-step beginner loop from `06` §5.
+3. Getting started (was "Quickstart"): obtaining Priroda (official site downloads) → water energy → NH3 optimize+hessian → reading `MOL>`/thermo output. Uses the 14-step beginner loop from `06` §5.
 4. Input syntax: `$group … $end`, case-insensitive, unique-prefix abbreviation, indexed arrays `a(5)=…`, multi-value `tol=a,b`, flag strings `print=+a+b`, ordered `$molecule` data, the commenting convention (drop the `$`), restart blocks appended to input (`$Energy` / `eng>`, `num>`).
 
 **Part II: Typical calculations**
@@ -67,28 +67,32 @@ Every item stays open for D4, testing against a real binary.
 
 | Item | Values seen | Resolution |
 |---|---|---|
-| `$scf iterations` default | 30 (Dft.rtf), 48,16 (HF for CCSD, 05), 16,16 (v6/v13/v15 output) | Recorded `16,16`; the default may depend on the method |
-| `$grid accuracy` default | 1e-7 (Dft.rtf), 1e-8 (input.txt), 1e-8,1e-5 (output) | Recorded `1e-8,1e-5` |
+| `$scf iterations` default | 30 (Dft.rtf), 48,16 (HF for CCSD, 05), 16,16 (v6/v13/v15 output) | **v25: `32,16`** (08 t01). Recorded; older values in the note |
+| `$grid accuracy` default | 1e-7 (Dft.rtf), 1e-8 (input.txt), 1e-8,1e-5 (output) | **Confirmed in v25** (08 t01) |
 | Grid finer than 1e-8 | useful (input.txt) vs pointless (Dft.rtf) | Both stated; test |
-| `$optimize trust` default | 0.5 (Dft.rtf), 0.2/0.0125 (output) | Recorded `0.2,0.0125` |
-| `$control task` default | `gradient` (Dft.rtf, pri script) | Recorded; test |
-| `$control theory` default | `dft` (Dft.rtf) | Recorded; test |
+| `$optimize trust` default | 0.5 (Dft.rtf), 0.2/0.0125 (output) | **v25: `0.125,0.015625`** (08 t11). Recorded; older values in the note |
+| `$control task` default | `gradient` (Dft.rtf, pri script) | **Confirmed in v25** (08 t02) |
+| `$control theory` default | `dft` (Dft.rtf) | **Confirmed in v25** (08 t02) |
 | `sbk.bas` coverage | Z≤84 (Dft.rtf), Z≤86 (file) | Recorded Z≤86 in `control.basis` |
 | `rL*` basis names | limor1 only | Probably a local rename; official `basis4.in` uses `L1…`. Settle in the basis chapter |
-| `convergence`+`iterations` in `$scf` | parser error `erations` (05); no effect without `procedure=bfgs` (04 #324) | Recorded in `scf.convergence` notes; test |
+| `convergence`+`iterations` in `$scf` | parser error `erations` (05); no effect without `procedure=bfgs` (04 #324) | **v25: `convergence=… iterations=…` gives `unknown name terations`; works with a keyword between** (08 t07). Safe orders: tests round 2 (t22) |
 | `$optimize steps` vs `step` | v6: `step` wins if both given | Recorded |
 | `functional` group | `$scf` (Dft.rtf) vs `$dft` (input.txt) | `$dft` is current |
-| `$atoms core(280)` index layout | 10·Z apparently | Noted; test |
+| `$atoms core(280)` index layout | 10·Z apparently | **Confirmed 10·Z** (08 t16) |
 | `$optimize coordinated=` spelling | input.txt typo? | Noted; test |
-| `$molecule mult` meaning | one forum post used `-1 1` for a radical anion (04 #49) | Documented as 2S+1; test |
-| Undocumented tasks and theories | 03, 01 | Listed with `status: undocumented`; test each |
+| `$molecule mult` meaning | one forum post used `-1 1` for a radical anion (04 #49) | **Confirmed 2S+1** (08 t10) |
+| Undocumented tasks and theories | 03, 01 | v25: the 12 ab initio theories in t17 and `task=check` run (08). Rest: tests round 2 |
 | Old predecessor keywords (`$SCF shift/field/fit`, `$search`, `$force`) | Dft_ansi.txt only | Not in the YAML. Goes to the "Version differences" chapter |
 | QM-specific `$scf d=, p=, dir=` (qm_n2) | 01 §4.5, meaning unknown | Not in the YAML until understood |
 
 ## 3a. Checklist for the first test runs (D4)
 
 Questions that a single run can answer. They are also tagged `<!-- verify -->` at the relevant place in `docs/`.
-`tests/` holds the first round of minimal inputs for them, with a run script and a results table (`tests/README.md`).
+`tests/` holds the minimal inputs for them, with a run script and a results table (`tests/README.md`). Round 1 ran on
+Priroda 25 (2025.02.28) on 2026-10-17; results in `research/08_test_runs_v25.md`. Answered: 2 (partly: `/tmp` echoed),
+3 (serial, cwd), 4, 5, 6 (aborts silently), 7 (yes, `eng>` for energy), 8 (except imaginary notation), 9 (not detected),
+10 (only `mol>`), 11, 12 (`core` and `mult`), 13 (partly), 14 (no such line printed in the runs). Still open: 1, 15,
+and the round-2 items.
 
 1. Parallel launch: `p -np N in out`, or `./mpiexec -np N ./p in out`, or `mpiexec -np N p in`?
 2. Scratch directory when neither `path=` nor `TMPDIR` is set: the current directory, the input-file directory, or `/tmp`?
@@ -116,5 +120,6 @@ Questions that a single run can answer. They are also tagged `<!-- verify -->` a
 3. ~~Fold in the keywords and defaults from the other sources; record the §3 conflicts.~~ Done: 16 groups, 72 keywords. New groups are `$Energy`, `$dynamic` and `$uniq`, with undocumented tasks, theories, functionals and print flags marked per value.
 4. ~~Write Part I and the Part V error index.~~ Done: About, Running, Quickstart and Input syntax; Common problems. The error index
    was written and then dropped (D6). The open questions are in §3a.
-4a. ~~First round of test inputs for §3a.~~ Done: `tests/`. Waiting for runs.
+4a. ~~First round of test inputs for §3a.~~ Done: `tests/`, run on v25; findings folded into the YAML and Part I/III.
+4b. Second round of test inputs (t21–t40) written; waiting for runs.
 5. Write the Part II chapters in task order, then Part III, then the appendices.

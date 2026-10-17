@@ -17,8 +17,8 @@ Job type, level of theory, basis-set file, Hamiltonian and printing.
 
 **Type:** enum\
 **Default:** `gradient`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18
 
 Job type.
 
@@ -36,7 +36,7 @@ Job type.
 | `scan` | Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. |
 | `nmr` | NMR shielding tensors. Works only with `theory=dft`. |
 | `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities). |
-| `check` | Process the geometry only. *(undocumented)* |
+| `check` | Read the input and set up the run (geometry, basis sets, SCF and grid settings), then stop before the SCF. Useful to check an input. |
 | `extremal` | Gradient-extremal path (v9 banner "Calculation of Gradient Extremal Path"); slow. *(undocumented)* |
 | `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. *(undocumented)* |
 | `saddle` | Approximate saddle-point search from two `$molecule` blocks (start and end). *(undocumented)* |
@@ -66,8 +66,8 @@ and others) that are untested or need data that is not distributed.
 
 **Type:** enum\
 **Default:** `dft`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17
 
 Theoretical method.
 
@@ -81,16 +81,16 @@ Theoretical method.
 | `DFT_n4` | Newer DFT variant, used in the official example inputs with `func=LPBEVV` (2025). *(undocumented)* |
 | `tddft` | GGA time-dependent DFT (no hybrid TDDFT). |
 | `rimp2` | RI-MP2. |
-| `hf` | Hartree–Fock. *(undocumented)* |
-| `rihf` | RI Hartree–Fock. *(undocumented)* |
-| `cis` | CIS (RHF/UHF). Slow and disk-hungry. *(undocumented)* |
-| `mp2` | Conventional MP2 (RHF, UHF, ROHF). Very disk-hungry. *(undocumented)* |
-| `mp3` | MP3. *(undocumented)* |
-| `mp4dq` | MP4(DQ). *(undocumented)* |
-| `mp4sdq` | MP4(SDQ). *(undocumented)* |
-| `mp4sdtq` | MP4(SDTQ) (RHF). *(undocumented)* |
-| `ccs` | CCS. *(undocumented)* |
-| `ccd` | CCD. *(undocumented)* |
+| `hf` | Hartree–Fock. |
+| `rihf` | RI Hartree–Fock. |
+| `cis` | CIS (RHF/UHF). Prints a table of excited states; `E =` is the total energy of the first excited state. Slow and disk-hungry. |
+| `mp2` | Conventional MP2 (RHF, UHF, ROHF). Very disk-hungry. |
+| `mp3` | MP3. |
+| `mp4dq` | MP4(DQ). |
+| `mp4sdq` | MP4(SDQ). |
+| `mp4sdtq` | MP4(SDTQ) (RHF). |
+| `ccs` | CCS. With an HF reference it returns the HF energy. |
+| `ccd` | CCD. |
 | `ccsd` | CCSD (RHF/UHF). |
 | `ccsd4t` | CCSD(T). |
 | `ccsdsd` | Linear-response (EOM) CCSD for excited states (RHF). *(undocumented)* |
@@ -99,10 +99,12 @@ Theoretical method.
 
 ```{note}
 **Hybrid trap.** Hybrid functionals (`PBE1`, `B3LYP`, …) take effect only with `theory=ridft`. With `theory=dft`
-or `tddft`, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort with
-`MPI_Abort` after reading the basis twice.
+or `tddft`, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort. Version 25
+stops right after printing the basis sets, with no error message in the output and exit status 1.
 
-The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. These
+The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. In version 25,
+water energies run to completion with `hf`, `rihf`, `cis`, `mp2`, `mp3`, `mp4dq`, `mp4sdq`, `mp4sdtq`, `ccs`,
+`ccd`, `ccsd` and `ccsd4t`; gradients with these methods were not tested. These
 were reported **not** working in v6: `mp4`, `rimp4`, `rimp4sdtq`, `rimp4sdq`, `riccsd`, `riccsd4t`. They
 either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
 CCSDT, …); none has been reported working.
@@ -132,8 +134,8 @@ is the number of states N included in the iterative solution of the equations (`
 
 **Type:** string\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 01 §4.11, §6; 03 §5; 04 §0
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 01 §4.11, §6; 03 §5; 04 §0; 08 t03
 
 Default: basis-set data are read from the input file itself.
 
@@ -144,7 +146,9 @@ quotes break parsing.
 ```{note}
 Shipped files include `basis.in` (Λ/L family, default set `L1`), `basis4.in` (scalar-relativistic L family;
 needs `four=1`), `3z.bas` (DFT only, Z ≤ 54), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
-`b4s*.in`, and `qm.in`. An absolute path is safest. Chapter "Basis sets" has the full family list.
+`b4s*.in`, and `qm.in`. In version 25 a relative name such as `basis=basis.in` works when the file is in the
+directory the program is started from. An absolute path is still the safest choice for parallel and batch
+runs.
 ```
 
 **See also:** {ref}`set ($molecule) <molecule.set>`, {ref}`four ($control) <control.four>`

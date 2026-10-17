@@ -19,10 +19,12 @@ most of the memory and all of the disk storage are used by the master process (r
 ```
 
 **Type:** list\
-**Default:** *none stated*\
+**Default:** `256`\
 **Units:** MB\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process)
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02
+
+Default: echoed by version 25 when `$system` is omitted.
 
 Memory limit in megabytes. A second value sets the limit for the other MPI ranks: `mem=2048,256` gives rank 0
 2048 MB and every other rank 256 MB. A single value applies to all ranks. The output echoes the result as
@@ -31,6 +33,8 @@ Memory limit in megabytes. A second value sets the limit for the other MPI ranks
 ```{note}
 For DFT, the v5 documentation estimates the memory as about 8·N²·3 bytes for energy and gradient, and twice that
 for an analytic Hessian, where N is the basis dimension. `Dft.rtf` gives an old default of 16 MB.
+Without a `$system` group, version 25 echoes `Memory: 256m + 512m (256m + 512m)`: 256 MB of memory plus a
+512 MB RAM disk per process, read from the echo format.
 ```
 
 (system.disk)=
@@ -40,9 +44,11 @@ for an analytic Hessian, where N is the basis dimension. `Dft.rtf` gives an old 
 ```
 
 **Type:** list\
-**Default:** *none stated*\
+**Default:** `-512`\
 **Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf (one file per GB); 01 §4.1; 04 §0, #468; 03 §17
+**Sources:** input.txt; Dft.rtf (one file per GB); 01 §4.1; 04 §0, #468; 03 §17; 08 t02
+
+Default: a 512 MB RAM disk, read from the version 25 echo `Memory: 256m + 512m` when `$system` is omitted.
 
 Positive values set the disk space in gigabytes; one scratch file is opened per gigabyte, which sidesteps
 per-file size limits. Negative values set the amount of memory, in megabytes, used to emulate disk
@@ -69,8 +75,8 @@ $system mem=2048,256 disk=-256,-1 $end
 
 **Type:** string\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 03 §2; 04 #465
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 03 §2; 04 #465; 08 t01
 
 Default: the `TMPDIR` environment variable, otherwise the current working directory.
 
@@ -81,7 +87,8 @@ Those directories should be on different physical drives. The value may be doubl
 ```{note}
 For all methods except GGA DFT, performance degrades "terribly" if more than one process reads and writes
 large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-`/tmp`, use `path=.`.
+`/tmp`, use `path=.`. Version 25 echoed `Disk:   1g '/tmp'` for `disk=1` without `path=`; whether `TMPDIR`
+was set in that test was not recorded.
 ```
 
 **Example:**

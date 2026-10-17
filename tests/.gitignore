@@ -1,1 +1,3 @@
-runs/
+runs/*/t03/basis.in
+runs/*/*.vec
+runs/*/*.tmp

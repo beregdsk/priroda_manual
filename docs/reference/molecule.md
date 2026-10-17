@@ -12,8 +12,11 @@ Charge, multiplicity, geometry (Cartesian and/or Z-matrix) and per-atom basis se
 Unlike the other groups, `$molecule` holds **ordered data**. It starts with `charge=` and `mult=`, then one of the
 keywords `cartesian` or `z-matrix`, followed by one line per atom.
 
-Cartesian lines: `Z x y z`. **Z is the atomic number written as an integer**: `8`, not `8.0` and not `O`. A value
-such as `25.0` breaks parsing with `molecule input: ''`. The coordinates are in Å unless `unit=b` is given.
+Cartesian lines: `Z x y z`. **Z is the atomic number written as an integer**: `8`, not `8.0` and not `O`. The
+atom lines are read as a stream of numbers, so a value such as `8.0` shifts everything after it. In version 25
+this gives **no error**: the run continues with a wrong molecule (extra atoms with Z=0) and a meaningless
+energy. Check the `formula:` and atom-count lines at the top of the output. The coordinates are in Å unless
+`unit=b` is given.
 
 Z-matrix lines, `Z j r k a l b`, can combine distances, angles and torsions in four ways:
 
@@ -31,7 +34,8 @@ put the Cartesian atoms first, then the remaining atoms as a Z-matrix.
 The program does not use or impose point-group symmetry unless the newer `sym=` option is given. Dummy atoms
 are not supported, so counterpoise (BSSE) calculations cannot be done; NICS probe points go in `$nmr points=`
 instead. Some tasks (`transit`, `saddle`, `path`, `uniq`) read **several** `$molecule` blocks from one input.
-Text after `$end`, such as the `Energy = …` lines that helper scripts append, is ignored.
+Text after `$end`, such as the `Energy = …` lines that helper scripts append, is ignored. The line
+`molecule input: ''` near the top of every output is normal and not an error.
 
 (molecule.charge)=
 ## `charge`
@@ -54,8 +58,8 @@ Molecular charge.
 
 **Type:** integer\
 **Default:** `1`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf (default)
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf (default); 08 t10
 
 Spin multiplicity, 2S+1.
 
@@ -133,10 +137,11 @@ Length unit of the coordinates. The default unit is Å.
 
 **Type:** list\
 **Default:** *none stated*\
-**Status:** undocumented · not verified\
-**Sources:** 01 §4.7; 04 #481
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 01 §4.7; 04 #481; 08 t15
 
 Used as `sym=1,0.01` in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
-Newer versions report the detected point group (`symmetry: D6h`).
+Newer versions report the detected point group (`symmetry: D6h`). In version 25, `sym=1,0.01` on a slightly
+distorted NH3 printed `symmetry: C3v    6, unique:    2` and echoed the geometry symmetrized.
 
 **See also:** {ref}`sym ($optimize) <optimize.sym>`

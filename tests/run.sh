@@ -1,8 +1,13 @@
 #!/bin/bash
 # Run the verification inputs serially and keep every output.
-#   PRIRODA=/path/to/p BASIS=/path/to/basis.in ./run.sh            # all tests
-#   PRIRODA=/path/to/p BASIS=/path/to/basis.in ./run.sh t01 t08    # selected tests
-# Outputs go to runs/<date>/. Tests that need special handling (t03, t19-t21) are run here as described in README.md.
+#   PRIRODA=/path/to/p BASIS=/path/to/basis.in ./run.sh             # all tests
+#   PRIRODA=/path/to/p BASIS=/path/to/basis.in ./run.sh t22 t24     # tests whose name starts with t22 or t24
+# Optional:
+#   BASIS4=/path/to/basis4.in    enables t35 (four=1)
+#   QMBASIS=/path/to/qm.in       enables t39 (theory=qm_n3)
+#   MPIEXEC=/path/to/mpiexec     enables t21b (bundled mpiexec); mpirun on PATH enables t21c
+# Outputs go to runs/<date>/: <name>.out, plus <name>.err when the program wrote to stderr.
+# Exit statuses are collected in runs/<date>/status.txt.
 set -u
 : "${PRIRODA:?set PRIRODA to the Priroda executable}"
 : "${BASIS:?set BASIS to the absolute path of basis.in}"
@@ -11,38 +16,69 @@ out="$here/runs/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$out"
 THEORIES="hf rihf cis mp2 mp3 mp4dq mp4sdq mp4sdtq ccs ccd ccsd ccsd4t"
 
-prep() { sed -e "s|@BASIS@|$BASIS|" -e "s|@THEORY@|${2:-}|" "$here/inputs/$1.in" > "$out/$3.in"; }
-run() {  # run <name>: run $out/<name>.in in $out, record the exit status
-  (cd "$out" && timeout 1800 "$PRIRODA" "$1.in" "$1.out"; echo "$1 exit=$?" >> status.txt)
-}
-
 selected() { local id=$1; shift; [ $# -eq 0 ] && return 0; for s in "$@"; do [[ $id == "$s"* ]] && return 0; done; return 1; }
+
+# prep <input name> <theory> <run name>: fill placeholders and write runs/<date>/<run name>.in
+prep() {
+  sed -e "s|@BASIS@|$BASIS|" -e "s|@BASIS4@|${BASIS4:-}|" -e "s|@QMBASIS@|${QMBASIS:-}|" \
+      -e "s|@THEORY@|${2:-}|" "$here/inputs/$1.in" > "$out/$3.in"
+}
+# last_energy <output>: the last $Energy group from eng-prefixed lines, prefix stripped
+last_energy() { sed -n 's/^eng>//p' "$1" | awk '/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'; }
+# run <name> [command prefix...]: run <name>.in in $out, keep stderr, record the exit status
+run() {
+  local name=$1; shift
+  (cd "$out" && timeout 3600 "$@" "$PRIRODA" "$name.in" "$name.out" 2> "$name.err"; echo "$name exit=$?" >> status.txt)
+  [ -s "$out/$name.err" ] || rm -f "$out/$name.err"
+}
+skip() { echo "$1 skipped: $2" >> "$out/status.txt"; }
 
 for f in "$here"/inputs/t*.in; do
   name=$(basename "$f" .in)
   selected "$name" "$@" || continue
   case $name in
-    t03_*)  # relative basis name: copy basis.in next to the input, run from that directory
+    t03_*)  # relative basis name: run next to a temporary copy of basis.in, then delete the copy
       mkdir -p "$out/t03" && cp "$BASIS" "$out/t03/basis.in" && cp "$f" "$out/t03/$name.in"
-      (cd "$out/t03" && timeout 600 "$PRIRODA" "$name.in" "$name.out"; echo "$name exit=$?" >> "$out/status.txt") ;;
+      (cd "$out/t03" && timeout 600 "$PRIRODA" "$name.in" "$name.out" 2> "$name.err"; echo "$name exit=$?" >> "$out/status.txt")
+      rm -f "$out/t03/basis.in"; [ -s "$out/t03/$name.err" ] || rm -f "$out/t03/$name.err" ;;
     t17_*)
       for th in $THEORIES; do prep "$name" "$th" "t17_$th"; run "t17_$th"; done ;;
+    t25_*|t26_*)  # need the Hessian of t24
+      if [ ! -s "$out/t24_hessian_planar_nh3.out" ]; then skip "$name" "needs t24 in the same run"; continue; fi
+      prep "$name" "" "$name"
+      last_energy "$out/t24_hessian_planar_nh3.out" > "$out/energy.tmp"
+      sed -i -e "/@ENERGY_FROM_t24@/r $out/energy.tmp" -e "/@ENERGY_FROM_t24@/d" "$out/$name.in"
+      rm -f "$out/energy.tmp"; run "$name" ;;
+    t27b_*)  # needs the vectors saved by t27a
+      if [ ! -e "$out/t27.vec" ]; then skip "$name" "needs t27a in the same run (no t27.vec)"; continue; fi
+      prep "$name" "" "$name"; run "$name" ;;
+    t35_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
+    t39_*) if [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     *)  prep "$name" "" "$name"; run "$name" ;;
   esac
 done
 
-if selected t19 "$@"; then  # output file name with a capital letter
-  prep t01_energy "" t19_capital; (cd "$out" && "$PRIRODA" t19_capital.in T19_Capital.out; echo "t19 exit=$?" >> status.txt)
+if selected t19 "$@"; then  # output file name with capital letters
+  prep t01_energy "" t19_capital
+  (cd "$out" && "$PRIRODA" t19_capital.in T19_Capital.out 2> t19_capital.err; echo "t19 exit=$?" >> status.txt)
 fi
 if selected t20 "$@"; then  # no output file given: does the output go to standard output?
-  prep t01_energy "" t20_stdout; (cd "$out" && "$PRIRODA" t20_stdout.in > t20_stdout.stdout 2>&1; echo "t20 exit=$?" >> status.txt)
+  prep t01_energy "" t20_stdout
+  (cd "$out" && "$PRIRODA" t20_stdout.in > t20_stdout.stdout 2>&1; echo "t20 exit=$?" >> status.txt)
 fi
 if selected t21 "$@"; then  # parallel launch forms, 2 processes
-  prep t01_energy "" t21a_np; (cd "$out" && "$PRIRODA" -np 2 t21a_np.in t21a_np.out; echo "t21a exit=$?" >> status.txt)
-  mpx="$(dirname "$PRIRODA")/mpiexec"
+  prep t01_energy "" t21a_np
+  (cd "$out" && "$PRIRODA" -np 2 t21a_np.in t21a_np.out > t21a_np.stdout 2>&1; echo "t21a exit=$?" >> status.txt)
+  mpx="${MPIEXEC:-$(dirname "$PRIRODA")/mpiexec}"
   if [ -x "$mpx" ]; then
-    prep t01_energy "" t21b_mpiexec; (cd "$out" && "$mpx" -np 2 "$PRIRODA" t21b_mpiexec.in t21b_mpiexec.out; echo "t21b exit=$?" >> status.txt)
-  fi
+    prep t01_energy "" t21b_mpiexec
+    (cd "$out" && "$mpx" -np 2 "$PRIRODA" t21b_mpiexec.in t21b_mpiexec.out > t21b_mpiexec.stdout 2>&1; echo "t21b exit=$?" >> status.txt)
+  else skip t21b "no bundled mpiexec (set MPIEXEC)"; fi
+  if command -v mpirun > /dev/null; then
+    prep t01_energy "" t21c_mpirun
+    (cd "$out" && mpirun -np 2 "$PRIRODA" t21c_mpirun.in t21c_mpirun.out > t21c_mpirun.stdout 2>&1; echo "t21c exit=$?" >> status.txt)
+  else skip t21c "no mpirun on PATH"; fi
 fi
 
+rm -f "$out"/t27.vec
 echo "Outputs in $out"; cat "$out/status.txt"

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Input syntax" href="input-syntax.html"><link rel="prev" title="Installing and running" href="running.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>Getting started - Priroda User Manual</title>
+        <title>Getting started - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -266,17 +266,45 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
 <span id="start-getting-started"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
-<p>This chapter takes you through three things: a single-point energy of water, a geometry optimization of ammonia
-followed by a Hessian that proves the structure is a minimum, and the parts of the output you need to read along the
-way. It assumes that Priroda is installed and that you can start it from a shell. <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a> covers that.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p><strong>The example inputs in this chapter have not been run yet.</strong> They are assembled from inputs published by the developer
-and by experienced users, adapted to the current basis-set file <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>. They follow the documented syntax, but
-nobody has checked them against a current Priroda binary. The output excerpts, by contrast, are copied verbatim from
-real outputs posted by users or shipped with the program. They come from various molecules and versions, so they
-will not match your runs number for number.</p>
+<p>This chapter takes you through four things: getting the program, a single-point energy of water, a geometry
+optimization of ammonia followed by a Hessian that proves the structure is a minimum, and the parts of the output
+you need to read along the way. <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a> covers running the program in more detail.</p>
+<p>The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. A few
+excerpts come from outputs posted by users of older versions; the text says so where it matters.</p>
+<!-- src: 08 -->
+<section id="obtaining-priroda">
+<span id="id1"></span><h2>Obtaining Priroda<a class="headerlink" href="#obtaining-priroda" title="Link to this heading">¶</a></h2>
+<p>Priroda is free of charge. Everything you need to run it can be downloaded from the official site,
+<a class="reference external" href="https://rad.chem.msu.ru/~laikov/p_w/">https://rad.chem.msu.ru/~laikov/p_w/</a>: the executables, the basis-set files and the helper scripts. Put the
+executable and <code class="docutils literal notranslate"><span class="pre">basis.in</span></code> in a directory of your own. The main Linux executable, <code class="docutils literal notranslate"><span class="pre">p</span></code>, is statically linked, so a
+serial run needs no other libraries. The page is a bare file index with no documentation, license text or contact information. It holds:</p>
+<ul class="simple">
+<li><p>Linux x86-64 executables (<code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">p4</span></code>, <code class="docutils literal notranslate"><span class="pre">p_d</span></code>, <code class="docutils literal notranslate"><span class="pre">p4_d</span></code>), builds for particular clusters (<code class="docutils literal notranslate"><span class="pre">p_l</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs1p1</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs10p</span></code>,
+<code class="docutils literal notranslate"><span class="pre">p_mvs10q</span></code>), an ARM build (<code class="docutils literal notranslate"><span class="pre">p_arm</span></code>), a bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>, and the molecule viewer <code class="docutils literal notranslate"><span class="pre">xm</span></code>;</p></li>
+<li><p>Windows (Cygwin, x86-64) executables in <code class="docutils literal notranslate"><span class="pre">exe64/</span></code>;</p></li>
+<li><p>example inputs and outputs;</p></li>
+<li><p>basis-set and parameter files (<code class="docutils literal notranslate"><span class="pre">basis.in</span></code>, <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b2*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b4s*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">3z.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">sbk.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>);</p></li>
+<li><p>small shell scripts: <code class="docutils literal notranslate"><span class="pre">ge</span></code> (append the <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> block from an output to the input), <code class="docutils literal notranslate"><span class="pre">gm</span></code> (replace <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> with
+the optimized geometry) and <code class="docutils literal notranslate"><span class="pre">grx</span></code> (join two IRC halves).</p></li>
+</ul>
+<!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
+<p>Which executable to choose is described in <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>. For the examples in this chapter you need one Linux
+executable (for example <code class="docutils literal notranslate"><span class="pre">p</span></code>) and <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>.</p>
+<p>Users have also obtained the program by writing to the developer, Dimitri Laikov, by e-mail. Users reported the
+address <code class="docutils literal notranslate"><span class="pre">dimitri_laikov&#64;mail.ru</span></code> from 2010 to 2018; earlier it was <code class="docutils literal notranslate"><span class="pre">laikov&#64;physto.se</span></code>. Users note that he does not always answer quickly.</p>
+<!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
+registered with Rospatent and distributed through the company OOO “Dimonta”. A user reported in 2018 that the developer
+had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer’s
+permission before using the program.</p>
 </div>
+<!-- src: 03 §1; 04 #2, #404, #443-#445 -->
+<p>The official site has hosted builds with known defects. In 2016 it carried a note that the <code class="docutils literal notranslate"><span class="pre">w64/*.exe</span></code> builds (an
+attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.</p>
+<!-- src: 04 #366 -->
+</section>
 <section id="before-you-start">
 <h2>Before you start<a class="headerlink" href="#before-you-start" title="Link to this heading">¶</a></h2>
 <p>Four practical points save most first-time failures.</p>
@@ -287,14 +315,17 @@ saved with Windows (CRLF) line endings gives errors such as <code class="docutil
 <!-- src: 04 §0 (CRLF symptoms) -->
 </li>
 <li><p><strong>Give the basis file by its full path.</strong> The <a class="reference internal" href="../reference/control.html#control-basis"><span class="std std-ref">basis</span></a> keyword names the basis-set file.
-Relative names have failed on Linux, and an absolute path is the safe choice. The examples below use
+A relative name works in version 25 when the file is in the directory you run from, but relative names have
+failed in older versions and in parallel runs, so an absolute path is the safe choice. The examples below use
 <code class="docutils literal notranslate"><span class="pre">/home/user/priroda/basis.in</span></code>; replace it with the location of <code class="docutils literal notranslate"><span class="pre">basis.in</span></code> on your machine.</p>
-<!-- src: 04 §0, #154 (full path to the basis file) -->
+<!-- src: 04 §0, #154 (full path to the basis file); 08 t03 -->
 </li>
 <li><p><strong>Atomic numbers are integers.</strong> Each atom line in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> starts with the atomic number written as an integer
-(<code class="docutils literal notranslate"><span class="pre">8</span></code>, not <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">O</span></code>). <!-- src: keywords/molecule.yaml body --></p></li>
-<li><p><strong>Running.</strong> A serial run is <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">input</span> <span class="pre">output</span></code>; a parallel run on one node is <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">input</span> <span class="pre">output</span></code>.
-Use full paths here too. <!-- src: 04 §0 (running); 06 §7 --></p></li>
+(<code class="docutils literal notranslate"><span class="pre">8</span></code>, not <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">O</span></code>). A real number such as <code class="docutils literal notranslate"><span class="pre">8.0</span></code> gives no error: the program silently reads a different
+molecule. <!-- src: keywords/molecule.yaml body; 08 t09 --></p></li>
+<li><p><strong>Running.</strong> A serial run is <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">input</span> <span class="pre">output</span></code>. Parallel runs are described in <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
+<!-- src: 04 §0 (running); 06 §7; 08 t01 -->
+</li>
 </ul>
 </section>
 <section id="a-single-point-energy">
@@ -312,16 +343,15 @@ $end
 $dft functional=PBE $end
 $molecule
  charge=0 mult=1
- z-matrix
+ cartesian
  set=L1
-   8
-   1    1    0.96252725
-   1    1    0.96252725    2    102.943872
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
 $end
 </pre></div>
 </div>
-<!-- verify -->
-<!-- src: geometry from input.txt ($molecule set= example, there with old sets B1/B2); $system values from 02 §4.1; basis.in + set=L1 from 01 §5.5, 04 #152 -->
+<!-- src: tests/inputs/t01_energy.in, run on version 25 (08 t01); $system values from 02 §4.1; basis.in + set=L1 from 01 §5.5, 04 #152 -->
 <p>Group by group:</p>
 <ul>
 <li><p><a class="reference internal" href="../reference/system.html#group-system"><span class="std std-ref">$system</span></a> sets the memory limit in MB and the scratch space. Here <code class="docutils literal notranslate"><span class="pre">disk=1</span></code> means 1 GB of disk
@@ -335,15 +365,16 @@ standard method. <code class="docutils literal notranslate"><span class="pre">pr
 <li><p><a class="reference internal" href="../reference/dft.html#group-dft"><span class="std std-ref">$dft</span></a> selects the <a class="reference internal" href="../reference/dft.html#dft-functional"><span class="std std-ref">functional</span></a>. PBE is already the default, so this line
 only makes the choice visible. <!-- src: 01 §4.3 (default PBE) --></p></li>
 <li><p><a class="reference internal" href="../reference/molecule.html#group-molecule"><span class="std std-ref">$molecule</span></a> holds the <a class="reference internal" href="../reference/molecule.html#molecule-charge"><span class="std std-ref">charge</span></a>, the
-<a class="reference internal" href="../reference/molecule.html#molecule-mult"><span class="std std-ref">multiplicity</span></a> (2S+1), the geometry as a Z-matrix (distances in Å, angles in degrees), and
-the basis set. <a class="reference internal" href="../reference/molecule.html#molecule-set"><span class="std std-ref">set=L1</span></a> picks the set named <code class="docutils literal notranslate"><span class="pre">L1</span></code> from <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>. <code class="docutils literal notranslate"><span class="pre">L1</span></code> is also the default
+<a class="reference internal" href="../reference/molecule.html#molecule-mult"><span class="std std-ref">multiplicity</span></a> (2S+1), the geometry, and the basis set. The geometry is given in Cartesian coordinates (Å), one line per atom: atomic number, then x, y,
+z. <a class="reference internal" href="../reference/molecule.html#molecule-set"><span class="std std-ref">set=L1</span></a> picks the set named <code class="docutils literal notranslate"><span class="pre">L1</span></code> from <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>. <code class="docutils literal notranslate"><span class="pre">L1</span></code> is also the default
 set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, §6.2; 04 §0 (L1 ≈ cc-pVDZ) --></p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Hybrid functionals such as <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> or <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> need <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=ridft</span></a>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, older
-versions silently drop the exact exchange, and newer ones abort. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
-<!-- src: 04 §0, #96, #99, #307-#310 -->
+versions silently drop the exact exchange, and newer ones abort with no error message. See
+<a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+<!-- src: 04 §0, #96, #99, #307-#310; 08 t08 -->
 </div>
 <p>Run it:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>p<span class="w"> </span>water.in<span class="w"> </span>water.out
@@ -352,42 +383,71 @@ versions silently drop the exact exchange, and newer ones abort. See <a class="r
 </section>
 <section id="what-to-look-for-in-the-output">
 <h3>What to look for in the output<a class="headerlink" href="#what-to-look-for-in-the-output" title="Link to this heading">¶</a></h3>
-<p>Near the top, a summary box repeats what the program understood from your input. It is the quickest check that the
-charge, multiplicity, method and functional are what you meant. This box is from the C60 example on the official site:</p>
+<p>The excerpts below are from this input run on Priroda 25. The output starts with the version banner,
+<code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">25</span> <span class="pre">(2025.02.28)</span></code>, and the memory and disk limits. The line <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> follows in every run; it is
+not an error. Then come the coordinates, the <code class="docutils literal notranslate"><span class="pre">formula:</span></code> line and a table of interatomic distances. Check the
+formula: it is the quickest way to catch a misread <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group.</p>
+<!-- src: 08 t01, t09 -->
+<p>Next, a summary box repeats what the program understood from your input. Check that the charge, multiplicity,
+method and functional are what you meant:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> +---------------------------------------
- | Number of atoms                     60
+ | Number of atoms                      3
  | Charge of molecule                   0
  | Spin multiplicity                    1
- | Number of alpha electrons          180
- | Number of beta  electrons          180
- | Number of core  electrons           60
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
  | Theoretical Method                 DFT
  | Approximation to E(xc)             PBE
- | Dimension of wavefunction basis    840
- | Dimension of   auxiliary  basis   2400
+ | Dimension of wavefunction basis     24
+ | Dimension of   auxiliary  basis     50
  | Hamiltonian: non-relativistic
  +---------------------------------------
 </pre></div>
 </div>
-<!-- src: 01 §7 item 5 (C60.df.l.2.out, Priroda 13) -->
-<p>Next comes the SCF iteration table (columns for the energy, the energy change and the gradient). A successful SCF
-ends with the line <code class="docutils literal notranslate"><span class="pre">converged!</span></code>. If you see <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code> or <code class="docutils literal notranslate"><span class="pre">SCF</span> <span class="pre">is</span> <span class="pre">far</span> <span class="pre">from</span> <span class="pre">convergence</span></code>, the energy is not
-usable; <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-common-problems"><span class="std std-ref">Solving common problems</span></a> lists the fixes.</p>
-<!-- src: 02 §3.3 (SCF markers); 01 §7 item 8 -->
-<p>The total energy follows, in hartree, on the line starting with <code class="docutils literal notranslate"><span class="pre">E</span>&#160; <span class="pre">=</span></code>, together with its components. This excerpt
-is from a user’s output:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  E  =    -232.0211375591
-  T  =     230.89636282  V  =    -944.03076786  J  =     312.67315771
-  Ex =     -33.07586264  Ec =      -1.37265420
+<!-- src: 08 t01 (verbatim) -->
+<p>The electron counts are per spin. “Number of core electrons” counts core orbitals (here the oxygen 1s); it matters
+only for correlated methods.</p>
+<!-- src: 08 t01, t16 (inferred from the counts) -->
+<p>Two lines then echo the SCF and grid settings, including defaults you did not set:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> scf: conv = 1.0e-06, 1.0e-03; iter=32,16; xmax = 0.25000; 0s; n1=12
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
 </pre></div>
 </div>
-<!-- src: 04 #375 (verbatim) -->
+<!-- src: 08 t01 (verbatim, two non-adjacent lines) -->
+<p>Next comes the SCF iteration table (columns for the energy, the energy change and the gradient, with indented
+micro-iterations). The grid is enlarged partway through, which is why the energy jumps once. A successful SCF ends
+with the line <code class="docutils literal notranslate"><span class="pre">converged!</span></code>.</p>
+<!-- src: 08 t01; 02 §3.3 (SCF markers) -->
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the SCF fails, the program prints <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code> (or, in older versions, <code class="docutils literal notranslate"><span class="pre">SCF</span> <span class="pre">is</span> <span class="pre">far</span> <span class="pre">from</span> <span class="pre">convergence</span></code>) and
+then <strong>carries on</strong>: it prints an energy, orbitals and properties, and exits normally. The numbers are not usable.
+Always look for <code class="docutils literal notranslate"><span class="pre">converged!</span></code> before trusting a result; <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-common-problems"><span class="std std-ref">Solving common problems</span></a> lists the fixes.</p>
+</div>
+<!-- src: 08 t10 (no convergence, exit status 0); 01 §7 item 8 -->
+<p>The total energy follows, in hartree, on the line starting with <code class="docutils literal notranslate"><span class="pre">E</span>&#160; <span class="pre">=</span></code>, together with its components:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  E  =     -76.3653913723
+  T  =      76.07611549  V  =    -199.28820003  J  =      46.93680394
+  Ex =      -8.95038631  Ec =      -0.32925888
+
+  dipole =   0.735449 au (  1.869339 D)
+</pre></div>
+</div>
+<!-- src: 08 t01 (verbatim) -->
+<p>If your energy differs from this one in more than the last few digits, check the basis file and the version.</p>
 <p><code class="docutils literal notranslate"><span class="pre">E</span></code> is the number you want. The components <code class="docutils literal notranslate"><span class="pre">T</span></code>, <code class="docutils literal notranslate"><span class="pre">V</span></code>, <code class="docutils literal notranslate"><span class="pre">J</span></code>, <code class="docutils literal notranslate"><span class="pre">Ex</span></code> and <code class="docutils literal notranslate"><span class="pre">Ec</span></code> do not add up to <code class="docutils literal notranslate"><span class="pre">E</span></code>, because the nuclear
 repulsion energy is not printed on these lines. This is expected and is not an error.</p>
 <!-- src: 04 #382 (Laikov, relayed) -->
-<p>Runs that compute a gradient also print the result as a restart block on lines prefixed with <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>, which starts
-with <code class="docutils literal notranslate"><span class="pre">eng&gt;</span> <span class="pre">E=</span></code>. Whether a pure <code class="docutils literal notranslate"><span class="pre">task=energy</span></code> run prints this block as well is not documented.</p>
-<!-- src: 01 §4.10, §7 item 8 --> <!-- verify: eng block for task=energy -->
+<p>Every run also prints its results as a restart block on lines prefixed with <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>. For <code class="docutils literal notranslate"><span class="pre">task=energy</span></code> it holds the
+energy and the dipole moment; gradient and Hessian runs add more:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>eng&gt;$Energy
+eng&gt; E=-7.6365391372338e+01
+eng&gt; D=-2.96281302e-14  6.81315681e-13 -7.35448725e-01
+eng&gt;$end
+</pre></div>
+</div>
+<!-- src: 08 t01 (verbatim); 01 §4.10 -->
 </section>
 </section>
 <section id="optimizing-a-geometry-and-confirming-a-minimum">
@@ -426,45 +486,46 @@ $molecule
 $end
 </pre></div>
 </div>
-<!-- verify -->
-<!-- src: adapted from 06 §2 FAQ example 1 (there basis=basis1.bas, set=B11, $grid/$scf lines); basis.in + L1 from 01 §6 -->
+<!-- src: adapted from 06 §2 FAQ example 1 (there basis=basis1.bas, set=B11, $grid/$scf lines); basis.in + L1 from 01 §6; run on version 25 as 08 t11 -->
 <p>The third hydrogen is placed by one distance and two angles: the negative index <code class="docutils literal notranslate"><span class="pre">-3</span></code> means “the angle to atom 3”
 instead of a dihedral. <!-- src: 06 §2; keywords/molecule.yaml body (Z-matrix forms) --></p>
 <p><a class="reference internal" href="../reference/optimize.html#optimize-tolerance"><span class="std std-ref">tol</span></a> is the convergence threshold on the gradient. The displacement threshold is then set
 to 100 times that value. The default is <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>; the tighter <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> used in most published examples is a better
-starting point for a Hessian. <a class="reference internal" href="../reference/optimize.html#optimize-steps"><span class="std std-ref">steps</span></a> caps the number of cycles (default 50). If an optimization
-needs far more than 50 steps, raising the limit rarely helps; supplying a Hessian usually does.</p>
-<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes -->
+starting point for a Hessian. <a class="reference internal" href="../reference/optimize.html#optimize-steps"><span class="std std-ref">steps</span></a> caps the number of cycles (128 by default in version 25;
+older versions used 50). If an optimization needs far more than 50 steps, raising the limit rarely helps; supplying a
+Hessian usually does. The output echoes all these settings under <code class="docutils literal notranslate"><span class="pre">Geometry</span> <span class="pre">optimization</span> <span class="pre">options:</span></code>.</p>
+<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes; 08 t11, t14 -->
 <p>Run it with <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">nh3.in</span> <span class="pre">nh3.out</span></code>.</p>
 </section>
 <section id="step-2-check-convergence">
 <h3>Step 2: check convergence<a class="headerlink" href="#step-2-check-convergence" title="Link to this heading">¶</a></h3>
-<p>Each optimization cycle starts with a line such as <code class="docutils literal notranslate"><span class="pre">Geometry</span> <span class="pre">Optimization</span> <span class="pre">Step</span> <span class="pre">0:</span></code>, and ends with the maximum
-gradient (<code class="docutils literal notranslate"><span class="pre">G(max)</span> <span class="pre">=</span> <span class="pre">...</span></code>) and displacement (<code class="docutils literal notranslate"><span class="pre">Max.</span> <span class="pre">Displacement</span> <span class="pre">=</span> <span class="pre">...</span></code>). When both are below the thresholds, the program
-prints <code class="docutils literal notranslate"><span class="pre">OPTIMIZATION</span> <span class="pre">CONVERGED</span> <span class="pre">in</span> <span class="pre">N</span> <span class="pre">steps!</span></code>. Check for it:</p>
-<!-- src: 03 §8 (step header); 06 §4 (G(max), Max. Displacement, marker) -->
+<p>Each optimization cycle starts with a line such as <code class="docutils literal notranslate"><span class="pre">Geometry</span> <span class="pre">Optimization</span> <span class="pre">Step</span> <span class="pre">1:</span></code>, followed by the energy, the
+largest gradient and the largest displacement. When both are below the thresholds, the program prints
+<code class="docutils literal notranslate"><span class="pre">OPTIMIZATION</span> <span class="pre">CONVERGED</span> <span class="pre">in</span> <span class="pre">N</span> <span class="pre">steps!</span></code>. Check for it:</p>
+<!-- src: 03 §8 (step header); 06 §4 (marker); 08 t11 -->
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s2">"OPTIMIZATION CONVERGED"</span><span class="w"> </span>nh3.out
 </pre></div>
 </div>
 <p>Right after the marker, the program prints the optimized geometry as a ready-made <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group, each line
-prefixed with <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code>, followed by the final energy. This excerpt is from the KNC wiki (a relativistic NpO2²⁺ run):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> Max. Displacement = 0.0000040
-    
- OPTIMIZATION CONVERGED in 4 steps!
+prefixed with <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code>, followed by the final energy. For <code class="docutils literal notranslate"><span class="pre">nh3.in</span></code>, version 25 printed:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> OPTIMIZATION CONVERGED in 6 steps!
 MOL&gt;$molecule
-MOL&gt; charge=2 mult=2
-MOL&gt; cartesian
-MOL&gt; set=L2
-MOL&gt;  93     0.00000003  -0.00000001  -0.00000007
-MOL&gt;   8    -0.00000002   0.00000001   1.71247831
-MOL&gt;   8    -0.00000002   0.00000001  -1.71247823
+MOL&gt; z-matrix
+MOL&gt; set=L1
+MOL&gt;   7
+MOL&gt;   1    1    1.02753254
+MOL&gt;   1    1    1.02744669    2    104.120811
+MOL&gt;   1    1    1.02748748    2    104.112983   -3    104.135802
 MOL&gt;$end
-MOL&gt; Energy = -28944.57077327 
+MOL&gt; Energy =    -56.4988651558
 </pre></div>
 </div>
-<!-- src: 06 §4 (verbatim, [....skip....] lines removed) -->
-<p>If the input geometry was a Z-matrix, as in <code class="docutils literal notranslate"><span class="pre">nh3.in</span></code>, the <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> block reproduces the Z-matrix with the optimized
-values. <!-- src: 01 §7 item 9 --></p>
+<!-- src: 08 t11 (verbatim) -->
+<p>The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. The
+<code class="docutils literal notranslate"><span class="pre">charge=0</span> <span class="pre">mult=1</span></code> line of the input is not repeated. A KNC wiki example of a charged doublet does show
+<code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">charge=2</span> <span class="pre">mult=2</span></code>, so the line seems to be printed only for values other than the defaults; check it for
+charged or open-shell molecules.</p>
+<!-- src: 01 §7 item 9; 08 t11; 06 §4 (NpO2 example with charge line) --> <!-- verify: charge line in MOL block -->
 </section>
 <section id="step-3-take-the-final-geometry">
 <h3>Step 3: take the final geometry<a class="headerlink" href="#step-3-take-the-final-geometry" title="Link to this heading">¶</a></h3>
@@ -475,25 +536,23 @@ optimized geometry:</p>
 sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^MOL&gt;//p'</span><span class="w"> </span>nh3.out<span class="w"> </span>&gt;&gt;<span class="w"> </span>nh3_freq.in
 </pre></div>
 </div>
-<!-- verify -->
-<!-- src: own one-liners modelled on the official gm script (01 §8); prefix-stripping idea from 06 §4 -->
+<!-- src: own one-liners modelled on the official gm script (01 §8); prefix-stripping idea from 06 §4; checked on the 08 t11 output -->
 <p>The first command assumes that <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> is the last group of the input, as in all examples here. The <code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">=</span> <span class="pre">...</span></code>
 line that ends up after <code class="docutils literal notranslate"><span class="pre">$end</span></code> does no harm: text outside a group is ignored. A normal optimization prints the <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code>
 block only once. A scan or an IRC prints one per point, so there you would pick the block you need.</p>
 <!-- src: 01 §4 (text after $end ignored); 02 §3.3 (marker per point in scan/IRC) -->
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>If the optimization did not converge</strong>, there are no <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines. Do not restart from the original geometry: start
-from the last one reached. The KNC wiki did this with a local script, <code class="docutils literal notranslate"><span class="pre">lastgeo</span></code>, whose code was never published.
-The limor1 scripts read the current geometry from lines prefixed with lower-case <code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code>, so this keeps the last such
-block:</p>
+<p><strong>If the optimization did not converge</strong>, there are no <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines, and the program prints no message about it:
+the output just ends after the last step. Do not restart from the original geometry: start from the last one
+reached. Every step prints the geometry for the next step as a <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group on lines prefixed with lower-case
+<code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code>, so this keeps the last such block:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^mol&gt;//p'</span><span class="w"> </span>nh3.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/\$molecule/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'</span>
 </pre></div>
 </div>
-<p>Whether current versions print <code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code> lines at every step is not confirmed. The official <code class="docutils literal notranslate"><span class="pre">gm</span></code> script (below) falls
-back to the input echo (lines starting with <code class="docutils literal notranslate"><span class="pre">&lt;$molecule</span></code>) when there are no <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines.</p>
-<!-- src: 06 §5 step 7, §6 (lastgeo unpublished; awk pattern); 02 §3.3 (mol = current $molecule); 01 §8 (gm fallback) -->
-<!-- verify: mol lines in current output -->
+<p>The official <code class="docutils literal notranslate"><span class="pre">gm</span></code> script (below) falls back to the input echo (lines starting with <code class="docutils literal notranslate"><span class="pre">&lt;$molecule</span></code>) when there are no
+<code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines.</p>
+<!-- src: 06 §5 step 7, §6 (awk pattern); 02 §3.3; 01 §8 (gm fallback); 08 t11, t12 (mol lines every step, no message at the step limit; recipe checked on t12) -->
 </div>
 <section id="the-official-helper-scripts-ge-and-gm">
 <h4>The official helper scripts <code class="docutils literal notranslate"><span class="pre">ge</span></code> and <code class="docutils literal notranslate"><span class="pre">gm</span></code><a class="headerlink" href="#the-official-helper-scripts-ge-and-gm" title="Link to this heading">¶</a></h4>
@@ -536,32 +595,48 @@ $molecule
 $end
 </pre></div>
 </div>
-<!-- verify -->
-<!-- src: structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10 -->
+<!-- src: structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10; the same input without $thermo and $optimize ran on version 25 as 08 t13 -->
 <p>The <code class="docutils literal notranslate"><span class="pre">$optimize</span></code> group is ignored by a Hessian run but does no harm, and it is useful again if you have to go back to
 step 1. <a class="reference internal" href="../reference/thermo.html#thermo-sigma"><span class="std std-ref">sigma</span></a> is the rotational symmetry number used in the thermochemistry; for ammonia
-(point group C3v) it is 3. Whether Priroda can work it out itself is not documented, so set it. Temperatures go in
+(point group C3v) it is 3. <strong>Priroda does not work it out itself</strong>: without <code class="docutils literal notranslate"><span class="pre">sigma=</span></code> it uses 1, and the entropy comes
+out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The default temperature is 298.15 K; other temperatures go in
 <a class="reference internal" href="../reference/thermo.html#thermo-temperature"><span class="std std-ref">temperature</span></a>.</p>
-<!-- src: input.txt $thermo; 03 §10 (sigma works, = R ln σ correction to S) --> <!-- verify: automatic sigma -->
+<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K) -->
 <p>For DFT the Hessian is analytic; the output announces it with <code class="docutils literal notranslate"><span class="pre">ANALYTIC</span> <span class="pre">SECOND</span> <span class="pre">DERIVATIVES</span> <span class="pre">OF</span> <span class="pre">SCF</span> <span class="pre">ENERGY</span></code>.</p>
-<!-- src: 04 #460 --> <!-- verify: header text in current version -->
+<!-- src: 04 #460; 08 t13 -->
 </section>
 <section id="step-5-check-the-frequencies">
 <h3>Step 5: check the frequencies<a class="headerlink" href="#step-5-check-the-frequencies" title="Link to this heading">¶</a></h3>
-<p>The KNC wiki tells you to search for <code class="docutils literal notranslate"><span class="pre">Normal</span> <span class="pre">Mode</span></code>: the vibrational frequencies follow that line. For a minimum,
-<strong>all of them must be real (positive)</strong>. A single imaginary frequency marks a transition state; several mean a
-higher-order saddle point.</p>
-<!-- src: 06 §5 steps 11-12, §8 -->
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="s2">"Normal Mode"</span><span class="w"> </span>nh3_freq.out
+<p>For a minimum, <strong>all frequencies must be real (positive)</strong>. A single imaginary frequency marks a transition state;
+several mean a higher-order saddle point. The frequencies are in the table after the line <code class="docutils literal notranslate"><span class="pre">Harmonic</span> <span class="pre">Frequencies</span></code>.
+For ammonia, version 25 printed:</p>
+<!-- src: 06 §5 steps 11-12, §8; 08 t13 -->
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> *------*---------*--------*---------*---------*--------*-----------*-----------*
+ | Mode | Freq.   | Mass.  | IR Int. |Raman A. |Raman D.| ROA (90)  | ROA (180) |
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
+ |    1 | 1095.36 |   1.18 | 111.670 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    2 | 1635.36 |   1.06 |  12.058 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    3 | 1635.49 |   1.06 |  12.054 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    4 | 3371.36 |   1.03 |   3.443 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    5 | 3488.82 |   1.09 |   0.493 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    6 | 3488.95 |   1.09 |   0.494 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
 </pre></div>
 </div>
-<!-- verify -->
-<p>No verbatim copy of this table has been found in the sources, so it is described here in words. In Priroda 4 and
-later it is a table with <code class="docutils literal notranslate"><span class="pre">|</span></code>-separated columns headed <code class="docutils literal notranslate"><span class="pre">Mode</span></code>, <code class="docutils literal notranslate"><span class="pre">Freq.</span></code>, <code class="docutils literal notranslate"><span class="pre">Mass.</span></code> and <code class="docutils literal notranslate"><span class="pre">IR</span> <span class="pre">Int.</span></code> (mode number,
-frequency in cm⁻¹, reduced mass, IR intensity), according to the parsing code of the limor1 scripts. Those scripts
-recognize imaginary frequencies by an <code class="docutils literal notranslate"><span class="pre">i</span></code> attached to the value. Check how your version prints them before relying
-on either.</p>
-<!-- src: 02 §3.3, §5.6 (table header from pri2mol/priIR) --> <!-- verify: whole table format, imaginary notation, units -->
+<!-- src: 08 t13 (verbatim) -->
+<p>The columns are the frequency in cm⁻¹, the reduced mass in amu and the IR intensity in km/mol. The Raman columns
+stay zero in a plain Hessian run; Raman intensities need <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code>. A second table, <code class="docutils literal notranslate"><span class="pre">Normal</span> <span class="pre">Modes</span> <span class="pre">(mass-weighted)</span> <span class="pre">and</span> <span class="pre">Frequencies</span></code>, follows with the mode vectors. To print the table:</p>
+<!-- src: 08 t13; keywords/control.yaml (task=dipole for Raman) -->
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="s2">"Harmonic Frequencies"</span><span class="w"> </span>nh3_freq.out
+</pre></div>
+</div>
+<!-- src: 08 t13 (checked) -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>How imaginary frequencies are shown has not been checked. The limor1 scripts recognize them by an <code class="docutils literal notranslate"><span class="pre">i</span></code> attached to
+the value.</p>
+</div>
+<!-- src: 02 §3.3, §5.6 --> <!-- verify: imaginary notation -->
 </section>
 <section id="step-6-if-a-frequency-is-imaginary-re-optimize">
 <h3>Step 6: if a frequency is imaginary, re-optimize<a class="headerlink" href="#step-6-if-a-frequency-is-imaginary-re-optimize" title="Link to this heading">¶</a></h3>
@@ -572,7 +647,7 @@ Starting from a good Hessian, the optimizer can move off the saddle point; one e
 sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^eng&gt;//p'</span><span class="w"> </span>nh3_freq.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>nh3_opt2.in
 </pre></div>
 </div>
-<!-- verify -->
+<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H --> <!-- verify: re-optimization from the appended Hessian -->
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 <p>The second command appends only the last <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group, after <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>. Do not leave an older <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group in
 the file. Then run <code class="docutils literal notranslate"><span class="pre">nh3_opt2.in</span></code> and go back to step 2. (<code class="docutils literal notranslate"><span class="pre">ge</span> <span class="pre">nh3_freq</span></code> does the appending in place, if you work with
@@ -581,8 +656,9 @@ the official scripts.)</p>
 <section id="step-7-read-the-thermochemistry">
 <h3>Step 7: read the thermochemistry<a class="headerlink" href="#step-7-read-the-thermochemistry" title="Link to this heading">¶</a></h3>
 <p>Once all frequencies are real, the end of the Hessian output holds the zero-point energy and a table of thermodynamic
-functions. The KNC wiki points to the string <code class="docutils literal notranslate"><span class="pre">ZPVE</span></code>. This is a user’s verbatim output (molecule not stated):</p>
-<!-- src: 06 §5 step 14 -->
+functions. The KNC wiki points to the string <code class="docutils literal notranslate"><span class="pre">ZPVE</span></code>. Version 25 prints the table at 298.150 K by default; this
+older user output (molecule not stated) shows 298.000 K:</p>
+<!-- src: 06 §5 step 14; 08 t13 -->
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> E =  -196.328936    E0 =  -196.191669
 
  ZPVE = 0.137267 a.u. =   86.1366 kcal/mol
@@ -620,9 +696,9 @@ G = −196.328936 × 627.51 + 69.0921 = −123129.28 kcal/mol, or −196.328936 
 the translational contribution for atoms. Older versions were also reported to put an extra RT into the enthalpy of
 monoatomic species. <!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80 --></p>
 </div>
-<p>The temperature is printed in the <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span></code> line. Outputs posted by users show both <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code> and <code class="docutils literal notranslate"><span class="pre">298.150</span> <span class="pre">K</span></code>, so check
-which value your version uses and set <a class="reference internal" href="../reference/thermo.html#thermo-temperature"><span class="std std-ref">temperature</span></a> explicitly if it matters.</p>
-<!-- src: 04 #80, #476 (298.000), #224 (298.150); keywords/thermo.yaml (298.15 per Dft.rtf) --> <!-- verify -->
+<p>The temperature is printed in the <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span></code> line. Version 25 uses 298.150 K; outputs posted by users of older versions
+also show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code>. Set <a class="reference internal" href="../reference/thermo.html#thermo-temperature"><span class="std std-ref">temperature</span></a> explicitly when you compare results across versions.</p>
+<!-- src: 04 #80, #476 (298.000), #224 (298.150); 08 t13 (298.150 in v25) -->
 </section>
 <section id="the-one-run-alternative-task-optimize-hessian">
 <h3>The one-run alternative: <code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code><a class="headerlink" href="#the-one-run-alternative-task-optimize-hessian" title="Link to this heading">¶</a></h3>
@@ -636,8 +712,7 @@ change the task line:</p>
 $end
 </pre></div>
 </div>
-<!-- verify -->
-<!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values -->
+<!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values; 08 t14 (optimize+hessian works in v25) -->
 <p>This is the only combined task that works: two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines do not chain jobs, and only the first one runs.
 <code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code> existed in Priroda 2, was missing in versions 6 to 8, and is available again from version 9.
 If the resulting Hessian shows an imaginary frequency, you still need step 6.</p>
@@ -676,8 +751,8 @@ If the resulting Hessian shows an imaginary frequency, you still need step 6.</p
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code></p></td>
 <td><p>the optimized geometry as a <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group, then <code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">=</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Normal</span> <span class="pre">Mode</span></code></p></td>
-<td><p>the start of the frequency table</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Harmonic</span> <span class="pre">Frequencies</span></code></p></td>
+<td><p>the frequency table (<code class="docutils literal notranslate"><span class="pre">Normal</span> <span class="pre">Modes</span></code> follows with the mode vectors)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ZPVE</span></code>, <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span> <span class="pre">...</span> <span class="pre">K</span></code></p></td>
 <td><p>zero-point energy and the thermochemistry table</p></td>
@@ -701,11 +776,30 @@ If the resulting Hessian shows an imaginary frequency, you still need step 6.</p
 </section>
 <section id="charges-and-bond-orders">
 <span id="qs-charges"></span><h3>Charges and bond orders<a class="headerlink" href="#charges-and-bond-orders" title="Link to this heading">¶</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">print=+charges</span></code>, DFT runs print Hirshfeld charges in a block headed <code class="docutils literal notranslate"><span class="pre">Atomic</span> <span class="pre">partitions</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">density:</span></code>. With
-<code class="docutils literal notranslate"><span class="pre">print=+bonds</span></code>, SCF runs print Mulliken populations and bond orders in a block headed <code class="docutils literal notranslate"><span class="pre">Overlap</span> <span class="pre">populations:</span></code>. The
-flags can be combined, as in <code class="docutils literal notranslate"><span class="pre">water.in</span></code>. The column layout of these blocks is not shown in the sources; for open-shell
-molecules the same tables are thought to carry spin populations.</p>
-<!-- src: keywords/control.yaml print; 06 §3, §8; 04 #79 (header names) --> <!-- verify: block layout, spin columns -->
+<p>With <code class="docutils literal notranslate"><span class="pre">print=+bonds</span></code>, SCF runs print Mulliken charges and spin populations under <code class="docutils literal notranslate"><span class="pre">Overlap</span> <span class="pre">populations:</span></code>, followed by
+a table of bond orders. With <code class="docutils literal notranslate"><span class="pre">print=+charges</span></code>, DFT runs print Hirshfeld charges and spins under
+<code class="docutils literal notranslate"><span class="pre">Atomic</span> <span class="pre">partitions</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">density:</span></code>. The flags can be combined, as in <code class="docutils literal notranslate"><span class="pre">water.in</span></code>, which gives:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> Overlap populations:
+  atom    charge   spin p.
+ O1      -0.4167  -0.00000
+ H1       0.2083  -0.00000
+ H2       0.2083  -0.00000
+
+   Bond orders:
+  O1    |  H1   :  1.07  H2   :  1.07
+  H1    |  O1   :  1.07
+  H2    |  O1   :  1.07
+
+ Atomic partitions of the density:
+   atom    charge    spin
+   1  O   -0.2905    0.0000
+   2  H    0.1451    0.0000
+   3  H    0.1451    0.0000
+  total   10.0003    0.0000
+</pre></div>
+</div>
+<!-- src: keywords/control.yaml print; 06 §3, §8; 04 #79; 08 t01 (verbatim, timing line removed) -->
+<p>The <code class="docutils literal notranslate"><span class="pre">total</span></code> row of the Hirshfeld block sums the electron populations, not the charges.</p>
 </section>
 <section id="viewing-results-in-molden">
 <span id="qs-molden"></span><h3>Viewing results in Molden<a class="headerlink" href="#viewing-results-in-molden" title="Link to this heading">¶</a></h3>
@@ -729,7 +823,7 @@ Molden reads (the symbol list covers H to Ar; extend it for heavier elements):</
 <span class="s1">  END{print n; print "optimized geometry"; for(i=1;i&lt;=n;i++) print l[i]}'</span><span class="w"> </span>&gt;<span class="w"> </span>job.xyz
 </pre></div>
 </div>
-<!-- verify -->
+<!-- src: checked on Cartesian mol lines from 08 t12 -->
 <!-- src: own one-liner replacing the KNC pri2xyz (06 §6, §9); MOL line layout from 06 §4, 01 §7 -->
 <p>For a Z-matrix geometry such as <code class="docutils literal notranslate"><span class="pre">nh3.in</span></code>, the <code class="docutils literal notranslate"><span class="pre">freq&gt;</span></code> file from the Hessian run is the easier way to look at the
 structure.</p>
@@ -779,7 +873,7 @@ vibrations, orbitals, NMR shifts and density critical points. Priroda’s own vi
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -806,6 +900,7 @@ vibrations, orbitals, NMR shifts and density critical points. Priroda’s own vi
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Getting started</a><ul>
+<li><a class="reference internal" href="#obtaining-priroda">Obtaining Priroda</a></li>
 <li><a class="reference internal" href="#before-you-start">Before you start</a></li>
 <li><a class="reference internal" href="#a-single-point-energy">A single-point energy</a><ul>
 <li><a class="reference internal" href="#the-input">The input</a></li>

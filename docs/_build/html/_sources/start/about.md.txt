@@ -8,7 +8,8 @@ coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and Laik
 The program is closed-source and has no complete official manual. Priroda's own documentation is a short keyword
 list, the "Input Summary" (`input.txt`), which ships with the program. This manual collects that text, the example
 files on the official site, and twenty years of user experience from Russian-language forums. It is not an official
-document: the developer has not written or reviewed it. {ref}`sources` lists what it is based on.
+document: the developer has not written or reviewed it. {ref}`sources` lists what it is based on. To download the
+program, see {ref}`obtaining-priroda`.
 <!-- src: 04 #151, #327; 00 -->
 
 ## Main features
@@ -63,10 +64,10 @@ Experienced users report that Priroda is markedly faster than general-purpose pr
 
 ## Capability matrix
 
-The table shows which `task=` values are known to work with each `theory=` value. It is assembled from example inputs
-and user reports, not from a statement by the developer.
+The table shows which `task=` values are known to work with each `theory=` value. It is assembled from example inputs,
+user reports and the test runs on version 25, not from a statement by the developer.
 
-- ✓: shown to work in an example input or a user report.
+- ✓: shown to work in an example input, a user report or a test run.
 - –: not available, according to the sources.
 - ?: unverified. No source shows it working or failing.
 
@@ -106,10 +107,10 @@ values, including the undocumented ones, is in {ref}`$control theory <control.th
 
 :::{warning}
 Hybrid functionals work only with `theory=ridft`. With `theory=dft` or `theory=tddft`, older versions silently drop
-the exact exchange and run what amounts to a pure GGA, and newer versions abort. See
-{ref}`$control theory <control.theory>`.
+the exact exchange and run what amounts to a pure GGA, and newer versions abort. Version 25 stops right after
+printing the basis sets, with no error message in the output. See {ref}`$control theory <control.theory>`.
 :::
-<!-- src: 03 §11; 04 #96, #99, #307-#310 -->
+<!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08 -->
 
 (what-priroda-does-not-do)=
 ## What Priroda does not do
@@ -119,9 +120,10 @@ Check this list before planning a project around Priroda.
 No use of point-group symmetry in older versions
 : Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
   Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
-  the official 2023–2025 example inputs use `sym=1` in `$molecule` and `$optimize`. What these options do is not documented;
-  see {ref}`$molecule sym <molecule.sym>`.
-  <!-- src: 04 §0, #251, #254; 01 §4.7 --> <!-- verify -->
+  the official 2023–2025 example inputs use `sym=1` in `$molecule` and `$optimize`. These options are not documented.
+  In a version 25 test they symmetrized the structure and kept the symmetry during the optimization; see
+  {ref}`$molecule sym <molecule.sym>` and {ref}`$optimize sym <optimize.sym>`.
+  <!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15 -->
 
 No continuum solvation
 : No version has a continuum solvent model. Solvent can only be included as explicit molecules.
@@ -178,47 +180,14 @@ version.
 | 15 | 2015.09.14 | Scalar-relativistic example (Pt complex). |
 | 16, 17 | 2016–2018 | The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the developer removed limits on SCF memory allocation and on the system size for Hessians. |
 | 23 | 2023.06.22 | Newest numbered version reported by users (2024). New functionals `LPBEVV` and `LPBEVVV`. |
-| ? | 2025 | Linux builds dated 2025-02-28 (`p4_d`) and 2025-04-14 (`p_l`), with 2025 example inputs that use `theory=DFT_n4`. Version number not known. |
+| 25 | 2025.02.28 | Banner `Priroda 25 (2025.02.28)`. The version used for the test runs behind this manual. Its date matches the `p4_d` build on the official site; `p_l` is dated 2025-04-14. The 2025 example inputs use `theory=DFT_n4`. |
 
-<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; 2025: 01 §2.2, §5.3 -->
+<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.3 -->
 
-Version numbers missing from the table (3, 12, 18–22) do not appear in any source. The Russian file `Dft_ansi.txt`
+Version numbers missing from the table (3, 12, 18–22, 24) do not appear in any source. The Russian file `Dft_ansi.txt`
 describes Priroda's predecessor, which used different group names (`$coordinates`, `$SCF`, `$search`, `$force`).
 Those names are not part of the current keyword list.
 <!-- src: 00 (Dft_ansi.txt) --> <!-- verify -->
-
-## Obtaining Priroda
-
-Priroda is free of charge and distributed by the developer. The usual route is to write to Dimitri Laikov by e-mail and
-ask for the program. Users reported the address `dimitri_laikov@mail.ru` from 2010 to 2018; earlier it was
-`laikov@physto.se`. Users note that he does not always answer quickly.
-<!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
-
-Current binaries and data files are also listed at <https://rad.chem.msu.ru/~laikov/p_w/>. The page is a bare file
-index with no documentation, license text or contact information. It holds:
-
-- Linux x86-64 executables (`p`, `p4`, `p_d`, `p4_d`), builds for particular clusters (`p_l`, `p_mvs1p1`, `p_mvs10p`,
-  `p_mvs10q`), an ARM build (`p_arm`), a bundled `mpiexec`, and the molecule viewer `xm`;
-- Windows (Cygwin, x86-64) executables in `exe64/`;
-- example inputs and outputs;
-- basis-set and parameter files (`basis.in`, `basis4.in`, `b2*.in`, `b4s*.in`, `3z.bas`, `sbk.bas`, `qm.in`);
-- small shell scripts: `ge` (append the `$Energy` block from an output to the input), `gm` (replace `$molecule` with
-  the optimized geometry) and `grx` (join two IRC halves).
-
-The executables are described in {doc}`running`.
-<!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
-
-:::{note}
-The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
-registered with Rospatent and distributed through the company OOO "Dimonta". A user reported in 2018 that the developer
-had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer's
-permission before using the program.
-:::
-<!-- src: 03 §1; 04 #2, #404, #443-#445 -->
-
-The official site has hosted builds with known defects. In 2016 it carried a note that the `w64/*.exe` builds (an
-attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.
-<!-- src: 04 #366 -->
 
 (how-to-cite)=
 ## How to cite

@@ -53,11 +53,9 @@ Groups you do not need can be left out; most keywords have sensible defaults. `i
 the problem requires.
 <!-- src: input.txt; 06 §2 -->
 
-:::{note}
-Every input in the sources starts each group on a new line. Whether two groups can share a line
-(`$scf conv=1e-7 $end $grid acc=1e-9 $end`) is not documented. Start each group on its own line.
-:::
-<!-- verify -->
+Two groups can also share a line: `$scf conv=1e-7 $end $grid acc=1e-9 $end` sets both values in version 25. Every
+input in the sources starts each group on a new line, which is easier to read.
+<!-- src: 08 t04 -->
 
 ## Keywords
 
@@ -98,10 +96,19 @@ from `step`. In inputs you keep or share, prefer the full keyword names; they ar
 :::
 <!-- src: 03 §8 (v6 step/steps); input.txt -->
 
-A misspelled or unknown keyword name stops the run with a message naming the group, of the form
-`*** error in '$scf' : unknown name erations`. That particular message comes from a parser problem with
-`convergence` and `iterations` in the same `$scf` group; see {ref}`$scf convergence <scf.convergence>`.
-<!-- src: 05 §5.1 --> <!-- verify -->
+A misspelled or unknown keyword name stops the run right after the basis-set echo, with a message naming the group
+and the keyword:
+
+```text
+*** error in '$scf' : unknown name nosuchkeyword
+```
+<!-- src: 08 t06 (verbatim) -->
+
+The same message can appear for a keyword you spelled correctly. In version 25,
+`$scf convergence=1e-7 iterations=250 $end` stops with `unknown name terations`: the value list of `convergence`
+takes the first letter of the next keyword. Put another keyword between the two, or see
+{ref}`$scf convergence <scf.convergence>`.
+<!-- src: 05 §5.1; 08 t07a, t07b -->
 
 ## Values
 
@@ -203,12 +210,10 @@ $end
 
 <!-- src: 01 §4, §4.8, §4.9 -->
 
-:::{note}
-That disabled groups and keywords are ignored is inferred from the official example files, which use this pattern
-throughout. It has not been tested what the program does with the stray `$end` that a disabled group leaves behind.
-Text inside a group is parsed as keywords, so do not put notes there.
-:::
-<!-- verify -->
+In version 25 a line of text before the first group and a disabled group with its leftover `$end`
+(`integral dir=1 $end`) are both ignored: the result is identical to the same input without them. Text inside a
+group is parsed as keywords, so do not put notes there.
+<!-- src: 08 t05 -->
 
 One user's input opened a group with `&` instead of `$` (`&dft func=PBE $end`) and ran. That group set only the
 default functional, so the run does not show whether `&` is accepted. Always use `$`.
@@ -286,9 +291,12 @@ group of the input with it. Because `gm` replaces everything from `$molecule` to
 ## Common mistakes
 
 Non-integer atomic numbers
-: `25.0` or `8.0` instead of `25` or `8` in `$molecule` stops the run after `molecule input: ''`, with
-  `illegal charge/multiplicity`. Element symbols (`O`) are not accepted either.
-  <!-- src: 03 §5; molecule.yaml -->
+: `25.0` or `8.0` instead of `25` or `8` in `$molecule`. The atom lines are read as a stream of numbers, so the
+  rest of the group shifts. In version 25 this gives no error at all: water written with `8.0` and `1.0` ran as an
+  oxygen atom plus three empty centres with Z=0, and printed a meaningless energy. Older versions were reported to
+  stop with `illegal charge/multiplicity`. Check the `formula:` line near the top of the output. Element symbols
+  (`O`) are not accepted either.
+  <!-- src: 03 §5; molecule.yaml; 08 t09 -->
 
 Typographic quotes
 : Word processors and some web pages turn `"` into curly or angle quotes, which break file names in `basis=` and
@@ -306,8 +314,9 @@ Windows line endings (CRLF)
   <!-- src: 04 #63-#65 -->
 
 Hybrid functional without `theory=ridft`
-: Syntactically valid but wrong. See {ref}`$control theory <control.theory>`.
-  <!-- src: 04 #96, #310 -->
+: Older versions ran a pure GGA; version 25 stops after the basis-set echo with no message. See
+  {ref}`$control theory <control.theory>`.
+  <!-- src: 04 #96, #310; 08 t08 -->
 
 `basis4.in` without `four=1`
 : The relativistic basis file needs `four=1` in `$control`.

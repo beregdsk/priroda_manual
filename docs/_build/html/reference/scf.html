@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$dft" href="dft.html"><link rel="prev" title="$guess" href="guess.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$scf - Priroda User Manual</title>
+        <title>$scf - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -299,28 +299,29 @@
 <span id="scf-convergence"></span><h2><code class="docutils literal notranslate"><span class="pre">convergence</span></code><a class="headerlink" href="#convergence" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-6,1e-3</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324; 08 t01, t07a, t07b</p>
 <p>Default: the first value is for SCF and the second for CP-SCF.</p>
 <p>SCF and CP-SCF convergence thresholds. The defaults are recommended. To save time in difficult cases you may
 loosen the SCF value to <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for preliminary geometry optimizations.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Two problems are reported when <code class="docutils literal notranslate"><span class="pre">convergence</span></code> and <code class="docutils literal notranslate"><span class="pre">iterations</span></code> appear together in <code class="docutils literal notranslate"><span class="pre">$scf</span></code>. In one, the group stops
-being read or fails with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>. In the other, the pair has no effect
-unless <code class="docutils literal notranslate"><span class="pre">procedure=bfgs</span></code> is also given. Reports disagree on whether keyword order matters. Until this is
-verified, check the <code class="docutils literal notranslate"><span class="pre">scf</span> <span class="pre">options:</span></code> echo line in the output.</p>
+<p>In version 25, <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code> stops the run with
+<code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>: the value list of <code class="docutils literal notranslate"><span class="pre">convergence</span></code> swallows the first letter of
+the keyword after it. With another keyword in between (<code class="docutils literal notranslate"><span class="pre">convergence=1e-7</span> <span class="pre">procedure=bfgs</span> <span class="pre">iterations=250</span></code>)
+both values are read. Older versions gave the same error as <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>. Check the
+<code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">…;</span> <span class="pre">iter=…</span></code> echo line in the output.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#scf-iterations"><span class="std std-ref">iterations ($scf)</span></a>, <a class="reference internal" href="#scf-procedure"><span class="std std-ref">procedure ($scf)</span></a></p>
 </section>
 <section id="iterations">
 <span id="scf-iterations"></span><h2><code class="docutils literal notranslate"><span class="pre">iterations</span></code><a class="headerlink" href="#iterations" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
-<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">16,16</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">16,16</span></code> is what v6, v13 and v15 echo for DFT. A HF run for CCSD showed <code class="docutils literal notranslate"><span class="pre">48,16</span></code>, so the default may depend on
-the method. <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 30 (older version).</p>
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">32,16</span></code><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306; 08 t01</p>
+<p>Default: Version 25 echoes <code class="docutils literal notranslate"><span class="pre">iter=32,16</span></code> for DFT. v6, v13 and v15 echoed <code class="docutils literal notranslate"><span class="pre">16,16</span></code>, a HF run for CCSD showed <code class="docutils literal notranslate"><span class="pre">48,16</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 30 (older version). The default may depend on the method and version.</p>
 <p>Maximum number of iterations and of microiterations (<code class="docutils literal notranslate"><span class="pre">iterations=it,micro</span></code>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -334,8 +335,8 @@ restart with <code class="docutils literal notranslate"><span class="pre">$guess
 <span id="scf-procedure"></span><h2><code class="docutils literal notranslate"><span class="pre">procedure</span></code><a class="headerlink" href="#procedure" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">nr</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #320</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf; 04 #320; 08 t07b</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">nr</span></code> for GGA DFT.</p>
 <p>Algorithm for solving the SCF equations. If one procedure fails, try the other.</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -428,7 +429,7 @@ $grid accuracy=1e-9 $end
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

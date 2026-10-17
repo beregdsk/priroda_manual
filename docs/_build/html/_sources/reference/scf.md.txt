@@ -42,8 +42,8 @@ Spin restriction.
 
 **Type:** list\
 **Default:** `1e-6,1e-3`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324; 08 t01, t07a, t07b
 
 Default: the first value is for SCF and the second for CP-SCF.
 
@@ -51,10 +51,11 @@ SCF and CP-SCF convergence thresholds. The defaults are recommended. To save tim
 loosen the SCF value to `1e-5` for preliminary geometry optimizations.
 
 ```{note}
-Two problems are reported when `convergence` and `iterations` appear together in `$scf`. In one, the group stops
-being read or fails with `*** error in '$scf' : unknown name erations`. In the other, the pair has no effect
-unless `procedure=bfgs` is also given. Reports disagree on whether keyword order matters. Until this is
-verified, check the `scf options:` echo line in the output.
+In version 25, `$scf convergence=1e-7 iterations=250 $end` stops the run with
+`*** error in '$scf' : unknown name terations`: the value list of `convergence` swallows the first letter of
+the keyword after it. With another keyword in between (`convergence=1e-7 procedure=bfgs iterations=250`)
+both values are read. Older versions gave the same error as `unknown name erations`. Check the
+`scf: conv = …; iter=…` echo line in the output.
 ```
 
 **See also:** {ref}`iterations ($scf) <scf.iterations>`, {ref}`procedure ($scf) <scf.procedure>`
@@ -66,12 +67,12 @@ verified, check the `scf options:` echo line in the output.
 ```
 
 **Type:** list\
-**Default:** `16,16`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306
+**Default:** `32,16`\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306; 08 t01
 
-Default: `16,16` is what v6, v13 and v15 echo for DFT. A HF run for CCSD showed `48,16`, so the default may depend on
-the method. `Dft.rtf` gives 30 (older version).
+Default: Version 25 echoes `iter=32,16` for DFT. v6, v13 and v15 echoed `16,16`, a HF run for CCSD showed `48,16`, and
+`Dft.rtf` gives 30 (older version). The default may depend on the method and version.
 
 
 Maximum number of iterations and of microiterations (`iterations=it,micro`).
@@ -92,8 +93,8 @@ restart with `$guess read=1`, repeating as needed.
 
 **Type:** enum\
 **Default:** `nr`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 04 #320
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 04 #320; 08 t07b
 
 Default: `nr` for GGA DFT.
 

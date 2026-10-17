@@ -6,6 +6,13 @@ Dimitri Laikov. It is compiled from the sources below, which are listed roughly 
 manual gives them when they disagree. Each keyword entry in the {doc}`input reference <reference/index>` names the
 sources it rests on.
 
+## Test runs
+
+Version 25 test runs
+: Small test inputs (water, ammonia, OH) run on Priroda 25 (2025.02.28) in October 2026 for this manual. Where they
+  confirm or contradict an older source, the manual follows the run and says so. The inputs and outputs are kept with
+  the manual's source files.
+
 ## Program files and text from the developer
 
 Official file index

@@ -88,14 +88,11 @@ punctuation, with no spaces or Cyrillic. This also applies to the computer name 
 case-sensitive on Linux, although keywords are not.
 <!-- src: 04 #171; 03 §2 (amg, Nov 2011); 06 §2 -->
 
-:::{note}
-One user saw the complaint `0: output file 'tasK.out'?` when the output file name contained a capital letter.
-This is not confirmed. Lower-case file names avoid the question.
-:::
-<!-- src: 04 #161 --> <!-- verify -->
+One user of an older version saw the complaint `0: output file 'tasK.out'?` when the output file name contained a
+capital letter. Version 25 writes to an output file with capital letters in its name without complaint.
+<!-- src: 04 #161; 08 t19 -->
 
-Older versions also wrote the output to standard output when no output file was given. <!-- src: 03 §2; 02 §5.1 -->
-<!-- verify -->
+If no output file is given (`p input.in`), the output goes to standard output. <!-- src: 03 §2; 02 §5.1; 08 t20 -->
 
 ### Parallel runs on Linux
 
@@ -114,6 +111,12 @@ The first form is what users ran with versions 6 and 10. The second is what the 
 `p -np 4` worked, but that run also had a relative basis-file path, which can cause the same failure. Try the form
 from the official site first.
 <!-- src: 04 #150-#154; 01 §2.1 --> <!-- verify -->
+
+:::{warning}
+In a test of version 25, `p -np 2 input.in output.out` failed at once: no output file was written. The other forms
+were not tested. Which command starts a parallel run of the current build is still open.
+:::
+<!-- src: 08 t21a --> <!-- verify -->
 
 Check the start of the output. A parallel run prints the number of processes and one line per process:
 
@@ -231,9 +234,10 @@ delete the leftovers yourself.
 :::{note}
 The fallback when neither `path=` nor `TMPDIR` is set is reported differently. `input.txt` says the current working
 directory. A 2020 user report says the directory of the input file. Version 6 printed `Disk: 1 GB '/tmp'` when
-`$system` was omitted. Set `path=` or `TMPDIR` explicitly.
+`$system` was omitted, and version 25 printed `Disk:   1g '/tmp'` for `disk=1` without `path=` (whether `TMPDIR` was
+set in that test is not known). Set `path=` or `TMPDIR` explicitly.
 :::
-<!-- src: input.txt; 04 #465; 04 #20 --> <!-- verify -->
+<!-- src: input.txt; 04 #465; 04 #20; 08 t01 --> <!-- verify -->
 
 On Windows there is no `/tmp`. Without `path=` or `TMPDIR`, older versions stopped after printing
 `0: opening file /tmp/tmp2960.0`. Use `$system path=. $end` (the current directory) or set `TMPDIR`.
@@ -272,9 +276,10 @@ message is the amount needed. Raise the limit in `$system`, move to a node with 
 method (RI-MP2 instead of conventional MP2).
 <!-- src: 04 #58, #199; 03 §4 -->
 
-If you omit `$system`, version 6 printed `Memory: 128 (128) MB` and `Disk: 1 GB '/tmp'`. Defaults in current versions
-are not documented, so always give `$system` for anything larger than a test.
-<!-- src: 03 §2; 04 §4 (#20) --> <!-- verify -->
+If you omit `$system`, version 6 printed `Memory: 128 (128) MB` and `Disk: 1 GB '/tmp'`. Version 25 prints
+`Memory: 256m + 512m (256m + 512m)` and no `Disk:` line: 256 MB of memory and a 512 MB RAM disk per process.
+That is enough for small molecules only, so always give `$system` for anything larger than a test.
+<!-- src: 03 §2; 04 §4 (#20); 08 t02 (RAM-disk reading inferred from the echo format) -->
 
 (running-parallel-scaling)=
 If a run fails for lack of memory or disk, see {ref}`troubleshooting.memory`.
@@ -438,10 +443,11 @@ Give the basis file as a **full path**:
 $control task=optimize basis=/home/user/priroda/basis/basis.in $end
 ```
 
-A relative name is looked up relative to the directory the program runs in. One user's parallel run stopped after
+A relative name is looked up relative to the directory the program runs in; in version 25, `basis=basis.in` works
+when the file is in that directory. One user's parallel run stopped after
 the node list with `application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0` and worked once the basis file was
 given with its full path.
-<!-- src: 04 #152-#154; 01 §2.4 (Windows: qm.in found in the current directory) -->
+<!-- src: 04 #152-#154; 01 §2.4 (Windows: qm.in found in the current directory); 08 t03 -->
 
 - Put the name in double quotes if the path contains special characters: `basis="/data/basis sets/basis.in"`. Two
   single quotes do not work; `basis=''3z.bas''` fails with `error opening file ''3z.bas''`.

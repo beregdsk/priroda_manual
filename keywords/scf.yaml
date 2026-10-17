@@ -28,23 +28,24 @@ keywords:
         loosen the SCF value to `1e-5` for preliminary geometry optimizations.
     notes:
       en: |
-        Two problems are reported when `convergence` and `iterations` appear together in `$scf`. In one, the group stops
-        being read or fails with `*** error in '$scf' : unknown name erations`. In the other, the pair has no effect
-        unless `procedure=bfgs` is also given. Reports disagree on whether keyword order matters. Until this is
-        verified, check the `scf options:` echo line in the output.
+        In version 25, `$scf convergence=1e-7 iterations=250 $end` stops the run with
+        `*** error in '$scf' : unknown name terations`: the value list of `convergence` swallows the first letter of
+        the keyword after it. With another keyword in between (`convergence=1e-7 procedure=bfgs iterations=250`)
+        both values are read. Older versions gave the same error as `unknown name erations`. Check the
+        `scf: conv = …; iter=…` echo line in the output.
     see_also: [scf.iterations, scf.procedure]
     status: current
-    sources: ["input.txt", "01 §4.5 (output echo)", "05 §2", "04 #322-#324"]
-    verified_against: null
+    sources: ["input.txt", "01 §4.5 (output echo)", "05 §2", "04 #322-#324", "08 t01, t07a, t07b"]
+    verified_against: "25 (2025.02.28)"
   - name: iterations
     type: list
-    default: [16, 16]
+    default: [32, 16]
     description:
       en: Maximum number of iterations and of microiterations (`iterations=it,micro`).
     default_note:
       en: |
-        `16,16` is what v6, v13 and v15 echo for DFT. A HF run for CCSD showed `48,16`, so the default may depend on
-        the method. `Dft.rtf` gives 30 (older version).
+        Version 25 echoes `iter=32,16` for DFT. v6, v13 and v15 echoed `16,16`, a HF run for CCSD showed `48,16`, and
+        `Dft.rtf` gives 30 (older version). The default may depend on the method and version.
     notes:
       en: |
         Do not raise this limit hoping for convergence: understand why SCF is not converging. A recommended
@@ -52,8 +53,8 @@ keywords:
         restart with `$guess read=1`, repeating as needed.
     see_also: [scf.convergence, guess.read]
     status: current
-    sources: ["input.txt", "01 §4.5", "04 #319", "05 §5", "Dft.rtf", "02 §3.2 (pri help)", "04 #306"]
-    verified_against: null
+    sources: ["input.txt", "01 §4.5", "04 #319", "05 §5", "Dft.rtf", "02 §3.2 (pri help)", "04 #306", "08 t01"]
+    verified_against: "25 (2025.02.28)"
   - name: procedure
     type: enum
     default: nr
@@ -68,8 +69,8 @@ keywords:
       $scf convergence=1e-7 procedure=bfgs iterations=250 $end
       $grid accuracy=1e-9 $end
     status: current
-    sources: ["input.txt", "Dft.rtf", "04 #320"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf", "04 #320", "08 t07b"]
+    verified_against: "25 (2025.02.28)"
   - name: d1small
     type: switch
     default: 0

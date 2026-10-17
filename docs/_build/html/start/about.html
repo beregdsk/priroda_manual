@@ -3,10 +3,10 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Installing and running" href="running.html"><link rel="prev" title="Priroda User Manual" href="../index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Installing and running" href="running.html"><link rel="prev" title="Priroda Unofficial Manual" href="../index.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>About Priroda - Priroda User Manual</title>
+        <title>About Priroda - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -273,7 +273,8 @@ coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and Laik
 <p>The program is closed-source and has no complete official manual. Priroda’s own documentation is a short keyword
 list, the “Input Summary” (<code class="docutils literal notranslate"><span class="pre">input.txt</span></code>), which ships with the program. This manual collects that text, the example
 files on the official site, and twenty years of user experience from Russian-language forums. It is not an official
-document: the developer has not written or reviewed it. <a class="reference internal" href="../sources.html#sources"><span class="std std-ref">Sources</span></a> lists what it is based on.</p>
+document: the developer has not written or reviewed it. <a class="reference internal" href="../sources.html#sources"><span class="std std-ref">Sources</span></a> lists what it is based on. To download the
+program, see <a class="reference internal" href="getting-started.html#obtaining-priroda"><span class="std std-ref">Obtaining Priroda</span></a>.</p>
 <!-- src: 04 #151, #327; 00 -->
 <section id="main-features">
 <h2>Main features<a class="headerlink" href="#main-features" title="Link to this heading">¶</a></h2>
@@ -321,10 +322,10 @@ for Molden.</p>
 </section>
 <section id="capability-matrix">
 <h2>Capability matrix<a class="headerlink" href="#capability-matrix" title="Link to this heading">¶</a></h2>
-<p>The table shows which <code class="docutils literal notranslate"><span class="pre">task=</span></code> values are known to work with each <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value. It is assembled from example inputs
-and user reports, not from a statement by the developer.</p>
+<p>The table shows which <code class="docutils literal notranslate"><span class="pre">task=</span></code> values are known to work with each <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value. It is assembled from example inputs,
+user reports and the test runs on version 25, not from a statement by the developer.</p>
 <ul class="simple">
-<li><p>✓: shown to work in an example input or a user report.</p></li>
+<li><p>✓: shown to work in an example input, a user report or a test run.</p></li>
 <li><p>–: not available, according to the sources.</p></li>
 <li><p>?: unverified. No source shows it working or failing.</p></li>
 </ul>
@@ -446,10 +447,10 @@ values, including the undocumented ones, is in <a class="reference internal" hre
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Hybrid functionals work only with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> or <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>, older versions silently drop
-the exact exchange and run what amounts to a pure GGA, and newer versions abort. See
-<a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+the exact exchange and run what amounts to a pure GGA, and newer versions abort. Version 25 stops right after
+printing the basis sets, with no error message in the output. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
 </div>
-<!-- src: 03 §11; 04 #96, #99, #307-#310 -->
+<!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08 -->
 </section>
 <section id="what-priroda-does-not-do">
 <span id="id1"></span><h2>What Priroda does not do<a class="headerlink" href="#what-priroda-does-not-do" title="Link to this heading">¶</a></h2>
@@ -457,9 +458,10 @@ the exact exchange and run what amounts to a pure GGA, and newer versions abort.
 <dl class="simple myst">
 <dt>No use of point-group symmetry in older versions</dt><dd><p>Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
 Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
-the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. What these options do is not documented;
-see <a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a>.</p>
-<!-- src: 04 §0, #251, #254; 01 §4.7 --> <!-- verify -->
+the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. These options are not documented.
+In a version 25 test they symmetrized the structure and kept the symmetry during the optimization; see
+<a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and <a class="reference internal" href="../reference/optimize.html#optimize-sym"><span class="std std-ref">$optimize sym</span></a>.</p>
+<!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15 -->
 </dd>
 <dt>No continuum solvation</dt><dd><p>No version has a continuum solvent model. Solvent can only be included as explicit molecules.</p>
 <!-- src: 04 #75, #76, #348, #417 -->
@@ -561,49 +563,18 @@ version.</p>
 <td><p>2023.06.22</p></td>
 <td><p>Newest numbered version reported by users (2024). New functionals <code class="docutils literal notranslate"><span class="pre">LPBEVV</span></code> and <code class="docutils literal notranslate"><span class="pre">LPBEVVV</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p>?</p></td>
-<td><p>2025</p></td>
-<td><p>Linux builds dated 2025-02-28 (<code class="docutils literal notranslate"><span class="pre">p4_d</span></code>) and 2025-04-14 (<code class="docutils literal notranslate"><span class="pre">p_l</span></code>), with 2025 example inputs that use <code class="docutils literal notranslate"><span class="pre">theory=DFT_n4</span></code>. Version number not known.</p></td>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>2025.02.28</p></td>
+<td><p>Banner <code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">25</span> <span class="pre">(2025.02.28)</span></code>. The version used for the test runs behind this manual. Its date matches the <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> build on the official site; <code class="docutils literal notranslate"><span class="pre">p_l</span></code> is dated 2025-04-14. The 2025 example inputs use <code class="docutils literal notranslate"><span class="pre">theory=DFT_n4</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; 2025: 01 §2.2, §5.3 -->
-<p>Version numbers missing from the table (3, 12, 18–22) do not appear in any source. The Russian file <code class="docutils literal notranslate"><span class="pre">Dft_ansi.txt</span></code>
+<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.3 -->
+<p>Version numbers missing from the table (3, 12, 18–22, 24) do not appear in any source. The Russian file <code class="docutils literal notranslate"><span class="pre">Dft_ansi.txt</span></code>
 describes Priroda’s predecessor, which used different group names (<code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$SCF</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>, <code class="docutils literal notranslate"><span class="pre">$force</span></code>).
 Those names are not part of the current keyword list.</p>
 <!-- src: 00 (Dft_ansi.txt) --> <!-- verify -->
-</section>
-<section id="obtaining-priroda">
-<h2>Obtaining Priroda<a class="headerlink" href="#obtaining-priroda" title="Link to this heading">¶</a></h2>
-<p>Priroda is free of charge and distributed by the developer. The usual route is to write to Dimitri Laikov by e-mail and
-ask for the program. Users reported the address <code class="docutils literal notranslate"><span class="pre">dimitri_laikov&#64;mail.ru</span></code> from 2010 to 2018; earlier it was
-<code class="docutils literal notranslate"><span class="pre">laikov&#64;physto.se</span></code>. Users note that he does not always answer quickly.</p>
-<!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
-<p>Current binaries and data files are also listed at <a class="reference external" href="https://rad.chem.msu.ru/~laikov/p_w/">https://rad.chem.msu.ru/~laikov/p_w/</a>. The page is a bare file
-index with no documentation, license text or contact information. It holds:</p>
-<ul class="simple">
-<li><p>Linux x86-64 executables (<code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">p4</span></code>, <code class="docutils literal notranslate"><span class="pre">p_d</span></code>, <code class="docutils literal notranslate"><span class="pre">p4_d</span></code>), builds for particular clusters (<code class="docutils literal notranslate"><span class="pre">p_l</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs1p1</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs10p</span></code>,
-<code class="docutils literal notranslate"><span class="pre">p_mvs10q</span></code>), an ARM build (<code class="docutils literal notranslate"><span class="pre">p_arm</span></code>), a bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>, and the molecule viewer <code class="docutils literal notranslate"><span class="pre">xm</span></code>;</p></li>
-<li><p>Windows (Cygwin, x86-64) executables in <code class="docutils literal notranslate"><span class="pre">exe64/</span></code>;</p></li>
-<li><p>example inputs and outputs;</p></li>
-<li><p>basis-set and parameter files (<code class="docutils literal notranslate"><span class="pre">basis.in</span></code>, <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b2*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b4s*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">3z.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">sbk.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>);</p></li>
-<li><p>small shell scripts: <code class="docutils literal notranslate"><span class="pre">ge</span></code> (append the <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> block from an output to the input), <code class="docutils literal notranslate"><span class="pre">gm</span></code> (replace <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> with
-the optimized geometry) and <code class="docutils literal notranslate"><span class="pre">grx</span></code> (join two IRC halves).</p></li>
-</ul>
-<p>The executables are described in <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
-<!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
-registered with Rospatent and distributed through the company OOO “Dimonta”. A user reported in 2018 that the developer
-had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer’s
-permission before using the program.</p>
-</div>
-<!-- src: 03 §1; 04 #2, #404, #443-#445 -->
-<p>The official site has hosted builds with known defects. In 2016 it carried a note that the <code class="docutils literal notranslate"><span class="pre">w64/*.exe</span></code> builds (an
-attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.</p>
-<!-- src: 04 #366 -->
 </section>
 <section id="how-to-cite">
 <span id="id2"></span><h2>How to cite<a class="headerlink" href="#how-to-cite" title="Link to this heading">¶</a></h2>
@@ -681,7 +652,7 @@ version.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -712,7 +683,6 @@ version.</p>
 <li><a class="reference internal" href="#capability-matrix">Capability matrix</a></li>
 <li><a class="reference internal" href="#what-priroda-does-not-do">What Priroda does not do</a></li>
 <li><a class="reference internal" href="#version-history">Version history</a></li>
-<li><a class="reference internal" href="#obtaining-priroda">Obtaining Priroda</a></li>
 <li><a class="reference internal" href="#how-to-cite">How to cite</a></li>
 </ul>
 </li>
