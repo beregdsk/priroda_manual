@@ -227,13 +227,10 @@ The scratch directory is taken from `path=`, then from the `TMPDIR` environment 
 delete the leftovers yourself.
 <!-- src: input.txt; 04 #20, #465; 06 §4 (Tutorial v6); 02 §5.2 -->
 
-:::{note}
-The fallback when neither `path=` nor `TMPDIR` is set is reported differently. `input.txt` says the current working
-directory. A 2020 user report says the directory of the input file. Version 6 printed `Disk: 1 GB '/tmp'` when
-`$system` was omitted, and version 25 printed `Disk:   1g '/tmp'` for `disk=1` without `path=` (whether `TMPDIR` was
-set in that test is not known). Set `path=` or `TMPDIR` explicitly.
-:::
-<!-- src: input.txt; 04 #465; 04 #20; 08 t01 --> <!-- verify -->
+When neither `path=` nor `TMPDIR` is set, version 25 puts scratch files in `/tmp` (echo `Disk:   1g '/tmp'`), as
+version 6 did. `input.txt` says the current working directory instead, and a 2020 user report the directory of the
+input file; neither matches version 25. `/tmp` is often small or shared, so set `path=` or `TMPDIR` for real jobs.
+<!-- src: input.txt; 04 #465; 04 #20; 08 t64 (TMPDIR unset: /tmp; TMPDIR set: used) -->
 
 On Windows there is no `/tmp`. Without `path=` or `TMPDIR`, older versions stopped after printing
 `0: opening file /tmp/tmp2960.0`. Use `$system path=. $end` (the current directory) or set `TMPDIR`.

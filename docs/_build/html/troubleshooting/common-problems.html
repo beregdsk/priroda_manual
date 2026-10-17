@@ -799,10 +799,10 @@ Both found that direct integrals avoid the problem:</p>
 <section id="where-scratch-files-go">
 <h3>Where scratch files go<a class="headerlink" href="#where-scratch-files-go" title="Link to this heading">¶</a></h3>
 <p>Priroda writes scratch files to the directory given by <a class="reference internal" href="../reference/system.html#system-path"><span class="std std-ref">path</span></a>; if <code class="docutils literal notranslate"><span class="pre">path</span></code> is not set, to
-<code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code>; otherwise to the directory of the input file. On a cluster, neither <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> nor the input directory is
-suitable for large scratch files: <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> may sit on a quota-limited node. Use the cluster’s local scratch area, or a
-RAM disk with a negative <code class="docutils literal notranslate"><span class="pre">disk</span></code> value. Never put scratch on NFS.</p>
-<!-- src: 04 #462, #465; 06 §10 -->
+<code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code>; otherwise, in version 25, to <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> (a 2020 user report said the directory of the input file). On a
+cluster, <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> is often too small or quota-limited for large scratch files. Use the cluster’s local scratch area, or
+a RAM disk with a negative <code class="docutils literal notranslate"><span class="pre">disk</span></code> value. Never put scratch on NFS.</p>
+<!-- src: 04 #462, #465; 06 §10; 08 t64 -->
 <p>A job that stops while writing a scratch file, with a message like
 <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">write</span> <span class="pre">file</span> <span class="pre">/tmp/tmp9633.11</span> <span class="pre">(leAX):</span> <span class="pre">fd=21</span> <span class="pre">...</span></code>, was reported once during an analytic Hessian and not answered.
 A full scratch directory or a file-size limit is a plausible cause, but this is a guess; check the free space and the

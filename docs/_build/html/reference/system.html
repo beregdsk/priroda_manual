@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -316,8 +317,8 @@ Keeping scratch in RAM gave a 6× speed-up for RI-MP2 on one cluster.</p>
 <p id="index-3"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 03 §2; 04 #465; 08 t01</p>
-<p>Default: the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable, otherwise the current working directory.</p>
+<strong>Sources:</strong> input.txt; 03 §2; 04 #465; 08 t01, t64</p>
+<p>Default: the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable, otherwise <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> (version 25). <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says the current working directory.</p>
 <p>Directory for temporary disk files. For parallel runs you can give a colon-separated list with one path per
 process: <code class="docutils literal notranslate"><span class="pre">path=/tmpa:/tmpb:/tmpc:/tmpd</span></code> makes process 1 write to <code class="docutils literal notranslate"><span class="pre">/tmpa</span></code>, process 2 to <code class="docutils literal notranslate"><span class="pre">/tmpb</span></code>, and so on.
 Those directories should be on different physical drives. The value may be double-quoted.</p>
@@ -325,8 +326,8 @@ Those directories should be on different physical drives. The value may be doubl
 <p class="admonition-title">Note</p>
 <p>For all methods except GGA DFT, performance degrades “terribly” if more than one process reads and writes
 large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, use <code class="docutils literal notranslate"><span class="pre">path=.</span></code>. Version 25 echoed <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code> for <code class="docutils literal notranslate"><span class="pre">disk=1</span></code> without <code class="docutils literal notranslate"><span class="pre">path=</span></code>; whether <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>
-was set in that test was not recorded.</p>
+<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, use <code class="docutils literal notranslate"><span class="pre">path=.</span></code>. Version 25, run without <code class="docutils literal notranslate"><span class="pre">path=</span></code>, used <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> when it was set and <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when it was
+not (echo <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>).</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system path=/tmpa:/tmpb:/tmpc:/tmpd $end

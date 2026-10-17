@@ -76,9 +76,9 @@ $system mem=2048,256 disk=-256,-1 $end
 **Type:** string\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 03 §2; 04 #465; 08 t01
+**Sources:** input.txt; 03 §2; 04 #465; 08 t01, t64
 
-Default: the `TMPDIR` environment variable, otherwise the current working directory.
+Default: the `TMPDIR` environment variable, otherwise `/tmp` (version 25). `input.txt` says the current working directory.
 
 Directory for temporary disk files. For parallel runs you can give a colon-separated list with one path per
 process: `path=/tmpa:/tmpb:/tmpc:/tmpd` makes process 1 write to `/tmpa`, process 2 to `/tmpb`, and so on.
@@ -87,8 +87,8 @@ Those directories should be on different physical drives. The value may be doubl
 ```{note}
 For all methods except GGA DFT, performance degrades "terribly" if more than one process reads and writes
 large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-`/tmp`, use `path=.`. Version 25 echoed `Disk:   1g '/tmp'` for `disk=1` without `path=`; whether `TMPDIR`
-was set in that test was not recorded.
+`/tmp`, use `path=.`. Version 25, run without `path=`, used `TMPDIR` when it was set and `/tmp` when it was
+not (echo `Disk:   1g '/tmp'`).
 ```
 
 **Example:**

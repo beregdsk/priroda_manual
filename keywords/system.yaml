@@ -51,7 +51,7 @@ keywords:
     type: string
     default: null
     default_note:
-      en: the `TMPDIR` environment variable, otherwise the current working directory.
+      en: "the `TMPDIR` environment variable, otherwise `/tmp` (version 25). `input.txt` says the current working directory."
     description:
       en: |
         Directory for temporary disk files. For parallel runs you can give a colon-separated list with one path per
@@ -61,9 +61,9 @@ keywords:
       en: |
         For all methods except GGA DFT, performance degrades "terribly" if more than one process reads and writes
         large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-        `/tmp`, use `path=.`. Version 25 echoed `Disk:   1g '/tmp'` for `disk=1` without `path=`; whether `TMPDIR`
-        was set in that test was not recorded.
+        `/tmp`, use `path=.`. Version 25, run without `path=`, used `TMPDIR` when it was set and `/tmp` when it was
+        not (echo `Disk:   1g '/tmp'`).
     example: "$system path=/tmpa:/tmpb:/tmpc:/tmpd $end"
     status: current
-    sources: ["input.txt", "03 §2", "04 #465", "08 t01"]
+    sources: ["input.txt", "03 §2", "04 #465", "08 t01, t64"]
     verified_against: "25 (2025.02.28)"

@@ -4,7 +4,8 @@ Three verification rounds: the inputs in `tests/inputs/`, run by the project own
 2026-10-17 on one Linux machine (`node 0: 'arch'`), serial unless stated. Each round reran all earlier tests;
 the outputs of rounds 1–3 were last in `tests/runs/20261017-124819/` (removed from the working tree in commit
 `9332498`; still in git history, e.g. `git show ef39f62:tests/runs/20261017-124819/t01_energy.out`); round 4 was in
-`tests/runs/20261017-130725/` (in history at commit `f04d4f5`); round 5 is in `tests/runs/20261017-131420/`. Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
+`tests/runs/20261017-130725/` (in history at commit `f04d4f5`); round 5 was in `tests/runs/20261017-131420/` (in history at commit `192f430`); round 6 is in
+`tests/runs/20261017-131753/`. Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
 
 Cite as `08 tNN`. This is program output, the top of the evidence order. Each result holds for v25 only; older
@@ -116,6 +117,13 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t61 | `$system mem=2`: stops after the basis echo with `need 12544 + 7905408 = 7917952 bytes.`; stderr `MPI_Abort`; exit 1. |
 | t62 | Conventional MP2 with `disk=-1` (1 MB RAM disk): stops in the grid setup with `0: out of disk space (grid_W), 8213824`; exit 1. |
 | t63 | Numerical `ridft` Hessian on 2 processes: frequencies identical to the serial run (t32a), REAL time 4.85 s vs 7.17 s. The output also contains a `NUMERICAL AND ANALYTICAL GRADIENT` comparison block. |
+
+## Round 6
+
+| Test | Result |
+|---|---|
+| t64a | `$system mem=256 disk=1`, no `path=`, `TMPDIR` unset, run from a subdirectory: `Disk:   1g '/tmp'`. Scratch goes to `/tmp`, not to the current or input directory. |
+| t64b | The same with `TMPDIR` set to a directory of its own: `Disk:   1g '<that directory>'`. |
 
 ## Cosmetic
 

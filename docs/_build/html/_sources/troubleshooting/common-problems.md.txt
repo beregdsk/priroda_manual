@@ -559,10 +559,10 @@ See {ref}`direct <integral.direct>`. <!-- src: 05 §4.2 (EvgeniX, amge 2015) -->
 ### Where scratch files go
 
 Priroda writes scratch files to the directory given by {ref}`path <system.path>`; if `path` is not set, to
-`$TMPDIR`; otherwise to the directory of the input file. On a cluster, neither `/tmp` nor the input directory is
-suitable for large scratch files: `/tmp` may sit on a quota-limited node. Use the cluster's local scratch area, or a
-RAM disk with a negative `disk` value. Never put scratch on NFS.
-<!-- src: 04 #462, #465; 06 §10 -->
+`$TMPDIR`; otherwise, in version 25, to `/tmp` (a 2020 user report said the directory of the input file). On a
+cluster, `/tmp` is often too small or quota-limited for large scratch files. Use the cluster's local scratch area, or
+a RAM disk with a negative `disk` value. Never put scratch on NFS.
+<!-- src: 04 #462, #465; 06 §10; 08 t64 -->
 
 A job that stops while writing a scratch file, with a message like
 `0: write file /tmp/tmp9633.11 (leAX): fd=21 ...`, was reported once during an analytic Hessian and not answered.

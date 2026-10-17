@@ -137,7 +137,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh
 | t57a | `t57a_nmr_ridft.in` | NMR with `theory=ridft` (sources say NMR works only with `dft`) | Shielding table or an error | about.md capability matrix (note 5) || No shieldings: only the SCF energy, no message. |
 | t57b | `t57b_nmr_standard.in` | `$nmr standard(1)=31.0 standard(8)=300.0`: shift = standard − shielding? | `shift=` values (H about -1.78, O about -36.88) | `nmr.standard` || Yes: shift = standard − shielding (H −1.7773, O −36.8797). |
 
-## Round 5 (run 2026-10-17 on version 25; outputs in `runs/20261017-131420/`)
+## Round 5 (run 2026-10-17 on version 25; outputs in git history, `git show 192f430:tests/runs/20261017-131420/<file>`)
 
 Run with (the `mpiexec` from the official site is needed for t59 and t63):
 
@@ -157,7 +157,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh
 | t62 | `t62_too_little_disk.in` | Conventional MP2 with a 1 MB RAM disk: what message does too little scratch give? | Error text (`out of disk space`?) | common-problems (disk) || `0: out of disk space (grid_W), 8213824`, exit 1. |
 | t63 | `t63_parallel_ridft_hessian.in` | Numerical `ridft` Hessian on 2 processes | Frequencies as in the serial run (round 2 t32a: 1642.79, 3910.72, 4018.26); run time | running.md (parallel performance) || Same frequencies as serial; 4.85 s vs 7.17 s. |
 
-## Round 6 (not run yet)
+## Round 6 (run 2026-10-17 on version 25; outputs in `runs/20261017-131753/`)
 
 ```bash
 cd tests
@@ -166,8 +166,8 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t64
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| t64a | `t64_scratch_location.in` with `TMPDIR` unset | Where do scratch files go when neither `path=` nor `TMPDIR` is set: current directory or `/tmp`? | The `Disk:` line in `t64a/t64_scratch_location.out` | running.md (where scratch files go) | |
-| t64b | the same with `TMPDIR` set to `t64b/tmpdir` | Is `TMPDIR` used when `path=` is not given? | The `Disk:` line in `t64b/t64_scratch_location.out` | `system.path` | |
+| t64a | `t64_scratch_location.in` with `TMPDIR` unset | Where do scratch files go when neither `path=` nor `TMPDIR` is set: current directory or `/tmp`? | The `Disk:` line in `t64a/t64_scratch_location.out` | running.md (where scratch files go) || `/tmp`. |
+| t64b | the same with `TMPDIR` set to `t64b/tmpdir` | Is `TMPDIR` used when `path=` is not given? | The `Disk:` line in `t64b/t64_scratch_location.out` | `system.path` || Yes, `TMPDIR` is used. |
 
 To check the Molden recipes by eye, open `freq>` and `mos>` files cut from a Hessian and a `print=+vectors+molden` run
 (for example round 3 t45) in Molden.

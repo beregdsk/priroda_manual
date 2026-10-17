@@ -1373,13 +1373,10 @@ delete the leftovers yourself.
 
 
 
-\begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-The fallback when neither \sphinxcode{\sphinxupquote{path=}} nor \sphinxcode{\sphinxupquote{TMPDIR}} is set is reported differently. \sphinxcode{\sphinxupquote{input.txt}} says the current working
-directory. A 2020 user report says the directory of the input file. Version 6 printed \sphinxcode{\sphinxupquote{Disk: 1 GB \textquotesingle{}/tmp\textquotesingle{}}} when
-\sphinxcode{\sphinxupquote{\$system}} was omitted, and version 25 printed \sphinxcode{\sphinxupquote{Disk:   1g \textquotesingle{}/tmp\textquotesingle{}}} for \sphinxcode{\sphinxupquote{disk=1}} without \sphinxcode{\sphinxupquote{path=}} (whether \sphinxcode{\sphinxupquote{TMPDIR}} was
-set in that test is not known). Set \sphinxcode{\sphinxupquote{path=}} or \sphinxcode{\sphinxupquote{TMPDIR}} explicitly.
-\end{sphinxadmonition}
+When neither \sphinxcode{\sphinxupquote{path=}} nor \sphinxcode{\sphinxupquote{TMPDIR}} is set, version 25 puts scratch files in \sphinxcode{\sphinxupquote{/tmp}} (echo \sphinxcode{\sphinxupquote{Disk:   1g \textquotesingle{}/tmp\textquotesingle{}}}), as
+version 6 did. \sphinxcode{\sphinxupquote{input.txt}} says the current working directory instead, and a 2020 user report the directory of the
+input file; neither matches version 25. \sphinxcode{\sphinxupquote{/tmp}} is often small or shared, so set \sphinxcode{\sphinxupquote{path=}} or \sphinxcode{\sphinxupquote{TMPDIR}} for real jobs.
 
 
 
@@ -3417,10 +3414,10 @@ Keeping scratch in RAM gave a 6× speed\sphinxhyphen{}up for RI\sphinxhyphen{}MP
 \sphinxstylestrong{Type:} string\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 03 \S{}2; 04 \#465; 08 t01
+\sphinxstylestrong{Sources:} input.txt; 03 \S{}2; 04 \#465; 08 t01, t64
 
 \sphinxAtStartPar
-Default: the \sphinxcode{\sphinxupquote{TMPDIR}} environment variable, otherwise the current working directory.
+Default: the \sphinxcode{\sphinxupquote{TMPDIR}} environment variable, otherwise \sphinxcode{\sphinxupquote{/tmp}} (version 25). \sphinxcode{\sphinxupquote{input.txt}} says the current working directory.
 
 \sphinxAtStartPar
 Directory for temporary disk files. For parallel runs you can give a colon\sphinxhyphen{}separated list with one path per
@@ -3431,8 +3428,8 @@ Those directories should be on different physical drives. The value may be doubl
 \sphinxAtStartPar
 For all methods except GGA DFT, performance degrades “terribly” if more than one process reads and writes
 large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-\sphinxcode{\sphinxupquote{/tmp}}, use \sphinxcode{\sphinxupquote{path=.}}. Version 25 echoed \sphinxcode{\sphinxupquote{Disk:   1g \textquotesingle{}/tmp\textquotesingle{}}} for \sphinxcode{\sphinxupquote{disk=1}} without \sphinxcode{\sphinxupquote{path=}}; whether \sphinxcode{\sphinxupquote{TMPDIR}}
-was set in that test was not recorded.
+\sphinxcode{\sphinxupquote{/tmp}}, use \sphinxcode{\sphinxupquote{path=.}}. Version 25, run without \sphinxcode{\sphinxupquote{path=}}, used \sphinxcode{\sphinxupquote{TMPDIR}} when it was set and \sphinxcode{\sphinxupquote{/tmp}} when it was
+not (echo \sphinxcode{\sphinxupquote{Disk:   1g \textquotesingle{}/tmp\textquotesingle{}}}).
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -7083,9 +7080,9 @@ See {\hyperref[\detokenize{reference/integral:integral-direct}]{\sphinxcrossref{
 \label{\detokenize{troubleshooting/common-problems:where-scratch-files-go}}
 \sphinxAtStartPar
 Priroda writes scratch files to the directory given by {\hyperref[\detokenize{reference/system:system-path}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{path}}}}}; if \sphinxcode{\sphinxupquote{path}} is not set, to
-\sphinxcode{\sphinxupquote{\$TMPDIR}}; otherwise to the directory of the input file. On a cluster, neither \sphinxcode{\sphinxupquote{/tmp}} nor the input directory is
-suitable for large scratch files: \sphinxcode{\sphinxupquote{/tmp}} may sit on a quota\sphinxhyphen{}limited node. Use the cluster’s local scratch area, or a
-RAM disk with a negative \sphinxcode{\sphinxupquote{disk}} value. Never put scratch on NFS.
+\sphinxcode{\sphinxupquote{\$TMPDIR}}; otherwise, in version 25, to \sphinxcode{\sphinxupquote{/tmp}} (a 2020 user report said the directory of the input file). On a
+cluster, \sphinxcode{\sphinxupquote{/tmp}} is often too small or quota\sphinxhyphen{}limited for large scratch files. Use the cluster’s local scratch area, or
+a RAM disk with a negative \sphinxcode{\sphinxupquote{disk}} value. Never put scratch on NFS.
 
 
 
