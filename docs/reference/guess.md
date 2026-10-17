@@ -45,12 +45,18 @@ follow-up job such as a Hessian after an optimization.
 
 **Type:** indexed-array\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t74e; 08 t75b; 08 t75d
 
 Default: `na(1)=1,2,3,…,N` (the natural order).
 
 Reordering of the starting vectors for alpha spin.
+
+```{note}
+Accepted in version 25, also together with `read=1`, where it reorders the vectors read from the file. For
+closed-shell water, swapping the HOMO and LUMO only slowed the SCF: it returned to the ground state. The
+effect was seen only in the iteration counts, as the output does not print the reordering.
+```
 
 **Example:**
 

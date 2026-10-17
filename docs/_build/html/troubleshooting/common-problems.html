@@ -567,9 +567,17 @@ with <code class="docutils literal notranslate"><span class="pre">restrict=1</sp
 molecules the closed-shell energy is not a meaningful singlet energy: use an unrestricted broken-symmetry run (see
 <a class="reference internal" href="#troubleshooting-open-shell-singlet"><span class="std std-ref">Open-shell singlets and broken symmetry</span></a>) or the high-spin state.</p>
 <!-- src: 08 t48b, t74d, t74e -->
-<p>In the first case, without degenerate orbitals, start from other vectors (<code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> with vectors of a related
-calculation) or reorder the starting orbitals with <a class="reference internal" href="../reference/guess.html#guess-na"><span class="std std-ref">na</span></a> and <a class="reference internal" href="../reference/guess.html#guess-nb"><span class="std std-ref">nb</span></a>.</p>
-<!-- verify: tests t75a-d (water, excited closed shell) -->
+<p>The first case could not be produced in version 25 tests. Water started with its HOMO and LUMO swapped, either from
+the default guess or from vectors read from a file, went back to the ground state every time; the swap only made
+the SCF take two to three times more iterations. So LUMO-below-HOMO most likely points to degenerate orbitals.</p>
+<!-- src: 08 t75a-d -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If an excited configuration does turn up in a molecule without degenerate orbitals, starting from other vectors
+(<code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> with vectors of a related calculation) or reordering the starting orbitals with
+<a class="reference internal" href="../reference/guess.html#guess-na"><span class="std std-ref">na</span></a> and <a class="reference internal" href="../reference/guess.html#guess-nb"><span class="std std-ref">nb</span></a> is the usual remedy. It has not been tested here, because no such case
+was found.</p>
+</div>
 </section>
 <section id="heavy-elements">
 <h3>Heavy elements<a class="headerlink" href="#heavy-elements" title="Link to this heading">¶</a></h3>

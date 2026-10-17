@@ -12,7 +12,8 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 8: `tests/runs/20261017-135441/` (first t72, stopped by the 1-hour limit: `tests/runs/20261017-141203/`);
 - round 9: `tests/runs/20261017-152445/` (t71b, t74); t72 on 8 processes: `tests/runs/20261017-153851/` (an interrupted attempt is in `20261017-153621/`);
 - round 10: `tests/runs/20261017-174656/` (t74a–c);
-- round 11: `tests/runs/20261017-180916/` (t74a–e); `20261017-180746/` is an earlier run of t74a–c only, with the same energies.
+- round 11: `tests/runs/20261017-180916/` (t74a–e); `20261017-180746/` is an earlier run of t74a–c only, with the same energies;
+- round 12: `tests/runs/20261017-182103/` (t75a–d).
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -196,6 +197,17 @@ Conclusions:
 - **t74c is a broken-symmetry solution** (alpha electron in one π* orbital, beta in the other), not the closed-shell singlet: forced restricted from the very same starting vectors, the SCF falls back to the t48b energy. Its identical alpha and beta lists (occupied π* -0.224, empty π* -0.168 in each spin) fit that picture: each spin has one π* component filled.
 - **The restricted closed-shell singlet of O2 has no aufbau solution.** With the pair in one of two degenerate π* orbitals, the filled one is pushed up by its own Coulomb repulsion and ends above the empty one; filling the other component (t74e's swap) only gives the symmetry-equivalent state with the same energy *(inferred: standard behaviour of Kohn–Sham with integer occupations of a degenerate shell)*. So t48b is not an "excited configuration" that a different start could escape, and the round-10 reading was wrong. The swap test is not decisive for `na`/`nb` themselves: in O2 any swap of the two π* components gives an equivalent state.
 - Spin-projected estimate from these numbers (Yamaguchi, assuming ⟨S²⟩ = 1 for the broken-symmetry state and 2 for the triplet): E(singlet) ≈ 2·E(BS) − E(T) = -150.1923, a singlet–triplet gap of 0.0305 hartree (0.83 eV); the experimental a¹Δg–X³Σg⁻ gap is 0.98 eV *(my calculation, not program output)*.
+
+## Round 12: excited closed-shell state of water
+
+| Test | Result |
+|---|---|
+| t75a | Water, default start: `converged!` (`5 F, 12 F1`), E = -76.3653913723; HOMO (5) -0.233472, LUMO (6) 0.059088. |
+| t75b | Same, with `$guess na(5)=6,5 nb(5)=6,5`: `converged!` (`12 F, 42 F1`) to the **ground state**, E = -76.3653928040 (1.4·10⁻⁶ from t75a, at the convergence threshold), same orbital energies. The swap was accepted and made the SCF longer, but the excited configuration did not hold. |
+| t75c | `read=1` with the t75b vectors: `Initial Guess (-1)`, `vectors from 'h2ox.vec'`, converged at once (`1 F, 0 F1`), E = -76.3653913723. |
+| t75d | `read=1` with the t75b vectors and `na(5)=6,5 nb(5)=6,5`: `vectors from 'h2ox.vec'`, then `11 F, 35 F1` back to the ground state, E = -76.3653901684. The longer run shows that `na`/`nb` act on vectors read from a file *(inferred from the iteration counts; the reordering is not printed)*. |
+
+Conclusion: the version 25 SCF did not stay in a closed-shell excited configuration of water, although the HOMO (b1) and LUMO (a1) differ in symmetry. In O2 (t48b, t74d, t74e) the LUMO-below-HOMO state persisted because it is the restricted solution for a degenerate shell, not an excited state. No case of an escapable excited state was found.
 
 ## Molden check
 

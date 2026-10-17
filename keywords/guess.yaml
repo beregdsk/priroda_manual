@@ -27,10 +27,15 @@ keywords:
     description:
       en: Reordering of the starting vectors for alpha spin.
     example: "$guess na(25)=26,25 $end    # swap the 25th and 26th vectors"
+    notes:
+      en: |
+        Accepted in version 25, also together with `read=1`, where it reorders the vectors read from the file. For
+        closed-shell water, swapping the HOMO and LUMO only slowed the SCF: it returned to the ground state. The
+        effect was seen only in the iteration counts, as the output does not print the reordering.
     see_also: [guess.nb]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t74e", "08 t75b", "08 t75d"]
+    verified_against: "25 (2025.02.28)"
   - name: nb
     type: indexed-array
     default: null

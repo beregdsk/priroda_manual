@@ -324,9 +324,17 @@ molecules the closed-shell energy is not a meaningful singlet energy: use an unr
 {ref}`troubleshooting.open-shell-singlet`) or the high-spin state.
 <!-- src: 08 t48b, t74d, t74e -->
 
-In the first case, without degenerate orbitals, start from other vectors (`$guess read=1` with vectors of a related
-calculation) or reorder the starting orbitals with {ref}`na <guess.na>` and {ref}`nb <guess.nb>`.
-<!-- verify: tests t75a-d (water, excited closed shell) -->
+The first case could not be produced in version 25 tests. Water started with its HOMO and LUMO swapped, either from
+the default guess or from vectors read from a file, went back to the ground state every time; the swap only made
+the SCF take two to three times more iterations. So LUMO-below-HOMO most likely points to degenerate orbitals.
+<!-- src: 08 t75a-d -->
+
+:::{note}
+If an excited configuration does turn up in a molecule without degenerate orbitals, starting from other vectors
+(`$guess read=1` with vectors of a related calculation) or reordering the starting orbitals with
+{ref}`na <guess.na>` and {ref}`nb <guess.nb>` is the usual remedy. It has not been tested here, because no such case
+was found.
+:::
 
 ### Heavy elements
 

@@ -304,10 +304,16 @@ follow-up job such as a Hessian after an optimization.</p>
 <span id="guess-na"></span><h2><code class="docutils literal notranslate"><span class="pre">na</span></code><a class="headerlink" href="#na" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 08 t74e; 08 t75b; 08 t75d</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">na(1)=1,2,3,…,N</span></code> (the natural order).</p>
 <p>Reordering of the starting vectors for alpha spin.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Accepted in version 25, also together with <code class="docutils literal notranslate"><span class="pre">read=1</span></code>, where it reorders the vectors read from the file. For
+closed-shell water, swapping the HOMO and LUMO only slowed the SCF: it returned to the ground state. The
+effect was seen only in the iteration counts, as the output does not print the reordering.</p>
+</div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$guess na(25)=26,25 $end    # swap the 25th and 26th vectors
 </pre></div>
