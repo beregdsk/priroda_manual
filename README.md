@@ -57,6 +57,8 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh            # all tests
 PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t22 t24    # selected tests
 ```
 
+On Windows, `tests/run_windows.ps1` runs the Windows-specific tests (see `tests/README.md`).
+
 Outputs go to `tests/runs/<date>/`. `tests/README.md` lists what each test checks and records the results; the
 findings are then written into `research/08_test_runs_v25.md`, the keyword YAML and the chapters.
 

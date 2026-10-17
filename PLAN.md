@@ -112,7 +112,7 @@ wrongly for `tddft`), 7 (yes; the last `$Energy` group wins), 8 (imaginary as `8
 12. `$atoms core(10·Z)` layout; `$optimize coordinates=` vs `coordinated=`; `$molecule mult` meaning.
 13. Each undocumented `task=`/`theory=` value in `keywords/control.yaml`: does it run at all?
 14. Is "performance will be degraded terribly…" printed by the program, or only a sentence in `input.txt`?
-15. The Windows build: the current file names in `exe64/`, and the Cygwin/OpenMPI DLLs it needs.
+15. The Windows build: the current file names in `exe64/`, and the Cygwin/OpenMPI DLLs it needs. Tests: `tests/run_windows.ps1` (w01–w13), not run yet.
 
 ## 4. Work order
 

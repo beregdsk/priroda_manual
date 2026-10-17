@@ -287,8 +287,55 @@ seconds.
 | t75c | `t75c_h2o_read_excited.in` | Read the t75b vectors with no reordering: does the run stay in the excited state? | `vectors from 'h2ox.vec'`; E = t75b or t75a | common-problems (restarting from wrong vectors) |  t75b had saved ground-state vectors, so this; converged at once, E = t75a. |
 | t75d | `t75d_h2o_read_excited_swap_back.in` | Read the t75b vectors and swap 5 and 6 back: does that return to the ground state? Also shows whether `na`/`nb` act on vectors read from a file | E = t75a?; HOMO below LUMO | common-problems (the fix); `guess.na` with `read=1` |  Swap applied to the read vectors (`11 F, 35 F1`), back to the ground state, E = t75a. |
 
+## Windows (not run yet)
+
+These need a Windows computer with the files from the `exe64/` folder of the official site: `p1.exe` and
+`cygwin1.dll` in one folder, and `basis.in`. For w13 also `p_190306.exe` and, for the 2-process run, an MPI launcher
+(`orterun.exe` or `mpirun.exe` with the Cygwin OpenMPI DLLs, as in running.md). Do not install Cygwin for these tests:
+most of them check what happens with only the two files.
+
+In PowerShell, in the `tests` folder:
+
+```powershell
+$env:PRIRODA = "C:\Priroda\p1.exe"
+$env:BASIS   = "C:\Priroda\basis.in"
+powershell -ExecutionPolicy Bypass -File .\run_windows.ps1            # all (a few minutes)
+powershell -ExecutionPolicy Bypass -File .\run_windows.ps1 w02 w05    # selected tests
+```
+
+Optional: `$env:PRIRODA_MPI = "C:\Priroda\p_190306.exe"` and `$env:MPIRUN = "C:\Priroda\orterun.exe"`.
+Outputs go to `runs\win-<date>\`; `env.txt` there lists the Windows version and the exe and DLL files next to the
+program, which the results depend on. The script writes every input with Unix line endings, whatever git did on
+checkout; only w06 gets Windows endings. The Linux water energy to compare with is t01, E = -76.3653913723.
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| w01 | `w01_energy.in` | Does `p1.exe` run with only `cygwin1.dll` next to it? Which version is it (the file is dated 2021)? | Banner (version, date); `converged!`; E = t01? | running.md (Windows); about.md (versions) | |
+| w02a | `w02_scratch_default.in` | `disk=1`, no `path=`, `TMPDIR` unset: does the run stop at `opening file /tmp/...`, and where does `Disk:` point? | `Disk:` echo; where the output stops | running.md (scratch on Windows); common-problems (`/tmp` on Windows); `system.path` | |
+| w02b | (same) | `set TMPDIR=%TEMP%` in cmd.exe | `Disk:` echo; runs? | running.md | |
+| w02c | (same) | `set TMPDIR="%TEMP%"` (with the quotes, as in the forum recipe in running.md) | `Disk:` echo; runs? Do the quotes break it? | running.md (parallel recipe, step 5) | |
+| w02d | (same) | `TMPDIR` set to a Windows path (`C:\...\w02d_tmp`) | `Disk:` echo (converted to `/cygdrive/...`?); runs? | running.md | |
+| w03 | `w03_ramdisk.in` | `disk=-256` (RAM disk), no `path=`, `TMPDIR` unset: does that avoid the `/tmp` problem? | Runs?; `Disk:` echo | `system.disk`; common-problems | |
+| w04 | `w04_no_system.in` | No `$system` group, `TMPDIR` unset: does a beginner's input run? | Runs?; `Memory:` echo | getting-started; `system.memory` | |
+| w05a | (w01) | Basis path with backslashes, `basis=C:\...\basis.in` | Runs? | running.md (basis path) | |
+| w05b | (w01) | Basis path with forward slashes, `basis=C:/.../basis.in` | Runs? | running.md | |
+| w05c | (w01) | Relative `basis=basis.in`, the file next to the input | Runs? | running.md | |
+| w06 | (w01, CRLF) | Input with Windows line endings: does the Windows build cope, or does it fail as on Linux? | `molecule input: ''`, `?rtesian` or a normal run | input-syntax; common-problems (CRLF) | |
+| w07 | `w07_memory_3gb.in` | `mem=3000`: no `malloc(...) failed` in the 64-bit build? | `Memory:` echo; runs? | running.md (1 GB limit of 32-bit builds) | |
+| w08 | (w01, no output file) | Does the output go to the console? | `w08_stdout.stdout` | running.md | |
+| w09 | (w01) | Started from another folder with full Windows paths for input and output | Runs? | common-problems (`cannot open input file`) | |
+| w10a | (w01) | Run inside a folder whose name has a space | Runs? | running.md (no spaces in names) | |
+| w10b | (w01) | Run from outside, quoted relative paths with a space | Runs? | running.md | |
+| w11 | `w11_optimize.in` | Water optimization (`path=.`) | `OPTIMIZATION CONVERGED`; final E | running.md | |
+| w12 | `w12_hessian.in` | Water analytic Hessian (`path=.`) | Frequencies; same as Linux v25? | running.md | |
+| w13a | (w01) | `p_190306.exe` on 2 processes through `MPIRUN` | Process lines; E = t01? | running.md (parallel runs on Windows) | |
+| w13b | (w01) | `p_190306.exe` started directly, without a launcher | Runs serially, or fails for lack of MPI? | running.md | |
+
+At the end `status.txt` lists scratch files left in the run folder and whether a `tmp` folder appeared next to the
+program's folder (where Cygwin without an installation puts `/tmp` *(inferred)*).
+
 ## Still not covered
 
-The Windows build (PLAN 3a.15), batch-system scripts, `$d2edr2` numerical
+Batch-system scripts, `$d2edr2` numerical
 Hessians and the split `num>` workflow, and the remaining undocumented tasks (`extremal`, `transit`, `saddle`, `path`,
 `conical`, `anharmonic`, `opt_n1`, `thermostat`, `uniq`), which need two-geometry inputs or long runs.
