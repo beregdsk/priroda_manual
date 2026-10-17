@@ -189,6 +189,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in QMBASIS=/abs/path/to/qm.in ./run.
 | t65b | `t65b_hessian_qm_n3.in` | `task=hessian` with `qm_n3` | Frequency table; exit status | matrix (`hessian` × `qm_n3`) || |
 | t66a–e | `t66{a..e}_saddle_{ridft,rimp2,ccsd,tddft,qm_n3}.in` | TS search (`saddle=1`) with each theory | `Lowest eigenvalues:` (Hessian read); `OPTIMIZATION CONVERGED`; final geometry planar | matrix (TS row) || |
 | t67a–e | `t67{a..e}_irc_{…}.in` | `task=irc` (`points=3`) with each theory | `Intrinsic Reaction Coordinate` header; `IRC>` points with falling energy | matrix (`irc` row) || |
+| t68f | `t68f_scan_tddft_all_bonds_fixed.in` | t68d with all three N–H bonds fixed: does a TDDFT scan work when the excited state cannot dissociate? | `SCAN>` summary | matrix (`scan` row, note 9) | Yes: 3 points, run in the cloud session (`runs/20261017-183348/`). t68d had failed because the state broke an N–H bond. |
 | t68a–e | `t68{a..e}_scan_{…}.in` | `task=scan` (the t37 scan, `points=3`) with each theory | One converged constrained optimization per point; `SCAN>` summary | matrix (`scan` row) || |
 | t69a–f | `t69{a..f}_md_{dft,ridft,rimp2,ccsd,tddft,qm_n3}.in` | `task=thermostat` (MD, `$dynamic n=20,5`) with each theory. t69f (`qm_n3`) is the control: the official examples show MD with the QM model, so if t69f fails, the `$dynamic` settings are at fault, not the theory | Trajectory steps with energies; exit status; run time | matrix (MD row); `$dynamic` meanings || |
 
@@ -287,7 +288,7 @@ seconds.
 | t75c | `t75c_h2o_read_excited.in` | Read the t75b vectors with no reordering: does the run stay in the excited state? | `vectors from 'h2ox.vec'`; E = t75b or t75a | common-problems (restarting from wrong vectors) |  t75b had saved ground-state vectors, so this; converged at once, E = t75a. |
 | t75d | `t75d_h2o_read_excited_swap_back.in` | Read the t75b vectors and swap 5 and 6 back: does that return to the ground state? Also shows whether `na`/`nb` act on vectors read from a file | E = t75a?; HOMO below LUMO | common-problems (the fix); `guess.na` with `read=1` |  Swap applied to the read vectors (`11 F, 35 F1`), back to the ground state, E = t75a. |
 
-## Round 13 (not run yet)
+## Round 13 (run in the cloud session on `p4_d`; outputs in `runs/20261017-182407/`)
 
 ```bash
 cd tests
@@ -303,25 +304,26 @@ group of that output), so run t77 as a whole. All runs are small; t77f and t77g 
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| t76a | `t76a_co2_bent_internal.in` | CO2 started 10° bent, default internal coordinates: does it crash (`signal 6`, `too few`) when it straightens? | End of output; last `INTERNAL COORDINATES` table; `OPTIMIZATION CONVERGED`? | common-problems (signal 6) | |
-| t76b | `t76b_co2_bent_cartesian.in` | The same with `cartesian=1` | Converges to linear CO2? | common-problems (signal 6); `optimize.cartesian` | |
-| t76c | `t76c_c2h2_bent_internal.in` | Acetylene started trans-bent, internal coordinates | As t76a | common-problems | |
-| t76d | `t76d_c2h2_bent_cartesian.in` | The same with `cartesian=1` | As t76b | common-problems | |
-| t76e | `t76e_c2h2_linear_internal.in` | Acetylene already linear (bond lengths off), internal coordinates | As t76a; how are linear angles handled? | common-problems | |
-| t77a | `t77a_hcn_ts_guess_hessian.in` | Hessian at a guessed HCN ⇄ HNC transition state | One imaginary frequency? | (input for t77b) | |
-| t77b | `t77b_hcn_saddle.in` | Saddle search (`saddle=1`) from the guess with the t77a Hessian | Converged; final geometry (H bridging C and N) | (input for t77c–h) | |
-| t77c | `t77c_hcn_ts_hessian.in` | Hessian at the found TS | Exactly one imaginary frequency (H moving between C and N) | common-problems (IRC) | |
-| t77d | `t77d_hcn_irc_rdefault_back0.in` | IRC, default `radius` (0.1), `points=30`, one direction | Number of points; does it reach HCN or HNC; `Vicinity of a Stationary Point(?) --- STOP.` early (on the first steps)? | common-problems (IRC stops early); `optimize.radius` | |
-| t77e | `t77e_hcn_irc_rdefault_back1.in` | The same, other direction (`back=1`) | As t77d; the other minimum | `optimize.back` | |
-| t77f | `t77f_hcn_irc_r003_back0.in` | `radius=0.03`, `points=100` | Does the smaller step avoid an early stop, if t77d/e had one? Same end point? | common-problems (IRC step size) | |
-| t77g | `t77g_hcn_irc_r003_back1.in` | The same, `back=1` | As t77f | common-problems | |
-| t77h | `t77h_hcn_irc_r03_back0.in` | `radius=0.3` (larger step) | Early stop or overshoot? | common-problems | |
+| t76a | `t76a_co2_bent_internal.in` | CO2 started 10° bent, default internal coordinates: does it crash (`signal 6`, `too few`) when it straightens? | End of output; last `INTERNAL COORDINATES` table; `OPTIMIZATION CONVERGED`? | common-problems (signal 6) |  Converged in 12 steps; internal coordinates went from 5 to 4 as CO2 straightened. No crash. |
+| t76b | `t76b_co2_bent_cartesian.in` | The same with `cartesian=1` | Converges to linear CO2? | common-problems (signal 6); `optimize.cartesian` |  Converged in 6 steps; same energy. |
+| t76c | `t76c_c2h2_bent_internal.in` | Acetylene started trans-bent, internal coordinates | As t76a | common-problems |  Converged in 24 steps (internal coordinates 9 then 7). No crash. |
+| t76d | `t76d_c2h2_bent_cartesian.in` | The same with `cartesian=1` | As t76b | common-problems |  6 steps; same energy. |
+| t76e | `t76e_c2h2_linear_internal.in` | Acetylene already linear (bond lengths off), internal coordinates | As t76a; how are linear angles handled? | common-problems |  2 steps; 7 internal coordinates. |
+| t77a | `t77a_hcn_ts_guess_hessian.in` | Hessian at a guessed HCN ⇄ HNC transition state | One imaginary frequency? | (input for t77b) |  1121.2i cm⁻¹, one imaginary mode. |
+| t77b | `t77b_hcn_saddle.in` | Saddle search (`saddle=1`) from the guess with the t77a Hessian | Converged; final geometry (H bridging C and N) | (input for t77c–h) |  Converged in 3 steps; E(TS) = -93.26204880. |
+| t77c | `t77c_hcn_ts_hessian.in` | Hessian at the found TS | Exactly one imaginary frequency (H moving between C and N) | common-problems (IRC) |  One imaginary mode, 1090.2i cm⁻¹. |
+| t77d | `t77d_hcn_irc_rdefault_back0.in` | IRC, default `radius` (0.1), `points=30`, one direction | Number of points; does it reach HCN or HNC; `Vicinity of a Stationary Point(?) --- STOP.` early (on the first steps)? | common-problems (IRC stops early); `optimize.radius` |  19 points to HCN; normal end (`Vicinity…` then `Energy Minimum Passed…`). |
+| t77e | `t77e_hcn_irc_rdefault_back1.in` | The same, other direction (`back=1`) | As t77d; the other minimum | `optimize.back` |  21 points to HNC; normal end. |
+| t77f | `t77f_hcn_irc_r003_back0.in` | `radius=0.03`, `points=100` | Does the smaller step avoid an early stop, if t77d/e had one? Same end point? | common-problems (IRC step size) |  60 points; ends closest to HCN (g = 0.0003). |
+| t77g | `t77g_hcn_irc_r003_back1.in` | The same, `back=1` | As t77f | common-problems |  69 points to HNC. |
+| t77h | `t77h_hcn_irc_r03_back0.in` | `radius=0.3` (larger step) | Early stop or overshoot? | common-problems |  7 points; stops farthest from the minimum (g = 0.010). No early stop with any step. |
 
-## Slurm (not run yet)
+## Slurm (run in the cloud session; outputs in `runs/slurm-*`)
 
 For the "Batch systems" section of running.md. The scripts in `tests/slurm/` install a single-node Slurm on an
 Ubuntu or Debian PC (the PC is both controller and compute node) and submit the manual's job script with small jobs.
-They were checked here on a real Slurm 23.11 with stand-in programs, not with Priroda.
+They were run in the cloud session on Slurm 23.11 with Priroda 25. The manual's original script failed (s01), and
+`manual.sbatch` now holds the corrected version that the manual shows.
 
 ```bash
 cd tests/slurm
@@ -337,11 +339,11 @@ Outputs go to `runs/slurm-<date>/<test>/`; `status.txt` summarizes each job's fi
 
 | ID | Script | Question | What to look at | Where it is used | Result |
 |---|---|---|---|---|---|
-| s01 | `manual.sbatch`, water | Does the manual's script work: `$SLURM_NTASKS` reaches `mpiexec`, scratch in the job's `TMPDIR`, removed at the end? | `s01/mol.out`: process lines (2), `Disk:` echo, E = t01; status: scratch removed | running.md (SLURM script) | |
-| s02 | `manual.sbatch`, Cu complex, `scancel` after 60 s | What does a cancelled run print, and is its scratch left behind? (The `rm` at the end of the script cannot run.) | Tail of `mol.out` (`signal 15`?); `slurm-<id>.out`; `scratch_left.txt` | running.md; common-problems (signal 15) | |
-| s03 | `manual_trap.sbatch`, same | Does the trap remove the scratch after `scancel`? | status: scratch removed | running.md (suggested script) | |
-| s04 | `manual.sbatch`, Cu complex, `--time=1` | What happens at the time limit? | Tail of `mol.out`; `DUE TO TIME LIMIT` in `slurm-<id>.out`; scratch left? | running.md | |
-| s05 | `manual.sbatch`, two water jobs with `--ntasks=1` | Do two Priroda jobs run side by side on one node, each with its own scratch? | `s05_queue.txt` (both `R`); both E = t01; both scratch removed | running.md (several independent jobs) | |
+| s01 | `manual.sbatch`, water | Does the manual's script work: `$SLURM_NTASKS` reaches `mpiexec`, scratch in the job's `TMPDIR`, removed at the end? | `s01/mol.out`: process lines (2), `Disk:` echo, E = t01; status: scratch removed | running.md (SLURM script) |  As written: **failed** (`Environment is too large (max is 193)`; Slurm still said COMPLETED). With `env -i` and `exit $status`: works, 2 processes, E = t01, scratch removed. |
+| s02 | `manual.sbatch`, Cu complex, `scancel` after 60 s | What does a cancelled run print, and is its scratch left behind? (The `rm` at the end of the script cannot run.) | Tail of `mol.out` (`signal 15`?); `slurm-<id>.out`; `scratch_left.txt` | running.md; common-problems (signal 15) |  `process 0 got signal 15`; Priroda deleted its scratch files, the empty job directory stayed. |
+| s03 | `manual_trap.sbatch`, same | Does the trap remove the scratch after `scancel`? | status: scratch removed | running.md (suggested script) |  Trap removed the directory. |
+| s04 | `manual.sbatch`, Cu complex, `--time=1` | What happens at the time limit? | Tail of `mol.out`; `DUE TO TIME LIMIT` in `slurm-<id>.out`; scratch left? | running.md |  `DUE TO TIME LIMIT`, same signal lines, scratch files deleted, empty directory left. |
+| s05 | `manual.sbatch`, two water jobs with `--ntasks=1` | Do two Priroda jobs run side by side on one node, each with its own scratch? | `s05_queue.txt` (both `R`); both E = t01; both scratch removed | running.md (several independent jobs) |  Both ran at once and completed. |
 
 PBS/Torque is not tested: it is hard to install on one PC. Its script in running.md differs only in the header lines
 and in reading the number of cores from `$PBS_NODEFILE`.

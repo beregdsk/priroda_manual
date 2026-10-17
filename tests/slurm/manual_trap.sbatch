@@ -13,5 +13,6 @@ mkdir -p "$TMPDIR"
 trap 'rm -rf "$TMPDIR"' EXIT
 trap 'exit 143' TERM
 
-${MPIEXEC:-$HOME/priroda/mpiexec} -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out &
-wait
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
+  ${MPIEXEC:-$HOME/priroda/mpiexec} -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out &
+wait $!

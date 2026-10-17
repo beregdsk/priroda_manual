@@ -1,0 +1,3 @@
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+                 7     local      mol     root PD       0:00      1 (InvalidAccount)
+                 8     local      mol     root PD       0:00      1 (InvalidAccount)

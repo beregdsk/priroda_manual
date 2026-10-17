@@ -6,7 +6,7 @@ $control
 $end
 $dft functional=OLYP $end
 $grid acc=1e-12 $end
-$scf restrict=0 convergence=1e-10 iterations=200 $end
+$scf restrict=0 iterations=200 convergence=1e-10 $end
 $molecule charge=+1 mult=2 cartesian
  set=L2
   29   0.04459645   0.22307433  -0.28240287

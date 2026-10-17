@@ -554,7 +554,8 @@ to 12.4 minutes.</p>
 <section id="where-scratch-files-go">
 <h3>Where scratch files go<a class="headerlink" href="#where-scratch-files-go" title="Link to this heading">¶</a></h3>
 <p>The scratch directory is taken from <code class="docutils literal notranslate"><span class="pre">path=</span></code>, then from the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable. The files are named
-<code class="docutils literal notranslate"><span class="pre">tmp&lt;number&gt;.&lt;rank&gt;</span></code>, for example <code class="docutils literal notranslate"><span class="pre">/tmp/tmp2960.0</span></code>. Priroda deletes them at the end of a normal run; after a crash,
+<code class="docutils literal notranslate"><span class="pre">tmp&lt;number&gt;.&lt;rank&gt;</span></code>, for example <code class="docutils literal notranslate"><span class="pre">/tmp/tmp2960.0</span></code>; in version 25 each process of a parallel run wrote its
+own file, named like <code class="docutils literal notranslate"><span class="pre">tmp5345.0000</span></code>. Priroda deletes them at the end of a normal run; after a crash,
 delete the leftovers yourself.</p>
 <!-- src: input.txt; 04 #20, #465; 06 §4 (Tutorial v6); 02 §5.2 -->
 <p>When neither <code class="docutils literal notranslate"><span class="pre">path=</span></code> nor <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> is set, version 25 puts scratch files in <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> (echo <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>), as
@@ -655,7 +656,7 @@ version 7 MP2 run hung on more than about 24 cores. Use version 17 or later for 
 <p>Hangs, crashes and poor speed-up in parallel runs are covered in <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-parallel"><span class="std std-ref">Parallel and MPI problems</span></a>.</p>
 </section>
 <section id="batch-systems">
-<h2>Batch systems<a class="headerlink" href="#batch-systems" title="Link to this heading">¶</a></h2>
+<span id="running-batch"></span><h2>Batch systems<a class="headerlink" href="#batch-systems" title="Link to this heading">¶</a></h2>
 <p>Priroda needs nothing special from a batch system. The job script has to:</p>
 <ol class="arabic simple">
 <li><p>request <strong>one node</strong> and the number of cores you will use (see <a class="reference internal" href="#running-parallel-scaling"><span class="std std-ref">parallel performance above</span></a>);</p></li>
@@ -664,7 +665,9 @@ version 7 MP2 run hung on more than about 24 cores. Use version 17 or later for 
 <li><p>start Priroda with the input and output file names.</p></li>
 </ol>
 <!-- src: 06 §7; 04 #462 -->
-<p>A SLURM script along these lines should work. Directory names and module setup are site-specific.</p>
+<p>This SLURM script was tested in version 25 on a single-node Slurm 23.11. Directory names and module setup are
+site-specific.</p>
+<!-- src: 08 Slurm tests (s01-s05) -->
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 #SBATCH --job-name=mol
 #SBATCH --nodes=1
@@ -676,13 +679,40 @@ cd "$SLURM_SUBMIT_DIR"
 export TMPDIR=/local/scratch/$SLURM_JOB_ID   # node-local disk; site-specific
 mkdir -p "$TMPDIR"
 
-$HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpiexec from the official site
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
+  $HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpiexec from the official site
+status=$?
 
 rm -rf "$TMPDIR"
+exit $status
 </pre></div>
 </div>
-<!-- verify: tests/slurm s01-s05 -->
-<p>Under PBS/Torque the same steps read the number of cores from <code class="docutils literal notranslate"><span class="pre">$PBS_NODEFILE</span></code>. PBS often provides a per-job local
+<p>Two lines matter more than they look:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">-i</span></code>.</strong> The <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> from the official site refuses to start when the environment holds 193 or more
+variables. It prints <code class="docutils literal notranslate"><span class="pre">Environment</span> <span class="pre">is</span> <span class="pre">too</span> <span class="pre">large</span> <span class="pre">(max</span> <span class="pre">is</span> <span class="pre">193)</span></code> and exits, and Priroda never runs. A Slurm job easily
+has that many, because Slurm adds its own <code class="docutils literal notranslate"><span class="pre">SLURM_*</span></code> variables; in the test, a job inherited 210 and the unmodified
+script failed this way. <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">-i</span></code> starts <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> with only the variables listed.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">$status</span></code>.</strong> Without it the job’s exit status is that of <code class="docutils literal notranslate"><span class="pre">rm</span></code>, so Slurm reports a failed run as <code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>.
+This is what happened in the test above.</p></li>
+</ul>
+<!-- src: 08 Slurm tests (s01 as written; limit found by test: 192 variables run, 193 refused, exit 255) -->
+<p>When a job is cancelled (<code class="docutils literal notranslate"><span class="pre">scancel</span></code>) or reaches its time limit, Slurm sends signal 15 (SIGTERM). Priroda then writes
+<code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">0</span> <span class="pre">got</span> <span class="pre">signal</span> <span class="pre">15</span></code> to the output, deletes its own scratch files, and stops; Slurm’s own log file says
+<code class="docutils literal notranslate"><span class="pre">CANCELLED</span></code> or <code class="docutils literal notranslate"><span class="pre">CANCELLED</span> <span class="pre">...</span> <span class="pre">DUE</span> <span class="pre">TO</span> <span class="pre">TIME</span> <span class="pre">LIMIT</span></code>. The <code class="docutils literal notranslate"><span class="pre">rm</span></code> at the end of the script does not run, so the empty
+scratch directory stays. To remove it as well, set the clean-up as a trap before starting Priroda:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>trap 'rm -rf "$TMPDIR"' EXIT
+trap 'exit 143' TERM
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
+  $HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out &amp;
+wait $!
+</pre></div>
+</div>
+<!-- src: 08 Slurm tests (s02-s04) -->
+<p>Two jobs of one process each ran side by side on the same node without trouble, each with its own scratch
+directory. <!-- src: 08 Slurm tests (s05) --></p>
+<p>Under PBS/Torque the same steps read the number of cores from <code class="docutils literal notranslate"><span class="pre">$PBS_NODEFILE</span></code>. This script was not tested; it
+uses <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">-i</span></code> and <code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">$status</span></code> for the same reasons as the SLURM one. PBS often provides a per-job local
 scratch directory and deletes it after the job.</p>
 <!-- src: 06 §7 (PBS_Tutorial) -->
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
@@ -694,9 +724,12 @@ NP=$(wc -l &lt; "$PBS_NODEFILE")
 export TMPDIR=/local/scratch/$PBS_JOBID      # site-specific
 mkdir -p "$TMPDIR"
 
-$HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
+  $HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
+status=$?
 
 rm -rf "$TMPDIR"
+exit $status
 </pre></div>
 </div>
 <!-- verify: PBS not testable on one PC; same steps as the tested SLURM script -->

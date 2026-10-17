@@ -395,7 +395,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scan</span></code></p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✗ (9)</p></td>
+<td class="text-center"><p>✓ (9)</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
@@ -447,9 +447,12 @@ only), whose status is undocumented. <!-- src: 06 §3; 03 §11 --></p></li>
 imaginary modes at the ground-state geometry, as expected for an excited state away from its own minimum.</p>
 <!-- src: 08 t65a -->
 </li>
-<li><p>A TDDFT scan of NH3 failed in version 25: the excited-state equations diverged (<code class="docutils literal notranslate"><span class="pre">g=</span> <span class="pre">-nan</span></code>) and the run stopped
-with <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">write</span> <span class="pre">td.XK(…)?</span></code>. A TDDFT TS search and IRC on the same molecule worked.</p>
-<!-- src: 08 t68d, t66d, t67d -->
+<li><p>A TDDFT scan of the NH3 umbrella angle in its first excited state worked in version 25 when all three N–H
+bonds were fixed. With only one fixed, the excited state broke another N–H bond (it is dissociative), the
+excitation energy fell from 7.3 to 0.4 eV over 46 steps, and the run then failed: the excited-state equations
+diverged (<code class="docutils literal notranslate"><span class="pre">g=</span> <span class="pre">-nan</span></code>) and it stopped with <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">write</span> <span class="pre">td.XK(…)?</span></code>. TDDFT cannot follow an excited state that comes
+down to the ground state; watch the excitation energy (<code class="docutils literal notranslate"><span class="pre">DE</span> <span class="pre">=</span></code>) in excited-state optimizations.</p>
+<!-- src: 08 t68d (re-read), t68f -->
 </li>
 </ol>
 <p>The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they

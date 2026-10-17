@@ -1,0 +1,7 @@
+slurmstepd-vm: error: *** JOB 15 ON vm CANCELLED AT 2026-10-17T18:34:03 ***
+
+  process 0 got signal 15
+
+  process 1 got signal 15
+
+  process 0 got signal 2

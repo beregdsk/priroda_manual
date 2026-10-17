@@ -13,7 +13,8 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 9: `tests/runs/20261017-152445/` (t71b, t74); t72 on 8 processes: `tests/runs/20261017-153851/` (an interrupted attempt is in `20261017-153621/`);
 - round 10: `tests/runs/20261017-174656/` (t74a–c);
 - round 11: `tests/runs/20261017-180916/` (t74a–e); `20261017-180746/` is an earlier run of t74a–c only, with the same energies;
-- round 12: `tests/runs/20261017-182103/` (t75a–d).
+- round 12: `tests/runs/20261017-182103/` (t75a–d);
+- round 13, run in the cloud session on `p4_d` (Linux, 4 cores): `tests/runs/20261017-182407/` (t76, t77), `20261017-183348/` (t68f); Slurm tests in `tests/runs/slurm-*`.
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -208,6 +209,49 @@ Conclusions:
 | t75d | `read=1` with the t75b vectors and `na(5)=6,5 nb(5)=6,5`: `vectors from 'h2ox.vec'`, then `11 F, 35 F1` back to the ground state, E = -76.3653901684. The longer run shows that `na`/`nb` act on vectors read from a file *(inferred from the iteration counts; the reordering is not printed)*. |
 
 Conclusion: the version 25 SCF did not stay in a closed-shell excited configuration of water, although the HOMO (b1) and LUMO (a1) differ in symmetry. In O2 (t48b, t74d, t74e) the LUMO-below-HOMO state persisted because it is the restricted solution for a degenerate shell, not an excited state. No case of an escapable excited state was found.
+
+## Round 13 (run in the cloud session)
+
+From round 13 on, tests were also run directly in the cloud session on `p4_d` (the same banner,
+`Priroda 25 (2025.02.28)`) with `basis.in` and `mpiexec` downloaded from the official site, on a 4-core Linux VM.
+Water (t01) gave E = -76.3653913723 there too, identical to the project owner's runs.
+
+| Test | Result |
+|---|---|
+| t76a | CO2 started 10° bent, default internal coordinates: `OPTIMIZATION CONVERGED in 12 steps!`, E = -188.4572048660. The coordinate count went from `5 internal coordinates` to `4` once the molecule was linear. No crash. |
+| t76b | Same with `cartesian=1`: converged in 6 steps, E = -188.4572048699. |
+| t76c | Acetylene started trans-bent, internal: converged in 24 steps (internal coordinates 9, then 7), E = -77.2469824571. |
+| t76d | Same with `cartesian=1`: 6 steps, E = -77.2469824663. |
+| t76e | Acetylene already linear, internal: 2 steps, 7 internal coordinates throughout. |
+| t77a | Hessian at the guessed HCN ⇄ HNC TS: frequencies 1121.2i, 2018.6, 2594.1 cm⁻¹. |
+| t77b | `saddle=1` with that Hessian: `OPTIMIZATION CONVERGED in 3 steps!`, E(TS) = -93.26204880. |
+| t77c | Hessian at the TS: one imaginary mode, 1090.2i cm⁻¹. |
+| t77d | IRC, default radius (0.1), `back=0`: 19 points to HCN (E = -93.340118 at the lowest point, 0.0781 hartree below the TS); `Vicinity of a Stationary Point(?) --- STOP.` then, after one more point that came out higher, `Energy Minimum Passed --- STOP.` (last gradient 0.0057). 21.6 s. |
+| t77e | Default radius, `back=1`: 21 points to HNC, E = -93.313467 (0.0514 below the TS); ends with `Vicinity…` only (gradient 0.0005). 25.0 s. |
+| t77f | `radius=0.03`, `back=0`: 60 points to HCN, E = -93.340115, gradient 0.0003; `Vicinity…`. 43 s. |
+| t77g | `radius=0.03`, `back=1`: 69 points to HNC, E = -93.313478; `Vicinity…` then `Energy Minimum Passed…`. 52 s. |
+| t77h | `radius=0.3`, `back=0`: 7 points to HCN; last point gradient 0.010, E 0.0023 above the lowest point; `Vicinity…` then `Energy Minimum Passed…`. 13 s. |
+| t68d (re-read) | The TDDFT scan of round 7 never finished its first point: with only N–H(1) fixed, the first excited state stretched the other N–H bonds (1.008 to 1.16 and 1.63 Å over 46 steps; the state is dissociative) while the excitation energy fell from 0.2676 to 0.0153 hartree (7.3 to 0.4 eV). Then the excited-state iterations gave `nan` and the run stopped with `0: write td.XK(…)?`. |
+| t68f | The same scan with all three N–H bonds fixed at 1.1 Å: all 3 points converged (1, 1 and 3 steps), `SCAN>` summary printed. TDDFT scans work. |
+
+No early IRC stop occurred with any step size, so the forum advice to shrink the step for light-atom barriers was not needed here; it is not contradicted either.
+
+## Slurm tests
+
+Run in the cloud session on Slurm 23.11.4 (single node, 4 cores) with `tests/slurm/run_slurm.sh`, 2 processes per job, scratch base `/tmp/priroda-slurm`.
+
+| Test | Result |
+|---|---|
+| s01, script as written in running.md (`runs/slurm-20261017-182503-as-written/`) | `mpiexec` printed `Environment is too large (max is 193)` (once per process) and exited; Priroda never started; no `mol.out`. Slurm reported `COMPLETED`, exit 0, because the script's last command is `rm`. The job environment had 210 variables (158 outside Slurm). |
+| limit | With `env -i` and padding variables: 192 variables run, 193 and 194 refused; `mpiexec` exits with 255 when it refuses. `env -i PATH=… HOME=… TMPDIR=… mpiexec …` runs normally (2 processes, E as t01). |
+| s01, corrected script (`env -i`, `exit $status`; `runs/slurm-20261017-182918-s01-s05/`) | `parallel on 2 processors`, `Disk:   1g '/tmp/priroda-slurm/<job id>'`, E = -76.3653913723, scratch directory removed, `COMPLETED`. |
+| s02 (`runs/slurm-20261017-183253/`) | Cu complex, `scancel` after 60 s: scratch held `tmp5345.0000` and `tmp5346.0000` (one file per process). `mol.out` ends with `process 0 got signal 15` and `process 0 got signal 2`; the Slurm log with `CANCELLED AT …`, `process 1 got signal 15`. `CANCELLED`, ExitCode 0:15. Priroda deleted its scratch files; the empty job directory stayed. |
+| s03 | Same with the trap script: scratch directory removed; ExitCode 143. |
+| s04 | Cu complex, `--time=1`: killed after 1 min 20 s, `CANCELLED … DUE TO TIME LIMIT`, `TIMEOUT`; same signal lines; scratch files deleted, empty directory left. |
+| s05 | Two 1-process water jobs ran at the same time (`squeue`: both `R`), each `COMPLETED`, each with its own scratch directory, removed. |
+
+In the first attempt (`runs/slurm-20261017-182918-s01-s05/`) s02–s04 failed after 3 s because their input had `convergence=1e-10 iterations=200` (the known parser problem, `unknown name erations`); the input was fixed and they were rerun.
+Jobs pending with reason `InvalidAccount` for up to about 50 s is normal in a Slurm without accounting: the backfill scheduler starts them.
 
 ## Molden check
 

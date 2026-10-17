@@ -80,7 +80,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 | `optimize` | ✓ | ✓ | ✓ (4) | ✓ | ✓ (1) | ✓ |
 | TS (`saddle=1`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `irc` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `scan` | ✓ | ✓ | ✗ (9) | ✓ | ✓ | ✓ |
+| `scan` | ✓ | ✓ | ✓ (9) | ✓ | ✓ | ✓ |
 | `nmr` | ✓ (5) | – | – | – | – | – |
 | TDDFT excited states | – | – (6) | ✓ | – | – (7) | – |
 | MD (`thermostat`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -105,9 +105,12 @@ Notes to the table:
 8. The Hessian of the excited state given by `state=` (version 25, water, `state=1,3`): numerical, with two
    imaginary modes at the ground-state geometry, as expected for an excited state away from its own minimum.
    <!-- src: 08 t65a -->
-9. A TDDFT scan of NH3 failed in version 25: the excited-state equations diverged (`g= -nan`) and the run stopped
-   with `0: write td.XK(…)?`. A TDDFT TS search and IRC on the same molecule worked.
-   <!-- src: 08 t68d, t66d, t67d -->
+9. A TDDFT scan of the NH3 umbrella angle in its first excited state worked in version 25 when all three N–H
+   bonds were fixed. With only one fixed, the excited state broke another N–H bond (it is dissociative), the
+   excitation energy fell from 7.3 to 0.4 eV over 46 steps, and the run then failed: the excited-state equations
+   diverged (`g= -nan`) and it stopped with `0: write td.XK(…)?`. TDDFT cannot follow an excited state that comes
+   down to the ground state; watch the excitation energy (`DE =`) in excited-state optimizations.
+   <!-- src: 08 t68d (re-read), t68f -->
 
 The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they
 show that the combination runs and ends normally, not how well it behaves on real problems.

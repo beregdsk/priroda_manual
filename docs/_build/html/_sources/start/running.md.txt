@@ -259,7 +259,8 @@ to 12.4 minutes.
 ### Where scratch files go
 
 The scratch directory is taken from `path=`, then from the `TMPDIR` environment variable. The files are named
-`tmp<number>.<rank>`, for example `/tmp/tmp2960.0`. Priroda deletes them at the end of a normal run; after a crash,
+`tmp<number>.<rank>`, for example `/tmp/tmp2960.0`; in version 25 each process of a parallel run wrote its
+own file, named like `tmp5345.0000`. Priroda deletes them at the end of a normal run; after a crash,
 delete the leftovers yourself.
 <!-- src: input.txt; 04 #20, #465; 06 §4 (Tutorial v6); 02 §5.2 -->
 
@@ -358,6 +359,7 @@ version 7 MP2 run hung on more than about 24 cores. Use version 17 or later for 
 
 Hangs, crashes and poor speed-up in parallel runs are covered in {ref}`troubleshooting.parallel`.
 
+(running-batch)=
 ## Batch systems
 
 Priroda needs nothing special from a batch system. The job script has to:
@@ -369,7 +371,9 @@ Priroda needs nothing special from a batch system. The job script has to:
 
 <!-- src: 06 §7; 04 #462 -->
 
-A SLURM script along these lines should work. Directory names and module setup are site-specific.
+This SLURM script was tested in version 25 on a single-node Slurm 23.11. Directory names and module setup are
+site-specific.
+<!-- src: 08 Slurm tests (s01-s05) -->
 
 ```text
 #!/bin/bash
@@ -383,14 +387,44 @@ cd "$SLURM_SUBMIT_DIR"
 export TMPDIR=/local/scratch/$SLURM_JOB_ID   # node-local disk; site-specific
 mkdir -p "$TMPDIR"
 
-$HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpiexec from the official site
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
+  $HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpiexec from the official site
+status=$?
 
 rm -rf "$TMPDIR"
+exit $status
 ```
 
-<!-- verify: tests/slurm s01-s05 -->
+Two lines matter more than they look:
 
-Under PBS/Torque the same steps read the number of cores from `$PBS_NODEFILE`. PBS often provides a per-job local
+- **`env -i`.** The `mpiexec` from the official site refuses to start when the environment holds 193 or more
+  variables. It prints `Environment is too large (max is 193)` and exits, and Priroda never runs. A Slurm job easily
+  has that many, because Slurm adds its own `SLURM_*` variables; in the test, a job inherited 210 and the unmodified
+  script failed this way. `env -i` starts `mpiexec` with only the variables listed.
+- **`exit $status`.** Without it the job's exit status is that of `rm`, so Slurm reports a failed run as `COMPLETED`.
+  This is what happened in the test above.
+<!-- src: 08 Slurm tests (s01 as written; limit found by test: 192 variables run, 193 refused, exit 255) -->
+
+When a job is cancelled (`scancel`) or reaches its time limit, Slurm sends signal 15 (SIGTERM). Priroda then writes
+`process 0 got signal 15` to the output, deletes its own scratch files, and stops; Slurm's own log file says
+`CANCELLED` or `CANCELLED ... DUE TO TIME LIMIT`. The `rm` at the end of the script does not run, so the empty
+scratch directory stays. To remove it as well, set the clean-up as a trap before starting Priroda:
+
+```text
+trap 'rm -rf "$TMPDIR"' EXIT
+trap 'exit 143' TERM
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
+  $HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out &
+wait $!
+```
+
+<!-- src: 08 Slurm tests (s02-s04) -->
+
+Two jobs of one process each ran side by side on the same node without trouble, each with its own scratch
+directory. <!-- src: 08 Slurm tests (s05) -->
+
+Under PBS/Torque the same steps read the number of cores from `$PBS_NODEFILE`. This script was not tested; it
+uses `env -i` and `exit $status` for the same reasons as the SLURM one. PBS often provides a per-job local
 scratch directory and deletes it after the job.
 <!-- src: 06 §7 (PBS_Tutorial) -->
 
@@ -404,9 +438,12 @@ NP=$(wc -l < "$PBS_NODEFILE")
 export TMPDIR=/local/scratch/$PBS_JOBID      # site-specific
 mkdir -p "$TMPDIR"
 
-$HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
+  $HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
+status=$?
 
 rm -rf "$TMPDIR"
+exit $status
 ```
 
 <!-- verify: PBS not testable on one PC; same steps as the tested SLURM script -->

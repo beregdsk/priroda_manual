@@ -35,6 +35,7 @@ ProctrackType=proctrack/linuxproc
 TaskPlugin=task/none
 ReturnToService=2
 SchedulerType=sched/backfill
+PriorityType=priority/basic
 SelectType=select/cons_tres
 SelectTypeParameters=CR_Core
 AccountingStorageType=accounting_storage/none

@@ -197,7 +197,7 @@ In a scan the points include both ends: `points=4` gives s = 0, 1/3, 2/3 and 1. 
 **Type:** real\
 **Default:** `0.1`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 04 #298; 08 t26
+**Sources:** input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h
 
 Default: `0.1` as echoed by version 25 (`r = 0.1000000000`); `Dft.rtf` gives 0.2 (older version).
 
@@ -207,7 +207,9 @@ this distance apart. The IRC coordinate is reported in bohr·amu^1/2.
 ```{note}
 `Vicinity of a Stationary Point(?) --- STOP.` ends an IRC that has reached the region of a minimum; in
 version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
-decrease on a step; changing the step size is the reported fix there.
+decrease on a step; changing the step size is the reported fix there. In a version 25 IRC of HCN ⇄ HNC,
+`radius=0.03`, `0.1` and `0.3` all reached both minima: about 65, 20 and 7 points, with the largest step
+stopping farthest from the minimum.
 ```
 
 (optimize.coordinates)=

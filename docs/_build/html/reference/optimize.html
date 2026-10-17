@@ -429,7 +429,7 @@ In a scan the points include both ends: <code class="docutils literal notranslat
 <p id="index-9"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #298; 08 t26</p>
+<strong>Sources:</strong> input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">0.1</span></code> as echoed by version 25 (<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">0.1000000000</span></code>); <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.2 (older version).</p>
 <p>Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
 this distance apart. The IRC coordinate is reported in bohr·amu^1/2.</p>
@@ -437,7 +437,9 @@ this distance apart. The IRC coordinate is reported in bohr·amu^1/2.</p>
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">Vicinity</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">Stationary</span> <span class="pre">Point(?)</span> <span class="pre">---</span> <span class="pre">STOP.</span></code> ends an IRC that has reached the region of a minimum; in
 version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
-decrease on a step; changing the step size is the reported fix there.</p>
+decrease on a step; changing the step size is the reported fix there. In a version 25 IRC of HCN ⇄ HNC,
+<code class="docutils literal notranslate"><span class="pre">radius=0.03</span></code>, <code class="docutils literal notranslate"><span class="pre">0.1</span></code> and <code class="docutils literal notranslate"><span class="pre">0.3</span></code> all reached both minima: about 65, 20 and 7 points, with the largest step
+stopping farthest from the minimum.</p>
 </div>
 </section>
 <section id="coordinates">

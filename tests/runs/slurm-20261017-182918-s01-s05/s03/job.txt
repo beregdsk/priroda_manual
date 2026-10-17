@@ -1,0 +1,29 @@
+JobId=11 JobName=mol
+   UserId=root(0) GroupId=root(0) MCS_label=N/A
+   Priority=4294901749 Nice=0 Account=(null) QOS=(null)
+   JobState=FAILED Reason=NonZeroExitCode Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0
+   RunTime=00:00:03 TimeLimit=1-00:00:00 TimeMin=N/A
+   SubmitTime=2026-10-17T18:31:00 EligibleTime=2026-10-17T18:31:00
+   AccrueTime=2026-10-17T18:31:00
+   StartTime=2026-10-17T18:31:00 EndTime=2026-10-17T18:31:03 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-10-17T18:31:00 Scheduler=Backfill
+   Partition=local AllocNode:Sid=localhost:4433
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=vm
+   BatchHost=vm
+   NumNodes=1 NumCPUs=2 NumTasks=2 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=2,mem=15069M,node=1,billing=2
+   AllocTRES=cpu=2,node=1,billing=2
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryNode=0 MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/user/priroda/tests/slurm/manual_trap.sbatch
+   WorkDir=/home/user/priroda/tests/runs/slurm-20261017-182918/s03
+   StdErr=/home/user/priroda/tests/runs/slurm-20261017-182918/s03/slurm-11.out
+   StdIn=/dev/null
+   StdOut=/home/user/priroda/tests/runs/slurm-20261017-182918/s03/slurm-11.out
+   Power=
+   
+

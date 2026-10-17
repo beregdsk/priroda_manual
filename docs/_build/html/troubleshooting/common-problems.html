@@ -633,7 +633,12 @@ shells. <!-- src: 06 §10; 02 §5.4; 04 #352 --></p></li>
 </pre></div>
 </div>
 <p>This was the answer from one experienced user; the asker did not report back.</p>
-<!-- src: 04 #517, #518 (Jul 2026) --> <!-- verify: tests t76a-e -->
+<!-- src: 04 #517, #518 (Jul 2026) -->
+<p>The crash could not be reproduced in version 25 tests with molecules that become linear, the usual suspects for
+running short of internal coordinates. CO2 and acetylene started bent converged in internal coordinates: the
+optimizer rebuilt its coordinate set when the molecule became linear (from 5 to 4 coordinates for CO2, from 9 to 7
+for acetylene) and carried on. They needed 12 and 24 steps, against 6 each with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>.</p>
+<!-- src: 08 t76a-e -->
 </section>
 <section id="the-optimization-converges-in-one-step">
 <h3>The optimization “converges” in one step<a class="headerlink" href="#the-optimization-converges-in-one-step" title="Link to this heading">¶</a></h3>
@@ -684,7 +689,14 @@ step size; see <a class="reference internal" href="../reference/optimize.html#op
 <li><p>on a very narrow barrier, such as a proton transfer, decrease it, because a step suited to heavy atoms throws the
 proton too far.</p></li>
 </ul>
-<p>This advice comes from one experienced user. <!-- src: 04 #295, #298 --> <!-- verify: tests t77d-h --></p>
+<p>This advice comes from one experienced user. <!-- src: 04 #295, #298 --></p>
+<p>In a version 25 test on a hydrogen shift (HCN ⇄ HNC), step sizes of 0.03, 0.1 (the default) and 0.3 all reached both
+minima without stopping early, so the default is a sensible start even for a light atom. The step size changed
+the cost and how close to the minimum the path ended: 60–69 points with 0.03, 19–21 with 0.1, and 7 with 0.3, which
+stopped farthest from the minimum (gradient 0.010 against 0.0003–0.006).</p>
+<!-- src: 08 t77d-h -->
+<p>An IRC can also end with <code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">Minimum</span> <span class="pre">Passed</span> <span class="pre">---</span> <span class="pre">STOP.</span></code> right after the <code class="docutils literal notranslate"><span class="pre">Vicinity</span></code> message, when its last point
+overshot the minimum and came out higher in energy than the one before. This is a normal end too. <!-- src: 08 t77d, t77g, t77h --></p>
 </section>
 <section id="irc-ends-near-a-minimum-but-not-in-it">
 <h3>IRC ends near a minimum but not in it<a class="headerlink" href="#irc-ends-near-a-minimum-but-not-in-it" title="Link to this heading">¶</a></h3>
@@ -916,6 +928,19 @@ spread its memory. RI-MP2 distributes memory better.</p>
 </li>
 </ul>
 </section>
+<section id="environment-is-too-large-max-is-193">
+<h3><code class="docutils literal notranslate"><span class="pre">Environment</span> <span class="pre">is</span> <span class="pre">too</span> <span class="pre">large</span> <span class="pre">(max</span> <span class="pre">is</span> <span class="pre">193)</span></code><a class="headerlink" href="#environment-is-too-large-max-is-193" title="Link to this heading">¶</a></h3>
+<p><strong>Symptom.</strong> A parallel run started with the <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> from the official site prints this line (once per process)
+and stops at once; no output file is written. Typically this happens inside a batch job.</p>
+<p><strong>Cause.</strong> That <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> refuses to start when the environment holds 193 or more variables. Batch systems add many
+variables of their own; a Slurm job in a version 25 test had 210.</p>
+<p><strong>Fix.</strong> Start it with a minimal environment:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" ./mpiexec -np 4 ./p input.in output.out
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../start/running.html#running-batch"><span class="std std-ref">Batch systems</span></a> for a complete job script.</p>
+<!-- src: 08 Slurm tests (s01 as written; 192 variables run, 193 refused) -->
+</section>
 <section id="starting-a-parallel-run-on-linux">
 <h3>Starting a parallel run on Linux<a class="headerlink" href="#starting-a-parallel-run-on-linux" title="Link to this heading">¶</a></h3>
 <p>Version 25 must be started through an MPI launcher, such as the <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> from the official site:
@@ -1097,6 +1122,7 @@ had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build 
 <li><a class="reference internal" href="#parallel-and-mpi-problems">Parallel and MPI problems</a><ul>
 <li><a class="reference internal" href="#a-parallel-ri-job-hangs-with-no-message">A parallel RI job hangs with no message</a></li>
 <li><a class="reference internal" href="#little-or-no-speed-up-from-more-cores">Little or no speed-up from more cores</a></li>
+<li><a class="reference internal" href="#environment-is-too-large-max-is-193"><code class="docutils literal notranslate"><span class="pre">Environment</span> <span class="pre">is</span> <span class="pre">too</span> <span class="pre">large</span> <span class="pre">(max</span> <span class="pre">is</span> <span class="pre">193)</span></code></a></li>
 <li><a class="reference internal" href="#starting-a-parallel-run-on-linux">Starting a parallel run on Linux</a></li>
 <li><a class="reference internal" href="#windows">Windows</a></li>
 </ul>

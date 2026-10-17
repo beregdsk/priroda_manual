@@ -1,0 +1,16 @@
+Slurm slurm-wlm 23.11.4 on vm; NP=2; SCRATCH_BASE=/tmp/priroda-slurm
+s01 job 9: JobState=COMPLETED Reason=None ExitCode=0:0 RunTime=00:00:01
+s01 scratch removed
+s02 job 10 ended before the cancel (too short for this machine)
+s02 job 10: JobState=FAILED Reason=NonZeroExitCode ExitCode=1:0 RunTime=00:00:03
+s02 scratch removed
+s03 job 11 ended before the cancel (too short for this machine)
+s03 job 11: JobState=FAILED Reason=NonZeroExitCode ExitCode=1:0 RunTime=00:00:03
+s03 scratch removed
+s04 job 12: JobState=FAILED Reason=NonZeroExitCode ExitCode=1:0 RunTime=00:00:03
+s04 scratch removed
+s05a job 13: JobState=COMPLETED Reason=None ExitCode=0:0 RunTime=00:00:01
+s05a scratch removed
+s05b job 14: JobState=COMPLETED Reason=None ExitCode=0:0 RunTime=00:00:01
+s05b scratch removed
+Outputs in /home/user/priroda/tests/slurm/../runs/slurm-20261017-182918

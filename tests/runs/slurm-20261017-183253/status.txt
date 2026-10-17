@@ -1,0 +1,10 @@
+Slurm slurm-wlm 23.11.4 on vm; NP=2; SCRATCH_BASE=/tmp/priroda-slurm
+s02 job 15 cancelled after 60 s
+s02 job 15: JobState=CANCELLED Reason=None ExitCode=0:15 RunTime=00:01:01
+s02 scratch left: /tmp/priroda-slurm/15: 
+s03 job 16 cancelled after 60 s
+s03 job 16: JobState=CANCELLED Reason=None ExitCode=143:0 RunTime=00:01:00
+s03 scratch removed
+s04 job 17: JobState=TIMEOUT Reason=TimeLimit ExitCode=0:15 RunTime=00:01:20
+s04 scratch left: /tmp/priroda-slurm/17: 
+Outputs in /home/user/priroda/tests/slurm/../runs/slurm-20261017-183253

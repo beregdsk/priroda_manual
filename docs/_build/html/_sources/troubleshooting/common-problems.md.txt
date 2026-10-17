@@ -389,7 +389,13 @@ $optimize cartesian=1 $end
 ```
 
 This was the answer from one experienced user; the asker did not report back.
-<!-- src: 04 #517, #518 (Jul 2026) --> <!-- verify: tests t76a-e -->
+<!-- src: 04 #517, #518 (Jul 2026) -->
+
+The crash could not be reproduced in version 25 tests with molecules that become linear, the usual suspects for
+running short of internal coordinates. CO2 and acetylene started bent converged in internal coordinates: the
+optimizer rebuilt its coordinate set when the molecule became linear (from 5 to 4 coordinates for CO2, from 9 to 7
+for acetylene) and carried on. They needed 12 and 24 steps, against 6 each with `cartesian=1`.
+<!-- src: 08 t76a-e -->
 
 ### The optimization "converges" in one step
 
@@ -444,7 +450,16 @@ step size; see {ref}`radius <optimize.radius>`:
 - on a very narrow barrier, such as a proton transfer, decrease it, because a step suited to heavy atoms throws the
   proton too far.
 
-This advice comes from one experienced user. <!-- src: 04 #295, #298 --> <!-- verify: tests t77d-h -->
+This advice comes from one experienced user. <!-- src: 04 #295, #298 -->
+
+In a version 25 test on a hydrogen shift (HCN ⇄ HNC), step sizes of 0.03, 0.1 (the default) and 0.3 all reached both
+minima without stopping early, so the default is a sensible start even for a light atom. The step size changed
+the cost and how close to the minimum the path ended: 60–69 points with 0.03, 19–21 with 0.1, and 7 with 0.3, which
+stopped farthest from the minimum (gradient 0.010 against 0.0003–0.006).
+<!-- src: 08 t77d-h -->
+
+An IRC can also end with `Energy Minimum Passed --- STOP.` right after the `Vicinity` message, when its last point
+overshot the minimum and came out higher in energy than the one before. This is a normal end too. <!-- src: 08 t77d, t77g, t77h -->
 
 ### IRC ends near a minimum but not in it
 
@@ -680,6 +695,23 @@ Hessians, on 24–32 cores without trouble, so this advice is disputed. Parallel
   <!-- src: 03 §3 (amg) -->
 - For RI-MP2, the v5 documentation suggests a number of processes that divides the number of occupied orbitals.
   <!-- src: 06 §10 -->
+
+### `Environment is too large (max is 193)`
+
+**Symptom.** A parallel run started with the `mpiexec` from the official site prints this line (once per process)
+and stops at once; no output file is written. Typically this happens inside a batch job.
+
+**Cause.** That `mpiexec` refuses to start when the environment holds 193 or more variables. Batch systems add many
+variables of their own; a Slurm job in a version 25 test had 210.
+
+**Fix.** Start it with a minimal environment:
+
+```text
+env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" ./mpiexec -np 4 ./p input.in output.out
+```
+
+See {ref}`running-batch` for a complete job script.
+<!-- src: 08 Slurm tests (s01 as written; 192 variables run, 193 refused) -->
 
 ### Starting a parallel run on Linux
 

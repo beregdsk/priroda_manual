@@ -132,9 +132,11 @@ keywords:
       en: |
         `Vicinity of a Stationary Point(?) --- STOP.` ends an IRC that has reached the region of a minimum; in
         version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
-        decrease on a step; changing the step size is the reported fix there.
+        decrease on a step; changing the step size is the reported fix there. In a version 25 IRC of HCN ⇄ HNC,
+        `radius=0.03`, `0.1` and `0.3` all reached both minima: about 65, 20 and 7 points, with the largest step
+        stopping farthest from the minimum.
     status: current
-    sources: ["input.txt", "Dft.rtf", "04 #298", "08 t26"]
+    sources: ["input.txt", "Dft.rtf", "04 #298", "08 t26", "08 t77d-h"]
     verified_against: "25 (2025.02.28)"
   - name: coordinates
     type: list

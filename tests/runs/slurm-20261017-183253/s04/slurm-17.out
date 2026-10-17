@@ -1,0 +1,7 @@
+slurmstepd-vm: error: *** JOB 17 ON vm CANCELLED AT 2026-10-17T18:37:26 DUE TO TIME LIMIT ***
+
+  process 0 got signal 15
+
+  process 1 got signal 15
+
+  process 0 got signal 2
