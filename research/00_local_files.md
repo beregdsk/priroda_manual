@@ -1,10 +1,10 @@
 # Local source files (`priroda_man/`)
 
-Three pre-existing documents, all predating this project. Treat `priroda_man/` as read-only originals; UTF-8 copies live in `research/`.
+Three pre-existing documents, all predating this project, provided by Alexandra Freidzon. None of them is official (correction from the project owner, 2026-10-17). Treat `priroda_man/` as read-only originals; UTF-8 copies live in `research/`.
 
 | File | Language / encoding | What it is | Era |
 |---|---|---|---|
-| `priroda_man/input.txt` | English, ASCII | "Input Summary" — closest thing to an official keyword reference, apparently Laikov's own text with user annotations appended. | Newest (Priroda with `$system`, `$dft`, `$optimize`, riMP2/CCSD, `four=1`) |
+| `priroda_man/input.txt` | English, ASCII | "Input Summary" — the most complete keyword list, with user annotations appended. Unofficial. | Newest (Priroda with `$system`, `$dft`, `$optimize`, riMP2/CCSD, `four=1`) |
 | `priroda_man/Dft.rtf` | Russian, RTF cp1251 → `research/00_Dft_rtf_utf8.txt` | "ИСХОДНЫЕ ДАННЫЕ ДЛЯ ПРОГРАММЫ “ПРИРОДА” автор Др. Д.Н.ЛАЙКОВ" — short user-annotated keyword list with practical advice. | Middle (has `$molecule`, `$optimize`, `$scf functional=`, basis files `3z.bas`, `sbk.bas`, `ccpvnz.bas`) |
 | `priroda_man/Dft_ansi.txt` | Russian, cp1251 CRLF → `research/00_Dft_ansi_utf8.txt` | "Описание исходных данных" for the predecessor program (groups `$coordinates`, `$basis`, `$auxiliary`, `$SCF`, `$search`, `$force`, `$hessian`). | Oldest — mostly obsolete keyword names; useful for history and for the inline basis-set format. |
 

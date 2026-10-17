@@ -1,16 +1,9 @@
 # Priroda Unofficial Manual
 
-An unofficial user manual for Priroda, the quantum-chemistry program by Dimitri Laikov.
-
 ```{important}
 This manual is not an official Priroda document. It was not written or reviewed by the developer. It is compiled
-from the program's own files, the short keyword list that ships with it, and user reports from forums and user
-pages; {ref}`sources` lists them all. When this manual and the program disagree, the program is right.
-```
-
-```{warning}
-Work in progress. Unless an entry says otherwise, nothing here has yet been checked against a running Priroda binary.
-Each keyword entry gives its sources and its verification status.
+from the files on the official site, unofficial keyword lists and wiki pages, test runs, and user reports from
+forums and user pages; {ref}`sources` lists them all. When this manual and the program disagree, the program is right.
 ```
 
 ```{toctree}

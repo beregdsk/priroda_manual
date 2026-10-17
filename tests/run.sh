@@ -4,7 +4,7 @@
 #   PRIRODA=/path/to/p BASIS=/path/to/basis.in ./run.sh t22 t24     # tests whose name starts with t22 or t24
 # Optional:
 #   BASIS4=/path/to/basis4.in    enables t35 (four=1)
-#   QMBASIS=/path/to/qm.in       enables t39 (theory=qm_n3)
+#   QMBASIS=/path/to/qm.in       enables t39 and the *_qm_n3 tests (theory=qm_n3)
 #   MPIEXEC=/path/to/mpiexec     enables t21b (bundled mpiexec); mpirun on PATH enables t21c
 # Outputs go to runs/<date>/: <name>.out, plus <name>.err when the program wrote to stderr.
 # Exit statuses are collected in runs/<date>/status.txt.
@@ -36,6 +36,7 @@ skip() { echo "$1 skipped: $2" >> "$out/status.txt"; }
 for f in "$here"/inputs/t*.in; do
   name=$(basename "$f" .in)
   selected "$name" "$@" || continue
+  if [[ $name == *_qm_n3 ]] && [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi
   case $name in
     t03_*)  # relative basis name: run next to a temporary copy of basis.in, then delete the copy
       mkdir -p "$out/t03" && cp "$BASIS" "$out/t03/basis.in" && cp "$f" "$out/t03/$name.in"

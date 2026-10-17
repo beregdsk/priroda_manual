@@ -169,6 +169,29 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t64
 | t64a | `t64_scratch_location.in` with `TMPDIR` unset | Where do scratch files go when neither `path=` nor `TMPDIR` is set: current directory or `/tmp`? | The `Disk:` line in `t64a/t64_scratch_location.out` | running.md (where scratch files go) || `/tmp`. |
 | t64b | the same with `TMPDIR` set to `t64b/tmpdir` | Is `TMPDIR` used when `path=` is not given? | The `Disk:` line in `t64b/t64_scratch_location.out` | `system.path` || Yes, `TMPDIR` is used. |
 
+## Round 7: capability matrix (not yet run)
+
+Fills the `?` cells of the capability matrix in about.md: which `task=` values work with which `theory=`. Each test
+asks only "does this task run with this theory, and does it finish normally?". All use water or NH3 with `L1`.
+t66 and t67 start from the planar-NH3 transition state with the DFT Hessian of t24 appended (only as a starting
+Hessian), so t24 must be in the same run. The `tddft` inputs use `state=1,3` (gradient of state 1). The `ccsd` column
+of the matrix also stands for `ccsd4t`; only `ccsd` is tested. The `*_qm_n3` tests need `QMBASIS`. CCSD runs may take
+several minutes.
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in QMBASIS=/abs/path/to/qm.in ./run.sh t24 t65 t66 t67 t68 t69
+```
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t65a | `t65a_hessian_tddft.in` | `task=hessian` with `tddft`: excited-state frequencies, ground-state ones, or an error? | Hessian heading (analytic or numerical); frequency table; exit status | about.md matrix (`hessian` × `tddft`) || |
+| t65b | `t65b_hessian_qm_n3.in` | `task=hessian` with `qm_n3` | Frequency table; exit status | matrix (`hessian` × `qm_n3`) || |
+| t66a–e | `t66{a..e}_saddle_{ridft,rimp2,ccsd,tddft,qm_n3}.in` | TS search (`saddle=1`) with each theory | `Lowest eigenvalues:` (Hessian read); `OPTIMIZATION CONVERGED`; final geometry planar | matrix (TS row) || |
+| t67a–e | `t67{a..e}_irc_{…}.in` | `task=irc` (`points=3`) with each theory | `Intrinsic Reaction Coordinate` header; `IRC>` points with falling energy | matrix (`irc` row) || |
+| t68a–e | `t68{a..e}_scan_{…}.in` | `task=scan` (the t37 scan, `points=3`) with each theory | One converged constrained optimization per point; `SCAN>` summary | matrix (`scan` row) || |
+| t69a–f | `t69{a..f}_md_{dft,ridft,rimp2,ccsd,tddft,qm_n3}.in` | `task=thermostat` (MD, `$dynamic n=20,5`) with each theory. t69f (`qm_n3`) is the control: the official examples show MD with the QM model, so if t69f fails, the `$dynamic` settings are at fault, not the theory | Trajectory steps with energies; exit status; run time | matrix (MD row); `$dynamic` meanings || |
+
 To check the Molden recipes by eye, open `freq>` and `mos>` files cut from a Hessian and a `print=+vectors+molden` run
 (for example round 3 t45) in Molden.
 

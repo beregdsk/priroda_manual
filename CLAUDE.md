@@ -53,8 +53,9 @@ Record conventions:
 
 ## Layout
 
-- `priroda_man/`: the original files as received. **Do not edit.**
-  - `input.txt`: English "Input Summary", the closest thing to an official keyword reference. Its Russian annotations (lines 60–61, 75, 127–128, 419–421) were corrupted to `?` and cannot be recovered from this file.
+- `priroda_man/`: the original files as received, provided by Alexandra Freidzon. **Do not edit.** None of them is
+  official: never describe them as the developer's or as shipping with the program.
+  - `input.txt`: English "Input Summary", the most complete keyword list, but unofficial. Its Russian annotations (lines 60–61, 75, 127–128, 419–421) were corrupted to `?` and cannot be recovered from this file.
   - `Dft.rtf`: Russian, cp1251.
   - `Dft_ansi.txt`: Russian, cp1251 + CRLF; describes the predecessor program with obsolete group names.
 - `research/`: extracted notes, one per source, numbered `00`–`09`. `08` records the test runs on Priroda 25 (program output, the strongest evidence; cite as `08 tNN`). `09` lists every group, keyword, task and theory name found in the v25 executable (`p4_d`); it settles which names exist, not what they do. `00_*_utf8.txt` are UTF-8 conversions of the cp1251 originals. `07` is the survey of other QC manuals (ORCA, GAMESS, TURBOMOLE, Psi4, NWChem, CP2K, Gaussian) with the recommended outline, keyword-entry template and toolchain.
@@ -76,4 +77,4 @@ Record conventions:
 - Official binaries and files: https://rad.chem.msu.ru/~laikov/p_w/ (a file index only, with no prose docs)
 - limor1 user page and scripts: http://limor1.nioch.nsc.ru/priroda.html (about 25 further chemport thread links listed in `02` are not yet harvested)
 - Forums: qchem.ru (Wayback archive), chemport.ru t=28803 and t=112860
-- KNC wiki beginner FAQ (Wayback archive); PDF mirror of the KNC docs: https://monitor.hpc.umanitoba.ca/doc/Priroda_Documentation_from_KNCWiki.pdf
+- KNC wiki beginner FAQ and v5 keyword page (Wayback archive; written by the wiki's administrators, not by the developer); PDF mirror of the KNC docs: https://monitor.hpc.umanitoba.ca/doc/Priroda_Documentation_from_KNCWiki.pdf

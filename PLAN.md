@@ -19,9 +19,9 @@ The structural model comes from `research/07_qc_manual_structures.md` §3. The c
 Every Part II chapter follows one template: *Overview → Minimal input → Key options → Advanced → Pitfalls (from forums) → Keyword summary (links into Part IV) → References.*
 
 **Part I: Introduction** (built as Part I)
-1. About Priroda: history (Laikov; versions 2 → 23), capability matrix (rows: tasks; columns: `dft`, `ridft`, `DFT_n4`, `tddft`, `rimp2`, `ccsd`, `ccsd4t`, `qm_n3`; marks for `four=1` and MPI), **what Priroda does not do** (symmetry, continuum solvation, D3, periodic systems), how to cite. ("Obtaining Priroda" moved to Getting started, 2026-10-17: download from p_w/, or e-mail the developer.)
+1. About Priroda: history (Laikov; versions 2 → 23), capability matrix (rows: tasks; columns: `dft`, `ridft`, `DFT_n4`, `tddft`, `rimp2`, `ccsd`, `ccsd4t`, `qm_n3`; marks for `four=1` and MPI), **what Priroda does not do** (symmetry, continuum solvation, D3, periodic systems), how to cite. ("Obtaining Priroda" is in Installing and running since 2026-10-17: download from p_w/, or e-mail the developer.)
 2. Installation and running: Linux binaries (`p`, `p4`, `_d` variants, cluster builds), `p in out`, `p -np N in out`, Windows/Cygwin (`p1.exe`, `p.exe` + OpenMPI DLLs, `dev\shm`), PBS/SLURM job scripts, `$system` (per-process `memory`/`disk`, negative disk = RAM disk, `mem=a,b` for rank 0 vs the other ranks, `path=`/`$TMPDIR`, never NFS), LF line endings.
-3. Getting started (was "Quickstart"): obtaining Priroda (official site downloads) → water energy → NH3 optimize+hessian → reading `MOL>`/thermo output. Uses the 14-step beginner loop from `06` §5.
+3. Getting started (was "Quickstart"): water energy → NH3 optimize+hessian → reading `MOL>`/thermo output. Uses the 14-step beginner loop from `06` §5.
 4. Input syntax: `$group … $end`, case-insensitive, unique-prefix abbreviation, indexed arrays `a(5)=…`, multi-value `tol=a,b`, flag strings `print=+a+b`, ordered `$molecule` data, the commenting convention (drop the `$`), restart blocks appended to input (`$Energy` / `eng>`, `num>`).
 
 **Part II: Typical calculations**

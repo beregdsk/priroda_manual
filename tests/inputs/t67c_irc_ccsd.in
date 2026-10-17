@@ -1,0 +1,17 @@
+$system mem=256 disk=1 $end
+$control
+ task=irc
+ theory=ccsd
+ basis=@BASIS@
+$end
+$optimize points=3 $end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  7    0.000000    0.000000    0.000000
+  1    1.010000    0.000000    0.000000
+  1   -0.505000    0.874686    0.000000
+  1   -0.505000   -0.874686    0.000000
+$end
+@ENERGY_FROM_t24@
