@@ -108,7 +108,7 @@ Small inputs again (water, ammonia, OH), except t32b, t33 and t36, which may tak
 | t49 | `t49_basis4_without_four.in` | `basis4.in` without `four=1` (needs `BASIS4`): does it stop at the `Basis set input:` line, as reported? | Where the output ends; error text | common-problems (basis file); `control.four` || Stops after the basis line with `1?`; exit 1. |
 
 
-## Round 4 (run 2026-10-17 on version 25; outputs in `runs/20261017-130725/`)
+## Round 4 (run 2026-10-17 on version 25; outputs in git history, `git show f04d4f5:tests/runs/20261017-130725/<file>`)
 
 Run with:
 
@@ -137,7 +137,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh
 | t57a | `t57a_nmr_ridft.in` | NMR with `theory=ridft` (sources say NMR works only with `dft`) | Shielding table or an error | about.md capability matrix (note 5) || No shieldings: only the SCF energy, no message. |
 | t57b | `t57b_nmr_standard.in` | `$nmr standard(1)=31.0 standard(8)=300.0`: shift = standard − shielding? | `shift=` values (H about -1.78, O about -36.88) | `nmr.standard` || Yes: shift = standard − shielding (H −1.7773, O −36.8797). |
 
-## Round 5 (not run yet)
+## Round 5 (run 2026-10-17 on version 25; outputs in `runs/20261017-131420/`)
 
 Run with (the `mpiexec` from the official site is needed for t59 and t63):
 
@@ -148,14 +148,29 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in MPIEXEC=/path/to/mpiexec ./run.sh
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| t58a | `t58a_input_syntax_example.in` | The first example of the Input syntax chapter, exactly as printed (`$system mem=512 disk=-512 path=/tmp`) | `Memory:` line with the RAM disk; `OPTIMIZATION CONVERGED` | input-syntax (first example) | |
-| t58b | `t58b_molecule_one_line_header.in` | `$molecule charge=0 mult=1 cartesian` on one line | Same energy as t01 | input-syntax (`$molecule`) | |
-| t59 | `t59_relative_basis_parallel.in` | Relative `basis=basis.in` in a 2-process run (basis file in the run directory) | Normal run, or `MPI_Abort` as in the old forum report | common-problems (basis file not found) | |
-| t60a | `t60a_broken_symmetry_dft.in` | Singlet O2 with `restrict=0` and `$guess mix=1`, pure DFT: does the solution break spin symmetry? | Spin populations; energy compared with t48b (closed-shell singlet) and t48 (triplet) | `guess.mix`; common-problems (open-shell singlets) | |
-| t60b | `t60b_broken_symmetry_ridft.in` | The same with `ridft`/PBE1 | as t60a | as t60a | |
-| t61 | `t61_too_little_memory.in` | `$system mem=2`: what message does too little memory give? | Error text (`malloc(...) failed`?) | running.md; common-problems (memory) | |
-| t62 | `t62_too_little_disk.in` | Conventional MP2 with a 1 MB RAM disk: what message does too little scratch give? | Error text (`out of disk space`?) | common-problems (disk) | |
-| t63 | `t63_parallel_ridft_hessian.in` | Numerical `ridft` Hessian on 2 processes | Frequencies as in the serial run (round 2 t32a: 1642.79, 3910.72, 4018.26); run time | running.md (parallel performance) | |
+| t58a | `t58a_input_syntax_example.in` | The first example of the Input syntax chapter, exactly as printed (`$system mem=512 disk=-512 path=/tmp`) | `Memory:` line with the RAM disk; `OPTIMIZATION CONVERGED` | input-syntax (first example) || Works as printed (RAM disk echoed as `512m + 512m`). |
+| t58b | `t58b_molecule_one_line_header.in` | `$molecule charge=0 mult=1 cartesian` on one line | Same energy as t01 | input-syntax (`$molecule`) || Works. |
+| t59 | `t59_relative_basis_parallel.in` | Relative `basis=basis.in` in a 2-process run (basis file in the run directory) | Normal run, or `MPI_Abort` as in the old forum report | common-problems (basis file not found) || Works on 2 processes. |
+| t60a | `t60a_broken_symmetry_dft.in` | Singlet O2 with `restrict=0` and `$guess mix=1`, pure DFT: does the solution break spin symmetry? | Spin populations; energy compared with t48b (closed-shell singlet) and t48 (triplet) | `guess.mix`; common-problems (open-shell singlets) || No symmetry breaking: identical α/β, closed-shell energy. |
+| t60b | `t60b_broken_symmetry_ridft.in` | The same with `ridft`/PBE1 | as t60a | as t60a || No symmetry breaking either. |
+| t61 | `t61_too_little_memory.in` | `$system mem=2`: what message does too little memory give? | Error text (`malloc(...) failed`?) | running.md; common-problems (memory) || `need 12544 + 7905408 = 7917952 bytes.`, exit 1. |
+| t62 | `t62_too_little_disk.in` | Conventional MP2 with a 1 MB RAM disk: what message does too little scratch give? | Error text (`out of disk space`?) | common-problems (disk) || `0: out of disk space (grid_W), 8213824`, exit 1. |
+| t63 | `t63_parallel_ridft_hessian.in` | Numerical `ridft` Hessian on 2 processes | Frequencies as in the serial run (round 2 t32a: 1642.79, 3910.72, 4018.26); run time | running.md (parallel performance) || Same frequencies as serial; 4.85 s vs 7.17 s. |
+
+## Round 6 (not run yet)
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t64
+```
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t64a | `t64_scratch_location.in` with `TMPDIR` unset | Where do scratch files go when neither `path=` nor `TMPDIR` is set: current directory or `/tmp`? | The `Disk:` line in `t64a/t64_scratch_location.out` | running.md (where scratch files go) | |
+| t64b | the same with `TMPDIR` set to `t64b/tmpdir` | Is `TMPDIR` used when `path=` is not given? | The `Disk:` line in `t64b/t64_scratch_location.out` | `system.path` | |
+
+To check the Molden recipes by eye, open `freq>` and `mos>` files cut from a Hessian and a `print=+vectors+molden` run
+(for example round 3 t45) in Molden.
 
 ## Still not covered
 

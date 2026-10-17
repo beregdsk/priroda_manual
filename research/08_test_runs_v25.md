@@ -3,8 +3,8 @@
 Three verification rounds: the inputs in `tests/inputs/`, run by the project owner with `tests/run.sh` on
 2026-10-17 on one Linux machine (`node 0: 'arch'`), serial unless stated. Each round reran all earlier tests;
 the outputs of rounds 1–3 were last in `tests/runs/20261017-124819/` (removed from the working tree in commit
-`9332498`; still in git history, e.g. `git show ef39f62:tests/runs/20261017-124819/t01_energy.out`); round 4 is in
-`tests/runs/20261017-130725/`. Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
+`9332498`; still in git history, e.g. `git show ef39f62:tests/runs/20261017-124819/t01_energy.out`); round 4 was in
+`tests/runs/20261017-130725/` (in history at commit `f04d4f5`); round 5 is in `tests/runs/20261017-131420/`. Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
 
 Cite as `08 tNN`. This is program output, the top of the evidence order. Each result holds for v25 only; older
@@ -103,6 +103,19 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t56 | Analytic DFT Hessian with the `num>` lines of `task=dipole` (t36) appended: Raman activities and depolarization ratios filled in (mode 1: 4.517, 0.3925; mode 2: 67.228, 0.1346). |
 | t57a | `task=nmr` with `theory=ridft`: only the ground-state SCF; no shieldings, no message, exit 0. |
 | t57b | `$nmr standard(1)=31.0 standard(8)=300.0`: `shift = standard − isotropic shielding` (H: 31.0 − 32.7773 = −1.7773; O: −36.8797). |
+
+## Round 5
+
+| Test | Result |
+|---|---|
+| t58a | The first Input syntax example as printed (`$system mem=512 disk=-512 path=/tmp`): echo `Memory: 512m + 512m (512m + 512m)`, no `Disk:` line; `OPTIMIZATION CONVERGED in 6 steps!`, same final energy as t11. |
+| t58b | `$molecule charge=0 mult=1 cartesian` on one line: read correctly, E as t01. |
+| t59 | Relative `basis=basis.in` in a 2-process run (`mpiexec -np 2`): works, E as t01. |
+| t60a | Singlet O2, `theory=dft` (PBE), `restrict=0`, `$guess mix=1`: converged to the restricted solution; alpha and beta orbital energies identical, E = -150.1593089237 = closed-shell t48b. |
+| t60b | Same with `ridft`/PBE1: also identical alpha and beta orbital energies, E = -150.1410585415. The forum report that RI-DFT breaks the symmetry is not reproduced for O2. |
+| t61 | `$system mem=2`: stops after the basis echo with `need 12544 + 7905408 = 7917952 bytes.`; stderr `MPI_Abort`; exit 1. |
+| t62 | Conventional MP2 with `disk=-1` (1 MB RAM disk): stops in the grid setup with `0: out of disk space (grid_W), 8213824`; exit 1. |
+| t63 | Numerical `ridft` Hessian on 2 processes: frequencies identical to the serial run (t32a), REAL time 4.85 s vs 7.17 s. The output also contains a `NUMERICAL AND ANALYTICAL GRADIENT` comparison block. |
 
 ## Cosmetic
 

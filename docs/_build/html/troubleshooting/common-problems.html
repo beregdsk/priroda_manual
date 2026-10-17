@@ -328,9 +328,9 @@ followed by NMR, as separate jobs.</p>
 <!-- src: 03 §2 (denis, Evgeniy); 04 #64 -->
 </li>
 <li><p>Give an absolute path to the basis file if Priroda is not started from the directory that contains it. One user’s
-parallel run aborted with <code class="docutils literal notranslate"><span class="pre">MPI_Abort</span></code> until he wrote the full basis path in the input. (In a serial version 25
-run, a relative name worked with the file in the current directory.)</p>
-<!-- src: 04 #152-#154; 08 t03 --> <!-- verify: relative basis in a parallel run -->
+parallel run aborted with <code class="docutils literal notranslate"><span class="pre">MPI_Abort</span></code> until he wrote the full basis path in the input. In version 25 a relative
+name worked with the file in the current directory, in a serial and in a 2-process run.</p>
+<!-- src: 04 #152-#154; 08 t03, t59 -->
 </li>
 <li><p>The relativistic basis file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> needs <a class="reference internal" href="../reference/control.html#control-four"><span class="std std-ref">four=1</span></a> in <a class="reference internal" href="../reference/control.html#group-control"><span class="std std-ref">$control</span></a>.
 Without it the job stops right after the <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> line, with <code class="docutils literal notranslate"><span class="pre">1?</span></code> as the only message (version 25).
@@ -526,7 +526,12 @@ $guess mix=1 $end
 user found that <code class="docutils literal notranslate"><span class="pre">restrict=0</span> <span class="pre">mix=1</span></code> converged back to the restricted solution, with identical energies and identical
 alpha and beta orbital energies. RI-DFT broke the symmetry in his case. Another user notes that pure GGA functionals
 often do not break symmetry, and suggests a hybrid (with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>) or a Hartree–Fock calculation first.</p>
-<!-- src: 03 §7 (Evgeniy Feb 2011; qadir) --> <!-- verify -->
+<!-- src: 03 §7 (Evgeniy Feb 2011; qadir) -->
+<p>In a version 25 test on singlet O2, <code class="docutils literal notranslate"><span class="pre">restrict=0</span> <span class="pre">mix=1</span></code> converged back to the restricted solution with both
+<code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> (PBE) and <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> (PBE1): alpha and beta orbital energies were identical, and the PBE energy
+equalled the closed-shell one. So <code class="docutils literal notranslate"><span class="pre">mix=1</span></code> alone does not guarantee a broken-symmetry solution; compare the alpha and
+beta orbital energies in the output.</p>
+<!-- src: 08 t60a, t60b; t48b (closed-shell reference) -->
 </section>
 <section id="heavy-elements">
 <h3>Heavy elements<a class="headerlink" href="#heavy-elements" title="Link to this heading">¶</a></h3>
@@ -731,6 +736,13 @@ by hand and keep only the translational terms.</p>
 <span id="troubleshooting-memory"></span><h2>Memory, disk and scratch errors<a class="headerlink" href="#memory-disk-and-scratch-errors" title="Link to this heading">¶</a></h2>
 <p>All <a class="reference internal" href="../reference/system.html#group-system"><span class="std std-ref">$system</span></a> limits apply per MPI process. With <code class="docutils literal notranslate"><span class="pre">disk=10</span></code> on four processes, up to 40 GB can be
 used. <!-- src: 03 §3; keywords/system.yaml --></p>
+<section id="need-bytes">
+<h3><code class="docutils literal notranslate"><span class="pre">need</span> <span class="pre">…</span> <span class="pre">bytes.</span></code><a class="headerlink" href="#need-bytes" title="Link to this heading">¶</a></h3>
+<p><strong>Cause.</strong> The <a class="reference internal" href="../reference/system.html#system-memory"><span class="std std-ref">memory</span></a> limit in <code class="docutils literal notranslate"><span class="pre">$system</span></code> is too small for the job. Version 25 stops right after
+the basis-set echo with a line such as <code class="docutils literal notranslate"><span class="pre">need</span> <span class="pre">12544</span> <span class="pre">+</span> <span class="pre">7905408</span> <span class="pre">=</span> <span class="pre">7917952</span> <span class="pre">bytes.</span></code> (here for water with <code class="docutils literal notranslate"><span class="pre">mem=2</span></code>); the
+last number is what the job needs at that point. Raise <code class="docutils literal notranslate"><span class="pre">memory</span></code> above it.</p>
+<!-- src: 08 t61 -->
+</section>
 <section id="malloc-failed">
 <h3><code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code><a class="headerlink" href="#malloc-failed" title="Link to this heading">¶</a></h3>
 <p><strong>Cause.</strong> Priroda could not allocate the memory requested in <a class="reference internal" href="../reference/system.html#system-memory"><span class="std std-ref">memory</span></a>, plus any RAM disk
@@ -748,12 +760,13 @@ Several users confirmed this limit. The 64-bit Windows build with <code class="d
 </li>
 </ul>
 <p>A message beginning <code class="docutils literal notranslate"><span class="pre">We</span> <span class="pre">need</span> <span class="pre">1.5</span> <span class="pre">GB</span> <span class="pre">of</span> <span class="pre">memory...</span></code> was reported once. One reply guessed that it is about RAM
-(<code class="docutils literal notranslate"><span class="pre">memory=</span></code>), not disk space, but this was not confirmed.</p>
-<!-- src: 04 #463, #464 --> <!-- verify -->
+(<code class="docutils literal notranslate"><span class="pre">memory=</span></code>), not disk space. It may be an older form of the <code class="docutils literal notranslate"><span class="pre">need</span> <span class="pre">…</span> <span class="pre">bytes.</span></code> message above.</p>
+<!-- src: 04 #463, #464; 08 t61 (v25 wording differs) -->
 </section>
 <section id="out-of-disk-space">
 <h3><code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span></code><a class="headerlink" href="#out-of-disk-space" title="Link to this heading">¶</a></h3>
-<p><strong>Symptom.</strong> <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(VNNNN),</span> <span class="pre">&lt;N&gt;KB</span></code>, or a similar message naming another array, such as
+<p><strong>Symptom.</strong> <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(VNNNN),</span> <span class="pre">&lt;N&gt;KB</span></code>, or a similar message naming another array (version 25:
+<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(grid_W),</span> <span class="pre">8213824</span></code> for a 1 MB RAM disk), such as
 <code class="docutils literal notranslate"><span class="pre">(ci.Rnvvo)</span></code>.</p>
 <p><strong>Fix.</strong></p>
 <ul>
@@ -1026,6 +1039,7 @@ had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build 
 </ul>
 </li>
 <li><a class="reference internal" href="#memory-disk-and-scratch-errors">Memory, disk and scratch errors</a><ul>
+<li><a class="reference internal" href="#need-bytes"><code class="docutils literal notranslate"><span class="pre">need</span> <span class="pre">…</span> <span class="pre">bytes.</span></code></a></li>
 <li><a class="reference internal" href="#malloc-failed"><code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code></a></li>
 <li><a class="reference internal" href="#out-of-disk-space"><code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span></code></a></li>
 <li><a class="reference internal" href="#a-small-ri-mp2-job-does-not-fit-in-memory">A small RI-MP2 job does not fit in memory</a></li>

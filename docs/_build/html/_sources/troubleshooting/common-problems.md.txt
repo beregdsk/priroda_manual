@@ -68,9 +68,9 @@ followed by NMR, as separate jobs.
   `error opening file ''3z.bas''`, and typographic quotes copied from a web page or word processor fail too.
   <!-- src: 03 §2 (denis, Evgeniy); 04 #64 -->
 - Give an absolute path to the basis file if Priroda is not started from the directory that contains it. One user's
-  parallel run aborted with `MPI_Abort` until he wrote the full basis path in the input. (In a serial version 25
-  run, a relative name worked with the file in the current directory.)
-  <!-- src: 04 #152-#154; 08 t03 --> <!-- verify: relative basis in a parallel run -->
+  parallel run aborted with `MPI_Abort` until he wrote the full basis path in the input. In version 25 a relative
+  name worked with the file in the current directory, in a serial and in a 2-process run.
+  <!-- src: 04 #152-#154; 08 t03, t59 -->
 - The relativistic basis file `basis4.in` needs {ref}`four=1 <control.four>` in {ref}`$control <group.control>`.
   Without it the job stops right after the `Basis set input:` line, with `1?` as the only message (version 25).
   The user who first reported this confirmed the fix.
@@ -276,7 +276,13 @@ See {ref}`restrict <scf.restrict>` and {ref}`mix <guess.mix>`. With non-RI pure 
 user found that `restrict=0 mix=1` converged back to the restricted solution, with identical energies and identical
 alpha and beta orbital energies. RI-DFT broke the symmetry in his case. Another user notes that pure GGA functionals
 often do not break symmetry, and suggests a hybrid (with `theory=ridft`) or a Hartree–Fock calculation first.
-<!-- src: 03 §7 (Evgeniy Feb 2011; qadir) --> <!-- verify -->
+<!-- src: 03 §7 (Evgeniy Feb 2011; qadir) -->
+
+In a version 25 test on singlet O2, `restrict=0 mix=1` converged back to the restricted solution with both
+`theory=dft` (PBE) and `theory=ridft` (PBE1): alpha and beta orbital energies were identical, and the PBE energy
+equalled the closed-shell one. So `mix=1` alone does not guarantee a broken-symmetry solution; compare the alpha and
+beta orbital energies in the output.
+<!-- src: 08 t60a, t60b; t48b (closed-shell reference) -->
 
 ### Heavy elements
 
@@ -489,6 +495,13 @@ In one unstable TS search started from a poor guess, the optimization followed d
 All {ref}`$system <group.system>` limits apply per MPI process. With `disk=10` on four processes, up to 40 GB can be
 used. <!-- src: 03 §3; keywords/system.yaml -->
 
+### `need … bytes.`
+
+**Cause.** The {ref}`memory <system.memory>` limit in `$system` is too small for the job. Version 25 stops right after
+the basis-set echo with a line such as `need 12544 + 7905408 = 7917952 bytes.` (here for water with `mem=2`); the
+last number is what the job needs at that point. Raise `memory` above it.
+<!-- src: 08 t61 -->
+
 ### `malloc(...) failed`
 
 **Cause.** Priroda could not allocate the memory requested in {ref}`memory <system.memory>`, plus any RAM disk
@@ -505,12 +518,13 @@ requested with a negative {ref}`disk <system.disk>`. The number in the message i
   <!-- src: 04 #94, #95, #104, #105, #210, #211, #370 -->
 
 A message beginning `We need 1.5 GB of memory...` was reported once. One reply guessed that it is about RAM
-(`memory=`), not disk space, but this was not confirmed.
-<!-- src: 04 #463, #464 --> <!-- verify -->
+(`memory=`), not disk space. It may be an older form of the `need … bytes.` message above.
+<!-- src: 04 #463, #464; 08 t61 (v25 wording differs) -->
 
 ### `out of disk space`
 
-**Symptom.** `0: out of disk space (VNNNN), <N>KB`, or a similar message naming another array, such as
+**Symptom.** `0: out of disk space (VNNNN), <N>KB`, or a similar message naming another array (version 25:
+`0: out of disk space (grid_W), 8213824` for a 1 MB RAM disk), such as
 `(ci.Rnvvo)`.
 
 **Fix.**

@@ -564,10 +564,11 @@ longer in CPU time. In a disk-bound RI-MP2 optimization another user got 20 step
 <section id="when-the-limits-are-too-small">
 <h3>When the limits are too small<a class="headerlink" href="#when-the-limits-are-too-small" title="Link to this heading">¶</a></h3>
 <p>Priroda does not fall back to a slower algorithm when memory or scratch runs out. The run stops with an error such as
-<code class="docutils literal notranslate"><span class="pre">malloc(536870912)</span> <span class="pre">failed</span></code> (memory) or <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(VNNNN),</span> <span class="pre">184441541KB</span></code> (scratch). The number in the disk
+<code class="docutils literal notranslate"><span class="pre">need</span> <span class="pre">…</span> <span class="pre">bytes.</span></code> (the <code class="docutils literal notranslate"><span class="pre">memory</span></code> limit is too small), <code class="docutils literal notranslate"><span class="pre">malloc(536870912)</span> <span class="pre">failed</span></code> (the machine cannot supply the memory)
+or <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(VNNNN),</span> <span class="pre">184441541KB</span></code> (scratch). The number in the disk
 message is the amount needed. Raise the limit in <code class="docutils literal notranslate"><span class="pre">$system</span></code>, move to a node with more resources, or choose a cheaper
 method (RI-MP2 instead of conventional MP2).</p>
-<!-- src: 04 #58, #199; 03 §4 -->
+<!-- src: 04 #58, #199; 03 §4; 08 t61, t62 -->
 <p>If you omit <code class="docutils literal notranslate"><span class="pre">$system</span></code>, version 6 printed <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">128</span> <span class="pre">(128)</span> <span class="pre">MB</span></code> and <code class="docutils literal notranslate"><span class="pre">Disk:</span> <span class="pre">1</span> <span class="pre">GB</span> <span class="pre">'/tmp'</span></code>. Version 25 prints
 <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span> <span class="pre">(256m</span> <span class="pre">+</span> <span class="pre">512m)</span></code> and no <code class="docutils literal notranslate"><span class="pre">Disk:</span></code> line: 256 MB of memory and a 512 MB RAM disk per process.
 That is enough for small molecules only, so always give <code class="docutils literal notranslate"><span class="pre">$system</span></code> for anything larger than a test.</p>
@@ -584,6 +585,10 @@ That is enough for small molecules only, so always give <code class="docutils li
 large systems. One 38-step optimization took 101, 63 and 37 s on single nodes with 8, 12 and 24 cores. A small
 PBE/L1 optimization with version 10 took 81.5, 42.5, 29.8 and 29.3 s on 1–4 cores.</p>
 <!-- src: 04 #343, #344, #154 -->
+</li>
+<li><p><strong>Parallel results equal serial ones.</strong> In version 25 tests on 2 processes, a water energy and a numerical
+<code class="docutils literal notranslate"><span class="pre">ridft</span></code> Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s.</p>
+<!-- src: 08 t21b, t63 (vs t32a) -->
 </li>
 <li><p><strong>Running across nodes gives no gain for DFT.</strong> Use one node per job.</p>
 <!-- src: 04 #344, #462; 03 §3 -->

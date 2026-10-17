@@ -1439,7 +1439,8 @@ Users also recommend more RAM over faster disks. Scratch on a separate SSD helps
 \label{\detokenize{start/running:when-the-limits-are-too-small}}
 \sphinxAtStartPar
 Priroda does not fall back to a slower algorithm when memory or scratch runs out. The run stops with an error such as
-\sphinxcode{\sphinxupquote{malloc(536870912) failed}} (memory) or \sphinxcode{\sphinxupquote{0: out of disk space (VNNNN), 184441541KB}} (scratch). The number in the disk
+\sphinxcode{\sphinxupquote{need … bytes.}} (the \sphinxcode{\sphinxupquote{memory}} limit is too small), \sphinxcode{\sphinxupquote{malloc(536870912) failed}} (the machine cannot supply the memory)
+or \sphinxcode{\sphinxupquote{0: out of disk space (VNNNN), 184441541KB}} (scratch). The number in the disk
 message is the amount needed. Raise the limit in \sphinxcode{\sphinxupquote{\$system}}, move to a node with more resources, or choose a cheaper
 method (RI\sphinxhyphen{}MP2 instead of conventional MP2).
 
@@ -1468,6 +1469,13 @@ Users consistently report the following:
 \sphinxstylestrong{DFT scales well within one node, up to about 6\textendash{}8 cores.} Beyond 8 cores the gain is at most about 10\%, even for
 large systems. One 38\sphinxhyphen{}step optimization took 101, 63 and 37 s on single nodes with 8, 12 and 24 cores. A small
 PBE/L1 optimization with version 10 took 81.5, 42.5, 29.8 and 29.3 s on 1\textendash{}4 cores.
+
+
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Parallel results equal serial ones.} In version 25 tests on 2 processes, a water energy and a numerical
+\sphinxcode{\sphinxupquote{ridft}} Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s.
 
 
 
@@ -6317,8 +6325,8 @@ Quote file names with straight double quotes: \sphinxcode{\sphinxupquote{basis="
 \item {} 
 \sphinxAtStartPar
 Give an absolute path to the basis file if Priroda is not started from the directory that contains it. One user’s
-parallel run aborted with \sphinxcode{\sphinxupquote{MPI\_Abort}} until he wrote the full basis path in the input. (In a serial version 25
-run, a relative name worked with the file in the current directory.)
+parallel run aborted with \sphinxcode{\sphinxupquote{MPI\_Abort}} until he wrote the full basis path in the input. In version 25 a relative
+name worked with the file in the current directory, in a serial and in a 2\sphinxhyphen{}process run.
 
 
 
@@ -6638,6 +6646,14 @@ See {\hyperref[\detokenize{reference/scf:scf-restrict}]{\sphinxcrossref{\DUrole{
 user found that \sphinxcode{\sphinxupquote{restrict=0 mix=1}} converged back to the restricted solution, with identical energies and identical
 alpha and beta orbital energies. RI\sphinxhyphen{}DFT broke the symmetry in his case. Another user notes that pure GGA functionals
 often do not break symmetry, and suggests a hybrid (with \sphinxcode{\sphinxupquote{theory=ridft}}) or a Hartree\textendash{}Fock calculation first.
+
+
+
+\sphinxAtStartPar
+In a version 25 test on singlet O2, \sphinxcode{\sphinxupquote{restrict=0 mix=1}} converged back to the restricted solution with both
+\sphinxcode{\sphinxupquote{theory=dft}} (PBE) and \sphinxcode{\sphinxupquote{theory=ridft}} (PBE1): alpha and beta orbital energies were identical, and the PBE energy
+equalled the closed\sphinxhyphen{}shell one. So \sphinxcode{\sphinxupquote{mix=1}} alone does not guarantee a broken\sphinxhyphen{}symmetry solution; compare the alpha and
+beta orbital energies in the output.
 
 
 
@@ -6962,6 +6978,16 @@ All {\hyperref[\detokenize{reference/system:group-system}]{\sphinxcrossref{\DUro
 used. 
 
 
+\subsection{\sphinxstyleliteralintitle{\sphinxupquote{need … bytes.}}}
+\label{\detokenize{troubleshooting/common-problems:need-bytes}}
+\sphinxAtStartPar
+\sphinxstylestrong{Cause.} The {\hyperref[\detokenize{reference/system:system-memory}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{memory}}}}} limit in \sphinxcode{\sphinxupquote{\$system}} is too small for the job. Version 25 stops right after
+the basis\sphinxhyphen{}set echo with a line such as \sphinxcode{\sphinxupquote{need 12544 + 7905408 = 7917952 bytes.}} (here for water with \sphinxcode{\sphinxupquote{mem=2}}); the
+last number is what the job needs at that point. Raise \sphinxcode{\sphinxupquote{memory}} above it.
+
+
+
+
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{malloc(...) failed}}}
 \label{\detokenize{troubleshooting/common-problems:malloc-failed}}
 \sphinxAtStartPar
@@ -6991,7 +7017,7 @@ Several users confirmed this limit. The 64\sphinxhyphen{}bit Windows build with 
 
 \sphinxAtStartPar
 A message beginning \sphinxcode{\sphinxupquote{We need 1.5 GB of memory...}} was reported once. One reply guessed that it is about RAM
-(\sphinxcode{\sphinxupquote{memory=}}), not disk space, but this was not confirmed.
+(\sphinxcode{\sphinxupquote{memory=}}), not disk space. It may be an older form of the \sphinxcode{\sphinxupquote{need … bytes.}} message above.
 
 
 
@@ -6999,7 +7025,8 @@ A message beginning \sphinxcode{\sphinxupquote{We need 1.5 GB of memory...}} was
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{out of disk space}}}
 \label{\detokenize{troubleshooting/common-problems:out-of-disk-space}}
 \sphinxAtStartPar
-\sphinxstylestrong{Symptom.} \sphinxcode{\sphinxupquote{0: out of disk space (VNNNN), \textless{}N\textgreater{}KB}}, or a similar message naming another array, such as
+\sphinxstylestrong{Symptom.} \sphinxcode{\sphinxupquote{0: out of disk space (VNNNN), \textless{}N\textgreater{}KB}}, or a similar message naming another array (version 25:
+\sphinxcode{\sphinxupquote{0: out of disk space (grid\_W), 8213824}} for a 1 MB RAM disk), such as
 \sphinxcode{\sphinxupquote{(ci.Rnvvo)}}.
 
 \sphinxAtStartPar

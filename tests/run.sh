@@ -54,6 +54,11 @@ for f in "$here"/inputs/t*.in; do
     t63_*)  # parallel run of a numerical Hessian: needs MPIEXEC
       if [ -z "${MPIEXEC:-}" ]; then skip "$name" "MPIEXEC not set"; continue; fi
       prep "$name" "" "$name"; run "$name" "$MPIEXEC" -np 2 ;;
+    t64_*)  # scratch location: a) TMPDIR unset, run from a subdirectory; b) TMPDIR set to a directory of its own
+      mkdir -p "$out/t64a" "$out/t64b/tmpdir" && prep "$name" "" "$name"
+      cp "$out/$name.in" "$out/t64a/"; cp "$out/$name.in" "$out/t64b/"
+      (cd "$out/t64a" && env -u TMPDIR timeout 600 "$PRIRODA" "$name.in" "$name.out" 2> "$name.err"; echo "t64a exit=$?" >> "$out/status.txt")
+      (cd "$out/t64b" && TMPDIR="$out/t64b/tmpdir" timeout 600 "$PRIRODA" "$name.in" "$name.out" 2> "$name.err"; echo "t64b exit=$?" >> "$out/status.txt") ;;
     t35_*|t49_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     t39_*) if [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     *)

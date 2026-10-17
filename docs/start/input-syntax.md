@@ -26,7 +26,7 @@ $molecule
 $end
 ```
 
-<!-- src: 06 §2 (FAQ example 1; basis file and set changed to the current basis.in/L1) --> <!-- verify -->
+<!-- src: 06 §2 (FAQ example 1; basis file and set changed to the current basis.in/L1); run as printed on v25 (08 t58a) -->
 
 ## Groups
 
@@ -167,7 +167,7 @@ $molecule charge=0 mult=1 cartesian
 $end
 ```
 
-<!-- src: input.txt; 03 §5 (working inputs); 05 §5 --> <!-- verify -->
+<!-- src: input.txt; 03 §5 (working inputs); 05 §5; 08 t58b -->
 
 Each atom line begins with the atomic number written as an integer. Cartesian coordinates are in Å unless `unit=b` is
 given. The Z-matrix forms, mixed Cartesian and Z-matrix input, isotope masses and per-atom basis sets are described

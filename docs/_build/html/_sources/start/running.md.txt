@@ -267,10 +267,11 @@ Users also recommend more RAM over faster disks. Scratch on a separate SSD helps
 ### When the limits are too small
 
 Priroda does not fall back to a slower algorithm when memory or scratch runs out. The run stops with an error such as
-`malloc(536870912) failed` (memory) or `0: out of disk space (VNNNN), 184441541KB` (scratch). The number in the disk
+`need … bytes.` (the `memory` limit is too small), `malloc(536870912) failed` (the machine cannot supply the memory)
+or `0: out of disk space (VNNNN), 184441541KB` (scratch). The number in the disk
 message is the amount needed. Raise the limit in `$system`, move to a node with more resources, or choose a cheaper
 method (RI-MP2 instead of conventional MP2).
-<!-- src: 04 #58, #199; 03 §4 -->
+<!-- src: 04 #58, #199; 03 §4; 08 t61, t62 -->
 
 If you omit `$system`, version 6 printed `Memory: 128 (128) MB` and `Disk: 1 GB '/tmp'`. Version 25 prints
 `Memory: 256m + 512m (256m + 512m)` and no `Disk:` line: 256 MB of memory and a 512 MB RAM disk per process.
@@ -289,6 +290,9 @@ Users consistently report the following:
   large systems. One 38-step optimization took 101, 63 and 37 s on single nodes with 8, 12 and 24 cores. A small
   PBE/L1 optimization with version 10 took 81.5, 42.5, 29.8 and 29.3 s on 1–4 cores.
   <!-- src: 04 #343, #344, #154 -->
+- **Parallel results equal serial ones.** In version 25 tests on 2 processes, a water energy and a numerical
+  `ridft` Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s.
+  <!-- src: 08 t21b, t63 (vs t32a) -->
 - **Running across nodes gives no gain for DFT.** Use one node per job.
   <!-- src: 04 #344, #462; 03 §3 -->
 - **Memory per process does not drop** when you add processes, and in a parallel Hessian nearly all of the disk use is

@@ -184,11 +184,12 @@
 \contentsline {subsection}{\numberline {6.4.7}Thermochemistry of single atoms}{68}{subsection.6.4.7}%
 \contentsline {subsection}{\numberline {6.4.8}Results depend on the number of processes}{68}{subsection.6.4.8}%
 \contentsline {section}{\numberline {6.5}Memory, disk and scratch errors}{68}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}\sphinxstyleliteralintitle {\sphinxupquote {malloc(...) failed}}}{69}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}\sphinxstyleliteralintitle {\sphinxupquote {out of disk space}}}{69}{subsection.6.5.2}%
-\contentsline {subsection}{\numberline {6.5.3}A small RI\sphinxhyphen {}MP2 job does not fit in memory}{69}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}Where scratch files go}{69}{subsection.6.5.4}%
-\contentsline {subsection}{\numberline {6.5.5}Slow runs: disk speed}{70}{subsection.6.5.5}%
+\contentsline {subsection}{\numberline {6.5.1}\sphinxstyleliteralintitle {\sphinxupquote {need … bytes.}}}{69}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}\sphinxstyleliteralintitle {\sphinxupquote {malloc(...) failed}}}{69}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}\sphinxstyleliteralintitle {\sphinxupquote {out of disk space}}}{69}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}A small RI\sphinxhyphen {}MP2 job does not fit in memory}{69}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.5}Where scratch files go}{69}{subsection.6.5.5}%
+\contentsline {subsection}{\numberline {6.5.6}Slow runs: disk speed}{70}{subsection.6.5.6}%
 \contentsline {section}{\numberline {6.6}Parallel and MPI problems}{70}{section.6.6}%
 \contentsline {subsection}{\numberline {6.6.1}A parallel RI job hangs with no message}{70}{subsection.6.6.1}%
 \contentsline {subsection}{\numberline {6.6.2}Little or no speed\sphinxhyphen {}up from more cores}{70}{subsection.6.6.2}%
