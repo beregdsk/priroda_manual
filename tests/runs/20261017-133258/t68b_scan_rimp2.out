@@ -1,0 +1,2316 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 13:35:11 2026
+
+ node   0: 'arch'
+
+ Memory: 256m (256m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 4 atoms, 10 electrons
+
+ Atomic Coordinates:
+   7     0.00000000   0.00000000   0.00000000
+   1     0.00000000   0.00000000   1.00800000
+   1     0.87295400   0.00000000  -0.50400000
+   1    -0.87295400   0.00000000  -0.50400000
+ #
+  formula: H3N
+  internuclear distances:
+  N1    |  H1   : 1.00800  H2   : 1.00800  H3   : 1.00800
+  H1    |  N1   : 1.00800
+  H2    |  N1   : 1.00800
+  H3    |  N1   : 1.00800
+     largest =    1.74591
+
+ atom   7 core =  1
+ at.d.=1
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   7  N :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -2.78, +13.00
+    2   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    3   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    4   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ Basis set input: '/home/egor/Programs/Priroda/basis.in'
+    1   7  N :  40 / 100 : { 6, 4, 3, 1}                       / {10, 9, 7, 4}                       log2(a) =  -1.81, +10.54
+    2   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+    3   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+    4   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+
+ +---------------------------------------
+ | Number of atoms                      4
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
+ | Theoretical Method               RIMP2
+ | Dimension of wavefunction basis     29
+ | Dimension of   auxiliary  basis     55
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=64,16; xmax = 0.12500; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-08)
+ inv=2: v = 1.5e-05
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+    1    56
+    7    64
+  mol   232
+
+ Geometry optimization options:
+ Coordinates: internal
+ Tolerance on gradient       = 0.00010000
+ Tolerance on displacement   = 0.01000000
+ Trust radius                = 0.12500000 (max), 0.01562500 (min)
+ Maximum number of steps     =        128
+ Updated hessian used
+ constrained variable: type=1 i=  1 j=  2 k=  0 l=  0, value=    1.100000,     1.100000
+ constrained variable: type=3 i=  2 j=  1 k=  4 l=  3, value= -180.000000,  -150.000000
+
+ Geometry Optimization Step 0:
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  99.1%     0.0
+ time: Initial Guess                    :     0.0  99.0%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  81.6%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.5%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  93.0%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1394897446   0.0000000000   0.10893881   0.06836469      0.0
+   1    -56.1934605612  -0.0539708166   0.04385865   0.01841966      0.0
+   2    -56.1986239920  -0.0051634308   0.00651691   0.00400245      0.0
+   3    -56.1987992570  -0.0001752649   0.00201464   0.00227005      0.0
+   4    -56.1988325275  -0.0000332705   0.00025622   0.00011102      0.0
+   5    -56.1988329189  -0.0000003915   0.00005881   0.00004722      0.0
+   6    -56.1988329530  -0.0000000340   0.00001257   0.00000689      0.0
+   7    -56.1988329536  -0.0000000007   0.00000280   0.00000100      0.0
+   8    -56.1988329537  -0.0000000000   0.00000015   0.00000007      0.0
+ converged!
+   9    -56.1988329537  -0.0000000000   0.00000004   0.00000001      0.0
+ time: Coulomb Matrix                   :     0.0  91.4%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  95.2%     0.0
+ time: Exchange Matrix                  :     0.0  89.7%     0.0
+ time: SCF Equations                    :     0.0  93.2%     0.0
+ Total   Energy =    -56.19883295
+ Kinetic Energy =     56.15384776
+ Dipole  Moment = {  0.00000, -0.00000,  0.00000} (  0.00000)
+ Quadrupole Moment = {  -4.13387;
+                        -0.00000,  -6.88879;
+                        -0.00000,   0.00000,  -4.13387}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  98.2%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.5%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.8%     0.0
+ E2aa =     -0.02334086
+ E2ab =     -0.14832971
+ E2   =     -0.19501144
+ E    =    -56.39384439
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.5%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  98.4%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.0%     0.0
+ time: Exchange Matrix                  :     0.0  99.6%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009096274, time =     0.0
+ subspace  2: g = 0.000812592, time =     0.0
+ subspace  3: g = 0.000112335, time =     0.0
+ subspace  4: g = 0.000007615, time =     0.0
+ subspace  5: g = 0.000001619, time =     0.0
+ time: CPHF Equations                   :     0.0  99.7%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.8%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.5%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.8%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  89.1%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  88.1%     0.0
+ time: Coulomb  Matrix                  :     0.0  95.5%     0.0
+ time: Exchange Matrix                  :     0.0  89.2%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.7%     0.0
+ Kinetic Energy =     56.44210416
+ Dipole  Moment = {  0.00000,  0.00000, -0.00000} (  0.00000)
+ Quadrupole Moment = {  -4.23949;
+                        -0.00000,  -6.85481;
+                        -0.00000,  -0.00000,  -4.23949}
+ occupation numbers:
+ nc=   1: sum=  2.00000046
+   1  2.00000046
+ no=   4: sum=  7.89214365
+   2  1.98364442    3  1.97066110    4  1.96891906    5  1.96891906
+ nv=  24: sum=  0.10785589
+   6  0.01770279    7  0.01770278    8  0.01611501    9  0.01541496   10  0.00704788
+  11  0.00704788   12  0.00615039   13  0.00615039   14  0.00577809   15  0.00131531
+  16  0.00095974   17  0.00095974   18  0.00089943   19  0.00074211   20  0.00074211
+  21  0.00070176   22  0.00070176   23  0.00047507   24  0.00046282   25  0.00029212
+  26  0.00029212   27  0.00006742   28  0.00006742   29  0.00006682
+ time: One-Electron Gradient            :     0.0  98.7%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.5%     0.1
+
+  E  =     -56.3938443900
+  T  =      56.44210416  V  =    -155.89643879  J  =      39.29433999
+  Ex =      -7.68439282  Ec =      -0.19501144
+
+  dipole =   0.000000 au (  0.000000 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.506407    2    -1.105974    3    -0.632752    4    -0.632752
+   5    -0.383463
+ virtual:
+   6     0.258211    7     0.370471    8     0.370471    9     0.814648
+  10     0.814648   11     0.915498   12     1.039588   13     1.039588
+  14     1.225069   15     1.344827   16     1.344827   17     1.372507
+  18     1.805516   19     2.006874   20     2.094115   21     2.198707
+  22     2.198707   23     2.395469   24     2.395469   25     2.871033
+  26     2.871033   27     3.869251   28     4.027940   29     4.027941
+
+
+eng>$Energy
+eng> E=-5.6393844390040e+01
+eng> D= 1.38504434e-11  2.14245034e-14 -3.20416690e-09
+eng> G= 1.88167017e-12 -1.04024083e-12  2.59084446e-07
+eng>    8.86410303e-13  3.93632699e-13  9.67160534e-03
+eng>    8.37615924e-03  2.36128602e-13 -4.83593221e-03
+eng>   -8.37615924e-03  4.10479530e-13 -4.83593221e-03
+eng>$end
+
+ G(max) = 0.00967193  |G| = 0.01675209
+
+
+ Geometry Optimization Step 1:
+ Energy:           -56.39384439
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0096719 (internal), 0.0096719 (cartesian)
+ max. displacement = 0.1738548 (internal), 0.0919832 (cartesian)
+ iter   0: rmax = 0.1738547909, xmax = 0.0919832082
+ iter   1: rmax = 0.0026886016, xmax = 0.0025124996
+ iter   2: rmax = 0.0000022449, xmax = 0.0000013023
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.1738548 (internal), 0.0912445 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000  -0.00000000  -0.04828453
+mol>   1    -0.00000000   0.00000000   1.05171547
+mol>   1     0.86235599   0.00000000  -0.50171547
+mol>   1    -0.86235599   0.00000000  -0.50171547
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000  -0.00000000  -0.04828453
+   1    -0.00000000   0.00000000   1.05171547
+   1     0.86235599   0.00000000  -0.50171547
+   1    -0.86235599   0.00000000  -0.50171547
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ s=1.1e-02
+ vmax=4e+02
+ time: Inversion of V-Matrix            :     0.0  99.5%     0.0
+ time: integral estimates               :     0.0  99.7%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  93.5%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1866835294   0.0000000000   0.01632771   0.01053442      0.0
+   1    -56.1891847005  -0.0025011711   0.00505410   0.00735838      0.0
+   2    -56.1894664691  -0.0002817686   0.00127478   0.00198688      0.0
+   3    -56.1894843890  -0.0000179199   0.00052348   0.00045315      0.0
+   4    -56.1894861089  -0.0000017199   0.00010553   0.00007514      0.0
+   5    -56.1894861660  -0.0000000571   0.00003806   0.00003350      0.0
+   6    -56.1894861709  -0.0000000049   0.00000426   0.00000413      0.0
+   7    -56.1894861710  -0.0000000002   0.00000193   0.00000116      0.0
+   8    -56.1894861711  -0.0000000000   0.00000036   0.00000033      0.0
+ converged!
+   9    -56.1894861711   0.0000000000   0.00000010   0.00000008      0.0
+ time: Coulomb Matrix                   :     0.0  89.6%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  89.0%     0.0
+ time: Exchange Matrix                  :     0.0  94.1%     0.0
+ time: SCF Equations                    :     0.0  91.2%     0.0
+ Total   Energy =    -56.18948617
+ Kinetic Energy =     56.13768402
+ Dipole  Moment = { -0.00000,  0.00000,  0.04313} (  0.04313)
+ Quadrupole Moment = {  -4.12591;
+                         0.00000,  -6.90814;
+                        -0.00000,   0.00000,  -4.13940}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.4%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  98.9%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.4%     0.0
+ E2aa =     -0.02335221
+ E2ab =     -0.14881688
+ E2   =     -0.19552129
+ E    =    -56.38500746
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.6%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0 100.0%     0.0
+ time: Coulomb  Matrix                  :     0.0  98.6%     0.0
+ time: Exchange Matrix                  :     0.0  98.8%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009389690, time =     0.0
+ subspace  2: g = 0.000966590, time =     0.0
+ subspace  3: g = 0.000182349, time =     0.0
+ subspace  4: g = 0.000026574, time =     0.0
+ subspace  5: g = 0.000006107, time =     0.0
+ subspace  6: g = 0.000000734, time =     0.0
+ time: CPHF Equations                   :     0.0  95.4%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  96.7%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  98.9%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.4%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  90.9%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.6%     0.0
+ time: Coulomb  Matrix                  :     0.0  93.7%     0.0
+ time: Exchange Matrix                  :     0.0  90.4%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.7%     0.0
+ Kinetic Energy =     56.42837805
+ Dipole  Moment = { -0.00000, -0.00000,  0.04226} (  0.04226)
+ Quadrupole Moment = {  -4.23723;
+                        -0.00000,  -6.87339;
+                        -0.00000,  -0.00000,  -4.23761}
+ occupation numbers:
+ nc=   1: sum=  2.00000052
+   1  2.00000052
+ no=   4: sum=  7.89096533
+   2  1.98355244    3  1.97055119    4  1.96992647    5  1.96693523
+ nv=  24: sum=  0.10903416
+   6  0.02050949    7  0.01662186    8  0.01554440    9  0.01553426   10  0.00705958
+  11  0.00697367   12  0.00624112   13  0.00599731   14  0.00572148   15  0.00135091
+  16  0.00098999   17  0.00096908   18  0.00087531   19  0.00079386   20  0.00074277
+  21  0.00070407   22  0.00067195   23  0.00047485   24  0.00046750   25  0.00030178
+  26  0.00028085   27  0.00008524   28  0.00006230   29  0.00006054
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.1%     0.1
+
+  E  =     -56.3850074635
+  T  =      56.42837805  V  =    -155.75238443  J  =      39.22765082
+  Ex =      -7.67633476  Ec =      -0.19552129
+
+  dipole =   0.042263 au (  0.107424 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.508579    2    -1.105024    3    -0.656508    4    -0.602307
+   5    -0.383616
+ virtual:
+   6     0.252005    7     0.356694    8     0.378832    9     0.803973
+  10     0.826372   11     0.917349   12     1.030132   13     1.039061
+  14     1.229751   15     1.330939   16     1.352304   17     1.365464
+  18     1.798707   19     1.935918   20     2.096506   21     2.156169
+  22     2.280317   23     2.350645   24     2.425281   25     2.784097
+  26     2.943441   27     3.743129   28     4.038623   29     4.125469
+
+
+eng>$Energy
+eng> E=-5.6385007463466e+01
+eng> D=-4.38241110e-12 -1.35768164e-14  4.22634562e-02
+eng> G=-2.78479670e-12 -9.70109740e-13 -1.01658027e-01
+eng>   -1.12236717e-12  1.18467564e-13  7.24998220e-02
+eng>   -1.98428860e-02 -7.51325193e-14  1.45791026e-02
+eng>    1.98428860e-02  9.26774695e-13  1.45791026e-02
+eng>$end
+
+ G(max) = 0.10165803  |G| = 0.12962700
+
+
+ Geometry Optimization Step 2:
+ Energy:           -56.38500746
+ Energy change:      0.00883693 (actual)
+                    -0.00019560 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.079325, |dG - HdX| = 0.02511879
+ include g
+ max. gradient     = 0.0243480 (internal), 0.0291582 (cartesian)
+ trust test =-0.1921316, trust radius = 0.0156250
+ Lagrangian multiplier =   1.034851
+ max. displacement = 0.0156250 (internal), 0.0108419 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0108418958
+ iter   1: rmax = 0.0000587143, xmax = 0.0000353413
+ iter   2: rmax = 0.0000000008, xmax = 0.0000000006
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0156250 (internal), 0.0108066 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00000000  -0.00000000  -0.04484563
+mol>   1    -0.00000000   0.00000000   1.05515437
+mol>   1     0.86807457  -0.00000000  -0.50515437
+mol>   1    -0.86807457  -0.00000000  -0.50515437
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00000000  -0.00000000  -0.04484563
+   1    -0.00000000   0.00000000   1.05515437
+   1     0.86807457  -0.00000000  -0.50515437
+   1    -0.86807457  -0.00000000  -0.50515437
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ s=1.2e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.3%     0.0
+ time: integral estimates               :     0.0  99.7%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  94.0%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1898244373   0.0000000000   0.00296260   0.00142395      0.0
+   1    -56.1898573586  -0.0000329214   0.00059037   0.00047766      0.0
+   2    -56.1898602847  -0.0000029260   0.00018212   0.00015779      0.0
+   3    -56.1898604858  -0.0000002011   0.00005679   0.00005891      0.0
+   4    -56.1898605072  -0.0000000214   0.00000871   0.00000578      0.0
+   5    -56.1898605078  -0.0000000006   0.00000328   0.00000285      0.0
+   6    -56.1898605079  -0.0000000001   0.00000035   0.00000025      0.0
+ converged!
+   7    -56.1898605079  -0.0000000000   0.00000009   0.00000011      0.0
+ time: Coulomb Matrix                   :     0.0  94.3%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  91.0%     0.0
+ time: Exchange Matrix                  :     0.0  85.5%     0.0
+ time: SCF Equations                    :     0.0  90.5%     0.0
+ Total   Energy =    -56.18986051
+ Kinetic Energy =     56.10390834
+ Dipole  Moment = {  0.00000, -0.00000,  0.03991} (  0.03991)
+ Quadrupole Moment = {  -4.12280;
+                         0.00000,  -6.92447;
+                        -0.00000,   0.00000,  -4.13220}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.4%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.8%     0.0
+ E2aa =     -0.02336916
+ E2ab =     -0.14907217
+ E2   =     -0.19581049
+ E    =    -56.38567100
+ time: Transformation (m|vo) -> (m|no)  :     0.0  97.7%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.9%     0.0
+ time: Coulomb  Matrix                  :     0.0  98.8%     0.0
+ time: Exchange Matrix                  :     0.0  99.8%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009431231, time =     0.0
+ subspace  2: g = 0.000951687, time =     0.0
+ subspace  3: g = 0.000179226, time =     0.0
+ subspace  4: g = 0.000025625, time =     0.0
+ subspace  5: g = 0.000005974, time =     0.0
+ subspace  6: g = 0.000000736, time =     0.0
+ time: CPHF Equations                   :     0.0  88.7%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  90.9%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.4%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.8%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.5%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0 100.0%     0.0
+ time: Coulomb  Matrix                  :     0.0  87.5%     0.0
+ time: Exchange Matrix                  :     0.0  94.4%     0.0
+ time: RI-MP2 Calculation               :     0.0  94.0%     0.0
+ Kinetic Energy =     56.39655355
+ Dipole  Moment = {  0.00000,  0.00000,  0.03910} (  0.03910)
+ Quadrupole Moment = {  -4.23460;
+                        -0.00000,  -6.88917;
+                        -0.00000,  -0.00000,  -4.23192}
+ occupation numbers:
+ nc=   1: sum=  2.00000052
+   1  2.00000052
+ no=   4: sum=  7.89035978
+   2  1.98340690    3  1.97047274    4  1.96963584    5  1.96684430
+ nv=  24: sum=  0.10963970
+   6  0.02052110    7  0.01689070    8  0.01579433    9  0.01560377   10  0.00705210
+  11  0.00696548   12  0.00622508   13  0.00599795   14  0.00571105   15  0.00135908
+  16  0.00098899   17  0.00097399   18  0.00088051   19  0.00079468   20  0.00074510
+  21  0.00071170   22  0.00067989   23  0.00047417   24  0.00047264   25  0.00030299
+  26  0.00028368   27  0.00008517   28  0.00006358   29  0.00006198
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.1%     0.1
+
+  E  =     -56.3856710011
+  T  =      56.39655355  V  =    -155.59600365  J  =      39.16545824
+  Ex =      -7.66818038  Ec =      -0.19581049
+
+  dipole =   0.039096 au (  0.099374 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.510215    2    -1.101860    3    -0.651701    4    -0.601825
+   5    -0.383169
+ virtual:
+   6     0.250303    7     0.355876    8     0.377233    9     0.804746
+  10     0.825979   11     0.915390   12     1.029477   13     1.037596
+  14     1.225149   15     1.328120   16     1.347860   17     1.360392
+  18     1.797417   19     1.932279   20     2.093172   21     2.144584
+  22     2.261413   23     2.348091   24     2.420012   25     2.782886
+  26     2.929391   27     3.744248   28     4.026136   29     4.097000
+
+
+eng>$Energy
+eng> E=-5.6385671001123e+01
+eng> D= 1.36947641e-11  9.51086530e-14  3.90964404e-02
+eng> G= 2.90163726e-12 -1.00811615e-12 -9.27345278e-02
+eng>   -1.57269369e-12  3.11545491e-13  7.25812349e-02
+eng>   -1.20126089e-02  9.56628923e-14  1.00766464e-02
+eng>    1.20126089e-02  6.00907763e-13  1.00766464e-02
+eng>$end
+
+ G(max) = 0.09273453  |G| = 0.11983076
+
+
+ Geometry Optimization Step 3:
+ Energy:           -56.38567100
+ Energy change:     -0.00066354 (actual)
+                    -0.00067552 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.079325, |dG - HdX| = 0.00007167
+ Hessian update: |dG| = 0.012761, |dG - HdX| = 0.00130631
+ include g
+ max. gradient     = 0.0153335 (internal), 0.0201533 (cartesian)
+ trust test = 0.0969202, trust radius = 0.0220971
+ Lagrangian multiplier =   0.136040
+ max. displacement = 0.0220971 (internal), 0.0138270 (cartesian)
+ iter   0: rmax = 0.0220970869, xmax = 0.0138270270
+ iter   1: rmax = 0.0002488449, xmax = 0.0002013374
+ iter   2: rmax = 0.0000000145, xmax = 0.0000000091
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0220971 (internal), 0.0139053 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00000000  -0.00000000  -0.03748724
+mol>   1    -0.00000000   0.00000000   1.06251276
+mol>   1     0.87344373   0.00000000  -0.51251276
+mol>   1    -0.87344373   0.00000000  -0.51251276
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00000000  -0.00000000  -0.03748724
+   1    -0.00000000   0.00000000   1.06251276
+   1     0.87344373   0.00000000  -0.51251276
+   1    -0.87344373   0.00000000  -0.51251276
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ s=1.2e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  56.5%     0.0
+ time: integral estimates               :     0.0  84.5%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  95.1%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1898864148   0.0000000000   0.00432011   0.00224145      0.0
+   1    -56.1899614219  -0.0000750071   0.00082345   0.00079662      0.0
+   2    -56.1899690633  -0.0000076414   0.00029638   0.00026508      0.0
+   3    -56.1899695953  -0.0000005319   0.00008189   0.00009720      0.0
+   4    -56.1899696519  -0.0000000567   0.00001509   0.00001045      0.0
+   5    -56.1899696536  -0.0000000016   0.00000589   0.00000472      0.0
+   6    -56.1899696537  -0.0000000002   0.00000055   0.00000033      0.0
+ converged!
+   7    -56.1899696538  -0.0000000000   0.00000017   0.00000023      0.0
+ time: Coulomb Matrix                   :     0.0  99.7%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.4%     0.0
+ time: Exchange Matrix                  :     0.0  99.4%     0.0
+ time: SCF Equations                    :     0.0  31.2%     0.0
+ Total   Energy =    -56.18996965
+ Kinetic Energy =     56.05760874
+ Dipole  Moment = {  0.00000,  0.00000,  0.03340} (  0.03340)
+ Quadrupole Moment = {  -4.13698;
+                         0.00000,  -6.94734;
+                        -0.00000,  -0.00000,  -4.10105}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.7%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.4%     0.0
+ E2aa =     -0.02339210
+ E2ab =     -0.14943043
+ E2   =     -0.19621463
+ E    =    -56.38618428
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.0%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.8%     0.0
+ time: Coulomb  Matrix                  :     0.0  71.1%     0.0
+ time: Exchange Matrix                  :     0.0  68.3%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009485814, time =     0.0
+ subspace  2: g = 0.000925900, time =     0.0
+ subspace  3: g = 0.000171825, time =     0.0
+ subspace  4: g = 0.000023954, time =     0.0
+ subspace  5: g = 0.000005698, time =     0.0
+ subspace  6: g = 0.000000739, time =     0.0
+ time: CPHF Equations                   :     0.0  93.7%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  94.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.7%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.4%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  87.5%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.5%     0.0
+ time: Coulomb  Matrix                  :     0.0  92.4%     0.0
+ time: Exchange Matrix                  :     0.0  88.8%     0.0
+ time: RI-MP2 Calculation               :     0.0  92.2%     0.0
+ Kinetic Energy =     56.35297189
+ Dipole  Moment = {  0.00000,  0.00000,  0.03279} (  0.03279)
+ Quadrupole Moment = {  -4.24809;
+                         0.00000,  -6.91127;
+                        -0.00000,  -0.00000,  -4.20451}
+ occupation numbers:
+ nc=   1: sum=  2.00000051
+   1  2.00000051
+ no=   4: sum=  7.88950200
+   2  1.98319998    3  1.97036246    4  1.96919861    5  1.96674095
+ nv=  24: sum=  0.11049748
+   6  0.02050712    7  0.01731657    8  0.01613673    9  0.01570163   10  0.00705009
+  11  0.00694385   12  0.00619358   13  0.00600704   14  0.00569725   15  0.00137071
+  16  0.00098407   17  0.00097952   18  0.00089154   19  0.00079415   20  0.00074700
+  21  0.00072412   22  0.00069312   23  0.00047972   24  0.00047288   25  0.00030424
+  26  0.00028815   27  0.00008498   28  0.00006529   29  0.00006413
+ time: One-Electron Gradient            :     0.0  93.8%     0.0
+ time: Coulomb-type Gradient            :     0.1  97.2%     0.1
+
+  E  =     -56.3861842790
+  T  =      56.35297189  V  =    -155.37915079  J  =      39.07912755
+  Ex =      -7.65687080  Ec =      -0.19621463
+
+  dipole =   0.032792 au (  0.083350 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.512455    2    -1.097471    3    -0.643853    4    -0.602217
+   5    -0.382518
+ virtual:
+   6     0.247683    7     0.354898    8     0.374939    9     0.806205
+  10     0.825416   11     0.912578   12     1.027227   13     1.037047
+  14     1.218531   15     1.323721   16     1.339772   17     1.355740
+  18     1.795416   19     1.925764   20     2.088810   21     2.130686
+  22     2.233447   23     2.340641   24     2.418615   25     2.784993
+  26     2.906414   27     3.748895   28     4.018305   29     4.045081
+
+
+eng>$Energy
+eng> E=-5.6386184278981e+01
+eng> D= 8.60133839e-12  1.74327515e-13  3.27920245e-02
+eng> G=-6.04100971e-12 -9.80415014e-13 -7.95171771e-02
+eng>   -8.57062576e-13  4.02789609e-13  7.29303033e-02
+eng>   -2.15738965e-03  6.65275221e-14  3.29343690e-03
+eng>    2.15738966e-03  5.11097883e-13  3.29343691e-03
+eng>$end
+
+ G(max) = 0.07951718  |G| = 0.10804079
+
+
+ Geometry Optimization Step 4:
+ Energy:           -56.38618428
+ Energy change:     -0.00051328 (actual)
+                    -0.00049209 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.012761, |dG - HdX| = 0.00000755
+ Hessian update: |dG| = 0.016915, |dG - HdX| = 0.00139746
+ include g
+ max. gradient     = 0.0034687 (internal), 0.0065869 (cartesian)
+ trust test =-0.0483713, trust radius = 0.0312500
+ max. displacement = 0.0176408 (internal), 0.0091073 (cartesian)
+ iter   0: rmax = 0.0176407895, xmax = 0.0091073031
+ iter   1: rmax = 0.0000727899, xmax = 0.0000966116
+ iter   2: rmax = 0.0000000028, xmax = 0.0000000014
+ iter   3: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0176408 (internal), 0.0091193 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00000000  -0.00000000  -0.03266150
+mol>   1     0.00000000   0.00000000   1.06733850
+mol>   1     0.87275996   0.00000000  -0.51733850
+mol>   1    -0.87275996   0.00000000  -0.51733850
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00000000  -0.00000000  -0.03266150
+   1     0.00000000   0.00000000   1.06733850
+   1     0.87275996   0.00000000  -0.51733850
+   1    -0.87275996   0.00000000  -0.51733850
+ #
+
+ time: Geometry Optimization            :     0.0  99.8%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  97.5%     0.0
+ s=1.2e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.7%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  98.2%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1898791303   0.0000000000   0.00157319   0.00100654      0.0
+   1    -56.1898949848  -0.0000158545   0.00035255   0.00039750      0.0
+   2    -56.1898969358  -0.0000019510   0.00016871   0.00012133      0.0
+   3    -56.1898970521  -0.0000001163   0.00003621   0.00004828      0.0
+   4    -56.1898970654  -0.0000000133   0.00000796   0.00000523      0.0
+   5    -56.1898970658  -0.0000000004   0.00000318   0.00000203      0.0
+   6    -56.1898970658  -0.0000000000   0.00000023   0.00000023      0.0
+ converged!
+   7    -56.1898970658   0.0000000000   0.00000010   0.00000012      0.0
+ time: Coulomb Matrix                   :     0.0  99.2%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.9%     0.0
+ time: Exchange Matrix                  :     0.0  99.3%     0.0
+ time: SCF Equations                    :     0.0  99.8%     0.0
+ Total   Energy =    -56.18989707
+ Kinetic Energy =     56.04194550
+ Dipole  Moment = { -0.00000, -0.00000,  0.02935} (  0.02935)
+ Quadrupole Moment = {  -4.15930;
+                        -0.00000,  -6.95521;
+                         0.00000,  -0.00000,  -4.07107}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  58.1%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  81.7%     0.0
+ time: RI-MP2 Energy                    :     0.0  77.1%     0.0
+ E2aa =     -0.02339975
+ E2ab =     -0.14955214
+ E2   =     -0.19635164
+ E    =    -56.38624870
+ time: Transformation (m|vo) -> (m|no)  :     0.0  77.5%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  81.6%     0.0
+ time: Coulomb  Matrix                  :     0.0  80.7%     0.0
+ time: Exchange Matrix                  :     0.0  99.9%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009498942, time =     0.0
+ subspace  2: g = 0.000911797, time =     0.0
+ subspace  3: g = 0.000166497, time =     0.0
+ subspace  4: g = 0.000023024, time =     0.0
+ subspace  5: g = 0.000005523, time =     0.0
+ subspace  6: g = 0.000000739, time =     0.0
+ time: CPHF Equations                   :     0.0  99.8%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  89.1%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  81.7%     0.0
+ time: RI-MP2 Energy                    :     0.0  77.1%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  89.9%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  89.9%     0.0
+ time: Coulomb  Matrix                  :     0.0  97.6%     0.0
+ time: Exchange Matrix                  :     0.0  99.7%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.0%     0.0
+ Kinetic Energy =     56.33823561
+ Dipole  Moment = { -0.00000,  0.00000,  0.02894} (  0.02894)
+ Quadrupole Moment = {  -4.26891;
+                         0.00000,  -6.91886;
+                         0.00000,  -0.00000,  -4.17732}
+ occupation numbers:
+ nc=   1: sum=  2.00000051
+   1  2.00000051
+ no=   4: sum=  7.88920713
+   2  1.98312769    3  1.97032427    4  1.96902523    5  1.96672995
+ nv=  24: sum=  0.11079236
+   6  0.02047415    7  0.01750319    8  0.01624205    9  0.01573496   10  0.00705824
+  11  0.00692767   12  0.00617512   13  0.00601824   14  0.00569366   15  0.00137438
+  16  0.00099056   17  0.00096910   18  0.00089860   19  0.00079240   20  0.00074638
+  21  0.00072993   22  0.00069948   23  0.00048201   24  0.00047217   25  0.00030427
+  26  0.00029022   27  0.00008483   28  0.00006580   29  0.00006495
+ time: One-Electron Gradient            :     0.0  87.3%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.5%     0.1
+
+  E  =     -56.3862487042
+  T  =      56.33823561  V  =    -155.30537227  J  =      39.04986580
+  Ex =      -7.65302897  Ec =      -0.19635164
+
+  dipole =   0.028944 au (  0.073568 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.513184    2    -1.095979    3    -0.640101    4    -0.603347
+   5    -0.382266
+ virtual:
+   6     0.246643    7     0.354683    8     0.374170    9     0.807005
+  10     0.825109   11     0.911574   12     1.025260   13     1.038235
+  14     1.216090   15     1.320955   16     1.335251   17     1.357247
+  18     1.794494   19     1.922587   20     2.087458   21     2.127651
+  22     2.222747   23     2.334008   24     2.423238   25     2.789251
+  26     2.895441   27     3.753791   28     4.015633   29     4.023927
+
+
+eng>$Energy
+eng> E=-5.6386248704191e+01
+eng> D=-1.38502577e-12  5.59553807e-14  2.89435435e-02
+eng> G= 9.17911580e-13 -9.09720025e-13 -7.39566879e-02
+eng>    5.96216110e-13  2.08666696e-13  7.32622096e-02
+eng>    5.69340612e-04  1.85464872e-13  3.47239126e-04
+eng>   -5.69340613e-04  5.15588457e-13  3.47239125e-04
+eng>$end
+
+ G(max) = 0.07395669  |G| = 0.10410491
+
+
+ Geometry Optimization Step 5:
+ Energy:           -56.38624870
+ Energy change:     -0.00006443 (actual)
+                    -0.00005741 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.016915, |dG - HdX| = 0.00001802
+ Hessian update: |dG| = 0.005728, |dG - HdX| = 0.00111112
+ include g
+ max. gradient     = 0.0007294 (internal), 0.0006945 (cartesian)
+ trust test =-0.0179014, trust radius = 0.0249478
+ max. displacement = 0.0054966 (internal), 0.0023971 (cartesian)
+ iter   0: rmax = 0.0054965577, xmax = 0.0023970522
+ iter   1: rmax = 0.0000071240, xmax = 0.0000064091
+ iter   2: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0054966 (internal), 0.0024035 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00000000   0.00000000  -0.03144539
+mol>   1     0.00000000   0.00000000   1.06855461
+mol>   1     0.87148811  -0.00000000  -0.51855461
+mol>   1    -0.87148811  -0.00000000  -0.51855461
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00000000   0.00000000  -0.03144539
+   1     0.00000000   0.00000000   1.06855461
+   1     0.87148811  -0.00000000  -0.51855461
+   1    -0.87148811  -0.00000000  -0.51855461
+ #
+
+ time: Geometry Optimization            :     0.0  97.8%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ s=1.2e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  94.1%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1898994063   0.0000000000   0.00029705   0.00015068      0.0
+   1    -56.1899001601  -0.0000007538   0.00008140   0.00008203      0.0
+   2    -56.1899002540  -0.0000000938   0.00002204   0.00002212      0.0
+   3    -56.1899002575  -0.0000000036   0.00000636   0.00001098      0.0
+   4    -56.1899002580  -0.0000000005   0.00000124   0.00000089      0.0
+   5    -56.1899002580  -0.0000000000   0.00000045   0.00000029      0.0
+ converged!
+   6    -56.1899002581  -0.0000000000   0.00000008   0.00000006      0.0
+ time: Coulomb Matrix                   :     0.0  99.5%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.8%     0.0
+ time: Exchange Matrix                  :     0.0  99.7%     0.0
+ time: SCF Equations                    :     0.0  99.8%     0.0
+ Total   Energy =    -56.18990026
+ Kinetic Energy =     56.04165058
+ Dipole  Moment = { -0.00000,  0.00000,  0.02840} (  0.02840)
+ Quadrupole Moment = {  -4.16829;
+                         0.00000,  -6.95535;
+                         0.00000,  -0.00000,  -4.06104}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.7%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  98.4%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.8%     0.0
+ E2aa =     -0.02339976
+ E2ab =     -0.14955264
+ E2   =     -0.19635217
+ E    =    -56.38625242
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.3%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.6%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.6%     0.0
+ time: Exchange Matrix                  :     0.0  74.1%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009495452, time =     0.0
+ subspace  2: g = 0.000908461, time =     0.0
+ subspace  3: g = 0.000165002, time =     0.0
+ subspace  4: g = 0.000022831, time =     0.0
+ subspace  5: g = 0.000005483, time =     0.0
+ subspace  6: g = 0.000000738, time =     0.0
+ time: CPHF Equations                   :     0.0  92.8%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  93.3%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  98.4%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.8%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  97.4%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.9%     0.0
+ time: Coulomb  Matrix                  :     0.0  93.4%     0.0
+ time: Exchange Matrix                  :     0.0  90.8%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.9%     0.0
+ Kinetic Energy =     56.33795358
+ Dipole  Moment = {  0.00000,  0.00000,  0.02805} (  0.02805)
+ Quadrupole Moment = {  -4.27725;
+                         0.00000,  -6.91899;
+                         0.00000,   0.00000,  -4.16808}
+ occupation numbers:
+ nc=   1: sum=  2.00000051
+   1  2.00000051
+ no=   4: sum=  7.88920447
+   2  1.98312616    3  1.97032354    4  1.96901190    5  1.96674288
+ nv=  24: sum=  0.11079502
+   6  0.02045957    7  0.01752499    8  0.01623639    9  0.01573518   10  0.00706308
+  11  0.00692303   12  0.00617116   13  0.00602255   14  0.00569433   15  0.00137416
+  16  0.00099222   17  0.00096528   18  0.00090036   19  0.00079158   20  0.00074573
+  21  0.00073079   22  0.00070049   23  0.00048196   24  0.00047201   25  0.00030408
+  26  0.00029054   27  0.00008479   28  0.00006576   29  0.00006500
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.2%     0.1
+
+  E  =     -56.3862524236
+  T  =      56.33795358  V  =    -155.30417797  J  =      39.04949677
+  Ex =      -7.65297395  Ec =      -0.19635217
+
+  dipole =   0.028047 au (  0.071290 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.513176    2    -1.095955    3    -0.639497    4    -0.603869
+   5    -0.382245
+ virtual:
+   6     0.246569    7     0.354730    8     0.374197    9     0.807145
+  10     0.825056   11     0.911523   12     1.024643   13     1.038942
+  14     1.215951   15     1.320272   16     1.334290   17     1.358830
+  18     1.794354   19     1.922139   20     2.087455   21     2.128480
+  22     2.221979   23     2.331826   24     2.425831   25     2.791138
+  26     2.893675   27     3.755613   28     4.009026   29     4.028191
+
+
+eng>$Energy
+eng> E=-5.6386252423553e+01
+eng> D= 1.00190689e-12  1.46140530e-13  2.80472671e-02
+eng> G= 4.74559628e-13 -9.77733805e-13 -7.33138940e-02
+eng>    1.51381945e-13  4.37871090e-13  7.33760341e-02
+eng>    3.71878432e-04  1.16987720e-13 -3.10700313e-05
+eng>   -3.71878432e-04  4.22874995e-13 -3.10700314e-05
+eng>$end
+
+ G(max) = 0.07337603  |G| = 0.10372679
+
+
+ Geometry Optimization Step 6:
+ Energy:           -56.38625242
+ Energy change:     -0.00000372 (actual)
+                    -0.00000296 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.005728, |dG - HdX| = 0.00000590
+ Hessian update: |dG| = 0.000666, |dG - HdX| = 0.00055570
+ include g
+ max. gradient     = 0.0003398 (internal), 0.0003719 (cartesian)
+ trust test =-0.4382278, trust radius = 0.0156250
+ max. displacement = 0.0018896 (internal), 0.0012994 (cartesian)
+ iter   0: rmax = 0.0018896321, xmax = 0.0012994290
+ iter   1: rmax = 0.0000008423, xmax = 0.0000005078
+ iter   2: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0018896 (internal), 0.0012999 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00000000   0.00000000  -0.03109746
+mol>   1     0.00000000   0.00000000   1.06890254
+mol>   1     0.87080021  -0.00000000  -0.51890254
+mol>   1    -0.87080021  -0.00000000  -0.51890254
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00000000   0.00000000  -0.03109746
+   1     0.00000000   0.00000000   1.06890254
+   1     0.87080021  -0.00000000  -0.51890254
+   1    -0.87080021  -0.00000000  -0.51890254
+ #
+
+ time: Geometry Optimization            :     0.0  98.1%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ s=1.2e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  76.3%     0.0
+ time: integral estimates               :     0.0  83.1%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  93.4%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1899107091   0.0000000000   0.00013740   0.00007221      0.0
+   1    -56.1899108191  -0.0000001100   0.00003230   0.00002780      0.0
+   2    -56.1899108290  -0.0000000098   0.00001215   0.00000698      0.0
+   3    -56.1899108294  -0.0000000005   0.00000231   0.00000298      0.0
+   4    -56.1899108295  -0.0000000001   0.00000071   0.00000051      0.0
+ converged!
+   5    -56.1899108295  -0.0000000000   0.00000028   0.00000016      0.0
+ time: Coulomb Matrix                   :     0.0  99.3%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.8%     0.0
+ time: Exchange Matrix                  :     0.0  98.8%     0.0
+ time: SCF Equations                    :     0.0  99.7%     0.0
+ Total   Energy =    -56.18991083
+ Kinetic Energy =     56.04264224
+ Dipole  Moment = {  0.00000,  0.00000,  0.02814} (  0.02814)
+ Quadrupole Moment = {  -4.17183;
+                        -0.00000,  -6.95484;
+                        -0.00000,  -0.00000,  -4.05744}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.4%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.0%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.3%     0.0
+ E2aa =     -0.02339918
+ E2ab =     -0.14954371
+ E2   =     -0.19634207
+ E    =    -56.38625290
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.3%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.2%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.1%     0.0
+ time: Exchange Matrix                  :     0.0  72.7%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009492353, time =     0.0
+ subspace  2: g = 0.000907513, time =     0.0
+ subspace  3: g = 0.000164525, time =     0.0
+ subspace  4: g = 0.000022789, time =     0.0
+ subspace  5: g = 0.000005474, time =     0.0
+ subspace  6: g = 0.000000737, time =     0.0
+ time: CPHF Equations                   :     0.0  91.4%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  92.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.0%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.3%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.9%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.7%     0.0
+ time: Coulomb  Matrix                  :     0.0  94.0%     0.0
+ time: Exchange Matrix                  :     0.0  90.0%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.5%     0.0
+ Kinetic Energy =     56.33888328
+ Dipole  Moment = {  0.00000,  0.00000,  0.02781} (  0.02781)
+ Quadrupole Moment = {  -4.28054;
+                        -0.00000,  -6.91850;
+                        -0.00000,  -0.00000,  -4.16473}
+ occupation numbers:
+ nc=   1: sum=  2.00000051
+   1  2.00000051
+ no=   4: sum=  7.88922517
+   2  1.98313068    3  1.97032598    4  1.96901717    5  1.96675133
+ nv=  24: sum=  0.11077432
+   6  0.02045354    7  0.01752364    8  0.01622514    9  0.01573280   10  0.00706531
+  11  0.00692152   12  0.00617023   13  0.00602424   14  0.00569500   15  0.00137374
+  16  0.00099271   17  0.00096380   18  0.00090089   19  0.00079122   20  0.00074539
+  21  0.00073086   22  0.00070060   23  0.00048175   24  0.00047197   25  0.00030396
+  26  0.00029056   27  0.00008478   28  0.00006570   29  0.00006496
+ time: One-Electron Gradient            :     0.0  99.7%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.0%     0.1
+
+  E  =     -56.3862528961
+  T  =      56.33888328  V  =    -155.30898013  J  =      39.05146502
+  Ex =      -7.65322877  Ec =      -0.19634207
+
+  dipole =   0.027811 au (  0.070690 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.513116    2    -1.096052    3    -0.639424    4    -0.604089
+   5    -0.382251
+ virtual:
+   6     0.246605    7     0.354774    8     0.374274    9     0.807164
+  10     0.825053   11     0.911563   12     1.024432   13     1.039266
+  14     1.216051   15     1.320098   16     1.334065   17     1.359620
+  18     1.794343   19     1.922117   20     2.087551   21     2.129201
+  22     2.222322   23     2.331050   24     2.427006   25     2.791925
+  26     2.893460   27     3.756308   28     4.007340   29     4.030276
+
+
+eng>$Energy
+eng> E=-5.6386252896128e+01
+eng> D= 4.93419524e-11  1.71960483e-13  2.78112655e-02
+eng> G= 5.79241863e-12 -8.49162877e-13 -7.33563753e-02
+eng>   -2.67536644e-13  2.95719628e-13  7.34180490e-02
+eng>    5.77373265e-05 -7.41376002e-15 -3.08368496e-05
+eng>   -5.77373320e-05  5.60857009e-13 -3.08368517e-05
+eng>$end
+
+ G(max) = 0.07341805  |G| = 0.10378524
+
+
+ Geometry Optimization Step 7:
+ Energy:           -56.38625290
+ Energy change:     -0.00000047 (actual)
+                    -0.00000044 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.000666, |dG - HdX| = 0.00000028
+ Hessian update: |dG| = 0.000456, |dG - HdX| = 0.00009457
+ include g
+ max. gradient     = 0.0000654 (internal), 0.0000617 (cartesian)
+ trust test =-0.1584101, trust radius = 0.0156250
+ max. displacement = 0.0001169 (internal), 0.0001099 (cartesian)
+ iter   0: rmax = 0.0001168669, xmax = 0.0001099406
+ iter   1: rmax = 0.0000000011, xmax = 0.0000000005
+ iter   2: rmax = 0.0000000000, xmax = 0.0000000000
+ max. displacement = 0.0001169 (internal), 0.0001099 (cartesian)
+ OPTIMIZATION CONVERGED in 6 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   7    -0.00000000   0.00000000  -0.03109746
+MOL>   1     0.00000000   0.00000000   1.06890254
+MOL>   1     0.87080021  -0.00000000  -0.51890254
+MOL>   1    -0.87080021  -0.00000000  -0.51890254
+MOL>$end
+MOL> Energy =    -56.3862528961
+
+ Atomic Coordinates:
+   7    -0.00000000   0.00000000  -0.03109746
+   1     0.00000000   0.00000000   1.06890254
+   1     0.87080021  -0.00000000  -0.51890254
+   1    -0.87080021  -0.00000000  -0.51890254
+ #
+
+ time: Geometry Optimization            :     0.0  98.3%     0.0
+
+ Geometry Optimization Step 0:
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ time: Geometry Optimization            :     0.0  98.3%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  88.3%     0.0
+ s=1.2e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  83.5%     0.0
+ time: integral estimates               :     0.0  99.0%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  95.9%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1899108295   0.0000000000   0.00000029   0.00000009      0.0
+ converged!
+   1    -56.1899108295   0.0000000000   0.00000006   0.00000008      0.0
+ time: Coulomb Matrix                   :     0.0  92.7%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  90.7%     0.0
+ time: Exchange Matrix                  :     0.0  85.7%     0.0
+ time: SCF Equations                    :     0.0  85.4%     0.0
+ Total   Energy =    -56.18991083
+ Kinetic Energy =     56.04264215
+ Dipole  Moment = {  0.00000,  0.00000,  0.02814} (  0.02814)
+ Quadrupole Moment = {  -4.17183;
+                        -0.00000,  -6.95484;
+                        -0.00000,  -0.00000,  -4.05744}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  81.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  72.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  91.5%     0.0
+ E2aa =     -0.02339918
+ E2ab =     -0.14954371
+ E2   =     -0.19634207
+ E    =    -56.38625290
+ time: Transformation (m|vo) -> (m|no)  :     0.0 100.0%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  98.6%     0.0
+ time: Coulomb  Matrix                  :     0.0  98.3%     0.0
+ time: Exchange Matrix                  :     0.0  99.6%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009492353, time =     0.0
+ subspace  2: g = 0.000907513, time =     0.0
+ subspace  3: g = 0.000164525, time =     0.0
+ subspace  4: g = 0.000022789, time =     0.0
+ subspace  5: g = 0.000005474, time =     0.0
+ subspace  6: g = 0.000000737, time =     0.0
+ time: CPHF Equations                   :     0.0  99.8%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  96.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  72.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  91.5%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  93.9%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  87.5%     0.0
+ time: Coulomb  Matrix                  :     0.0  94.3%     0.0
+ time: Exchange Matrix                  :     0.0  92.3%     0.0
+ time: RI-MP2 Calculation               :     0.0  92.9%     0.0
+ Kinetic Energy =     56.33888321
+ Dipole  Moment = {  0.00000,  0.00000,  0.02781} (  0.02781)
+ Quadrupole Moment = {  -4.28054;
+                         0.00000,  -6.91850;
+                        -0.00000,   0.00000,  -4.16473}
+ occupation numbers:
+ nc=   1: sum=  2.00000051
+   1  2.00000051
+ no=   4: sum=  7.88922517
+   2  1.98313068    3  1.97032598    4  1.96901717    5  1.96675133
+ nv=  24: sum=  0.11077432
+   6  0.02045354    7  0.01752364    8  0.01622514    9  0.01573280   10  0.00706531
+  11  0.00692152   12  0.00617023   13  0.00602424   14  0.00569500   15  0.00137374
+  16  0.00099271   17  0.00096380   18  0.00090089   19  0.00079122   20  0.00074539
+  21  0.00073086   22  0.00070060   23  0.00048175   24  0.00047197   25  0.00030396
+  26  0.00029056   27  0.00008478   28  0.00006570   29  0.00006496
+ time: One-Electron Gradient            :     0.0  94.8%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.4%     0.1
+
+  E  =     -56.3862528986
+  T  =      56.33888321  V  =    -155.30898003  J  =      39.05146499
+  Ex =      -7.65322876  Ec =      -0.19634207
+
+  dipole =   0.027812 au (  0.070691 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.513116    2    -1.096052    3    -0.639424    4    -0.604089
+   5    -0.382251
+ virtual:
+   6     0.246605    7     0.354774    8     0.374274    9     0.807164
+  10     0.825053   11     0.911563   12     1.024431   13     1.039266
+  14     1.216051   15     1.320098   16     1.334065   17     1.359620
+  18     1.794343   19     1.922117   20     2.087551   21     2.129201
+  22     2.222322   23     2.331050   24     2.427006   25     2.791925
+  26     2.893460   27     3.756308   28     4.007340   29     4.030276
+
+
+eng>$Energy
+eng> E=-5.6386252898632e+01
+eng> D= 4.78586216e-11  1.74939131e-13  2.78115827e-02
+eng> G= 6.31064645e-12 -8.48070052e-13 -7.33563708e-02
+eng>    1.82146832e-13  3.48255352e-13  7.34180502e-02
+eng>    5.77479928e-05  1.38223366e-13 -3.08396782e-05
+eng>   -5.77479993e-05  3.61591333e-13 -3.08396811e-05
+eng>$end
+
+ G(max) = 0.07341805  |G| = 0.10378524
+
+
+ Geometry Optimization Step 1:
+ Energy:           -56.38625290
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0000655 (internal), 0.0000617 (cartesian)
+ Lagrangian multiplier =   0.000092
+ max. displacement = 0.2617994 (internal), 0.1093132 (cartesian)
+ iter   0: rmax = 0.2617993878, xmax = 0.1000000000
+ iter   1: rmax = 0.0240445009, xmax = 0.0099241872
+ iter   2: rmax = 0.0099973985, xmax = 0.0000549713
+ iter   3: rmax = 0.0100377832, xmax = 0.0000000394
+ iter   4: rmax = 0.0100377238, xmax = 0.0000000000
+ max. displacement = 0.2617994 (internal), 0.1099063 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00004203  -0.05815991  -0.03147735
+mol>   1     0.00006893   0.01786787   1.06589213
+mol>   1     0.86835160   0.02014602  -0.51715631
+mol>   1    -0.86837851   0.02014602  -0.51725847
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00004203  -0.05815991  -0.03147735
+   1     0.00006893   0.01786787   1.06589213
+   1     0.86835160   0.02014602  -0.51715631
+   1    -0.86837851   0.02014602  -0.51725847
+ #
+
+ time: Geometry Optimization            :     0.0  98.0%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  98.9%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  93.5%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1888215719   0.0000000000   0.01938800   0.01326088      0.0
+   1    -56.1904551488  -0.0016335769   0.00788744   0.00924972      0.0
+   2    -56.1908124549  -0.0003573061   0.00239278   0.00455637      0.0
+   3    -56.1908535346  -0.0000410797   0.00111204   0.00312136      0.0
+   4    -56.1908641769  -0.0000106423   0.00027123   0.00027457      0.0
+   5    -56.1908645639  -0.0000003869   0.00006575   0.00009460      0.0
+   6    -56.1908646159  -0.0000000520   0.00002924   0.00005133      0.0
+   7    -56.1908646230  -0.0000000071   0.00001241   0.00003077      0.0
+   8    -56.1908646247  -0.0000000017   0.00000452   0.00000597      0.0
+   9    -56.1908646248  -0.0000000002   0.00000159   0.00000098      0.0
+  10    -56.1908646249  -0.0000000000   0.00000023   0.00000014      0.0
+ converged!
+  11    -56.1908646249  -0.0000000000   0.00000008   0.00000005      0.0
+ time: Coulomb Matrix                   :     0.0  91.6%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  94.6%     0.0
+ time: Exchange Matrix                  :     0.0  93.7%     0.0
+ time: SCF Equations                    :     0.0  94.2%     0.0
+ Total   Energy =    -56.19086462
+ Kinetic Energy =     56.04724761
+ Dipole  Moment = {  0.00005,  0.14489,  0.02758} (  0.14749)
+ Quadrupole Moment = {  -4.18967;
+                        -0.00000,  -6.95912;
+                         0.00033,  -0.01517,  -4.07971}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.4%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.0%     0.0
+ E2aa =     -0.02338433
+ E2ab =     -0.14957286
+ E2   =     -0.19634152
+ E    =    -56.38720614
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.2%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.3%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.0%     0.0
+ time: Exchange Matrix                  :     0.0  72.7%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009503413, time =     0.0
+ subspace  2: g = 0.000912871, time =     0.0
+ subspace  3: g = 0.000169015, time =     0.0
+ subspace  4: g = 0.000023854, time =     0.0
+ subspace  5: g = 0.000006118, time =     0.0
+ subspace  6: g = 0.000001175, time =     0.0
+ time: CPHF Equations                   :     0.0  93.5%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  94.0%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.4%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.0%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  98.7%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.8%     0.0
+ time: Coulomb  Matrix                  :     0.0  93.3%     0.0
+ time: Exchange Matrix                  :     0.0  90.4%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.6%     0.0
+ Kinetic Energy =     56.34315608
+ Dipole  Moment = {  0.00004,  0.13860,  0.02737} (  0.14127)
+ Quadrupole Moment = {  -4.29789;
+                        -0.00000,  -6.92328;
+                         0.00030,  -0.01392,  -4.18593}
+ occupation numbers:
+ nc=   1: sum=  2.00000061
+   1  2.00000061
+ no=   4: sum=  7.88913206
+   2  1.98316406    3  1.97028369    4  1.96898562    5  1.96669870
+ nv=  24: sum=  0.11086733
+   6  0.02053513    7  0.01760842    8  0.01640779    9  0.01543419   10  0.00709321
+  11  0.00694043   12  0.00615315   13  0.00601819   14  0.00568735   15  0.00137508
+  16  0.00098995   17  0.00096124   18  0.00089975   19  0.00081922   20  0.00075977
+  21  0.00072607   22  0.00067857   23  0.00051230   24  0.00044235   25  0.00031033
+  26  0.00029661   27  0.00008563   28  0.00006696   29  0.00006562
+ time: One-Electron Gradient            :     0.0  79.7%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.5%     0.1
+
+  E  =     -56.3872061428
+  T  =      56.34315608  V  =    -155.31447307  J  =      39.04891148
+  Ex =      -7.65376742  Ec =      -0.19634152
+
+  dipole =   0.141274 au (  0.359086 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.514024    2    -1.097375    3    -0.639228    4    -0.603847
+   5    -0.383996
+ virtual:
+   6     0.246731    7     0.354390    8     0.374056    9     0.807343
+  10     0.825316   11     0.912073   12     1.023224   13     1.037796
+  14     1.211459   15     1.323222   16     1.337185   17     1.362466
+  18     1.768590   19     1.926042   20     2.123271   21     2.134899
+  22     2.219917   23     2.288841   24     2.357792   25     2.851253
+  26     2.923117   27     3.745457   28     4.005164   29     4.038764
+
+
+eng>$Energy
+eng> E=-5.6387206142810e+01
+eng> D= 4.46513911e-05  1.38597848e-01  2.73678970e-02
+eng> G=-2.63204009e-05  7.78960390e-03 -7.31363230e-02
+eng>    2.26537945e-05  1.12272391e-03  7.27324031e-02
+eng>   -3.24482839e-04 -4.45493192e-03  2.10575812e-04
+eng>    3.28149445e-04 -4.45739589e-03  1.93344130e-04
+eng>$end
+
+ G(max) = 0.07354999  |G| = 0.10363818
+
+
+ Geometry Optimization Step 2:
+ Energy:           -56.38720614
+ Energy change:     -0.00095324 (actual)
+                    -0.00000001 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.007266, |dG - HdX| = 0.09844958
+ include g
+ max. gradient     = 0.0007473 (internal), 0.0013240 (cartesian)
+ trust test =-1.0734300, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000256
+ max. displacement = 0.0052660 (internal), 0.0040344 (cartesian)
+ iter   0: rmax = 0.0052659557, xmax = 0.0040343782
+ iter   1: rmax = 0.0000109331, xmax = 0.0000088044
+ iter   2: rmax = 0.0000062005, xmax = 0.0000000000
+ max. displacement = 0.0052660 (internal), 0.0040310 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00078343  -0.05838192  -0.03032352
+mol>   1    -0.00126844   0.01787728   1.06702798
+mol>   1     0.86810346   0.02021685  -0.51928943
+mol>   1    -0.86761845   0.02028778  -0.51741504
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00078343  -0.05838192  -0.03032352
+   1    -0.00126844   0.01787728   1.06702798
+   1     0.86810346   0.02021685  -0.51928943
+   1    -0.86761845   0.02028778  -0.51741504
+ #
+
+ time: Geometry Optimization            :     0.0  95.9%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  93.0%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.4%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  94.0%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1908438241   0.0000000000   0.00033299   0.00020984      0.0
+   1    -56.1908448989  -0.0000010747   0.00008304   0.00008600      0.0
+   2    -56.1908450345  -0.0000001356   0.00003393   0.00002552      0.0
+   3    -56.1908450421  -0.0000000076   0.00000663   0.00001373      0.0
+   4    -56.1908450433  -0.0000000012   0.00000272   0.00000501      0.0
+   5    -56.1908450434  -0.0000000001   0.00000128   0.00000359      0.0
+   6    -56.1908450434  -0.0000000000   0.00000027   0.00000086      0.0
+ converged!
+   7    -56.1908450434  -0.0000000000   0.00000017   0.00000024      0.0
+ time: Coulomb Matrix                   :     0.0  99.5%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0 100.0%     0.0
+ time: Exchange Matrix                  :     0.0 100.0%     0.0
+ time: SCF Equations                    :     0.0  99.8%     0.0
+ Total   Energy =    -56.19084504
+ Kinetic Energy =     56.04455220
+ Dipole  Moment = { -0.00092,  0.14538,  0.02662} (  0.14780)
+ Quadrupole Moment = {  -4.19617;
+                        -0.00008,  -6.96052;
+                        -0.00599,  -0.01531,  -4.07201}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.6%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  70.2%     0.0
+ time: RI-MP2 Energy                    :     0.0  72.5%     0.0
+ E2aa =     -0.02338571
+ E2ab =     -0.14959492
+ E2   =     -0.19636634
+ E    =    -56.38721138
+ time: Transformation (m|vo) -> (m|no)  :     0.0  73.6%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  79.1%     0.0
+ time: Coulomb  Matrix                  :     0.0  79.1%     0.0
+ time: Exchange Matrix                  :     0.0  93.4%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009505161, time =     0.0
+ subspace  2: g = 0.000909878, time =     0.0
+ subspace  3: g = 0.000167791, time =     0.0
+ subspace  4: g = 0.000023667, time =     0.0
+ subspace  5: g = 0.000006097, time =     0.0
+ subspace  6: g = 0.000001182, time =     0.0
+ time: CPHF Equations                   :     0.0  99.8%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.6%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  70.2%     0.0
+ time: RI-MP2 Energy                    :     0.0  72.5%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  85.7%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  88.5%     0.0
+ time: Coulomb  Matrix                  :     0.0  97.0%     0.0
+ time: Exchange Matrix                  :     0.0  98.6%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.0%     0.0
+ Kinetic Energy =     56.34062381
+ Dipole  Moment = { -0.00083,  0.13906,  0.02647} (  0.14156)
+ Quadrupole Moment = {  -4.30395;
+                        -0.00006,  -6.92464;
+                        -0.00554,  -0.01403,  -4.17891}
+ occupation numbers:
+ nc=   1: sum=  2.00000061
+   1  2.00000061
+ no=   4: sum=  7.88907904
+   2  1.98315166    3  1.97027609    4  1.96895161    5  1.96669969
+ nv=  24: sum=  0.11092035
+   6  0.02052631    7  0.01764736    8  0.01642389    9  0.01543990   10  0.00709606
+  11  0.00693664   12  0.00614892   13  0.00602119   14  0.00568680   15  0.00137563
+  16  0.00099154   17  0.00095856   18  0.00090126   19  0.00081892   20  0.00076130
+  21  0.00072565   22  0.00067965   23  0.00051266   24  0.00044225   25  0.00031031
+  26  0.00029712   27  0.00008560   28  0.00006705   29  0.00006578
+ time: One-Electron Gradient            :     0.0  78.4%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.1%     0.1
+
+  E  =     -56.3872113811
+  T  =      56.34062381  V  =    -155.30166523  J  =      39.04381388
+  Ex =      -7.65310018  Ec =      -0.19636634
+
+  dipole =   0.141556 au (  0.359802 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.514154    2    -1.097126    3    -0.638424    4    -0.604178
+   5    -0.383960
+ virtual:
+   6     0.246535    7     0.354359    8     0.373916    9     0.807524
+  10     0.825227   11     0.911926   12     1.022691   13     1.038210
+  14     1.210983   15     1.322389   16     1.336224   17     1.363343
+  18     1.768253   19     1.925362   20     2.123316   21     2.134437
+  22     2.217856   23     2.287005   24     2.358824   25     2.852818
+  26     2.920938   27     3.746647   28     3.998630   29     4.040785
+
+
+eng>$Energy
+eng> E=-5.6387211381096e+01
+eng> D=-8.28867913e-04  1.39057395e-01  2.64655461e-02
+eng> G= 5.13225798e-04  7.72115000e-03 -7.20121867e-02
+eng>   -4.18250641e-04  1.08572851e-03  7.28149334e-02
+eng>    1.26726714e-05 -4.42758626e-03 -5.53329709e-04
+eng>   -1.07647828e-04 -4.37929226e-03 -2.49416998e-04
+eng>$end
+
+ G(max) = 0.07282423  |G| = 0.10289881
+
+
+ Geometry Optimization Step 3:
+ Energy:           -56.38721138
+ Energy change:     -0.00000524 (actual)
+                    -0.00000420 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.007266, |dG - HdX| = 0.00006065
+ Hessian update: |dG| = 0.001131, |dG - HdX| = 0.00036964
+ include g
+ max. gradient     = 0.0002444 (internal), 0.0004016 (cartesian)
+ trust test =-0.2092234, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000254
+ max. displacement = 0.0020958 (internal), 0.0013907 (cartesian)
+ iter   0: rmax = 0.0020958096, xmax = 0.0013906516
+ iter   1: rmax = 0.0000012871, xmax = 0.0000010881
+ iter   2: rmax = 0.0000009948, xmax = 0.0000000000
+ max. displacement = 0.0020958 (internal), 0.0013904 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00126818  -0.05846110  -0.03011883
+mol>   1    -0.00200422   0.01789121   1.06722324
+mol>   1     0.86817264   0.02022856  -0.52002498
+mol>   1    -0.86743660   0.02034133  -0.51707942
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00126818  -0.05846110  -0.03011883
+   1    -0.00200422   0.01789121   1.06722324
+   1     0.86817264   0.02022856  -0.52002498
+   1    -0.86743660   0.02034133  -0.51707942
+ #
+
+ time: Geometry Optimization            :     0.0  96.3%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.6%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  93.7%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1908396486   0.0000000000   0.00010305   0.00006052      0.0
+   1    -56.1908397713  -0.0000001227   0.00002783   0.00002942      0.0
+   2    -56.1908397861  -0.0000000148   0.00000781   0.00000637      0.0
+   3    -56.1908397868  -0.0000000007   0.00000220   0.00000462      0.0
+   4    -56.1908397870  -0.0000000001   0.00000088   0.00000159      0.0
+ converged!
+   5    -56.1908397870  -0.0000000000   0.00000048   0.00000155      0.0
+ time: Coulomb Matrix                   :     0.0  86.2%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  81.9%     0.0
+ time: Exchange Matrix                  :     0.0  91.0%     0.0
+ time: SCF Equations                    :     0.0  87.9%     0.0
+ Total   Energy =    -56.19083979
+ Kinetic Energy =     56.04395482
+ Dipole  Moment = { -0.00148,  0.14556,  0.02645} (  0.14795)
+ Quadrupole Moment = {  -4.19724;
+                        -0.00012,  -6.96084;
+                        -0.00948,  -0.01534,  -4.07077}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  98.6%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.7%     0.0
+ time: RI-MP2 Energy                    :     0.0 100.0%     0.0
+ E2aa =     -0.02338603
+ E2ab =     -0.14960007
+ E2   =     -0.19637214
+ E    =    -56.38721193
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.0%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  98.9%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.6%     0.0
+ time: Exchange Matrix                  :     0.0  99.7%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009505760, time =     0.0
+ subspace  2: g = 0.000909385, time =     0.0
+ subspace  3: g = 0.000167596, time =     0.0
+ subspace  4: g = 0.000023634, time =     0.0
+ subspace  5: g = 0.000006093, time =     0.0
+ subspace  6: g = 0.000001183, time =     0.0
+ time: CPHF Equations                   :     0.0  88.3%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  90.6%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.7%     0.0
+ time: RI-MP2 Energy                    :     0.0 100.0%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.6%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.5%     0.0
+ time: Coulomb  Matrix                  :     0.0  94.1%     0.0
+ time: Exchange Matrix                  :     0.0  91.1%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.5%     0.0
+ Kinetic Energy =     56.34006309
+ Dipole  Moment = { -0.00134,  0.13923,  0.02630} (  0.14170)
+ Quadrupole Moment = {  -4.30495;
+                        -0.00009,  -6.92495;
+                        -0.00877,  -0.01406,  -4.17778}
+ occupation numbers:
+ nc=   1: sum=  2.00000061
+   1  2.00000061
+ no=   4: sum=  7.88906680
+   2  1.98314892    3  1.97027432    4  1.96894443    5  1.96669913
+ nv=  24: sum=  0.11093259
+   6  0.02052524    7  0.01765526    8  0.01642790    9  0.01544104   10  0.00709655
+  11  0.00693599   12  0.00614819   13  0.00602160   14  0.00568663   15  0.00137577
+  16  0.00099189   17  0.00095814   18  0.00090144   19  0.00081891   20  0.00076162
+  21  0.00072557   22  0.00067984   23  0.00051276   24  0.00044222   25  0.00031032
+  26  0.00029723   27  0.00008559   28  0.00006708   29  0.00006582
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.2%     0.1
+
+  E  =     -56.3872119266
+  T  =      56.34006309  V  =    -155.29880180  J  =      39.04266425
+  Ex =      -7.65295041  Ec =      -0.19637214
+
+  dipole =   0.141700 au (  0.360168 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.514185    2    -1.097072    3    -0.638275    4    -0.604223
+   5    -0.383955
+ virtual:
+   6     0.246493    7     0.354349    8     0.373881    9     0.807555
+  10     0.825212   11     0.911899   12     1.022582   13     1.038285
+  14     1.210877   15     1.322155   16     1.336126   17     1.363481
+  18     1.768156   19     1.925229   20     2.123309   21     2.134350
+  22     2.217424   23     2.286611   24     2.358911   25     2.853100
+  26     2.920574   27     3.746801   28     3.997424   29     4.041107
+
+
+eng>$Energy
+eng> E=-5.6387211926567e+01
+eng> D=-1.33889974e-03  1.39230904e-01  2.63023469e-02
+eng> G= 8.89338791e-04  7.70919285e-03 -7.17859607e-02
+eng>   -6.65445770e-04  1.08016190e-03  7.28263181e-02
+eng>    4.53562768e-05 -4.43662756e-03 -7.41392686e-04
+eng>   -2.69249298e-04 -4.35272720e-03 -2.98964635e-04
+eng>$end
+
+ G(max) = 0.07283737  |G| = 0.10275248
+
+
+ Geometry Optimization Step 4:
+ Energy:           -56.38721193
+ Energy change:     -0.00000055 (actual)
+                    -0.00000047 (predicted)
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.001131, |dG - HdX| = 0.00000187
+ Hessian update: |dG| = 0.000331, |dG - HdX| = 0.00012558
+ include g
+ max. gradient     = 0.0000879 (internal), 0.0001121 (cartesian)
+ trust test =-0.1580975, trust radius = 0.0156250
+ Lagrangian multiplier =   0.000255
+ max. displacement = 0.0006896 (internal), 0.0004539 (cartesian)
+ iter   0: rmax = 0.0006895928, xmax = 0.0004539058
+ iter   1: rmax = 0.0000001360, xmax = 0.0000001144
+ iter   2: rmax = 0.0000000260, xmax = 0.0000000000
+ max. displacement = 0.0006896 (internal), 0.0004539 (cartesian)
+ OPTIMIZATION CONVERGED in 3 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   7     0.00126818  -0.05846110  -0.03011883
+MOL>   1    -0.00200422   0.01789121   1.06722324
+MOL>   1     0.86817264   0.02022856  -0.52002498
+MOL>   1    -0.86743660   0.02034133  -0.51707942
+MOL>$end
+MOL> Energy =    -56.3872119266
+
+ Atomic Coordinates:
+   7     0.00126818  -0.05846110  -0.03011883
+   1    -0.00200422   0.01789121   1.06722324
+   1     0.86817264   0.02022856  -0.52002498
+   1    -0.86743660   0.02034133  -0.51707942
+ #
+
+ time: Geometry Optimization            :     0.0  96.6%     0.0
+
+ Geometry Optimization Step 0:
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ time: Geometry Optimization            :     0.0  96.6%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.7%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.6%     0.0
+ time: integral estimates               :     0.0  87.0%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  94.4%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1908397870   0.0000000000   0.00000042   0.00000056      0.0
+ converged!
+   1    -56.1908397870  -0.0000000000   0.00000030   0.00000113      0.0
+ time: Coulomb Matrix                   :     0.0  99.6%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.4%     0.0
+ time: Exchange Matrix                  :     0.0 100.0%     0.0
+ time: SCF Equations                    :     0.0  99.8%     0.0
+ Total   Energy =    -56.19083979
+ Kinetic Energy =     56.04395504
+ Dipole  Moment = { -0.00148,  0.14556,  0.02645} (  0.14795)
+ Quadrupole Moment = {  -4.19724;
+                        -0.00012,  -6.96084;
+                        -0.00948,  -0.01534,  -4.07077}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.8%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.3%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.1%     0.0
+ E2aa =     -0.02338603
+ E2ab =     -0.14960007
+ E2   =     -0.19637214
+ E    =    -56.38721193
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.8%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.7%     0.0
+ time: Coulomb  Matrix                  :     0.0  67.6%     0.0
+ time: Exchange Matrix                  :     0.0  80.6%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009505761, time =     0.0
+ subspace  2: g = 0.000909385, time =     0.0
+ subspace  3: g = 0.000167596, time =     0.0
+ subspace  4: g = 0.000023634, time =     0.0
+ subspace  5: g = 0.000006093, time =     0.0
+ subspace  6: g = 0.000001183, time =     0.0
+ time: CPHF Equations                   :     0.0  94.3%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  95.7%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.3%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.1%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  81.2%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.9%     0.0
+ time: Coulomb  Matrix                  :     0.0  88.4%     0.0
+ time: Exchange Matrix                  :     0.0  93.9%     0.0
+ time: RI-MP2 Calculation               :     0.0  92.9%     0.0
+ Kinetic Energy =     56.34006331
+ Dipole  Moment = { -0.00134,  0.13923,  0.02630} (  0.14170)
+ Quadrupole Moment = {  -4.30495;
+                        -0.00009,  -6.92495;
+                        -0.00877,  -0.01406,  -4.17778}
+ occupation numbers:
+ nc=   1: sum=  2.00000061
+   1  2.00000061
+ no=   4: sum=  7.88906680
+   2  1.98314892    3  1.97027432    4  1.96894443    5  1.96669913
+ nv=  24: sum=  0.11093259
+   6  0.02052524    7  0.01765526    8  0.01642790    9  0.01544103   10  0.00709655
+  11  0.00693599   12  0.00614819   13  0.00602160   14  0.00568663   15  0.00137577
+  16  0.00099189   17  0.00095814   18  0.00090144   19  0.00081891   20  0.00076162
+  21  0.00072557   22  0.00067984   23  0.00051276   24  0.00044222   25  0.00031032
+  26  0.00029723   27  0.00008559   28  0.00006708   29  0.00006582
+ time: One-Electron Gradient            :     0.0  88.2%     0.0
+ time: Coulomb-type Gradient            :     0.1  93.7%     0.1
+
+  E  =     -56.3872119263
+  T  =      56.34006331  V  =    -155.29880219  J  =      39.04266444
+  Ex =      -7.65295043  Ec =      -0.19637214
+
+  dipole =   0.141699 au (  0.360166 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.514185    2    -1.097072    3    -0.638275    4    -0.604223
+   5    -0.383954
+ virtual:
+   6     0.246493    7     0.354349    8     0.373881    9     0.807555
+  10     0.825212   11     0.911899   12     1.022582   13     1.038285
+  14     1.210877   15     1.322155   16     1.336126   17     1.363481
+  18     1.768156   19     1.925229   20     2.123309   21     2.134350
+  22     2.217424   23     2.286611   24     2.358911   25     2.853100
+  26     2.920574   27     3.746801   28     3.997424   29     4.041107
+
+
+eng>$Energy
+eng> E=-5.6387211926321e+01
+eng> D=-1.34001324e-03  1.39230384e-01  2.63016947e-02
+eng> G= 8.89421821e-04  7.70938359e-03 -7.17859350e-02
+eng>   -6.65439408e-04  1.08006742e-03  7.28262873e-02
+eng>    4.53053846e-05 -4.43668587e-03 -7.41360459e-04
+eng>   -2.69287798e-04 -4.35276514e-03 -2.98991849e-04
+eng>$end
+
+ G(max) = 0.07283734  |G| = 0.10275246
+
+
+ Geometry Optimization Step 1:
+ Energy:           -56.38721193
+    12 cartesian,   11 internal coordinates
+     6 independent variables
+ include g
+ max. gradient     = 0.0000880 (internal), 0.0001120 (cartesian)
+ Lagrangian multiplier =   0.000293
+ max. displacement = 0.2617994 (internal), 0.1115946 (cartesian)
+ iter   0: rmax = 0.2617993914, xmax = 0.1000000000
+ iter   1: rmax = 0.0343786650, xmax = 0.0139189720
+ iter   2: rmax = 0.0108629362, xmax = 0.0001258797
+ iter   3: rmax = 0.0109729361, xmax = 0.0000000604
+ iter   4: rmax = 0.0109730099, xmax = 0.0000000001
+ max. displacement = 0.2617994 (internal), 0.1139170 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7    -0.00238843  -0.11874340  -0.03011145
+mol>   1     0.00039117   0.03647127   1.05887922
+mol>   1     0.86559729   0.04129915  -0.51470308
+mol>   1    -0.86360004   0.04097298  -0.51406470
+mol>$end
+
+ Atomic Coordinates:
+   7    -0.00238843  -0.11874340  -0.03011145
+   1     0.00039117   0.03647127   1.05887922
+   1     0.86559729   0.04129915  -0.51470308
+   1    -0.86360004   0.04097298  -0.51406470
+ #
+
+ time: Geometry Optimization            :     0.0  93.7%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  87.6%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: integral estimates               :     0.0  99.5%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  91.3%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1912375674   0.0000000000   0.01931322   0.01318538      0.0
+   1    -56.1929555156  -0.0017179481   0.00780869   0.00903417      0.0
+   2    -56.1933144294  -0.0003589138   0.00242415   0.00457207      0.0
+   3    -56.1933562953  -0.0000418659   0.00111173   0.00311191      0.0
+   4    -56.1933670249  -0.0000107295   0.00026836   0.00026495      0.0
+   5    -56.1933674313  -0.0000004065   0.00006442   0.00008517      0.0
+   6    -56.1933674849  -0.0000000536   0.00002758   0.00004661      0.0
+   7    -56.1933674919  -0.0000000070   0.00001201   0.00002771      0.0
+   8    -56.1933674934  -0.0000000015   0.00000400   0.00000682      0.0
+   9    -56.1933674935  -0.0000000002   0.00000143   0.00000105      0.0
+  10    -56.1933674935  -0.0000000000   0.00000035   0.00000027      0.0
+ converged!
+  11    -56.1933674935  -0.0000000000   0.00000010   0.00000010      0.0
+ time: Coulomb Matrix                   :     0.0  94.0%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  98.0%     0.0
+ time: Exchange Matrix                  :     0.0  99.6%     0.0
+ time: SCF Equations                    :     0.0  96.8%     0.0
+ Total   Energy =    -56.19336749
+ Kinetic Energy =     56.03856858
+ Dipole  Moment = {  0.00245,  0.29013,  0.02387} (  0.29112)
+ Quadrupole Moment = {  -4.24493;
+                        -0.00076,  -6.98225;
+                         0.00274,  -0.02876,  -4.14304}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  68.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  67.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  69.3%     0.0
+ E2aa =     -0.02335885
+ E2ab =     -0.14987715
+ E2   =     -0.19659484
+ E    =    -56.38996233
+ time: Transformation (m|vo) -> (m|no)  :     0.0  77.9%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.7%     0.0
+ time: Coulomb  Matrix                  :     0.0  98.9%     0.0
+ time: Exchange Matrix                  :     0.0  99.3%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009574072, time =     0.0
+ subspace  2: g = 0.000928703, time =     0.0
+ subspace  3: g = 0.000181518, time =     0.0
+ subspace  4: g = 0.000025718, time =     0.0
+ subspace  5: g = 0.000007155, time =     0.0
+ subspace  6: g = 0.000001486, time =     0.0
+ time: CPHF Equations                   :     0.0  99.8%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  92.5%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  67.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  69.3%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  91.6%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  84.7%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.8%     0.0
+ time: Exchange Matrix                  :     0.0  99.5%     0.0
+ time: RI-MP2 Calculation               :     0.0  92.2%     0.0
+ Kinetic Energy =     56.33503508
+ Dipole  Moment = {  0.00227,  0.27679,  0.02402} (  0.27784)
+ Quadrupole Moment = {  -4.35174;
+                        -0.00071,  -6.94754;
+                         0.00230,  -0.02638,  -4.24712}
+ occupation numbers:
+ nc=   1: sum=  2.00000095
+   1  2.00000095
+ no=   4: sum=  7.88836128
+   2  1.98315984    3  1.97007690    4  1.96866268    5  1.96646186
+ nv=  24: sum=  0.11163777
+   6  0.02081176    7  0.01808697    8  0.01680985    9  0.01491618   10  0.00716158
+  11  0.00699040   12  0.00609885   13  0.00600115   14  0.00565651   15  0.00138620
+  16  0.00098551   17  0.00095395   18  0.00089884   19  0.00086999   20  0.00081172
+  21  0.00070424   22  0.00065900   23  0.00054878   24  0.00041250   25  0.00032976
+  26  0.00031612   27  0.00008800   28  0.00007156   29  0.00006834
+ time: One-Electron Gradient            :     0.0  83.4%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.1%     0.1
+
+  E  =     -56.3899623335
+  T  =      56.33503508  V  =    -155.22393443  J  =      38.99805322
+  Ex =      -7.64962850  Ec =      -0.19659484
+
+  dipole =   0.277840 au (  0.706204 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.517969    2    -1.099258    3    -0.635266    4    -0.602603
+   5    -0.389161
+ virtual:
+   6     0.245790    7     0.352634    8     0.371944    9     0.808696
+  10     0.825865   11     0.912286   12     1.018880   13     1.032302
+  14     1.194653   15     1.330850   16     1.343740   17     1.368306
+  18     1.712420   19     1.932143   20     2.117145   21     2.163236
+  22     2.203277   23     2.222360   24     2.250829   25     2.953238
+  26     2.975907   27     3.707009   28     3.989500   29     4.056267
+
+
+eng>$Energy
+eng> E=-5.6389962333493e+01
+eng> D= 2.26991897e-03  2.76790396e-01  2.40175409e-02
+eng> G=-5.57560641e-03  1.21213098e-02 -6.67113461e-02
+eng>    4.56621412e-04  2.83873428e-03  7.06027557e-02
+eng>    5.66401605e-03 -6.94041974e-03 -3.19875668e-03
+eng>   -5.45031047e-04 -8.01962430e-03 -6.92652967e-04
+eng>$end
+
+ G(max) = 0.07066128  |G| = 0.09887875
+
+
+ Geometry Optimization Step 2:
+ Energy:           -56.38996233
+ Energy change:     -0.00275041 (actual)
+                    -0.00000005 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.009030, |dG - HdX| = 0.00229435
+ include g
+ max. gradient     = 0.0053189 (internal), 0.0081522 (cartesian)
+ trust test =-0.0483956, trust radius = 0.0156250
+ Lagrangian multiplier =   0.159958
+ max. displacement = 0.0156212 (internal), 0.0084955 (cartesian)
+ iter   0: rmax = 0.0156212382, xmax = 0.0084954900
+ iter   1: rmax = 0.0000999972, xmax = 0.0000801936
+ iter   2: rmax = 0.0001123583, xmax = 0.0000000009
+ iter   3: rmax = 0.0001123572, xmax = 0.0000000000
+ max. displacement = 0.0156212 (internal), 0.0084650 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00208627  -0.11982561  -0.02871094
+mol>   1    -0.00408829   0.03665774   1.06008419
+mol>   1     0.86201467   0.04134265  -0.51882368
+mol>   1    -0.86001265   0.04182522  -0.51254958
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00208627  -0.11982561  -0.02871094
+   1    -0.00408829   0.03665774   1.06008419
+   1     0.86201467   0.04134265  -0.51882368
+   1    -0.86001265   0.04182522  -0.51254958
+ #
+
+ time: Geometry Optimization            :     0.0  91.1%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  79.9%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.4%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  93.8%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1934920444   0.0000000000   0.00105079   0.00065454      0.0
+   1    -56.1935036639  -0.0000116195   0.00027671   0.00032843      0.0
+   2    -56.1935051022  -0.0000014383   0.00006397   0.00008354      0.0
+   3    -56.1935051759  -0.0000000737   0.00002345   0.00004718      0.0
+   4    -56.1935051882  -0.0000000123   0.00000915   0.00001712      0.0
+   5    -56.1935051893  -0.0000000011   0.00000413   0.00001241      0.0
+   6    -56.1935051896  -0.0000000003   0.00000116   0.00000216      0.0
+   7    -56.1935051896  -0.0000000000   0.00000067   0.00000061      0.0
+ converged!
+   8    -56.1935051897  -0.0000000000   0.00000013   0.00000014      0.0
+ time: Coulomb Matrix                   :     0.0  99.4%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.6%     0.0
+ time: Exchange Matrix                  :     0.0 100.0%     0.0
+ time: SCF Equations                    :     0.0  99.4%     0.0
+ Total   Energy =    -56.19350519
+ Kinetic Energy =     56.04455542
+ Dipole  Moment = { -0.00252,  0.29293,  0.02262} (  0.29381)
+ Quadrupole Moment = {  -4.26219;
+                        -0.00083,  -6.97957;
+                        -0.01885,  -0.02978,  -4.12905}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.8%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.7%     0.0
+ time: RI-MP2 Energy                    :     0.0  79.5%     0.0
+ E2aa =     -0.02335511
+ E2ab =     -0.14982885
+ E2   =     -0.19653907
+ E    =    -56.39004425
+ time: Transformation (m|vo) -> (m|no)  :     0.0  84.1%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  81.6%     0.0
+ time: Coulomb  Matrix                  :     0.0  80.8%     0.0
+ time: Exchange Matrix                  :     0.0  83.3%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009558318, time =     0.0
+ subspace  2: g = 0.000925488, time =     0.0
+ subspace  3: g = 0.000180009, time =     0.0
+ subspace  4: g = 0.000025768, time =     0.0
+ subspace  5: g = 0.000007272, time =     0.0
+ subspace  6: g = 0.000001533, time =     0.0
+ time: CPHF Equations                   :     0.0  99.1%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0 100.0%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  99.7%     0.0
+ time: RI-MP2 Energy                    :     0.0  79.5%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  88.7%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  89.6%     0.0
+ time: Coulomb  Matrix                  :     0.0  95.8%     0.0
+ time: Exchange Matrix                  :     0.0  96.2%     0.0
+ time: RI-MP2 Calculation               :     0.0  94.2%     0.0
+ Kinetic Energy =     56.34063309
+ Dipole  Moment = { -0.00225,  0.27947,  0.02291} (  0.28042)
+ Quadrupole Moment = {  -4.36780;
+                        -0.00069,  -6.94499;
+                        -0.01750,  -0.02725,  -4.23406}
+ occupation numbers:
+ nc=   1: sum=  2.00000095
+   1  2.00000095
+ no=   4: sum=  7.88847280
+   2  1.98318714    3  1.97009005    4  1.96869567    5  1.96649995
+ nv=  24: sum=  0.11152625
+   6  0.02078720    7  0.01806794    8  0.01676949    9  0.01488269   10  0.00717430
+  11  0.00698524   12  0.00609487   13  0.00600852   14  0.00565961   15  0.00138425
+  16  0.00098741   17  0.00094734   18  0.00090027   19  0.00086923   20  0.00081290
+  21  0.00070267   22  0.00065857   23  0.00054855   24  0.00041140   25  0.00032958
+  26  0.00031673   27  0.00008799   28  0.00007122   29  0.00006829
+ time: One-Electron Gradient            :     0.0  78.5%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.9%     0.1
+
+  E  =     -56.3900442550
+  T  =      56.34063309  V  =    -155.25200659  J  =      39.00920825
+  Ex =      -7.65112145  Ec =      -0.19653907
+
+  dipole =   0.280418 au (  0.712756 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.517695    2    -1.099923    3    -0.635063    4    -0.603613
+   5    -0.389344
+ virtual:
+   6     0.246023    7     0.352866    8     0.372323    9     0.808795
+  10     0.825843   11     0.912633   12     1.017690   13     1.033845
+  14     1.194862   15     1.329618   16     1.343762   17     1.372584
+  18     1.711295   19     1.932564   20     2.120796   21     2.159633
+  22     2.202694   23     2.223111   24     2.255288   25     2.960070
+  26     2.976669   27     3.708599   28     3.983952   29     4.066053
+
+
+eng>$Energy
+eng> E=-5.6390044254994e+01
+eng> D=-2.25089844e-03  2.79471052e-01  2.29132233e-02
+eng> G= 5.68562359e-04  1.25426022e-02 -6.71275630e-02
+eng>   -1.27652106e-03  2.77858746e-03  7.07375002e-02
+eng>    1.77156975e-03 -7.71032270e-03 -2.56607659e-03
+eng>   -1.06361104e-03 -7.61086699e-03 -1.04386053e-03
+eng>$end
+
+ G(max) = 0.07080356  |G| = 0.09902632
+
+
+ Geometry Optimization Step 3:
+ Energy:           -56.39004425
+ Energy change:     -0.00008192 (actual)
+                    -0.00008095 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.009030, |dG - HdX| = 0.00021684
+ Hessian update: |dG| = 0.004335, |dG - HdX| = 0.00063979
+ include g
+ max. gradient     = 0.0015341 (internal), 0.0026939 (cartesian)
+ trust test =-0.0558543, trust radius = 0.0220971
+ Lagrangian multiplier =   0.000173
+ max. displacement = 0.0129880 (internal), 0.0086747 (cartesian)
+ iter   0: rmax = 0.0129879799, xmax = 0.0086746594
+ iter   1: rmax = 0.0000674010, xmax = 0.0000550697
+ iter   2: rmax = 0.0000816720, xmax = 0.0000000003
+ iter   3: rmax = 0.0000816715, xmax = 0.0000000000
+ max. displacement = 0.0129880 (internal), 0.0086599 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   7     0.00548039  -0.12075972  -0.02778120
+mol>   1    -0.00867090   0.03684880   1.06077715
+mol>   1     0.86041611   0.04141091  -0.52285914
+mol>   1    -0.85722561   0.04250001  -0.51013682
+mol>$end
+
+ Atomic Coordinates:
+   7     0.00548039  -0.12075972  -0.02778120
+   1    -0.00867090   0.03684880   1.06077715
+   1     0.86041611   0.04141091  -0.52285914
+   1    -0.85722561   0.04250001  -0.51013682
+ #
+
+ time: Geometry Optimization            :     0.0  91.7%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  83.9%     0.0
+ s=1.3e-02
+ vmax=3e+02
+ time: Inversion of V-Matrix            :     0.0  99.2%     0.0
+ time: integral estimates               :     0.0  99.8%     0.0
+        5175 blocks,        46255 integrals total
+ sparsity=1.0
+ time: Coulomb-type Integrals           :     0.0  93.1%     0.0
+
+ it.       energy       energy change    gradient     change       time
+   0    -56.1935402769   0.0000000000   0.00071791   0.00045936      0.0
+   1    -56.1935460391  -0.0000057622   0.00019900   0.00021640      0.0
+   2    -56.1935467424  -0.0000007034   0.00004579   0.00005227      0.0
+   3    -56.1935467769  -0.0000000344   0.00002072   0.00004605      0.0
+   4    -56.1935467842  -0.0000000073   0.00000698   0.00001383      0.0
+   5    -56.1935467848  -0.0000000007   0.00000293   0.00000923      0.0
+   6    -56.1935467850  -0.0000000002   0.00000078   0.00000115      0.0
+ converged!
+   7    -56.1935467850  -0.0000000000   0.00000039   0.00000050      0.0
+ time: Coulomb Matrix                   :     0.0  91.4%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  89.0%     0.0
+ time: Exchange Matrix                  :     0.0  92.2%     0.0
+ time: SCF Equations                    :     0.0  91.0%     0.0
+ Total   Energy =    -56.19354679
+ Kinetic Energy =     56.04783698
+ Dipole  Moment = { -0.00644,  0.29526,  0.02179} (  0.29614)
+ Quadrupole Moment = {  -4.27320;
+                        -0.00125,  -6.97826;
+                        -0.04036,  -0.03045,  -4.12081}
+ time: Transformation (m|nn) -> (m|no)  :     0.0  99.6%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  98.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.2%     0.0
+ E2aa =     -0.02335365
+ E2ab =     -0.14980737
+ E2   =     -0.19651467
+ E    =    -56.39006146
+ time: Transformation (m|vo) -> (m|no)  :     0.0  99.3%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.0%     0.0
+ time: Coulomb  Matrix                  :     0.0  99.3%     0.0
+ time: Exchange Matrix                  :     0.0  99.1%     0.0
+ CPHF Equations:
+ subspace  1: g = 0.009550375, time =     0.0
+ subspace  2: g = 0.000924312, time =     0.0
+ subspace  3: g = 0.000179520, time =     0.0
+ subspace  4: g = 0.000025890, time =     0.0
+ subspace  5: g = 0.000007382, time =     0.0
+ subspace  6: g = 0.000001569, time =     0.0
+ time: CPHF Equations                   :     0.0  93.2%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  88.4%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  98.8%     0.0
+ time: RI-MP2 Energy                    :     0.0  99.2%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0  94.6%     0.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  99.5%     0.0
+ time: Coulomb  Matrix                  :     0.0  90.9%     0.0
+ time: Exchange Matrix                  :     0.0  94.2%     0.0
+ time: RI-MP2 Calculation               :     0.0  93.3%     0.0
+ Kinetic Energy =     56.34371344
+ Dipole  Moment = { -0.00579,  0.28169,  0.02217} (  0.28262)
+ Quadrupole Moment = {  -4.37806;
+                        -0.00097,  -6.94376;
+                        -0.03735,  -0.02783,  -4.22640}
+ occupation numbers:
+ nc=   1: sum=  2.00000096
+   1  2.00000096
+ no=   4: sum=  7.88852413
+   2  1.98320204    3  1.97009542    4  1.96870951    5  1.96651716
+ nv=  24: sum=  0.11147491
+   6  0.02077827    7  0.01806592    8  0.01674630    9  0.01486054   10  0.00718322
+  11  0.00698173   12  0.00609459   13  0.00601044   14  0.00566104   15  0.00138318
+  16  0.00099057   17  0.00094332   18  0.00089938   19  0.00086902   20  0.00081385
+  21  0.00070172   22  0.00065829   23  0.00054862   24  0.00041071   25  0.00032962
+  26  0.00031721   27  0.00008802   28  0.00007114   29  0.00006822
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.1  94.1%     0.1
+
+  E  =     -56.3900614576
+  T  =      56.34371344  V  =    -155.26700848  J  =      39.01506567
+  Ex =      -7.65191003  Ec =      -0.19651467
+
+  dipole =   0.282623 au (  0.718362 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -15.517569    2    -1.100316    3    -0.635012    4    -0.604049
+   5    -0.389483
+ virtual:
+   6     0.246123    7     0.352952    8     0.372513    9     0.808756
+  10     0.825915   11     0.912932   12     1.016593   13     1.035098
+  14     1.194844   15     1.327195   16     1.345251   17     1.375454
+  18     1.710258   19     1.932676   20     2.122238   21     2.156560
+  22     2.202235   23     2.223783   24     2.258304   25     2.962056
+  26     2.979452   27     3.709251   28     3.979580   29     4.072974
+
+
+eng>$Energy
+eng> E=-5.6390061457567e+01
+eng> D=-5.79444856e-03  2.81692930e-01  2.21669660e-02
+eng> G= 3.83656745e-03  1.27968745e-02 -6.72755651e-02
+eng>   -2.86555105e-03  2.74362113e-03  7.07823682e-02
+eng>   -3.04449661e-05 -8.13805100e-03 -2.72129661e-03
+eng>   -9.40571431e-04 -7.40244463e-03 -7.85506533e-04
+eng>$end
+
+ G(max) = 0.07089346  |G| = 0.09929902
+
+
+ Geometry Optimization Step 4:
+ Energy:           -56.39006146
+ Energy change:     -0.00001720 (actual)
+                    -0.00001716 (predicted)
+    12 cartesian,   10 internal coordinates
+     6 independent variables
+ Hessian update: |dG| = 0.004335, |dG - HdX| = 0.00004119
+ Hessian update: |dG| = 0.002305, |dG - HdX| = 0.00004317
+ include g
+ max. gradient     = 0.0000258 (internal), 0.0000362 (cartesian)
+ trust test =-0.0000216, trust radius = 0.0183679
+ Lagrangian multiplier =   0.000165
+ max. displacement = 0.0002062 (internal), 0.0001315 (cartesian)
+ iter   0: rmax = 0.0002061949, xmax = 0.0001314611
+ iter   1: rmax = 0.0000000170, xmax = 0.0000000094
+ iter   2: rmax = 0.0000000089, xmax = 0.0000000000
+ max. displacement = 0.0002062 (internal), 0.0001315 (cartesian)
+ OPTIMIZATION CONVERGED in 3 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   7     0.00548039  -0.12075972  -0.02778120
+MOL>   1    -0.00867090   0.03684880   1.06077715
+MOL>   1     0.86041611   0.04141091  -0.52285914
+MOL>   1    -0.85722561   0.04250001  -0.51013682
+MOL>$end
+MOL> Energy =    -56.3900614576
+
+ Atomic Coordinates:
+   7     0.00548039  -0.12075972  -0.02778120
+   1    -0.00867090   0.03684880   1.06077715
+   1     0.86041611   0.04141091  -0.52285914
+   1    -0.85722561   0.04250001  -0.51013682
+ #
+
+ time: Geometry Optimization            :     0.0  92.1%     0.0
+
+ Scan Structures:
+SCAN> n= 0, s=0.000000, E=   -56.38625290
+SCAN>$molecule
+SCAN> cartesian
+SCAN> set=L1
+SCAN>   7    -0.00000000   0.00000000  -0.03109746
+SCAN>   1     0.00000000   0.00000000   1.06890254
+SCAN>   1     0.87080021  -0.00000000  -0.51890254
+SCAN>   1    -0.87080021  -0.00000000  -0.51890254
+SCAN>$end
+
+ Atomic Coordinates:
+   7    -0.00000000   0.00000000  -0.03109746
+   1     0.00000000   0.00000000   1.06890254
+   1     0.87080021  -0.00000000  -0.51890254
+   1    -0.87080021  -0.00000000  -0.51890254
+ #
+
+SCAN> n= 1, s=0.500000, E=   -56.38721193
+SCAN>$molecule
+SCAN> cartesian
+SCAN> set=L1
+SCAN>   7     0.00126818  -0.05846110  -0.03011883
+SCAN>   1    -0.00200422   0.01789121   1.06722324
+SCAN>   1     0.86817264   0.02022856  -0.52002498
+SCAN>   1    -0.86743660   0.02034133  -0.51707942
+SCAN>$end
+
+ Atomic Coordinates:
+   7     0.00126818  -0.05846110  -0.03011883
+   1    -0.00200422   0.01789121   1.06722324
+   1     0.86817264   0.02022856  -0.52002498
+   1    -0.86743660   0.02034133  -0.51707942
+ #
+
+SCAN> n= 2, s=1.000000, E=   -56.39006146
+SCAN>$molecule
+SCAN> cartesian
+SCAN> set=L1
+SCAN>   7     0.00548039  -0.12075972  -0.02778120
+SCAN>   1    -0.00867090   0.03684880   1.06077715
+SCAN>   1     0.86041611   0.04141091  -0.52285914
+SCAN>   1    -0.85722561   0.04250001  -0.51013682
+SCAN>$end
+
+ Atomic Coordinates:
+   7     0.00548039  -0.12075972  -0.02778120
+   1    -0.00867090   0.03684880   1.06077715
+   1     0.86041611   0.04141091  -0.52285914
+   1    -0.85722561   0.04250001  -0.51013682
+ #
+
+
+ ===========================================
+       s     |       E(s)     | E(s) - E(0) 
+ -------------------------------------------
+    0.0000000      -56.3862529     0.0000000
+    0.5000000      -56.3872119    -0.0009590
+    1.0000000      -56.3900615    -0.0038086
+ ===========================================
+
+ PLOT
+0--------------------------------------------------------------------------*
+|                                                       *
+*
+
+ ============================================================
+
+ Memory used =     7778 KB
+  Disk  used =    22148 KB,         49009 KB written,       346770 KB read
+
+ CPU  time =    2.38 sec =  0.04 min = 0.00 hr =   93.84%
+ REAL time =    2.53 sec =  0.04 min = 0.00 hr
+ ratio     =   93.84%
+
+ date: Sat Oct 17 13:35:14 2026
+
+ time: Geometry Optimization            :     0.0   0.0% 344998750710781360453042645773472222480660863843619259931769380141446210833645252044237746354729272661977346282103557595719219843000732436518206103674674330959297531278614050839512744236511367781245250496979787418326783620022272.0
+ time: Initial Guess                    :     0.0   0.0% 100363249704241091960007347051512219767519883816844815549033441913972642382405744170290784350499791163731164440969308949392945369909061150645721688324198433265620427030823237861007246809183624122504431792664702619746304.0
+ time: atomic calculations              :     0.0  99.1%     0.0
+ time: One-Electron Integrals           :     0.0  93.6%     0.0
+ time: Coulomb-type Integrals           :     0.3  94.0%     0.3
+ time: Diagonalize                      :     0.0  94.8%     0.0
+ time: Matrix Multiply                  :     0.0  93.7%     0.0
+ time: Inversion of V-Matrix            :     0.0   0.0% 707896986634783764097792834087562382381549651055026890852391337875087494987656032676331483424939538382633366481557086095406942359789060917735791845637121235220624000701745554903327938310725173248.0
+ time: integral estimates               :     0.0   0.0% 2832204130262763029867961263600132581772671935051999444205568.0
+ time: Coulomb Matrix                   :     0.0  94.6%     0.0
+ time: Transformation (m|nn) -> (m|no)  :     0.0  94.5%     0.0
+ time: Transformation (m|no) -> (m|oo)  :     0.0   0.0%     0.0
+ time: Exchange Matrix                  :     0.0  93.8%     0.0
+ time: SCF Equations                    :     0.1  82.7%     0.1
+ time: Orthogonalize                    :     0.0  94.5%     0.0
+ time: Diagonalization                  :     0.0  96.6%     0.0
+ time: Rotate                           :     0.0   0.0% 2828311202546423571565478735843926863872903602436124190965760.0
+ time: RI-MP2 Calculation               :     0.1  93.3%     0.1
+ time: CPHF Equations                   :     0.0  95.1%     0.0
+ time: Transformation (m|no) -> (m|vo)  :     0.0  90.6%     0.0
+ time: RI-MP2 Energy                    :     0.0  90.8%     0.0
+ time: Transformation (m|vo) -> (m|no)  :     0.0   0.0% 2833381086835746688268202696617103453082092351130872479481856.0
+ time: Transformation (m|no) -> (m|nn)  :     0.0  94.8%     0.0
+ time: Coulomb  Matrix                  :     0.0  93.8%     0.0
+ time: One-Electron Gradient            :     0.0  91.1%     0.0
+ time: Coulomb-type Gradient            :     1.2  94.4%     1.2

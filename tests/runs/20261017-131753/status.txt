@@ -1,2 +1,0 @@
-t64a exit=0
-t64b exit=0

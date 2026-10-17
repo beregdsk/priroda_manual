@@ -1,8 +1,9 @@
 $system mem=256 disk=1 $end
 $control
- task=energy
- theory=dft
+ task=hessian
+ theory=tddft
  basis=/home/egor/Programs/Priroda/basis.in
+ state=1,3
 $end
 $molecule
  charge=0 mult=1

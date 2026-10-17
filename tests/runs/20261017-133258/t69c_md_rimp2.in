@@ -1,8 +1,15 @@
 $system mem=256 disk=1 $end
 $control
- task=energy
- theory=dft
+ task=thermostat
+ theory=rimp2
  basis=/home/egor/Programs/Priroda/basis.in
+$end
+$dynamic
+ e=0.001
+ d=0.03
+ n=20,5
+ m=10
+ i=1
 $end
 $molecule
  charge=0 mult=1
