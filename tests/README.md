@@ -192,8 +192,8 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in QMBASIS=/abs/path/to/qm.in ./run.
 | t68a–e | `t68{a..e}_scan_{…}.in` | `task=scan` (the t37 scan, `points=3`) with each theory | One converged constrained optimization per point; `SCAN>` summary | matrix (`scan` row) || |
 | t69a–f | `t69{a..f}_md_{dft,ridft,rimp2,ccsd,tddft,qm_n3}.in` | `task=thermostat` (MD, `$dynamic n=20,5`) with each theory. t69f (`qm_n3`) is the control: the official examples show MD with the QM model, so if t69f fails, the `$dynamic` settings are at fault, not the theory | Trajectory steps with energies; exit status; run time | matrix (MD row); `$dynamic` meanings || |
 
-To check the Molden recipes by eye, open `freq>` and `mos>` files cut from a Hessian and a `print=+vectors+molden` run
-(for example round 3 t45) in Molden.
+The Molden recipes were checked by hand: `freq>` and `mos>` files cut with the Getting started recipes open correctly
+in Molden.
 
 ## Still not covered
 

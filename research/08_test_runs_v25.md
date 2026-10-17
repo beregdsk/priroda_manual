@@ -145,6 +145,12 @@ water, `L1` basis. `tddft` inputs use `state=1,3`.
 | t68d | `task=scan` with `tddft`: the TDDFT iterations diverge (`iter=101…104: g= -nan`), then `0: write td.XK(100800:101760)?`, stderr `MPI_Abort`, exit 1. |
 | t69a–f | `task=thermostat` with `$dynamic e=0.001 d=0.03 n=20,5 m=10 i=1` and `dft`, `ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`: all run 26 points (`point -5` … `point 20`), exit 0. Header `THERMOSTAT`, `N = 9 K = 0 ne = 8`, `e = 0.001`, `dx = 0.03`, `L = 20,-5;10`; one line per point: `point N: s … a … b … w … r … d … E … g … U … P … z …`. Negative point numbers are the equilibration steps (second value of `n`). |
 
+## Molden check
+
+The project owner cut a `freq>` file (vibrations, from a v25 Hessian output with `print=+molden`) and a `mos>` file
+(orbitals, from round 3 t45, `print=+vectors+molden`) with the `sed`/`grep` recipes of the Getting started chapter
+and opened both in Molden: both files open correctly. Cite as `08 Molden check`.
+
 ## Cosmetic
 
 Every output ends with a repeated timing summary in which some lines show `0.0%` followed by a huge garbage number.

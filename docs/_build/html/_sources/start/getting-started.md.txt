@@ -533,14 +533,14 @@ The KNC wiki treats Molden as the reference viewer. Open files with the `READ` b
 sed -n 's/^freq>//p' nh3_freq.out > nh3.freq
 ```
 
-Open `nh3.freq` in Molden to animate the normal modes. <!-- src: 06 §9 (freq recipe, clean sed) --> <!-- verify -->
+Open `nh3.freq` in Molden to animate the normal modes. <!-- src: 06 §9 (freq recipe, clean sed); 08 Molden check (v25 freq file opened in Molden) -->
 
 **Orbitals.** Add `print=+vectors+molden` to `$control`. The orbitals then appear on `mos>` lines:
 
 ```bash
 grep '^mos>' water.out | sed 's/^mos>//' > water.mos
 ```
-<!-- src: 08 t45 (recipe checked: gives [Molden Format], [Atoms] AU, [5D], [GTO], [MO]) -->
+<!-- src: 08 t45 (recipe checked: gives [Molden Format], [Atoms] AU, [5D], [GTO], [MO]); 08 Molden check (opened in Molden) -->
 
 The `+molden` part is essential: without it, there are no `mos>` lines. The files are large, and Molden can be slow
 with them. <!-- src: 03 §14 (one-liner, verbatim); 04 #508-#510 -->

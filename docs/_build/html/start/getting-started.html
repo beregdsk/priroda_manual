@@ -781,12 +781,12 @@ a table of bond orders. With <code class="docutils literal notranslate"><span cl
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^freq&gt;//p'</span><span class="w"> </span>nh3_freq.out<span class="w"> </span>&gt;<span class="w"> </span>nh3.freq
 </pre></div>
 </div>
-<p>Open <code class="docutils literal notranslate"><span class="pre">nh3.freq</span></code> in Molden to animate the normal modes. <!-- src: 06 §9 (freq recipe, clean sed) --> <!-- verify --></p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">nh3.freq</span></code> in Molden to animate the normal modes. <!-- src: 06 §9 (freq recipe, clean sed); 08 Molden check (v25 freq file opened in Molden) --></p>
 <p><strong>Orbitals.</strong> Add <code class="docutils literal notranslate"><span class="pre">print=+vectors+molden</span></code> to <code class="docutils literal notranslate"><span class="pre">$control</span></code>. The orbitals then appear on <code class="docutils literal notranslate"><span class="pre">mos&gt;</span></code> lines:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s1">'^mos&gt;'</span><span class="w"> </span>water.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/^mos&gt;//'</span><span class="w"> </span>&gt;<span class="w"> </span>water.mos
 </pre></div>
 </div>
-<!-- src: 08 t45 (recipe checked: gives [Molden Format], [Atoms] AU, [5D], [GTO], [MO]) -->
+<!-- src: 08 t45 (recipe checked: gives [Molden Format], [Atoms] AU, [5D], [GTO], [MO]); 08 Molden check (opened in Molden) -->
 <p>The <code class="docutils literal notranslate"><span class="pre">+molden</span></code> part is essential: without it, there are no <code class="docutils literal notranslate"><span class="pre">mos&gt;</span></code> lines. The files are large, and Molden can be slow
 with them. <!-- src: 03 §14 (one-liner, verbatim); 04 #508-#510 --></p>
 <p><strong>Geometry.</strong> If the optimized geometry is Cartesian, this one-liner turns the <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> block into an XYZ file that
