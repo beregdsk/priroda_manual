@@ -38,6 +38,7 @@ latex_elements = {
     "preamble": r"""
 \usepackage{amssymb}
 \DeclareUnicodeCharacter{2713}{\checkmark}
+\DeclareUnicodeCharacter{2717}{\ensuremath{\times}}
 \DeclareUnicodeCharacter{039B}{\ensuremath{\Lambda}}
 \DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}}
 \DeclareUnicodeCharacter{2264}{\ensuremath{\le}}
