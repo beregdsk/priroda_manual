@@ -1,0 +1,148 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 12:11:37 2026
+
+ node   0: 'arch'
+
+ Memory: 128m (128m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 3 atoms, 10 electrons
+
+ Atomic Coordinates:
+   8     0.00000000   0.00000000   0.11730000
+   1     0.00000000   0.75720000  -0.46920000
+   1     0.00000000  -0.75720000  -0.46920000
+ #
+  formula: H2O
+  internuclear distances:
+  O1    |  H1   : 0.95778  H2   : 0.95778
+  H1    |  O1   : 0.95778
+  H2    |  O1   : 0.95778
+     largest =    1.51440
+
+ atom   8 core =  1
+ at.d.=0
+
+ Basis set input: 'basis.in'
+    1   8  O :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -2.51, +13.32
+    2   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    3   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ Basis set input: 'basis.in'
+    1   8  O :  40 / 100 : { 6, 4, 3, 1}                       / {10, 9, 7, 4}                       log2(a) =  -1.53, +10.86
+    2   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+    3   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+
+ +---------------------------------------
+ | Number of atoms                      3
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
+ | Theoretical Method                 DFT
+ | Approximation to E(xc)             PBE
+ | Dimension of wavefunction basis     24
+ | Dimension of   auxiliary  basis     50
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=32,16; xmax = 0.25000; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-06)
+ inv=2: v = 1.5e-05
+ d0 = 7.6e-06, 6.1e-05
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+    1    56
+    8    64
+  mol   176
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  99.3%     0.0
+ time: Initial Guess                    :     0.0  99.5%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  97.2%     0.0
+ time: Inversion of V-Matrix            :     0.0  98.8%     0.0
+ time: Orthogonalize                    :     0.0  83.3%     0.0
+
+  it          E            dE            g          x               t
+ grid:     9076   23
+   0       -76.3406847636  0.0000000000 0.07092765                 0.0
+       1                                0.02316952 0.05036495      0.0
+       2                                0.00166079 0.05823893      0.0
+   1       -76.3652359949 -0.0245512312 0.00460088                 0.1
+       1                                0.00195515 0.00703546      0.0
+       2                                0.00017362 0.00940086      0.0
+       3                                0.00001576 0.00936362      0.0
+   2       -76.3653818908 -0.0001458959 0.00003649                 0.1
+       1                                0.00001184 0.00005200      0.0
+       2                                0.00000247 0.00007414      0.0
+       3                                0.00000036 0.00007588      0.0
+ grid:    34000   53
+   3       -76.3653905717 -0.0000086809 0.00037949                 0.3
+       1                                0.00010851 0.00021906      0.0
+       2                                0.00002673 0.00025750      0.0
+       3                                0.00000397 0.00023493      0.0
+       4                                0.00000021 0.00023186      0.1
+   4       -76.3653913723 -0.0000008006 0.00000023                 0.4
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.3%     0.0
+ time: Grid Construction                :     0.1  99.5%     0.1
+ time: Numerical Integration            :     0.4  99.5%     0.4
+ time: Diagonalize                      :     0.0  98.3%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0 100.0%     0.0
+ time: SCF Equations                    :     0.4  99.5%     0.4
+   5 F,   12 F1
+
+  E  =     -76.3653913723
+  T  =      76.07611549  V  =    -199.28820003  J  =      46.93680394
+  Ex =      -8.95038631  Ec =      -0.32925888
+
+  dipole =   0.735449 au (  1.869339 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -18.724922    2    -0.905970    3    -0.463299    4    -0.310995
+   5    -0.233472
+ virtual:
+   6     0.059088    7     0.147001    8     0.617168    9     0.692056
+  10     0.763451   11     0.839548   12     0.847550   13     1.165240
+
+
+eng>$Energy
+eng> E=-7.6365391372338e+01
+eng> D=-2.96281302e-14  6.81315681e-13 -7.35448725e-01
+eng>$end
+
+
+ ============================================================
+
+ Memory used =     7775 KB
+  Disk  used =    16105 KB,           908 KB written,         2191 KB read
+
+ CPU  time =    1.31 sec =  0.02 min = 0.00 hr =   99.45%
+ REAL time =    1.32 sec =  0.02 min = 0.00 hr
+ ratio     =   99.45%
+
+ date: Sat Oct 17 12:11:39 2026
+
+ time: Initial Guess                    :     0.0   0.0% 344998750710781360453042645773472222480660863843619259931769380141446210833645252044237746354729272661977346282103557595719219843000732436518206103674674330959297531278614050839512744236511367781245250496979787418326783620022272.0
+ time: atomic calculations              :     0.0   0.0% 100363249704241091960007347051512219767519883816844815549033441913972642382405744170290784350499791163731164440969308949392945369909061150645721688324198433265620427030823237861007246809183624122504431792664702619746304.0
+ time: One-Electron Integrals           :     0.0  98.6%     0.0
+ time: Coulomb-type Integrals           :     0.0  99.3%     0.0
+ time: Diagonalize                      :     0.0  99.0%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: SCF Equations                    :     0.4  99.5%     0.4
+ time: Inversion of V-Matrix            :     0.0   0.0% 707896986634783764097792834087562382381549651055026890852391337875087494987656032676331483424939538382633366481557086095406942359789060917735791845637121235220624000701745554903327938310725173248.0
+ time: Orthogonalize                    :     0.0   0.0% 2832204130262763029867961263600132581772671935051999444205568.0
+ time: Grid Construction                :     0.1  99.5%     0.1
+ time: Numerical Integration            :     0.4  99.5%     0.4
+ time: Rotate                           :     0.0 100.0%     0.0
+ time: scf x                            :     0.2  99.5%     0.2
