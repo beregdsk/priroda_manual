@@ -1,0 +1,17 @@
+$system mem=256 disk=1 $end
+$control
+ task=energy
+ theory=dft
+ basis=@BASIS@
+ save=o2t.vec
+ print=+charges
+$end
+$scf restrict=1 iterations=300 $end
+$guess read=1 $end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  8    0.000000    0.000000    0.000000
+  8    0.000000    0.000000    1.210000
+$end

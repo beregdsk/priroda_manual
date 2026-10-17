@@ -80,7 +80,7 @@ for f in "$here"/inputs/t*.in; do
     t72_*)  # long: optimization + Hessian of a 22-atom complex; only with LONG=1
       if [ -z "${LONG:-}" ]; then skip "$name" "long run, set LONG=1"; continue; fi
       prep "$name" "" "$name"; run "$name" ;;
-    t74b_*|t74c_*)  # need the triplet vectors saved by t74a; each run starts from a fresh copy of them
+    t74b_*|t74c_*|t74d_*)  # need the triplet vectors saved by t74a; each run starts from a fresh copy of them
       [ -e "$out/o2t_triplet.vec" ] || { [ -e "$out/o2t.vec" ] && cp "$out/o2t.vec" "$out/o2t_triplet.vec"; }
       if [ ! -e "$out/o2t_triplet.vec" ]; then skip "$name" "needs t74a in the same run (no o2t.vec)"; continue; fi
       cp "$out/o2t_triplet.vec" "$out/o2t.vec"

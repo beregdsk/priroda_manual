@@ -240,7 +240,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in LONG=1 TIMEOUT=0 ./run.sh t72
 | t74b | `t74b_o2_singlet_from_triplet.in` | Singlet O2 (`restrict=0`) started from the triplet vectors: a broken-symmetry solution, which `mix=1` never gave? | `vectors from 'o2t.vec'` (accepted despite the different multiplicity?); alpha and beta orbital energies differ; E below the closed-shell singlet (-150.1593089, round 3 t48b) | common-problems (open-shell singlets) || Triplet vectors accepted; a singlet 0.048 hartree below the closed-shell one, but **not converged** after 32 iterations (gradient 1.7·10⁻⁶, slowly falling). See t74c. |
 | t72 | (as in round 8) | `optimize+hessian` for the Cu complex, run to the end | `OPTIMIZATION CONVERGED`; Hessian SCF converged; frequency table | common-problems (fine-grid fix) || Done on 8 processes in 32 min: optimization (6 steps), all SCFs converged, analytic Hessian; one tiny imaginary mode (6.11i). |
 
-## Round 10 (not run yet)
+## Round 10 (run 2026-10-17 on version 25; outputs in `runs/20261017-174656/`)
 
 ```bash
 cd tests
@@ -251,7 +251,22 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t74
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| t74c | `t74c_o2_singlet_from_triplet_long.in` | The t74b singlet with `iterations=300` and `print=+charges`: does it converge, and is it a broken-symmetry solution? | `converged!`; final energy (below -150.2075743?); Hirshfeld spins on the two O atoms (about +1 and −1 for a broken-symmetry singlet, 0 for closed shell) | common-problems (open-shell singlets) | |
+| t74c | `t74c_o2_singlet_from_triplet_long.in` | The t74b singlet with `iterations=300` and `print=+charges`: does it converge, and is it a broken-symmetry solution? | `converged!`; final energy (below -150.2075743?); Hirshfeld spins on the two O atoms (about +1 and −1 for a broken-symmetry singlet, 0 for closed shell) | common-problems (open-shell singlets) || Converged, E = -150.2075772, normal HOMO/LUMO order. Spins 0 on both atoms, which for O2 does not decide broken symmetry vs closed shell. Round 3's closed-shell singlet (t48b) turned out to have its LUMO *below* its HOMO (a wrong, excited state). See t74d. |
+
+## Round 11 (not run yet)
+
+```bash
+cd tests
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t74
+```
+
+(`t74` runs t74a, which saves the triplet vectors, then t74b–t74d, which read them, and t74e. t74b and t74c are
+rerun only because they share the prefix; they are quick.)
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t74d | `t74d_o2_singlet_restricted_from_triplet.in` | Singlet O2 from the triplet vectors, but **restricted** (`restrict=1`). Same energy as t74c (-150.2075772) → t74c is the closed-shell singlet; higher → t74c is broken-symmetry | `converged!`; E; HOMO/LUMO order | common-problems (open-shell singlets) | |
+| t74e | `t74e_o2_singlet_swapped_guess.in` | Default singlet run (like t48b) with orbitals 8 and 9 swapped in the starting guess (`na(8)=9,8 nb(8)=9,8`): does that avoid the wrong state of t48b? | E (t48b: -150.1593089; t74c: -150.2075772); HOMO below LUMO | common-problems (SCF converged to the wrong state) | |
 
 ## Still not covered
 

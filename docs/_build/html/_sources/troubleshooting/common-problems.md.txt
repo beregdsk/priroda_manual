@@ -294,13 +294,32 @@ In version 25 tests, `restrict=0 mix=1` converged back to the restricted solutio
 the energies equalled the closed-shell ones exactly. So `mix=1` alone does not give a broken-symmetry solution.
 <!-- src: 08 t60a, t60b, t73a-c; t48b (closed-shell reference) -->
 
-What worked better was to start the singlet from the vectors of the triplet: run the triplet with
-{ref}`save <control.save>`, then the singlet with `restrict=0` and `$guess read=1` (the program accepts vectors of
-another multiplicity). For O2 this gave a singlet 0.048 hartree below the closed-shell one, but the SCF converged
-very slowly: give it plenty of {ref}`iterations <scf.iterations>`. To tell the solutions apart, compare the energy
-with the closed-shell one and look at the spin populations (`print=+charges`); identical lists of alpha and beta
-orbital energies prove nothing when the open-shell orbitals are degenerate, as in O2.
-<!-- src: 08 t74a, t74b --> <!-- verify: converged broken-symmetry O2 singlet with more iterations -->
+Starting the singlet from the vectors of the triplet worked better: run the triplet with {ref}`save <control.save>`,
+then the singlet with `restrict=0` and `$guess read=1` (the program accepts vectors of another multiplicity). For O2
+this converged, after many iterations, to a singlet 0.048 hartree below the one found from the default guess. Give
+such runs plenty of {ref}`iterations <scf.iterations>`.
+<!-- src: 08 t74a-c -->
+
+Part of that difference came from the default run converging to the wrong state (see
+{ref}`troubleshooting.wrong-state`). Whether the lower O2 solution is broken-symmetry could not be decided from the
+output: for O2 both the atomic spin populations (`print=+charges`) and the alpha and beta orbital-energy lists come
+out the same for a broken-symmetry and a closed-shell solution, because the two π* orbitals are spread equally over
+both atoms. Compare the energy with a run forced to stay restricted (`restrict=1`) from the same starting vectors.
+<!-- src: 08 t74c, t48b --> <!-- verify: t74d (restrict=1 from triplet vectors) -->
+
+(troubleshooting.wrong-state)=
+### SCF converged to the wrong state
+
+A converged SCF is not always the ground state. In the orbital energies printed after the SCF, the lowest virtual
+orbital should lie above the highest occupied one. If it lies below, the SCF has converged to an excited
+configuration. In a version 25 test, closed-shell singlet O2 from the default guess ended with the HOMO at
+−0.178 and the LUMO at −0.219 hartree; started from the triplet's vectors, the same molecule reached normal
+ordering and an energy 0.048 hartree lower.
+<!-- src: 08 t48b, t74c -->
+
+To get out of such a state, start from other vectors (`$guess read=1` with vectors of a related calculation, for
+example another multiplicity), or reorder the starting orbitals with {ref}`na <guess.na>` and {ref}`nb <guess.nb>`.
+<!-- src: 08 t74c; keywords/guess.yaml na, nb -->
 
 ### Heavy elements
 
