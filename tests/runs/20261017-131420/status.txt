@@ -1,8 +1,0 @@
-t58a_input_syntax_example exit=0
-t58b_molecule_one_line_header exit=0
-t59_relative_basis_parallel exit=0
-t60a_broken_symmetry_dft exit=0
-t60b_broken_symmetry_ridft exit=0
-t61_too_little_memory exit=1
-t62_too_little_disk exit=1
-t63_parallel_ridft_hessian exit=0

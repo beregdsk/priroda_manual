@@ -1,4 +1,4 @@
-$system mem=2 disk=1 $end
+$system mem=256 disk=1 $end
 $control
  task=energy
  theory=dft
