@@ -4,6 +4,42 @@ Priroda has no installer. You copy an executable, the basis-set files you need a
 launcher into a directory, write an input file, and start the program with the input and output file names as
 arguments.
 
+(obtaining-priroda)=
+## Obtaining Priroda
+
+Priroda is free of charge. Everything you need to run it can be downloaded from the official site,
+<https://rad.chem.msu.ru/~laikov/p_w/>: the executables, the basis-set files and the helper scripts. Put the
+executable and `basis.in` in a directory of your own. The main Linux executable, `p`, is statically linked, so a
+serial run needs no other libraries. The page is a bare file index with no documentation, license text or contact information. It holds:
+
+- Linux x86-64 executables (`p`, `p4`, `p_d`, `p4_d`), builds for particular clusters (`p_l`, `p_mvs1p1`, `p_mvs10p`,
+  `p_mvs10q`), an ARM build (`p_arm`), a bundled `mpiexec`, and the molecule viewer `xm`;
+- Windows (Cygwin, x86-64) executables in `exe64/`;
+- example inputs and outputs;
+- basis-set and parameter files (`basis.in`, `basis4.in`, `b2*.in`, `b4s*.in`, `3z.bas`, `sbk.bas`, `qm.in`);
+- small shell scripts: `ge` (append the `$Energy` block from an output to the input), `gm` (replace `$molecule` with
+  the optimized geometry) and `grx` (join two IRC halves).
+<!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
+
+Which executable to choose is described under {ref}`executables` below.
+
+Users have also obtained the program by writing to the developer, Dimitri Laikov, by e-mail. Users reported the
+address `dimitri_laikov@mail.ru` from 2010 to 2018; earlier it was `laikov@physto.se`. Users note that he does not always answer quickly.
+<!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
+
+:::{note}
+The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
+registered with Rospatent and distributed through the company OOO "Dimonta". A user reported in 2018 that the developer
+had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer's
+permission before using the program.
+:::
+<!-- src: 03 §1; 04 #2, #404, #443-#445 -->
+
+The official site has hosted builds with known defects. In 2016 it carried a note that the `w64/*.exe` builds (an
+attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.
+<!-- src: 04 #366 -->
+
+(executables)=
 ## Executables
 
 ### Linux

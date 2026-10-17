@@ -270,8 +270,40 @@
 <p>Priroda has no installer. You copy an executable, the basis-set files you need and, for parallel runs, the MPI
 launcher into a directory, write an input file, and start the program with the input and output file names as
 arguments.</p>
+<section id="obtaining-priroda">
+<span id="id1"></span><h2>Obtaining Priroda<a class="headerlink" href="#obtaining-priroda" title="Link to this heading">¶</a></h2>
+<p>Priroda is free of charge. Everything you need to run it can be downloaded from the official site,
+<a class="reference external" href="https://rad.chem.msu.ru/~laikov/p_w/">https://rad.chem.msu.ru/~laikov/p_w/</a>: the executables, the basis-set files and the helper scripts. Put the
+executable and <code class="docutils literal notranslate"><span class="pre">basis.in</span></code> in a directory of your own. The main Linux executable, <code class="docutils literal notranslate"><span class="pre">p</span></code>, is statically linked, so a
+serial run needs no other libraries. The page is a bare file index with no documentation, license text or contact information. It holds:</p>
+<ul class="simple">
+<li><p>Linux x86-64 executables (<code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">p4</span></code>, <code class="docutils literal notranslate"><span class="pre">p_d</span></code>, <code class="docutils literal notranslate"><span class="pre">p4_d</span></code>), builds for particular clusters (<code class="docutils literal notranslate"><span class="pre">p_l</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs1p1</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs10p</span></code>,
+<code class="docutils literal notranslate"><span class="pre">p_mvs10q</span></code>), an ARM build (<code class="docutils literal notranslate"><span class="pre">p_arm</span></code>), a bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>, and the molecule viewer <code class="docutils literal notranslate"><span class="pre">xm</span></code>;</p></li>
+<li><p>Windows (Cygwin, x86-64) executables in <code class="docutils literal notranslate"><span class="pre">exe64/</span></code>;</p></li>
+<li><p>example inputs and outputs;</p></li>
+<li><p>basis-set and parameter files (<code class="docutils literal notranslate"><span class="pre">basis.in</span></code>, <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b2*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b4s*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">3z.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">sbk.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>);</p></li>
+<li><p>small shell scripts: <code class="docutils literal notranslate"><span class="pre">ge</span></code> (append the <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> block from an output to the input), <code class="docutils literal notranslate"><span class="pre">gm</span></code> (replace <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> with
+the optimized geometry) and <code class="docutils literal notranslate"><span class="pre">grx</span></code> (join two IRC halves).</p></li>
+</ul>
+<!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
+<p>Which executable to choose is described under <a class="reference internal" href="#executables"><span class="std std-ref">Executables</span></a> below.</p>
+<p>Users have also obtained the program by writing to the developer, Dimitri Laikov, by e-mail. Users reported the
+address <code class="docutils literal notranslate"><span class="pre">dimitri_laikov&#64;mail.ru</span></code> from 2010 to 2018; earlier it was <code class="docutils literal notranslate"><span class="pre">laikov&#64;physto.se</span></code>. Users note that he does not always answer quickly.</p>
+<!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
+registered with Rospatent and distributed through the company OOO “Dimonta”. A user reported in 2018 that the developer
+had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer’s
+permission before using the program.</p>
+</div>
+<!-- src: 03 §1; 04 #2, #404, #443-#445 -->
+<p>The official site has hosted builds with known defects. In 2016 it carried a note that the <code class="docutils literal notranslate"><span class="pre">w64/*.exe</span></code> builds (an
+attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.</p>
+<!-- src: 04 #366 -->
+</section>
 <section id="executables">
-<h2>Executables<a class="headerlink" href="#executables" title="Link to this heading">¶</a></h2>
+<span id="id2"></span><h2>Executables<a class="headerlink" href="#executables" title="Link to this heading">¶</a></h2>
 <section id="linux">
 <h3>Linux<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h3>
 <p>The official site lists these Linux files. Sizes and dates are those of the 2025 file index.</p>
@@ -802,6 +834,7 @@ single quotes do not work; <code class="docutils literal notranslate"><span clas
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Installing and running</a><ul>
+<li><a class="reference internal" href="#obtaining-priroda">Obtaining Priroda</a></li>
 <li><a class="reference internal" href="#executables">Executables</a><ul>
 <li><a class="reference internal" href="#linux">Linux</a></li>
 <li><a class="reference internal" href="#windows">Windows</a></li>

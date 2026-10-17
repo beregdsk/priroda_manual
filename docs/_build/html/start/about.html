@@ -271,12 +271,13 @@
 It began as a fast program for GGA density-functional calculations and grew to cover hybrid DFT, RI-MP2,
 coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and Laikov’s own semiempirical model.</p>
 <!-- src: 06 §1; 03 §1; 04 #331 -->
-<p>The program is closed-source and has no complete official manual. Priroda’s own documentation is a short keyword
-list, the “Input Summary” (<code class="docutils literal notranslate"><span class="pre">input.txt</span></code>), which ships with the program. This manual collects that text, the example
-files on the official site, and twenty years of user experience from Russian-language forums. It is not an official
-document: the developer has not written or reviewed it. <a class="reference internal" href="../sources.html#sources"><span class="std std-ref">Sources</span></a> lists what it is based on. To download the
-program, see <a class="reference internal" href="getting-started.html#obtaining-priroda"><span class="std std-ref">Obtaining Priroda</span></a>.</p>
-<!-- src: 04 #151, #327; 00 -->
+<p>The program is closed-source and has no official manual. The official site offers executables, basis-set files and
+example inputs, but no prose documentation. The other documents in circulation are unofficial: keyword lists such as
+the English “Input Summary” (<code class="docutils literal notranslate"><span class="pre">input.txt</span></code>), and a keyword page and beginner FAQ on a computing-centre wiki. This
+manual collects those texts, the example files on the official site, test runs of version 25, and twenty years of
+user experience from Russian-language forums. It is not an official document: the developer has not written or
+reviewed it. <a class="reference internal" href="../sources.html#sources"><span class="std std-ref">Sources</span></a> lists what it is based on. To download the program, see <a class="reference internal" href="running.html#obtaining-priroda"><span class="std std-ref">Obtaining Priroda</span></a>.</p>
+<!-- src: 04 #151, #327; 00; 01 §2 -->
 <section id="main-features">
 <h2>Main features<a class="headerlink" href="#main-features" title="Link to this heading">¶</a></h2>
 <dl class="simple myst">
@@ -427,6 +428,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 </table>
 </div>
 <!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
+<!-- verify: the ? cells are tests/ round 7 (t65-t69) -->
 <p>Notes to the table:</p>
 <ol class="arabic simple">
 <li><p>A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the developer’s 2011 note on a bug
@@ -522,7 +524,7 @@ version.</p>
 </tr>
 <tr class="row-even"><td><p>5</p></td>
 <td><p>—</p></td>
-<td><p>Version described by the “Input Summary” mirrored on the KNC wiki. Introduced the systematic L basis sets. Hybrid RI-DFT was implemented in November 2004.</p></td>
+<td><p>Version described by the keyword reference on the KNC wiki. Introduced the systematic L basis sets. Hybrid RI-DFT was implemented in November 2004.</p></td>
 </tr>
 <tr class="row-odd"><td><p>6</p></td>
 <td><p>2006.08.20</p></td>

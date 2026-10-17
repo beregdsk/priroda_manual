@@ -5,12 +5,13 @@ It began as a fast program for GGA density-functional calculations and grew to c
 coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and Laikov's own semiempirical model.
 <!-- src: 06 §1; 03 §1; 04 #331 -->
 
-The program is closed-source and has no complete official manual. Priroda's own documentation is a short keyword
-list, the "Input Summary" (`input.txt`), which ships with the program. This manual collects that text, the example
-files on the official site, and twenty years of user experience from Russian-language forums. It is not an official
-document: the developer has not written or reviewed it. {ref}`sources` lists what it is based on. To download the
-program, see {ref}`obtaining-priroda`.
-<!-- src: 04 #151, #327; 00 -->
+The program is closed-source and has no official manual. The official site offers executables, basis-set files and
+example inputs, but no prose documentation. The other documents in circulation are unofficial: keyword lists such as
+the English "Input Summary" (`input.txt`), and a keyword page and beginner FAQ on a computing-centre wiki. This
+manual collects those texts, the example files on the official site, test runs of version 25, and twenty years of
+user experience from Russian-language forums. It is not an official document: the developer has not written or
+reviewed it. {ref}`sources` lists what it is based on. To download the program, see {ref}`obtaining-priroda`.
+<!-- src: 04 #151, #327; 00; 01 §2 -->
 
 ## Main features
 
@@ -85,6 +86,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 | MD (`thermostat`) | ? | ? | ? | ? | ? | ✓ |
 
 <!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
+<!-- verify: the ? cells are tests/ round 7 (t65-t69) -->
 
 Notes to the table:
 
@@ -172,7 +174,7 @@ version.
 |---|---|---|
 | 2 | 2002.01.14 (v2.10) | Banner `program Priroda version 2.10`. Had `task=optimize+hessian`. |
 | 4 | 2004.09.14 (v4.07) | The finite-nucleus model changed between versions 3 and 4, so pre-v4 relativistic basis sets must not be used with v4 and later. |
-| 5 | — | Version described by the "Input Summary" mirrored on the KNC wiki. Introduced the systematic L basis sets. Hybrid RI-DFT was implemented in November 2004. |
+| 5 | — | Version described by the keyword reference on the KNC wiki. Introduced the systematic L basis sets. Hybrid RI-DFT was implemented in November 2004. |
 | 6 | 2006.08.20 | Long the most widely used version: 32- and 64-bit Linux builds with MPI, and a Windows build (`p6.exe`). `optimize+hessian` was removed. Parallel Hessians use at most 2 cores. |
 | 7 | — | Sent as object files for linking against a local MPI library. |
 | 8 | 2008.09.05 | Built on request for a Myrinet cluster. |

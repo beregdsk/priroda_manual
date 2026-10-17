@@ -18,7 +18,7 @@ Version 25 executable
   every group, keyword, task and theory name it reads. This settles which names exist; it says nothing about what
   they do. The result is on {ref}`binary-keywords`.
 
-## Program files and text from the developer
+## Program files from the developer
 
 Official file index
 : <https://rad.chem.msu.ru/~laikov/p_w/>, read in October 2026 (page dated June 2025). A bare listing of executables,
@@ -26,15 +26,19 @@ Official file index
   prose documentation. Example outputs from this site are the strongest evidence for defaults and output formats.
   Windows builds are in the `exe64/` subdirectory.
 
-Input Summary (`input.txt`)
-: An English keyword list shipped with the program, apparently written by the developer, with user annotations
-  appended. It is the closest thing to an official keyword reference. A few of its Russian annotations are
-  corrupted and cannot be read.
+## Unofficial keyword lists
 
-Version 5 keyword reference (KNC wiki mirror)
-: The developer's "Input Summary" for version 5, mirrored on the wiki of the Kazan Scientific Centre computing centre
-  together with a beginner FAQ. The wiki is offline; pages were recovered from the Internet Archive
-  (captures 2008–2012). A PDF copy of the documentation page is at
+None of these documents is official, and none comes from the developer's site. The three files `input.txt`,
+`Dft.rtf` and `Dft_ansi.txt` were provided by Alexandra Freidzon.
+
+Input Summary (`input.txt`)
+: An English keyword list for a recent version, with user annotations appended. It is the most complete keyword list
+  available, but it is not an official document. A few of its Russian annotations are corrupted and cannot be read.
+
+Version 5 keyword reference (KNC wiki)
+: A keyword reference for version 5 on the wiki of the Kazan Scientific Centre computing centre, kept by the wiki's
+  administrators together with a beginner FAQ. It was not written by the developer. The wiki is offline; pages were
+  recovered from the Internet Archive (captures 2008–2012). A PDF copy of the documentation page is at
   <https://monitor.hpc.umanitoba.ca/doc/Priroda_Documentation_from_KNCWiki.pdf>.
 
 `Dft.rtf`
