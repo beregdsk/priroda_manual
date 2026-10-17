@@ -17,8 +17,8 @@ keywords:
         follow-up job such as a Hessian after an optimization.
     see_also: [control.save, scf.iterations]
     status: current
-    sources: ["input.txt", "04 #306", "05 §1"]
-    verified_against: null
+    sources: ["input.txt", "04 #306", "05 §1", "08 t27"]
+    verified_against: "25 (2025.02.28)"
   - name: na
     type: indexed-array
     default: null

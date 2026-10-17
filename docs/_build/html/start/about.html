@@ -360,9 +360,9 @@ user reports and the test runs on version 25, not from a statement by the develo
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hessian</span></code></p></td>
 <td class="text-center"><p>✓ (2)</p></td>
+<td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>?</p></td>
 </tr>
@@ -425,14 +425,15 @@ user reports and the test runs on version 25, not from a statement by the develo
 </tbody>
 </table>
 </div>
-<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291; TS/IRC/scan: 06 §3, 02 §4, 03 §9; nmr: input.txt, 04 #96; MD: 01 §5.7 -->
+<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
 <p>Notes to the table:</p>
 <ol class="arabic simple">
 <li><p>A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the developer’s 2011 note on a bug
 fix that names the CCSD(T) gradient. <!-- src: 04 #146; 03 §1 --></p></li>
 <li><p>Analytic second derivatives. <!-- src: 06 §3; 05 §10 --></p></li>
-<li><p>Users report CCSD and CCSD(T) Hessians. For correlated methods they are computed by finite differences of the
-gradient, which takes many gradient calculations. <!-- src: 04 #255, #291 --> <!-- verify --></p></li>
+<li><p>Computed by finite differences of the gradient (<code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">COMPUTATION</span> <span class="pre">OF</span> <span class="pre">SECOND</span> <span class="pre">DERIVATIVES</span></code>), which takes
+many gradient calculations. Shown for <code class="docutils literal notranslate"><span class="pre">ridft</span></code> and <code class="docutils literal notranslate"><span class="pre">rimp2</span></code> in version 25 tests; users report CCSD and CCSD(T)
+Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b --></p></li>
 <li><p>Excited-state optimization works, but Priroda has no root following, so the state can switch during the
 optimization. <!-- src: 03 §11 --></p></li>
 <li><p>NMR works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> and a non-hybrid functional. Users report that relativistic (<code class="docutils literal notranslate"><span class="pre">four=1</span></code>) NMR runs
@@ -459,9 +460,10 @@ printing the basis sets, with no error message in the output. See <a class="refe
 <dt>No use of point-group symmetry in older versions</dt><dd><p>Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
 Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
 the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. These options are not documented.
-In a version 25 test they symmetrized the structure and kept the symmetry during the optimization; see
-<a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and <a class="reference internal" href="../reference/optimize.html#optimize-sym"><span class="std std-ref">$optimize sym</span></a>.</p>
-<!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15 -->
+In version 25 tests, <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code> symmetrized the structure and <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> kept the symmetry
+during the optimization; each option alone does only half of this. See <a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and
+<a class="reference internal" href="../reference/optimize.html#optimize-sym"><span class="std std-ref">$optimize sym</span></a>.</p>
+<!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15, t30a, t30b -->
 </dd>
 <dt>No continuum solvation</dt><dd><p>No version has a continuum solvent model. Solvent can only be included as explicit molecules.</p>
 <!-- src: 04 #75, #76, #348, #417 -->

@@ -380,9 +380,15 @@ This is the oldest known problem in both forums and the fix is well established.
 same error as <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>, and one found that the pair worked only with <code class="docutils literal notranslate"><span class="pre">procedure=bfgs</span></code>, which this
 explains.</p>
 <!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b -->
-<p>Until the safe orders are known, put <code class="docutils literal notranslate"><span class="pre">convergence</span></code> last in the group, or give it on a line of its own, and confirm
-both values in the <code class="docutils literal notranslate"><span class="pre">scf:</span></code> echo line of the output, for example <code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">1.0e-07,</span> <span class="pre">1.0e-03;</span> <span class="pre">iter=250,16</span></code>.</p>
-<!-- verify: convergence last or on its own line (tests round 2) -->
+<p>Further tests on version 25 narrowed it down. The problem is a <code class="docutils literal notranslate"><span class="pre">convergence=</span></code> with <strong>one</strong> value followed by another
+keyword, also on the next line. Both of these work:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf convergence=1e-7,1e-3 iterations=250 $end
+$scf iterations=250 convergence=1e-7 $end
+</pre></div>
+</div>
+<p>So give both values, or put <code class="docutils literal notranslate"><span class="pre">convergence</span></code> last, and confirm the values in the <code class="docutils literal notranslate"><span class="pre">scf:</span></code> echo line of the output, for
+example <code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">1.0e-07,</span> <span class="pre">1.0e-03;</span> <span class="pre">iter=250,16</span></code>.</p>
+<!-- src: 08 t22a, t22b, t22c -->
 </section>
 </section>
 <section id="scf-does-not-converge-or-diverges">
@@ -451,7 +457,10 @@ $scf iterations=10 $end
 $guess read=1 $end
 </pre></div>
 </div>
-<!-- verify -->
+<!-- src: 08 t27 (save and guess read=1 work in v25) --> <!-- verify: whole restart loop on a hard case -->
+<p>In version 25 the output of a restarted run shows <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(-1)</span></code> and <code class="docutils literal notranslate"><span class="pre">vectors</span> <span class="pre">from</span> <span class="pre">'job.vec'</span></code>; a normal start
+shows <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(2)</span></code>.</p>
+<!-- src: 08 t27 -->
 <p>Leave out the <code class="docutils literal notranslate"><span class="pre">$guess</span></code> line in the first run. Vectors from a converged run of an easier case, or of the same molecule
 at another geometry, also work as a starting point.</p>
 <!-- src: 03 §7 (sanya, amg agreed) -->
@@ -581,11 +590,15 @@ the SCF failed on the first step. See <a class="reference internal" href="#troub
 </section>
 <section id="a-symmetric-structure-stays-symmetric">
 <h3>A symmetric structure stays symmetric<a class="headerlink" href="#a-symmetric-structure-stays-symmetric" title="Link to this heading">¶</a></h3>
-<p>Priroda always works in C1, but a symmetric starting geometry often stays symmetric through an optimization that
-converges normally, and the Hessian then shows a saddle point. If the optimization did not break the symmetry, always
+<p>Without the symmetry options, Priroda works in C1, but a symmetric starting geometry often stays symmetric through
+an optimization that converges normally, and the Hessian then shows a saddle point. If the optimization did not break the symmetry, always
 compute the Hessian. If it has an imaginary frequency, paste its <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> block into the input, displace the
 geometry along that mode if needed, and optimize again.</p>
 <!-- src: 04 #254 (amge); 06 §10 (re-optimize with lasteng) -->
+<p>Version 25 can also use symmetry on purpose: <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code> detects the point group and symmetrizes the
+input geometry, and <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> keeps that symmetry during the optimization. Both options are needed. See
+<a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and <a class="reference internal" href="../reference/optimize.html#optimize-sym"><span class="std std-ref">$optimize sym</span></a>.</p>
+<!-- src: 08 t15, t30a, t30b -->
 </section>
 <section id="a-scan-starts-from-a-mangled-geometry">
 <h3>A scan starts from a mangled geometry<a class="headerlink" href="#a-scan-starts-from-a-mangled-geometry" title="Link to this heading">¶</a></h3>
@@ -608,6 +621,9 @@ from an unoptimized geometry gives two points with <a class="reference internal"
 </section>
 <section id="irc-stops-with-vicinity-of-a-stationary-point-stop">
 <h3>IRC stops with <code class="docutils literal notranslate"><span class="pre">Vicinity</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">Stationary</span> <span class="pre">Point(?)</span> <span class="pre">---</span> <span class="pre">STOP.</span></code><a class="headerlink" href="#irc-stops-with-vicinity-of-a-stationary-point-stop" title="Link to this heading">¶</a></h3>
+<p>This message is also the normal end of an IRC that has reached a minimum: a version 25 test IRC of the ammonia
+inversion ended with it after 7 points, at the minimum. It is a problem only when it comes early.</p>
+<!-- src: 08 t26 -->
 <p>On the first IRC step this means that the energy did not go down on that step. The reported fix is to change the
 step size; see <a class="reference internal" href="../reference/optimize.html#optimize-radius"><span class="std std-ref">radius</span></a>:</p>
 <ul class="simple">
@@ -661,7 +677,9 @@ have a non-zero number of basis functions.</p>
 </section>
 <section id="tddft-oscillator-strengths-are-all-zero">
 <h3>TDDFT oscillator strengths are all zero<a class="headerlink" href="#tddft-oscillator-strengths-are-all-zero" title="Link to this heading">¶</a></h3>
-<p>With <code class="docutils literal notranslate"><span class="pre">restrict=0</span></code>, singlet and triplet excitations get mixed. Use <code class="docutils literal notranslate"><span class="pre">restrict=1</span></code> and compute one multiplicity per run.
+<p>A closed-shell TDDFT run on version 25 printed non-zero oscillator strengths in its <code class="docutils literal notranslate"><span class="pre">Electronic</span> <span class="pre">Spectrum:</span></code> table
+with the default settings. <!-- src: 08 t33 --></p>
+<p>The reported cause of all-zero values: with <code class="docutils literal notranslate"><span class="pre">restrict=0</span></code>, singlet and triplet excitations get mixed. Use <code class="docutils literal notranslate"><span class="pre">restrict=1</span></code> and compute one multiplicity per run.
 The user who reported the problem confirmed the fix.</p>
 <!-- src: 03 §11 (Marsel, sanya) -->
 </section>
@@ -829,10 +847,12 @@ spread its memory. RI-MP2 distributes memory better.</p>
 </section>
 <section id="starting-a-parallel-run-on-linux">
 <h3>Starting a parallel run on Linux<a class="headerlink" href="#starting-a-parallel-run-on-linux" title="Link to this heading">¶</a></h3>
-<p>The Priroda binary starts its own processes: run <code class="docutils literal notranslate"><span class="pre">./p</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">job.in</span> <span class="pre">job.out</span></code>. Starting it through the bundled
-<code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> failed with <code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">in</span> <span class="pre">system</span> <span class="pre">call</span> <span class="pre">mpiexec:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></code> or <code class="docutils literal notranslate"><span class="pre">mpiexec</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">exec</span> <span class="pre">p</span></code>. Use
-absolute paths for the binary, the input, the output and the basis file.</p>
-<!-- src: 04 #150, #152-#154 -->
+<p>Version 25 must be started through an MPI launcher, such as the <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> from the official site:
+<code class="docutils literal notranslate"><span class="pre">./mpiexec</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">./p</span> <span class="pre">job.in</span> <span class="pre">job.out</span></code>. <code class="docutils literal notranslate"><span class="pre">./p</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">job.in</span> <span class="pre">job.out</span></code>, which worked in versions 6 and 10, now stops with
+<code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">file</span> <span class="pre">'-np'?.</span></code>. With version 10, starting through the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> once failed with
+<code class="docutils literal notranslate"><span class="pre">Error</span> <span class="pre">in</span> <span class="pre">system</span> <span class="pre">call</span> <span class="pre">mpiexec:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></code> or <code class="docutils literal notranslate"><span class="pre">mpiexec</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">exec</span> <span class="pre">p</span></code>. Use absolute paths for the
+binary, the input, the output and the basis file.</p>
+<!-- src: 04 #150, #152-#154; 01 §2.1; 08 t21a --> <!-- verify: bundled mpiexec on version 25 -->
 <p>The message <code class="docutils literal notranslate"><span class="pre">OOPS:</span> <span class="pre">semop</span> <span class="pre">lock</span> <span class="pre">failed</span></code> (with <code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">N</span> <span class="pre">received</span> <span class="pre">signal</span> <span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">6</span></code>) has two reported contexts:</p>
 <ul>
 <li><p>as a secondary message after another fatal error, such as running out of disk. Fix the first error;</p>

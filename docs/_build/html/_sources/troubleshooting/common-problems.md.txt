@@ -123,9 +123,17 @@ same error as `unknown name erations`, and one found that the pair worked only w
 explains.
 <!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b -->
 
-Until the safe orders are known, put `convergence` last in the group, or give it on a line of its own, and confirm
-both values in the `scf:` echo line of the output, for example `scf: conv = 1.0e-07, 1.0e-03; iter=250,16`.
-<!-- verify: convergence last or on its own line (tests round 2) -->
+Further tests on version 25 narrowed it down. The problem is a `convergence=` with **one** value followed by another
+keyword, also on the next line. Both of these work:
+
+```text
+$scf convergence=1e-7,1e-3 iterations=250 $end
+$scf iterations=250 convergence=1e-7 $end
+```
+
+So give both values, or put `convergence` last, and confirm the values in the `scf:` echo line of the output, for
+example `scf: conv = 1.0e-07, 1.0e-03; iter=250,16`.
+<!-- src: 08 t22a, t22b, t22c -->
 
 (troubleshooting.scf)=
 ## SCF does not converge or diverges
@@ -194,7 +202,11 @@ $end
 $scf iterations=10 $end
 $guess read=1 $end
 ```
-<!-- verify -->
+<!-- src: 08 t27 (save and guess read=1 work in v25) --> <!-- verify: whole restart loop on a hard case -->
+
+In version 25 the output of a restarted run shows `Initial Guess (-1)` and `vectors from 'job.vec'`; a normal start
+shows `Initial Guess (2)`.
+<!-- src: 08 t27 -->
 
 Leave out the `$guess` line in the first run. Vectors from a converged run of an easier case, or of the same molecule
 at another geometry, also work as a starting point.
@@ -328,11 +340,16 @@ the SCF failed on the first step. See {ref}`troubleshooting.nan`.
 
 ### A symmetric structure stays symmetric
 
-Priroda always works in C1, but a symmetric starting geometry often stays symmetric through an optimization that
-converges normally, and the Hessian then shows a saddle point. If the optimization did not break the symmetry, always
+Without the symmetry options, Priroda works in C1, but a symmetric starting geometry often stays symmetric through
+an optimization that converges normally, and the Hessian then shows a saddle point. If the optimization did not break the symmetry, always
 compute the Hessian. If it has an imaginary frequency, paste its `$Energy` block into the input, displace the
 geometry along that mode if needed, and optimize again.
 <!-- src: 04 #254 (amge); 06 §10 (re-optimize with lasteng) -->
+
+Version 25 can also use symmetry on purpose: `$molecule sym=1,0.01` detects the point group and symmetrizes the
+input geometry, and `$optimize sym=1` keeps that symmetry during the optimization. Both options are needed. See
+{ref}`$molecule sym <molecule.sym>` and {ref}`$optimize sym <optimize.sym>`.
+<!-- src: 08 t15, t30a, t30b -->
 
 ### A scan starts from a mangled geometry
 
@@ -356,6 +373,10 @@ from an unoptimized geometry gives two points with {ref}`back=0 <optimize.back>`
 <!-- src: 04 #92, #93, #100, #102 -->
 
 ### IRC stops with `Vicinity of a Stationary Point(?) --- STOP.`
+
+This message is also the normal end of an IRC that has reached a minimum: a version 25 test IRC of the ammonia
+inversion ended with it after 7 points, at the minimum. It is a problem only when it comes early.
+<!-- src: 08 t26 -->
 
 On the first IRC step this means that the energy did not go down on that step. The reported fix is to change the
 step size; see {ref}`radius <optimize.radius>`:
@@ -413,7 +434,10 @@ have a non-zero number of basis functions.
 
 ### TDDFT oscillator strengths are all zero
 
-With `restrict=0`, singlet and triplet excitations get mixed. Use `restrict=1` and compute one multiplicity per run.
+A closed-shell TDDFT run on version 25 printed non-zero oscillator strengths in its `Electronic Spectrum:` table
+with the default settings. <!-- src: 08 t33 -->
+
+The reported cause of all-zero values: with `restrict=0`, singlet and triplet excitations get mixed. Use `restrict=1` and compute one multiplicity per run.
 The user who reported the problem confirmed the fix.
 <!-- src: 03 §11 (Marsel, sanya) -->
 
@@ -582,10 +606,12 @@ Hessians, on 24–32 cores without trouble, so this advice is disputed. Parallel
 
 ### Starting a parallel run on Linux
 
-The Priroda binary starts its own processes: run `./p -np 4 job.in job.out`. Starting it through the bundled
-`mpiexec` failed with `Error in system call mpiexec: No such file or directory` or `mpiexec could not exec p`. Use
-absolute paths for the binary, the input, the output and the basis file.
-<!-- src: 04 #150, #152-#154 -->
+Version 25 must be started through an MPI launcher, such as the `mpiexec` from the official site:
+`./mpiexec -np 4 ./p job.in job.out`. `./p -np 4 job.in job.out`, which worked in versions 6 and 10, now stops with
+`input file '-np'?.`. With version 10, starting through the bundled `mpiexec` once failed with
+`Error in system call mpiexec: No such file or directory` or `mpiexec could not exec p`. Use absolute paths for the
+binary, the input, the output and the basis file.
+<!-- src: 04 #150, #152-#154; 01 §2.1; 08 t21a --> <!-- verify: bundled mpiexec on version 25 -->
 
 The message `OOPS: semop lock failed` (with `process N received signal 2` or `6`) has two reported contexts:
 

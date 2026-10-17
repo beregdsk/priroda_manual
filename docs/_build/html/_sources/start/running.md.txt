@@ -96,27 +96,19 @@ If no output file is given (`p input.in`), the output goes to standard output. <
 
 ### Parallel runs on Linux
 
-Priroda is parallelized with MPI. Three command forms appear in the sources, and which one works depends on the build:
+Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. The official site shows the
+`mpiexec` that it ships next to `p`:
 
 ```text
-p -np 4 input.in output.out                  # the executable starts its own processes
-./mpiexec -np 4 ./p input.in output.out      # the mpiexec shipped with p
-mpiexec -np 4 p input.in                     # as used for version 14 at one site
+./mpiexec -np 4 ./p input.in output.out
 ```
 
-<!-- src: 04 #66, #151, #153; 01 §2.1; 02 §5.1 -->
+<!-- src: 01 §2.1 --> <!-- verify: not yet tested on version 25 -->
 
-The first form is what users ran with versions 6 and 10. The second is what the official site shows for the current
-`p` and its bundled `mpiexec`. In one report with version 10, starting through the bundled `mpiexec` failed while
-`p -np 4` worked, but that run also had a relative basis-file path, which can cause the same failure. Try the form
-from the official site first.
-<!-- src: 04 #150-#154; 01 §2.1 --> <!-- verify -->
-
-:::{warning}
-In a test of version 25, `p -np 2 input.in output.out` failed at once: no output file was written. The other forms
-were not tested. Which command starts a parallel run of the current build is still open.
-:::
-<!-- src: 08 t21a --> <!-- verify -->
+Older versions also accepted `p -np 4 input.in output.out`, which users ran with versions 6 and 10. **Version 25 does
+not**: it takes `-np` as the input file name, prints `input file '-np'?.` and stops. One site ran version 14 as
+`mpiexec -np 4 p input.in`, with the system's MPI launcher.
+<!-- src: 04 #66, #150-#154; 02 §5.1; 08 t21a -->
 
 Check the start of the output. A parallel run prints the number of processes and one line per process:
 
@@ -348,8 +340,7 @@ cd "$SLURM_SUBMIT_DIR"
 export TMPDIR=/local/scratch/$SLURM_JOB_ID   # node-local disk; site-specific
 mkdir -p "$TMPDIR"
 
-"$PRIRODA" -np "$SLURM_NTASKS" mol.in mol.out
-# or, if your build needs it:  ./mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out
+$HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpiexec from the official site
 
 rm -rf "$TMPDIR"
 ```
@@ -370,7 +361,7 @@ NP=$(wc -l < "$PBS_NODEFILE")
 export TMPDIR=/local/scratch/$PBS_JOBID      # site-specific
 mkdir -p "$TMPDIR"
 
-$HOME/priroda/p -np "$NP" mol.in mol.out
+$HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
 
 rm -rf "$TMPDIR"
 ```

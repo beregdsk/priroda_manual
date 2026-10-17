@@ -75,7 +75,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
 | `energy` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `gradient` | ✓ | ✓ | ✓ | ✓ | ✓ (1) | ✓ |
-| `hessian` | ✓ (2) | ? | ? | ? | ✓ (3) | ? |
+| `hessian` | ✓ (2) | ✓ (3) | ? | ✓ (3) | ✓ (3) | ? |
 | `optimize` | ✓ | ✓ | ✓ (4) | ✓ | ✓ (1) | ✓ |
 | TS (`saddle=1`) | ✓ | ? | ? | ? | ? | ? |
 | `irc` | ✓ | ? | ? | ? | ? | ? |
@@ -84,15 +84,16 @@ user reports and the test runs on version 25, not from a statement by the develo
 | TDDFT excited states | – | – (6) | ✓ | – | – (7) | – |
 | MD (`thermostat`) | ? | ? | ? | ? | ? | ✓ |
 
-<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291; TS/IRC/scan: 06 §3, 02 §4, 03 §9; nmr: input.txt, 04 #96; MD: 01 §5.7 -->
+<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
 
 Notes to the table:
 
 1. A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the developer's 2011 note on a bug
    fix that names the CCSD(T) gradient. <!-- src: 04 #146; 03 §1 -->
 2. Analytic second derivatives. <!-- src: 06 §3; 05 §10 -->
-3. Users report CCSD and CCSD(T) Hessians. For correlated methods they are computed by finite differences of the
-   gradient, which takes many gradient calculations. <!-- src: 04 #255, #291 --> <!-- verify -->
+3. Computed by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND DERIVATIVES`), which takes
+   many gradient calculations. Shown for `ridft` and `rimp2` in version 25 tests; users report CCSD and CCSD(T)
+   Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b -->
 4. Excited-state optimization works, but Priroda has no root following, so the state can switch during the
    optimization. <!-- src: 03 §11 -->
 5. NMR works only with `theory=dft` and a non-hybrid functional. Users report that relativistic (`four=1`) NMR runs
@@ -121,9 +122,10 @@ No use of point-group symmetry in older versions
 : Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
   Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
   the official 2023–2025 example inputs use `sym=1` in `$molecule` and `$optimize`. These options are not documented.
-  In a version 25 test they symmetrized the structure and kept the symmetry during the optimization; see
-  {ref}`$molecule sym <molecule.sym>` and {ref}`$optimize sym <optimize.sym>`.
-  <!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15 -->
+  In version 25 tests, `$molecule sym=1,0.01` symmetrized the structure and `$optimize sym=1` kept the symmetry
+  during the optimization; each option alone does only half of this. See {ref}`$molecule sym <molecule.sym>` and
+  {ref}`$optimize sym <optimize.sym>`.
+  <!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15, t30a, t30b -->
 
 No continuum solvation
 : No version has a continuum solvent model. Solvent can only be included as explicit molecules.

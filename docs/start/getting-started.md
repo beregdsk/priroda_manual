@@ -279,11 +279,10 @@ MOL> Energy =    -56.4988651558
 ```
 <!-- src: 08 t11 (verbatim) -->
 
-The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. The
-`charge=0 mult=1` line of the input is not repeated. A KNC wiki example of a charged doublet does show
-`MOL> charge=2 mult=2`, so the line seems to be printed only for values other than the defaults; check it for
-charged or open-shell molecules.
-<!-- src: 01 §7 item 9; 08 t11; 06 §4 (NpO2 example with charge line) --> <!-- verify: charge line in MOL block -->
+The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. Only
+a charge or multiplicity that differs from the defaults (0 and 1) is written: `nh3.in` gives no such line, and an
+OH⁻ optimization gave `MOL> charge=-1`. So the block can be pasted into the next input as it is.
+<!-- src: 01 §7 item 9; 08 t11, t29; 06 §4 (NpO2 example: charge=2 mult=2) -->
 
 ### Step 3: take the final geometry
 
@@ -401,11 +400,15 @@ grep -A 12 "Harmonic Frequencies" nh3_freq.out
 ```
 <!-- src: 08 t13 (checked) -->
 
-:::{note}
-How imaginary frequencies are shown has not been checked. The limor1 scripts recognize them by an `i` attached to
-the value.
-:::
-<!-- src: 02 §3.3, §5.6 --> <!-- verify: imaginary notation -->
+An imaginary frequency is printed with a trailing `i`. Planar ammonia, the transition state of the inversion,
+gives one:
+
+```text
+ |    1 |  845.22i|   1.21 | 357.748 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+```
+<!-- src: 08 t24 (verbatim); 02 §3.3, §5.6 (limor1 scripts look for the i) -->
+
+`grep "i|" nh3_freq.out` therefore finds the imaginary modes.
 
 ### Step 6: if a frequency is imaginary, re-optimize
 
@@ -417,7 +420,7 @@ Starting from a good Hessian, the optimizer can move off the saddle point; one e
 sed -e 's/task=hessian/task=optimize/' nh3_freq.in > nh3_opt2.in
 sed -n 's/^eng>//p' nh3_freq.out | awk '/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}' >> nh3_opt2.in
 ```
-<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H --> <!-- verify: re-optimization from the appended Hessian -->
+<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H; 08 t25 (an appended Hessian is read: Lowest eigenvalues line) --> <!-- verify: minimization from a saddle with the appended Hessian -->
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 
 The second command appends only the last `$Energy` group, after `$molecule`. Do not leave an older `$Energy` group in

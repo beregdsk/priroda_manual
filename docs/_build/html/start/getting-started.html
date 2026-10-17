@@ -521,11 +521,10 @@ MOL&gt; Energy =    -56.4988651558
 </pre></div>
 </div>
 <!-- src: 08 t11 (verbatim) -->
-<p>The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. The
-<code class="docutils literal notranslate"><span class="pre">charge=0</span> <span class="pre">mult=1</span></code> line of the input is not repeated. A KNC wiki example of a charged doublet does show
-<code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">charge=2</span> <span class="pre">mult=2</span></code>, so the line seems to be printed only for values other than the defaults; check it for
-charged or open-shell molecules.</p>
-<!-- src: 01 §7 item 9; 08 t11; 06 §4 (NpO2 example with charge line) --> <!-- verify: charge line in MOL block -->
+<p>The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. Only
+a charge or multiplicity that differs from the defaults (0 and 1) is written: <code class="docutils literal notranslate"><span class="pre">nh3.in</span></code> gives no such line, and an
+OH⁻ optimization gave <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">charge=-1</span></code>. So the block can be pasted into the next input as it is.</p>
+<!-- src: 01 §7 item 9; 08 t11, t29; 06 §4 (NpO2 example: charge=2 mult=2) -->
 </section>
 <section id="step-3-take-the-final-geometry">
 <h3>Step 3: take the final geometry<a class="headerlink" href="#step-3-take-the-final-geometry" title="Link to this heading">¶</a></h3>
@@ -631,12 +630,13 @@ stay zero in a plain Hessian run; Raman intensities need <code class="docutils l
 </pre></div>
 </div>
 <!-- src: 08 t13 (checked) -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>How imaginary frequencies are shown has not been checked. The limor1 scripts recognize them by an <code class="docutils literal notranslate"><span class="pre">i</span></code> attached to
-the value.</p>
+<p>An imaginary frequency is printed with a trailing <code class="docutils literal notranslate"><span class="pre">i</span></code>. Planar ammonia, the transition state of the inversion,
+gives one:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> |    1 |  845.22i|   1.21 | 357.748 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+</pre></div>
 </div>
-<!-- src: 02 §3.3, §5.6 --> <!-- verify: imaginary notation -->
+<!-- src: 08 t24 (verbatim); 02 §3.3, §5.6 (limor1 scripts look for the i) -->
+<p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">&quot;i|&quot;</span> <span class="pre">nh3_freq.out</span></code> therefore finds the imaginary modes.</p>
 </section>
 <section id="step-6-if-a-frequency-is-imaginary-re-optimize">
 <h3>Step 6: if a frequency is imaginary, re-optimize<a class="headerlink" href="#step-6-if-a-frequency-is-imaginary-re-optimize" title="Link to this heading">¶</a></h3>
@@ -647,7 +647,7 @@ Starting from a good Hessian, the optimizer can move off the saddle point; one e
 sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^eng&gt;//p'</span><span class="w"> </span>nh3_freq.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/\$Energy/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>nh3_opt2.in
 </pre></div>
 </div>
-<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H --> <!-- verify: re-optimization from the appended Hessian -->
+<!-- src: checked on the 08 t13 output: the appended group holds E, D, A, G, Dx and the packed Hessian H; 08 t25 (an appended Hessian is read: Lowest eigenvalues line) --> <!-- verify: minimization from a saddle with the appended Hessian -->
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 <p>The second command appends only the last <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group, after <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>. Do not leave an older <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group in
 the file. Then run <code class="docutils literal notranslate"><span class="pre">nh3_opt2.in</span></code> and go back to step 2. (<code class="docutils literal notranslate"><span class="pre">ge</span> <span class="pre">nh3_freq</span></code> does the appending in place, if you work with

@@ -382,10 +382,11 @@ $end
 <p id="index-6"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.7; 04 #481; 08 t15</p>
+<strong>Sources:</strong> 01 §4.7; 04 #481; 08 t15; 08 t30a</p>
 <p>Used as <code class="docutils literal notranslate"><span class="pre">sym=1,0.01</span></code> in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
 Newer versions report the detected point group (<code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">D6h</span></code>). In version 25, <code class="docutils literal notranslate"><span class="pre">sym=1,0.01</span></code> on a slightly
-distorted NH3 printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span>&#160;&#160;&#160; <span class="pre">6,</span> <span class="pre">unique:</span>&#160;&#160;&#160; <span class="pre">2</span></code> and echoed the geometry symmetrized.</p>
+distorted NH3 printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span>&#160;&#160;&#160; <span class="pre">6,</span> <span class="pre">unique:</span>&#160;&#160;&#160; <span class="pre">2</span></code> and echoed the geometry symmetrized. On its own it
+does not keep the symmetry during an optimization; add <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> for that.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-sym"><span class="std std-ref">sym ($optimize)</span></a></p>
 </section>
 </section>

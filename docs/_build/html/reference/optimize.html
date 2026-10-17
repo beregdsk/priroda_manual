@@ -273,8 +273,8 @@
 <span id="optimize-saddle"></span><h2><code class="docutils literal notranslate"><span class="pre">saddle</span></code><a class="headerlink" href="#saddle" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #216; 03 §9</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf; 04 #216; 03 §9; 08 t25</p>
 <p>Type of stationary point sought.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -297,7 +297,9 @@
 <p class="admonition-title">Note</p>
 <p>A saddle-point search needs an accurate Hessian in the input: compute one with <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> and append its
 <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> block (the <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> lines). A usual route is scan → Hessian at the scan maximum → <code class="docutils literal notranslate"><span class="pre">saddle=1</span></code> →
-<code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> to confirm one imaginary frequency → IRC.</p>
+<code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> to confirm one imaginary frequency → IRC. In version 25 the output confirms the search with
+<code class="docutils literal notranslate"><span class="pre">Saddle</span> <span class="pre">point</span> <span class="pre">search:</span> <span class="pre">follow</span> <span class="pre">=</span> <span class="pre">1</span></code> and, when a Hessian was read from <code class="docutils literal notranslate"><span class="pre">$Energy</span></code>, <code class="docutils literal notranslate"><span class="pre">Lowest</span> <span class="pre">eigenvalues:</span></code> with one
+negative value.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-follow"><span class="std std-ref">follow ($optimize)</span></a>, <a class="reference internal" href="Energy.html#energy-h"><span class="std std-ref">H ($Energy)</span></a></p>
 </section>
@@ -327,10 +329,10 @@ with symmetry (<code class="docutils literal notranslate"><span class="pre">sym=
 <section id="follow">
 <span id="optimize-follow"></span><h2><code class="docutils literal notranslate"><span class="pre">follow</span></code><a class="headerlink" href="#follow" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> integer<br />
-<strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>.</p>
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf; 08 t25</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>; version 25 echoes <code class="docutils literal notranslate"><span class="pre">Saddle</span> <span class="pre">point</span> <span class="pre">search:</span> <span class="pre">follow</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
 <p>Follow the n-th Hessian eigenvector in a saddle-point search.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-saddle"><span class="std std-ref">saddle ($optimize)</span></a></p>
 </section>
@@ -385,9 +387,10 @@ the internal-coordinate table.</p>
 <span id="optimize-back"></span><h2><code class="docutils literal notranslate"><span class="pre">back</span></code><a class="headerlink" href="#back" title="Link to this heading">¶</a></h2>
 <p id="index-7"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 02 §3.2; 04 §0</p>
-<p>IRC direction. A full IRC takes two runs, one per direction. Re-optimize the endpoints afterwards, because
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 02 §3.2; 04 §0; 08 t26</p>
+<p>IRC direction. A full IRC takes two runs, one per direction: version 25 with the default <code class="docutils literal notranslate"><span class="pre">back=0</span></code>
+followed one direction only (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">back</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">down</span> <span class="pre">=</span> <span class="pre">1</span></code> in the output). Re-optimize the endpoints afterwards, because
 an IRC does not end at a converged minimum.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -412,24 +415,27 @@ an IRC does not end at a converged minimum.</p>
 <span id="optimize-points"></span><h2><code class="docutils literal notranslate"><span class="pre">points</span></code><a class="headerlink" href="#points" title="Link to this heading">¶</a></h2>
 <p id="index-8"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
-<p>Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 08 t26, t37</p>
+<p>Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.
+In a scan the points include both ends: <code class="docutils literal notranslate"><span class="pre">points=4</span></code> gives s = 0, 1/3, 2/3 and 1. An IRC can stop before
+<code class="docutils literal notranslate"><span class="pre">points</span></code> is reached when it arrives at a minimum.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-value"><span class="std std-ref">value ($optimize)</span></a></p>
 </section>
 <section id="radius">
 <span id="optimize-radius"></span><h2><code class="docutils literal notranslate"><span class="pre">radius</span></code><a class="headerlink" href="#radius" title="Link to this heading">¶</a></h2>
 <p id="index-9"><strong>Type:</strong> real<br />
-<strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #298</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">0.2</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> (older version).</p>
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.1</span></code><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf; 04 #298; 08 t26</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">0.1</span></code> as echoed by version 25 (<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">0.1000000000</span></code>); <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.2 (older version).</p>
 <p>Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
 this distance apart. The IRC coordinate is reported in bohr·amu^1/2.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">Vicinity</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">Stationary</span> <span class="pre">Point(?)</span> <span class="pre">---</span> <span class="pre">STOP.</span></code> during an IRC means the energy did not decrease on that step.
-Changing the step size is the reported fix.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Vicinity</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">Stationary</span> <span class="pre">Point(?)</span> <span class="pre">---</span> <span class="pre">STOP.</span></code> ends an IRC that has reached the region of a minimum; in
+version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
+decrease on a step; changing the step size is the reported fix there.</p>
 </div>
 </section>
 <section id="coordinates">
@@ -476,8 +482,8 @@ Changing the step size is the reported fix.</p>
 <span id="optimize-fix"></span><h2><code class="docutils literal notranslate"><span class="pre">fix</span></code><a class="headerlink" href="#fix" title="Link to this heading">¶</a></h2>
 <p id="index-11"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 02 §3.2; 03 §5 (wish list); 04 #372-#373</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 02 §3.2; 03 §5 (wish list); 04 #372-#373; 08 t37</p>
 <p>Internal coordinates to keep fixed during the optimization, in the same five-integer format as
 <code class="docutils literal notranslate"><span class="pre">coordinates</span></code>. Several entries are separated by commas or spaces.</p>
 <div class="admonition note">
@@ -492,8 +498,8 @@ be constrained to stay equal.</p>
 <p id="index-12"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> Å and degrees<br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 03 §5, §8; 04 #278-#279, #373</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 03 §5, §8; 04 #278-#279, #373; 08 t37</p>
 <p>Default: computed from the input geometry.</p>
 <p>Values of the fixed internal coordinates. For <code class="docutils literal notranslate"><span class="pre">task=scan</span></code>, give all the initial values followed by all the
 final values. <code class="docutils literal notranslate"><span class="pre">val(i)=</span></code> fills the list starting at position i, so values left unset keep their input-geometry
@@ -556,10 +562,12 @@ Otherwise keep the default.</p>
 <p id="index-15"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.6; 04 #481; 08 t15</p>
+<strong>Sources:</strong> 01 §4.6; 04 #481; 08 t15; 08 t30b</p>
 <p>Used as <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in the official 2023–2025 example inputs. In version 25, together with <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code>,
 the optimizer switched to Cartesian coordinates (<code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">cartesian</span></code>), printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span> <span class="pre">(6)</span></code> at
-every step, and returned an exactly symmetric structure followed by <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">symmetry:</span> <span class="pre">C3v</span></code>.</p>
+every step, and returned an exactly symmetric structure followed by <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">symmetry:</span> <span class="pre">C3v</span></code>. Without
+<code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=</span></code>, <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> only switches to Cartesian coordinates and reports <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C1</span> <span class="pre">(1)</span></code>,
+so give both options.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-sym"><span class="std std-ref">sym ($molecule)</span></a></p>
 </section>
 <section id="mod">

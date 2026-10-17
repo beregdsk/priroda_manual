@@ -44,11 +44,13 @@ keywords:
     default: null
     units: au
     description:
-      en: Hessian as a lower triangle, 3N(3N+1)/2 values.
+      en: |
+        Hessian as a lower triangle, 3N(3N+1)/2 values. Written by `task=hessian` on `eng>` lines; in version 25 a
+        `saddle=1` optimization and an IRC read it back from an appended `$Energy` group.
     see_also: [optimize.saddle]
     status: undocumented
-    sources: ["02 §3.2"]
-    verified_against: null
+    sources: ["02 §3.2", "08 t24, t25"]
+    verified_against: "25 (2025.02.28)"
   - name: D
     type: list
     default: null

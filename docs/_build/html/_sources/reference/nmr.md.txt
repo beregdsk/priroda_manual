@@ -19,8 +19,8 @@ Reference shieldings and extra points for NMR shielding calculations.
 
 **Type:** indexed-array\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 04 #69; 02 §5.7
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 04 #69; 02 §5.7; 08 t34
 
 Reference shielding constants, indexed by atomic number, for computing chemical shifts. Values are needed
 only for the elements present in the molecule.
@@ -28,7 +28,8 @@ only for the elements present in the molecule.
 ```{note}
 A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
 different TMS values (e.g. `standard(1)=31.3867 standard(6)=181.9781`) for other settings. Compute TMS with
-exactly the settings of the production run.
+exactly the settings of the production run. Without `standard`, version 25 prints `shift=` as minus the
+isotropic shielding.
 ```
 
 **Example:**

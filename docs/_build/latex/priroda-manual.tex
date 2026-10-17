@@ -304,13 +304,13 @@ Task
 \(\checkmark\) (2)
 &
 \sphinxAtStartPar
-?
+\(\checkmark\) (3)
 &
 \sphinxAtStartPar
 ?
 &
 \sphinxAtStartPar
-?
+\(\checkmark\) (3)
 &
 \sphinxAtStartPar
 \(\checkmark\) (3)
@@ -494,8 +494,9 @@ Analytic second derivatives.
 
 \item {} 
 \sphinxAtStartPar
-Users report CCSD and CCSD(T) Hessians. For correlated methods they are computed by finite differences of the
-gradient, which takes many gradient calculations.  
+Computed by finite differences of the gradient (\sphinxcode{\sphinxupquote{NUMERICAL COMPUTATION OF SECOND DERIVATIVES}}), which takes
+many gradient calculations. Shown for \sphinxcode{\sphinxupquote{ridft}} and \sphinxcode{\sphinxupquote{rimp2}} in version 25 tests; users report CCSD and CCSD(T)
+Hessians. 
 
 \item {} 
 \sphinxAtStartPar
@@ -544,8 +545,9 @@ Check this list before planning a project around Priroda.
 Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
 Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
 the official 2023\textendash{}2025 example inputs use \sphinxcode{\sphinxupquote{sym=1}} in \sphinxcode{\sphinxupquote{\$molecule}} and \sphinxcode{\sphinxupquote{\$optimize}}. These options are not documented.
-In a version 25 test they symmetrized the structure and kept the symmetry during the optimization; see
-{\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$molecule sym}}}}} and {\hyperref[\detokenize{reference/optimize:optimize-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize sym}}}}}.
+In version 25 tests, \sphinxcode{\sphinxupquote{\$molecule sym=1,0.01}} symmetrized the structure and \sphinxcode{\sphinxupquote{\$optimize sym=1}} kept the symmetry
+during the optimization; each option alone does only half of this. See {\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$molecule sym}}}}} and
+{\hyperref[\detokenize{reference/optimize:optimize-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize sym}}}}}.
 
 
 
@@ -1177,29 +1179,19 @@ If no output file is given (\sphinxcode{\sphinxupquote{p input.in}}), the output
 \subsection{Parallel runs on Linux}
 \label{\detokenize{start/running:parallel-runs-on-linux}}
 \sphinxAtStartPar
-Priroda is parallelized with MPI. Three command forms appear in the sources, and which one works depends on the build:
+Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. The official site shows the
+\sphinxcode{\sphinxupquote{mpiexec}} that it ships next to \sphinxcode{\sphinxupquote{p}}:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-p \PYGZhy{}np 4 input.in output.out                  \PYGZsh{} the executable starts its own processes
-./mpiexec \PYGZhy{}np 4 ./p input.in output.out      \PYGZsh{} the mpiexec shipped with p
-mpiexec \PYGZhy{}np 4 p input.in                     \PYGZsh{} as used for version 14 at one site
+./mpiexec \PYGZhy{}np 4 ./p input.in output.out
 \end{sphinxVerbatim}
 
 
 
 \sphinxAtStartPar
-The first form is what users ran with versions 6 and 10. The second is what the official site shows for the current
-\sphinxcode{\sphinxupquote{p}} and its bundled \sphinxcode{\sphinxupquote{mpiexec}}. In one report with version 10, starting through the bundled \sphinxcode{\sphinxupquote{mpiexec}} failed while
-\sphinxcode{\sphinxupquote{p \sphinxhyphen{}np 4}} worked, but that run also had a relative basis\sphinxhyphen{}file path, which can cause the same failure. Try the form
-from the official site first.
-
-
-
-\begin{sphinxadmonition}{warning}{Warning:}
-\sphinxAtStartPar
-In a test of version 25, \sphinxcode{\sphinxupquote{p \sphinxhyphen{}np 2 input.in output.out}} failed at once: no output file was written. The other forms
-were not tested. Which command starts a parallel run of the current build is still open.
-\end{sphinxadmonition}
+Older versions also accepted \sphinxcode{\sphinxupquote{p \sphinxhyphen{}np 4 input.in output.out}}, which users ran with versions 6 and 10. \sphinxstylestrong{Version 25 does
+not}: it takes \sphinxcode{\sphinxupquote{\sphinxhyphen{}np}} as the input file name, prints \sphinxcode{\sphinxupquote{input file \textquotesingle{}\sphinxhyphen{}np\textquotesingle{}?.}} and stops. One site ran version 14 as
+\sphinxcode{\sphinxupquote{mpiexec \sphinxhyphen{}np 4 p input.in}}, with the system’s MPI launcher.
 
 
 
@@ -1569,8 +1561,7 @@ cd \PYGZdq{}\PYGZdl{}SLURM\PYGZus{}SUBMIT\PYGZus{}DIR\PYGZdq{}
 export TMPDIR=/local/scratch/\PYGZdl{}SLURM\PYGZus{}JOB\PYGZus{}ID   \PYGZsh{} node\PYGZhy{}local disk; site\PYGZhy{}specific
 mkdir \PYGZhy{}p \PYGZdq{}\PYGZdl{}TMPDIR\PYGZdq{}
 
-\PYGZdq{}\PYGZdl{}PRIRODA\PYGZdq{} \PYGZhy{}np \PYGZdq{}\PYGZdl{}SLURM\PYGZus{}NTASKS\PYGZdq{} mol.in mol.out
-\PYGZsh{} or, if your build needs it:  ./mpiexec \PYGZhy{}np \PYGZdq{}\PYGZdl{}SLURM\PYGZus{}NTASKS\PYGZdq{} \PYGZdq{}\PYGZdl{}PRIRODA\PYGZdq{} mol.in mol.out
+\PYGZdl{}HOME/priroda/mpiexec \PYGZhy{}np \PYGZdq{}\PYGZdl{}SLURM\PYGZus{}NTASKS\PYGZdq{} \PYGZdq{}\PYGZdl{}PRIRODA\PYGZdq{} mol.in mol.out   \PYGZsh{} the mpiexec from the official site
 
 rm \PYGZhy{}rf \PYGZdq{}\PYGZdl{}TMPDIR\PYGZdq{}
 \end{sphinxVerbatim}
@@ -1593,7 +1584,7 @@ NP=\PYGZdl{}(wc \PYGZhy{}l \PYGZlt{} \PYGZdq{}\PYGZdl{}PBS\PYGZus{}NODEFILE\PYGZ
 export TMPDIR=/local/scratch/\PYGZdl{}PBS\PYGZus{}JOBID      \PYGZsh{} site\PYGZhy{}specific
 mkdir \PYGZhy{}p \PYGZdq{}\PYGZdl{}TMPDIR\PYGZdq{}
 
-\PYGZdl{}HOME/priroda/p \PYGZhy{}np \PYGZdq{}\PYGZdl{}NP\PYGZdq{} mol.in mol.out
+\PYGZdl{}HOME/priroda/mpiexec \PYGZhy{}np \PYGZdq{}\PYGZdl{}NP\PYGZdq{} \PYGZdl{}HOME/priroda/p mol.in mol.out
 
 rm \PYGZhy{}rf \PYGZdq{}\PYGZdl{}TMPDIR\PYGZdq{}
 \end{sphinxVerbatim}
@@ -2132,10 +2123,9 @@ MOL\PYGZgt{} Energy =    \PYGZhy{}56.4988651558
 
 
 \sphinxAtStartPar
-The block keeps the coordinate type of the input: a Z\sphinxhyphen{}matrix input gives a Z\sphinxhyphen{}matrix with the optimized values. The
-\sphinxcode{\sphinxupquote{charge=0 mult=1}} line of the input is not repeated. A KNC wiki example of a charged doublet does show
-\sphinxcode{\sphinxupquote{MOL\textgreater{} charge=2 mult=2}}, so the line seems to be printed only for values other than the defaults; check it for
-charged or open\sphinxhyphen{}shell molecules.
+The block keeps the coordinate type of the input: a Z\sphinxhyphen{}matrix input gives a Z\sphinxhyphen{}matrix with the optimized values. Only
+a charge or multiplicity that differs from the defaults (0 and 1) is written: \sphinxcode{\sphinxupquote{nh3.in}} gives no such line, and an
+OH⁻ optimization gave \sphinxcode{\sphinxupquote{MOL\textgreater{} charge=\sphinxhyphen{}1}}. So the block can be pasted into the next input as it is.
 
 
 
@@ -2288,13 +2278,18 @@ grep\PYG{+w}{ }\PYGZhy{}A\PYG{+w}{ }\PYG{l+m}{12}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq
 
 
 
-\begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-How imaginary frequencies are shown has not been checked. The limor1 scripts recognize them by an \sphinxcode{\sphinxupquote{i}} attached to
-the value.
-\end{sphinxadmonition}
+An imaginary frequency is printed with a trailing \sphinxcode{\sphinxupquote{i}}. Planar ammonia, the transition state of the inversion,
+gives one:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+ |    1 |  845.22i|   1.21 | 357.748 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+\end{sphinxVerbatim}
 
 
+
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{grep "i|" nh3\_freq.out}} therefore finds the imaginary modes.
 
 
 \subsection{Step 6: if a frequency is imaginary, re\sphinxhyphen{}optimize}
@@ -3010,8 +3005,8 @@ group is parsed as keywords, so do not put notes there.
 
 
 \sphinxAtStartPar
-One user’s input opened a group with \sphinxcode{\sphinxupquote{\&}} instead of \sphinxcode{\sphinxupquote{\$}} (\sphinxcode{\sphinxupquote{\&dft func=PBE \$end}}) and ran. That group set only the
-default functional, so the run does not show whether \sphinxcode{\sphinxupquote{\&}} is accepted. Always use \sphinxcode{\sphinxupquote{\$}}.
+A group opened with \sphinxcode{\sphinxupquote{\&}} instead of \sphinxcode{\sphinxupquote{\$}} is ignored like any other text: in version 25, \sphinxcode{\sphinxupquote{\&dft func=BLYP \$end}} left the
+functional at PBE, with no message. Always use \sphinxcode{\sphinxupquote{\$}}.
 
 
 
@@ -3426,7 +3421,7 @@ Job type, level of theory, basis\sphinxhyphen{}set file, Hamiltonian and printin
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{gradient}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default gradient, check); 02 \S{}3.2 (pri: default gradient); 03 \S{}5; 04 \#69\sphinxhyphen{}\#73, \#145, \#478, \#497; 01 \S{}4.2; 08 t02, t18
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default gradient, check); 02 \S{}3.2 (pri: default gradient); 03 \S{}5; 04 \#69\sphinxhyphen{}\#73, \#145, \#478, \#497; 01 \S{}4.2; 08 t02, t18, t26, t34, t36, t37
 
 \sphinxAtStartPar
 Job type.
@@ -3486,14 +3481,14 @@ Optimization followed by a Hessian at the final geometry. The only combined task
 \sphinxcode{\sphinxupquote{irc}}
 &
 \sphinxAtStartPar
-Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (\sphinxcode{\sphinxupquote{\$Energy}}).
+Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (\sphinxcode{\sphinxupquote{\$Energy}}). Each point is printed on \sphinxcode{\sphinxupquote{IRC\textgreater{}}} lines with its distance and energy.
 \\
 \sphinxhline
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{scan}}
 &
 \sphinxAtStartPar
-Relaxed potential\sphinxhyphen{}energy\sphinxhyphen{}surface scan over the coordinates in \sphinxcode{\sphinxupquote{\$optimize fix}}.
+Relaxed potential\sphinxhyphen{}energy\sphinxhyphen{}surface scan over the coordinates in \sphinxcode{\sphinxupquote{\$optimize fix}}. The structures and energies are summarized on \sphinxcode{\sphinxupquote{SCAN\textgreater{}}} lines at the end.
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3507,7 +3502,7 @@ NMR shielding tensors. Works only with \sphinxcode{\sphinxupquote{theory=dft}}.
 \sphinxcode{\sphinxupquote{dipole}}
 &
 \sphinxAtStartPar
-Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities).
+Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a \sphinxcode{\sphinxupquote{num\textgreater{}}} block.
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3605,7 +3600,7 @@ and others) that are untested or need data that is not distributed.
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{dft}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default dft); 06 \S{}3 (v5 ab initio list); 03 \S{}5 (Evgeniy 2011 test); 04 \#96, \#99, \#307\sphinxhyphen{}\#310; 01 \S{}3.1, \S{}4.2; 08 t02, t08, t17
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf (default dft); 06 \S{}3 (v5 ab initio list); 03 \S{}5 (Evgeniy 2011 test); 04 \#96, \#99, \#307\sphinxhyphen{}\#310; 01 \S{}3.1, \S{}4.2; 08 t02, t08, t17, t31\sphinxhyphen{}t33, t38, t39
 
 \sphinxAtStartPar
 Theoretical method.
@@ -3637,14 +3632,14 @@ GGA DFT with density fitting. Hybrid functionals are \sphinxstylestrong{not} app
 \sphinxcode{\sphinxupquote{ridft}}
 &
 \sphinxAtStartPar
-Hybrid DFT with exact exchange via the resolution\sphinxhyphen{}of\sphinxhyphen{}identity (RI) approximation. Required for hybrid functionals.
+Hybrid DFT with exact exchange via the resolution\sphinxhyphen{}of\sphinxhyphen{}identity (RI) approximation. Required for hybrid functionals; the default functional is then \sphinxcode{\sphinxupquote{PBE1}}. Hessians are numerical.
 \\
 \sphinxhline
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{DFT\_n4}}
 &
 \sphinxAtStartPar
-Newer DFT variant, used in the official example inputs with \sphinxcode{\sphinxupquote{func=LPBEVV}} (2025). \sphinxstyleemphasis{(undocumented)}
+Newer DFT variant, used in the official example inputs with \sphinxcode{\sphinxupquote{func=LPBEVV}} (2025). Runs in version 25 (summary box: \sphinxcode{\sphinxupquote{DFT\_N4}}); what it changes is not documented. \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3658,7 +3653,7 @@ GGA time\sphinxhyphen{}dependent DFT (no hybrid TDDFT).
 \sphinxcode{\sphinxupquote{rimp2}}
 &
 \sphinxAtStartPar
-RI\sphinxhyphen{}MP2.
+RI\sphinxhyphen{}MP2. Hessians are numerical.
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3756,7 +3751,7 @@ Linear\sphinxhyphen{}response (EOM) CCSD for excited states (RHF). \sphinxstylee
 \sphinxcode{\sphinxupquote{qm\_n3}}
 &
 \sphinxAtStartPar
-Laikov’s semiempirical QM model. Needs \sphinxcode{\sphinxupquote{basis=qm.in}}; parameters exist for H, Li\textendash{}F, Na\textendash{}Cl, Sc\textendash{}Cu. \sphinxstyleemphasis{(undocumented)}
+Laikov’s semiempirical QM model. Needs \sphinxcode{\sphinxupquote{basis=qm.in}} and no \sphinxcode{\sphinxupquote{set=}}; parameters exist for H, Li\textendash{}F, Na\textendash{}Cl, Sc\textendash{}Cu. Runs in version 25, with a short output of its own (no summary box, no \sphinxcode{\sphinxupquote{E  =}} line). \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -3779,7 +3774,8 @@ stops right after printing the basis sets, with no error message in the output a
 \sphinxAtStartPar
 The ab initio list comes from the v6 documentation and a 2011 user test, which was energy\sphinxhyphen{}only. In version 25,
 water energies run to completion with \sphinxcode{\sphinxupquote{hf}}, \sphinxcode{\sphinxupquote{rihf}}, \sphinxcode{\sphinxupquote{cis}}, \sphinxcode{\sphinxupquote{mp2}}, \sphinxcode{\sphinxupquote{mp3}}, \sphinxcode{\sphinxupquote{mp4dq}}, \sphinxcode{\sphinxupquote{mp4sdq}}, \sphinxcode{\sphinxupquote{mp4sdtq}}, \sphinxcode{\sphinxupquote{ccs}},
-\sphinxcode{\sphinxupquote{ccd}}, \sphinxcode{\sphinxupquote{ccsd}} and \sphinxcode{\sphinxupquote{ccsd4t}}; gradients with these methods were not tested. These
+\sphinxcode{\sphinxupquote{ccd}}, \sphinxcode{\sphinxupquote{ccsd}} and \sphinxcode{\sphinxupquote{ccsd4t}}; an \sphinxcode{\sphinxupquote{hf}} optimization also worked, so HF gradients exist. For \sphinxcode{\sphinxupquote{ridft}} and
+\sphinxcode{\sphinxupquote{rimp2}}, \sphinxcode{\sphinxupquote{task=hessian}} works by finite differences of the gradient (\sphinxcode{\sphinxupquote{NUMERICAL COMPUTATION OF SECOND DERIVATIVES}}); for \sphinxcode{\sphinxupquote{dft}} it is analytic. These
 were reported \sphinxstylestrong{not} working in v6: \sphinxcode{\sphinxupquote{mp4}}, \sphinxcode{\sphinxupquote{rimp4}}, \sphinxcode{\sphinxupquote{rimp4sdtq}}, \sphinxcode{\sphinxupquote{rimp4sdq}}, \sphinxcode{\sphinxupquote{riccsd}}, \sphinxcode{\sphinxupquote{riccsd4t}}. They
 either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
 CCSDT, …); none has been reported working.
@@ -3795,12 +3791,14 @@ CCSDT, …); none has been reported working.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} list\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 08 t33
 
 \sphinxAtStartPar
 For excited\sphinxhyphen{}state methods. The first value is the excited state n whose properties are computed; the second
-is the number of states N included in the iterative solution of the equations (\sphinxcode{\sphinxupquote{state=n,N}}).
+is the number of states N included in the iterative solution of the equations (\sphinxcode{\sphinxupquote{state=n,N}}). In version 25,
+\sphinxcode{\sphinxupquote{theory=tddft}} with \sphinxcode{\sphinxupquote{state=1,5}} printed all five states in an \sphinxcode{\sphinxupquote{Electronic Spectrum:}} table (excitation energy,
+wavelength, transition moment, oscillator strength), and \sphinxcode{\sphinxupquote{E  =}} was the total energy of state 1.
 
 
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{basis}}}
@@ -3839,8 +3837,8 @@ runs.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0}}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 01 \S{}3.3; 04 \#207\sphinxhyphen{}\#208, \#336
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 01 \S{}3.3; 04 \#207\sphinxhyphen{}\#208, \#336; 08 t35
 
 \sphinxAtStartPar
 Four\sphinxhyphen{}component option.
@@ -3894,8 +3892,8 @@ Required with the relativistic basis file \sphinxcode{\sphinxupquote{basis4.in}}
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 01 \S{}4.2; 06 \S{}1
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 01 \S{}4.2; 06 \S{}1; 08 t35
 
 \sphinxAtStartPar
 Default: \sphinxcode{\sphinxupquote{finite}} for four\sphinxhyphen{}component theory, \sphinxcode{\sphinxupquote{point}} for non\sphinxhyphen{}relativistic theory.
@@ -3939,7 +3937,9 @@ Point\sphinxhyphen{}nucleus model.
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-A basis optimized for a point nucleus must not be used with the finite\sphinxhyphen{}nucleus model, and vice versa.
+A basis optimized for a point nucleus must not be used with the finite\sphinxhyphen{}nucleus model, and vice versa. With
+\sphinxcode{\sphinxupquote{four=1}} and no \sphinxcode{\sphinxupquote{nucleus=}}, version 25 prints \sphinxcode{\sphinxupquote{Finite nucleus model (1):}} with the Gaussian parameters of each
+element.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -4042,12 +4042,13 @@ Suppress the printout of internal coordinates. \sphinxstyleemphasis{(undocumente
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} string\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 04 \#306
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 04 \#306; 08 t27
 
 \sphinxAtStartPar
 File name for saving SCF vectors. With \sphinxcode{\sphinxupquote{\$guess read=1}} the vectors are read back from the same file.
-This is the basis of the SCF restart technique.
+This is the basis of the SCF restart technique. In version 25, a run with \sphinxcode{\sphinxupquote{\$guess read=1}} prints
+\sphinxcode{\sphinxupquote{Initial Guess (\sphinxhyphen{}1)}} and \sphinxcode{\sphinxupquote{vectors from \textquotesingle{}\textless{}file\textgreater{}\textquotesingle{}}}; the normal guess is printed as \sphinxcode{\sphinxupquote{Initial Guess (2)}}.
 
 \sphinxAtStartPar
 \sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/guess:guess-read}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{read (\$guess)}}}}}
@@ -4259,12 +4260,13 @@ Coordinates in bohr.
 \sphinxstylestrong{Type:} list\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} undocumented · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} 01 \S{}4.7; 04 \#481; 08 t15
+\sphinxstylestrong{Sources:} 01 \S{}4.7; 04 \#481; 08 t15; 08 t30a
 
 \sphinxAtStartPar
 Used as \sphinxcode{\sphinxupquote{sym=1,0.01}} in the official 2023\textendash{}2025 example inputs, apparently to enable symmetry with tolerance 0.01.
 Newer versions report the detected point group (\sphinxcode{\sphinxupquote{symmetry: D6h}}). In version 25, \sphinxcode{\sphinxupquote{sym=1,0.01}} on a slightly
-distorted NH3 printed \sphinxcode{\sphinxupquote{symmetry: C3v    6, unique:    2}} and echoed the geometry symmetrized.
+distorted NH3 printed \sphinxcode{\sphinxupquote{symmetry: C3v    6, unique:    2}} and echoed the geometry symmetrized. On its own it
+does not keep the symmetry during an optimization; add \sphinxcode{\sphinxupquote{\$optimize sym=1}} for that.
 
 \sphinxAtStartPar
 \sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/optimize:optimize-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{sym (\$optimize)}}}}}
@@ -4287,8 +4289,8 @@ Initial guess for the SCF vectors.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 04 \#306; 05 \S{}1
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 04 \#306; 05 \S{}1; 08 t27
 
 \sphinxAtStartPar
 Source of the starting SCF vectors.
@@ -4510,7 +4512,7 @@ Spin\sphinxhyphen{}restricted (available only for a few methods).
 \sphinxstylestrong{Type:} list\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{1e\sphinxhyphen{}6,1e\sphinxhyphen{}3}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 01 \S{}4.5 (output echo); 05 \S{}2; 04 \#322\sphinxhyphen{}\#324; 08 t01, t07a, t07b
+\sphinxstylestrong{Sources:} input.txt; 01 \S{}4.5 (output echo); 05 \S{}2; 04 \#322\sphinxhyphen{}\#324; 08 t01, t07a, t07b; 08 t22a\sphinxhyphen{}c
 
 \sphinxAtStartPar
 Default: the first value is for SCF and the second for CP\sphinxhyphen{}SCF.
@@ -4521,11 +4523,12 @@ loosen the SCF value to \sphinxcode{\sphinxupquote{1e\sphinxhyphen{}5}} for prel
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-In version 25, \sphinxcode{\sphinxupquote{\$scf convergence=1e\sphinxhyphen{}7 iterations=250 \$end}} stops the run with
-\sphinxcode{\sphinxupquote{*** error in \textquotesingle{}\$scf\textquotesingle{} : unknown name terations}}: the value list of \sphinxcode{\sphinxupquote{convergence}} swallows the first letter of
-the keyword after it. With another keyword in between (\sphinxcode{\sphinxupquote{convergence=1e\sphinxhyphen{}7 procedure=bfgs iterations=250}})
-both values are read. Older versions gave the same error as \sphinxcode{\sphinxupquote{unknown name erations}}. Check the
-\sphinxcode{\sphinxupquote{scf: conv = …; iter=…}} echo line in the output.
+\sphinxstylestrong{Give both values, or put \sphinxcode{\sphinxupquote{convergence}} last.} In version 25, a one\sphinxhyphen{}value \sphinxcode{\sphinxupquote{convergence=1e\sphinxhyphen{}7}} followed by
+\sphinxcode{\sphinxupquote{iterations=250}} stops the run with \sphinxcode{\sphinxupquote{*** error in \textquotesingle{}\$scf\textquotesingle{} : unknown name terations}}, also when the two
+keywords are on separate lines. \sphinxcode{\sphinxupquote{convergence=1e\sphinxhyphen{}7,1e\sphinxhyphen{}3 iterations=250}} works, and so does
+\sphinxcode{\sphinxupquote{iterations=250 convergence=1e\sphinxhyphen{}7}}; \sphinxcode{\sphinxupquote{convergence=1e\sphinxhyphen{}7 procedure=bfgs iterations=250}} also worked. Older
+versions gave the same error as \sphinxcode{\sphinxupquote{unknown name erations}}. Check the \sphinxcode{\sphinxupquote{scf: conv = …; iter=…}} echo line in the
+output.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -4704,7 +4707,7 @@ Exchange\textendash{}correlation functional.
 \sphinxstylestrong{Type:} enum\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{PBE}}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 01 \S{}3.2; 03 \S{}5 (strings); 04 \S{}0; 08 t02
+\sphinxstylestrong{Sources:} input.txt; 01 \S{}3.2; 03 \S{}5 (strings); 04 \S{}0; 08 t02; 08 t31, t38
 
 \sphinxAtStartPar
 Default: \sphinxcode{\sphinxupquote{PBE}} (the default GGA); \sphinxcode{\sphinxupquote{PBE1}} for \sphinxcode{\sphinxupquote{theory=ridft}}.
@@ -4781,14 +4784,14 @@ Becke three\sphinxhyphen{}parameter hybrid (see notes).
 \sphinxcode{\sphinxupquote{LPBEVV}}
 &
 \sphinxAtStartPar
-Newer functional used in the official example inputs with \sphinxcode{\sphinxupquote{theory=DFT\_n4}} (2025). \sphinxstyleemphasis{(undocumented)}
+Newer functional used in the official example inputs with \sphinxcode{\sphinxupquote{theory=DFT\_n4}} (2025). Runs in version 25; its definition is not documented. \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxhline
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{LPBEVVV}}
 &
 \sphinxAtStartPar
-Newer functional used in the official example inputs with \sphinxcode{\sphinxupquote{theory=ridft}} (2023\textendash{}2025). \sphinxstyleemphasis{(undocumented)}
+Newer functional used in the official example inputs with \sphinxcode{\sphinxupquote{theory=ridft}} (2023\textendash{}2025). Runs in version 25; its definition is not documented. \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -5057,8 +5060,8 @@ Geometry optimization, saddle\sphinxhyphen{}point search, IRC and relaxed scans.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0}}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 04 \#216; 03 \S{}9
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 04 \#216; 03 \S{}9; 08 t25
 
 \sphinxAtStartPar
 Type of stationary point sought.
@@ -5101,7 +5104,9 @@ Optimize to a saddle point.
 \sphinxAtStartPar
 A saddle\sphinxhyphen{}point search needs an accurate Hessian in the input: compute one with \sphinxcode{\sphinxupquote{task=hessian}} and append its
 \sphinxcode{\sphinxupquote{\$Energy}} block (the \sphinxcode{\sphinxupquote{eng\textgreater{}}} lines). A usual route is scan \(\rightarrow\) Hessian at the scan maximum \(\rightarrow\) \sphinxcode{\sphinxupquote{saddle=1}} \(\rightarrow\)
-\sphinxcode{\sphinxupquote{task=hessian}} to confirm one imaginary frequency \(\rightarrow\) IRC.
+\sphinxcode{\sphinxupquote{task=hessian}} to confirm one imaginary frequency \(\rightarrow\) IRC. In version 25 the output confirms the search with
+\sphinxcode{\sphinxupquote{Saddle point search: follow = 1}} and, when a Hessian was read from \sphinxcode{\sphinxupquote{\$Energy}}, \sphinxcode{\sphinxupquote{Lowest eigenvalues:}} with one
+negative value.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -5152,12 +5157,12 @@ Trust radius (the largest allowed step), given as maximum, minimum and initial v
 \index{follow (\$optimize)@\spxentry{follow}\spxextra{\$optimize}}\ignorespaces 
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} integer\\
-\sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf
+\sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{1}}\\
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 08 t25
 
 \sphinxAtStartPar
-Default: \sphinxcode{\sphinxupquote{1}} according to \sphinxcode{\sphinxupquote{Dft.rtf}}.
+Default: \sphinxcode{\sphinxupquote{1}} according to \sphinxcode{\sphinxupquote{Dft.rtf}}; version 25 echoes \sphinxcode{\sphinxupquote{Saddle point search: follow = 1}}.
 
 \sphinxAtStartPar
 Follow the n\sphinxhyphen{}th Hessian eigenvector in a saddle\sphinxhyphen{}point search.
@@ -5250,11 +5255,12 @@ the internal\sphinxhyphen{}coordinate table.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0}}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 02 \S{}3.2; 04 \S{}0
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 02 \S{}3.2; 04 \S{}0; 08 t26
 
 \sphinxAtStartPar
-IRC direction. A full IRC takes two runs, one per direction. Re\sphinxhyphen{}optimize the endpoints afterwards, because
+IRC direction. A full IRC takes two runs, one per direction: version 25 with the default \sphinxcode{\sphinxupquote{back=0}}
+followed one direction only (\sphinxcode{\sphinxupquote{n = 1, back = 0, down = 1}} in the output). Re\sphinxhyphen{}optimize the endpoints afterwards, because
 an IRC does not end at a converged minimum.
 
 
@@ -5301,11 +5307,13 @@ Trace the IRC path backwards.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} integer\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 08 t26, t37
 
 \sphinxAtStartPar
 Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.
+In a scan the points include both ends: \sphinxcode{\sphinxupquote{points=4}} gives s = 0, 1/3, 2/3 and 1. An IRC can stop before
+\sphinxcode{\sphinxupquote{points}} is reached when it arrives at a minimum.
 
 \sphinxAtStartPar
 \sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/optimize:optimize-value}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{value (\$optimize)}}}}}
@@ -5316,12 +5324,12 @@ Number of points to optimize in an IRC run, or number of constrained geometry op
 \index{radius (\$optimize)@\spxentry{radius}\spxextra{\$optimize}}\ignorespaces 
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} real\\
-\sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 04 \#298
+\sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{0.1}}\\
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; Dft.rtf; 04 \#298; 08 t26
 
 \sphinxAtStartPar
-Default: \sphinxcode{\sphinxupquote{0.2}} according to \sphinxcode{\sphinxupquote{Dft.rtf}} (older version).
+Default: \sphinxcode{\sphinxupquote{0.1}} as echoed by version 25 (\sphinxcode{\sphinxupquote{r = 0.1000000000}}); \sphinxcode{\sphinxupquote{Dft.rtf}} gives 0.2 (older version).
 
 \sphinxAtStartPar
 Radius, in mass\sphinxhyphen{}weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
@@ -5329,8 +5337,9 @@ this distance apart. The IRC coordinate is reported in bohr·amu\textasciicircum
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-\sphinxcode{\sphinxupquote{Vicinity of a Stationary Point(?) \sphinxhyphen{}\sphinxhyphen{}\sphinxhyphen{} STOP.}} during an IRC means the energy did not decrease on that step.
-Changing the step size is the reported fix.
+\sphinxcode{\sphinxupquote{Vicinity of a Stationary Point(?) \sphinxhyphen{}\sphinxhyphen{}\sphinxhyphen{} STOP.}} ends an IRC that has reached the region of a minimum; in
+version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
+decrease on a step; changing the step size is the reported fix there.
 \end{sphinxadmonition}
 
 
@@ -5419,8 +5428,8 @@ Special coordinate for linear fragments (meaning not described).
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} list\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 02 \S{}3.2; 03 \S{}5 (wish list); 04 \#372\sphinxhyphen{}\#373
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 02 \S{}3.2; 03 \S{}5 (wish list); 04 \#372\sphinxhyphen{}\#373; 08 t37
 
 \sphinxAtStartPar
 Internal coordinates to keep fixed during the optimization, in the same five\sphinxhyphen{}integer format as
@@ -5443,8 +5452,8 @@ be constrained to stay equal.
 \sphinxstylestrong{Type:} indexed\sphinxhyphen{}array\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Units:} Å and degrees\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 03 \S{}5, \S{}8; 04 \#278\sphinxhyphen{}\#279, \#373
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 03 \S{}5, \S{}8; 04 \#278\sphinxhyphen{}\#279, \#373; 08 t37
 
 \sphinxAtStartPar
 Default: computed from the input geometry.
@@ -5547,12 +5556,14 @@ Detailed
 \sphinxstylestrong{Type:} switch\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} undocumented · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} 01 \S{}4.6; 04 \#481; 08 t15
+\sphinxstylestrong{Sources:} 01 \S{}4.6; 04 \#481; 08 t15; 08 t30b
 
 \sphinxAtStartPar
 Used as \sphinxcode{\sphinxupquote{sym=1}} in the official 2023\textendash{}2025 example inputs. In version 25, together with \sphinxcode{\sphinxupquote{\$molecule sym=1,0.01}},
 the optimizer switched to Cartesian coordinates (\sphinxcode{\sphinxupquote{Coordinates: cartesian}}), printed \sphinxcode{\sphinxupquote{symmetry: C3v (6)}} at
-every step, and returned an exactly symmetric structure followed by \sphinxcode{\sphinxupquote{MOL\textgreater{} symmetry: C3v}}.
+every step, and returned an exactly symmetric structure followed by \sphinxcode{\sphinxupquote{MOL\textgreater{} symmetry: C3v}}. Without
+\sphinxcode{\sphinxupquote{\$molecule sym=}}, \sphinxcode{\sphinxupquote{\$optimize sym=1}} only switches to Cartesian coordinates and reports \sphinxcode{\sphinxupquote{symmetry: C1 (1)}},
+so give both options.
 
 \sphinxAtStartPar
 \sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{sym (\$molecule)}}}}}
@@ -5767,8 +5778,8 @@ Reference shieldings and extra points for NMR shielding calculations.
 \sphinxAtStartPar
 \sphinxstylestrong{Type:} indexed\sphinxhyphen{}array\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
-\sphinxstylestrong{Status:} current · not verified\\
-\sphinxstylestrong{Sources:} input.txt; 04 \#69; 02 \S{}5.7
+\sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} input.txt; 04 \#69; 02 \S{}5.7; 08 t34
 
 \sphinxAtStartPar
 Reference shielding constants, indexed by atomic number, for computing chemical shifts. Values are needed
@@ -5778,7 +5789,8 @@ only for the elements present in the molecule.
 \sphinxAtStartPar
 A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
 different TMS values (e.g. \sphinxcode{\sphinxupquote{standard(1)=31.3867 standard(6)=181.9781}}) for other settings. Compute TMS with
-exactly the settings of the production run.
+exactly the settings of the production run. Without \sphinxcode{\sphinxupquote{standard}}, version 25 prints \sphinxcode{\sphinxupquote{shift=}} as minus the
+isotropic shielding.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -5885,11 +5897,12 @@ Cartesian gradient (3N values).
 \sphinxstylestrong{Type:} list\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Units:} au\\
-\sphinxstylestrong{Status:} undocumented · not verified\\
-\sphinxstylestrong{Sources:} 02 \S{}3.2
+\sphinxstylestrong{Status:} undocumented · verified on 25 (2025.02.28)\\
+\sphinxstylestrong{Sources:} 02 \S{}3.2; 08 t24, t25
 
 \sphinxAtStartPar
-Hessian as a lower triangle, 3N(3N+1)/2 values.
+Hessian as a lower triangle, 3N(3N+1)/2 values. Written by \sphinxcode{\sphinxupquote{task=hessian}} on \sphinxcode{\sphinxupquote{eng\textgreater{}}} lines; in version 25 a
+\sphinxcode{\sphinxupquote{saddle=1}} optimization and an IRC read it back from an appended \sphinxcode{\sphinxupquote{\$Energy}} group.
 
 \sphinxAtStartPar
 \sphinxstylestrong{See also:} {\hyperref[\detokenize{reference/optimize:optimize-saddle}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{saddle (\$optimize)}}}}}
@@ -6279,8 +6292,17 @@ explains.
 
 
 \sphinxAtStartPar
-Until the safe orders are known, put \sphinxcode{\sphinxupquote{convergence}} last in the group, or give it on a line of its own, and confirm
-both values in the \sphinxcode{\sphinxupquote{scf:}} echo line of the output, for example \sphinxcode{\sphinxupquote{scf: conv = 1.0e\sphinxhyphen{}07, 1.0e\sphinxhyphen{}03; iter=250,16}}.
+Further tests on version 25 narrowed it down. The problem is a \sphinxcode{\sphinxupquote{convergence=}} with \sphinxstylestrong{one} value followed by another
+keyword, also on the next line. Both of these work:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYGZdl{}scf convergence=1e\PYGZhy{}7,1e\PYGZhy{}3 iterations=250 \PYGZdl{}end
+\PYGZdl{}scf iterations=250 convergence=1e\PYGZhy{}7 \PYGZdl{}end
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+So give both values, or put \sphinxcode{\sphinxupquote{convergence}} last, and confirm the values in the \sphinxcode{\sphinxupquote{scf:}} echo line of the output, for
+example \sphinxcode{\sphinxupquote{scf: conv = 1.0e\sphinxhyphen{}07, 1.0e\sphinxhyphen{}03; iter=250,16}}.
 
 
 
@@ -6406,6 +6428,12 @@ Repeat until the SCF converges.
 \PYGZdl{}scf iterations=10 \PYGZdl{}end
 \PYGZdl{}guess read=1 \PYGZdl{}end
 \end{sphinxVerbatim}
+
+
+
+\sphinxAtStartPar
+In version 25 the output of a restarted run shows \sphinxcode{\sphinxupquote{Initial Guess (\sphinxhyphen{}1)}} and \sphinxcode{\sphinxupquote{vectors from \textquotesingle{}job.vec\textquotesingle{}}}; a normal start
+shows \sphinxcode{\sphinxupquote{Initial Guess (2)}}.
 
 
 
@@ -6609,10 +6637,17 @@ the SCF failed on the first step. See {\hyperref[\detokenize{troubleshooting/com
 \subsection{A symmetric structure stays symmetric}
 \label{\detokenize{troubleshooting/common-problems:a-symmetric-structure-stays-symmetric}}
 \sphinxAtStartPar
-Priroda always works in C1, but a symmetric starting geometry often stays symmetric through an optimization that
-converges normally, and the Hessian then shows a saddle point. If the optimization did not break the symmetry, always
+Without the symmetry options, Priroda works in C1, but a symmetric starting geometry often stays symmetric through
+an optimization that converges normally, and the Hessian then shows a saddle point. If the optimization did not break the symmetry, always
 compute the Hessian. If it has an imaginary frequency, paste its \sphinxcode{\sphinxupquote{\$Energy}} block into the input, displace the
 geometry along that mode if needed, and optimize again.
+
+
+
+\sphinxAtStartPar
+Version 25 can also use symmetry on purpose: \sphinxcode{\sphinxupquote{\$molecule sym=1,0.01}} detects the point group and symmetrizes the
+input geometry, and \sphinxcode{\sphinxupquote{\$optimize sym=1}} keeps that symmetry during the optimization. Both options are needed. See
+{\hyperref[\detokenize{reference/molecule:molecule-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$molecule sym}}}}} and {\hyperref[\detokenize{reference/optimize:optimize-sym}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize sym}}}}}.
 
 
 
@@ -6649,6 +6684,12 @@ from an unoptimized geometry gives two points with {\hyperref[\detokenize{refere
 
 \subsection{IRC stops with \sphinxstyleliteralintitle{\sphinxupquote{Vicinity of a Stationary Point(?) \sphinxhyphen{}\sphinxhyphen{}\sphinxhyphen{} STOP.}}}
 \label{\detokenize{troubleshooting/common-problems:irc-stops-with-vicinity-of-a-stationary-point-stop}}
+\sphinxAtStartPar
+This message is also the normal end of an IRC that has reached a minimum: a version 25 test IRC of the ammonia
+inversion ended with it after 7 points, at the minimum. It is a problem only when it comes early.
+
+
+
 \sphinxAtStartPar
 On the first IRC step this means that the energy did not go down on that step. The reported fix is to change the
 step size; see {\hyperref[\detokenize{reference/optimize:optimize-radius}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{radius}}}}}:
@@ -6739,7 +6780,11 @@ have a non\sphinxhyphen{}zero number of basis functions.
 \subsection{TDDFT oscillator strengths are all zero}
 \label{\detokenize{troubleshooting/common-problems:tddft-oscillator-strengths-are-all-zero}}
 \sphinxAtStartPar
-With \sphinxcode{\sphinxupquote{restrict=0}}, singlet and triplet excitations get mixed. Use \sphinxcode{\sphinxupquote{restrict=1}} and compute one multiplicity per run.
+A closed\sphinxhyphen{}shell TDDFT run on version 25 printed non\sphinxhyphen{}zero oscillator strengths in its \sphinxcode{\sphinxupquote{Electronic Spectrum:}} table
+with the default settings. 
+
+\sphinxAtStartPar
+The reported cause of all\sphinxhyphen{}zero values: with \sphinxcode{\sphinxupquote{restrict=0}}, singlet and triplet excitations get mixed. Use \sphinxcode{\sphinxupquote{restrict=1}} and compute one multiplicity per run.
 The user who reported the problem confirmed the fix.
 
 
@@ -7013,9 +7058,11 @@ For RI\sphinxhyphen{}MP2, the v5 documentation suggests a number of processes th
 \subsection{Starting a parallel run on Linux}
 \label{\detokenize{troubleshooting/common-problems:starting-a-parallel-run-on-linux}}
 \sphinxAtStartPar
-The Priroda binary starts its own processes: run \sphinxcode{\sphinxupquote{./p \sphinxhyphen{}np 4 job.in job.out}}. Starting it through the bundled
-\sphinxcode{\sphinxupquote{mpiexec}} failed with \sphinxcode{\sphinxupquote{Error in system call mpiexec: No such file or directory}} or \sphinxcode{\sphinxupquote{mpiexec could not exec p}}. Use
-absolute paths for the binary, the input, the output and the basis file.
+Version 25 must be started through an MPI launcher, such as the \sphinxcode{\sphinxupquote{mpiexec}} from the official site:
+\sphinxcode{\sphinxupquote{./mpiexec \sphinxhyphen{}np 4 ./p job.in job.out}}. \sphinxcode{\sphinxupquote{./p \sphinxhyphen{}np 4 job.in job.out}}, which worked in versions 6 and 10, now stops with
+\sphinxcode{\sphinxupquote{input file \textquotesingle{}\sphinxhyphen{}np\textquotesingle{}?.}}. With version 10, starting through the bundled \sphinxcode{\sphinxupquote{mpiexec}} once failed with
+\sphinxcode{\sphinxupquote{Error in system call mpiexec: No such file or directory}} or \sphinxcode{\sphinxupquote{mpiexec could not exec p}}. Use absolute paths for the
+binary, the input, the output and the basis file.
 
 
 

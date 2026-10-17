@@ -19,8 +19,8 @@ Geometry optimization, saddle-point search, IRC and relaxed scans.
 
 **Type:** switch\
 **Default:** `0`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 04 #216; 03 §9
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 04 #216; 03 §9; 08 t25
 
 Type of stationary point sought.
 
@@ -35,7 +35,9 @@ Type of stationary point sought.
 ```{note}
 A saddle-point search needs an accurate Hessian in the input: compute one with `task=hessian` and append its
 `$Energy` block (the `eng>` lines). A usual route is scan → Hessian at the scan maximum → `saddle=1` →
-`task=hessian` to confirm one imaginary frequency → IRC.
+`task=hessian` to confirm one imaginary frequency → IRC. In version 25 the output confirms the search with
+`Saddle point search: follow = 1` and, when a Hessian was read from `$Energy`, `Lowest eigenvalues:` with one
+negative value.
 ```
 
 **See also:** {ref}`follow ($optimize) <optimize.follow>`, {ref}`H ($Energy) <Energy.H>`
@@ -84,11 +86,11 @@ Trust radius (the largest allowed step), given as maximum, minimum and initial v
 ```
 
 **Type:** integer\
-**Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf
+**Default:** `1`\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 08 t25
 
-Default: `1` according to `Dft.rtf`.
+Default: `1` according to `Dft.rtf`; version 25 echoes `Saddle point search: follow = 1`.
 
 Follow the n-th Hessian eigenvector in a saddle-point search.
 
@@ -151,10 +153,11 @@ the internal-coordinate table.
 
 **Type:** switch\
 **Default:** `0`\
-**Status:** current · not verified\
-**Sources:** input.txt; 02 §3.2; 04 §0
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 02 §3.2; 04 §0; 08 t26
 
-IRC direction. A full IRC takes two runs, one per direction. Re-optimize the endpoints afterwards, because
+IRC direction. A full IRC takes two runs, one per direction: version 25 with the default `back=0`
+followed one direction only (`n = 1, back = 0, down = 1` in the output). Re-optimize the endpoints afterwards, because
 an IRC does not end at a converged minimum.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
@@ -175,10 +178,12 @@ an IRC does not end at a converged minimum.
 
 **Type:** integer\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t26, t37
 
 Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.
+In a scan the points include both ends: `points=4` gives s = 0, 1/3, 2/3 and 1. An IRC can stop before
+`points` is reached when it arrives at a minimum.
 
 **See also:** {ref}`value ($optimize) <optimize.value>`
 
@@ -189,18 +194,19 @@ Number of points to optimize in an IRC run, or number of constrained geometry op
 ```
 
 **Type:** real\
-**Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 04 #298
+**Default:** `0.1`\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 04 #298; 08 t26
 
-Default: `0.2` according to `Dft.rtf` (older version).
+Default: `0.1` as echoed by version 25 (`r = 0.1000000000`); `Dft.rtf` gives 0.2 (older version).
 
 Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
 this distance apart. The IRC coordinate is reported in bohr·amu^1/2.
 
 ```{note}
-`Vicinity of a Stationary Point(?) --- STOP.` during an IRC means the energy did not decrease on that step.
-Changing the step size is the reported fix.
+`Vicinity of a Stationary Point(?) --- STOP.` ends an IRC that has reached the region of a minimum; in
+version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
+decrease on a step; changing the step size is the reported fix there.
 ```
 
 (optimize.coordinates)=
@@ -243,8 +249,8 @@ List of redundant internal coordinates to use, each given as five integers.
 
 **Type:** list\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 02 §3.2; 03 §5 (wish list); 04 #372-#373
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 02 §3.2; 03 §5 (wish list); 04 #372-#373; 08 t37
 
 Internal coordinates to keep fixed during the optimization, in the same five-integer format as
 `coordinates`. Several entries are separated by commas or spaces.
@@ -265,8 +271,8 @@ be constrained to stay equal.
 **Type:** indexed-array\
 **Default:** *none stated*\
 **Units:** Å and degrees\
-**Status:** current · not verified\
-**Sources:** input.txt; 03 §5, §8; 04 #278-#279, #373
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 03 §5, §8; 04 #278-#279, #373; 08 t37
 
 Default: computed from the input geometry.
 
@@ -339,11 +345,13 @@ Amount of optimization output.
 **Type:** switch\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.6; 04 #481; 08 t15
+**Sources:** 01 §4.6; 04 #481; 08 t15; 08 t30b
 
 Used as `sym=1` in the official 2023–2025 example inputs. In version 25, together with `$molecule sym=1,0.01`,
 the optimizer switched to Cartesian coordinates (`Coordinates: cartesian`), printed `symmetry: C3v (6)` at
-every step, and returned an exactly symmetric structure followed by `MOL> symmetry: C3v`.
+every step, and returned an exactly symmetric structure followed by `MOL> symmetry: C3v`. Without
+`$molecule sym=`, `$optimize sym=1` only switches to Cartesian coordinates and reports `symmetry: C1 (1)`,
+so give both options.
 
 **See also:** {ref}`sym ($molecule) <molecule.sym>`
 

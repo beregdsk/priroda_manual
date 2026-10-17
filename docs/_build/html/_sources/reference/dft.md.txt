@@ -18,7 +18,7 @@ Exchange–correlation functional.
 **Type:** enum\
 **Default:** `PBE`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §3.2; 03 §5 (strings); 04 §0; 08 t02
+**Sources:** input.txt; 01 §3.2; 03 §5 (strings); 04 §0; 08 t02; 08 t31, t38
 
 Default: `PBE` (the default GGA); `PBE1` for `theory=ridft`.
 
@@ -36,8 +36,8 @@ Exchange–correlation approximation for DFT methods.
 | `PBE1` | PBE hybrid with 1/4 exact exchange, J. Chem. Phys. 110 (1999) 6158. Default for `theory=ridft`. |
 | `B3LYP_PW` | Becke three-parameter hybrid with PW local correlation (see notes). |
 | `B3LYP` | Becke three-parameter hybrid (see notes). |
-| `LPBEVV` | Newer functional used in the official example inputs with `theory=DFT_n4` (2025). *(undocumented)* |
-| `LPBEVVV` | Newer functional used in the official example inputs with `theory=ridft` (2023–2025). *(undocumented)* |
+| `LPBEVV` | Newer functional used in the official example inputs with `theory=DFT_n4` (2025). Runs in version 25; its definition is not documented. *(undocumented)* |
+| `LPBEVVV` | Newer functional used in the official example inputs with `theory=ridft` (2023–2025). Runs in version 25; its definition is not documented. *(undocumented)* |
 
 ```{note}
 The B3LYP form in Priroda is

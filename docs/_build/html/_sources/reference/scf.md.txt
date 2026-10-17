@@ -43,7 +43,7 @@ Spin restriction.
 **Type:** list\
 **Default:** `1e-6,1e-3`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324; 08 t01, t07a, t07b
+**Sources:** input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c
 
 Default: the first value is for SCF and the second for CP-SCF.
 
@@ -51,11 +51,12 @@ SCF and CP-SCF convergence thresholds. The defaults are recommended. To save tim
 loosen the SCF value to `1e-5` for preliminary geometry optimizations.
 
 ```{note}
-In version 25, `$scf convergence=1e-7 iterations=250 $end` stops the run with
-`*** error in '$scf' : unknown name terations`: the value list of `convergence` swallows the first letter of
-the keyword after it. With another keyword in between (`convergence=1e-7 procedure=bfgs iterations=250`)
-both values are read. Older versions gave the same error as `unknown name erations`. Check the
-`scf: conv = …; iter=…` echo line in the output.
+**Give both values, or put `convergence` last.** In version 25, a one-value `convergence=1e-7` followed by
+`iterations=250` stops the run with `*** error in '$scf' : unknown name terations`, also when the two
+keywords are on separate lines. `convergence=1e-7,1e-3 iterations=250` works, and so does
+`iterations=250 convergence=1e-7`; `convergence=1e-7 procedure=bfgs iterations=250` also worked. Older
+versions gave the same error as `unknown name erations`. Check the `scf: conv = …; iter=…` echo line in the
+output.
 ```
 
 **See also:** {ref}`iterations ($scf) <scf.iterations>`, {ref}`procedure ($scf) <scf.procedure>`

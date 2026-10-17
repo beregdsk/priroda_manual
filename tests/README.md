@@ -23,7 +23,7 @@ the Hessian from t24, and t27b reads the vectors saved by t27a, so run those gro
 After a run, record the answer in the Result column, add it to a `research/` note, then update the keyword YAML
 (`default`, `verified_against`, `status`) or the chapter text and remove the `<!-- verify -->` mark it resolves.
 
-## Round 1 (run 2026-10-17 on version 25, outputs in `runs/20261017-121135/`)
+## Round 1 (run 2026-10-17 on version 25; rerun with round 2, outputs in `runs/20261017-123408/`)
 
 The findings are written up in `research/08_test_runs_v25.md` and folded into the YAML and chapters.
 
@@ -54,43 +54,64 @@ The findings are written up in `research/08_test_runs_v25.md` and folded into th
 | t20 | (t01, no output file) | Does the output go to standard output when no output file is given? | `t20_stdout.stdout` | running.md || Yes. |
 | t21 | (t01 on 2 processes) | Which parallel launch works: `p -np 2 in out` (t21a) or `./mpiexec -np 2 ./p in out` (t21b, if `mpiexec` sits next to `p`)? | Both outputs; same energy as t01 | running.md (parallel runs); PLAN 3a.1 || t21a `p -np 2` failed, no output, exit 1; stderr not captured. t21b not run. |
 
-## Round 2 (not run yet)
+## Round 2 (run 2026-10-17 on version 25, outputs in `runs/20261017-123408/`)
 
 Small inputs again (water, ammonia, OH), except t32b, t33 and t36, which may take a few minutes.
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| t21 | (t01 on 2 processes) | Rerun of the parallel launch, now with stderr kept. Which form works: `p -np 2` (t21a), the bundled `mpiexec` (t21b), or a system `mpirun` (t21c)? | `t21*.stdout` for error text; the process lines at the top of each output; same energy as t01 | running.md (parallel runs); PLAN 3a.1 | |
-| t22a | `t22a_scf_conv_last.in` | Is `iterations=250 convergence=1e-7` (convergence last) read correctly? | `scf: conv = …; iter=…` line, or an error | `scf.convergence`; common-problems (`$scf` settings) | |
-| t22b | `t22b_scf_conv_own_line.in` | Does a line break end the value list (`convergence` and `iterations` on separate lines)? | as t22a | as t22a | |
-| t22c | `t22c_scf_conv_two_values.in` | Does `convergence=1e-7,1e-3 iterations=250` give the forum error `unknown name erations`? | Error text | as t22a | |
-| t23 | `t23_ampersand_group.in` | Is a group opened with `&` (`&dft func=BLYP $end`) read? | `Approximation to E(xc)` in the summary box: BLYP or PBE | input-syntax (text outside groups) | |
-| t24 | `t24_hessian_planar_nh3.in` | Planar NH3 is the inversion transition state. How is the imaginary frequency printed? | Frequency table; the first mode | getting-started (step 5); limor1 scripts expect an `i` suffix | |
-| t25 | `t25_saddle_from_hessian.in` | TS optimization with `saddle=1` and the t24 Hessian appended as `$Energy`. Is the Hessian read? | A message about reading the Hessian; steps; `OPTIMIZATION CONVERGED`; planar final geometry | `optimize.saddle`, `Energy.H`; input-syntax (`$Energy`) | |
-| t26 | `t26_irc_from_hessian.in` | IRC from the planar TS with the t24 Hessian, `points=10` | Path points, energies, the final message; one or both directions | `control.task` (irc), `optimize.points`, `optimize.back` | |
-| t27a/b | `t27a_save_vectors.in`, `t27b_read_vectors.in` | Does `save=` write vectors, and does `$guess read=1` read them? | t27b: initial guess line and fewer SCF iterations than t27a | `control.save`, `guess.read`; common-problems (SCF restart) | |
-| t28a | `t28a_oh_more_iterations.in` | Does the OH radical of t10 converge with `iterations=100`? | `converged!` and the iteration count | common-problems (SCF) | |
-| t28b | `t28b_oh_bfgs.in` | Same with `procedure=bfgs` | as t28a | `scf.procedure` | |
-| t29 | `t29_mol_block_charge.in` | Does the final `MOL>` block repeat `charge=-1` for OH⁻? | The `MOL>` lines | getting-started (step 2) | |
-| t30a | `t30a_molecule_sym_only.in` | What does `$molecule sym=1,0.01` alone do? | `symmetry:` lines; `Coordinates:` in the optimizer echo | `molecule.sym` | |
-| t30b | `t30b_optimize_sym_only.in` | What does `$optimize sym=1` alone do? | as t30a | `optimize.sym` | |
-| t31a | `t31a_ridft_default_functional.in` | Is PBE1 the default functional for `theory=ridft`? | `Approximation to E(xc)` | `dft.functional` | |
-| t31b | `t31b_ridft_pbe1.in` | Hybrid energy with `ridft` + `PBE1` (the correct way) | Normal end, energy | about.md hybrid warning | |
-| t32a | `t32a_hessian_ridft.in` | Does `task=hessian` work with `ridft` (analytic or numerical)? | Hessian heading; frequencies | about.md capability matrix (`?` cells) | |
-| t32b | `t32b_hessian_rimp2.in` | Same with `rimp2` | as t32a; run time | capability matrix | |
-| t32c | `t32c_optimize_hf.in` | Do gradients work with `theory=hf`? | `OPTIMIZATION CONVERGED` | `control.theory` notes | |
-| t33 | `t33_tddft.in` | GGA TDDFT with `state=1,5` | Excited-state table: energies, oscillator strengths | `control.state`; about.md (TDDFT) | |
-| t34 | `t34_nmr.in` | NMR shieldings with `theory=dft` | Shielding table format | `control.task` (nmr), `$nmr` | |
-| t35 | `t35_four_relativistic.in` | Scalar-relativistic `four=1` with `basis4.in` (needs `BASIS4`) | `Hamiltonian: scalar-relativistic`; nucleus model; energy | `control.four`, `control.nucleus` | |
-| t36 | `t36_task_dipole.in` | `task=dipole` (numerical polarizabilities, for Raman) | What is printed; run time | `control.task` (dipole) | |
-| t37 | `t37_scan.in` | Relaxed scan, adapted from the limor1 `NH3_scan-fix` example | One optimization per point; the per-point output marker; the dihedral sign | `control.task` (scan), `optimize.fix`, `optimize.value` | |
-| t38a | `t38a_dft_n4_lpbevv.in` | Does `theory=DFT_n4` with `functional=LPBEVV` (2025 official inputs) run? | Method and functional in the summary box; energy | `control.theory`, `dft.functional` | |
-| t38b | `t38b_ridft_lpbevvv.in` | Does `functional=LPBEVVV` with `ridft` run? | as t38a | `dft.functional` | |
-| t39 | `t39_qm_n3.in` | Semiempirical QM model with `qm.in` (needs `QMBASIS`) | Energy; run time | `control.theory` (qm_n3) | |
-| t40 | `t40_coordinated_spelling.in` | Is `$optimize coordinated=` (the `input.txt` spelling) accepted? Any unique prefix of `coordinates` would be. | Error `unknown name coordinated`, or a normal run | `optimize.coordinates` | |
+| t21 | (t01 on 2 processes) | Rerun of the parallel launch, now with stderr kept. Which form works: `p -np 2` (t21a), the bundled `mpiexec` (t21b), or a system `mpirun` (t21c)? | `t21*.stdout` for error text; the process lines at the top of each output; same energy as t01 | running.md (parallel runs); PLAN 3a.1 || `p -np 2` rejected: `input file '-np'?.` then `MPI_Abort`. t21b/t21c not run (no launcher available). Retest in round 3. |
+| t22a | `t22a_scf_conv_last.in` | Is `iterations=250 convergence=1e-7` (convergence last) read correctly? | `scf: conv = …; iter=…` line, or an error | `scf.convergence`; common-problems (`$scf` settings) || Works. |
+| t22b | `t22b_scf_conv_own_line.in` | Does a line break end the value list (`convergence` and `iterations` on separate lines)? | as t22a | as t22a || Fails (`terations`): a line break does not help. |
+| t22c | `t22c_scf_conv_two_values.in` | Does `convergence=1e-7,1e-3 iterations=250` give the forum error `unknown name erations`? | Error text | as t22a || Works. Rule: give both values or put `convergence` last. |
+| t23 | `t23_ampersand_group.in` | Is a group opened with `&` (`&dft func=BLYP $end`) read? | `Approximation to E(xc)` in the summary box: BLYP or PBE | input-syntax (text outside groups) || Silently ignored (PBE used). |
+| t24 | `t24_hessian_planar_nh3.in` | Planar NH3 is the inversion transition state. How is the imaginary frequency printed? | Frequency table; the first mode | getting-started (step 5); limor1 scripts expect an `i` suffix || One imaginary mode, printed `845.22i`. |
+| t25 | `t25_saddle_from_hessian.in` | TS optimization with `saddle=1` and the t24 Hessian appended as `$Energy`. Is the Hessian read? | A message about reading the Hessian; steps; `OPTIMIZATION CONVERGED`; planar final geometry | `optimize.saddle`, `Energy.H`; input-syntax (`$Energy`) || Hessian read (`Lowest eigenvalues: -0.02919 …`), converged, stays planar. |
+| t26 | `t26_irc_from_hessian.in` | IRC from the planar TS with the t24 Hessian, `points=10` | Path points, energies, the final message; one or both directions | `control.task` (irc), `optimize.points`, `optimize.back` || Works; `IRC>` lines; one direction; 7 points, ends with `Vicinity of a Stationary Point(?) --- STOP.` at the minimum. |
+| t27a/b | `t27a_save_vectors.in`, `t27b_read_vectors.in` | Does `save=` write vectors, and does `$guess read=1` read them? | t27b: initial guess line and fewer SCF iterations than t27a | `control.save`, `guess.read`; common-problems (SCF restart) || Works: `Initial Guess (-1)`, `vectors from 't27.vec'`, 1 iteration. |
+| t28a | `t28a_oh_more_iterations.in` | Does the OH radical of t10 converge with `iterations=100`? | `converged!` and the iteration count | common-problems (SCF) || Converges after 34 iterations. |
+| t28b | `t28b_oh_bfgs.in` | Same with `procedure=bfgs` | as t28a | `scf.procedure` || Converges after 29 iterations (E 3·10⁻⁶ higher). |
+| t29 | `t29_mol_block_charge.in` | Does the final `MOL>` block repeat `charge=-1` for OH⁻? | The `MOL>` lines | getting-started (step 2) || Yes: `MOL> charge=-1` (no `mult=` line for the default 1). |
+| t30a | `t30a_molecule_sym_only.in` | What does `$molecule sym=1,0.01` alone do? | `symmetry:` lines; `Coordinates:` in the optimizer echo | `molecule.sym` || Detects C3v and symmetrizes the input; optimizer internal, symmetry not kept. |
+| t30b | `t30b_optimize_sym_only.in` | What does `$optimize sym=1` alone do? | as t30a | `optimize.sym` || Cartesian optimizer, `symmetry: C1`: no effect alone. Both options are needed. |
+| t31a | `t31a_ridft_default_functional.in` | Is PBE1 the default functional for `theory=ridft`? | `Approximation to E(xc)` | `dft.functional` || Yes, PBE1. |
+| t31b | `t31b_ridft_pbe1.in` | Hybrid energy with `ridft` + `PBE1` (the correct way) | Normal end, energy | about.md hybrid warning || Works, same energy as t31a. |
+| t32a | `t32a_hessian_ridft.in` | Does `task=hessian` work with `ridft` (analytic or numerical)? | Hessian heading; frequencies | about.md capability matrix (`?` cells) || Works, numerical. |
+| t32b | `t32b_hessian_rimp2.in` | Same with `rimp2` | as t32a; run time | capability matrix || Works, numerical. |
+| t32c | `t32c_optimize_hf.in` | Do gradients work with `theory=hf`? | `OPTIMIZATION CONVERGED` | `control.theory` notes || Yes, converged in 4 steps. |
+| t33 | `t33_tddft.in` | GGA TDDFT with `state=1,5` | Excited-state table: energies, oscillator strengths | `control.state`; about.md (TDDFT) || Works; `Electronic Spectrum:` table with oscillator strengths; `E  =` is state 1. |
+| t34 | `t34_nmr.in` | NMR shieldings with `theory=dft` | Shielding table format | `control.task` (nmr), `$nmr` || Works; without `standard`, shift = −shielding. |
+| t35 | `t35_four_relativistic.in` | Scalar-relativistic `four=1` with `basis4.in` (needs `BASIS4`) | `Hamiltonian: scalar-relativistic`; nucleus model; energy | `control.four`, `control.nucleus` || Works: `Finite nucleus model (1)`, `Hamiltonian: scalar-relativistic`. |
+| t36 | `t36_task_dipole.in` | `task=dipole` (numerical polarizabilities, for Raman) | What is printed; run time | `control.task` (dipole) || Works: 19 SCF runs in fields, result as a `num>` block. |
+| t37 | `t37_scan.in` | Relaxed scan, adapted from the limor1 `NH3_scan-fix` example | One optimization per point; the per-point output marker; the dihedral sign | `control.task` (scan), `optimize.fix`, `optimize.value` || Works; 4 points incl. both ends; `SCAN>` summary. |
+| t38a | `t38a_dft_n4_lpbevv.in` | Does `theory=DFT_n4` with `functional=LPBEVV` (2025 official inputs) run? | Method and functional in the summary box; energy | `control.theory`, `dft.functional` || Runs. |
+| t38b | `t38b_ridft_lpbevvv.in` | Does `functional=LPBEVVV` with `ridft` run? | as t38a | `dft.functional` || Runs. |
+| t39 | `t39_qm_n3.in` | Semiempirical QM model with `qm.in` (needs `QMBASIS`) | Energy; run time | `control.theory` (qm_n3) || Runs; short output format of its own, no `E  =` line. |
+| t40 | `t40_coordinated_spelling.in` | Is `$optimize coordinated=` (the `input.txt` spelling) accepted? Any unique prefix of `coordinates` would be. | Error `unknown name coordinated`, or a normal run | `optimize.coordinates` || No error, but inconclusive (see t40b/t40c). |
+
+## Round 3 (not run yet)
+
+| ID | Input | Question | What to look at in the output | Where it is used | Result |
+|---|---|---|---|---|---|
+| t21 | (t01 on 2 processes) | Parallel launch through an MPI launcher. Download `mpiexec` from the official site next to `p` (or set `MPIEXEC=`), or have `mpirun` on `PATH`. | `t21b_*.stdout`, `t21c_*.stdout`; the process lines at the top of the output; same energy as t01 | running.md (parallel runs) | |
+| t40b | `t40b_coordinated_in_optimize.in` | Is `coordinated=` (the `input.txt` spelling) accepted in an optimization? | Error `unknown name coordinated`, or a normal run | `optimize.coordinates` | |
+| t40c | `t40c_unknown_in_unused_group.in` | Is a group the task does not use (`$optimize` in an energy run) checked for unknown keywords? | Error, or a normal run (then t40 tells nothing) | input-syntax (keywords) | |
+| t41 | `t41_two_energy_groups.in` | Two `$Energy` groups (first from t13, pyramidal NH3; then from t24, planar). Which one is read? | `Lowest eigenvalues:` line: negative (t24 group) or positive (t13 group) | input-syntax (appending `$Energy`) | |
+| t42 | `t42_irc_back.in` | IRC with `back=1`: does it go the other way? | `n = 1, back = 1`; final geometry mirror image of t26 | `optimize.back` | |
+| t43 | `t43_minimize_from_saddle.in` | A plain optimization from planar NH3 with its Hessian appended: does it leave the saddle point? | Final `MOL>` geometry pyramidal, energy about -56.4989 | getting-started (step 6) | |
+| t44 | `t44_thermo_sigma_temps.in` | `$thermo sigma=3 temperature=200,298.15,400` | Three thermochemistry tables; S lower by R ln 3 = 2.18 cal/(mol·K) than t13 at 298.15 K | `thermo.sigma`, `thermo.temperature` | |
+| t45 | `t45_molden_orbitals.in` | `print=+vectors+molden`: are orbitals written as `mos>` lines? | `mos>` lines; whether Molden opens them | getting-started (viewing in Molden) | |
+| t46 | `t46_hybrid_with_tddft.in` | Hybrid functional with `theory=tddft`: abort like `dft` (t08) or run? | Error or excited states | `control.theory` (hybrid trap) | |
+| t47 | `t47_unit_bohr.in` | `$molecule unit=b`: coordinates in bohr (t01 water converted) | Same energy as t01 | `molecule.unit` | |
+| t48 | `t48_o2_triplet.in` | O2 triplet with default settings (`restrict` default for an even electron count) | Number of alpha/beta electrons; `converged!`; energy | `scf.restrict`, `molecule.mult` | |
+| t48b | `t48b_o2_singlet.in` | O2 singlet for comparison | Energy above the triplet | `molecule.mult` | |
+| t49 | `t49_basis4_without_four.in` | `basis4.in` without `four=1` (needs `BASIS4`): does it stop at the `Basis set input:` line, as reported? | Where the output ends; error text | common-problems (basis file); `control.four` | |
+
+Run t41–t43 together with t13 and t24 (`./run.sh t13 t24 t41 t42 t43`), because they take the Hessians from those
+outputs.
 
 ## Still not covered
 
-The Windows build (PLAN 3a.15), batch-system scripts, several `$Energy` groups in one input, `$d2edr2` numerical
+The Windows build (PLAN 3a.15), batch-system scripts, `$d2edr2` numerical
 Hessians and the split `num>` workflow, and the remaining undocumented tasks (`extremal`, `transit`, `saddle`, `path`,
 `conical`, `anharmonic`, `opt_n1`, `thermostat`, `uniq`), which need two-geometry inputs or long runs.

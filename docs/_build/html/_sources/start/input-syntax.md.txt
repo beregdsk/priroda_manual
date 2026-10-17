@@ -215,9 +215,9 @@ In version 25 a line of text before the first group and a disabled group with it
 group is parsed as keywords, so do not put notes there.
 <!-- src: 08 t05 -->
 
-One user's input opened a group with `&` instead of `$` (`&dft func=PBE $end`) and ran. That group set only the
-default functional, so the run does not show whether `&` is accepted. Always use `$`.
-<!-- src: 04 #376 -->
+A group opened with `&` instead of `$` is ignored like any other text: in version 25, `&dft func=BLYP $end` left the
+functional at PBE, with no message. Always use `$`.
+<!-- src: 04 #376; 08 t23 -->
 
 ## Appending results of earlier runs
 

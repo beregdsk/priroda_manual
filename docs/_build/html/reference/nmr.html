@@ -273,15 +273,16 @@
 <span id="nmr-standard"></span><h2><code class="docutils literal notranslate"><span class="pre">standard</span></code><a class="headerlink" href="#standard" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 04 #69; 02 §5.7</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 04 #69; 02 §5.7; 08 t34</p>
 <p>Reference shielding constants, indexed by atomic number, for computing chemical shifts. Values are needed
 only for the elements present in the molecule.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
 different TMS values (e.g. <code class="docutils literal notranslate"><span class="pre">standard(1)=31.3867</span> <span class="pre">standard(6)=181.9781</span></code>) for other settings. Compute TMS with
-exactly the settings of the production run.</p>
+exactly the settings of the production run. Without <code class="docutils literal notranslate"><span class="pre">standard</span></code>, version 25 prints <code class="docutils literal notranslate"><span class="pre">shift=</span></code> as minus the
+isotropic shielding.</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$nmr

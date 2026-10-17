@@ -43,18 +43,24 @@ for f in "$here"/inputs/t*.in; do
       rm -f "$out/t03/basis.in"; [ -s "$out/t03/$name.err" ] || rm -f "$out/t03/$name.err" ;;
     t17_*)
       for th in $THEORIES; do prep "$name" "$th" "t17_$th"; run "t17_$th"; done ;;
-    t25_*|t26_*)  # need the Hessian of t24
-      if [ ! -s "$out/t24_hessian_planar_nh3.out" ]; then skip "$name" "needs t24 in the same run"; continue; fi
-      prep "$name" "" "$name"
-      last_energy "$out/t24_hessian_planar_nh3.out" > "$out/energy.tmp"
-      sed -i -e "/@ENERGY_FROM_t24@/r $out/energy.tmp" -e "/@ENERGY_FROM_t24@/d" "$out/$name.in"
-      rm -f "$out/energy.tmp"; run "$name" ;;
     t27b_*)  # needs the vectors saved by t27a
       if [ ! -e "$out/t27.vec" ]; then skip "$name" "needs t27a in the same run (no t27.vec)"; continue; fi
       prep "$name" "" "$name"; run "$name" ;;
-    t35_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
+    t35_*|t49_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     t39_*) if [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
-    *)  prep "$name" "" "$name"; run "$name" ;;
+    *)
+      # Inputs with @ENERGY_FROM_tNN@ lines get the last $Energy group of test tNN's output (same run) in its place.
+      need=$(grep -o '@ENERGY_FROM_t[0-9a-z]*@' "$f" | sort -u | sed 's/@ENERGY_FROM_\(.*\)@/\1/')
+      if [ -z "$need" ]; then prep "$name" "" "$name"; run "$name"; continue; fi
+      prep "$name" "" "$name"; ok=1
+      for src in $need; do
+        srcout=$(ls "$out"/${src}_*.out 2>/dev/null | head -1)
+        if [ -z "$srcout" ] || [ ! -s "$srcout" ]; then skip "$name" "needs $src in the same run"; ok=0; break; fi
+        last_energy "$srcout" > "$out/energy.tmp"
+        sed -i -e "/@ENERGY_FROM_$src@/r $out/energy.tmp" -e "/@ENERGY_FROM_$src@/d" "$out/$name.in"
+        rm -f "$out/energy.tmp"
+      done
+      [ $ok = 1 ] && run "$name" ;;
   esac
 done
 

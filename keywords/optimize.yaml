@@ -16,11 +16,13 @@ keywords:
       en: |
         A saddle-point search needs an accurate Hessian in the input: compute one with `task=hessian` and append its
         `$Energy` block (the `eng>` lines). A usual route is scan → Hessian at the scan maximum → `saddle=1` →
-        `task=hessian` to confirm one imaginary frequency → IRC.
+        `task=hessian` to confirm one imaginary frequency → IRC. In version 25 the output confirms the search with
+        `Saddle point search: follow = 1` and, when a Hessian was read from `$Energy`, `Lowest eigenvalues:` with one
+        negative value.
     see_also: [optimize.follow, Energy.H]
     status: current
-    sources: ["input.txt", "Dft.rtf", "04 #216", "03 §9"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf", "04 #216", "03 §9", "08 t25"]
+    verified_against: "25 (2025.02.28)"
   - name: tolerance
     type: list
     default: [0.0001, 0.01]
@@ -49,15 +51,15 @@ keywords:
     verified_against: "25 (2025.02.28)"
   - name: follow
     type: integer
-    default: null
+    default: 1
     default_note:
-      en: "`1` according to `Dft.rtf`."
+      en: "`1` according to `Dft.rtf`; version 25 echoes `Saddle point search: follow = 1`."
     description:
       en: Follow the n-th Hessian eigenvector in a saddle-point search.
     see_also: [optimize.saddle]
     status: current
-    sources: ["input.txt", "Dft.rtf"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf", "08 t25"]
+    verified_against: "25 (2025.02.28)"
   - name: steps
     type: integer
     default: 128
@@ -97,38 +99,42 @@ keywords:
       - {value: "1", en: Trace the IRC path backwards.}
     description:
       en: |
-        IRC direction. A full IRC takes two runs, one per direction. Re-optimize the endpoints afterwards, because
+        IRC direction. A full IRC takes two runs, one per direction: version 25 with the default `back=0`
+        followed one direction only (`n = 1, back = 0, down = 1` in the output). Re-optimize the endpoints afterwards, because
         an IRC does not end at a converged minimum.
     see_also: [optimize.points, optimize.radius]
     status: current
-    sources: ["input.txt", "02 §3.2", "04 §0"]
-    verified_against: null
+    sources: ["input.txt", "02 §3.2", "04 §0", "08 t26"]
+    verified_against: "25 (2025.02.28)"
   - name: points
     type: integer
     default: null
     description:
       en: |
         Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.
+        In a scan the points include both ends: `points=4` gives s = 0, 1/3, 2/3 and 1. An IRC can stop before
+        `points` is reached when it arrives at a minimum.
     see_also: [optimize.value]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t26, t37"]
+    verified_against: "25 (2025.02.28)"
   - name: radius
     type: real
-    default: null
+    default: 0.1
     default_note:
-      en: "`0.2` according to `Dft.rtf` (older version)."
+      en: "`0.1` as echoed by version 25 (`r = 0.1000000000`); `Dft.rtf` gives 0.2 (older version)."
     description:
       en: |
         Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
         this distance apart. The IRC coordinate is reported in bohr·amu^1/2.
     notes:
       en: |
-        `Vicinity of a Stationary Point(?) --- STOP.` during an IRC means the energy did not decrease on that step.
-        Changing the step size is the reported fix.
+        `Vicinity of a Stationary Point(?) --- STOP.` ends an IRC that has reached the region of a minimum; in
+        version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
+        decrease on a step; changing the step size is the reported fix there.
     status: current
-    sources: ["input.txt", "Dft.rtf", "04 #298"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf", "04 #298", "08 t26"]
+    verified_against: "25 (2025.02.28)"
   - name: coordinates
     type: list
     default: null
@@ -161,8 +167,8 @@ keywords:
         be constrained to stay equal.
     see_also: [optimize.value, optimize.coordinates]
     status: current
-    sources: ["input.txt", "02 §3.2", "03 §5 (wish list)", "04 #372-#373"]
-    verified_against: null
+    sources: ["input.txt", "02 §3.2", "03 §5 (wish list)", "04 #372-#373", "08 t37"]
+    verified_against: "25 (2025.02.28)"
   - name: value
     type: indexed-array
     default: null
@@ -189,8 +195,8 @@ keywords:
       # the last two fixed coordinates keep their input values
     see_also: [optimize.fix, optimize.points]
     status: current
-    sources: ["input.txt", "03 §5, §8", "04 #278-#279, #373"]
-    verified_against: null
+    sources: ["input.txt", "03 §5, §8", "04 #278-#279, #373", "08 t37"]
+    verified_against: "25 (2025.02.28)"
   - name: gradient
     type: switch
     default: null
@@ -220,10 +226,12 @@ keywords:
       en: |
         Used as `sym=1` in the official 2023–2025 example inputs. In version 25, together with `$molecule sym=1,0.01`,
         the optimizer switched to Cartesian coordinates (`Coordinates: cartesian`), printed `symmetry: C3v (6)` at
-        every step, and returned an exactly symmetric structure followed by `MOL> symmetry: C3v`.
+        every step, and returned an exactly symmetric structure followed by `MOL> symmetry: C3v`. Without
+        `$molecule sym=`, `$optimize sym=1` only switches to Cartesian coordinates and reports `symmetry: C1 (1)`,
+        so give both options.
     see_also: [molecule.sym]
     status: undocumented
-    sources: ["01 §4.6", "04 #481", "08 t15"]
+    sources: ["01 §4.6", "04 #481", "08 t15", "08 t30b"]
     verified_against: "25 (2025.02.28)"
   - name: mod
     type: integer

@@ -484,9 +484,9 @@ $end
 (<code class="docutils literal notranslate"><span class="pre">integral</span> <span class="pre">dir=1</span> <span class="pre">$end</span></code>) are both ignored: the result is identical to the same input without them. Text inside a
 group is parsed as keywords, so do not put notes there.</p>
 <!-- src: 08 t05 -->
-<p>One user’s input opened a group with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">$</span></code> (<code class="docutils literal notranslate"><span class="pre">&amp;dft</span> <span class="pre">func=PBE</span> <span class="pre">$end</span></code>) and ran. That group set only the
-default functional, so the run does not show whether <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> is accepted. Always use <code class="docutils literal notranslate"><span class="pre">$</span></code>.</p>
-<!-- src: 04 #376 -->
+<p>A group opened with <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">$</span></code> is ignored like any other text: in version 25, <code class="docutils literal notranslate"><span class="pre">&amp;dft</span> <span class="pre">func=BLYP</span> <span class="pre">$end</span></code> left the
+functional at PBE, with no message. Always use <code class="docutils literal notranslate"><span class="pre">$</span></code>.</p>
+<!-- src: 04 #376; 08 t23 -->
 </section>
 <section id="appending-results-of-earlier-runs">
 <h2>Appending results of earlier runs<a class="headerlink" href="#appending-results-of-earlier-runs" title="Link to this heading">¶</a></h2>

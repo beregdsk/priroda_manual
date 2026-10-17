@@ -17,8 +17,8 @@ Initial guess for the SCF vectors.
 
 **Type:** switch\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 04 #306; 05 §1
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 04 #306; 05 §1; 08 t27
 
 Source of the starting SCF vectors.
 

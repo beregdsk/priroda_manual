@@ -16,8 +16,8 @@ keywords:
       - {value: PBE1, en: "PBE hybrid with 1/4 exact exchange, J. Chem. Phys. 110 (1999) 6158. Default for `theory=ridft`."}
       - {value: B3LYP_PW, en: "Becke three-parameter hybrid with PW local correlation (see notes)."}
       - {value: B3LYP, en: "Becke three-parameter hybrid (see notes)."}
-      - {value: LPBEVV, en: "Newer functional used in the official example inputs with `theory=DFT_n4` (2025).", status: undocumented}
-      - {value: LPBEVVV, en: "Newer functional used in the official example inputs with `theory=ridft` (2023–2025).", status: undocumented}
+      - {value: LPBEVV, en: "Newer functional used in the official example inputs with `theory=DFT_n4` (2025). Runs in version 25; its definition is not documented.", status: undocumented}
+      - {value: LPBEVVV, en: "Newer functional used in the official example inputs with `theory=ridft` (2023–2025). Runs in version 25; its definition is not documented.", status: undocumented}
     description:
       en: Exchange–correlation approximation for DFT methods.
     notes:
@@ -36,5 +36,5 @@ keywords:
         them documented or tested.
     see_also: [control.theory]
     status: current
-    sources: ["input.txt", "01 §3.2", "03 §5 (strings)", "04 §0", "08 t02"]
+    sources: ["input.txt", "01 §3.2", "03 §5 (strings)", "04 §0", "08 t02", "08 t31, t38"]
     verified_against: "25 (2025.02.28)"

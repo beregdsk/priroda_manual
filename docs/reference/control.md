@@ -18,7 +18,7 @@ Job type, level of theory, basis-set file, Hamiltonian and printing.
 **Type:** enum\
 **Default:** `gradient`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18
+**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37
 
 Job type.
 
@@ -32,10 +32,10 @@ Job type.
 | `hessian` | Second derivatives (force constants) followed by vibrational analysis and thermochemistry. |
 | `optimize` | Geometry optimization, including saddle points with `$optimize saddle=1`. |
 | `optimize+hessian` | Optimization followed by a Hessian at the final geometry. The only combined task that works. Present in v2 and v9 and later, absent in v6. |
-| `irc` | Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (`$Energy`). |
-| `scan` | Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. |
+| `irc` | Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (`$Energy`). Each point is printed on `IRC>` lines with its distance and energy. |
+| `scan` | Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. The structures and energies are summarized on `SCAN>` lines at the end. |
 | `nmr` | NMR shielding tensors. Works only with `theory=dft`. |
-| `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities). |
+| `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a `num>` block. |
 | `check` | Read the input and set up the run (geometry, basis sets, SCF and grid settings), then stop before the SCF. Useful to check an input. |
 | `extremal` | Gradient-extremal path (v9 banner "Calculation of Gradient Extremal Path"); slow. *(undocumented)* |
 | `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. *(undocumented)* |
@@ -67,7 +67,7 @@ and others) that are untested or need data that is not distributed.
 **Type:** enum\
 **Default:** `dft`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17
+**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39
 
 Theoretical method.
 
@@ -77,10 +77,10 @@ Theoretical method.
 | Value | Meaning |
 |---|---|
 | `dft` | GGA DFT with density fitting. Hybrid functionals are **not** applied here: see notes. (**default**) |
-| `ridft` | Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals. |
-| `DFT_n4` | Newer DFT variant, used in the official example inputs with `func=LPBEVV` (2025). *(undocumented)* |
+| `ridft` | Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals; the default functional is then `PBE1`. Hessians are numerical. |
+| `DFT_n4` | Newer DFT variant, used in the official example inputs with `func=LPBEVV` (2025). Runs in version 25 (summary box: `DFT_N4`); what it changes is not documented. *(undocumented)* |
 | `tddft` | GGA time-dependent DFT (no hybrid TDDFT). |
-| `rimp2` | RI-MP2. |
+| `rimp2` | RI-MP2. Hessians are numerical. |
 | `hf` | Hartree–Fock. |
 | `rihf` | RI Hartree–Fock. |
 | `cis` | CIS (RHF/UHF). Prints a table of excited states; `E =` is the total energy of the first excited state. Slow and disk-hungry. |
@@ -94,7 +94,7 @@ Theoretical method.
 | `ccsd` | CCSD (RHF/UHF). |
 | `ccsd4t` | CCSD(T). |
 | `ccsdsd` | Linear-response (EOM) CCSD for excited states (RHF). *(undocumented)* |
-| `qm_n3` | Laikov's semiempirical QM model. Needs `basis=qm.in`; parameters exist for H, Li–F, Na–Cl, Sc–Cu. *(undocumented)* |
+| `qm_n3` | Laikov's semiempirical QM model. Needs `basis=qm.in` and no `set=`; parameters exist for H, Li–F, Na–Cl, Sc–Cu. Runs in version 25, with a short output of its own (no summary box, no `E  =` line). *(undocumented)* |
 | `qm_n2` | Earlier variant of the QM model, used for very large systems with `task=opt_n1`. *(undocumented)* |
 
 ```{note}
@@ -104,7 +104,9 @@ stops right after printing the basis sets, with no error message in the output a
 
 The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. In version 25,
 water energies run to completion with `hf`, `rihf`, `cis`, `mp2`, `mp3`, `mp4dq`, `mp4sdq`, `mp4sdtq`, `ccs`,
-`ccd`, `ccsd` and `ccsd4t`; gradients with these methods were not tested. These
+`ccd`, `ccsd` and `ccsd4t`; an `hf` optimization also worked, so HF gradients exist. For `ridft` and
+`rimp2`, `task=hessian` works by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND
+DERIVATIVES`); for `dft` it is analytic. These
 were reported **not** working in v6: `mp4`, `rimp4`, `rimp4sdtq`, `rimp4sdq`, `riccsd`, `riccsd4t`. They
 either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
 CCSDT, …); none has been reported working.
@@ -120,11 +122,13 @@ CCSDT, …); none has been reported working.
 
 **Type:** list\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t33
 
 For excited-state methods. The first value is the excited state n whose properties are computed; the second
-is the number of states N included in the iterative solution of the equations (`state=n,N`).
+is the number of states N included in the iterative solution of the equations (`state=n,N`). In version 25,
+`theory=tddft` with `state=1,5` printed all five states in an `Electronic Spectrum:` table (excitation energy,
+wavelength, transition moment, oscillator strength), and `E  =` was the total energy of state 1.
 
 (control.basis)=
 ## `basis`
@@ -161,8 +165,8 @@ runs.
 
 **Type:** switch\
 **Default:** `0`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §3.3; 04 #207-#208, #336
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §3.3; 04 #207-#208, #336; 08 t35
 
 Four-component option.
 
@@ -188,8 +192,8 @@ Required with the relativistic basis file `basis4.in`. Forgetting it is a common
 
 **Type:** enum\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.2; 06 §1
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §4.2; 06 §1; 08 t35
 
 Default: `finite` for four-component theory, `point` for non-relativistic theory.
 
@@ -204,7 +208,9 @@ Nuclear model. The official example inputs write it as `nuc=finite`.
 | `point` | Point-nucleus model. |
 
 ```{note}
-A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa.
+A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa. With
+`four=1` and no `nucleus=`, version 25 prints `Finite nucleus model (1):` with the Gaussian parameters of each
+element.
 ```
 
 **See also:** {ref}`four ($control) <control.four>`
@@ -250,10 +256,11 @@ $control print=+vectors+molden $end
 
 **Type:** string\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 04 #306
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; Dft.rtf; 04 #306; 08 t27
 
 File name for saving SCF vectors. With `$guess read=1` the vectors are read back from the same file.
-This is the basis of the SCF restart technique.
+This is the basis of the SCF restart technique. In version 25, a run with `$guess read=1` prints
+`Initial Guess (-1)` and `vectors from '<file>'`; the normal guess is printed as `Initial Guess (2)`.
 
 **See also:** {ref}`read ($guess) <guess.read>`

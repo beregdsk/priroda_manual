@@ -138,10 +138,11 @@ Length unit of the coordinates. The default unit is Å.
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.7; 04 #481; 08 t15
+**Sources:** 01 §4.7; 04 #481; 08 t15; 08 t30a
 
 Used as `sym=1,0.01` in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
 Newer versions report the detected point group (`symmetry: D6h`). In version 25, `sym=1,0.01` on a slightly
-distorted NH3 printed `symmetry: C3v    6, unique:    2` and echoed the geometry symmetrized.
+distorted NH3 printed `symmetry: C3v    6, unique:    2` and echoed the geometry symmetrized. On its own it
+does not keep the symmetry during an optimization; add `$optimize sym=1` for that.
 
 **See also:** {ref}`sym ($optimize) <optimize.sym>`

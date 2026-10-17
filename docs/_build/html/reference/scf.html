@@ -300,17 +300,18 @@
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-6,1e-3</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324; 08 t01, t07a, t07b</p>
+<strong>Sources:</strong> input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c</p>
 <p>Default: the first value is for SCF and the second for CP-SCF.</p>
 <p>SCF and CP-SCF convergence thresholds. The defaults are recommended. To save time in difficult cases you may
 loosen the SCF value to <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for preliminary geometry optimizations.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In version 25, <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code> stops the run with
-<code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>: the value list of <code class="docutils literal notranslate"><span class="pre">convergence</span></code> swallows the first letter of
-the keyword after it. With another keyword in between (<code class="docutils literal notranslate"><span class="pre">convergence=1e-7</span> <span class="pre">procedure=bfgs</span> <span class="pre">iterations=250</span></code>)
-both values are read. Older versions gave the same error as <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>. Check the
-<code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">…;</span> <span class="pre">iter=…</span></code> echo line in the output.</p>
+<p><strong>Give both values, or put <code class="docutils literal notranslate"><span class="pre">convergence</span></code> last.</strong> In version 25, a one-value <code class="docutils literal notranslate"><span class="pre">convergence=1e-7</span></code> followed by
+<code class="docutils literal notranslate"><span class="pre">iterations=250</span></code> stops the run with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>, also when the two
+keywords are on separate lines. <code class="docutils literal notranslate"><span class="pre">convergence=1e-7,1e-3</span> <span class="pre">iterations=250</span></code> works, and so does
+<code class="docutils literal notranslate"><span class="pre">iterations=250</span> <span class="pre">convergence=1e-7</span></code>; <code class="docutils literal notranslate"><span class="pre">convergence=1e-7</span> <span class="pre">procedure=bfgs</span> <span class="pre">iterations=250</span></code> also worked. Older
+versions gave the same error as <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">…;</span> <span class="pre">iter=…</span></code> echo line in the
+output.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#scf-iterations"><span class="std std-ref">iterations ($scf)</span></a>, <a class="reference internal" href="#scf-procedure"><span class="std std-ref">procedure ($scf)</span></a></p>
 </section>

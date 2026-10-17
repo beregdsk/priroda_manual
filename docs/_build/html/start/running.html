@@ -409,24 +409,16 @@ capital letter. Version 25 writes to an output file with capital letters in its 
 </section>
 <section id="parallel-runs-on-linux">
 <h3>Parallel runs on Linux<a class="headerlink" href="#parallel-runs-on-linux" title="Link to this heading">¶</a></h3>
-<p>Priroda is parallelized with MPI. Three command forms appear in the sources, and which one works depends on the build:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p -np 4 input.in output.out                  # the executable starts its own processes
-./mpiexec -np 4 ./p input.in output.out      # the mpiexec shipped with p
-mpiexec -np 4 p input.in                     # as used for version 14 at one site
+<p>Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. The official site shows the
+<code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> that it ships next to <code class="docutils literal notranslate"><span class="pre">p</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>./mpiexec -np 4 ./p input.in output.out
 </pre></div>
 </div>
-<!-- src: 04 #66, #151, #153; 01 §2.1; 02 §5.1 -->
-<p>The first form is what users ran with versions 6 and 10. The second is what the official site shows for the current
-<code class="docutils literal notranslate"><span class="pre">p</span></code> and its bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>. In one report with version 10, starting through the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> failed while
-<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">4</span></code> worked, but that run also had a relative basis-file path, which can cause the same failure. Try the form
-from the official site first.</p>
-<!-- src: 04 #150-#154; 01 §2.1 --> <!-- verify -->
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>In a test of version 25, <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">2</span> <span class="pre">input.in</span> <span class="pre">output.out</span></code> failed at once: no output file was written. The other forms
-were not tested. Which command starts a parallel run of the current build is still open.</p>
-</div>
-<!-- src: 08 t21a --> <!-- verify -->
+<!-- src: 01 §2.1 --> <!-- verify: not yet tested on version 25 -->
+<p>Older versions also accepted <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">input.in</span> <span class="pre">output.out</span></code>, which users ran with versions 6 and 10. <strong>Version 25 does
+not</strong>: it takes <code class="docutils literal notranslate"><span class="pre">-np</span></code> as the input file name, prints <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">file</span> <span class="pre">'-np'?.</span></code> and stops. One site ran version 14 as
+<code class="docutils literal notranslate"><span class="pre">mpiexec</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">p</span> <span class="pre">input.in</span></code>, with the system’s MPI launcher.</p>
+<!-- src: 04 #66, #150-#154; 02 §5.1; 08 t21a -->
 <p>Check the start of the output. A parallel run prints the number of processes and one line per process:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> parallel on  4 processors
  node  0: 'linux-ldmm'
@@ -645,8 +637,7 @@ cd "$SLURM_SUBMIT_DIR"
 export TMPDIR=/local/scratch/$SLURM_JOB_ID   # node-local disk; site-specific
 mkdir -p "$TMPDIR"
 
-"$PRIRODA" -np "$SLURM_NTASKS" mol.in mol.out
-# or, if your build needs it:  ./mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out
+$HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpiexec from the official site
 
 rm -rf "$TMPDIR"
 </pre></div>
@@ -664,7 +655,7 @@ NP=$(wc -l &lt; "$PBS_NODEFILE")
 export TMPDIR=/local/scratch/$PBS_JOBID      # site-specific
 mkdir -p "$TMPDIR"
 
-$HOME/priroda/p -np "$NP" mol.in mol.out
+$HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
 
 rm -rf "$TMPDIR"
 </pre></div>

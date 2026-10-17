@@ -2,7 +2,8 @@
 
 First verification round: the inputs in `tests/inputs/`, run by the project owner with `tests/run.sh` on
 2026-10-17 on one Linux machine (`node 0: 'arch'`), serial unless stated. Outputs are in
-`tests/runs/20261017-121135/`. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
+`tests/runs/20261017-123408/` (round 1 was first run as `20261017-121135`, then rerun together
+with round 2; the round-1 energies were identical both times). Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
 
 Cite as `08 tNN`. This is program output, the top of the evidence order. Each result holds for v25 only; older
@@ -37,6 +38,37 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t19 | An output file name with capital letters (`T19_Capital.out`) works; no complaint. |
 | t20 | `p input` with no output file writes the output to standard output. |
 | t21a | `p -np 2 input output` failed: exit status 1 and no output file. stderr was not captured, and the bundled `mpiexec` was not next to `p`, so t21b did not run. Parallel launch is still open. |
+
+## Round 2 (same run directory)
+
+| Test | Result |
+|---|---|
+| stderr | Every run that stops on an input error (t06, t07a, t08, t22b) writes `application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0` to stderr; for t08 (hybrid with `theory=dft`) that is the only message anywhere. |
+| t21a | `p -np 2 input output` is not supported: the program takes `-np` as the input file name (`input file '-np'?.`, then `MPI_Abort`). t21b (bundled `mpiexec`) and t21c (`mpirun`) were not run: neither was available. |
+| t22a | `$scf iterations=250 convergence=1e-7 $end` works (`conv = 1.0e-07`, `iter=250,16`). |
+| t22b | `convergence=1e-7` and `iterations=250` on **separate lines** still fail with `unknown name terations`: a line break does not end the value list. |
+| t22c | `$scf convergence=1e-7,1e-3 iterations=250 $end` works. So the problem is a **one-value** `convergence=` followed by another keyword; giving both values, or putting `convergence` last, avoids it. In round 1, `$optimize tol=1e-5 steps=100` (one-value list followed by a keyword) worked, so not every list keyword has this problem. |
+| t23 | `&dft func=BLYP $end` is **silently ignored**: the run used PBE, no message. Groups must start with `$`. |
+| t24 | Planar NH3 Hessian: one imaginary mode, printed with a trailing `i`: `\|    1 \|  845.22i\|   1.21 \| 357.748 \| …`. The thermochemistry table is still printed. |
+| t25 | `$optimize saddle=1` with the t24 `$Energy` group (incl. `H=`) appended: echo `Saddle point search: follow = 1`, then `Lowest eigenvalues: -0.02919  0.18683` (the stored Hessian was read), `OPTIMIZATION CONVERGED in 1 steps!`; the final `MOL>` geometry stays planar (TS), E from -56.4876851 to -56.4877160. |
+| t26 | `task=irc` with the t24 Hessian and `$optimize points=10`: header `Intrinsic Reaction Coordinate`, `n = 1, back = 0, down = 1`, `r = 0.1000000000`, the imaginary frequency and the mode. Each point is a constrained optimization (`Constrained Optimization for Path Point  N:`) and is printed as `IRC> point   N: distance = … E = … g = …` followed by an `IRC>`-prefixed `$molecule` group. Only one direction was followed. After 7 points (E -56.48769 to -56.49882, the minimum) it stopped with `Vicinity of a Stationary Point(?) --- STOP.` and printed the list of points again. |
+| t27 | `save=t27.vec` writes the vectors; with `$guess read=1` the next run prints `Initial Guess (-1)` and `vectors from 't27.vec'` and converges in 1 iteration (5 in t27a). The normal guess is printed as `Initial Guess (2)`. |
+| t28 | OH radical: with `iterations=100` the default Newton–Raphson SCF converges after 34 iterations (E = -75.6715198993); with `procedure=bfgs`, after 29 (E = -75.6715168582, 3·10⁻⁶ higher). |
+| t29 | OH⁻ optimization: the `MOL>` block contains `MOL> charge=-1` but no `mult=` line. Together with t11 (no line for charge 0, mult 1): only values that differ from the defaults are written *(inferred)*. |
+| t30a | `$molecule sym=1,0.01` alone: symmetry detected (`symmetry: C3v    6, unique:    2`) and the input geometry symmetrized, but the optimizer stays in internal coordinates with no symmetry lines, and the final structure is only approximately symmetric. |
+| t30b | `$optimize sym=1` alone: `Coordinates: cartesian` and `symmetry: C1 (1)` at every step; no symmetry is used. So both options are needed: `$molecule sym=` detects and symmetrizes, `$optimize sym=1` keeps the symmetry during the optimization (t15). |
+| t31 | `theory=ridft` without `$dft` uses `PBE1` (E = -76.3679713845, identical to an explicit `functional=PBE1`). |
+| t32a | `task=hessian` with `ridft`/PBE1 works but is **numerical**: `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`, one gradient per displacement (7 for water). |
+| t32b | Same with `rimp2`: numerical, works. |
+| t32c | `task=optimize` with `theory=hf` converges (4 steps): HF gradients work. |
+| t33 | `theory=tddft`, `state=1,5`: `Time-Dependent Density Functional Theory for Excited States:`, Davidson-type iterations, the leading excitations per state, then `state N: E = <total>, DE = <excitation>, R = <transition moment x,y,z>` lines and an `Electronic Spectrum:` table (excitation energy in au and eV, wavelength in nm, transition moment in au, oscillator strength). Oscillator strengths are non-zero. `E  =` is the total energy of state 1 (the first value of `state=`). |
+| t34 | `task=nmr` (DFT): `Calculation of NMR Chemical Shifts`, then `NMR Shielding Tensors:` (isotropic, principal values, tensor and principal axes per atom), then a list `isotropic= … shift= …` and the same sorted. Without `$nmr standard` the shift is minus the shielding. |
+| t35 | `four=1` with `basis4.in`: `Finite nucleus model (1):` with Gaussian parameters per element, `Hamiltonian: scalar-relativistic`; E = -76.4207924482. So with `four=1` the nucleus defaults to finite. |
+| t36 | `task=dipole`: `Numeric Evaluation of Dipole Polarizability`, 19 SCF runs in finite electric fields (water, 4.9 s); the results come as a `num>` block (with `Ax=` …), meant to be appended to a Hessian input *(inferred)*. |
+| t37 | `task=scan` (adapted from the limor1 `NH3_scan-fix` input): echo `constrained variable: type=1 … value= 1.1, 1.1` and `type=3 … value= -180, -150`; one constrained optimization per point, each ending in `OPTIMIZATION CONVERGED`; then `Scan Structures:` with `SCAN> n= 0, s=0.000000, E= …` and an `SCAN>`-prefixed `$molecule` per point. `points=4` gives 4 points including both ends (s = 0, 1/3, 2/3, 1). |
+| t38 | `theory=DFT_n4` with `functional=LPBEVV` runs (`DFT_N4`, `LPBEVV`, E = -76.3593590628); `ridft` with `LPBEVVV` runs (E = -76.3608742262). |
+| t39 | `theory=qm_n3` with `basis=qm.in` (no `set=`): a much shorter output with no summary box: `qm file: '…/qm.in'`, `SCF: No=4,4 N=6 N1=17`, lines `it= N: E= … g= … x= …`, `converged!`, `e: -0.45857  0.32014` (HOMO and LUMO energies *(inferred)*), `gmax = …`. No `E  =` line. E = -76.2843068727 in 0.05 s. |
+| t40 | `$optimize coordinated=1,1,2,0,0` with `task=energy`: no error. Inconclusive, because with `task=energy` the `$optimize` group may not be read at all. |
 
 ## Cosmetic
 
