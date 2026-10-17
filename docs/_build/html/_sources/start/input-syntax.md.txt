@@ -1,6 +1,6 @@
 # Input syntax
 
-The author describes the input as "a kind of NAMELIST free format". It is close to the GAMESS-US format: keywords are
+`input.txt` describes the input as "a kind of NAMELIST free format". It is close to the GAMESS-US format: keywords are
 grouped, and each group starts with `$name` and ends with `$end`. This chapter covers the rules that apply to all
 groups. The individual keywords are in the {doc}`input reference <../reference/index>`.
 <!-- src: input.txt; 06 §2 -->
@@ -49,7 +49,7 @@ The order of the groups does not matter, and neither does the order of keywords 
 `$molecule` and `$Energy`, whose contents are ordered data.
 <!-- src: 06 §2 -->
 
-Groups you do not need can be left out; most keywords have sensible defaults. The author advises changing only what
+Groups you do not need can be left out; most keywords have sensible defaults. `input.txt` advises changing only what
 the problem requires.
 <!-- src: input.txt; 06 §2 -->
 
@@ -70,7 +70,7 @@ names are case-sensitive. This applies to `basis=`, `save=` and `path=`.
 
 ### Abbreviations
 
-Within a group, a keyword can be shortened to a prefix. The author's own example is `mem` for `memory`. Inputs in the
+Within a group, a keyword can be shortened to a prefix. The example in `input.txt` is `mem` for `memory`. Inputs in the
 sources use, among others:
 <!-- src: input.txt; 06 §2 -->
 
@@ -168,7 +168,7 @@ Some tasks read more than one `$molecule` group from one input:
 
 - `task=transit`, `task=saddle` and `task=path` take two blocks, the start and the end structure. The atoms must be
   numbered the same way in both.
-- `task=uniq` takes any number of blocks and filters out duplicate structures; the author's example has 157.
+- `task=uniq` takes any number of blocks and filters out duplicate structures; the official example has 157.
 
 These tasks are undocumented; see {ref}`$control task <control.task>` and {ref}`$uniq <group.uniq>`.
 <!-- src: 03 §5, §9; 01 §4.9 -->
@@ -176,10 +176,10 @@ These tasks are undocumented; see {ref}`$control task <control.task>` and {ref}`
 ## Text outside groups
 
 Everything outside a `$name … $end` group is ignored. There is no documented comment character, but this rule serves
-the same purpose, and the author uses it to switch input off:
+the same purpose, and the official example inputs use it to switch input off:
 <!-- src: 01 §4, §10; 03 §5 (amg: trailing Energy line has no effect) -->
 
-- **Delete the `$`** to disable a whole group. `integral dir=1 $end` in the author's 2023–2025 inputs is plain text,
+- **Delete the `$`** to disable a whole group. `integral dir=1 $end` in the official 2023–2025 example inputs is plain text,
   not an `$integral` group.
 - **Move keywords after `$end`** to disable them. In the example below, `v=` and `h=` are outside `$dynamic` and
   have no effect.
@@ -204,7 +204,7 @@ $end
 <!-- src: 01 §4, §4.8, §4.9 -->
 
 :::{note}
-That disabled groups and keywords are ignored is inferred from the author's files, which use this pattern
+That disabled groups and keywords are ignored is inferred from the official example files, which use this pattern
 throughout. It has not been tested what the program does with the stray `$end` that a disabled group leaves behind.
 Text inside a group is parsed as keywords, so do not put notes there.
 :::
@@ -244,7 +244,7 @@ To reuse it, remove the prefix and append the block to the end of the next input
 sed -n 's/^eng>//p' mol.out >> mol.in
 ```
 
-The `ge` script on the author's site does the same. It also skips the first block when the output contains a
+The `ge` script on the official site does the same. It also skips the first block when the output contains a
 `NUMERICAL AND ANALYTICAL GRADIENT` section.
 <!-- src: 01 §8; 03 §8 (perl one-liner); 03 §14 -->
 
@@ -278,7 +278,7 @@ Partial results of a numerical calculation are printed on lines prefixed with `n
 ### Optimized geometry from `MOL>` lines
 
 After `OPTIMIZATION CONVERGED`, the final geometry is printed as a ready-made `$molecule` group on lines prefixed with
-`MOL>`. Strip the prefix to continue from that geometry. The `gm` script on the author's site replaces the `$molecule`
+`MOL>`. Strip the prefix to continue from that geometry. The `gm` script on the official site replaces the `$molecule`
 group of the input with it. Because `gm` replaces everything from `$molecule` to the end of the file, keep
 `$molecule` as the last group of your inputs, followed only by appended result blocks.
 <!-- src: 01 §7, §8; 06 §4 -->
@@ -313,5 +313,4 @@ Hybrid functional without `theory=ridft`
 : The relativistic basis file needs `four=1` in `$control`.
   <!-- src: 04 #207, #208 -->
 
-More input problems, with their exact error messages, are listed in {ref}`troubleshooting.input` and
-{ref}`troubleshooting.error-messages`.
+More input problems, with their exact error messages, are listed in {ref}`troubleshooting.input`.

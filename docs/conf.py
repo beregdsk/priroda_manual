@@ -31,6 +31,8 @@ latex_documents = [("index", "priroda-manual.tex", project, author, "manual")]
 # (Unicode engines) and texlive-fontsrecommended (Times/T1 fonts). With texlive-xetex installed,
 # switch to latex_engine = "xelatex" and drop latex_elements.
 latex_elements = {
+    # One-sided layout: chapters start on the next page, not the next right-hand page, so no blank pages.
+    "extraclassoptions": "openany,oneside",
     "fontenc": "\\usepackage[OT1]{fontenc}",
     "fontpkg": "",
     "preamble": r"""

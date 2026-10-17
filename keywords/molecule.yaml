@@ -91,7 +91,7 @@ keywords:
     default: null
     description:
       en: |
-        Used as `sym=1,0.01` in the author's 2023–2025 inputs, apparently to enable symmetry with tolerance 0.01.
+        Used as `sym=1,0.01` in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
         Newer versions report the detected point group (`symmetry: D6h`).
     see_also: [optimize.sym]
     status: undocumented

@@ -136,7 +136,7 @@ Length unit of the coordinates. The default unit is Å.
 **Status:** undocumented · not verified\
 **Sources:** 01 §4.7; 04 #481
 
-Used as `sym=1,0.01` in the author's 2023–2025 inputs, apparently to enable symmetry with tolerance 0.01.
+Used as `sym=1,0.01` in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
 Newer versions report the detected point group (`symmetry: D6h`).
 
 **See also:** {ref}`sym ($optimize) <optimize.sym>`

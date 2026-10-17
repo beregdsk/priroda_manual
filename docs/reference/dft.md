@@ -36,8 +36,8 @@ Exchange–correlation approximation for DFT methods.
 | `PBE1` | PBE hybrid with 1/4 exact exchange, J. Chem. Phys. 110 (1999) 6158. Default for `theory=ridft`. |
 | `B3LYP_PW` | Becke three-parameter hybrid with PW local correlation (see notes). |
 | `B3LYP` | Becke three-parameter hybrid (see notes). |
-| `LPBEVV` | Newer functional used by the author with `theory=DFT_n4` (2025). *(undocumented)* |
-| `LPBEVVV` | Newer functional used by the author with `theory=ridft` (2023–2025). *(undocumented)* |
+| `LPBEVV` | Newer functional used in the official example inputs with `theory=DFT_n4` (2025). *(undocumented)* |
+| `LPBEVVV` | Newer functional used in the official example inputs with `theory=ridft` (2023–2025). *(undocumented)* |
 
 ```{note}
 The B3LYP form in Priroda is

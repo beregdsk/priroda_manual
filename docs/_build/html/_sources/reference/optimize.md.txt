@@ -338,7 +338,7 @@ Amount of optimization output.
 **Status:** undocumented · not verified\
 **Sources:** 01 §4.6; 04 #481
 
-Used as `sym=1` in the author's 2023–2025 inputs, apparently to preserve molecular symmetry during the optimization.
+Used as `sym=1` in the official 2023–2025 example inputs, apparently to preserve molecular symmetry during the optimization.
 
 **See also:** {ref}`sym ($molecule) <molecule.sym>`
 

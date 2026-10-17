@@ -1,4 +1,4 @@
-"""Render keywords/*.yaml into the Part IV input-reference pages.
+"""Render keywords/*.yaml into the input-reference pages.
 
 Runs on Sphinx's builder-inited event and writes docs/reference/<group>.md.
 Also runnable standalone (`python docs/_ext/priroda_keywords.py`) to validate

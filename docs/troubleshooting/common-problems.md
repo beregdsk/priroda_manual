@@ -1,10 +1,9 @@
 (troubleshooting.common-problems)=
 # Solving common problems
 
-This chapter is arranged by symptom. Each entry names the likely cause and the fix that users have reported. If you
-already have an error message, look it up first in {ref}`the error message index <troubleshooting.error-messages>`.
+This chapter is arranged by symptom. Each entry names the likely cause and the fix that users have reported.
 
-Almost everything here comes from user forums, not from the author. Each fix says how well it is supported:
+Almost everything here comes from user forums, not from the developer. Each fix says how well it is supported:
 "confirmed by several users" means more than one person reported that the fix worked, and "single report" means one
 user posted it and nobody confirmed it. Many reports date from Priroda 6 to 10 (2009–2015). Where a problem may
 have been fixed in later builds, the entry says so.
@@ -151,7 +150,7 @@ In several reported failures the SCF was not the real problem. Before changing S
   designed for foreign orbital bases. Use a native basis, or start from a geometry optimized in one.
 - **Geometry.** A very poor starting geometry can by itself prevent SCF convergence. Pre-optimize with a cheap pure
   functional (for example PBE with `theory=dft`) before switching to the target method.
-<!-- src: 04 #319 (input), #320, #321 (amge); 04 §8 "My observations on #319" (note author's analysis, not posted in the thread) -->
+<!-- src: 04 #319 (input), #320, #321 (amge); 04 §8 "My observations on #319" (the research note's own analysis, not posted in the thread) -->
 
 ### Restart from saved vectors
 
@@ -260,7 +259,7 @@ vectors. <!-- src: 06 §10 -->
 - An HF reference for CCSD diverged for a small closed-shell molecule (7 atoms, `set=L1`, `restrict=0`). The
   `change` column stuck at `0.50000000`. Nobody replied. Running a closed-shell molecule with `restrict=0` was
   unusual and may be worth changing.
-  <!-- src: 05 §7.2 (EvgeniX 2015; the restrict=1 suggestion is the note author's interpretation) -->
+  <!-- src: 05 §7.2 (EvgeniX 2015; the restrict=1 suggestion is the research note's own interpretation) -->
 - An HfCl2 molecule (PBE, `four=1`, `basis4.in`, `set=L3`, `accuracy=1e-10`) would not converge. Nobody replied.
   <!-- src: 05 §7.3 (YuraM 2016) -->
 
@@ -361,7 +360,7 @@ has to be repeated three or four times. Priroda has no option to recompute the H
 
 **Cause.** Hybrid functionals (B3LYP, PBE0/PBE1, ...) are applied only with {ref}`theory=ridft <control.theory>`.
 With `theory=dft` or `theory=tddft`, older versions (reported for v6 to v8) ran without any error message but used
-zero exact exchange, so the result was a pure-GGA-like calculation labelled as a hybrid. The author was told about
+zero exact exchange, so the result was a pure-GGA-like calculation labelled as a hybrid. The developer was told about
 it and, according to a user who corresponded with him, did not intend to change it.
 <!-- src: 03 §11 (sanya, amg); 04 #96, #99 -->
 
@@ -412,7 +411,7 @@ energies computed with different versions; within one version the comparison is 
 ### The printed energy components do not add up to E
 
 The line `T = ... V = ... J = ... Ex = ... Ec = ...` does not include the nuclear repulsion energy, so the
-components do not sum to `E`. This is not an error: E = T + V + J + Ex + Ec + E(nn). The answer came from the author,
+components do not sum to `E`. This is not an error: E = T + V + J + Ex + Ec + E(nn). The answer came from the developer,
 relayed by a user.
 <!-- src: 04 #375, #382 (Laikov, relayed) -->
 
@@ -616,7 +615,7 @@ was posted. One user runs Priroda under WSL on Windows instead; no details of th
 <!-- src: 04 #472, #508 -->
 
 :::{warning}
-Not every build on the author's site is reliable. A note there once said that the `w64/*.exe` 64-bit Cygwin builds
-had a DFT/ECP bug. If a Windows build misbehaves, ask the author which build you should be running.
+Not every build on the official site is reliable. A note there once said that the `w64/*.exe` 64-bit Cygwin builds
+had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build you should be running.
 :::
 <!-- src: 04 #366 -->

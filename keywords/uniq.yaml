@@ -9,7 +9,7 @@ keywords:
     default: null
     description:
       en: |
-        Threshold for treating two structures as identical (inferred from the author's example `dist=0.01`, run on 157
+        Threshold for treating two structures as identical (inferred from the official example `dist=0.01`, run on 157
         MD snapshots, each in its own `$molecule` block).
     status: undocumented
     sources: ["01 §4.9"]

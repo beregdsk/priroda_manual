@@ -190,14 +190,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">About Priroda</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running.html">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-syntax.html">Input syntax</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +219,13 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -265,11 +268,12 @@
 <h1>About Priroda<a class="headerlink" href="#about-priroda" title="Link to this heading">¶</a></h1>
 <p>Priroda (Russian for “nature”) is a quantum-chemistry program for molecules written by Dimitri N. Laikov.
 It began as a fast program for GGA density-functional calculations and grew to cover hybrid DFT, RI-MP2,
-coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and the author’s own semiempirical model.</p>
+coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and Laikov’s own semiempirical model.</p>
 <!-- src: 06 §1; 03 §1; 04 #331 -->
-<p>The program is closed-source and has no complete official manual. The author’s documentation is a short keyword
+<p>The program is closed-source and has no complete official manual. Priroda’s own documentation is a short keyword
 list, the “Input Summary” (<code class="docutils literal notranslate"><span class="pre">input.txt</span></code>), which ships with the program. This manual collects that text, the example
-files on the author’s site, and twenty years of user experience from Russian-language forums.</p>
+files on the official site, and twenty years of user experience from Russian-language forums. It is not an official
+document: the developer has not written or reviewed it. <a class="reference internal" href="../sources.html#sources"><span class="std std-ref">Sources</span></a> lists what it is based on.</p>
 <!-- src: 04 #151, #327; 00 -->
 <section id="main-features">
 <h2>Main features<a class="headerlink" href="#main-features" title="Link to this heading">¶</a></h2>
@@ -318,7 +322,7 @@ for Molden.</p>
 <section id="capability-matrix">
 <h2>Capability matrix<a class="headerlink" href="#capability-matrix" title="Link to this heading">¶</a></h2>
 <p>The table shows which <code class="docutils literal notranslate"><span class="pre">task=</span></code> values are known to work with each <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value. It is assembled from example inputs
-and user reports, not from a statement by the author.</p>
+and user reports, not from a statement by the developer.</p>
 <ul class="simple">
 <li><p>✓: shown to work in an example input or a user report.</p></li>
 <li><p>–: not available, according to the sources.</p></li>
@@ -423,7 +427,7 @@ and user reports, not from a statement by the author.</p>
 <!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291; TS/IRC/scan: 06 §3, 02 §4, 03 §9; nmr: input.txt, 04 #96; MD: 01 §5.7 -->
 <p>Notes to the table:</p>
 <ol class="arabic simple">
-<li><p>A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the author’s 2011 note on a bug
+<li><p>A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the developer’s 2011 note on a bug
 fix that names the CCSD(T) gradient. <!-- src: 04 #146; 03 §1 --></p></li>
 <li><p>Analytic second derivatives. <!-- src: 06 §3; 05 §10 --></p></li>
 <li><p>Users report CCSD and CCSD(T) Hessians. For correlated methods they are computed by finite differences of the
@@ -453,14 +457,14 @@ the exact exchange and run what amounts to a pure GGA, and newer versions abort.
 <dl class="simple myst">
 <dt>No use of point-group symmetry in older versions</dt><dd><p>Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
 Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
-the author’s 2023–2025 inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. What these options do is not documented;
+the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. What these options do is not documented;
 see <a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a>.</p>
 <!-- src: 04 §0, #251, #254; 01 §4.7 --> <!-- verify -->
 </dd>
 <dt>No continuum solvation</dt><dd><p>No version has a continuum solvent model. Solvent can only be included as explicit molecules.</p>
 <!-- src: 04 #75, #76, #348, #417 -->
 </dd>
-<dt>No D3 or other empirical dispersion correction</dt><dd><p>The author has declined to add one (relayed from correspondence). Users add Grimme’s D3 a posteriori with the
+<dt>No D3 or other empirical dispersion correction</dt><dd><p>The developer has declined to add one (relayed from correspondence). Users add Grimme’s D3 a posteriori with the
 external <code class="docutils literal notranslate"><span class="pre">dftd3</span></code> program. The 2023–2025 functionals <code class="docutils literal notranslate"><span class="pre">LPBEVV</span></code> and <code class="docutils literal notranslate"><span class="pre">LPBEVVV</span></code> may include dispersion, but this is
 inferred from their test systems and not documented.</p>
 <!-- src: 04 #347, #348, #417, #512; 01 §3.2 -->
@@ -527,7 +531,7 @@ version.</p>
 </tr>
 <tr class="row-even"><td><p>9</p></td>
 <td><p>2009–2011</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code> returned. In mid-2011 the author fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code> returned. In mid-2011 the developer fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD.</p></td>
 </tr>
 <tr class="row-odd"><td><p>10</p></td>
 <td><p>2011.04.14</p></td>
@@ -539,7 +543,7 @@ version.</p>
 </tr>
 <tr class="row-odd"><td><p>13</p></td>
 <td><p>2013.01.10, 2013.01.21, 2013.09.13</p></td>
-<td><p>Builds behind the example outputs on the author’s site.</p></td>
+<td><p>Builds behind the example outputs on the official site.</p></td>
 </tr>
 <tr class="row-even"><td><p>14</p></td>
 <td><p>2014.01.01</p></td>
@@ -551,7 +555,7 @@ version.</p>
 </tr>
 <tr class="row-even"><td><p>16, 17</p></td>
 <td><p>2016–2018</p></td>
-<td><p>The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the author removed limits on SCF memory allocation and on the system size for Hessians.</p></td>
+<td><p>The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the developer removed limits on SCF memory allocation and on the system size for Hessians.</p></td>
 </tr>
 <tr class="row-odd"><td><p>23</p></td>
 <td><p>2023.06.22</p></td>
@@ -572,7 +576,7 @@ Those names are not part of the current keyword list.</p>
 </section>
 <section id="obtaining-priroda">
 <h2>Obtaining Priroda<a class="headerlink" href="#obtaining-priroda" title="Link to this heading">¶</a></h2>
-<p>Priroda is free of charge and distributed by the author. The usual route is to write to Dimitri Laikov by e-mail and
+<p>Priroda is free of charge and distributed by the developer. The usual route is to write to Dimitri Laikov by e-mail and
 ask for the program. Users reported the address <code class="docutils literal notranslate"><span class="pre">dimitri_laikov&#64;mail.ru</span></code> from 2010 to 2018; earlier it was
 <code class="docutils literal notranslate"><span class="pre">laikov&#64;physto.se</span></code>. Users note that he does not always answer quickly.</p>
 <!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
@@ -591,18 +595,18 @@ the optimized geometry) and <code class="docutils literal notranslate"><span cla
 <!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The legal status is not stated on the author’s site. A 2009 presentation relayed on a forum said that Priroda is
-registered with Rospatent and distributed through the company OOO “Dimonta”. A user reported in 2018 that the author
-had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the author’s
+<p>The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
+registered with Rospatent and distributed through the company OOO “Dimonta”. A user reported in 2018 that the developer
+had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer’s
 permission before using the program.</p>
 </div>
 <!-- src: 03 §1; 04 #2, #404, #443-#445 -->
-<p>The author’s site has hosted builds with known defects. In 2016 it carried a note that the <code class="docutils literal notranslate"><span class="pre">w64/*.exe</span></code> builds (an
-attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the author whether it is the right one.</p>
+<p>The official site has hosted builds with known defects. In 2016 it carried a note that the <code class="docutils literal notranslate"><span class="pre">w64/*.exe</span></code> builds (an
+attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.</p>
 <!-- src: 04 #366 -->
 </section>
 <section id="how-to-cite">
-<h2>How to cite<a class="headerlink" href="#how-to-cite" title="Link to this heading">¶</a></h2>
+<span id="id2"></span><h2>How to cite<a class="headerlink" href="#how-to-cite" title="Link to this heading">¶</a></h2>
 <p>Priroda has no single program paper for the current version. Users cite the papers below; the first three are the
 list given by the KNC wiki FAQ and repeated in the forums.</p>
 <p>Program:</p>
@@ -640,7 +644,7 @@ with Gaussian basis sets. DFT2000 Conference, Menton, France, 2000. <!-- src: 06
 </li>
 </ul>
 <p>For version 6, users cited the program itself as “D. N. Laikov, PRIRODA, Electronic Structure Code, Version 6, 2006”.
-A 2014 forum suggestion adds the author’s page, <a class="reference external" href="http://rad.chem.msu.ru/~laikov/">http://rad.chem.msu.ru/~laikov/</a>, as the reference for the current
+A 2014 forum suggestion adds Laikov’s home page, <a class="reference external" href="http://rad.chem.msu.ru/~laikov/">http://rad.chem.msu.ru/~laikov/</a>, as the reference for the current
 version.</p>
 <!-- src: 03 §1; 04 #302 -->
 <p>Also cite the original papers for the functional, and for the Hamiltonian and nuclear model if you use <code class="docutils literal notranslate"><span class="pre">four=1</span></code>.

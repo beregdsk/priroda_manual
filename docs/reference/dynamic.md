@@ -11,7 +11,7 @@ Molecular dynamics with a thermostat.
 
 **Relevant when:** `task = thermostat`
 
-Known only from the author's example inputs and a third-party input generator. Every meaning below is
+Known only from the official example inputs and a third-party input generator. Every meaning below is
 inferred, except `file`.
 
 ```text

@@ -214,7 +214,7 @@ keywords:
     type: switch
     default: null
     description:
-      en: Used as `sym=1` in the author's 2023–2025 inputs, apparently to preserve molecular symmetry during the optimization.
+      en: Used as `sym=1` in the official 2023–2025 example inputs, apparently to preserve molecular symmetry during the optimization.
     see_also: [molecule.sym]
     status: undocumented
     sources: ["01 §4.6", "04 #481"]

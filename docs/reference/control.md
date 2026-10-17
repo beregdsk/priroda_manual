@@ -78,7 +78,7 @@ Theoretical method.
 |---|---|
 | `dft` | GGA DFT with density fitting. Hybrid functionals are **not** applied here: see notes. (**default**) |
 | `ridft` | Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals. |
-| `DFT_n4` | Newer DFT variant, used by the author with `func=LPBEVV` (2025). *(undocumented)* |
+| `DFT_n4` | Newer DFT variant, used in the official example inputs with `func=LPBEVV` (2025). *(undocumented)* |
 | `tddft` | GGA time-dependent DFT (no hybrid TDDFT). |
 | `rimp2` | RI-MP2. |
 | `hf` | Hartree–Fock. *(undocumented)* |
@@ -189,7 +189,7 @@ Required with the relativistic basis file `basis4.in`. Forgetting it is a common
 
 Default: `finite` for four-component theory, `point` for non-relativistic theory.
 
-Nuclear model. The author's own inputs write it as `nuc=finite`.
+Nuclear model. The official example inputs write it as `nuc=finite`.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```

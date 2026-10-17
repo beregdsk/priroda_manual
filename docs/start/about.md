@@ -2,12 +2,13 @@
 
 Priroda (Russian for "nature") is a quantum-chemistry program for molecules written by Dimitri N. Laikov.
 It began as a fast program for GGA density-functional calculations and grew to cover hybrid DFT, RI-MP2,
-coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and the author's own semiempirical model.
+coupled-cluster methods, TDDFT, a scalar-relativistic Hamiltonian, NMR, and Laikov's own semiempirical model.
 <!-- src: 06 §1; 03 §1; 04 #331 -->
 
-The program is closed-source and has no complete official manual. The author's documentation is a short keyword
+The program is closed-source and has no complete official manual. Priroda's own documentation is a short keyword
 list, the "Input Summary" (`input.txt`), which ships with the program. This manual collects that text, the example
-files on the author's site, and twenty years of user experience from Russian-language forums.
+files on the official site, and twenty years of user experience from Russian-language forums. It is not an official
+document: the developer has not written or reviewed it. {ref}`sources` lists what it is based on.
 <!-- src: 04 #151, #327; 00 -->
 
 ## Main features
@@ -63,7 +64,7 @@ Experienced users report that Priroda is markedly faster than general-purpose pr
 ## Capability matrix
 
 The table shows which `task=` values are known to work with each `theory=` value. It is assembled from example inputs
-and user reports, not from a statement by the author.
+and user reports, not from a statement by the developer.
 
 - ✓: shown to work in an example input or a user report.
 - –: not available, according to the sources.
@@ -86,7 +87,7 @@ and user reports, not from a statement by the author.
 
 Notes to the table:
 
-1. A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the author's 2011 note on a bug
+1. A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the developer's 2011 note on a bug
    fix that names the CCSD(T) gradient. <!-- src: 04 #146; 03 §1 -->
 2. Analytic second derivatives. <!-- src: 06 §3; 05 §10 -->
 3. Users report CCSD and CCSD(T) Hessians. For correlated methods they are computed by finite differences of the
@@ -118,7 +119,7 @@ Check this list before planning a project around Priroda.
 No use of point-group symmetry in older versions
 : Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
   Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
-  the author's 2023–2025 inputs use `sym=1` in `$molecule` and `$optimize`. What these options do is not documented;
+  the official 2023–2025 example inputs use `sym=1` in `$molecule` and `$optimize`. What these options do is not documented;
   see {ref}`$molecule sym <molecule.sym>`.
   <!-- src: 04 §0, #251, #254; 01 §4.7 --> <!-- verify -->
 
@@ -127,7 +128,7 @@ No continuum solvation
   <!-- src: 04 #75, #76, #348, #417 -->
 
 No D3 or other empirical dispersion correction
-: The author has declined to add one (relayed from correspondence). Users add Grimme's D3 a posteriori with the
+: The developer has declined to add one (relayed from correspondence). Users add Grimme's D3 a posteriori with the
   external `dftd3` program. The 2023–2025 functionals `LPBEVV` and `LPBEVVV` may include dispersion, but this is
   inferred from their test systems and not documented.
   <!-- src: 04 #347, #348, #417, #512; 01 §3.2 -->
@@ -169,13 +170,13 @@ version.
 | 6 | 2006.08.20 | Long the most widely used version: 32- and 64-bit Linux builds with MPI, and a Windows build (`p6.exe`). `optimize+hessian` was removed. Parallel Hessians use at most 2 cores. |
 | 7 | — | Sent as object files for linking against a local MPI library. |
 | 8 | 2008.09.05 | Built on request for a Myrinet cluster. |
-| 9 | 2009–2011 | `optimize+hessian` returned. In mid-2011 the author fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD. |
+| 9 | 2009–2011 | `optimize+hessian` returned. In mid-2011 the developer fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD. |
 | 10 | 2011.04.14 | Linux build `p` with a bundled `mpiexec`. |
 | 11 | — | Contains the semiempirical QM model. |
-| 13 | 2013.01.10, 2013.01.21, 2013.09.13 | Builds behind the example outputs on the author's site. |
+| 13 | 2013.01.10, 2013.01.21, 2013.09.13 | Builds behind the example outputs on the official site. |
 | 14 | 2014.01.01 | Input geometry echoed with a `<` prefix (`<$molecule`). 8060-atom QM-model run on 32 processes. |
 | 15 | 2015.09.14 | Scalar-relativistic example (Pt complex). |
-| 16, 17 | 2016–2018 | The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the author removed limits on SCF memory allocation and on the system size for Hessians. |
+| 16, 17 | 2016–2018 | The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the developer removed limits on SCF memory allocation and on the system size for Hessians. |
 | 23 | 2023.06.22 | Newest numbered version reported by users (2024). New functionals `LPBEVV` and `LPBEVVV`. |
 | ? | 2025 | Linux builds dated 2025-02-28 (`p4_d`) and 2025-04-14 (`p_l`), with 2025 example inputs that use `theory=DFT_n4`. Version number not known. |
 
@@ -188,7 +189,7 @@ Those names are not part of the current keyword list.
 
 ## Obtaining Priroda
 
-Priroda is free of charge and distributed by the author. The usual route is to write to Dimitri Laikov by e-mail and
+Priroda is free of charge and distributed by the developer. The usual route is to write to Dimitri Laikov by e-mail and
 ask for the program. Users reported the address `dimitri_laikov@mail.ru` from 2010 to 2018; earlier it was
 `laikov@physto.se`. Users note that he does not always answer quickly.
 <!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
@@ -208,17 +209,18 @@ The executables are described in {doc}`running`.
 <!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
 
 :::{note}
-The legal status is not stated on the author's site. A 2009 presentation relayed on a forum said that Priroda is
-registered with Rospatent and distributed through the company OOO "Dimonta". A user reported in 2018 that the author
-had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the author's
+The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
+registered with Rospatent and distributed through the company OOO "Dimonta". A user reported in 2018 that the developer
+had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer's
 permission before using the program.
 :::
 <!-- src: 03 §1; 04 #2, #404, #443-#445 -->
 
-The author's site has hosted builds with known defects. In 2016 it carried a note that the `w64/*.exe` builds (an
-attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the author whether it is the right one.
+The official site has hosted builds with known defects. In 2016 it carried a note that the `w64/*.exe` builds (an
+attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.
 <!-- src: 04 #366 -->
 
+(how-to-cite)=
 ## How to cite
 
 Priroda has no single program paper for the current version. Users cite the papers below; the first three are the
@@ -257,7 +259,7 @@ Semiempirical QM model (`theory=qm_n*`):
   <!-- verify -->
 
 For version 6, users cited the program itself as "D. N. Laikov, PRIRODA, Electronic Structure Code, Version 6, 2006".
-A 2014 forum suggestion adds the author's page, <http://rad.chem.msu.ru/~laikov/>, as the reference for the current
+A 2014 forum suggestion adds Laikov's home page, <http://rad.chem.msu.ru/~laikov/>, as the reference for the current
 version.
 <!-- src: 03 §1; 04 #302 -->
 

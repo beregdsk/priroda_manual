@@ -46,7 +46,7 @@ for an analytic Hessian, where N is the basis dimension. `Dft.rtf` gives an old 
 
 Positive values set the disk space in gigabytes; one scratch file is opened per gigabyte, which sidesteps
 per-file size limits. Negative values set the amount of memory, in megabytes, used to emulate disk
-(a RAM disk). A second value applies to the other MPI ranks, as for `memory`; the author typically gives
+(a RAM disk). A second value applies to the other MPI ranks, as for `memory`; the official example inputs typically give
 them `-1`.
 
 ```{note}

@@ -22,5 +22,5 @@ Duplicate-structure filtering over several `$molecule` blocks.
 **Status:** undocumented · not verified\
 **Sources:** 01 §4.9
 
-Threshold for treating two structures as identical (inferred from the author's example `dist=0.01`, run on 157
+Threshold for treating two structures as identical (inferred from the official example `dist=0.01`, run on 157
 MD snapshots, each in its own `$molecule` block).

@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Quickstart: your first calculations" href="quickstart.html"><link rel="prev" title="About Priroda" href="about.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Getting started" href="getting-started.html"><link rel="prev" title="About Priroda" href="about.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
         <title>Installing and running - Priroda User Manual</title>
@@ -190,14 +190,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Priroda</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-syntax.html">Input syntax</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +219,13 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -270,7 +273,7 @@ arguments.</p>
 <h2>Executables<a class="headerlink" href="#executables" title="Link to this heading">¶</a></h2>
 <section id="linux">
 <h3>Linux<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h3>
-<p>The author’s site lists these Linux files. Sizes and dates are those of the 2025 file index.</p>
+<p>The official site lists these Linux files. Sizes and dates are those of the 2025 file index.</p>
 <!-- src: 01 §2.1, §2.2 -->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -315,7 +318,7 @@ arguments.</p>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xm</span></code></p></td>
 <td><p>2025-04-24</p></td>
-<td><p>The author’s molecule viewer. It takes a Priroda input file as its argument (<code class="docutils literal notranslate"><span class="pre">xm</span> <span class="pre">C60.qm.in</span></code>).</p></td>
+<td><p>The developer’s molecule viewer. It takes a Priroda input file as its argument (<code class="docutils literal notranslate"><span class="pre">xm</span> <span class="pre">C60.qm.in</span></code>).</p></td>
 </tr>
 </tbody>
 </table>
@@ -330,7 +333,7 @@ site. Scripts and forum posts written for those versions use these names. This m
 </section>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
-<p>The Windows build is a Cygwin build for x86-64. It is in the <code class="docutils literal notranslate"><span class="pre">exe64/</span></code> directory of the author’s site:</p>
+<p>The Windows build is a Cygwin build for x86-64. It is in the <code class="docutils literal notranslate"><span class="pre">exe64/</span></code> directory of the official site:</p>
 <!-- src: 01 §2.2 -->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -417,10 +420,10 @@ mpiexec -np 4 p input.in                     # as used for version 14 at one sit
 </pre></div>
 </div>
 <!-- src: 04 #66, #151, #153; 01 §2.1; 02 §5.1 -->
-<p>The first form is what users ran with versions 6 and 10. The second is what the author’s site shows for the current
+<p>The first form is what users ran with versions 6 and 10. The second is what the official site shows for the current
 <code class="docutils literal notranslate"><span class="pre">p</span></code> and its bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>. In one report with version 10, starting through the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> failed while
 <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">4</span></code> worked, but that run also had a relative basis-file path, which can cause the same failure. Try the form
-from the author’s site first.</p>
+from the official site first.</p>
 <!-- src: 04 #150-#154; 01 §2.1 --> <!-- verify -->
 <p>Check the start of the output. A parallel run prints the number of processes and one line per process:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> parallel on  4 processors
@@ -430,7 +433,7 @@ from the author’s site first.</p>
 </pre></div>
 </div>
 <!-- src: 04 #152; 01 §2.6 -->
-<p>The cluster builds are started through the cluster’s own MPI. The author’s example for <code class="docutils literal notranslate"><span class="pre">p_l</span></code> under SLURM is:</p>
+<p>The cluster builds are started through the cluster’s own MPI. The official example for <code class="docutils literal notranslate"><span class="pre">p_l</span></code> under SLURM is:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sbatch -p test -n 16 -t 6 impi ~/bin/p_l file.{in,out}
 </pre></div>
 </div>
@@ -439,7 +442,7 @@ from the author’s site first.</p>
 </section>
 <section id="parallel-runs-on-windows">
 <span id="running-windows-parallel"></span><h3>Parallel runs on Windows<a class="headerlink" href="#parallel-runs-on-windows" title="Link to this heading">¶</a></h3>
-<p>The author’s site shows this command for a two-process run:</p>
+<p>The official site shows this command for a two-process run:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun.exe -np 2 p.exe C60.qm.in C60.qm.w.2.out
 </pre></div>
 </div>
@@ -501,7 +504,7 @@ used by rank 0, so give the other ranks less.</p>
 </dd>
 <dt><a class="reference internal" href="../reference/system.html#system-disk"><span class="std std-ref">disk</span></a></dt><dd><p>A positive value is scratch disk in <strong>GB</strong>. The program opens one scratch file per gigabyte. A negative value is
 scratch kept in memory, in <strong>MB</strong> (a RAM disk): <code class="docutils literal notranslate"><span class="pre">disk=-2048</span></code> holds 2048 MB of scratch in RAM. A second value
-applies to the other ranks, as for <code class="docutils literal notranslate"><span class="pre">memory</span></code>; the author typically gives them <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+applies to the other ranks, as for <code class="docutils literal notranslate"><span class="pre">memory</span></code>; the official example inputs typically give them <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
 <!-- src: input.txt; Dft.rtf; 04 #196, #468; 01 §4.1 -->
 </dd>
 <dt><a class="reference internal" href="../reference/system.html#system-path"><span class="std std-ref">path</span></a></dt><dd><p>The scratch directory. A colon-separated list gives one directory per process, which pays off only when the
@@ -543,7 +546,7 @@ directory. A 2020 user report says the directory of the input file. Version 6 pr
 use the node-local scratch disk instead.</p>
 </div>
 <!-- src: input.txt; 06 §3, §7 -->
-<p>Priroda is sensitive to disk speed. The author’s documentation warns that for all methods except GGA DFT, performance
+<p>Priroda is sensitive to disk speed. Priroda’s own documentation (<code class="docutils literal notranslate"><span class="pre">input.txt</span></code>) warns that for all methods except GGA DFT, performance
 “will be degraded terribly” if more than one process reads and writes large files on the same physical drive. In
 order of preference:</p>
 <!-- src: input.txt; 04 #181, #293 -->
@@ -747,12 +750,12 @@ single quotes do not work; <code class="docutils literal notranslate"><span clas
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="quickstart.html">
+          <a class="next-page" href="getting-started.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Quickstart: your first calculations</div>
+                <div class="title">Getting started</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

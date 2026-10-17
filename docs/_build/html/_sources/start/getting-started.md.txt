@@ -1,13 +1,12 @@
-(start.quickstart)=
-# Quickstart: your first calculations
+(start.getting-started)=
+# Getting started
 
 This chapter takes you through three things: a single-point energy of water, a geometry optimization of ammonia
 followed by a Hessian that proves the structure is a minimum, and the parts of the output you need to read along the
-way. It assumes that Priroda is installed and that you can start it from a shell. The chapter "Installation and
-running" covers that.
+way. It assumes that Priroda is installed and that you can start it from a shell. {doc}`running` covers that.
 
 :::{warning}
-**The example inputs in this chapter have not been run yet.** They are assembled from inputs published by the author
+**The example inputs in this chapter have not been run yet.** They are assembled from inputs published by the developer
 and by experienced users, adapted to the current basis-set file `basis.in`. They follow the documented syntax, but
 nobody has checked them against a current Priroda binary. The output excerpts, by contrast, are copied verbatim from
 real outputs posted by users or shipped with the program. They come from various molecules and versions, so they
@@ -76,7 +75,7 @@ Group by group:
 
 :::{note}
 Hybrid functionals such as `PBE1` or `B3LYP` need {ref}`theory=ridft <control.theory>`. With `theory=dft`, older
-versions silently drop the exact exchange, and newer ones abort. The chapter "Single points" explains this trap.
+versions silently drop the exact exchange, and newer ones abort. See {ref}`$control theory <control.theory>`.
 <!-- src: 04 §0, #96, #99, #307-#310 -->
 :::
 
@@ -89,7 +88,7 @@ p water.in water.out
 ### What to look for in the output
 
 Near the top, a summary box repeats what the program understood from your input. It is the quickest check that the
-charge, multiplicity, method and functional are what you meant. This box is from the author's C60 example:
+charge, multiplicity, method and functional are what you meant. This box is from the C60 example on the official site:
 
 ```text
  +---------------------------------------
@@ -110,7 +109,7 @@ charge, multiplicity, method and functional are what you meant. This box is from
 
 Next comes the SCF iteration table (columns for the energy, the energy change and the gradient). A successful SCF
 ends with the line `converged!`. If you see `no convergence!` or `SCF is far from convergence`, the energy is not
-usable; the chapter "Solving common problems" lists the fixes.
+usable; {ref}`troubleshooting.common-problems` lists the fixes.
 <!-- src: 02 §3.3 (SCF markers); 01 §7 item 8 -->
 
 The total energy follows, in hartree, on the line starting with `E  =`, together with its components. This excerpt
@@ -435,8 +434,6 @@ The output is plain text, and the results meant for reuse are on lines tagged wi
 
 <!-- src: 01 §7; 02 §3.3; 06 §4, §8; 03 §14; 04 #79 -->
 
-Appendix B lists every output marker found so far.
-
 (qs-charges)=
 ### Charges and bond orders
 
@@ -492,8 +489,5 @@ vibrations, orbitals, NMR shifts and density critical points. Priroda's own view
 
 - {doc}`input-syntax` explains groups, keyword abbreviation, arrays and restart blocks.
 - {doc}`running` covers memory, scratch disks and parallel runs.
-- "Single points" discusses functionals, grids and the hybrid trap.
-- "Geometry optimization" and "Hessians, frequencies, thermochemistry" go deeper into the two loops of this chapter.
-- "Properties" covers charges, bond orders and orbitals.
-- {ref}`troubleshooting.common-problems` and {ref}`troubleshooting.error-messages` help when a run fails.
-- Appendix C describes the helper scripts (`ge`, `gm`, `grx`, `pri2mol`).
+- The {doc}`input reference <../reference/index>` describes every known keyword, group by group.
+- {ref}`troubleshooting.common-problems` helps when a run fails.

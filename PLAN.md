@@ -11,16 +11,17 @@ The structural model comes from `research/07_qc_manual_structures.md` §3. The c
 | D2 | Target version | Current Priroda (v23 / 2025 builds from p_w/). Older behaviour goes into "Version differences" notes. |
 | D3 | Toolchain | Sphinx + MyST Markdown + Furo, `sphinxcontrib-bibtex`. The PDF is built with pdflatex and Computer Modern (OT1), because this machine lacks `texlive-xetex`, `texlive-luatex` and `texlive-fontsrecommended`. Non-ASCII symbols are mapped in `latex_elements`, and the visible text must stay free of Cyrillic. Switch to XeLaTeX once `texlive-xetex` is installed. `docs/reference/` is generated from `keywords/*.yaml`. |
 | D4 | Verification | The user will run Priroda **later**. Until then every keyword carries `verified_against: null` (rendered "not verified"). |
-| D5 | Author review | Approved in principle. The user makes contact; we prepare the defaults table and the list of undocumented keywords. |
+| D5 | Developer review | Approved in principle. The user makes contact; we prepare the defaults table and the list of undocumented keywords. |
+| D6 | Presentation (2026-10-17) | The manual states on its front page and in About that it is **unofficial**, and lists its sources on a Sources page. The prose never says "the author": write "the developer", "Laikov", "the official site" or "`input.txt`". No error-message index. No placeholder pages: the toctree has only written chapters, and parts are numbered by what exists (renumber when Part II/III chapters arrive). The PDF is one-sided (`openany,oneside`) so it has no blank pages. |
 
 ## 1. Outline
 
 Every Part II chapter follows one template: *Overview → Minimal input → Key options → Advanced → Pitfalls (from forums) → Keyword summary (links into Part IV) → References.*
 
-**Part I: Getting started**
+**Part I: Introduction** (built as Part I)
 1. About Priroda: history (Laikov; versions 2 → 23), capability matrix (rows: tasks; columns: `dft`, `ridft`, `DFT_n4`, `tddft`, `rimp2`, `ccsd`, `ccsd4t`, `qm_n3`; marks for `four=1` and MPI), **what Priroda does not do** (symmetry, continuum solvation, D3, periodic systems), how to obtain it (e-mail the author; p_w/ binaries), how to cite.
 2. Installation and running: Linux binaries (`p`, `p4`, `_d` variants, cluster builds), `p in out`, `p -np N in out`, Windows/Cygwin (`p1.exe`, `p.exe` + OpenMPI DLLs, `dev\shm`), PBS/SLURM job scripts, `$system` (per-process `memory`/`disk`, negative disk = RAM disk, `mem=a,b` for rank 0 vs the other ranks, `path=`/`$TMPDIR`, never NFS), LF line endings.
-3. Quickstart: water energy → NH3 optimize+hessian → reading `MOL>`/thermo output. Uses the 14-step beginner loop from `06` §5.
+3. Getting started (was "Quickstart"): water energy → NH3 optimize+hessian → reading `MOL>`/thermo output. Uses the 14-step beginner loop from `06` §5.
 4. Input syntax: `$group … $end`, case-insensitive, unique-prefix abbreviation, indexed arrays `a(5)=…`, multi-value `tol=a,b`, flag strings `print=+a+b`, ordered `$molecule` data, the commenting convention (drop the `$`), restart blocks appended to input (`$Energy` / `eng>`, `num>`).
 
 **Part II: Typical calculations**
@@ -39,16 +40,16 @@ Every Part II chapter follows one template: *Overview → Minimal input → Key 
 **Part III: Methods and theory** (short, ORCA-style)
 16. Density fitting. 17. Functionals table. 18. Basis-set families: Λ/L (L0…L7777, m/a/+ variants, Lx, `_k`), 3z, SBK, b2/b2u/b4s, and orbital ↔ auxiliary pairing. 19. Adaptive grids. 20. Scalar-relativistic Hamiltonian. 21. Optimizer and coordinates. 22. QM model.
 
-**Part IV: Input reference** (one chapter per group, in input-writing order, generated from YAML)
+**Part IV: Input reference** (currently built as Part II; one chapter per group, in input-writing order, generated from YAML)
 `$system`, `$control`, `$molecule`, `$guess`, `$scf`, `$dft`, `$grid`, `$integral`, `$atoms`, `$optimize`, `$d2edr2`, `$thermo`, `$nmr`, `$dynamic`, `$uniq`, `$Energy`, basis-file format (`$kinetic`, `$auxiliary`, ECP, gc). Includes a master group table and an alphabetical index.
 
-**Part V: Troubleshooting**
+**Part V: Troubleshooting** (currently built as Part III)
 23. Solving common problems (symptom → cause → fix): SCF divergence, optimization failures, NaN/missing basis, memory/disk errors, MPI hangs.
-24. Error-message index: every verbatim message from `03`, `04`, `05`, `06`, with its fix.
+24. ~~Error-message index~~ Dropped (D6). Verbatim messages stay in the symptom entries of chapter 23.
 25. Version differences and obsolete keywords (the old `$SCF`/`$search`/`$force` names from `Dft_ansi.txt`, and how the defaults changed).
 26. FAQ.
 
-**Appendices:** A. Example inputs (+ expected energies if D4 allows). B. Output markers (`MOL>`, `eng>`, `freq>`, `mos>`, `num>`, `<$molecule`, `OPTIMIZATION CONVERGED`, `REACTION PATH`, …). C. Helper scripts (`ge`, `gm`, `grx`, pri2mol, xyz2pri; we write generic replacements for the KNC-only `lastgeo`/`lasteng`). D. Units/constants. E. Bibliography.
+**Appendices:** Sources (written). A. Example inputs (+ expected energies if D4 allows). B. Output markers (`MOL>`, `eng>`, `freq>`, `mos>`, `num>`, `<$molecule`, `OPTIMIZATION CONVERGED`, `REACTION PATH`, …). C. Helper scripts (`ge`, `gm`, `grx`, pri2mol, xyz2pri; we write generic replacements for the KNC-only `lastgeo`/`lasteng`). D. Units/constants. E. Bibliography.
 
 ## 2. Keyword record
 
@@ -87,6 +88,7 @@ Every item stays open for D4, testing against a real binary.
 ## 3a. Checklist for the first test runs (D4)
 
 Questions that a single run can answer. They are also tagged `<!-- verify -->` at the relevant place in `docs/`.
+`tests/` holds the first round of minimal inputs for them, with a run script and a results table (`tests/README.md`).
 
 1. Parallel launch: `p -np N in out`, or `./mpiexec -np N ./p in out`, or `mpiexec -np N p in`?
 2. Scratch directory when neither `path=` nor `TMPDIR` is set: the current directory, the input-file directory, or `/tmp`?
@@ -112,6 +114,7 @@ Questions that a single run can answer. They are also tagged `<!-- verify -->` a
 1. ~~Settle D1–D5.~~ Done.
 2. ~~Scaffold the toolchain and the YAML schema; migrate the `input.txt` keywords as the baseline.~~ Done: 13 groups, 52 keywords. The `$integral`, `$guess mix` and `task=extremal` entries were recovered from 03 #0 because their annotations in `input.txt` are corrupted.
 3. ~~Fold in the keywords and defaults from the other sources; record the §3 conflicts.~~ Done: 16 groups, 72 keywords. New groups are `$Energy`, `$dynamic` and `$uniq`, with undocumented tasks, theories, functionals and print flags marked per value.
-4. ~~Write Part I and the Part V error index.~~ Done: About, Running, Quickstart and Input syntax; Common problems and
-   an error index of 36 messages. The open questions are in §3a.
+4. ~~Write Part I and the Part V error index.~~ Done: About, Running, Quickstart and Input syntax; Common problems. The error index
+   was written and then dropped (D6). The open questions are in §3a.
+4a. ~~First round of test inputs for §3a.~~ Done: `tests/`. Waiting for runs.
 5. Write the Part II chapters in task order, then Part III, then the appendices.

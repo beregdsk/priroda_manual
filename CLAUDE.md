@@ -18,7 +18,7 @@ make clean
 
 ## Keyword pipeline
 
-The input reference (Part IV) is not hand-written. `keywords/<group>.yaml` holds one record per keyword (schema in the docstring of `docs/_ext/priroda_keywords.py`). That Sphinx extension runs on `builder-inited` and writes `docs/reference/<group>.md` and `docs/reference/index.md`, so **edit the YAML, never the generated `.md`**.
+The input reference (Part II in the built manual) is not hand-written. `keywords/<group>.yaml` holds one record per keyword (schema in the docstring of `docs/_ext/priroda_keywords.py`). That Sphinx extension runs on `builder-inited` and writes `docs/reference/<group>.md` and `docs/reference/index.md`, so **edit the YAML, never the generated `.md`**.
 
 The extension validates on every build:
 - required fields;
@@ -41,6 +41,8 @@ Record conventions:
   `<!-- verify -->`. Readers never see these comments; the author uses them for D4 verification passes.
   **Never put a `>` inside a comment** (e.g. `eng>`, `MOL>`): MyST ends an inline comment there, and the rest
   leaks onto the page. Write `eng-prefixed lines` instead.
+- The manual is unofficial. Never call Laikov "the author" in prose: write "the developer", "Laikov", "the official
+  site" or name the file (`input.txt`). Don't add placeholder pages or link to chapters that don't exist yet.
 - Uncertain behaviour gets an explicit `:::{note}` or `:::{warning}` in the text ("reported by users, not confirmed"),
   never silent hedging and never invented detail.
 - Link keywords as ``{ref}`steps <optimize.steps>` ``, and groups as ``{ref}`$optimize <group.optimize>` ``. Don't
@@ -57,6 +59,8 @@ Record conventions:
   - `Dft_ansi.txt`: Russian, cp1251 + CRLF; describes the predecessor program with obsolete group names.
 - `research/`: extracted notes, one per source, numbered `00`–`07`. `00_*_utf8.txt` are UTF-8 conversions of the cp1251 originals. `07` is the survey of other QC manuals (ORCA, GAMESS, TURBOMOLE, Psi4, NWChem, CP2K, Gaussian) with the recommended outline, keyword-entry template and toolchain.
 - `PLAN.md`: manual outline, settled decisions, table of known conflicts, and work order with progress. Read it before writing manual content.
+- `tests/`: minimal verification inputs for the open questions (`PLAN.md` §3a), `run.sh`, and a results table in
+  `tests/README.md`.
 - `keywords/`: the YAML keyword source. `docs/`: the Sphinx source (`conf.py`, `index.md`, `_ext/`, generated `reference/`).
 
 ## Working with the sources

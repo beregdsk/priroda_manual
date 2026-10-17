@@ -46,7 +46,7 @@ keywords:
     values:
       - {value: dft, en: "GGA DFT with density fitting. Hybrid functionals are **not** applied here: see notes.", default: true}
       - {value: ridft, en: Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals.}
-      - {value: DFT_n4, en: "Newer DFT variant, used by the author with `func=LPBEVV` (2025).", status: undocumented}
+      - {value: DFT_n4, en: "Newer DFT variant, used in the official example inputs with `func=LPBEVV` (2025).", status: undocumented}
       - {value: tddft, en: GGA time-dependent DFT (no hybrid TDDFT).}
       - {value: rimp2, en: RI-MP2.}
       - {value: hf, en: Hartree–Fock., status: undocumented}
@@ -132,7 +132,7 @@ keywords:
       - {value: finite, en: "Gaussian nuclear model (L. Visscher, K. G. Dyall, At. Data Nucl. Data Tables 67 (1997) 207–224)."}
       - {value: point, en: Point-nucleus model.}
     description:
-      en: Nuclear model. The author's own inputs write it as `nuc=finite`.
+      en: Nuclear model. The official example inputs write it as `nuc=finite`.
     notes:
       en: A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa.
     see_also: [control.four]

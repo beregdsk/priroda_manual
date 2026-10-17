@@ -8,7 +8,7 @@ arguments.
 
 ### Linux
 
-The author's site lists these Linux files. Sizes and dates are those of the 2025 file index.
+The official site lists these Linux files. Sizes and dates are those of the 2025 file index.
 <!-- src: 01 §2.1, §2.2 -->
 
 | File | Date | Description |
@@ -21,7 +21,7 @@ The author's site lists these Linux files. Sizes and dates are those of the 2025
 | `p_mvs1p1`, `p_mvs10p`, `p_mvs10q` | 2019–2023 | Builds for particular clusters. |
 | `p_arm`, `mpiexec_arm` | 2015-09-23 | ARM build and its MPI launcher. |
 | `mpiexec` | 2012-09-09 | MPI launcher shipped with `p`. |
-| `xm` | 2025-04-24 | The author's molecule viewer. It takes a Priroda input file as its argument (`xm C60.qm.in`). |
+| `xm` | 2025-04-24 | The developer's molecule viewer. It takes a Priroda input file as its argument (`xm C60.qm.in`). |
 
 That `p` is statically linked is inferred from the description of `p_d` as "dynamically linked". The site does not say
 which cluster each `p_mvs*` and `p_l` build is for.
@@ -35,7 +35,7 @@ Some users run the Linux build under WSL on Windows. <!-- src: 04 #508 -->
 
 ### Windows
 
-The Windows build is a Cygwin build for x86-64. It is in the `exe64/` directory of the author's site:
+The Windows build is a Cygwin build for x86-64. It is in the `exe64/` directory of the official site:
 <!-- src: 01 §2.2 -->
 
 | File | Date | Description |
@@ -109,10 +109,10 @@ mpiexec -np 4 p input.in                     # as used for version 14 at one sit
 
 <!-- src: 04 #66, #151, #153; 01 §2.1; 02 §5.1 -->
 
-The first form is what users ran with versions 6 and 10. The second is what the author's site shows for the current
+The first form is what users ran with versions 6 and 10. The second is what the official site shows for the current
 `p` and its bundled `mpiexec`. In one report with version 10, starting through the bundled `mpiexec` failed while
 `p -np 4` worked, but that run also had a relative basis-file path, which can cause the same failure. Try the form
-from the author's site first.
+from the official site first.
 <!-- src: 04 #150-#154; 01 §2.1 --> <!-- verify -->
 
 Check the start of the output. A parallel run prints the number of processes and one line per process:
@@ -126,7 +126,7 @@ Check the start of the output. A parallel run prints the number of processes and
 
 <!-- src: 04 #152; 01 §2.6 -->
 
-The cluster builds are started through the cluster's own MPI. The author's example for `p_l` under SLURM is:
+The cluster builds are started through the cluster's own MPI. The official example for `p_l` under SLURM is:
 
 ```text
 sbatch -p test -n 16 -t 6 impi ~/bin/p_l file.{in,out}
@@ -138,7 +138,7 @@ Here `impi` is that cluster's wrapper script for Intel MPI, not part of Priroda.
 (running-windows-parallel)=
 ### Parallel runs on Windows
 
-The author's site shows this command for a two-process run:
+The official site shows this command for a two-process run:
 
 ```text
 mpirun.exe -np 2 p.exe C60.qm.in C60.qm.w.2.out
@@ -204,7 +204,7 @@ $system memory=2048 disk=-2048 path=/scratch/user $end
 {ref}`disk <system.disk>`
 : A positive value is scratch disk in **GB**. The program opens one scratch file per gigabyte. A negative value is
   scratch kept in memory, in **MB** (a RAM disk): `disk=-2048` holds 2048 MB of scratch in RAM. A second value
-  applies to the other ranks, as for `memory`; the author typically gives them `-1`.
+  applies to the other ranks, as for `memory`; the official example inputs typically give them `-1`.
   <!-- src: input.txt; Dft.rtf; 04 #196, #468; 01 §4.1 -->
 
 {ref}`path <system.path>`
@@ -247,7 +247,7 @@ use the node-local scratch disk instead.
 :::
 <!-- src: input.txt; 06 §3, §7 -->
 
-Priroda is sensitive to disk speed. The author's documentation warns that for all methods except GGA DFT, performance
+Priroda is sensitive to disk speed. Priroda's own documentation (`input.txt`) warns that for all methods except GGA DFT, performance
 "will be degraded terribly" if more than one process reads and writes large files on the same physical drive. In
 order of preference:
 <!-- src: input.txt; 04 #181, #293 -->

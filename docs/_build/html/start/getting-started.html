@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Input syntax" href="input-syntax.html"><link rel="prev" title="Installing and running" href="running.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>Quickstart: your first calculations - Priroda User Manual</title>
+        <title>Getting started - Priroda User Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -190,14 +190,14 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Priroda</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running.html">Installing and running</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Quickstart: your first calculations</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-syntax.html">Input syntax</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +219,13 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -243,7 +246,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/start/quickstart.md.txt" title="View this page">
+  <a class="muted-link" href="../_sources/start/getting-started.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -261,15 +264,14 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="quickstart-your-first-calculations">
-<span id="start-quickstart"></span><h1>Quickstart: your first calculations<a class="headerlink" href="#quickstart-your-first-calculations" title="Link to this heading">¶</a></h1>
+          <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
+<span id="start-getting-started"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
 <p>This chapter takes you through three things: a single-point energy of water, a geometry optimization of ammonia
 followed by a Hessian that proves the structure is a minimum, and the parts of the output you need to read along the
-way. It assumes that Priroda is installed and that you can start it from a shell. The chapter “Installation and
-running” covers that.</p>
+way. It assumes that Priroda is installed and that you can start it from a shell. <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a> covers that.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><strong>The example inputs in this chapter have not been run yet.</strong> They are assembled from inputs published by the author
+<p><strong>The example inputs in this chapter have not been run yet.</strong> They are assembled from inputs published by the developer
 and by experienced users, adapted to the current basis-set file <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>. They follow the documented syntax, but
 nobody has checked them against a current Priroda binary. The output excerpts, by contrast, are copied verbatim from
 real outputs posted by users or shipped with the program. They come from various molecules and versions, so they
@@ -340,7 +342,7 @@ set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, �
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Hybrid functionals such as <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> or <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> need <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=ridft</span></a>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, older
-versions silently drop the exact exchange, and newer ones abort. The chapter “Single points” explains this trap.</p>
+versions silently drop the exact exchange, and newer ones abort. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
 <!-- src: 04 §0, #96, #99, #307-#310 -->
 </div>
 <p>Run it:</p>
@@ -351,7 +353,7 @@ versions silently drop the exact exchange, and newer ones abort. The chapter “
 <section id="what-to-look-for-in-the-output">
 <h3>What to look for in the output<a class="headerlink" href="#what-to-look-for-in-the-output" title="Link to this heading">¶</a></h3>
 <p>Near the top, a summary box repeats what the program understood from your input. It is the quickest check that the
-charge, multiplicity, method and functional are what you meant. This box is from the author’s C60 example:</p>
+charge, multiplicity, method and functional are what you meant. This box is from the C60 example on the official site:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> +---------------------------------------
  | Number of atoms                     60
  | Charge of molecule                   0
@@ -370,7 +372,7 @@ charge, multiplicity, method and functional are what you meant. This box is from
 <!-- src: 01 §7 item 5 (C60.df.l.2.out, Priroda 13) -->
 <p>Next comes the SCF iteration table (columns for the energy, the energy change and the gradient). A successful SCF
 ends with the line <code class="docutils literal notranslate"><span class="pre">converged!</span></code>. If you see <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code> or <code class="docutils literal notranslate"><span class="pre">SCF</span> <span class="pre">is</span> <span class="pre">far</span> <span class="pre">from</span> <span class="pre">convergence</span></code>, the energy is not
-usable; the chapter “Solving common problems” lists the fixes.</p>
+usable; <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-common-problems"><span class="std std-ref">Solving common problems</span></a> lists the fixes.</p>
 <!-- src: 02 §3.3 (SCF markers); 01 §7 item 8 -->
 <p>The total energy follows, in hartree, on the line starting with <code class="docutils literal notranslate"><span class="pre">E</span>&#160; <span class="pre">=</span></code>, together with its components. This excerpt
 is from a user’s output:</p>
@@ -696,7 +698,6 @@ If the resulting Hessian shows an imaginary frequency, you still need step 6.</p
 </table>
 </div>
 <!-- src: 01 §7; 02 §3.3; 06 §4, §8; 03 §14; 04 #79 -->
-<p>Appendix B lists every output marker found so far.</p>
 </section>
 <section id="charges-and-bond-orders">
 <span id="qs-charges"></span><h3>Charges and bond orders<a class="headerlink" href="#charges-and-bond-orders" title="Link to this heading">¶</a></h3>
@@ -743,11 +744,8 @@ vibrations, orbitals, NMR shifts and density critical points. Priroda’s own vi
 <ul class="simple">
 <li><p><a class="reference internal" href="input-syntax.html"><span class="doc">Input syntax</span></a> explains groups, keyword abbreviation, arrays and restart blocks.</p></li>
 <li><p><a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a> covers memory, scratch disks and parallel runs.</p></li>
-<li><p>“Single points” discusses functionals, grids and the hybrid trap.</p></li>
-<li><p>“Geometry optimization” and “Hessians, frequencies, thermochemistry” go deeper into the two loops of this chapter.</p></li>
-<li><p>“Properties” covers charges, bond orders and orbitals.</p></li>
-<li><p><a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-common-problems"><span class="std std-ref">Solving common problems</span></a> and <a class="reference internal" href="../troubleshooting/error-messages.html#troubleshooting-error-messages"><span class="std std-ref">Error message index</span></a> help when a run fails.</p></li>
-<li><p>Appendix C describes the helper scripts (<code class="docutils literal notranslate"><span class="pre">ge</span></code>, <code class="docutils literal notranslate"><span class="pre">gm</span></code>, <code class="docutils literal notranslate"><span class="pre">grx</span></code>, <code class="docutils literal notranslate"><span class="pre">pri2mol</span></code>).</p></li>
+<li><p>The <a class="reference internal" href="../reference/index.html"><span class="doc">input reference</span></a> describes every known keyword, group by group.</p></li>
+<li><p><a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-common-problems"><span class="std std-ref">Solving common problems</span></a> helps when a run fails.</p></li>
 </ul>
 </section>
 </section>
@@ -807,7 +805,7 @@ vibrations, orbitals, NMR shifts and density critical points. Priroda’s own vi
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Quickstart: your first calculations</a><ul>
+<li><a class="reference internal" href="#">Getting started</a><ul>
 <li><a class="reference internal" href="#before-you-start">Before you start</a></li>
 <li><a class="reference internal" href="#a-single-point-energy">A single-point energy</a><ul>
 <li><a class="reference internal" href="#the-input">The input</a></li>
