@@ -2,7 +2,8 @@
 
 Source: the Linux build `p4_d` from <https://rad.chem.msu.ru/~laikov/p_w/>, downloaded 2026-10-17 (18 707 656 bytes,
 ELF x86-64, dynamically linked, **not stripped**, with debug info). Its banner string is `Priroda 25 (2025.02.28)`,
-the same as in the test runs (`08`). The file was only read (`strings`, `objdump`, `readelf`), never executed.
+the same as in the test runs (`08`). For this note the file was only read (`strings`, `objdump`, `readelf`); from round 13 on the same file was also run
+for tests in the cloud session (see `08`).
 
 Cite as `09`. This is the program's own code, so it settles **which names exist**. It says nothing about what a
 keyword does; meanings below come from other sources or are marked *(unknown)*.
