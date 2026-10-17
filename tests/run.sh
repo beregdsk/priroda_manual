@@ -60,7 +60,7 @@ for f in "$here"/inputs/t*.in; do
       cp "$out/$name.in" "$out/t64a/"; cp "$out/$name.in" "$out/t64b/"
       (cd "$out/t64a" && env -u TMPDIR timeout 600 "$PRIRODA" "$name.in" "$name.out" 2> "$name.err"; echo "t64a exit=$?" >> "$out/status.txt")
       (cd "$out/t64b" && TMPDIR="$out/t64b/tmpdir" timeout 600 "$PRIRODA" "$name.in" "$name.out" 2> "$name.err"; echo "t64b exit=$?" >> "$out/status.txt") ;;
-    t71_*)  # SCF restart loop: up to 8 cycles of 10 iterations, each reading the vectors saved by the previous one
+    t71_*|t71b_*)  # SCF restart loop: up to 8 cycles of 10 iterations, each reading the vectors saved by the previous one
       prep "$name" "" "${name}_cycle1"
       for c in 1 2 3 4 5 6 7 8; do
         if [ $c -gt 1 ]; then
@@ -73,6 +73,9 @@ for f in "$here"/inputs/t*.in; do
     t72_*)  # long: optimization + Hessian of a 22-atom complex; only with LONG=1
       if [ -z "${LONG:-}" ]; then skip "$name" "long run, set LONG=1"; continue; fi
       prep "$name" "" "$name"; run "$name" ;;
+    t74b_*)  # needs the triplet vectors saved by t74a
+      if [ ! -e "$out/o2t.vec" ]; then skip "$name" "needs t74a in the same run (no o2t.vec)"; continue; fi
+      prep "$name" "" "$name"; run "$name"; rm -f "$out/o2t.vec" ;;
     t35_*|t49_*) if [ -z "${BASIS4:-}" ]; then skip "$name" "BASIS4 not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     t39_*) if [ -z "${QMBASIS:-}" ]; then skip "$name" "QMBASIS not set"; continue; fi; prep "$name" "" "$name"; run "$name" ;;
     *)
