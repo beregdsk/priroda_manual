@@ -1,0 +1,7 @@
+t71b_cu_restart_loop_short_cycle1 exit=0
+t71b_cu_restart_loop_short_cycle2 exit=0
+t71b_cu_restart_loop_short_cycle3 exit=0
+t71b_cu_restart_loop_short_cycle4 exit=0
+t71b_cu_restart_loop_short converged in cycle 4
+t74a_o2_triplet_save exit=0
+t74b_o2_singlet_from_triplet exit=0
