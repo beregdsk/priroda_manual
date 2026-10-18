@@ -269,15 +269,17 @@
 <section class="tex2jax_ignore mathjax_ignore" id="system">
 <span id="group-system"></span><h1><code class="docutils literal notranslate"><span class="pre">$system</span></code><a class="headerlink" href="#system" title="Link to this heading">¶</a></h1>
 <p id="index-0">Memory, disk and scratch-directory limits.</p>
-<p>All limits apply <strong>per MPI process</strong>. For example, <code class="docutils literal notranslate"><span class="pre">disk=10</span></code> on four processes can use 40 GB. In a parallel run,
-most of the memory and all of the disk storage are used by the master process (rank 0).</p>
+<p>All limits apply <strong>per MPI process</strong>. For example, <code class="docutils literal notranslate"><span class="pre">disk=10</span></code> on four processes can use 40 GB. For GGA DFT, the
+v5 documentation and a v8 benchmark report that most of the memory and all of the disk storage are used by the
+master process (rank 0). RI-MP2 and the other correlated methods write large scratch files on every process.
+In version 25, a two-process DFT run left one scratch file per process.</p>
 <section id="memory">
 <span id="system-memory"></span><h2><code class="docutils literal notranslate"><span class="pre">memory</span></code><a class="headerlink" href="#memory" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">256</span></code><br />
 <strong>Units:</strong> MB<br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02</p>
+<strong>Sources:</strong> input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02, t58a</p>
 <p>Default: echoed by version 25 when <code class="docutils literal notranslate"><span class="pre">$system</span></code> is omitted.</p>
 <p>Memory limit in megabytes. A second value sets the limit for the other MPI ranks: <code class="docutils literal notranslate"><span class="pre">mem=2048,256</span></code> gives rank 0
 2048 MB and every other rank 256 MB. A single value applies to all ranks. The output echoes the result as
@@ -286,17 +288,18 @@ most of the memory and all of the disk storage are used by the master process (r
 <p class="admonition-title">Note</p>
 <p>For DFT, the v5 documentation estimates the memory as about 8·N²·3 bytes for energy and gradient, and twice that
 for an analytic Hessian, where N is the basis dimension. <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives an old default of 16 MB.
-Without a <code class="docutils literal notranslate"><span class="pre">$system</span></code> group, version 25 echoes <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span> <span class="pre">(256m</span> <span class="pre">+</span> <span class="pre">512m)</span></code>: 256 MB of memory plus a
-512 MB RAM disk per process, read from the echo format.</p>
+Without a <code class="docutils literal notranslate"><span class="pre">$system</span></code> group, version 25 echoes <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span> <span class="pre">(256m</span> <span class="pre">+</span> <span class="pre">512m)</span></code>, the same form that
+<code class="docutils literal notranslate"><span class="pre">mem=512</span> <span class="pre">disk=-512</span></code> gives. This is read as 256 MB of memory plus a 512 MB RAM disk per process
+<em>(inferred from the echo format)</em>.</p>
 </div>
 </section>
 <section id="disk">
 <span id="system-disk"></span><h2><code class="docutils literal notranslate"><span class="pre">disk</span></code><a class="headerlink" href="#disk" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">-512</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (one file per GB); 01 §4.1; 04 §0, #468; 03 §17; 08 t02</p>
-<p>Default: a 512 MB RAM disk, read from the version 25 echo <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span></code> when <code class="docutils literal notranslate"><span class="pre">$system</span></code> is omitted.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf (one file per GB); 01 §4.1; 04 §0, #468; 03 §3, §17; 08 t02, t58a, t62, t64; 06 §3, 08 Slurm s02 (scratch per process)</p>
+<p>Default: a 512 MB RAM disk <em>(inferred from the version 25 echo <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span></code> when <code class="docutils literal notranslate"><span class="pre">$system</span></code> is omitted)</em>.</p>
 <p>Positive values set the disk space in gigabytes; one scratch file is opened per gigabyte, which sidesteps
 per-file size limits. Negative values set the amount of memory, in megabytes, used to emulate disk
 (a RAM disk). A second value applies to the other MPI ranks, as for <code class="docutils literal notranslate"><span class="pre">memory</span></code>; the official example inputs typically give
@@ -304,8 +307,11 @@ them <code class="docutils literal notranslate"><span class="pre">-1</span></cod
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>With a RAM disk, <code class="docutils literal notranslate"><span class="pre">memory</span></code> plus |<code class="docutils literal notranslate"><span class="pre">disk</span></code>| (times the number of processes) must fit in physical RAM, or the run
-fails with <code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code>. Example for a 24 GB node: <code class="docutils literal notranslate"><span class="pre">memory=9000</span> <span class="pre">disk=-14000</span></code>.
-Keeping scratch in RAM gave a 6× speed-up for RI-MP2 on one cluster.</p>
+fails with <code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code>. Example for a 24 GB node running a single process: <code class="docutils literal notranslate"><span class="pre">memory=9000</span> <span class="pre">disk=-14000</span></code>.
+On one cluster, an RI-MP2 job on 8 cores with scratch in RAM ran 6× faster than on 2 cores with scratch on
+disk (a v8 benchmark; core count and scratch location both changed).
+In version 25, <code class="docutils literal notranslate"><span class="pre">disk=-512</span></code> was echoed as <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">512m</span> <span class="pre">+</span> <span class="pre">512m</span></code> with no <code class="docutils literal notranslate"><span class="pre">Disk:</span></code> line, <code class="docutils literal notranslate"><span class="pre">disk=1</span></code> as
+<code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>, and conventional MP2 with <code class="docutils literal notranslate"><span class="pre">disk=-1</span></code> stopped with <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(grid_W)</span></code>.</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system mem=2048,256 disk=-256,-1 $end

@@ -9,7 +9,7 @@
 
 Numerical Hessian by finite differences of the gradient.
 
-**Relevant when:** `numerical Hessian: task = hessian with theory = ridft | rimp2 | tddft | qm_n3, or $control derivative = numeric. An analytic dft Hessian does not use this group.`
+**Relevant when:** `numerical Hessian: task = hessian with theory = ridft | rimp2 | tddft | qm_n3, or $control derivative = numeric (an analytic dft Hessian has no displacement steps)`
 
 (d2edr2.length)=
 ## `length`
@@ -63,7 +63,7 @@ With the default, version 25 printed a FORWARD and a BACKWARD step for every coo
 **Type:** list\
 **Default:** `0,-1`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t55
+**Sources:** input.txt; 08 t55; 08 t32a, t32b, t53, t65
 
 Default: `0,-1` runs every step from 0 to 3N (or 6N) in a single run.
 
@@ -75,8 +75,7 @@ across separate runs and then combined.
 Not the same keyword as `$optimize steps`. Tested in version 25 with water (`ridft`, `displace=1`, steps 0–9):
 two partial runs (`steps=0,4`, `steps=5,9`) and a combining run with `displace=1 steps=-1` gave the same
 frequencies, to within 0.4 cm⁻¹, as a one-run Hessian with the default `displace=2`. The combining run does no
-SCF. Keep the same `displace` value in every part and in the combining run. Each part writes one numbered group
-per displacement (`$Energy000`, `$Energy001`, …) on `num>` lines. The collecting command in `input.txt`
+SCF. Each part writes one numbered group per displacement (`$Energy000`, `$Energy001`, …) on `num>` lines. The collecting command in `input.txt`
 (`grep "num>" … | sed "s/\.*num>//g"`) leaves the file names that `grep` adds at the start of each line;
 the example uses `grep -h` instead.
 ```

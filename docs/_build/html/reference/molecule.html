@@ -269,14 +269,15 @@
 <section class="tex2jax_ignore mathjax_ignore" id="molecule">
 <span id="group-molecule"></span><h1><code class="docutils literal notranslate"><span class="pre">$molecule</span></code><a class="headerlink" href="#molecule" title="Link to this heading">¶</a></h1>
 <p id="index-0">Charge, multiplicity, geometry (Cartesian and/or Z-matrix) and per-atom basis sets.</p>
-<p>Unlike the other groups, <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> holds <strong>ordered data</strong>. It starts with <code class="docutils literal notranslate"><span class="pre">charge=</span></code> and <code class="docutils literal notranslate"><span class="pre">mult=</span></code>, then one of the
-keywords <code class="docutils literal notranslate"><span class="pre">cartesian</span></code> or <code class="docutils literal notranslate"><span class="pre">z-matrix</span></code>, followed by one line per atom.</p>
+<p>Unlike the other groups, <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> holds <strong>ordered data</strong>. It starts with the optional <code class="docutils literal notranslate"><span class="pre">charge=</span></code> and <code class="docutils literal notranslate"><span class="pre">mult=</span></code>
+(defaults 0 and 1), then one of the keywords <code class="docutils literal notranslate"><span class="pre">cartesian</span></code> or <code class="docutils literal notranslate"><span class="pre">z-matrix</span></code>, followed by one line per atom.</p>
 <p>Cartesian lines: <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">z</span></code>. <strong>Z is the atomic number written as an integer</strong>: <code class="docutils literal notranslate"><span class="pre">8</span></code>, not <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and not <code class="docutils literal notranslate"><span class="pre">O</span></code>. The
 atom lines are read as a stream of numbers, so a value such as <code class="docutils literal notranslate"><span class="pre">8.0</span></code> shifts everything after it. In version 25
 this gives <strong>no error</strong>: the run continues with a wrong molecule (extra atoms with Z=0) and a meaningless
 energy. Check the <code class="docutils literal notranslate"><span class="pre">formula:</span></code> and atom-count lines at the top of the output. The coordinates are in Å unless
 <code class="docutils literal notranslate"><span class="pre">unit=b</span></code> is given.</p>
-<p>Z-matrix lines, <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">j</span> <span class="pre">r</span> <span class="pre">k</span> <span class="pre">a</span> <span class="pre">l</span> <span class="pre">b</span></code>, can combine distances, angles and torsions in four ways:</p>
+<p>Z-matrix lines give the atomic number <code class="docutils literal notranslate"><span class="pre">Z_i</span></code> of atom i, then up to three reference atoms j, k, l, each followed
+by an internal coordinate. They can combine distances, angles and torsions in four ways:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -285,35 +286,36 @@ energy. Check the <code class="docutils literal notranslate"><span class="pre">f
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">q_i</span> <span class="pre">j</span> <span class="pre">r_ij</span>&#160; <span class="pre">k</span> <span class="pre">a_ijk</span>&#160; <span class="pre">l</span> <span class="pre">b_ijkl</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Z_i</span> <span class="pre">j</span> <span class="pre">r_ij</span>&#160; <span class="pre">k</span> <span class="pre">a_ijk</span>&#160; <span class="pre">l</span> <span class="pre">b_ijkl</span></code></p></td>
 <td><p>distance, angle, torsion</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">q_i</span> <span class="pre">j</span> <span class="pre">r_ij</span>&#160; <span class="pre">k</span> <span class="pre">a_ijk</span> <span class="pre">-l</span> <span class="pre">a_ijl</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Z_i</span> <span class="pre">j</span> <span class="pre">r_ij</span>&#160; <span class="pre">k</span> <span class="pre">a_ijk</span> <span class="pre">-l</span> <span class="pre">a_ijl</span></code></p></td>
 <td><p>distance and two angles</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">q_i</span> <span class="pre">j</span> <span class="pre">r_ij</span> <span class="pre">-k</span> <span class="pre">r_ik</span>&#160;&#160; <span class="pre">l</span> <span class="pre">b_ijkl</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Z_i</span> <span class="pre">j</span> <span class="pre">r_ij</span> <span class="pre">-k</span> <span class="pre">r_ik</span>&#160;&#160; <span class="pre">l</span> <span class="pre">b_ijkl</span></code></p></td>
 <td><p>two distances and torsion</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">q_i</span> <span class="pre">j</span> <span class="pre">r_ij</span> <span class="pre">-k</span> <span class="pre">r_ik</span>&#160; <span class="pre">-l</span> <span class="pre">r_il</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Z_i</span> <span class="pre">j</span> <span class="pre">r_ij</span> <span class="pre">-k</span> <span class="pre">r_ik</span>&#160; <span class="pre">-l</span> <span class="pre">r_il</span></code></p></td>
 <td><p>three distances</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Distances are in Å, and angles and torsions are in degrees. In a pure Z-matrix the first atom gives only its
+<p>Distances are in Å (bohr with <code class="docutils literal notranslate"><span class="pre">unit=b</span></code>), and angles and torsions are in degrees. In a pure Z-matrix the first atom gives only its
 atomic number, the second only a distance, and the third two internal coordinates. The two formats can be mixed:
 put the Cartesian atoms first, then the remaining atoms as a Z-matrix.</p>
-<p>The program does not use or impose point-group symmetry unless the newer <code class="docutils literal notranslate"><span class="pre">sym=</span></code> option is given. Dummy atoms
-are not supported, so counterpoise (BSSE) calculations cannot be done; NICS probe points go in <code class="docutils literal notranslate"><span class="pre">$nmr</span> <span class="pre">points=</span></code>
-instead. Some tasks (<code class="docutils literal notranslate"><span class="pre">transit</span></code>, <code class="docutils literal notranslate"><span class="pre">saddle</span></code>, <code class="docutils literal notranslate"><span class="pre">path</span></code>, <code class="docutils literal notranslate"><span class="pre">uniq</span></code>) read <strong>several</strong> <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks from one input.
+<p>The program does not use or impose point-group symmetry unless the newer <code class="docutils literal notranslate"><span class="pre">sym=</span></code> option is given. Users report
+that ghost atoms (basis functions without a nuclear charge), which counterpoise (BSSE) corrections need, are not
+available. In version 25, atoms with Z=0 are accepted but carry no basis functions, so they are not ghost atoms.
+NICS probe points go in <code class="docutils literal notranslate"><span class="pre">$nmr</span> <span class="pre">points=</span></code> instead. Some tasks (<code class="docutils literal notranslate"><span class="pre">transit</span></code>, <code class="docutils literal notranslate"><span class="pre">saddle</span></code>, <code class="docutils literal notranslate"><span class="pre">path</span></code>, <code class="docutils literal notranslate"><span class="pre">uniq</span></code>) read <strong>several</strong> <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks from one input.
 Text after <code class="docutils literal notranslate"><span class="pre">$end</span></code>, such as the <code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">=</span> <span class="pre">…</span></code> lines that helper scripts append, is ignored. The line
 <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> near the top of every output is normal and not an error.</p>
 <section id="charge">
 <span id="molecule-charge"></span><h2><code class="docutils literal notranslate"><span class="pre">charge</span></code><a class="headerlink" href="#charge" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default)</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; Dft.rtf (default); 08 t29</p>
 <p>Molecular charge.</p>
 </section>
 <section id="mult">
@@ -331,14 +333,19 @@ Text after <code class="docutils literal notranslate"><span class="pre">$end</sp
 <strong>Units:</strong> amu<br />
 <strong>Status:</strong> current · not verified<br />
 <strong>Sources:</strong> input.txt</p>
-<p>Optional atomic mass written after an atom’s coordinates, for isotopes.</p>
+<p>Optional atomic mass for isotopes, written as <code class="docutils literal notranslate"><span class="pre">mass=</span></code> after an atom’s coordinates on the same atom line, in
+both Cartesian and Z-matrix input. Not tested in version 25.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1  0.0  0.0  0.96  mass=2.014
+</pre></div>
+</div>
 </section>
 <section id="set">
 <span id="molecule-set"></span><h2><code class="docutils literal notranslate"><span class="pre">set</span></code><a class="headerlink" href="#set" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 03 §5 (default set); 01 §4.11; 06 §1</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 03 §5 (default set); 01 §4.11, §6.2; 06 §1; 08 t01 (set=L1), t70a (set=L2)</p>
 <p>Default: the set named by <code class="docutils literal notranslate"><span class="pre">default=</span></code> in the basis-file header (<code class="docutils literal notranslate"><span class="pre">L1</span></code> in <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>).</p>
 <p>Basis set for the atoms that follow. The name must match one in the basis-set file. It can appear several
 times in the group. The orbital basis is paired with its own auxiliary (fitting) basis, so you cannot
@@ -346,9 +353,9 @@ combine arbitrary orbital and auxiliary sets.</p>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$molecule
  z-matrix
- set=B2
+ set=L2
    8
- set=B1
+ set=L1
    1    1    0.96252725
    1    1    0.96252725    2    102.943872
 $end

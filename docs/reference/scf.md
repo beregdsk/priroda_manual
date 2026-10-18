@@ -43,7 +43,7 @@ Spin restriction.
 **Type:** list\
 **Default:** `1e-6,1e-3`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.5 (output echo, energy gradient); 05 §5.1; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c; 08 t74b (gradient vs threshold); 08 Slurm (erations)
+**Sources:** input.txt; 01 §4.5 (output echo, energy gradient); 05 §5.1; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c; 08 t74b (gradient vs threshold); 08 Slurm (erations); 08 review check (convergence value series)
 
 Default: the first value is for SCF and the second for CP-SCF.
 
@@ -55,8 +55,9 @@ loosen the SCF value to `1e-5` for preliminary geometry optimizations.
 ```{note}
 **Put `iterations=` before `convergence=`, or give `convergence` two values.** A one-value `convergence=`
 followed by `iterations=` stops the run with `*** error in '$scf' : unknown name terations`, also when the
-two keywords are on separate lines. The message names the next keyword with its first letters missing; how
-many depends on the value: version 25 printed `terations` after `1e-7` and `erations` after `1e-10`.
+two keywords are on separate lines. The message names `iterations` with its first letters missing; how many
+depended on the machine, not on the value (`terations` on one computer, `erations` with `p4_d` on another, for
+every value tried). Other keywords after a one-value `convergence=`, such as `restrict=`, were read correctly.
 `iterations=250 convergence=1e-7` and `convergence=1e-7,1e-3 iterations=250` both work. Check the
 `scf: conv = …; iter=…` echo line in the output.
 ```

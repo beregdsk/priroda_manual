@@ -9,9 +9,10 @@
 
 Results of an earlier run (energy, gradient, Hessian, dipole data), read back as input.
 
-The program prints this group on lines prefixed with `eng>` (an energy/gradient/Hessian run), or `num>` (the
-pieces of a distributed numerical Hessian; see `$d2edr2 steps`). Strip the prefix and append the group to the
-next input. The shipped helper script `ge` does this.
+The program prints this group on lines prefixed with `eng>` (an energy, gradient or Hessian run) or `num>`.
+`num>` lines come from `task=dipole` (one `$Energy` group with `A=`, `Dx=` and `Ax=`) and from numerical Hessians,
+which write one numbered group per displacement: `$Energy000`, `$Energy001`, … (see `$d2edr2 steps`). Strip the
+prefix and append the groups to the next input. The helper script `ge` on the official site does this.
 
 A stored Hessian is required for `$optimize saddle=1` and `task=irc`. It also speeds up difficult minimizations,
 and it lets you redo vibrational analysis or thermochemistry (for example for other isotopes, `$thermo mass=`)
@@ -35,8 +36,8 @@ eng>$end
 **Type:** real\
 **Default:** *none stated*\
 **Units:** hartree\
-**Status:** undocumented · not verified\
-**Sources:** 01 §4.10; 02 §3.2
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 01 §4.10; 02 §3.2; 08 t01
 
 Total energy.
 
@@ -49,8 +50,8 @@ Total energy.
 **Type:** list\
 **Default:** *none stated*\
 **Units:** au\
-**Status:** undocumented · not verified\
-**Sources:** 01 §4.10; 02 §3.2
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 01 §4.10; 02 §3.2; 08 t02
 
 Cartesian gradient (3N values).
 
@@ -64,13 +65,14 @@ Cartesian gradient (3N values).
 **Default:** *none stated*\
 **Units:** au\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 02 §3.2; 08 t24, t25, t41, t41b
+**Sources:** 02 §3.2; 08 t13; 08 t24, t25, t41, t41b; 08 t55
 
 Hessian as a lower triangle, 3N(3N+1)/2 values. Written by `task=hessian` on `eng>` lines; in version 25 a
 `saddle=1` optimization and an IRC read it back from an appended `$Energy` group. If the input holds several
-`$Energy` groups, the last one is used.
+plain `$Energy` groups, the last one is used. The numbered groups `$Energy000`, `$Energy001`, … of a split
+numerical Hessian are all read by the combining run (`$d2edr2 steps=-1`).
 
-**See also:** {ref}`saddle ($optimize) <optimize.saddle>`
+**See also:** {ref}`saddle ($optimize) <optimize.saddle>`, {ref}`steps ($d2edr2) <d2edr2.steps>`
 
 (Energy.D)=
 ## `D`
@@ -81,10 +83,10 @@ Hessian as a lower triangle, 3N(3N+1)/2 values. Written by `task=hessian` on `en
 **Type:** list\
 **Default:** *none stated*\
 **Units:** au\
-**Status:** undocumented · not verified\
-**Sources:** 01 §4.10; 02 §3.2 (inferred)
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 01 §4.10; 02 §3.2; 08 t01
 
-Dipole moment.
+Dipole moment (3 values), written next to `E=`.
 
 (Energy.Dx)=
 ## `Dx`
@@ -95,7 +97,7 @@ Dipole moment.
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 02 §3.2 (inferred)
+**Sources:** 02 §3.2 (inferred); 08 t13; 08 t36
 
 Dipole derivatives with respect to nuclear coordinates (inferred from use: IR/Raman intensities).
 
@@ -108,6 +110,26 @@ Dipole derivatives with respect to nuclear coordinates (inferred from use: IR/Ra
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 02 §3.2 (inferred); 04 #381
+**Sources:** 02 §3.2; 08 t13; 08 t36
 
-Polarizability, and its derivatives after `task=dipole` (inferred; used for Raman intensities).
+Static dipole polarizability as a lower triangle (6 values), written with a negative sign (inferred: the
+second derivative of the energy with respect to the field). Written by an analytic Hessian (`eng>`) and by
+`task=dipole` (`num>`).
+
+**See also:** {ref}`Ax ($Energy) <Energy.Ax>`
+
+(Energy.Ax)=
+## `Ax`
+
+```{index} single: Ax ($Energy)
+```
+
+**Type:** list\
+**Default:** *none stated*\
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 08 t36; 08 t56; 04 #381 (relayed); 09
+
+Polarizability derivatives with respect to the nuclear coordinates. Written by `task=dipole` on `num>` lines;
+appended to a Hessian input, they give the Raman activities and depolarization ratios.
+
+**See also:** {ref}`A ($Energy) <Energy.A>`, {ref}`Dx ($Energy) <Energy.Dx>`

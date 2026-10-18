@@ -320,11 +320,12 @@ negative value.</p>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.125,0.015625</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12</p>
-<p>Default: echoed by version 25 as <code class="docutils literal notranslate"><span class="pre">Trust</span> <span class="pre">radius</span> <span class="pre">=</span> <span class="pre">0.12500000</span> <span class="pre">(max),</span> <span class="pre">0.01562500</span> <span class="pre">(min)</span></code>, both in internal coordinates and
-with symmetry (<code class="docutils literal notranslate"><span class="pre">sym=1</span></code>). v6, v13 and v15 echoed <code class="docutils literal notranslate"><span class="pre">0.2</span> <span class="pre">(max),</span> <span class="pre">0.0125</span> <span class="pre">(min)</span></code> in internal coordinates, and
-0.1 / 0.00625 with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>. If only the maximum is given, the minimum is 1/16 of it and the initial value 1/4.
-<code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.5 (older version).</p>
+<strong>Sources:</strong> input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12, t15, t76b; 08 (review check)</p>
+<p>Default: echoed by version 25 as <code class="docutils literal notranslate"><span class="pre">Trust</span> <span class="pre">radius</span> <span class="pre">=</span> <span class="pre">0.12500000</span> <span class="pre">(max),</span> <span class="pre">0.01562500</span> <span class="pre">(min)</span></code> in internal coordinates, with
+symmetry (<code class="docutils literal notranslate"><span class="pre">sym=1</span></code>) and with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>. v13 and v15 echoed 0.2 / 0.0125 in internal coordinates and
+0.1 / 0.00625 with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>; v6 echoed 0.2 / 0.0125 in Cartesian coordinates. <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.5
+(older version). <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says that if only the maximum is given, the minimum is 1/16 of it and the initial
+value 1/4. Version 25 uses 1/8 instead: <code class="docutils literal notranslate"><span class="pre">trust=0.2</span></code> alone was echoed as <code class="docutils literal notranslate"><span class="pre">0.20000000</span> <span class="pre">(max),</span> <span class="pre">0.02500000</span> <span class="pre">(min)</span></code>.</p>
 <p>Trust radius (the largest allowed step), given as maximum, minimum and initial values.</p>
 </section>
 <section id="follow">
@@ -348,8 +349,9 @@ with symmetry (<code class="docutils literal notranslate"><span class="pre">sym=
 <p class="admonition-title">Note</p>
 <p>Version 25 echoes <code class="docutils literal notranslate"><span class="pre">Maximum</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">steps</span> <span class="pre">=</span> <span class="pre">128</span></code> when <code class="docutils literal notranslate"><span class="pre">steps</span></code> is not given; older sources give 50. When the
 limit is reached the program prints no message: the output just ends, and the last geometry appears only in
-<code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code> lines, not <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code>. If an optimization has not converged within about 50 steps, something is probably
-wrong; raising <code class="docutils literal notranslate"><span class="pre">steps</span></code> rarely helps. Computing a Hessian first and supplying it often does. In v6, if both <code class="docutils literal notranslate"><span class="pre">steps</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code> are
+<code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code> lines, not <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code>. <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> warns that an optimization not converged after about 50 steps very likely
+has something wrong with it, and that computing a Hessian first helps in many cases; so don’t simply raise
+<code class="docutils literal notranslate"><span class="pre">steps</span></code>. In v6, if both <code class="docutils literal notranslate"><span class="pre">steps</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code> are
 given, the value of <code class="docutils literal notranslate"><span class="pre">step</span></code> is used; give only one of them.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-tolerance"><span class="std std-ref">tolerance ($optimize)</span></a>, <a class="reference internal" href="d2edr2.html#d2edr2-steps"><span class="std std-ref">steps ($d2edr2)</span></a></p>
@@ -358,8 +360,8 @@ given, the value of <code class="docutils literal notranslate"><span class="pre"
 <span id="optimize-cartesian"></span><h2><code class="docutils literal notranslate"><span class="pre">cartesian</span></code><a class="headerlink" href="#cartesian" title="Link to this heading">¶</a></h2>
 <p id="index-6"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.6; 04 #518</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 01 §4.6; 04 #518; 08 t11; 08 t76a-d</p>
 <p>Coordinate system for the optimization. The output reports <code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">internal</span></code> or <code class="docutils literal notranslate"><span class="pre">cartesian</span></code>.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -381,7 +383,9 @@ given, the value of <code class="docutils literal notranslate"><span class="pre"
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code> is the fix when the program crashes with <code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">0</span> <span class="pre">got</span> <span class="pre">signal</span> <span class="pre">6</span></code> after a <code class="docutils literal notranslate"><span class="pre">too</span> <span class="pre">few</span></code> message in
-the internal-coordinate table.</p>
+the internal-coordinate table. In version 25, bent CO2 and acetylene that became linear during the optimization
+converged in internal coordinates without that crash (the number of internal coordinates dropped instead), and
+also with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>.</p>
 </div>
 </section>
 <section id="back">
@@ -429,7 +433,7 @@ In a scan the points include both ends: <code class="docutils literal notranslat
 <p id="index-9"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h</p>
+<strong>Sources:</strong> input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h (t77h: back=0 only)</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">0.1</span></code> as echoed by version 25 (<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">0.1000000000</span></code>); <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.2 (older version).</p>
 <p>Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
 this distance apart. The IRC coordinate is reported in bohr·amu^1/2.</p>
@@ -437,9 +441,11 @@ this distance apart. The IRC coordinate is reported in bohr·amu^1/2.</p>
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">Vicinity</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">Stationary</span> <span class="pre">Point(?)</span> <span class="pre">---</span> <span class="pre">STOP.</span></code> ends an IRC that has reached the region of a minimum; in
 version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
-decrease on a step; changing the step size is the reported fix there. In a version 25 IRC of HCN ⇄ HNC,
-<code class="docutils literal notranslate"><span class="pre">radius=0.03</span></code>, <code class="docutils literal notranslate"><span class="pre">0.1</span></code> and <code class="docutils literal notranslate"><span class="pre">0.3</span></code> all reached both minima: about 65, 20 and 7 points, with the largest step
-stopping farthest from the minimum.</p>
+decrease on a step; changing the step size is the reported fix there. The other normal end is
+<code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">Minimum</span> <span class="pre">Passed</span> <span class="pre">---</span> <span class="pre">STOP.</span></code>, printed after a point that came out higher than the one before; in version
+25 it sometimes followed the <code class="docutils literal notranslate"><span class="pre">Vicinity</span></code> message. In a version 25 IRC of HCN ⇄ HNC, <code class="docutils literal notranslate"><span class="pre">radius=0.03</span></code> and <code class="docutils literal notranslate"><span class="pre">0.1</span></code>
+reached both minima (about 65 and 20 points per direction). <code class="docutils literal notranslate"><span class="pre">radius=0.3</span></code> was run towards HCN only: 7 points,
+stopping farther from the minimum than the smaller radii.</p>
 </div>
 </section>
 <section id="coordinates">
@@ -487,13 +493,14 @@ stopping farthest from the minimum.</p>
 <p id="index-11"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 02 §3.2; 03 §5 (wish list); 04 #372-#373; 08 t37</p>
+<strong>Sources:</strong> input.txt; 02 §3.2; 03 §5 (2010 wish list); 04 #372-#373; 08 t37; 09</p>
 <p>Internal coordinates to keep fixed during the optimization, in the same five-integer format as
 <code class="docutils literal notranslate"><span class="pre">coordinates</span></code>. Several entries are separated by commas or spaces.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Atoms cannot be frozen in Cartesian space; only internal coordinates can be fixed. Two coordinates also cannot
-be constrained to stay equal.</p>
+<p>Users reported in 2010 that atoms could not be frozen in Cartesian space and that two coordinates could not be
+constrained to stay equal. This was not checked in version 25, whose executable contains <code class="docutils literal notranslate"><span class="pre">$optimize</span></code> names of
+unknown meaning (<code class="docutils literal notranslate"><span class="pre">fragment</span></code>, <code class="docutils literal notranslate"><span class="pre">weight</span></code>, <code class="docutils literal notranslate"><span class="pre">local</span></code>) and restraint groups (<code class="docutils literal notranslate"><span class="pre">$anchor</span></code>, <code class="docutils literal notranslate"><span class="pre">$confine</span></code>).</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-value"><span class="std std-ref">value ($optimize)</span></a>, <a class="reference internal" href="#optimize-coordinates"><span class="std std-ref">coordinates ($optimize)</span></a></p>
 </section>
@@ -567,9 +574,9 @@ Otherwise keep the default.</p>
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
 <strong>Sources:</strong> 01 §4.6; 04 #481; 09; 08 t15; 08 t30b</p>
-<p>The full name of the <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> used in the official 2023–2025 example inputs (any unique prefix is
-accepted). In version 25, together with <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code>,
-the optimizer switched to Cartesian coordinates (<code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">cartesian</span></code>), printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span> <span class="pre">(6)</span></code> at
+<p>Keeps point-group symmetry during the optimization (the optimizer switches to Cartesian coordinates); needs
+<code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=</span></code> as well. The official 2023–2025 example inputs write it as the prefix <code class="docutils literal notranslate"><span class="pre">sym=1</span></code>. In version 25,
+together with <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code>, the optimizer switched to Cartesian coordinates (<code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">cartesian</span></code>), printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span> <span class="pre">(6)</span></code> at
 every step, and returned an exactly symmetric structure followed by <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span> <span class="pre">symmetry:</span> <span class="pre">C3v</span></code>. Without
 <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=</span></code>, <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> only switches to Cartesian coordinates and reports <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C1</span> <span class="pre">(1)</span></code>,
 so give both options.</p>

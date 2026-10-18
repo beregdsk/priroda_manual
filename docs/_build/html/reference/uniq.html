@@ -270,15 +270,20 @@
 <span id="group-uniq"></span><h1><code class="docutils literal notranslate"><span class="pre">$uniq</span></code><a class="headerlink" href="#uniq" title="Link to this heading">¶</a></h1>
 <p id="index-0">Duplicate-structure filtering over several <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks.</p>
 <p><strong>Relevant when:</strong> <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">uniq</span></code></p>
+<p>In version 25, <code class="docutils literal notranslate"><span class="pre">task=uniq</span></code> with <code class="docutils literal notranslate"><span class="pre">dist=0.01</span></code> and several <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks in one input did no SCF. It listed each
+structure as new (<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=&gt;</span>&#160;&#160;&#160;&#160; <span class="pre">1</span></code>) or as a copy of an earlier one with a distance (<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">=</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">1</span>&#160;&#160;&#160;&#160; <span class="pre">0.0060421693</span></code>),
+printed <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">unique</span></code>, and wrote the <code class="docutils literal notranslate"><span class="pre">Atomic</span> <span class="pre">Coordinates</span></code> of each unique structure. A copy of a water molecule that
+was rotated and translated counted as identical (distance 0), and so did a copy with one H moved by 0.004 Å; a
+copy with one H moved by 0.043 Å counted as a new structure.</p>
 <section id="distance">
 <span id="uniq-distance"></span><h2><code class="docutils literal notranslate"><span class="pre">distance</span></code><a class="headerlink" href="#distance" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.9; 09</p>
-<p>Threshold for treating two structures as identical (inferred from the official example <code class="docutils literal notranslate"><span class="pre">dist=0.01</span></code>, run on 157
-MD snapshots, each in its own <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> block). <code class="docutils literal notranslate"><span class="pre">dist</span></code> is a prefix of the full name <code class="docutils literal notranslate"><span class="pre">distance</span></code>; the group
-also reads <code class="docutils literal notranslate"><span class="pre">file</span></code>.</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.9; 09; 08 (review check)</p>
+<p>Threshold for treating two structures as identical: structures closer than this count as copies. The official
+example uses <code class="docutils literal notranslate"><span class="pre">dist=0.01</span></code> on 157 MD snapshots, each in its own <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> block. How the distance is measured
+and in which units is not known. <code class="docutils literal notranslate"><span class="pre">dist</span></code> is a prefix of the full name <code class="docutils literal notranslate"><span class="pre">distance</span></code>; the group also reads <code class="docutils literal notranslate"><span class="pre">file</span></code>.</p>
 </section>
 </section>
 

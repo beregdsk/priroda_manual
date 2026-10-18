@@ -125,7 +125,8 @@ wrongly for `tddft`), 7 (yes; the last `$Energy` group wins), 8 (imaginary as `8
 4b. ~~Second round of test inputs (t21–t40).~~ Run on v25; folded into `research/08`, the YAML and the chapters.
 4c. ~~Third round (t40b–t49).~~ Run on v25; folded in. t21 still needs an MPI launcher.
 4e. ~~Keyword list from the v25 executable (`p4_d`).~~ Done: `research/09`, appendix page "Keywords in the program";
-    YAML names corrected (`optimize.symmetry`, `optimize.model`, `uniq.distance`).
+    YAML names corrected (`optimize.symmetry`, `optimize.model`, `uniq.distance`; after the review also `dynamic.dx`,
+    `dynamic.hb`, `dynamic.v1`), and a new record `Energy.Ax`.
 4f. ~~Round 4 (t21, t41b, t50, t53, t55, t56, t57).~~ Run on v25; folded in. Parallel launch settled (bundled `mpiexec`).
 4g. ~~Rounds 5 and 6 (t58–t64).~~ Run on v25; folded in. Remaining `verify` marks need Windows, a batch system or hard cases.
 4d. Repository `README.md` added.

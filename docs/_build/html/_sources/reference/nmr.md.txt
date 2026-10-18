@@ -26,8 +26,9 @@ Reference shielding constants, indexed by atomic number, for computing chemical 
 only for the elements present in the molecule.
 
 ```{note}
-A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
-different TMS values (e.g. `standard(1)=31.3867 standard(6)=181.9781`) for other settings. Compute TMS with
+A reference shielding is only valid for the method, basis set and grid it was computed with. A user input
+posted on a forum has other TMS values (`standard(1)=31.3867 standard(6)=181.9781`); the settings they were
+computed with are not given. Compute TMS with
 exactly the settings of the production run. Without `standard`, version 25 prints `shift=` as minus the
 isotropic shielding; with it, `shift = standard − isotropic shielding`.
 ```

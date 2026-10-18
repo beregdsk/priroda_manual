@@ -274,13 +274,16 @@ sources it rests on.</p>
 <section id="test-runs">
 <h2>Test runs<a class="headerlink" href="#test-runs" title="Link to this heading">¶</a></h2>
 <dl class="simple myst">
-<dt>Version 25 test runs</dt><dd><p>Small test inputs (water, ammonia, OH) run on Priroda 25 (2025.02.28) in October 2026 for this manual. Where they
-confirm or contradict an older source, the manual follows the run and says so. The inputs and outputs are kept with
-the manual’s source files.</p>
+<dt>Version 25 test runs</dt><dd><p>Small test inputs run on Priroda 25 (2025.02.28) in October 2026 for this manual, first on the project owner’s
+Linux machine and in later rounds also on a 4-core Linux virtual machine. Most use water, ammonia, OH or O₂;
+others use CO₂, acetylene, HCN, H₂, Cr₂ and a 22-atom Cu(II) complex. Where they confirm or contradict an older
+source, the manual follows the run and says so. The inputs and outputs are kept with the manual’s source files.</p>
+<!-- src: 08 header, rounds 3, 8, 13, 14 -->
 </dd>
-<dt>Version 25 executable</dt><dd><p>The Linux build <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> from the official site, whose banner matches the test runs, was examined (not run) to list
-every group, keyword, task and theory name it reads. This settles which names exist; it says nothing about what
-they do. The result is on <a class="reference internal" href="binary-keywords.html#binary-keywords"><span class="std std-ref">Keywords in the program</span></a>.</p>
+<dt>Version 25 executable</dt><dd><p>The Linux build <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> from the official site, whose banner matches the test runs, was examined without running
+it to list every group, keyword, task and theory name it reads; the same build was later used for the test runs
+on the virtual machine. This list settles which names exist; it says nothing about what they do. The result is
+on <a class="reference internal" href="binary-keywords.html#binary-keywords"><span class="std std-ref">Keywords in the program</span></a>.</p>
 </dd>
 </dl>
 </section>
@@ -289,7 +292,8 @@ they do. The result is on <a class="reference internal" href="binary-keywords.ht
 <dl class="simple myst">
 <dt>Official file index</dt><dd><p><a class="reference external" href="https://rad.chem.msu.ru/~laikov/p_w/">https://rad.chem.msu.ru/~laikov/p_w/</a>, read in October 2026 (page dated June 2025). A bare listing of executables,
 example inputs and outputs, basis-set and parameter files, and the helper scripts <code class="docutils literal notranslate"><span class="pre">ge</span></code>, <code class="docutils literal notranslate"><span class="pre">gm</span></code> and <code class="docutils literal notranslate"><span class="pre">grx</span></code>. It has no
-prose documentation. Example outputs from this site are the strongest evidence for defaults and output formats.
+prose documentation. Example outputs from this site (versions 13–15) are the strongest evidence for those
+versions; for version 25, the test runs take precedence.
 Windows builds are in the <code class="docutils literal notranslate"><span class="pre">exe64/</span></code> subdirectory.</p>
 </dd>
 </dl>
@@ -330,8 +334,8 @@ parallel hangs, with complete inputs and outputs.</p>
 August 2012 were recovered from the Internet Archive.</p>
 </dd>
 <dt>LIMOR page, Novosibirsk Institute of Organic Chemistry</dt><dd><p><a class="reference external" href="http://limor1.nioch.nsc.ru/priroda.html">http://limor1.nioch.nsc.ru/priroda.html</a>. Example inputs, tables of basis-set names, and Perl helper scripts
-(<code class="docutils literal notranslate"><span class="pre">pri</span></code>, <code class="docutils literal notranslate"><span class="pre">priin</span></code>, <code class="docutils literal notranslate"><span class="pre">pri2mol</span></code> and others) written by users. Much of what the manual says about the output format is
-inferred from how these scripts parse it.</p>
+(<code class="docutils literal notranslate"><span class="pre">pri</span></code>, <code class="docutils literal notranslate"><span class="pre">priin</span></code>, <code class="docutils literal notranslate"><span class="pre">pri2mol</span></code> and others) written by users. Much of what the manual says about the output format was
+first inferred from how these scripts parse it and has since been checked against version 25 output.</p>
 </dd>
 </dl>
 </section>

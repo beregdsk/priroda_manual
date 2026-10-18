@@ -216,9 +216,9 @@ instead of a dihedral. <!-- src: 06 §2; keywords/molecule.yaml body (Z-matrix f
 {ref}`tol <optimize.tolerance>` is the convergence threshold on the gradient. The displacement threshold is then set
 to 100 times that value. The default is `1e-4`; the tighter `1e-5` used in most published examples is a better
 starting point for a Hessian. {ref}`steps <optimize.steps>` caps the number of cycles (128 by default in version 25;
-older versions used 50). If an optimization needs far more than 50 steps, raising the limit rarely helps; supplying a
-Hessian usually does. The output echoes all these settings under `Geometry optimization options:`.
-<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes; 08 t11, t14 -->
+older versions used 50). An optimization that needs far more than 50 steps very likely has something wrong with it,
+and computing a Hessian first helps in many cases, according to `Dft.rtf`; so don't simply raise the limit. The output echoes all these settings under `Geometry optimization options:`.
+<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes; Dft.rtf (00_Dft_rtf_utf8.txt line 83); 08 t11, t14 -->
 
 Run it with `p nh3.in nh3.out`.
 

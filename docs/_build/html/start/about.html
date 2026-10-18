@@ -290,9 +290,9 @@ GGA DFT has analytic second derivatives.</p>
 <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=ridft</span></a>.</p>
 <!-- src: 06 §3 (hybrid RI DFT implemented November 2004) -->
 </dd>
-<dt>Correlated methods</dt><dd><p>RI-MP2 and, as undocumented or less-used options, conventional MP2–MP4, CCSD and CCSD(T). Gradients exist for
-MP2, CCSD and CCSD(T).</p>
-<!-- src: 06 §3; 03 §1 (2011 gradient bug fix names these methods); 04 #146 -->
+<dt>Correlated methods</dt><dd><p>RI-MP2, and conventional MP2–MP4, CCD, CCSD and CCSD(T); version 25 runs energies with all of them. Gradients
+exist for MP2, CCSD and CCSD(T).</p>
+<!-- src: 06 §3; input.txt; 08 t17; 03 §1 (2011 gradient bug fix names these methods); 04 #146 -->
 </dd>
 <dt>Excited states</dt><dd><p>GGA TDDFT with excited-state gradients, so excited-state geometries can be optimized.</p>
 <!-- src: 03 §11 -->
@@ -314,7 +314,8 @@ for Molden.</p>
 <dt>Semiempirical model</dt><dd><p>Laikov’s parametrized “QM” model (<a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=qm_n3</span></a>), used for systems of thousands of atoms.</p>
 <!-- src: 01 §3.1, §5.9; 04 #480 -->
 </dd>
-<dt>Parallel execution</dt><dd><p>MPI parallelism. In practice it scales well within one node and poorly beyond it; see <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
+<dt>Parallel execution</dt><dd><p>MPI parallelism. Users report no gain from more than one node. Within one node the reports differ: one user saw
+little gain beyond 6–8 cores, another a good speed-up up to 24 cores. See <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
 <!-- src: 04 #343, #344, #462 -->
 </dd>
 </dl>
@@ -329,7 +330,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <ul class="simple">
 <li><p>✓: shown to work in an example input, a user report or a test run.</p></li>
 <li><p>–: not available, according to the sources.</p></li>
-<li><p>✗: failed in a version 25 test.</p></li>
+<li><p>?: no source and no test.</p></li>
 </ul>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -339,12 +340,14 @@ user reports and the test runs on version 25, not from a statement by the develo
 <th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">ridft</span></code></p></th>
 <th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">tddft</span></code></p></th>
 <th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">rimp2</span></code></p></th>
-<th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">ccsd</span></code> / <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code></p></th>
+<th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">ccsd</span></code></p></th>
+<th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code></p></th>
 <th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">qm_n3</span></code></p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">energy</span></code></p></td>
+<td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
@@ -358,12 +361,14 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓ (1)</p></td>
+<td class="text-center"><p>✓ (1)</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hessian</span></code></p></td>
 <td class="text-center"><p>✓ (2)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>✓ (3, 8)</p></td>
+<td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
 <td class="text-center"><p>✓ (3)</p></td>
@@ -374,6 +379,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓ (4)</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓ (1)</p></td>
+<td class="text-center"><p>✓ (1)</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-even"><td><p>TS (<code class="docutils literal notranslate"><span class="pre">saddle=1</span></code>)</p></td>
@@ -382,6 +388,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>?</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irc</span></code></p></td>
@@ -390,6 +397,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>?</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scan</span></code></p></td>
@@ -398,10 +406,12 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓ (9)</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>?</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nmr</span></code></p></td>
 <td class="text-center"><p>✓ (5)</p></td>
+<td class="text-center"><p>–</p></td>
 <td class="text-center"><p>–</p></td>
 <td class="text-center"><p>–</p></td>
 <td class="text-center"><p>–</p></td>
@@ -414,6 +424,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>–</p></td>
 <td class="text-center"><p>– (7)</p></td>
+<td class="text-center"><p>– (7)</p></td>
 <td class="text-center"><p>–</p></td>
 </tr>
 <tr class="row-odd"><td><p>MD (<code class="docutils literal notranslate"><span class="pre">thermostat</span></code>)</p></td>
@@ -422,24 +433,27 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
+<td class="text-center"><p>?</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4; gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68; MD: 08 t69; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39; MD: 01 §5.7 -->
+<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4, 08 t17 (ccsd, ccsd4t); gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 04 #255 (CCSD(T)), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65a, t65b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68 (ccsd only, not ccsd4t); MD: 08 t69 (ccsd only), 01 §5.7; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39 -->
 <p>Notes to the table:</p>
 <ol class="arabic">
-<li><p>A CCSD optimization is shown in a user input. CCSD(T) gradients are implied by the developer’s 2011 note on a bug
-fix that names the CCSD(T) gradient. <!-- src: 04 #146; 03 §1 --></p></li>
-<li><p>Analytic second derivatives. <!-- src: 06 §3; 05 §10 --></p></li>
+<li><p>A CCSD optimization is shown in a user input, and a user reports CCSD(T) optimizations and Hessians. A 2011 bug
+fix that names the CCSD(T) gradient (Laikov, in an e-mail relayed on the qchem.ru forum) also implies CCSD(T)
+gradients. The version 25 tests ran <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code> only for an energy. <!-- src: 04 #146, #255; 03 §1; 08 t17 --></p></li>
+<li><p>Analytic second derivatives. <!-- src: 06 §3; 05 §10; 08 t13 --></p></li>
 <li><p>Computed by finite differences of the gradient (<code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">COMPUTATION</span> <span class="pre">OF</span> <span class="pre">SECOND</span> <span class="pre">DERIVATIVES</span></code>), which takes
-many gradient calculations. Shown for <code class="docutils literal notranslate"><span class="pre">ridft</span></code> and <code class="docutils literal notranslate"><span class="pre">rimp2</span></code> in version 25 tests; users report CCSD and CCSD(T)
-Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b --></p></li>
+many gradient calculations. Shown for <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">tddft</span></code> and <code class="docutils literal notranslate"><span class="pre">qm_n3</span></code> in version 25 tests; users report
+CCSD and CCSD(T) Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b, t65a, t65b --></p></li>
 <li><p>Excited-state optimization works, but Priroda has no root following, so the state can switch during the
 optimization. <!-- src: 03 §11 --></p></li>
 <li><p>NMR works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> and a non-hybrid functional; with <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, version 25 silently computes only the
-energy. Users report that relativistic (<code class="docutils literal notranslate"><span class="pre">four=1</span></code>) NMR runs hang. <!-- src: input.txt; 04 #96; 03 §12; 08 t57a --></p></li>
+energy. Relativistic NMR is not implemented (Laikov, relayed by a user), and users report that NMR runs with
+<code class="docutils literal notranslate"><span class="pre">four=1</span></code> hang. <!-- src: input.txt; 04 #96; 03 §12; 08 t57a --></p></li>
 <li><p>There is no hybrid TDDFT. See <a class="reference internal" href="#what-priroda-does-not-do"><span class="std std-ref">What Priroda does not do</span></a>.</p></li>
 <li><p>Excited states at the coupled-cluster level use a different <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value, <code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code>, for closed-shell (RHF)
 molecules, with the state chosen by <code class="docutils literal notranslate"><span class="pre">state=</span></code>. In a version 25 test on water it gave the first excited state 0.338
@@ -447,9 +461,8 @@ hartree (9.2 eV) above the CCSD ground state, against 0.370 hartree for CIS in t
 molecule it silently computed only the UHF energy. It is not in <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>; only the v5 keyword page and the
 program itself list it. <!-- src: 06 §3; 03 §11; 09; 08 t78a-d --></p></li>
 <li><p>The Hessian of the excited state given by <code class="docutils literal notranslate"><span class="pre">state=</span></code> (version 25, water, <code class="docutils literal notranslate"><span class="pre">state=1,3</span></code>): numerical, with two
-imaginary modes at the ground-state geometry, as expected for an excited state away from its own minimum.</p>
-<!-- src: 08 t65a -->
-</li>
+imaginary modes. The geometry was the ground-state test geometry, not optimized for the excited state, so these
+numbers only show negative curvature there. <!-- src: 08 t65a --></p></li>
 <li><p>A TDDFT scan of the NH3 umbrella angle in its first excited state worked in version 25 when all three N–H
 bonds were fixed. With only one fixed, the excited state broke another N–H bond (it is dissociative), the
 excitation energy fell from 7.3 to 0.4 eV over 46 steps, and the run then failed: the excited-state equations
@@ -459,7 +472,8 @@ down to the ground state; watch the excitation energy (<code class="docutils lit
 </li>
 </ol>
 <p>The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they
-show that the combination runs and ends normally, not how well it behaves on real problems.</p>
+show that the combination runs and ends normally, not how well it behaves on real problems. Of the coupled-cluster
+methods, these tests used <code class="docutils literal notranslate"><span class="pre">ccsd</span></code> only.</p>
 <!-- src: 08 t65-t69 -->
 <p>The scalar-relativistic option <code class="docutils literal notranslate"><span class="pre">four=1</span></code> has been used with <code class="docutils literal notranslate"><span class="pre">dft</span></code>, <code class="docutils literal notranslate"><span class="pre">ridft</span></code> and <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>. The full list of <code class="docutils literal notranslate"><span class="pre">theory=</span></code>
 values, including the undocumented ones, is in <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
@@ -477,16 +491,19 @@ energies with no warning. See <a class="reference internal" href="../reference/c
 <span id="id1"></span><h2>What Priroda does not do<a class="headerlink" href="#what-priroda-does-not-do" title="Link to this heading">¶</a></h2>
 <p>Check this list before planning a project around Priroda.</p>
 <dl class="simple myst">
-<dt>No use of point-group symmetry in older versions</dt><dd><p>Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
+<dt>Limited use of point-group symmetry</dt><dd><p>Symmetry is used only to symmetrize a structure and keep it symmetric; no source reports a speed-up from it.
+Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
 Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
-the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. These options are not documented.
-In version 25 tests, <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code> symmetrized the structure and <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> kept the symmetry
-during the optimization; each option alone does only half of this. See <a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and
+the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. These options are not described
+in any written source. In version 25 tests, <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code> symmetrized the structure and <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code>
+kept the symmetry during the optimization; each option alone does only half of this. <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> also
+switches the optimizer to Cartesian coordinates. See <a class="reference internal" href="../reference/molecule.html#molecule-sym"><span class="std std-ref">$molecule sym</span></a> and
 <a class="reference internal" href="../reference/optimize.html#optimize-symmetry"><span class="std std-ref">$optimize symmetry</span></a>.</p>
 <!-- src: 04 §0, #251, #254; 01 §4.7; 08 t15, t30a, t30b -->
 </dd>
-<dt>No continuum solvation</dt><dd><p>No version has a continuum solvent model. Solvent can only be included as explicit molecules.</p>
-<!-- src: 04 #75, #76, #348, #417 -->
+<dt>No continuum solvation</dt><dd><p>Users reported no continuum solvent model in any version up to 2018, and the version 25 executable contains no
+group for one. Solvent can only be included as explicit molecules.</p>
+<!-- src: 04 #75, #76, #348, #417; 09 (group list) -->
 </dd>
 <dt>No D3 or other empirical dispersion correction</dt><dd><p>The developer has declined to add one (relayed from correspondence). Users add Grimme’s D3 a posteriori with the
 external <code class="docutils literal notranslate"><span class="pre">dftd3</span></code> program. The 2023–2025 functionals <code class="docutils literal notranslate"><span class="pre">LPBEVV</span></code> and <code class="docutils literal notranslate"><span class="pre">LPBEVVV</span></code> may include dispersion, but this is
@@ -500,9 +517,8 @@ inferred from their test systems and not documented.</p>
 <a class="reference internal" href="../reference/nmr.html#nmr-points"><span class="std std-ref">$nmr points</span></a> instead.</p>
 <!-- src: 04 #146; input.txt -->
 </dd>
-<dt>No hybrid TDDFT</dt><dd><p>TDDFT is GGA only. A hybrid functional with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> does not give hybrid TDDFT: version 25 drops the exact
-exchange without a warning, and the energies are wrong. <!-- src: 08 t46 --></p>
-<!-- src: 03 §11 -->
+<dt>No hybrid TDDFT</dt><dd><p>TDDFT is GGA only. With a hybrid functional, version 25 drops the exact exchange without a warning (see the
+warning above this section). <!-- src: 03 §11; 08 t46 --></p>
 </dd>
 </dl>
 <p>Other gaps reported by users:</p>
@@ -517,10 +533,10 @@ only the first. <!-- src: 04 #69, #70, #145 --></p></li>
 </section>
 <section id="version-history">
 <h2>Version history<a class="headerlink" href="#version-history" title="Link to this heading">¶</a></h2>
-<p>Priroda numbers its versions with integers and prints the build date in the output banner, for example
-<code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">13</span> <span class="pre">(2013.01.10)</span></code>. Energies differ slightly between versions, so keep every calculation you compare on one
-version.</p>
-<!-- src: 01 §2.4; 04 #513, #514 -->
+<p>Since version 6, Priroda numbers its versions with integers; versions 2 and 4 printed decimal sub-versions (2.10,
+4.07). The output banner shows the build date, for example <code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">13</span> <span class="pre">(2013.01.10)</span></code>. Energies differ slightly
+between versions, so keep every calculation you compare on one version.</p>
+<!-- src: 01 §2.4; 02 §3.3; 04 #513, #514 -->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -555,8 +571,8 @@ version.</p>
 <td><p>Built on request for a Myrinet cluster.</p></td>
 </tr>
 <tr class="row-even"><td><p>9</p></td>
-<td><p>2009–2011</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code> returned. In mid-2011 the developer fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD.</p></td>
+<td><p>— (forum posts 2009–2011)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code> returned. In mid-2011 Laikov fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD (from his e-mail, relayed on the qchem.ru forum).</p></td>
 </tr>
 <tr class="row-odd"><td><p>10</p></td>
 <td><p>2011.04.14</p></td>
@@ -579,7 +595,7 @@ version.</p>
 <td><p>Scalar-relativistic example (Pt complex).</p></td>
 </tr>
 <tr class="row-even"><td><p>16, 17</p></td>
-<td><p>2016–2018</p></td>
+<td><p>— (forum posts 2016–2018)</p></td>
 <td><p>The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the developer removed limits on SCF memory allocation and on the system size for Hessians.</p></td>
 </tr>
 <tr class="row-odd"><td><p>23</p></td>
@@ -588,22 +604,24 @@ version.</p>
 </tr>
 <tr class="row-even"><td><p>25</p></td>
 <td><p>2025.02.28</p></td>
-<td><p>Banner <code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">25</span> <span class="pre">(2025.02.28)</span></code>. The version used for the test runs behind this manual. Its date matches the <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> build on the official site; <code class="docutils literal notranslate"><span class="pre">p_l</span></code> is dated 2025-04-14. The 2025 example inputs use <code class="docutils literal notranslate"><span class="pre">theory=DFT_n4</span></code>.</p></td>
+<td><p>Banner <code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">25</span> <span class="pre">(2025.02.28)</span></code>. The version used for the test runs behind this manual. Its date matches the <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> build on the official site; <code class="docutils literal notranslate"><span class="pre">p_l</span></code> is dated 2025-04-14. One 2025 example input uses <code class="docutils literal notranslate"><span class="pre">theory=DFT_n4</span></code> (with <code class="docutils literal notranslate"><span class="pre">LPBEVV</span></code>).</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.3 -->
-<p>Version numbers missing from the table (3, 12, 18–22, 24) do not appear in any source. The Russian file <code class="docutils literal notranslate"><span class="pre">Dft_ansi.txt</span></code>
-describes Priroda’s predecessor, whose input had the groups <code class="docutils literal notranslate"><span class="pre">$control</span></code>, <code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$basis</span></code>, <code class="docutils literal notranslate"><span class="pre">$auxiliary</span></code>,
-<code class="docutils literal notranslate"><span class="pre">$guess</span></code>, <code class="docutils literal notranslate"><span class="pre">$SCF</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>, <code class="docutils literal notranslate"><span class="pre">$force</span></code> and <code class="docutils literal notranslate"><span class="pre">$hessian</span></code>. Version 25 reads none of <code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$auxiliary</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>,
-<code class="docutils literal notranslate"><span class="pre">$force</span></code> and <code class="docutils literal notranslate"><span class="pre">$hessian</span></code>; the geometry now goes in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>, and optimization settings in <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>.</p>
-<!-- src: 00 (Dft_ansi.txt); 09 (group list of the v25 executable) -->
+<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §1, §3.2, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.1, §5.3 -->
+<p>Versions 12, 18–22 and 24 do not appear in any source; version 3 is mentioned only for the change of the nucleus
+model. The Russian file <code class="docutils literal notranslate"><span class="pre">Dft_ansi.txt</span></code> describes Priroda’s predecessor, whose input had the groups <code class="docutils literal notranslate"><span class="pre">$control</span></code>,
+<code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$basis</span></code>, <code class="docutils literal notranslate"><span class="pre">$auxiliary</span></code>, <code class="docutils literal notranslate"><span class="pre">$guess</span></code>, <code class="docutils literal notranslate"><span class="pre">$SCF</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>, <code class="docutils literal notranslate"><span class="pre">$force</span></code> and <code class="docutils literal notranslate"><span class="pre">$hessian</span></code>. Version 25 reads none
+of <code class="docutils literal notranslate"><span class="pre">$coordinates</span></code>, <code class="docutils literal notranslate"><span class="pre">$auxiliary</span></code>, <code class="docutils literal notranslate"><span class="pre">$search</span></code>, <code class="docutils literal notranslate"><span class="pre">$force</span></code> and <code class="docutils literal notranslate"><span class="pre">$hessian</span></code> as an input group; the geometry now goes in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>, and optimization settings in
+<code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. (<code class="docutils literal notranslate"><span class="pre">$AUXILIARY</span></code> survives as a section of the old-style basis files <code class="docutils literal notranslate"><span class="pre">3z.bas</span></code> and <code class="docutils literal notranslate"><span class="pre">sbk.bas</span></code> on the official
+site.)</p>
+<!-- src: 00 (Dft_ansi.txt); 09 (group list of the v25 executable); 01 §6 (3z.bas) -->
 </section>
 <section id="how-to-cite">
 <span id="id2"></span><h2>How to cite<a class="headerlink" href="#how-to-cite" title="Link to this heading">¶</a></h2>
-<p>Priroda has no single program paper for the current version. Users cite the papers below; the first three are the
-list given by the KNC wiki FAQ and repeated in the forums.</p>
+<p>Priroda has no single program paper for the current version. Users cite the papers below. The first five are the
+citation list of the KNC wiki FAQ; the first three are also given in the forums.</p>
 <p>Program:</p>
 <ul class="simple">
 <li><p>D. N. Laikov, Yu. A. Ustynyuk. PRIRODA-04: a quantum-chemical program suite. New possibilities in the study of
@@ -642,7 +660,8 @@ A 2014 forum suggestion adds Laikov’s home page, <a class="reference external"
 version.</p>
 <!-- src: 03 §1; 04 #302 -->
 <p>Also cite the original papers for the functional, and for the Hamiltonian and nuclear model if you use <code class="docutils literal notranslate"><span class="pre">four=1</span></code>.
-<a class="reference internal" href="../reference/dft.html#dft-functional"><span class="std std-ref">$dft functional</span></a> and <a class="reference internal" href="../reference/control.html#control-four"><span class="std std-ref">$control four</span></a> give them.</p>
+<a class="reference internal" href="../reference/dft.html#dft-functional"><span class="std std-ref">$dft functional</span></a>, <a class="reference internal" href="../reference/control.html#control-four"><span class="std std-ref">$control four</span></a> and
+<a class="reference internal" href="../reference/control.html#control-nucleus"><span class="std std-ref">$control nucleus</span></a> give them.</p>
 </section>
 </section>
 

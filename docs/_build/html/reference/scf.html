@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -300,18 +301,21 @@
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-6,1e-3</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.5 (output echo); 05 §2; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c</p>
+<strong>Sources:</strong> input.txt; 01 §4.5 (output echo, energy gradient); 05 §5.1; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c; 08 t74b (gradient vs threshold); 08 Slurm (erations); 08 review check (convergence value series)</p>
 <p>Default: the first value is for SCF and the second for CP-SCF.</p>
-<p>SCF and CP-SCF convergence thresholds. The defaults are recommended. To save time in difficult cases you may
+<p>SCF and CP-SCF convergence thresholds. The SCF value is a threshold on the energy gradient: in version
+25, an SCF whose gradient stayed near 2·10⁻⁶ ended with <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code> at the default 1e-6. The defaults
+are recommended. To save time in difficult cases you may
 loosen the SCF value to <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for preliminary geometry optimizations.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Give both values, or put <code class="docutils literal notranslate"><span class="pre">convergence</span></code> last.</strong> In version 25, a one-value <code class="docutils literal notranslate"><span class="pre">convergence=1e-7</span></code> followed by
-<code class="docutils literal notranslate"><span class="pre">iterations=250</span></code> stops the run with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>, also when the two
-keywords are on separate lines. <code class="docutils literal notranslate"><span class="pre">convergence=1e-7,1e-3</span> <span class="pre">iterations=250</span></code> works, and so does
-<code class="docutils literal notranslate"><span class="pre">iterations=250</span> <span class="pre">convergence=1e-7</span></code>; <code class="docutils literal notranslate"><span class="pre">convergence=1e-7</span> <span class="pre">procedure=bfgs</span> <span class="pre">iterations=250</span></code> also worked. Older
-versions gave the same error as <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">…;</span> <span class="pre">iter=…</span></code> echo line in the
-output.</p>
+<p><strong>Put <code class="docutils literal notranslate"><span class="pre">iterations=</span></code> before <code class="docutils literal notranslate"><span class="pre">convergence=</span></code>, or give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> two values.</strong> A one-value <code class="docutils literal notranslate"><span class="pre">convergence=</span></code>
+followed by <code class="docutils literal notranslate"><span class="pre">iterations=</span></code> stops the run with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>, also when the
+two keywords are on separate lines. The message names <code class="docutils literal notranslate"><span class="pre">iterations</span></code> with its first letters missing; how many
+depended on the machine, not on the value (<code class="docutils literal notranslate"><span class="pre">terations</span></code> on one computer, <code class="docutils literal notranslate"><span class="pre">erations</span></code> with <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> on another, for
+every value tried). Other keywords after a one-value <code class="docutils literal notranslate"><span class="pre">convergence=</span></code>, such as <code class="docutils literal notranslate"><span class="pre">restrict=</span></code>, were read correctly.
+<code class="docutils literal notranslate"><span class="pre">iterations=250</span> <span class="pre">convergence=1e-7</span></code> and <code class="docutils literal notranslate"><span class="pre">convergence=1e-7,1e-3</span> <span class="pre">iterations=250</span></code> both work. Check the
+<code class="docutils literal notranslate"><span class="pre">scf:</span> <span class="pre">conv</span> <span class="pre">=</span> <span class="pre">…;</span> <span class="pre">iter=…</span></code> echo line in the output.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#scf-iterations"><span class="std std-ref">iterations ($scf)</span></a>, <a class="reference internal" href="#scf-procedure"><span class="std std-ref">procedure ($scf)</span></a></p>
 </section>
@@ -320,15 +324,18 @@ output.</p>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">32,16</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306; 08 t01</p>
+<strong>Sources:</strong> input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306; 08 t01, t10, t28, t71b</p>
 <p>Default: Version 25 echoes <code class="docutils literal notranslate"><span class="pre">iter=32,16</span></code> for DFT. v6, v13 and v15 echoed <code class="docutils literal notranslate"><span class="pre">16,16</span></code>, a HF run for CCSD showed <code class="docutils literal notranslate"><span class="pre">48,16</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 30 (older version). The default may depend on the method and version.</p>
 <p>Maximum number of iterations and of microiterations (<code class="docutils literal notranslate"><span class="pre">iterations=it,micro</span></code>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Do not raise this limit hoping for convergence: understand why SCF is not converging. A recommended
-technique for difficult cases is to cap the run at <code class="docutils literal notranslate"><span class="pre">iterations=10</span></code>, save the vectors (<code class="docutils literal notranslate"><span class="pre">$control</span> <span class="pre">save=</span></code>) and
-restart with <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code>, repeating as needed.</p>
+<p><strong>An unconverged SCF does not stop the run.</strong> Version 25 prints <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code>, then still prints <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span></code>,
+the orbitals and the properties, and exits with status 0. Search the output for <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code>.</p>
+<p>Raising the limit moderately is fine: an OH radical failed at the default 32 iterations and converged after
+34 with <code class="docutils literal notranslate"><span class="pre">iterations=100</span></code>. A very large limit does not replace understanding why the SCF is not converging
+(<code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> warns against it). A recommended technique for difficult cases is to cap the run at
+<code class="docutils literal notranslate"><span class="pre">iterations=10</span></code>, save the vectors (<code class="docutils literal notranslate"><span class="pre">$control</span> <span class="pre">save=</span></code>) and restart with <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code>, repeating as needed.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#scf-convergence"><span class="std std-ref">convergence ($scf)</span></a>, <a class="reference internal" href="guess.html#guess-read"><span class="std std-ref">read ($guess)</span></a></p>
 </section>

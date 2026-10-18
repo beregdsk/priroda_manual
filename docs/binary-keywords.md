@@ -27,9 +27,9 @@ accepted, so `sym=1` in `$optimize` means `symmetry=1` and `dist=` in `$uniq` me
 | {ref}`$d2edr2 <group.d2edr2>` | {ref}`length <d2edr2.length>`, {ref}`steps <d2edr2.steps>`, {ref}`displace <d2edr2.displace>` |
 | {ref}`$thermo <group.thermo>` | {ref}`sigma <thermo.sigma>`, {ref}`temperature <thermo.temperature>`, {ref}`mass <thermo.mass>`, `project`, `localize`, `diagonalize` |
 | {ref}`$nmr <group.nmr>` | {ref}`standard <nmr.standard>`, {ref}`points <nmr.points>` |
-| {ref}`$Energy <group.Energy>` | {ref}`e <Energy.E>`, {ref}`g <Energy.G>`, {ref}`h <Energy.H>`, {ref}`d <Energy.D>`, {ref}`a <Energy.A>`, {ref}`dx <Energy.Dx>`, `ax`, `r` |
+| {ref}`$Energy <group.Energy>` | {ref}`e <Energy.E>`, {ref}`g <Energy.G>`, {ref}`h <Energy.H>`, {ref}`d <Energy.D>`, {ref}`a <Energy.A>`, {ref}`dx <Energy.Dx>`, {ref}`ax <Energy.Ax>`, `r` |
 | {ref}`$uniq <group.uniq>` | {ref}`distance <uniq.distance>`, `file` |
-| {ref}`$dynamic <group.dynamic>` | `t`, {ref}`e <dynamic.e>`, {ref}`n <dynamic.n>`, {ref}`m <dynamic.m>`, `a`, `b`, `c`, {ref}`i <dynamic.i>`, `o`, `z`, `y`, `dx`, `kd`, `lw`, `hb`, `rb`, `pb`, `v1`, `frag`, {ref}`file <dynamic.file>`, `fprint` |
+| {ref}`$dynamic <group.dynamic>` | `t`, {ref}`e <dynamic.e>`, {ref}`n <dynamic.n>`, {ref}`m <dynamic.m>`, `a`, `b`, `c`, {ref}`i <dynamic.i>`, `o`, `z`, `y`, {ref}`dx <dynamic.dx>`, `kd`, `lw`, {ref}`hb <dynamic.hb>`, `rb`, `pb`, {ref}`v1 <dynamic.v1>`, `frag`, {ref}`file <dynamic.file>`, `fprint` |
 
 `$molecule` is read differently from the other groups, so its keywords (`charge`, `mult`, `cartesian`, `z-matrix`,
 `set`, `unit`, `sym`) could not be listed from the program; see {ref}`$molecule <group.molecule>`.

@@ -36,7 +36,7 @@ given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) 
 **Default:** `298.15`\
 **Units:** K\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 08 t13; 08 t44
+**Sources:** input.txt; Dft.rtf; 08 t13; 08 t44; 04 #80, #476
 
 Default: `298.15`: version 25 prints `T =  298.150 K`, as `Dft.rtf` states. Older posted outputs also show `298.000 K`
 (2011, 2021), so set `temperature=` explicitly when comparing with other versions.

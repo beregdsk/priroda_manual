@@ -270,12 +270,14 @@
 <span id="group-dynamic"></span><h1><code class="docutils literal notranslate"><span class="pre">$dynamic</span></code><a class="headerlink" href="#dynamic" title="Link to this heading">¶</a></h1>
 <p id="index-0">Molecular dynamics with a thermostat.</p>
 <p><strong>Relevant when:</strong> <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">thermostat</span></code></p>
-<p>Known only from the official example inputs and a third-party input generator. Every meaning below is
-inferred, except <code class="docutils literal notranslate"><span class="pre">file</span></code>.</p>
+<p>Known from the official example inputs, a third-party input generator, the names in the version 25 executable
+and one version 25 test. Only the meaning of <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">file</span></code> is shown by output; the rest is inferred.</p>
 <p>In version 25, <code class="docutils literal notranslate"><span class="pre">task=thermostat</span></code> with <code class="docutils literal notranslate"><span class="pre">e=0.001</span> <span class="pre">d=0.03</span> <span class="pre">n=20,5</span> <span class="pre">m=10</span> <span class="pre">i=1</span></code> ran with every tested theory (<code class="docutils literal notranslate"><span class="pre">dft</span></code>,
-<code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">ccsd</span></code>, <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, <code class="docutils literal notranslate"><span class="pre">qm_n3</span></code>). The output has one line per step, <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">N:</span> <span class="pre">s</span> <span class="pre">…</span> <span class="pre">E</span> <span class="pre">…</span> <span class="pre">g</span> <span class="pre">…</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">ccsd</span></code>, <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, <code class="docutils literal notranslate"><span class="pre">qm_n3</span></code>). The header echoes <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">=</span> <span class="pre">0.00100000</span></code> and
+<code class="docutils literal notranslate"><span class="pre">dx</span> <span class="pre">=</span> <span class="pre">0.03000000</span> <span class="pre">L</span> <span class="pre">=</span> <span class="pre">20,-5;10</span></code>. The output has one line per step, <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">N:</span> <span class="pre">s</span> <span class="pre">…</span> <span class="pre">E</span> <span class="pre">…</span> <span class="pre">g</span> <span class="pre">…</span></code>, where
 negative point numbers are equilibration steps (the second value of <code class="docutils literal notranslate"><span class="pre">n</span></code>) and positive ones the production steps
-(the first value). In the program, <code class="docutils literal notranslate"><span class="pre">d</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code> are prefixes of the keywords <code class="docutils literal notranslate"><span class="pre">dx</span></code> and <code class="docutils literal notranslate"><span class="pre">hb</span></code>.</p>
+(the first value). The official example (below) writes <code class="docutils literal notranslate"><span class="pre">d=</span></code> and the generator script writes <code class="docutils literal notranslate"><span class="pre">h=</span></code> and <code class="docutils literal notranslate"><span class="pre">v=</span></code>;
+these are prefixes of the full names <code class="docutils literal notranslate"><span class="pre">dx</span></code>, <code class="docutils literal notranslate"><span class="pre">hb</span></code> and <code class="docutils literal notranslate"><span class="pre">v1</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$dynamic
  e=0.001
  d=0.03
@@ -292,57 +294,58 @@ $end
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> hartree<br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.8; 02 §3.2</p>
-<p>Thermostat temperature as kT (inferred: a generator script sets e = T/315775).</p>
+<strong>Sources:</strong> 01 §4.8; 02 §3.2; 08 t69; 09</p>
+<p>Thermostat temperature as kT (inferred: a generator script sets e = T/315775). Version 25 echoes it as <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">=</span> <span class="pre">0.00100000</span></code>.</p>
 </section>
-<section id="d">
-<span id="dynamic-d"></span><h2><code class="docutils literal notranslate"><span class="pre">d</span></code><a class="headerlink" href="#d" title="Link to this heading">¶</a></h2>
+<section id="dx">
+<span id="dynamic-dx"></span><h2><code class="docutils literal notranslate"><span class="pre">dx</span></code><a class="headerlink" href="#dx" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.8; 02 §3.2</p>
-<p>Time step (inferred).</p>
+<strong>Sources:</strong> 01 §4.8; 02 §3.2; 08 t69; 09</p>
+<p>Time step (inferred). The examples write the prefix <code class="docutils literal notranslate"><span class="pre">d=</span></code>; version 25 echoes it as <code class="docutils literal notranslate"><span class="pre">dx</span> <span class="pre">=</span> <span class="pre">0.03000000</span></code>.</p>
 </section>
 <section id="n">
 <span id="dynamic-n"></span><h2><code class="docutils literal notranslate"><span class="pre">n</span></code><a class="headerlink" href="#n" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.8; 02 §3.2</p>
-<p>Number of steps and print interval (inferred).</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.8; 02 §3.2; 08 t69; 09</p>
+<p>Two values: the number of production steps, then the number of equilibration steps. In version 25, <code class="docutils literal notranslate"><span class="pre">n=20,5</span></code>
+gave 26 points, <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">-5</span></code> … <code class="docutils literal notranslate"><span class="pre">point</span> <span class="pre">20</span></code>, and the echo <code class="docutils literal notranslate"><span class="pre">L</span> <span class="pre">=</span> <span class="pre">20,-5;10</span></code>.</p>
 </section>
 <section id="m">
 <span id="dynamic-m"></span><h2><code class="docutils literal notranslate"><span class="pre">m</span></code><a class="headerlink" href="#m" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.8; 02 §3.2</p>
-<p>Meaning not known.</p>
+<strong>Sources:</strong> 01 §4.8; 02 §3.2; 08 t69; 09</p>
+<p>Meaning not known. With <code class="docutils literal notranslate"><span class="pre">m=10</span></code>, version 25 printed <code class="docutils literal notranslate"><span class="pre">;10</span></code> at the end of the echo <code class="docutils literal notranslate"><span class="pre">L</span> <span class="pre">=</span> <span class="pre">20,-5;10</span></code>.</p>
 </section>
 <section id="i">
 <span id="dynamic-i"></span><h2><code class="docutils literal notranslate"><span class="pre">i</span></code><a class="headerlink" href="#i" title="Link to this heading">¶</a></h2>
 <p id="index-5"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.8; 02 §3.2</p>
-<p>Run index or random seed (inferred).</p>
+<strong>Sources:</strong> 01 §4.8; 02 §3.2; 08 t69; 09</p>
+<p>Run index or random seed (inferred). Version 25 does not echo it.</p>
 </section>
-<section id="v">
-<span id="dynamic-v"></span><h2><code class="docutils literal notranslate"><span class="pre">v</span></code><a class="headerlink" href="#v" title="Link to this heading">¶</a></h2>
+<section id="v1">
+<span id="dynamic-v1"></span><h2><code class="docutils literal notranslate"><span class="pre">v1</span></code><a class="headerlink" href="#v1" title="Link to this heading">¶</a></h2>
 <p id="index-6"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> bohr³ per atom<br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.8; 02 §3.2</p>
-<p>Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred).</p>
+<strong>Sources:</strong> 01 §4.8; 02 §3.2; 09</p>
+<p>Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred). Written as the prefix <code class="docutils literal notranslate"><span class="pre">v=</span></code> in the generator script.</p>
 </section>
-<section id="h">
-<span id="dynamic-h"></span><h2><code class="docutils literal notranslate"><span class="pre">h</span></code><a class="headerlink" href="#h" title="Link to this heading">¶</a></h2>
+<section id="hb">
+<span id="dynamic-hb"></span><h2><code class="docutils literal notranslate"><span class="pre">hb</span></code><a class="headerlink" href="#hb" title="Link to this heading">¶</a></h2>
 <p id="index-7"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.8; 02 §3.2</p>
-<p>Stiffness of the cavity wall (inferred).</p>
+<strong>Sources:</strong> 01 §4.8; 02 §3.2; 09</p>
+<p>Stiffness of the cavity wall (inferred). Written as the prefix <code class="docutils literal notranslate"><span class="pre">h=</span></code> in the generator script.</p>
 </section>
 <section id="file">
 <span id="dynamic-file"></span><h2><code class="docutils literal notranslate"><span class="pre">file</span></code><a class="headerlink" href="#file" title="Link to this heading">¶</a></h2>
@@ -411,12 +414,12 @@ $end
             <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">$dynamic</span></code></a><ul>
 <li><a class="reference internal" href="#e"><code class="docutils literal notranslate"><span class="pre">e</span></code></a></li>
-<li><a class="reference internal" href="#d"><code class="docutils literal notranslate"><span class="pre">d</span></code></a></li>
+<li><a class="reference internal" href="#dx"><code class="docutils literal notranslate"><span class="pre">dx</span></code></a></li>
 <li><a class="reference internal" href="#n"><code class="docutils literal notranslate"><span class="pre">n</span></code></a></li>
 <li><a class="reference internal" href="#m"><code class="docutils literal notranslate"><span class="pre">m</span></code></a></li>
 <li><a class="reference internal" href="#i"><code class="docutils literal notranslate"><span class="pre">i</span></code></a></li>
-<li><a class="reference internal" href="#v"><code class="docutils literal notranslate"><span class="pre">v</span></code></a></li>
-<li><a class="reference internal" href="#h"><code class="docutils literal notranslate"><span class="pre">h</span></code></a></li>
+<li><a class="reference internal" href="#v1"><code class="docutils literal notranslate"><span class="pre">v1</span></code></a></li>
+<li><a class="reference internal" href="#hb"><code class="docutils literal notranslate"><span class="pre">hb</span></code></a></li>
 <li><a class="reference internal" href="#file"><code class="docutils literal notranslate"><span class="pre">file</span></code></a></li>
 </ul>
 </li>

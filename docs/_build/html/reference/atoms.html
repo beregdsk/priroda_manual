@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -273,14 +274,16 @@
 <p id="index-1"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t16</p>
+<strong>Sources:</strong> input.txt; 08 t16; 01 §7; 08 (review check)</p>
 <p>For HF-based methods, the number of core shells for L=0,1,2,3, given for each atomic number. The values are
 used only to compute the total number of core electrons in the molecule.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The index is 10·Z: <code class="docutils literal notranslate"><span class="pre">core(280)</span></code> is nickel, <code class="docutils literal notranslate"><span class="pre">core(80)</span></code> oxygen. In version 25, <code class="docutils literal notranslate"><span class="pre">core(80)=0,0,0,0</span></code> removed the
 oxygen 1s from the frozen core of an RI-MP2 run. The output reports the frozen core as <code class="docutils literal notranslate"><span class="pre">atom</span>&#160;&#160; <span class="pre">8</span> <span class="pre">core</span> <span class="pre">=</span>&#160; <span class="pre">1</span></code>
-and <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">core</span> <span class="pre">electrons</span> <span class="pre">1</span></code>; the number there counts core orbitals, not electrons.</p>
+and <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">core</span> <span class="pre">electrons</span> <span class="pre">1</span></code>; the number there apparently counts core orbitals, not electrons (the C60
+example output prints <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">core</span>&#160; <span class="pre">electrons</span> <span class="pre">60</span></code> for 60 carbon atoms, and a version 25 HCl run prints 5
+for the Cl core 1s, 2s, 2p).</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$atoms core(280)=2,1,0,0 $end
@@ -293,10 +296,12 @@ and <code class="docutils literal notranslate"><span class="pre">Number</span> <
 <span id="atoms-mcore"></span><h2><code class="docutils literal notranslate"><span class="pre">mcore</span></code><a class="headerlink" href="#mcore" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
-<p>A simple way to add outer-core shells to the correlation treatment: <code class="docutils literal notranslate"><span class="pre">mcore=M</span></code> adds all shells whose principal
-quantum number is lower than that of the outermost valence shell by less than M.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> input.txt; 08 (review check)</p>
+<p>A simple way to add outer-core shells to the correlation treatment: <code class="docutils literal notranslate"><span class="pre">mcore=M</span></code> correlates every core shell
+whose principal quantum number is at least n(valence) − M. In version 25, for Cl in an RI-MP2 run of HCl, the
+default core was <code class="docutils literal notranslate"><span class="pre">atom</span>&#160; <span class="pre">17</span> <span class="pre">core</span> <span class="pre">=</span>&#160; <span class="pre">2,</span>&#160; <span class="pre">1</span></code> (1s, 2s, 2p); <code class="docutils literal notranslate"><span class="pre">mcore=1</span></code> left only 1s in the core (<code class="docutils literal notranslate"><span class="pre">core</span> <span class="pre">=</span>&#160; <span class="pre">1</span></code>), and
+<code class="docutils literal notranslate"><span class="pre">mcore=2</span></code> left no core at all.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#atoms-core"><span class="std std-ref">core ($atoms)</span></a></p>
 </section>
 </section>

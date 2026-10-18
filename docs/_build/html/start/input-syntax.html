@@ -276,7 +276,7 @@ groups. The individual keywords are in the <a class="reference internal" href=".
 $control
  task=optimize
  theory=dft
- basis=/home/user/priroda/basis.in
+ basis=/opt/priroda/basis.in
 $end
 $optimize tol=1e-5 steps=100 $end
 $molecule
@@ -297,22 +297,24 @@ $end
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf conv=1e-7 $end
 
 $scf
- convergence=1e-7
  procedure=bfgs
+ convergence=1e-7
 $end
 </pre></div>
 </div>
+<!-- src: 08 t04; 08 (review check: conv=1e-7 alone, procedure before and after convergence) -->
 <p>Inside a group, <code class="docutils literal notranslate"><span class="pre">keyword=value</span></code> pairs are separated by spaces or line breaks, and several pairs can share a line
 (<code class="docutils literal notranslate"><span class="pre">theory=qm_n3</span> <span class="pre">basis=qm.in</span></code>). Blank lines inside a group are allowed.</p>
 <!-- src: input.txt; 01 §4.2; 02 §3; 05 §5 -->
-<p>The order of the groups does not matter, and neither does the order of keywords within a group. The exceptions are
-<code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$Energy</span></code>, whose contents are ordered data.</p>
-<!-- src: 06 §2 -->
+<p>The order of the groups does not matter, and neither does the order of keywords within a group. The exception is
+<code class="docutils literal notranslate"><span class="pre">$molecule</span></code>, whose contents are ordered data. (The KNC wiki FAQ also lists <code class="docutils literal notranslate"><span class="pre">$Energy</span></code>, but version 25 reads it with
+the same keyword reader as the other groups.)</p>
+<!-- src: 06 §2; 09 (energy read by the generic namelist reader; only $molecule by mol_input) -->
 <p>Groups you do not need can be left out; most keywords have sensible defaults. <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> advises changing only what
 the problem requires.</p>
 <!-- src: input.txt; 06 §2 -->
-<p>Two groups can also share a line: <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">conv=1e-7</span> <span class="pre">$end</span> <span class="pre">$grid</span> <span class="pre">acc=1e-9</span> <span class="pre">$end</span></code> sets both values in version 25. Every
-input in the sources starts each group on a new line, which is easier to read.</p>
+<p>Two groups can also share a line: <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">conv=1e-7,1e-3</span> <span class="pre">$end</span> <span class="pre">$grid</span> <span class="pre">acc=1e-9</span> <span class="pre">$end</span></code> sets both values in version 25.
+Inputs in the sources normally start each group on a new line, which is easier to read.</p>
 <!-- src: 08 t04 -->
 </section>
 <section id="keywords">
@@ -321,8 +323,9 @@ input in the sources starts each group on a new line, which is easier to read.</
 <h3>Case<a class="headerlink" href="#case" title="Link to this heading">¶</a></h3>
 <p>Group names, keyword names and keyword values are case-insensitive: <code class="docutils literal notranslate"><span class="pre">$System</span></code> and <code class="docutils literal notranslate"><span class="pre">$system</span></code>, <code class="docutils literal notranslate"><span class="pre">theory=riDFT</span></code> and
 <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">functional=pbe</span></code> and <code class="docutils literal notranslate"><span class="pre">functional=PBE</span></code> are the same. File names are the exception, because Linux file
-names are case-sensitive. This applies to <code class="docutils literal notranslate"><span class="pre">basis=</span></code>, <code class="docutils literal notranslate"><span class="pre">save=</span></code> and <code class="docutils literal notranslate"><span class="pre">path=</span></code>.</p>
-<!-- src: 06 §2, §3 ($System); 05 §5; 01 §4.11 -->
+names are case-sensitive. This applies to <code class="docutils literal notranslate"><span class="pre">basis=</span></code>, <code class="docutils literal notranslate"><span class="pre">save=</span></code>, <code class="docutils literal notranslate"><span class="pre">path=</span></code> and other file names, such as <code class="docutils literal notranslate"><span class="pre">file=</span></code> in
+<code class="docutils literal notranslate"><span class="pre">$dynamic</span></code> and <code class="docutils literal notranslate"><span class="pre">$uniq</span></code>.</p>
+<!-- src: 06 §2, §3 ($System); 05 §5; 01 §4.8, §4.9, §4.11 -->
 </section>
 <section id="abbreviations">
 <h3>Abbreviations<a class="headerlink" href="#abbreviations" title="Link to this heading">¶</a></h3>
@@ -370,11 +373,14 @@ sources use, among others:</p>
 <a class="reference internal" href="../reference/d2edr2.html#d2edr2-steps"><span class="std std-ref">$d2edr2</span></a> selects displacement steps of a numerical Hessian.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>A prefix must stay unambiguous within its group. How Priroda resolves a prefix that matches two keywords is not
-documented. In version 6, when <code class="docutils literal notranslate"><span class="pre">$optimize</span></code> contained both <code class="docutils literal notranslate"><span class="pre">step=</span></code> and <code class="docutils literal notranslate"><span class="pre">steps=</span></code>, the maximum number of steps was taken
-from <code class="docutils literal notranslate"><span class="pre">step</span></code>. In inputs you keep or share, prefer the full keyword names; they are also easier to search for.</p>
+<p>A prefix must stay unambiguous within its group. In <code class="docutils literal notranslate"><span class="pre">$scf</span></code>, <code class="docutils literal notranslate"><span class="pre">co</span></code> matches both <code class="docutils literal notranslate"><span class="pre">convergence</span></code> and <code class="docutils literal notranslate"><span class="pre">core</span></code>; in version 25,
+<code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">co=1e-7</span> <span class="pre">$end</span></code> stopped with <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">e-7</span></code>, a message that does not point to the cause. In inputs you keep
+or share, prefer the full keyword names; they are also easier to search for.</p>
 </div>
-<!-- src: 03 §8 (v6 step/steps); input.txt -->
+<!-- src: 09 ($scf names); 08 (review check: co=1e-7); input.txt -->
+<p>Do not give the same keyword twice in one group, even in different spellings. In version 6, an <code class="docutils literal notranslate"><span class="pre">$optimize</span></code> group with
+both <code class="docutils literal notranslate"><span class="pre">step=</span></code> and <code class="docutils literal notranslate"><span class="pre">steps=</span></code> took the maximum number of steps from <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+<!-- src: 03 §8 (v6 step/steps, Evgeniy) -->
 <p>A misspelled or unknown keyword name stops the run right after the basis-set echo, with a message naming the group
 and the keyword:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*** error in '$scf' : unknown name nosuchkeyword
@@ -385,11 +391,21 @@ and the keyword:</p>
 optimization (<code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">coordinated</span></code>) but was ignored in an energy run, which does not read <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. A
 clean energy run therefore does not prove that the rest of the input is correct.</p>
 <!-- src: 08 t40, t40b, t40c -->
-<p>The same message can appear for a keyword you spelled correctly. In version 25,
-<code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code> stops with <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>: the value list of <code class="docutils literal notranslate"><span class="pre">convergence</span></code>
-takes the first letter of the next keyword. Give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> both of its values, or put it last in the group;
-see <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">$scf convergence</span></a>.</p>
-<!-- src: 05 §5.1; 08 t07a, t07b, t22a-c -->
+<p>The same message can appear for a keyword you spelled correctly. In version 25, <code class="docutils literal notranslate"><span class="pre">convergence=</span></code> with a single value,
+followed by <code class="docutils literal notranslate"><span class="pre">iterations=</span></code>, stops the run with the name of <code class="docutils literal notranslate"><span class="pre">iterations</span></code> cut short:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code> printed <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code> on the machine of the first test
+rounds, also with the two keywords on separate lines;</p></li>
+<li><p>the same input printed <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code> in later runs of the <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> executable on another machine. There
+the message was the same for every value tried (<code class="docutils literal notranslate"><span class="pre">1e-5</span></code>, <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>, <code class="docutils literal notranslate"><span class="pre">1e-7</span></code>, <code class="docutils literal notranslate"><span class="pre">1e-10</span></code>, <code class="docutils literal notranslate"><span class="pre">0.000001</span></code>, <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>, and <code class="docutils literal notranslate"><span class="pre">1e-6,</span></code>
+with a trailing comma), and <code class="docutils literal notranslate"><span class="pre">iter=50</span></code> gave <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">er</span></code>.</p></li>
+</ul>
+<p>Other keywords after a one-value <code class="docutils literal notranslate"><span class="pre">convergence=</span></code> were read normally (<code class="docutils literal notranslate"><span class="pre">procedure</span></code>, <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, <code class="docutils literal notranslate"><span class="pre">xmax</span></code>, <code class="docutils literal notranslate"><span class="pre">diagm</span></code>,
+<code class="docutils literal notranslate"><span class="pre">temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">fraction</span></code>, <code class="docutils literal notranslate"><span class="pre">core</span></code>, <code class="docutils literal notranslate"><span class="pre">eemin</span></code>, <code class="docutils literal notranslate"><span class="pre">aw</span></code>), but <code class="docutils literal notranslate"><span class="pre">n1=</span></code> stopped the run with <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">'$end'</span> <span class="pre">found,</span> <span class="pre">'convergence'</span></code>.
+The problem disappears when <code class="docutils literal notranslate"><span class="pre">convergence</span></code> gets both of its values (<code class="docutils literal notranslate"><span class="pre">convergence=1e-6,1e-3</span> <span class="pre">iterations=50</span></code>) or comes
+after <code class="docutils literal notranslate"><span class="pre">iterations</span></code>. Give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> both values, or put it last in the group; see
+<a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">$scf convergence</span></a>.</p>
+<!-- src: 05 §5.1; 08 t07a, t07b, t22a-c; 08 (review check: convergence value series, iter=, n1=, other keywords); slurm s02-s04 first attempt (erations with 1e-10) -->
 </section>
 </section>
 <section id="values">
@@ -415,11 +431,12 @@ form is used for <a class="reference internal" href="../reference/optimize.html#
 <code class="docutils literal notranslate"><span class="pre">print=+vectors+molden</span></code>, <code class="docutils literal notranslate"><span class="pre">print=-internals+molden</span></code>. The leading <code class="docutils literal notranslate"><span class="pre">+</span></code> may be omitted (<code class="docutils literal notranslate"><span class="pre">print=charges+bonds</span></code>).</p>
 <!-- src: input.txt; 06 §3; 04 #460 -->
 </dd>
-<dt>Quoted strings</dt><dd><p>A file name or path may be put in double quotes, and must be if it contains special characters:
-<code class="docutils literal notranslate"><span class="pre">basis=&quot;3z.bas&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">path=&quot;/home/user/priroda/scratch&quot;</span></code>. Use the straight ASCII double quote <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>. Typographic quotes
+<dt>Quoted strings</dt><dd><p>A file name or path may be put in double quotes. The quotes are optional: <code class="docutils literal notranslate"><span class="pre">basis=&quot;3z.bas&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">basis=basis.in</span></code>
+both work, as does <code class="docutils literal notranslate"><span class="pre">path=&quot;/scratch/priroda&quot;</span></code>. Use the straight ASCII double quote <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>. Typographic quotes
 break the name, and two single quotes do not count as a double quote: <code class="docutils literal notranslate"><span class="pre">basis=''3z.bas''</span></code> fails with
-<code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">''3z.bas''</span></code>.</p>
-<!-- src: input.txt; 03 §2, §5; 04 #64 -->
+<code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">''3z.bas''</span></code>. Avoid spaces and non-ASCII characters in file names, directory names and the
+host name.</p>
+<!-- src: input.txt; 03 §2 (amg: no Cyrillic or spaces), §5; 05 §5; 04 #64 -->
 </dd>
 </dl>
 </section>
@@ -450,11 +467,13 @@ in the <a class="reference internal" href="../reference/molecule.html#group-mole
 <p>Some tasks read more than one <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group from one input:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">task=transit</span></code>, <code class="docutils literal notranslate"><span class="pre">task=saddle</span></code> and <code class="docutils literal notranslate"><span class="pre">task=path</span></code> take two blocks, the start and the end structure. The atoms must be
-numbered the same way in both.</p></li>
+numbered the same way in both. <code class="docutils literal notranslate"><span class="pre">task=saddle</span></code> is not the same as <a class="reference internal" href="../reference/optimize.html#optimize-saddle"><span class="std std-ref">$optimize saddle=1</span></a>, the
+transition-state search from a stored Hessian. This two-block input was reported for versions 8–9 and has not been
+tested on version 25.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">task=uniq</span></code> takes any number of blocks and filters out duplicate structures; the official example has 157.</p></li>
 </ul>
 <p>These tasks are undocumented; see <a class="reference internal" href="../reference/control.html#control-task"><span class="std std-ref">$control task</span></a> and <a class="reference internal" href="../reference/uniq.html#group-uniq"><span class="std std-ref">$uniq</span></a>.</p>
-<!-- src: 03 §5, §9; 01 §4.9 -->
+<!-- src: 03 §5, §9; 01 §4.9; 09 (task names exist in v25) --> <!-- verify -->
 </section>
 </section>
 <section id="text-outside-groups">
@@ -478,13 +497,16 @@ $dynamic
 $end
  v=500.0
  h=0.1
-$molecule
- ...
+$molecule charge=0 mult=1 cartesian
+ set=L1
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
 $end
- Energy =   -783.83738426
+ Energy =   -76.36539137
 </pre></div>
 </div>
-<!-- src: 01 §4, §4.8, §4.9 -->
+<!-- src: 01 §4, §4.8, §4.9 (pattern of the official example inputs; atoms and energy replaced by the water of 08 t01) --> <!-- verify -->
 <p>In version 25 a line of text before the first group and a disabled group with its leftover <code class="docutils literal notranslate"><span class="pre">$end</span></code>
 (<code class="docutils literal notranslate"><span class="pre">integral</span> <span class="pre">dir=1</span> <span class="pre">$end</span></code>) are both ignored: the result is identical to the same input without them. Text inside a
 group is parsed as keywords, so do not put notes there.</p>
@@ -495,14 +517,14 @@ functional at PBE, with no message. Always use <code class="docutils literal not
 </section>
 <section id="appending-results-of-earlier-runs">
 <h2>Appending results of earlier runs<a class="headerlink" href="#appending-results-of-earlier-runs" title="Link to this heading">¶</a></h2>
-<p>Priroda writes results that can be reused as input into the main output file. Each such line carries a prefix, for
+<p>Priroda writes reusable results into the main output file. Each such line carries a prefix, for
 example <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code>. Strip the prefix and append the lines to the next input. The program has no separate
 restart file for these data; SCF orbitals are the exception, saved with <a class="reference internal" href="../reference/control.html#control-save"><span class="std std-ref">$control save</span></a>.</p>
 <!-- src: 06 §4 -->
 <section id="energy-from-eng-lines">
 <h3><code class="docutils literal notranslate"><span class="pre">$Energy</span></code> from <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> lines<a class="headerlink" href="#energy-from-eng-lines" title="Link to this heading">¶</a></h3>
-<p>A run prints its energy, dipole, gradient and, after <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code>, the Hessian as an
-<a class="reference internal" href="../reference/Energy.html#group-energy"><span class="std std-ref">$Energy</span></a> group on lines prefixed with <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>:</p>
+<p>A run prints its energy and dipole, plus the gradient when one is computed and, after <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code>, the Hessian, as
+an <a class="reference internal" href="../reference/Energy.html#group-energy"><span class="std std-ref">$Energy</span></a> group on lines prefixed with <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>eng&gt;$Energy
 eng&gt; E=-2.894457077327e+04
 eng&gt; D= 0.00000000e+00  0.00000000e+00  0.00000000e+00
@@ -512,13 +534,13 @@ eng&gt;    1.27590122e-07 -9.81695012e-09  2.56258122e-06
 eng&gt;$end
 </pre></div>
 </div>
-<!-- src: 06 §4 -->
+<!-- src: 06 §4; 08 t01 (task=energy prints only E= and D=) -->
 <p>To reuse it, remove the prefix and append the block to the end of the next input, after <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sed -n 's/^eng&gt;//p' mol.out &gt;&gt; mol.in
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">ge</span></code> script on the official site does the same. It also skips the first block when the output contains a
-<code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">AND</span> <span class="pre">ANALYTICAL</span> <span class="pre">GRADIENT</span></code> section.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ge</span></code> script on the official site does the same. When the output contains a <code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">AND</span> <span class="pre">ANALYTICAL</span> <span class="pre">GRADIENT</span></code>
+section, it ignores everything before that section.</p>
 <!-- src: 01 §8; 03 §8 (perl one-liner); 03 §14 -->
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -529,7 +551,7 @@ program uses the <strong>last</strong> one, even when an earlier one matches the
 <!-- src: 01 §7 (one eng block per optimization step); 08 t41, t41b -->
 <p>A stored Hessian is required by <a class="reference internal" href="../reference/optimize.html#optimize-saddle"><span class="std std-ref">$optimize saddle=1</span></a> and <code class="docutils literal notranslate"><span class="pre">task=irc</span></code>. It also helps difficult
 minimizations, and it lets you redo the vibrational analysis or the thermochemistry without recomputing.</p>
-<!-- src: Dft.rtf; 06 §4, §5; energy.yaml -->
+<!-- src: Dft.rtf lines 79, 103; 06 §4, §5; 08 t25, t26, t66 -->
 </section>
 <section id="num-lines">
 <h3><code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines<a class="headerlink" href="#num-lines" title="Link to this heading">¶</a></h3>
@@ -554,8 +576,14 @@ the <code class="docutils literal notranslate"><span class="pre">Raman</span> <s
 <p>After <code class="docutils literal notranslate"><span class="pre">OPTIMIZATION</span> <span class="pre">CONVERGED</span></code>, the final geometry is printed as a ready-made <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group on lines prefixed with
 <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code>. Strip the prefix to continue from that geometry. The <code class="docutils literal notranslate"><span class="pre">gm</span></code> script on the official site replaces the <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>
 group of the input with it. Because <code class="docutils literal notranslate"><span class="pre">gm</span></code> replaces everything from <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> to the end of the file, keep
-<code class="docutils literal notranslate"><span class="pre">$molecule</span></code> as the last group of your inputs, followed only by appended result blocks.</p>
-<!-- src: 01 §7, §8; 06 §4 -->
+<code class="docutils literal notranslate"><span class="pre">$molecule</span></code> as the last group of your inputs. Anything appended after it, including an <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group with a
+Hessian, is deleted by <code class="docutils literal notranslate"><span class="pre">gm</span></code>; append such blocks again afterwards.</p>
+<!-- src: 01 §7, §8 (gm: sed stops at $molecule); 06 §4 -->
+<p>An optimization that runs out of steps prints no <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines in version 25. The geometry of each step is printed on
+lines prefixed with lowercase <code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code>; the block from the last step is the geometry to restart from. <code class="docutils literal notranslate"><span class="pre">gm</span></code> finds
+neither <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines nor an input echo in such an output and stops with <code class="docutils literal notranslate"><span class="pre">mol?</span></code>, so strip the last <code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code> block by
+hand.</p>
+<!-- src: 08 t12 (two steps, two mol blocks, no MOL lines, no input echo; checked in the round 1-3 output); 01 §8 (gm script) -->
 </section>
 </section>
 <section id="common-mistakes">
@@ -565,16 +593,17 @@ group of the input with it. Because <code class="docutils literal notranslate"><
 rest of the group shifts. In version 25 this gives no error at all: water written with <code class="docutils literal notranslate"><span class="pre">8.0</span></code> and <code class="docutils literal notranslate"><span class="pre">1.0</span></code> ran as an
 oxygen atom plus three empty centres with Z=0, and printed a meaningless energy. Older versions were reported to
 stop with <code class="docutils literal notranslate"><span class="pre">illegal</span> <span class="pre">charge/multiplicity</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">formula:</span></code> line near the top of the output. Element symbols
-(<code class="docutils literal notranslate"><span class="pre">O</span></code>) are not accepted either.</p>
-<!-- src: 03 §5; molecule.yaml; 08 t09 -->
+are not accepted either: in version 25, water written with <code class="docutils literal notranslate"><span class="pre">O</span></code> and <code class="docutils literal notranslate"><span class="pre">H</span></code> stopped after <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> with the
+line <code class="docutils literal notranslate"><span class="pre">'o'</span> <span class="pre">?</span></code>.</p>
+<!-- src: 03 §5; 08 t09; 08 (review check: element symbols) -->
 </dd>
 <dt>Typographic quotes</dt><dd><p>Word processors and some web pages turn <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> into curly or angle quotes, which break file names in <code class="docutils literal notranslate"><span class="pre">basis=</span></code> and
 <code class="docutils literal notranslate"><span class="pre">path=</span></code>. Retype them as straight quotes.</p>
 <!-- src: 04 #64 -->
 </dd>
-<dt>Two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines</dt><dd><p>A second <code class="docutils literal notranslate"><span class="pre">task=</span></code> line does not start a second job; only the first task runs. <code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> is the only
-combination the program understands. Run other sequences as separate jobs.</p>
-<!-- src: 04 #69, #70 -->
+<dt>Two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines</dt><dd><p>A second <code class="docutils literal notranslate"><span class="pre">task=</span></code> line does not start a second job; in version 6, users reported that only the first task ran.
+<code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> is the only combination the program understands. Run other sequences as separate jobs.</p>
+<!-- src: 04 #69, #70 (v6; optimize+hessian "not in all versions"); 09 (optimize+hessian is one task name in v25) --> <!-- verify -->
 </dd>
 <dt>Windows line endings (CRLF)</dt><dd><p>The run stops in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> with <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> followed by a garbled <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">?matrix</span></code> or <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code>. Convert the
 file with <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code>; see <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
@@ -585,13 +614,14 @@ unknown <code class="docutils literal notranslate"><span class="pre">theory=</sp
 <code class="docutils literal notranslate"><span class="pre">Theoretical</span> <span class="pre">Method</span></code> line and that the output goes on to an SCF.</p>
 <!-- src: 08 t50, t50b -->
 </dd>
-<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Older versions ran without the exact exchange. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, version 25 stops after the basis-set echo with
-no message; with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> it still runs without the exact exchange and gives wrong energies. See
+<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Older versions ran but gave wrong results. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, version 25 stops after the basis-set echo with no
+message in the output file (stderr shows only <code class="docutils literal notranslate"><span class="pre">MPI_Abort</span></code>); with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> it still runs without the exact exchange and gives wrong energies. See
 <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
 <!-- src: 04 #96, #310; 08 t08, t46 -->
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> without <code class="docutils literal notranslate"><span class="pre">four=1</span></code></dt><dd><p>The relativistic basis file needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>.</p>
-<!-- src: 04 #207, #208 -->
+<dt><code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> without <code class="docutils literal notranslate"><span class="pre">four=1</span></code></dt><dd><p>The relativistic basis file needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>. Without it, version 25 stops right after the line
+<code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> with the single line <code class="docutils literal notranslate"><span class="pre">1?</span></code>.</p>
+<!-- src: 04 #207, #208; 08 t49 -->
 </dd>
 </dl>
 <p>More input problems, with their exact error messages, are listed in <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-input"><span class="std std-ref">The input is not read, or is read wrongly</span></a>.</p>

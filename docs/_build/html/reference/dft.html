@@ -225,6 +225,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
@@ -273,7 +274,7 @@
 <p id="index-1"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">PBE</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §3.2; 03 §5 (strings); 04 §0; 08 t02; 08 t31, t38</p>
+<strong>Sources:</strong> input.txt; 01 §3.2; 03 §5 (strings); 04 §0, #347 (no D3); 08 t02; 08 t31, t38</p>
 <p>Default: <code class="docutils literal notranslate"><span class="pre">PBE</span></code> (the default GGA); <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> for <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</p>
 <p>Exchange–correlation approximation for DFT methods.</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -297,7 +298,7 @@
 <td><p>Handy–Cohen exchange + LYP correlation, J. Chem. Phys. 117 (2002) 1441.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PBE1</span></code></p></td>
-<td><p>PBE hybrid with 1/4 exact exchange, J. Chem. Phys. 110 (1999) 6158. Default for <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</p></td>
+<td><p>PBE hybrid with 1/4 exact exchange (PBE0), J. Chem. Phys. 110 (1999) 6158. Default for <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">B3LYP_PW</span></code></p></td>
 <td><p>Becke three-parameter hybrid with PW local correlation (see notes).</p></td>
@@ -320,10 +321,14 @@
 Exc = 0.2·Ex(HF) + 0.8·(0.9·Ex(B) + 0.1·Ex(S)) + 0.81·Ec(LYP) + 0.19·Ec(LSD).
 Ec(LSD) is the local correlation of either Phys. Rev. B 45 (1992) 13244 (PW) or Can. J. Phys. 58 (1980) 1200 (VWN).
 <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> points out that some commercial programs use VWN, although Becke himself used PW
-(J. Chem. Phys. 98 (1993) 5648).</p>
+(J. Chem. Phys. 98 (1993) 5648). It does not say which name uses which form. Presumably <code class="docutils literal notranslate"><span class="pre">B3LYP_PW</span></code> uses PW and
+<code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> uses VWN (inferred from the names; untested). Which VWN parametrization would be used is not stated;
+<code class="docutils literal notranslate"><span class="pre">VWN5</span></code> appears among the v6 functional names.</p>
 <p><strong>Hybrids (<code class="docutils literal notranslate"><span class="pre">PBE1</span></code>, <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code>, <code class="docutils literal notranslate"><span class="pre">B3LYP_PW</span></code>) require <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</strong> With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> or <code class="docutils literal notranslate"><span class="pre">tddft</span></code> they either
 run silently without exact exchange or abort; see <code class="docutils literal notranslate"><span class="pre">$control</span> <span class="pre">theory</span></code>.</p>
-<p>No empirical dispersion correction (D3 or similar) is available. The v6 binary contains further functional
+<p>No empirical dispersion correction (D3 or similar) is available, and a user relayed that none is planned.
+The names <code class="docutils literal notranslate"><span class="pre">LPBEVV</span></code> and <code class="docutils literal notranslate"><span class="pre">LPBEVVV</span></code> may stand for a VV10-type nonlocal (dispersion) correlation (inferred from the
+names and the π-stacked examples; unverified). The v6 binary contains further functional
 names (<code class="docutils literal notranslate"><span class="pre">VWN5</span></code>, <code class="docutils literal notranslate"><span class="pre">SLYP0</span></code>, <code class="docutils literal notranslate"><span class="pre">BPBE</span></code>, <code class="docutils literal notranslate"><span class="pre">HFLSD</span></code>, <code class="docutils literal notranslate"><span class="pre">HFPBE</span></code>, <code class="docutils literal notranslate"><span class="pre">B2PBE</span></code>, <code class="docutils literal notranslate"><span class="pre">B3PBE</span></code>, <code class="docutils literal notranslate"><span class="pre">HFLYP</span></code>, <code class="docutils literal notranslate"><span class="pre">B1LYP</span></code>, <code class="docutils literal notranslate"><span class="pre">B2LYP</span></code>), none of
 them documented or tested.</p>
 </div>

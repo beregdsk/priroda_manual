@@ -121,15 +121,17 @@ The parser has a problem when {ref}`convergence <scf.convergence>` is directly f
 $scf convergence=1e-7 iterations=250 $end
 ```
 
-stops the run after the basis-set echo with `*** error in '$scf' : unknown name terations`. The message names the
-next keyword with its first letters missing; how many are missing depends on the value: with `convergence=1e-10` the
-same run printed `unknown name erations`, as forum users of 2015 builds also reported. With
+stops the run after the basis-set echo with `*** error in '$scf' : unknown name terations`. The message names
+`iterations` with its first letters missing. How many are missing depended on the machine, not on the value: the same
+input printed `unknown name erations` with the `p4_d` executable on another computer, for every value tried, as
+forum users of 2015 builds also reported. With
 {ref}`procedure=bfgs <scf.procedure>` between them, `$scf convergence=1e-7 procedure=bfgs iterations=250 $end`, both
 values are read; one forum user found that the pair worked only with `procedure=bfgs`.
-<!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b; 08 Slurm tests (first attempt, s02: convergence=1e-10 iterations=200 gave erations) -->
+<!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b; 08 review check (convergence value series); 08 Slurm tests (first attempt, s02) -->
 
-Further tests on version 25 narrowed it down. The problem is a `convergence=` with **one** value followed by another
-keyword, also on the next line. Both of these work:
+Further tests on version 25 narrowed it down. The problem is a `convergence=` with **one** value followed by
+`iterations=`, also on the next line; other keywords after it, such as `restrict=` or `procedure=`, were read
+correctly. Both of these work:
 
 ```text
 $scf convergence=1e-7,1e-3 iterations=250 $end

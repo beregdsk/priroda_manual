@@ -69,13 +69,13 @@ Convergence tolerance on the gradient (first value) and on the displacement (sec
 **Type:** list\
 **Default:** `0.125,0.015625`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12, t15, t76b
+**Sources:** input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12, t15, t76b; 08 (review check)
 
 Default: echoed by version 25 as `Trust radius = 0.12500000 (max), 0.01562500 (min)` in internal coordinates, with
 symmetry (`sym=1`) and with `cartesian=1`. v13 and v15 echoed 0.2 / 0.0125 in internal coordinates and
 0.1 / 0.00625 with `cartesian=1`; v6 echoed 0.2 / 0.0125 in Cartesian coordinates. `Dft.rtf` gives 0.5
 (older version). `input.txt` says that if only the maximum is given, the minimum is 1/16 of it and the initial
-value 1/4. In version 25 the default minimum is 1/8 of the maximum, so the 1/16 rule is not confirmed there.
+value 1/4. Version 25 uses 1/8 instead: `trust=0.2` alone was echoed as `0.20000000 (max), 0.02500000 (min)`.
 
 
 Trust radius (the largest allowed step), given as maximum, minimum and initial values.
@@ -113,8 +113,9 @@ Maximum number of optimization cycles.
 ```{note}
 Version 25 echoes `Maximum number of steps = 128` when `steps` is not given; older sources give 50. When the
 limit is reached the program prints no message: the output just ends, and the last geometry appears only in
-`mol>` lines, not `MOL>`. If an optimization has not converged within about 50 steps, something is probably
-wrong; raising `steps` rarely helps. Computing a Hessian first and supplying it often does. In v6, if both `steps` and `step` are
+`mol>` lines, not `MOL>`. `Dft.rtf` warns that an optimization not converged after about 50 steps very likely
+has something wrong with it, and that computing a Hessian first helps in many cases; so don't simply raise
+`steps`. In v6, if both `steps` and `step` are
 given, the value of `step` is used; give only one of them.
 ```
 

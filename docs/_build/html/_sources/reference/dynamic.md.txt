@@ -11,13 +11,15 @@ Molecular dynamics with a thermostat.
 
 **Relevant when:** `task = thermostat`
 
-Known only from the official example inputs and a third-party input generator. Every meaning below is
-inferred, except `file`.
+Known from the official example inputs, a third-party input generator, the names in the version 25 executable
+and one version 25 test. Only the meaning of `n` and `file` is shown by output; the rest is inferred.
 
 In version 25, `task=thermostat` with `e=0.001 d=0.03 n=20,5 m=10 i=1` ran with every tested theory (`dft`,
-`ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`). The output has one line per step, `point N: s … E … g …`, where
+`ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`). The header echoes `e = 0.00100000` and
+`dx = 0.03000000 L = 20,-5;10`. The output has one line per step, `point N: s … E … g …`, where
 negative point numbers are equilibration steps (the second value of `n`) and positive ones the production steps
-(the first value). In the program, `d` and `h` are prefixes of the keywords `dx` and `hb`.
+(the first value). The official example (below) writes `d=` and the generator script writes `h=` and `v=`;
+these are prefixes of the full names `dx`, `hb` and `v1`.
 
 ```text
 $dynamic
@@ -40,22 +42,22 @@ $end
 **Default:** *none stated*\
 **Units:** hartree\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2
+**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
 
-Thermostat temperature as kT (inferred: a generator script sets e = T/315775).
+Thermostat temperature as kT (inferred: a generator script sets e = T/315775). Version 25 echoes it as `e = 0.00100000`.
 
-(dynamic.d)=
-## `d`
+(dynamic.dx)=
+## `dx`
 
-```{index} single: d ($dynamic)
+```{index} single: dx ($dynamic)
 ```
 
 **Type:** real\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2
+**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
 
-Time step (inferred).
+Time step (inferred). The examples write the prefix `d=`; version 25 echoes it as `dx = 0.03000000`.
 
 (dynamic.n)=
 ## `n`
@@ -65,10 +67,11 @@ Time step (inferred).
 
 **Type:** list\
 **Default:** *none stated*\
-**Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
 
-Number of steps and print interval (inferred).
+Two values: the number of production steps, then the number of equilibration steps. In version 25, `n=20,5`
+gave 26 points, `point -5` … `point 20`, and the echo `L = 20,-5;10`.
 
 (dynamic.m)=
 ## `m`
@@ -79,9 +82,9 @@ Number of steps and print interval (inferred).
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2
+**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
 
-Meaning not known.
+Meaning not known. With `m=10`, version 25 printed `;10` at the end of the echo `L = 20,-5;10`.
 
 (dynamic.i)=
 ## `i`
@@ -92,36 +95,36 @@ Meaning not known.
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2
+**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
 
-Run index or random seed (inferred).
+Run index or random seed (inferred). Version 25 does not echo it.
 
-(dynamic.v)=
-## `v`
+(dynamic.v1)=
+## `v1`
 
-```{index} single: v ($dynamic)
+```{index} single: v1 ($dynamic)
 ```
 
 **Type:** real\
 **Default:** *none stated*\
 **Units:** bohr³ per atom\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2
+**Sources:** 01 §4.8; 02 §3.2; 09
 
-Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred).
+Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred). Written as the prefix `v=` in the generator script.
 
-(dynamic.h)=
-## `h`
+(dynamic.hb)=
+## `hb`
 
-```{index} single: h ($dynamic)
+```{index} single: hb ($dynamic)
 ```
 
 **Type:** real\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2
+**Sources:** 01 §4.8; 02 §3.2; 09
 
-Stiffness of the cavity wall (inferred).
+Stiffness of the cavity wall (inferred). Written as the prefix `h=` in the generator script.
 
 (dynamic.file)=
 ## `file`

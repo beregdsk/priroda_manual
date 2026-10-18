@@ -2,32 +2,37 @@
 # Getting started
 
 This chapter takes you through three things: a single-point energy of water, a geometry optimization of ammonia
-followed by a Hessian that proves the structure is a minimum, and the parts of the output you need to read along the
-way. To download the program, see {ref}`obtaining-priroda`; for the examples you need one Linux executable (for
-example `p`) and `basis.in`. {doc}`running` covers running the program in more detail.
+followed by a Hessian that confirms the structure is a minimum, and the parts of the output you need to read along
+the way. To download the program, see {ref}`obtaining-priroda`; for the examples you need one Linux executable and
+`basis.in`. {doc}`running` covers running the program in more detail.
 
-The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. A few
-excerpts come from outputs posted by users of older versions; the text says so where it matters.
-<!-- src: 08 -->
+The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. That
+build date matches the file `p4_d` on the download site; the file `p` there is an older build (2023-06-25), so its
+output can differ from the excerpts here. A few excerpts come from outputs posted by users of older versions; the
+text says so where it matters.
+<!-- src: 08 (header: banner date matches p4_d, p dated 2023-06-25); 01 §2.2 -->
 
 ## Before you start
 
-Four practical points save most first-time failures.
+Three practical points save most first-time failures.
 
 - **Plain text with Unix line endings.** Write inputs as plain ASCII with LF line endings and straight quotes. A file
-  saved with Windows (CRLF) line endings gives errors such as `molecule input: ''` or `?rtesian`, or makes
-  `task=scan` silently run an optimization. Convert such files with `dos2unix`.
-  <!-- src: 04 §0 (CRLF symptoms) -->
+  saved with Windows (CRLF) line endings gives errors such as `molecule input: '' 'cartesian ' ?` or `?rtesian`.
+  One user's `task=scan` silently ran an optimization, and CRLF line endings were blamed for it. Convert such files
+  with `dos2unix`.
+  <!-- src: 04 §0 (CRLF symptoms), line 379 (#173/#174), #110, #113 (amge's diagnosis, not a confirmed test) -->
 - **Give the basis file by its full path.** The {ref}`basis <control.basis>` keyword names the basis-set file.
-  A relative name works in version 25 when the file is in the directory you run from, but relative names have
-  failed in older versions and in parallel runs, so an absolute path is the safe choice. The examples below use
+  A relative name works in version 25 when the file is in the directory you run from, also in parallel runs, but
+  relative names have failed in older versions (including parallel runs in version 10), so an absolute path is the
+  safe choice. The examples below use
   `/home/user/priroda/basis.in`; replace it with the location of `basis.in` on your machine.
-  <!-- src: 04 §0, #154 (full path to the basis file); 08 t03 -->
+  <!-- src: 04 §0, #154 (full path to the basis file, v10 parallel); 08 t03, t59 -->
 - **Atomic numbers are integers.** Each atom line in `$molecule` starts with the atomic number written as an integer
   (`8`, not `8.0` and not `O`). A real number such as `8.0` gives no error: the program silently reads a different
   molecule. <!-- src: keywords/molecule.yaml body; 08 t09 -->
-- **Running.** A serial run is `p input output`. Parallel runs are described in {doc}`running`.
-  <!-- src: 04 §0 (running); 06 §7; 08 t01 -->
+
+A serial run is `p input output`. Parallel runs are described in {doc}`running`.
+<!-- src: 04 §0 (running); 06 §7; 08 t01 -->
 
 ## A single-point energy
 
@@ -67,9 +72,9 @@ Group by group:
 - {ref}`$dft <group.dft>` selects the {ref}`functional <dft.functional>`. PBE is already the default, so this line
   only makes the choice visible. <!-- src: 01 §4.3 (default PBE) -->
 - {ref}`$molecule <group.molecule>` holds the {ref}`charge <molecule.charge>`, the
-  {ref}`multiplicity <molecule.mult>` (2S+1), the geometry, and the basis set. The geometry is given in Cartesian coordinates (Å), one line per atom: atomic number, then x, y,
-  z. {ref}`set=L1 <molecule.set>` picks the set named `L1` from `basis.in`. `L1` is also the default
-  set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, §6.2; 04 §0 (L1 ≈ cc-pVDZ) -->
+  {ref}`multiplicity <molecule.mult>` (2S+1), the geometry, and the basis set. The geometry is given in Cartesian
+  coordinates (Å), one line per atom: atomic number, then x, y, z. {ref}`set=L1 <molecule.set>` picks the set named
+  `L1` from `basis.in`. `L1` is also the default set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, §6.2; 04 §0 (L1 ≈ cc-pVDZ) -->
 
 :::{note}
 Hybrid functionals such as `PBE1` or `B3LYP` need {ref}`theory=ridft <control.theory>`. With `theory=dft`, older
@@ -112,9 +117,9 @@ method and functional are what you meant:
 ```
 <!-- src: 08 t01 (verbatim) -->
 
-The electron counts are per spin. "Number of core electrons" counts core orbitals (here the oxygen 1s); it matters
-only for correlated methods.
-<!-- src: 08 t01, t16 (inferred from the counts) -->
+The electron counts are per spin. "Number of core electrons" appears to count core orbitals (here the oxygen 1s).
+In an RI-MP2 test, removing the core changed this count to 0 and changed the correlation energy.
+<!-- src: 08 t01, t16 (core-orbital reading inferred from the counts) -->
 
 Two lines then echo the SCF and grid settings, including defaults you did not set:
 
@@ -125,16 +130,17 @@ Two lines then echo the SCF and grid settings, including defaults you did not se
 <!-- src: 08 t01 (verbatim, two non-adjacent lines) -->
 
 Next comes the SCF iteration table (columns for the energy, the energy change and the gradient, with indented
-micro-iterations). The grid is enlarged partway through, which is why the energy jumps once. A successful SCF ends
-with the line `converged!`.
-<!-- src: 08 t01; 02 §3.3 (SCF markers) -->
+micro-iterations). Partway through, a `grid:` line marks the switch to the fine integration grid; the gradient
+jumps there, and in larger molecules the energy can jump too. A successful SCF ends with the line `converged!`.
+<!-- src: 08 t01 (gradient 3.6e-5 to 3.8e-4 at the grid switch, energy keeps falling), t70a (energy jump +0.0023); 02 §3.3 (SCF markers) -->
 
 :::{warning}
-If the SCF fails, the program prints `no convergence!` (or, in older versions, `SCF is far from convergence`) and
-then **carries on**: it prints an energy, orbitals and properties, and exits normally. The numbers are not usable.
-Always look for `converged!` before trusting a result; {ref}`troubleshooting.common-problems` lists the fixes.
+If the SCF fails, the program prints `no convergence!` and then **carries on**: it prints an energy, orbitals and
+properties, and exits normally. The numbers are not usable. (Older versions then also printed
+`SCF is far from convergence` and stopped.) Always look for `converged!` before trusting a result;
+{ref}`troubleshooting.common-problems` lists the fixes.
 :::
-<!-- src: 08 t10 (no convergence, exit status 0); 01 §7 item 8 -->
+<!-- src: 08 t10 (no convergence, exit status 0); 04 #306, #319 (both messages, then exit); 02 §3.3, §5.3 -->
 
 The total energy follows, in hartree, on the line starting with `E  =`, together with its components:
 
@@ -210,9 +216,9 @@ instead of a dihedral. <!-- src: 06 §2; keywords/molecule.yaml body (Z-matrix f
 {ref}`tol <optimize.tolerance>` is the convergence threshold on the gradient. The displacement threshold is then set
 to 100 times that value. The default is `1e-4`; the tighter `1e-5` used in most published examples is a better
 starting point for a Hessian. {ref}`steps <optimize.steps>` caps the number of cycles (128 by default in version 25;
-older versions used 50). If an optimization needs far more than 50 steps, raising the limit rarely helps; supplying a
-Hessian usually does. The output echoes all these settings under `Geometry optimization options:`.
-<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes; 08 t11, t14 -->
+older versions used 50). An optimization that needs far more than 50 steps very likely has something wrong with it,
+and computing a Hessian first helps in many cases, according to `Dft.rtf`; so don't simply raise the limit. The output echoes all these settings under `Geometry optimization options:`.
+<!-- src: 06 §3 $optimize; 01 §4.6 (tol echo); keywords/optimize.yaml steps notes; Dft.rtf (00_Dft_rtf_utf8.txt line 83); 08 t11, t14 -->
 
 Run it with `p nh3.in nh3.out`.
 
@@ -244,10 +250,10 @@ MOL> Energy =    -56.4988651558
 ```
 <!-- src: 08 t11 (verbatim) -->
 
-The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. Only
-a charge or multiplicity that differs from the defaults (0 and 1) is written: `nh3.in` gives no such line, and an
-OH⁻ optimization gave `MOL> charge=-1`. So the block can be pasted into the next input as it is.
-<!-- src: 01 §7 item 9; 08 t11, t29; 06 §4 (NpO2 example: charge=2 mult=2) -->
+The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. The
+charge and multiplicity seem to be written only when they differ from the defaults (0 and 1): `nh3.in` gives no such
+line, and an OH⁻ optimization gave `MOL> charge=-1`. So the block can be pasted into the next input as it is.
+<!-- src: 01 §7 item 9; 08 t11, t29 (inferred; a non-default mult not tested in v25); 06 §4 (NpO2 example: charge=2 mult=2) -->
 
 ### Step 3: take the final geometry
 
@@ -263,8 +269,9 @@ sed -n 's/^MOL>//p' nh3.out >> nh3_freq.in
 
 The first command assumes that `$molecule` is the last group of the input, as in all examples here. The `Energy = ...`
 line that ends up after `$end` does no harm: text outside a group is ignored. A normal optimization prints the `MOL>`
-block only once. A scan or an IRC prints one per point, so there you would pick the block you need.
-<!-- src: 01 §4 (text after $end ignored); 02 §3.3 (marker per point in scan/IRC) -->
+block only once. A scan prints one `MOL>` block per point (and repeats them as `SCAN>` blocks), so there you pick
+the block you need; an IRC prints its points as `IRC>` blocks instead.
+<!-- src: 01 §4 (text after $end ignored); 08 t26, t37, t68f (MOL and SCAN blocks per point), t77d (no MOL lines, IRC blocks) -->
 
 :::{note}
 **If the optimization did not converge**, there are no `MOL>` lines, and the program prints no message about it:
@@ -276,9 +283,10 @@ reached. Every step prints the geometry for the next step as a `$molecule` group
 sed -n 's/^mol>//p' nh3.out | awk '/\$molecule/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'
 ```
 
-The official `gm` script (below) falls back to the input echo (lines starting with `<$molecule`) when there are no
-`MOL>` lines.
-<!-- src: 06 §5 step 7, §6 (awk pattern); 02 §3.3; 01 §8 (gm fallback); 08 t11, t12 (mol lines every step, no message at the step limit; recipe checked on t12) -->
+On an output with no `MOL>` lines, the official `gm` script (below) falls back to the input echo (lines starting
+with `<$molecule`), which is your *starting* geometry. For a Cartesian input there is no such echo, and `gm` stops
+with `mol?`. Use the command above instead.
+<!-- src: 06 §5 step 7, §6 (awk pattern); 02 §3.3; 01 §8 (gm fallback, mol? exit); 08 t11 (echo = start geometry), t12 (Cartesian input: no echo; mol lines every step, no message at the step limit; recipe checked on t12) -->
 :::
 
 #### The official helper scripts `ge` and `gm`
@@ -299,8 +307,9 @@ output, so use it on a Hessian output, not on an optimization output that has on
 
 ### Step 4: compute the Hessian
 
-After step 3, `nh3_freq.in` looks like this, with your optimized values in place of these coordinates. Two optional
-lines are added here: `print=+molden` (for viewing the vibrations, see [](#qs-molden)) and a `$thermo` group:
+After step 3, `nh3_freq.in` holds the optimized geometry from `nh3.out` and, after `$end`, its `Energy =` line. Two
+optional lines are added here by hand: `print=+molden` (for viewing the vibrations, see [](#qs-molden)) and a
+`$thermo` group:
 
 ```text
 $system mem=128 disk=1 $end
@@ -313,26 +322,28 @@ $end
 $optimize tol=1e-5 steps=100 $end
 $thermo sigma=3 $end
 $molecule
- charge=0 mult=1
  z-matrix
  set=L1
    7
-   1    1    1.02672223
-   1    1    1.02672140    2    104.150240
-   1    1    1.02671372    2    104.144601   -3    104.150290
+   1    1    1.02753254
+   1    1    1.02744669    2    104.120811
+   1    1    1.02748748    2    104.112983   -3    104.135802
 $end
+ Energy =    -56.4988651558
 ```
-<!-- src: structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10; the same input without $thermo and $optimize ran on version 25 as 08 t13 -->
+<!-- src: produced by the step 3 commands from the 08 t11 output, plus the two lines; run as shown on version 25 in 08 (review check); structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10 -->
 
-The `$optimize` group is ignored by a Hessian run but does no harm, and it is useful again if you have to go back to
-step 1. {ref}`sigma <thermo.sigma>` is the rotational symmetry number used in the thermochemistry; for ammonia
+In a version 25 test, a Hessian run with this input did no optimization: the `$optimize` group did no harm, and it is
+useful again if you have to go back to step 1. {ref}`sigma <thermo.sigma>` is the rotational symmetry number used in the thermochemistry; for ammonia
 (point group C3v) it is 3. **Priroda does not work it out itself**: without `sigma=` it uses 1, and the entropy comes
-out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The default temperature is 298.15 K; other temperatures go in
+out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The free energy G is then too low by T·R ln σ, about
+0.65 kcal/mol for ammonia at 298.15 K. The default temperature is 298.15 K; other temperatures go in
 {ref}`temperature <thermo.temperature>`.
-<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K), t44 (sigma=3 lowers S by R ln 3) -->
+<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K), t44 (sigma=3 lowers S by R ln 3, H unchanged, G shifted by T·ΔS: 9.0519 vs 9.7029) -->
 
-For DFT the Hessian is analytic; the output announces it with `ANALYTIC SECOND DERIVATIVES OF SCF ENERGY`.
-<!-- src: 04 #460; 08 t13 -->
+With `theory=dft` (pure functionals) the Hessian is analytic; the output announces it with
+`ANALYTIC SECOND DERIVATIVES OF SCF ENERGY`. With `theory=ridft` (hybrids) it is computed numerically.
+<!-- src: 04 #460; 08 t13, t32a (ridft: NUMERICAL COMPUTATION OF SECOND DERIVATIVES) -->
 
 ### Step 5: check the frequencies
 
@@ -345,15 +356,15 @@ For ammonia, version 25 printed:
  *------*---------*--------*---------*---------*--------*-----------*-----------*
  | Mode | Freq.   | Mass.  | IR Int. |Raman A. |Raman D.| ROA (90)  | ROA (180) |
  *------*---------*--------*---------*---------*--------*-----------*-----------*
- |    1 | 1095.36 |   1.18 | 111.670 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    2 | 1635.36 |   1.06 |  12.058 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    3 | 1635.49 |   1.06 |  12.054 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    4 | 3371.36 |   1.03 |   3.443 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    5 | 3488.82 |   1.09 |   0.493 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    6 | 3488.95 |   1.09 |   0.494 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    1 | 1099.30 |   1.18 | 111.146 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    2 | 1636.22 |   1.06 |  12.006 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    3 | 1636.60 |   1.06 |  12.008 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    4 | 3363.03 |   1.03 |   3.508 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    5 | 3479.92 |   1.09 |   0.530 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    6 | 3480.84 |   1.09 |   0.522 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
  *------*---------*--------*---------*---------*--------*-----------*-----------*
 ```
-<!-- src: 08 t13 (verbatim) -->
+<!-- src: 08 (review check: the step 4 input at the t11 geometry, verbatim); table layout as 08 t13 -->
 
 The columns are the frequency in cm⁻¹, the reduced mass in amu and the IR intensity in km/mol. The Raman columns
 stay zero in a plain Hessian run; for Raman intensities, run `task=dipole` first and append its `num>` lines (see
@@ -362,9 +373,9 @@ stay zero in a plain Hessian run; for Raman intensities, run `task=dipole` first
 <!-- src: 08 t13, t56; keywords/control.yaml (task=dipole for Raman) -->
 
 ```bash
-grep -A 12 "Harmonic Frequencies" nh3_freq.out
+grep -A 14 "Harmonic Frequencies" nh3_freq.out
 ```
-<!-- src: 08 t13 (checked) -->
+<!-- src: 08 (review check: heading 5 lines, 3 border lines, 6 modes, closing border; -A 14 shows all) -->
 
 An imaginary frequency is printed with a trailing `i`. Planar ammonia, the transition state of the inversion,
 gives one:
@@ -380,9 +391,9 @@ gives one:
 
 Put the Hessian you just computed into the optimization input. It is printed as a `$Energy` group on `eng>` lines.
 Starting from a good Hessian, the optimizer can move off the saddle point. In a version 25 test that started
-exactly on a saddle point (planar ammonia), it reached the pyramidal minimum in 19 steps; from a near-symmetric
-structure it usually takes fewer.
-<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow); 08 t43 -->
+exactly on a saddle point (planar ammonia), it reached the pyramidal minimum in 19 steps. Forum users report that
+one such re-optimization cycle is usually enough.
+<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow; "one cycle is usually enough"); 08 t43 -->
 
 ```bash
 sed -e 's/task=hessian/task=optimize/' nh3_freq.in > nh3_opt2.in
@@ -392,37 +403,36 @@ sed -n 's/^eng>//p' nh3_freq.out | awk '/\$Energy/{buf=""} {buf=buf $0 "\n"} END
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 
 The second command appends only the last `$Energy` group, after `$molecule`. Do not leave an older `$Energy` group in
-the file. Then run `nh3_opt2.in` and go back to step 2. (`ge nh3_freq` does the appending in place, if you work with
-the official scripts.)
+the file. Then run `nh3_opt2.in` and go back to step 2. (With the official scripts, `ge nh3_freq` appends the group
+to `nh3_freq.in`; then change its task to `optimize`.)
 
 ### Step 7: read the thermochemistry
 
 Once all frequencies are real, the end of the Hessian output holds the zero-point energy and a table of thermodynamic
-functions. The KNC wiki points to the string `ZPVE`. Version 25 prints the table at 298.150 K by default; this
-older user output (molecule not stated) shows 298.000 K:
-<!-- src: 06 §5 step 14; 08 t13 -->
+functions. The KNC wiki points to the string `ZPVE`. For `nh3_freq.in` (with `sigma=3`), version 25 printed:
+<!-- src: 06 §5 step 14; 08 (review check) -->
 
 ```text
- E =  -196.328936    E0 =  -196.191669
+ E =   -56.498867    E0 =   -56.465387
 
- ZPVE = 0.137267 a.u. =   86.1366 kcal/mol
+ ZPVE = 0.033480 a.u. =   21.0089 kcal/mol
 
  ----------------------------------------------------------------------
- T =  298.000 K      ln(Q)       S          U          H          G
+ T =  298.150 K      ln(Q)       S          U          H          G
                               cal/mol*K  kcal/mol   kcal/mol   kcal/mol
  ----------------------------------------------------------------------
- translational      16.9514    38.6542     0.8883     1.4805   -10.0385
- rotational         11.1465    25.1313     0.8883     0.8883    -6.6008
- vibrational         0.6842     4.7490    87.1466    87.1466    85.7314
- total              28.7821    68.5345    88.9232    89.5154    69.0921
+ translational      14.8304    34.4393     0.8887     1.4812    -8.7869
+ rotational          4.2951    11.5161     0.8887     0.8887    -2.5448
+ vibrational         0.0057     0.0757    21.0280    21.0280    21.0055
+ total              19.1312    46.0311    22.8055    23.3980     9.6738
  ----------------------------------------------------------------------
 ```
-<!-- src: 04 #476 (amge, Dec 2021, verbatim) -->
+<!-- src: 08 (review check: the step 4 input, verbatim) -->
 
 How to read it:
 
 - `E` is the electronic energy in hartree. `E0 = E + ZPVE` is the energy corrected for the zero-point vibrational
-  energy (here −196.328936 + 0.137267 = −196.191669).
+  energy (here −56.498867 + 0.033480 = −56.465387).
 - The `U`, `H` and `G` columns are **thermal corrections** in kcal/mol, not total values. They already contain the
   ZPVE. The program does not print the total enthalpy or free energy; you add them yourself.
 - Take the corrections from the `total` row and add them to **E, not E0**. Adding them to `E0` would count the
@@ -431,15 +441,16 @@ How to read it:
   H = E + ddH,  G = E + ddG,  with ddH = `H` (total) and ddG = `G` (total).
 
 - Convert units before adding: 1 hartree = 627.51 kcal/mol. For the table above,
-  G = −196.328936 × 627.51 + 69.0921 = −123129.28 kcal/mol, or −196.328936 + 69.0921 / 627.51 = −196.218831 hartree.
+  G = −56.498867 × 627.51 + 9.6738 = −35443.93 kcal/mol, or −56.498867 + 9.6738 / 627.51 = −56.483451 hartree.
 - The entropy `S` (cal/(mol·K)) is taken from the `total` row as it stands.
 
-<!-- src: 04 #44, #134/#135 (H=E+ddH, G=E+ddG; use E not E0), #224/#225 (E0 = E + ZPVE), #474 (627.51), #476 (worked G) -->
+<!-- src: 04 #44, #134/#135 (H=E+ddH, G=E+ddG; use E not E0), #224/#225 (E0 = E + ZPVE), #474 (627.51), #476 (E not E0 in a worked example); numbers from 08 (review check) -->
 
 :::{warning}
-For a **single atom**, the table is wrong: the rotational row contains `-inf`/`inf` or a spurious RT term. Use only
-the translational contribution for atoms. Older versions were also reported to put an extra RT into the enthalpy of
-monoatomic species. <!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80 -->
+For a **single atom**, users reported (2012, version not stated) that the table is wrong: the rotational row
+contains `-inf`/`inf` or a spurious RT term. Use only the translational contribution for atoms. Older versions were
+also reported to put an extra RT into the enthalpy of monoatomic species. Version 25 was not tested.
+<!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80 --> <!-- verify -->
 :::
 
 The temperature is printed in the `T =` line. Version 25 uses 298.150 K; outputs posted by users of older versions
@@ -461,10 +472,10 @@ $end
 ```
 <!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values; 08 t14 (optimize+hessian works in v25) -->
 
-This is the only combined task that works: two `task=` lines do not chain jobs, and only the first one runs.
-`optimize+hessian` existed in Priroda 2, was missing in versions 6 to 8, and is available again from version 9.
-If the resulting Hessian shows an imaginary frequency, you still need step 6.
-<!-- src: 04 §0 (only combined task; two task= lines); 03 §8 (version history) -->
+This is the only combined task in version 25. Two `task=` lines do not chain jobs: users report that only the
+first one runs. `optimize+hessian` existed in Priroda 2, was reported missing in versions 6 and 8, and is available
+again from version 9. If the resulting Hessian shows an imaginary frequency, you still need step 6.
+<!-- src: 09 (optimize+hessian is the only combined entry in the task table); 04 §0 (two task= lines, forum report); 03 §8 ("gone in v6/v8", back in v9) -->
 
 (qs-reading-output)=
 ## Reading the output
@@ -519,7 +530,8 @@ a table of bond orders. With `print=+charges`, DFT runs print Hirshfeld charges 
 ```
 <!-- src: keywords/control.yaml print; 06 §3, §8; 04 #79; 08 t01 (verbatim, timing line removed) -->
 
-The `total` row of the Hirshfeld block sums the electron populations, not the charges.
+The `total` row of the Hirshfeld block sums the electron populations, not the charges (10.0003, close to the
+10 electrons of water). <!-- src: 08 t01 -->
 
 (qs-molden)=
 ### Viewing results in Molden
@@ -561,7 +573,8 @@ structure.
 
 **pri2mol.** The Perl script `pri2mol` by the forum user amge, available from
 `http://limor1.nioch.nsc.ru/quant/program/pri2mol/`, converts a Priroda output into Molden and XYZ files: geometries,
-vibrations, orbitals, NMR shifts and density critical points. Priroda's own viewer, `xm`, is on the download site.
+vibrations, orbitals, NMR shifts and density critical points. The download site also has `xm`, a molecule viewer
+that takes a Priroda input file.
 <!-- src: 04 §0, §14 (URL), #502, #508-#509; 02 §7.1; 01 §2.2 (xm) -->
 
 ## Where next

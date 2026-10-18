@@ -35,7 +35,7 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t04 | Two groups on one line (`$scf conv=1e-7,1e-3 $end $grid acc=1e-9 $end`) work: both values are echoed. |
 | t05 | A line of text before the first group and a disabled group (`integral dir=1 $end`, no `$`) are ignored; the result equals t01 exactly. |
 | t06 | Unknown keyword: output ends with `*** error in '$scf' : unknown name nosuchkeyword` right after the basis echo; exit status 1. |
-| t07a | `$scf convergence=1e-7 iterations=250 $end` fails: `*** error in '$scf' : unknown name terations`; exit status 1. The value list after `convergence=` swallows the first letter of the next keyword *(inferred)*. Forum reports had `erations`. |
+| t07a | `$scf convergence=1e-7 iterations=250 $end` fails: `*** error in '$scf' : unknown name terations`; exit status 1. The value list after `convergence=` swallows the start of the next keyword *(inferred)*. Forum reports had `erations`, and so did the cloud session's `p4_d` for this exact input (see "Review check" below): the number of letters lost depends on the machine or executable, not on the value. |
 | t07b | `$scf convergence=1e-7 procedure=bfgs iterations=250 $end` works: `conv = 1.0e-07`, `iter=250,16`. BFGS changes the iteration table (no micro-iterations, an `x` column on every line), so `procedure=bfgs` took effect. |
 | t08 | `theory=dft` with `functional=PBE1`: the output stops after the second basis echo, with **no error message** in the output; exit status 1. (stderr was not captured.) |
 | t09 | Atomic numbers written as `8.0`, `1.0`: **no error**. The atom block is read as a stream of numbers; the integer read stops at `.`, the rest shifts, and the run continues with 4 atoms (O plus three `?` atoms with Z=0 and no basis functions), 8 electrons, formula `__3O`, and a meaningless energy (`-74.77`). Exit status 0. Z=0 atoms carry no basis functions, so they are not ghost atoms. |
@@ -72,7 +72,7 @@ versions may differ. Items marked *(inferred)* are my reading of the output.
 | t30a | `$molecule sym=1,0.01` alone: symmetry detected (`symmetry: C3v    6, unique:    2`) and the input geometry symmetrized, but the optimizer stays in internal coordinates with no symmetry lines, and the final structure is only approximately symmetric. |
 | t30b | `$optimize sym=1` alone: `Coordinates: cartesian` and `symmetry: C1 (1)` at every step; no symmetry is used. So both options are needed: `$molecule sym=` detects and symmetrizes, `$optimize sym=1` keeps the symmetry during the optimization (t15). |
 | t31 | `theory=ridft` without `$dft` uses `PBE1` (E = -76.3679713845, identical to an explicit `functional=PBE1`). |
-| t32a | `task=hessian` with `ridft`/PBE1 works but is **numerical**: `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`, one gradient per displacement (7 for water). |
+| t32a | `task=hessian` with `ridft`/PBE1 works but is **numerical**: `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`, one gradient per displacement: for water 9 FORWARD and 9 BACKWARD steps plus the reference point (corrected after the review; first recorded as 7). |
 | t32b | Same with `rimp2`: numerical, works. |
 | t32c | `task=optimize` with `theory=hf` converges (4 steps): HF gradients work. |
 | t33 | `theory=tddft`, `state=1,5`: `Time-Dependent Density Functional Theory for Excited States:`, Davidson-type iterations, the leading excitations per state, then `state N: E = <total>, DE = <excitation>, R = <transition moment x,y,z>` lines and an `Electronic Spectrum:` table (excitation energy in au and eV, wavelength in nm, transition moment in au, oscillator strength). Oscillator strengths are non-zero. `E  =` is the total energy of state 1 (the first value of `state=`). |
@@ -272,6 +272,28 @@ Run in the cloud session on Slurm 23.11.4 (single node, 4 cores) with `tests/slu
 
 In the first attempt (`runs/slurm-20261017-182918-s01-s05/`) s02–s04 failed after 3 s because their input had `convergence=1e-10 iterations=200` (the known parser problem, `unknown name erations`); the input was fixed and they were rerun.
 Jobs pending with reason `InvalidAccount` for up to about 50 s is normal in a Slurm without accounting: the backfill scheduler starts them.
+
+## Review check (cloud session, `p4_d`)
+
+Runs made while applying the review fixes, water PBE/L1, `task=energy`, in the session's scratch folders (not kept in `tests/runs`).
+
+`$scf` parsing (input-syntax review):
+- One-value `convergence=` followed by `iterations=` stopped every time with `*** error in '$scf' : unknown name erations` (exit 1, `MPI_Abort` on stderr): values 1e-5, 1e-6, 1e-7, 1e-10, 0.000001, 1.0e-6, with a trailing comma, with `iterations=` 9, 50, 99, 100, 250, 999 or `50,16`, followed by `restrict=1`, and the exact t07a input (which printed `terations` on the owner's machine).
+- `convergence=1e-6 iter=50`: `unknown name er`. `convergence=1e-6 n1=12`: `*** error in '$scf' : no '$end' found, 'convergence'`.
+- Ran normally: `convergence=1e-6,1e-3 iterations=50` (`conv = 1.0e-06, 1.0e-03; iter=50,16`); `convergence=1e-7 procedure=bfgs` and `procedure=bfgs convergence=1e-7` (`conv = 1.0e-07`); `iterations=50 convergence=1e-6`; `convergence=1e-6` followed by `restrict=1`, `restrict=0`, `xmax=0.25`, `diagm=0`, `temperature=0`, `fraction=0`, `core=0`, `eemin=0` or `aw=0`; `$scf conv=1e-7 $end $grid acc=1e-9 $end`.
+- `iterations=50 n1=12` and `convergence=1e-6,1e-3 n1=12` both echoed `n1=36` (default echo `n1=12`); not explained.
+- `$scf co=1e-7 $end` (ambiguous prefix of `convergence` and `core`): `*** error in '$scf' : unknown name e-7`, exit 1.
+- `$molecule` with element symbols `O`, `H`, `H` instead of atomic numbers: output stops after `molecule input: ''` with `'o' ?`, exit 1.
+
+Keyword checks (YAML review):
+- `task=uniq` with `$uniq dist=0.01` and several water `$molecule` blocks: no SCF; lists `N =>  k` for a new structure and `N =  k  dist` for a copy, prints `2 unique`, then the coordinates of each unique structure. An identical copy and a rotated and translated copy each gave distance 0; one H moved by 0.004 Å gave 0.0060421693 (a copy); one H moved by 0.043 Å counted as new.
+- t11 NH3 optimization with `$optimize trust=0.2 steps=2`: echo `Trust radius = 0.20000000 (max), 0.02500000 (min)`, so the minimum is 1/8 of the maximum (not 1/16 as in `input.txt`).
+- HCl RI-MP2, L1: default `atom  17 core =  2,  1`, `Number of core  electrons 5`, E2 = -0.15953479; `$atoms mcore=1`: `core =  1`, count 1, E2 = -0.17175836; `mcore=2`: no core line, count 0, E2 = -0.17183374.
+
+Getting-started walkthrough (NH3, the t11 input and the chapter's own recipes):
+- Optimization: `OPTIMIZATION CONVERGED in 6 steps!`, `MOL>` block identical to t11.
+- Hessian built with the Step 3 `sed` recipe plus `print=+molden` and `$thermo sigma=3 $end`, keeping `$optimize` and the trailing `Energy =` line: exit 0, analytic Hessian, no optimization performed. Frequencies 1099.30, 1636.22, 1636.60, 3363.03, 3479.92, 3480.84 cm⁻¹; E = -56.498867, E0 = -56.465387, ZPVE = 0.033480 a.u. (21.0089 kcal/mol); 298.150 K total row S = 46.0311, U = 22.8055, H = 23.3980, G = 9.6738. `grep -A 14 "Harmonic Frequencies"` shows the whole table.
+- Re-optimization with the Step 6 recipe (appended `$Energy` group after the `Energy =` line): accepted, `OPTIMIZATION CONVERGED in 1 steps!`.
 
 ## Molden check
 

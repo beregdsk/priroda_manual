@@ -18,7 +18,7 @@ Integral evaluation for RI methods.
 **Type:** switch\
 **Default:** `0`\
 **Status:** undocumented · not verified\
-**Sources:** input.txt (annotation corrupted); 03 #0, §17; 05 §2
+**Sources:** input.txt (annotation corrupted); 03 #0, §3, §17; 05 §4.2
 
 Selects direct (recomputed) Coulomb integrals for RI methods.
 

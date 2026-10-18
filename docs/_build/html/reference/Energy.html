@@ -269,9 +269,10 @@
 <section class="tex2jax_ignore mathjax_ignore" id="energy">
 <span id="group-energy"></span><h1><code class="docutils literal notranslate"><span class="pre">$Energy</span></code><a class="headerlink" href="#energy" title="Link to this heading">¶</a></h1>
 <p id="index-0">Results of an earlier run (energy, gradient, Hessian, dipole data), read back as input.</p>
-<p>The program prints this group on lines prefixed with <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> (an energy/gradient/Hessian run), or <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> (the
-pieces of a distributed numerical Hessian; see <code class="docutils literal notranslate"><span class="pre">$d2edr2</span> <span class="pre">steps</span></code>). Strip the prefix and append the group to the
-next input. The shipped helper script <code class="docutils literal notranslate"><span class="pre">ge</span></code> does this.</p>
+<p>The program prints this group on lines prefixed with <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> (an energy, gradient or Hessian run) or <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code>.
+<code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines come from <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> (one <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group with <code class="docutils literal notranslate"><span class="pre">A=</span></code>, <code class="docutils literal notranslate"><span class="pre">Dx=</span></code> and <code class="docutils literal notranslate"><span class="pre">Ax=</span></code>) and from numerical Hessians,
+which write one numbered group per displacement: <code class="docutils literal notranslate"><span class="pre">$Energy000</span></code>, <code class="docutils literal notranslate"><span class="pre">$Energy001</span></code>, … (see <code class="docutils literal notranslate"><span class="pre">$d2edr2</span> <span class="pre">steps</span></code>). Strip the
+prefix and append the groups to the next input. The helper script <code class="docutils literal notranslate"><span class="pre">ge</span></code> on the official site does this.</p>
 <p>A stored Hessian is required for <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">saddle=1</span></code> and <code class="docutils literal notranslate"><span class="pre">task=irc</span></code>. It also speeds up difficult minimizations,
 and it lets you redo vibrational analysis or thermochemistry (for example for other isotopes, <code class="docutils literal notranslate"><span class="pre">$thermo</span> <span class="pre">mass=</span></code>)
 without recomputing.</p>
@@ -288,8 +289,8 @@ eng&gt;$end
 <p id="index-1"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> hartree<br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.10; 02 §3.2</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.10; 02 §3.2; 08 t01</p>
 <p>Total energy.</p>
 </section>
 <section id="g">
@@ -297,8 +298,8 @@ eng&gt;$end
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> au<br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.10; 02 §3.2</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.10; 02 §3.2; 08 t02</p>
 <p>Cartesian gradient (3N values).</p>
 </section>
 <section id="h">
@@ -307,27 +308,28 @@ eng&gt;$end
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> au<br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 02 §3.2; 08 t24, t25, t41, t41b</p>
+<strong>Sources:</strong> 02 §3.2; 08 t13; 08 t24, t25, t41, t41b; 08 t55</p>
 <p>Hessian as a lower triangle, 3N(3N+1)/2 values. Written by <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> on <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> lines; in version 25 a
 <code class="docutils literal notranslate"><span class="pre">saddle=1</span></code> optimization and an IRC read it back from an appended <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group. If the input holds several
-<code class="docutils literal notranslate"><span class="pre">$Energy</span></code> groups, the last one is used.</p>
-<p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-saddle"><span class="std std-ref">saddle ($optimize)</span></a></p>
+plain <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> groups, the last one is used. The numbered groups <code class="docutils literal notranslate"><span class="pre">$Energy000</span></code>, <code class="docutils literal notranslate"><span class="pre">$Energy001</span></code>, … of a split
+numerical Hessian are all read by the combining run (<code class="docutils literal notranslate"><span class="pre">$d2edr2</span> <span class="pre">steps=-1</span></code>).</p>
+<p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-saddle"><span class="std std-ref">saddle ($optimize)</span></a>, <a class="reference internal" href="d2edr2.html#d2edr2-steps"><span class="std std-ref">steps ($d2edr2)</span></a></p>
 </section>
 <section id="d">
 <span id="energy-d"></span><h2><code class="docutils literal notranslate"><span class="pre">D</span></code><a class="headerlink" href="#d" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> au<br />
-<strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.10; 02 §3.2 (inferred)</p>
-<p>Dipole moment.</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 01 §4.10; 02 §3.2; 08 t01</p>
+<p>Dipole moment (3 values), written next to <code class="docutils literal notranslate"><span class="pre">E=</span></code>.</p>
 </section>
 <section id="dx">
 <span id="energy-dx"></span><h2><code class="docutils literal notranslate"><span class="pre">Dx</span></code><a class="headerlink" href="#dx" title="Link to this heading">¶</a></h2>
 <p id="index-5"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 02 §3.2 (inferred)</p>
+<strong>Sources:</strong> 02 §3.2 (inferred); 08 t13; 08 t36</p>
 <p>Dipole derivatives with respect to nuclear coordinates (inferred from use: IR/Raman intensities).</p>
 </section>
 <section id="a">
@@ -335,8 +337,21 @@ eng&gt;$end
 <p id="index-6"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 02 §3.2 (inferred); 04 #381</p>
-<p>Polarizability, and its derivatives after <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> (inferred; used for Raman intensities).</p>
+<strong>Sources:</strong> 02 §3.2; 08 t13; 08 t36</p>
+<p>Static dipole polarizability as a lower triangle (6 values), written with a negative sign (inferred: the
+second derivative of the energy with respect to the field). Written by an analytic Hessian (<code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>) and by
+<code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> (<code class="docutils literal notranslate"><span class="pre">num&gt;</span></code>).</p>
+<p><strong>See also:</strong> <a class="reference internal" href="#energy-ax"><span class="std std-ref">Ax ($Energy)</span></a></p>
+</section>
+<section id="ax">
+<span id="energy-ax"></span><h2><code class="docutils literal notranslate"><span class="pre">Ax</span></code><a class="headerlink" href="#ax" title="Link to this heading">¶</a></h2>
+<p id="index-7"><strong>Type:</strong> list<br />
+<strong>Default:</strong> <em>none stated</em><br />
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> 08 t36; 08 t56; 04 #381 (relayed); 09</p>
+<p>Polarizability derivatives with respect to the nuclear coordinates. Written by <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> on <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines;
+appended to a Hessian input, they give the Raman activities and depolarization ratios.</p>
+<p><strong>See also:</strong> <a class="reference internal" href="#energy-a"><span class="std std-ref">A ($Energy)</span></a>, <a class="reference internal" href="#energy-dx"><span class="std std-ref">Dx ($Energy)</span></a></p>
 </section>
 </section>
 
@@ -402,6 +417,7 @@ eng&gt;$end
 <li><a class="reference internal" href="#d"><code class="docutils literal notranslate"><span class="pre">D</span></code></a></li>
 <li><a class="reference internal" href="#dx"><code class="docutils literal notranslate"><span class="pre">Dx</span></code></a></li>
 <li><a class="reference internal" href="#a"><code class="docutils literal notranslate"><span class="pre">A</span></code></a></li>
+<li><a class="reference internal" href="#ax"><code class="docutils literal notranslate"><span class="pre">Ax</span></code></a></li>
 </ul>
 </li>
 </ul>
