@@ -468,12 +468,15 @@ in the <a class="reference internal" href="../reference/molecule.html#group-mole
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">task=transit</span></code>, <code class="docutils literal notranslate"><span class="pre">task=saddle</span></code> and <code class="docutils literal notranslate"><span class="pre">task=path</span></code> take two blocks, the start and the end structure. The atoms must be
 numbered the same way in both. <code class="docutils literal notranslate"><span class="pre">task=saddle</span></code> is not the same as <a class="reference internal" href="../reference/optimize.html#optimize-saddle"><span class="std std-ref">$optimize saddle=1</span></a>, the
-transition-state search from a stored Hessian. This two-block input was reported for versions 8–9 and has not been
-tested on version 25.</p></li>
+transition-state search from a stored Hessian. In a version 25 test, <code class="docutils literal notranslate"><span class="pre">task=saddle</span></code> with the two mirror-image
+structures of ammonia ran a two-stage search (a one-dimensional maximization between the structures, then a
+two-dimensional saddle search) and stopped at the planar midpoint, 0.00003 hartree above the fully optimized
+transition state. <code class="docutils literal notranslate"><span class="pre">task=transit</span></code> with the same input crashed with a bus error after printing its internal
+coordinates. <code class="docutils literal notranslate"><span class="pre">task=path</span></code> was not tested.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">task=uniq</span></code> takes any number of blocks and filters out duplicate structures; the official example has 157.</p></li>
 </ul>
 <p>These tasks are undocumented; see <a class="reference internal" href="../reference/control.html#control-task"><span class="std std-ref">$control task</span></a> and <a class="reference internal" href="../reference/uniq.html#group-uniq"><span class="std std-ref">$uniq</span></a>.</p>
-<!-- src: 03 §5, §9; 01 §4.9; 09 (task names exist in v25) --> <!-- verify -->
+<!-- src: 03 §5, §9; 01 §4.9; 09 (task names exist in v25); 08 t81c, t81d (task=uniq: 08 review check) -->
 </section>
 </section>
 <section id="text-outside-groups">
@@ -506,7 +509,7 @@ $end
  Energy =   -76.36539137
 </pre></div>
 </div>
-<!-- src: 01 §4, §4.8, §4.9 (pattern of the official example inputs; atoms and energy replaced by the water of 08 t01) --> <!-- verify -->
+<!-- src: 01 §4, §4.8, §4.9 (pattern of the official example inputs; atoms and energy replaced by the water of 08 t01); 08 t81e, t81f (tested in a short task=thermostat run: v and h after $end are not echoed, inside $dynamic they are) -->
 <p>In version 25 a line of text before the first group and a disabled group with its leftover <code class="docutils literal notranslate"><span class="pre">$end</span></code>
 (<code class="docutils literal notranslate"><span class="pre">integral</span> <span class="pre">dir=1</span> <span class="pre">$end</span></code>) are both ignored: the result is identical to the same input without them. Text inside a
 group is parsed as keywords, so do not put notes there.</p>
@@ -601,9 +604,11 @@ line <code class="docutils literal notranslate"><span class="pre">'o'</span> <sp
 <code class="docutils literal notranslate"><span class="pre">path=</span></code>. Retype them as straight quotes.</p>
 <!-- src: 04 #64 -->
 </dd>
-<dt>Two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines</dt><dd><p>A second <code class="docutils literal notranslate"><span class="pre">task=</span></code> line does not start a second job; in version 6, users reported that only the first task ran.
-<code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> is the only combination the program understands. Run other sequences as separate jobs.</p>
-<!-- src: 04 #69, #70 (v6; optimize+hessian "not in all versions"); 09 (optimize+hessian is one task name in v25) --> <!-- verify -->
+<dt>Two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines</dt><dd><p>A second <code class="docutils literal notranslate"><span class="pre">task=</span></code> line does not start a second job. In version 25 the last one wins: with <code class="docutils literal notranslate"><span class="pre">task=optimize</span></code> and then
+<code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>, only the Hessian was computed, and nothing was printed about the first line. In version 6
+users reported that only the first task ran. <code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> is the only combination the program
+understands. Run other sequences as separate jobs.</p>
+<!-- src: 04 #69, #70 (v6; optimize+hessian "not in all versions"); 09 (optimize+hessian is one task name in v25); 08 t81b -->
 </dd>
 <dt>Windows line endings (CRLF)</dt><dd><p>The run stops in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> with <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code> followed by a garbled <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">?matrix</span></code> or <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code>. Convert the
 file with <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code>; see <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>

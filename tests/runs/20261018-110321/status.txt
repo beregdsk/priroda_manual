@@ -1,0 +1,11 @@
+t24_hessian_planar_nh3 exit=0
+t80a_saddle_ccsd4t exit=0
+t80b_irc_ccsd4t exit=0
+t80c_scan_ccsd4t exit=0
+t80d_md_ccsd4t exit=0
+t80e_gradient_ccsd exit=0
+t80f_gradient_ccsd4t exit=0
+t80g_optimize_ccsd exit=0
+t80h_optimize_ccsd4t exit=0
+t80i_hessian_ccsd exit=0
+t80j_hessian_ccsd4t exit=0

@@ -213,10 +213,6 @@ user reports and the test runs on version 25, not from a statement by the develo
 \sphinxAtStartPar
 \textendash{}: not available, according to the sources.
 
-\item {} 
-\sphinxAtStartPar
-?: no source and no test.
-
 \end{itemize}
 
 
@@ -371,7 +367,7 @@ TS (\sphinxcode{\sphinxupquote{saddle=1}})
 \(\checkmark\)
 &
 \sphinxAtStartPar
-?
+\(\checkmark\)
 &
 \sphinxAtStartPar
 \(\checkmark\)
@@ -396,7 +392,7 @@ TS (\sphinxcode{\sphinxupquote{saddle=1}})
 \(\checkmark\)
 &
 \sphinxAtStartPar
-?
+\(\checkmark\)
 &
 \sphinxAtStartPar
 \(\checkmark\)
@@ -421,7 +417,7 @@ TS (\sphinxcode{\sphinxupquote{saddle=1}})
 \(\checkmark\)
 &
 \sphinxAtStartPar
-?
+\(\checkmark\)
 &
 \sphinxAtStartPar
 \(\checkmark\)
@@ -496,7 +492,7 @@ MD (\sphinxcode{\sphinxupquote{thermostat}})
 \(\checkmark\)
 &
 \sphinxAtStartPar
-?
+\(\checkmark\)
 &
 \sphinxAtStartPar
 \(\checkmark\)
@@ -516,7 +512,8 @@ Notes to the table:
 \sphinxAtStartPar
 A CCSD optimization is shown in a user input, and a user reports CCSD(T) optimizations and Hessians. A 2011 bug
 fix that names the CCSD(T) gradient (Laikov, in an e\sphinxhyphen{}mail relayed on the qchem.ru forum) also implies CCSD(T)
-gradients. The version 25 tests ran \sphinxcode{\sphinxupquote{ccsd4t}} only for an energy. 
+gradients. Version 25 tests confirmed gradients and optimizations with both \sphinxcode{\sphinxupquote{ccsd}} and \sphinxcode{\sphinxupquote{ccsd4t}}; the \sphinxcode{\sphinxupquote{ccsd4t}}
+energies include the (T) correction. 
 
 \item {} 
 \sphinxAtStartPar
@@ -525,8 +522,8 @@ Analytic second derivatives.
 \item {} 
 \sphinxAtStartPar
 Computed by finite differences of the gradient (\sphinxcode{\sphinxupquote{NUMERICAL COMPUTATION OF SECOND DERIVATIVES}}), which takes
-many gradient calculations. Shown for \sphinxcode{\sphinxupquote{ridft}}, \sphinxcode{\sphinxupquote{rimp2}}, \sphinxcode{\sphinxupquote{tddft}} and \sphinxcode{\sphinxupquote{qm\_n3}} in version 25 tests; users report
-CCSD and CCSD(T) Hessians. 
+many gradient calculations. Shown for \sphinxcode{\sphinxupquote{ridft}}, \sphinxcode{\sphinxupquote{rimp2}}, \sphinxcode{\sphinxupquote{tddft}}, \sphinxcode{\sphinxupquote{qm\_n3}}, \sphinxcode{\sphinxupquote{ccsd}} and \sphinxcode{\sphinxupquote{ccsd4t}} in version 25
+tests. 
 
 \item {} 
 \sphinxAtStartPar
@@ -571,8 +568,7 @@ down to the ground state; watch the excitation energy (\sphinxcode{\sphinxupquot
 
 \sphinxAtStartPar
 The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they
-show that the combination runs and ends normally, not how well it behaves on real problems. Of the coupled\sphinxhyphen{}cluster
-methods, these tests used \sphinxcode{\sphinxupquote{ccsd}} only.
+show that the combination runs and ends normally, not how well it behaves on real problems.
 
 
 
@@ -1858,6 +1854,10 @@ less obvious case: an input edited in Word ran \sphinxcode{\sphinxupquote{task=s
 
 
 \sphinxAtStartPar
+Version 25 behaves the same way: a water input saved with Windows line endings stopped after \sphinxcode{\sphinxupquote{molecule input: \textquotesingle{}\textquotesingle{}}}
+with the line \sphinxcode{\sphinxupquote{\textquotesingle{}cartesian\textquotesingle{} ?}}, exit status 1. 
+
+\sphinxAtStartPar
 To check and fix the line endings on Linux:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -2535,9 +2535,9 @@ The entropy \sphinxcode{\sphinxupquote{S}} (cal/(mol·K)) is taken from the \sph
 
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
-For a \sphinxstylestrong{single atom}, users reported (2012, version not stated) that the table is wrong: the rotational row
-contains \sphinxcode{\sphinxupquote{\sphinxhyphen{}inf}}/\sphinxcode{\sphinxupquote{inf}} or a spurious RT term. Use only the translational contribution for atoms. Older versions were
-also reported to put an extra RT into the enthalpy of monoatomic species. Version 25 was not tested.
+For a \sphinxstylestrong{single atom} the table is wrong. In version 25 (a neon atom), the rotational row has \sphinxcode{\sphinxupquote{\sphinxhyphen{}inf}} for ln(Q)
+and S and \sphinxcode{\sphinxupquote{inf}} for G, and it adds RT (0.59 kcal/mol) to U and H, so the total H comes out as 2.07 kcal/mol instead
+of 5/2 RT = 1.48. Users reported both problems for older versions. Use only the translational row for atoms.
 
 
 \end{sphinxadmonition}
@@ -3141,8 +3141,11 @@ Some tasks read more than one \sphinxcode{\sphinxupquote{\$molecule}} group from
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{task=transit}}, \sphinxcode{\sphinxupquote{task=saddle}} and \sphinxcode{\sphinxupquote{task=path}} take two blocks, the start and the end structure. The atoms must be
 numbered the same way in both. \sphinxcode{\sphinxupquote{task=saddle}} is not the same as {\hyperref[\detokenize{reference/optimize:optimize-saddle}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{\$optimize saddle=1}}}}}, the
-transition\sphinxhyphen{}state search from a stored Hessian. This two\sphinxhyphen{}block input was reported for versions 8\textendash{}9 and has not been
-tested on version 25.
+transition\sphinxhyphen{}state search from a stored Hessian. In a version 25 test, \sphinxcode{\sphinxupquote{task=saddle}} with the two mirror\sphinxhyphen{}image
+structures of ammonia ran a two\sphinxhyphen{}stage search (a one\sphinxhyphen{}dimensional maximization between the structures, then a
+two\sphinxhyphen{}dimensional saddle search) and stopped at the planar midpoint, 0.00003 hartree above the fully optimized
+transition state. \sphinxcode{\sphinxupquote{task=transit}} with the same input crashed with a bus error after printing its internal
+coordinates. \sphinxcode{\sphinxupquote{task=path}} was not tested.
 
 \item {} 
 \sphinxAtStartPar
@@ -3343,8 +3346,10 @@ Word processors and some web pages turn \sphinxcode{\sphinxupquote{"}} into curl
 
 \sphinxlineitem{Two \sphinxcode{\sphinxupquote{task=}} lines}
 \sphinxAtStartPar
-A second \sphinxcode{\sphinxupquote{task=}} line does not start a second job; in version 6, users reported that only the first task ran.
-\sphinxcode{\sphinxupquote{task=optimize+hessian}} is the only combination the program understands. Run other sequences as separate jobs.
+A second \sphinxcode{\sphinxupquote{task=}} line does not start a second job. In version 25 the last one wins: with \sphinxcode{\sphinxupquote{task=optimize}} and then
+\sphinxcode{\sphinxupquote{task=hessian}} in \sphinxcode{\sphinxupquote{\$control}}, only the Hessian was computed, and nothing was printed about the first line. In version 6
+users reported that only the first task ran. \sphinxcode{\sphinxupquote{task=optimize+hessian}} is the only combination the program
+understands. Run other sequences as separate jobs.
 
 
 
@@ -3756,14 +3761,14 @@ Gradient\sphinxhyphen{}extremal path (v9 banner “Calculation of Gradient Extre
 \sphinxcode{\sphinxupquote{transit}}
 &
 \sphinxAtStartPar
-Synchronous transit in internal coordinates. Needs two \sphinxcode{\sphinxupquote{\$molecule}} blocks (start and end). Reported working in v8. \sphinxstyleemphasis{(undocumented)}
+Synchronous transit in internal coordinates. Needs two \sphinxcode{\sphinxupquote{\$molecule}} blocks (start and end). Reported working in v8. In version 25 a test with two ammonia structures crashed with a bus error after printing the internal coordinates (08 t81d). \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxhline
 \sphinxAtStartPar
 \sphinxcode{\sphinxupquote{saddle}}
 &
 \sphinxAtStartPar
-Approximate saddle\sphinxhyphen{}point search from two \sphinxcode{\sphinxupquote{\$molecule}} blocks (start and end). \sphinxstyleemphasis{(undocumented)}
+Approximate saddle\sphinxhyphen{}point search from two \sphinxcode{\sphinxupquote{\$molecule}} blocks (start and end). Version 25 prints \sphinxcode{\sphinxupquote{Approximate Saddle Point Search}}, then a one\sphinxhyphen{}dimensional maximization between the two structures and a two\sphinxhyphen{}dimensional saddle search; for the two mirror images of ammonia it stopped at the planar midpoint (08 t81c). \sphinxstyleemphasis{(undocumented)}
 \\
 \sphinxhline
 \sphinxAtStartPar
@@ -6625,8 +6630,8 @@ been traced to the same encoding problem: an input edited in Word or saved as Un
 
 
 \sphinxAtStartPar
-Two \sphinxcode{\sphinxupquote{task=}} lines in one input do not chain jobs: in a 2011 report (version 6) only the first one ran, and no error
-was printed. The only combined task name is \sphinxcode{\sphinxupquote{task=optimize+hessian}}; see {\hyperref[\detokenize{reference/control:control-task}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{task}}}}}. A user in 2011
+Two \sphinxcode{\sphinxupquote{task=}} lines in one input do not chain jobs, and no error is printed. In version 25 only the last one ran
+(\sphinxcode{\sphinxupquote{task=optimize}} then \sphinxcode{\sphinxupquote{task=hessian}} gave just a Hessian); in a 2011 report (version 6) only the first one ran. The only combined task name is \sphinxcode{\sphinxupquote{task=optimize+hessian}}; see {\hyperref[\detokenize{reference/control:control-task}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{task}}}}}. A user in 2011
 added that even this one did not work in all versions. Run other sequences, such as optimization followed by NMR, as
 separate jobs.
 
@@ -6870,6 +6875,13 @@ Repeat until the SCF converges.
 \end{sphinxVerbatim}
 
 
+
+\sphinxAtStartPar
+An optimization in version 25 does not stop when the SCF of one step fails to converge: it goes on to the next step,
+which starts from the last orbitals. In a test on water with \sphinxcode{\sphinxupquote{iterations=3}}, the first step ended with
+\sphinxcode{\sphinxupquote{no convergence!}}, the later steps converged, and the optimization reached the same energy as a normal run in the
+same number of steps. So the loop above matters mostly for single points and for the first SCF of a hard case;
+check every step of an optimization for \sphinxcode{\sphinxupquote{no convergence!}} all the same. 
 
 \sphinxAtStartPar
 In version 25 the output of a restarted run shows \sphinxcode{\sphinxupquote{Initial Guess (\sphinxhyphen{}1)}} and \sphinxcode{\sphinxupquote{vectors from \textquotesingle{}job.vec\textquotesingle{}}}; a normal start
@@ -7212,7 +7224,9 @@ scrambled structure that has nothing to do with the input geometry.
 \sphinxAtStartPar
 \sphinxstylestrong{Fix.} Flip the sign of every dihedral value taken from another program. The user who hit this confirmed that
 flipping the signs fixed it. The user who answered (amge) had reported the sign difference on qchem.ru in 2008, for
-“all versions” of that time. Neither report covers version 25.
+“all versions” of that time. Version 25 still uses the opposite sign: a Z\sphinxhyphen{}matrix dihedral of +100° gave Cartesian
+coordinates with a standard (IUPAC) dihedral of −100°, and a scan whose first \sphinxcode{\sphinxupquote{value}} was −100° instead of +100°
+started by turning the molecule into its mirror image.
 
 
 

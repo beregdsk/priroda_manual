@@ -787,7 +787,9 @@ return:</p>
 </div>
 <p>Variants seen are <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code> for <code class="docutils literal notranslate"><span class="pre">cartesian</span></code>, <code class="docutils literal notranslate"><span class="pre">'z-matrix'</span> <span class="pre">?</span></code>, and <code class="docutils literal notranslate"><span class="pre">'cartesian</span></code> followed by <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">?</span></code> on the next line. A
 less obvious case: an input edited in Word ran <code class="docutils literal notranslate"><span class="pre">task=scan</span></code> as a plain optimization.</p>
-<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) --> <!-- verify: CRLF symptoms in v25 -->
+<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) -->
+<p>Version 25 behaves the same way: a water input saved with Windows line endings stopped after <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code>
+with the line <code class="docutils literal notranslate"><span class="pre">'cartesian'</span> <span class="pre">?</span></code>, exit status 1. <!-- src: 08 t81a --></p>
 <p>To check and fix the line endings on Linux:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file mol.in        # reports "with CRLF line terminators" if the file has Windows endings
 dos2unix mol.in

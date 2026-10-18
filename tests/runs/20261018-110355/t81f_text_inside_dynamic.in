@@ -1,0 +1,21 @@
+$system mem=256 disk=1 $end
+$control
+ task=thermostat
+ theory=dft
+ basis=/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in
+$end
+integral dir=1 $end
+$dynamic
+ e=0.001
+ d=0.03
+ n=10,2
+ v=500.0
+ h=0.1
+$end
+$molecule charge=0 mult=1 cartesian
+ set=L1
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
+$end
+ Energy =   -76.36539137

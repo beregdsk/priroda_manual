@@ -15,7 +15,8 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 11: `tests/runs/20261017-180916/` (t74a–e); `20261017-180746/` is an earlier run of t74a–c only, with the same energies;
 - round 12: `tests/runs/20261017-182103/` (t75a–d);
 - round 13, run in the cloud session on `p4_d` (Linux, 4 cores): `tests/runs/20261017-182407/` (t76, t77), `20261017-183348/` (t68f); Slurm tests in `tests/runs/slurm-*`;
-- round 14 (cloud session): `tests/runs/20261017-191941/` (t78), `20261017-192031/` (t79, with t79a/b failing on `print=+charges`), `20261017-192046/` (t79a/b rerun).
+- round 14 (cloud session): `tests/runs/20261017-191941/` (t78), `20261017-192031/` (t79, with t79a/b failing on `print=+charges`), `20261017-192046/` (t79a/b rerun);
+- round 15 (cloud session): `tests/runs/20261018-110321/` (t24, t80), `20261018-110355/` (t81).
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -272,6 +273,30 @@ Run in the cloud session on Slurm 23.11.4 (single node, 4 cores) with `tests/slu
 
 In the first attempt (`runs/slurm-20261017-182918-s01-s05/`) s02–s04 failed after 3 s because their input had `convergence=1e-10 iterations=200` (the known parser problem, `unknown name erations`); the input was fixed and they were rerun.
 Jobs pending with reason `InvalidAccount` for up to about 50 s is normal in a Slurm without accounting: the backfill scheduler starts them.
+
+## Round 15 (cloud session): `ccsd4t` capabilities and the last testable claims
+
+| Test | Result |
+|---|---|
+| t80a | NH3 TS with `ccsd4t` from the t24 Hessian: `OPTIMIZATION CONVERGED in 2 steps!`, 5.1 s. |
+| t80b | IRC with `ccsd4t`, `points=3`: 3 points (E from -56.41220 to -56.41725), each a converged constrained optimization; 24 s. |
+| t80c | Scan with `ccsd4t` (the t68c scan): 3 `SCAN>` points, E = -56.40507, -56.40606, -56.40904; 23 s. |
+| t80d | `task=thermostat` with `ccsd4t` (the t69d input): 20 points; 24 s. |
+| t80e, t80f | Water gradient: `ccsd` E = -76.27397156, `ccsd4t` E = -76.27808323; the `ccsd4t` output has `E(4)3 = -0.0041116702`, the (T) correction. |
+| t80g, t80h | Water optimization: both `OPTIMIZATION CONVERGED in 4 steps!`; final E -76.27402742 (`ccsd`), -76.27819557 (`ccsd4t`). |
+| t80i, t80j | Water Hessian: `NUMERICAL COMPUTATION OF SECOND DERIVATIVES`; frequencies 1655.2, 3906.5, 4012.0 (`ccsd`) and 1640.9, 3899.5, 4008.6 cm⁻¹ (`ccsd4t`); about 17.5 s each. |
+| t81a | Water input with CRLF line endings: output stops after `molecule input: ''` with `'cartesian' ?`; stderr `MPI_Abort`; exit 1. |
+| t81b | `$control` with `task=optimize` and then `task=hessian`: only a Hessian was computed (frequencies 1572.3, 3895.0, 4006.5 cm⁻¹ at the input geometry), no optimization, no message: the **last** `task=` wins in v25. |
+| t81c | `task=saddle` with two `$molecule` blocks (pyramidal NH3 and its mirror image): `Approximate Saddle Point Search`, `Stage 1: One-Dimensional Maximization:` (converged at s = 0.5, the planar midpoint, E = -56.4876815), `Stage 2: Two-Dimensional Saddle Point Search:`, then the run ended normally (exit 0, 1.1 s). The fully optimized planar TS (t25) is -56.4877160. |
+| t81d | `task=transit` with the same two blocks: printed the internal-coordinate table of both structures, then `Bus error`, exit 135. |
+| t81e, t81f | The input-syntax example (`integral dir=1 $end`, `$dynamic` with `v=500.0`, `h=0.1` after its `$end`, a trailing `Energy =` line) in a `task=thermostat` run with `n=10,2`: runs; `v`/`h` not echoed. With `v=` and `h=` moved inside `$dynamic` (t81f) the output adds `V/N = 500.00000000 V = 1500.00000000 r = 7.10124042` and `b = 0.00000000 h = 0.10000000`. Both runs print `nan` values in the dynamics table from point -1 on (no `m=`/`i=` given; not investigated). |
+| t81g | Neon atom, `task=hessian`: thermochemistry at 298.150 K has translational row ln(Q) 15.0713, S 34.9180, U 0.8887, H 1.4812, G -8.9296; rotational row `-inf -inf 0.5925 0.5925 inf`; total H 2.0737 = translational + RT, total S and G `-inf`/`inf`. |
+| t81h | Water optimization with `$scf iterations=3`: step 0 `no convergence!`, steps 1-4 `converged!`, `OPTIMIZATION CONVERGED in 4 steps!`, final E -76.3658117793. A reference run with default SCF settings: same 4 steps, E -76.3658117794. |
+| t81i | H2O2 Z-matrix with dihedral H1-O2-O3-H4 = +100°: the printed Cartesian coordinates give a standard (IUPAC) dihedral of -100.00°. |
+
+Session runs (not kept as test files): `task=scan` of the t81i molecule with `fix=3,1,2,3,4` and `value=100 110`, `points=2`: the first `SCAN>` point kept the dihedral at 100.000000 (in Priroda's sign) after 11 optimization steps in total; with `value=-100 -90` the first point had -100.000000, i.e. the mirror image, after 19 steps. Energies are equal for the two mirror images, as expected.
+
+Conclusions: `ccsd4t` runs every task in the capability matrix. Priroda's dihedral sign is opposite to the IUPAC convention in Z-matrix input, output and `$optimize value`. The last `task=` line wins. An optimization continues past an unconverged SCF step.
 
 ## Review check (cloud session, `p4_d`)
 

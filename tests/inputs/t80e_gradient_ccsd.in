@@ -1,0 +1,14 @@
+$system mem=512 disk=1 $end
+$control
+ task=gradient
+ theory=ccsd
+ basis=@BASIS@
+$end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
+$end

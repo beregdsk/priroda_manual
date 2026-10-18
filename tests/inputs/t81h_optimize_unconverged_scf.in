@@ -1,0 +1,17 @@
+$system mem=256 disk=1 $end
+$control
+ task=optimize
+ theory=dft
+ basis=@BASIS@
+ save=t81h.vec
+$end
+$scf iterations=3 $end
+$optimize steps=10 $end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
+$end

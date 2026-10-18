@@ -1,0 +1,20 @@
+$system mem=256 disk=1 $end
+$control
+ task=scan
+ theory=ccsd4t
+ basis=/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in
+$end
+$optimize
+ fix=1,1,2,0,0 3,2,1,4,3
+ value=1.1,-180 1.1,-150
+ points=3
+$end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+   7    0.00000000    0.00000000    0.00000000
+   1    0.00000000    0.00000000    1.00800000
+   1    0.87295400    0.00000000   -0.50400000
+   1   -0.87295400    0.00000000   -0.50400000
+$end

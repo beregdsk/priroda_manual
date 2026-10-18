@@ -38,8 +38,8 @@ Job type.
 | `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a `num>` block. |
 | `check` | Not a task name in the version 25 program. Like any unrecognized task, `task=check` sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF without a message, which makes it a usable input check. *(undocumented)* |
 | `extremal` | Gradient-extremal path (v9 banner "Calculation of Gradient Extremal Path"); slow. *(undocumented)* |
-| `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. *(undocumented)* |
-| `saddle` | Approximate saddle-point search from two `$molecule` blocks (start and end). *(undocumented)* |
+| `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. In version 25 a test with two ammonia structures crashed with a bus error after printing the internal coordinates (08 t81d). *(undocumented)* |
+| `saddle` | Approximate saddle-point search from two `$molecule` blocks (start and end). Version 25 prints `Approximate Saddle Point Search`, then a one-dimensional maximization between the two structures and a two-dimensional saddle search; for the two mirror images of ammonia it stopped at the planar midpoint (08 t81c). *(undocumented)* |
 | `path` | Minimum-energy-path optimization from two `$molecule` blocks (start and end). *(undocumented)* |
 | `conical` | Conical intersection of states 0 and 1 (v9 banner). Untested. *(undocumented)* |
 | `anharmonic` | Anharmonic corrections to vibrational energies; slow. *(undocumented)* |

@@ -318,10 +318,10 @@
 <td><p>Gradient-extremal path (v9 banner “Calculation of Gradient Extremal Path”); slow. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transit</span></code></p></td>
-<td><p>Synchronous transit in internal coordinates. Needs two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). Reported working in v8. <em>(undocumented)</em></p></td>
+<td><p>Synchronous transit in internal coordinates. Needs two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). Reported working in v8. In version 25 a test with two ammonia structures crashed with a bus error after printing the internal coordinates (08 t81d). <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">saddle</span></code></p></td>
-<td><p>Approximate saddle-point search from two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). <em>(undocumented)</em></p></td>
+<td><p>Approximate saddle-point search from two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). Version 25 prints <code class="docutils literal notranslate"><span class="pre">Approximate</span> <span class="pre">Saddle</span> <span class="pre">Point</span> <span class="pre">Search</span></code>, then a one-dimensional maximization between the two structures and a two-dimensional saddle search; for the two mirror images of ammonia it stopped at the planar midpoint (08 t81c). <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">path</span></code></p></td>
 <td><p>Minimum-energy-path optimization from two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). <em>(undocumented)</em></p></td>

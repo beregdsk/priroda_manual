@@ -330,7 +330,6 @@ user reports and the test runs on version 25, not from a statement by the develo
 <ul class="simple">
 <li><p>✓: shown to work in an example input, a user report or a test run.</p></li>
 <li><p>–: not available, according to the sources.</p></li>
-<li><p>?: no source and no test.</p></li>
 </ul>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -388,7 +387,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irc</span></code></p></td>
@@ -397,7 +396,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scan</span></code></p></td>
@@ -406,7 +405,7 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓ (9)</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nmr</span></code></p></td>
@@ -433,22 +432,23 @@ user reports and the test runs on version 25, not from a statement by the develo
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>?</p></td>
+<td class="text-center"><p>✓</p></td>
 <td class="text-center"><p>✓</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4, 08 t17 (ccsd, ccsd4t); gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 04 #255 (CCSD(T)), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65a, t65b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68 (ccsd only, not ccsd4t); MD: 08 t69 (ccsd only), 01 §5.7; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39 -->
+<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4, 08 t17 (ccsd, ccsd4t); gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 04 #255 (CCSD(T)), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65a, t65b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68, t80a-c (ccsd4t); MD: 08 t69, t80d (ccsd4t), 01 §5.7; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39 -->
 <p>Notes to the table:</p>
 <ol class="arabic">
 <li><p>A CCSD optimization is shown in a user input, and a user reports CCSD(T) optimizations and Hessians. A 2011 bug
 fix that names the CCSD(T) gradient (Laikov, in an e-mail relayed on the qchem.ru forum) also implies CCSD(T)
-gradients. The version 25 tests ran <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code> only for an energy. <!-- src: 04 #146, #255; 03 §1; 08 t17 --></p></li>
+gradients. Version 25 tests confirmed gradients and optimizations with both <code class="docutils literal notranslate"><span class="pre">ccsd</span></code> and <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code>; the <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code>
+energies include the (T) correction. <!-- src: 04 #146, #255; 03 §1; 08 t17, t80e-h --></p></li>
 <li><p>Analytic second derivatives. <!-- src: 06 §3; 05 §10; 08 t13 --></p></li>
 <li><p>Computed by finite differences of the gradient (<code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">COMPUTATION</span> <span class="pre">OF</span> <span class="pre">SECOND</span> <span class="pre">DERIVATIVES</span></code>), which takes
-many gradient calculations. Shown for <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">tddft</span></code> and <code class="docutils literal notranslate"><span class="pre">qm_n3</span></code> in version 25 tests; users report
-CCSD and CCSD(T) Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b, t65a, t65b --></p></li>
+many gradient calculations. Shown for <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, <code class="docutils literal notranslate"><span class="pre">qm_n3</span></code>, <code class="docutils literal notranslate"><span class="pre">ccsd</span></code> and <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code> in version 25
+tests. <!-- src: 04 #255, #291; 08 t32a, t32b, t65a, t65b, t80i, t80j --></p></li>
 <li><p>Excited-state optimization works, but Priroda has no root following, so the state can switch during the
 optimization. <!-- src: 03 §11 --></p></li>
 <li><p>NMR works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> and a non-hybrid functional; with <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, version 25 silently computes only the
@@ -472,9 +472,8 @@ down to the ground state; watch the excitation energy (<code class="docutils lit
 </li>
 </ol>
 <p>The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they
-show that the combination runs and ends normally, not how well it behaves on real problems. Of the coupled-cluster
-methods, these tests used <code class="docutils literal notranslate"><span class="pre">ccsd</span></code> only.</p>
-<!-- src: 08 t65-t69 -->
+show that the combination runs and ends normally, not how well it behaves on real problems.</p>
+<!-- src: 08 t65-t69, t80 -->
 <p>The scalar-relativistic option <code class="docutils literal notranslate"><span class="pre">four=1</span></code> has been used with <code class="docutils literal notranslate"><span class="pre">dft</span></code>, <code class="docutils literal notranslate"><span class="pre">ridft</span></code> and <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>. The full list of <code class="docutils literal notranslate"><span class="pre">theory=</span></code>
 values, including the undocumented ones, is in <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
 <!-- src: 01 §5.6; 06 §3 (UO2F2 riDFT, O2 riMP2 examples); 05 §14 -->

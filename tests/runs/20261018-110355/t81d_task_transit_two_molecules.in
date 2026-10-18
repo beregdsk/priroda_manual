@@ -1,0 +1,24 @@
+$system mem=256 disk=1 $end
+$control
+ task=transit
+ theory=dft
+ basis=/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in
+$end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  7    0.000000    0.000000    0.110000
+  1    0.000000    0.940000   -0.260000
+  1    0.814064   -0.470000   -0.260000
+  1   -0.814064   -0.470000   -0.260000
+$end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  7    0.000000    0.000000   -0.110000
+  1    0.000000    0.940000    0.260000
+  1    0.814064   -0.470000    0.260000
+  1   -0.814064   -0.470000    0.260000
+$end

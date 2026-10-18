@@ -71,7 +71,6 @@ user reports and the test runs on version 25, not from a statement by the develo
 
 - ✓: shown to work in an example input, a user report or a test run.
 - –: not available, according to the sources.
-- ?: no source and no test.
 
 | Task | `dft` | `ridft` | `tddft` | `rimp2` | `ccsd` | `ccsd4t` | `qm_n3` |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -79,24 +78,25 @@ user reports and the test runs on version 25, not from a statement by the develo
 | `gradient` | ✓ | ✓ | ✓ | ✓ | ✓ (1) | ✓ (1) | ✓ |
 | `hessian` | ✓ (2) | ✓ (3) | ✓ (3, 8) | ✓ (3) | ✓ (3) | ✓ (3) | ✓ (3) |
 | `optimize` | ✓ | ✓ | ✓ (4) | ✓ | ✓ (1) | ✓ (1) | ✓ |
-| TS (`saddle=1`) | ✓ | ✓ | ✓ | ✓ | ✓ | ? | ✓ |
-| `irc` | ✓ | ✓ | ✓ | ✓ | ✓ | ? | ✓ |
-| `scan` | ✓ | ✓ | ✓ (9) | ✓ | ✓ | ? | ✓ |
+| TS (`saddle=1`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `irc` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `scan` | ✓ | ✓ | ✓ (9) | ✓ | ✓ | ✓ | ✓ |
 | `nmr` | ✓ (5) | – | – | – | – | – | – |
 | TDDFT excited states | – | – (6) | ✓ | – | – (7) | – (7) | – |
-| MD (`thermostat`) | ✓ | ✓ | ✓ | ✓ | ✓ | ? | ✓ |
+| MD (`thermostat`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
-<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4, 08 t17 (ccsd, ccsd4t); gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 04 #255 (CCSD(T)), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65a, t65b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68 (ccsd only, not ccsd4t); MD: 08 t69 (ccsd only), 01 §5.7; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39 -->
+<!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4, 08 t17 (ccsd, ccsd4t); gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 04 #255 (CCSD(T)), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65a, t65b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68, t80a-c (ccsd4t); MD: 08 t69, t80d (ccsd4t), 01 §5.7; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39 -->
 
 Notes to the table:
 
 1. A CCSD optimization is shown in a user input, and a user reports CCSD(T) optimizations and Hessians. A 2011 bug
    fix that names the CCSD(T) gradient (Laikov, in an e-mail relayed on the qchem.ru forum) also implies CCSD(T)
-   gradients. The version 25 tests ran `ccsd4t` only for an energy. <!-- src: 04 #146, #255; 03 §1; 08 t17 -->
+   gradients. Version 25 tests confirmed gradients and optimizations with both `ccsd` and `ccsd4t`; the `ccsd4t`
+   energies include the (T) correction. <!-- src: 04 #146, #255; 03 §1; 08 t17, t80e-h -->
 2. Analytic second derivatives. <!-- src: 06 §3; 05 §10; 08 t13 -->
 3. Computed by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND DERIVATIVES`), which takes
-   many gradient calculations. Shown for `ridft`, `rimp2`, `tddft` and `qm_n3` in version 25 tests; users report
-   CCSD and CCSD(T) Hessians. <!-- src: 04 #255, #291; 08 t32a, t32b, t65a, t65b -->
+   many gradient calculations. Shown for `ridft`, `rimp2`, `tddft`, `qm_n3`, `ccsd` and `ccsd4t` in version 25
+   tests. <!-- src: 04 #255, #291; 08 t32a, t32b, t65a, t65b, t80i, t80j -->
 4. Excited-state optimization works, but Priroda has no root following, so the state can switch during the
    optimization. <!-- src: 03 §11 -->
 5. NMR works only with `theory=dft` and a non-hybrid functional; with `ridft`, version 25 silently computes only the
@@ -119,9 +119,8 @@ Notes to the table:
    <!-- src: 08 t68d (re-read), t68f -->
 
 The version 25 tests behind the TS, IRC, scan and MD rows used tiny molecules (NH3, water) and short runs, so they
-show that the combination runs and ends normally, not how well it behaves on real problems. Of the coupled-cluster
-methods, these tests used `ccsd` only.
-<!-- src: 08 t65-t69 -->
+show that the combination runs and ends normally, not how well it behaves on real problems.
+<!-- src: 08 t65-t69, t80 -->
 
 The scalar-relativistic option `four=1` has been used with `dft`, `ridft` and `rimp2`. The full list of `theory=`
 values, including the undocumented ones, is in {ref}`$control theory <control.theory>`.

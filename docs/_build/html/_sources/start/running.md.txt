@@ -504,7 +504,10 @@ return:
 
 Variants seen are `?rtesian` for `cartesian`, `'z-matrix' ?`, and `'cartesian` followed by `' ?` on the next line. A
 less obvious case: an input edited in Word ran `task=scan` as a plain optimization.
-<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) --> <!-- verify: CRLF symptoms in v25 -->
+<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) -->
+
+Version 25 behaves the same way: a water input saved with Windows line endings stopped after `molecule input: ''`
+with the line `'cartesian' ?`, exit status 1. <!-- src: 08 t81a -->
 
 To check and fix the line endings on Linux:
 

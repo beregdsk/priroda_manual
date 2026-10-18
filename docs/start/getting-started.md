@@ -447,10 +447,10 @@ How to read it:
 <!-- src: 04 #44, #134/#135 (H=E+ddH, G=E+ddG; use E not E0), #224/#225 (E0 = E + ZPVE), #474 (627.51), #476 (E not E0 in a worked example); numbers from 08 (review check) -->
 
 :::{warning}
-For a **single atom**, users reported (2012, version not stated) that the table is wrong: the rotational row
-contains `-inf`/`inf` or a spurious RT term. Use only the translational contribution for atoms. Older versions were
-also reported to put an extra RT into the enthalpy of monoatomic species. Version 25 was not tested.
-<!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80 --> <!-- verify -->
+For a **single atom** the table is wrong. In version 25 (a neon atom), the rotational row has `-inf` for ln(Q)
+and S and `inf` for G, and it adds RT (0.59 kcal/mol) to U and H, so the total H comes out as 2.07 kcal/mol instead
+of 5/2 RT = 1.48. Users reported both problems for older versions. Use only the translational row for atoms.
+<!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80; 08 t81g -->
 :::
 
 The temperature is printed in the `T =` line. Version 25 uses 298.150 K; outputs posted by users of older versions

@@ -60,11 +60,11 @@ An input that runs on one computer but not on another, or a `task=scan` that sil
 been traced to the same encoding problem: an input edited in Word or saved as Unicode. Fix it as above.
 <!-- src: 04 #110, #113 -->
 
-Two `task=` lines in one input do not chain jobs: in a 2011 report (version 6) only the first one ran, and no error
-was printed. The only combined task name is `task=optimize+hessian`; see {ref}`task <control.task>`. A user in 2011
+Two `task=` lines in one input do not chain jobs, and no error is printed. In version 25 only the last one ran
+(`task=optimize` then `task=hessian` gave just a Hessian); in a 2011 report (version 6) only the first one ran. The only combined task name is `task=optimize+hessian`; see {ref}`task <control.task>`. A user in 2011
 added that even this one did not work in all versions. Run other sequences, such as optimization followed by NMR, as
 separate jobs.
-<!-- src: 04 #69, #70; 09 (optimize+hessian is the only combined task name in the v25 binary) --> <!-- verify -->
+<!-- src: 04 #69, #70; 09 (optimize+hessian is the only combined task name in the v25 binary); 08 t81b -->
 
 ### The basis file is not found
 
@@ -212,7 +212,13 @@ $end
 $scf iterations=10 $end
 $guess read=1 $end
 ```
-<!-- src: 08 t27, t71b (both task=energy; what a v25 optimization does after an unconverged SCF is untested) --> <!-- verify -->
+<!-- src: 08 t27, t71b (task=energy) -->
+
+An optimization in version 25 does not stop when the SCF of one step fails to converge: it goes on to the next step,
+which starts from the last orbitals. In a test on water with `iterations=3`, the first step ended with
+`no convergence!`, the later steps converged, and the optimization reached the same energy as a normal run in the
+same number of steps. So the loop above matters mostly for single points and for the first SCF of a hard case;
+check every step of an optimization for `no convergence!` all the same. <!-- src: 08 t81h -->
 
 In version 25 the output of a restarted run shows `Initial Guess (-1)` and `vectors from 'job.vec'`; a normal start
 shows `Initial Guess (2)`. Each restart continues from where the previous run stopped, and goes straight to the
@@ -457,8 +463,10 @@ scrambled structure that has nothing to do with the input geometry.
 
 **Fix.** Flip the sign of every dihedral value taken from another program. The user who hit this confirmed that
 flipping the signs fixed it. The user who answered (amge) had reported the sign difference on qchem.ru in 2008, for
-"all versions" of that time. Neither report covers version 25.
-<!-- src: 04 #271, #276, #278, #279 (confirmed); 03 §15 (amg, Oct 2008; amg and amge are probably the same person) --> <!-- verify -->
+"all versions" of that time. Version 25 still uses the opposite sign: a Z-matrix dihedral of +100° gave Cartesian
+coordinates with a standard (IUPAC) dihedral of −100°, and a scan whose first `value` was −100° instead of +100°
+started by turning the molecule into its mirror image.
+<!-- src: 04 #271, #276, #278, #279 (confirmed); 03 §15 (amg, Oct 2008; amg and amge are probably the same person); 08 t81i and round-15 scans -->
 
 A scan that requested 10 points but computed only 7 (and 11 of 20) was reported once and never explained.
 <!-- src: 04 #60; 04 §21 -->

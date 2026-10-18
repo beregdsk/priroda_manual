@@ -360,6 +360,26 @@ and in reading the number of cores from `$PBS_NODEFILE`.
 | t79b | `t79b_h2_stretched_hf_mix.in` | The same with `mix=1` | E; Spin Squared | `guess.mix` | No change. |
 | t79c–e | `t79{c,d,e}_h2_stretched_dft_*.in` | PBE: unrestricted, with `mix=1`, restricted | E; spins | `guess.mix` | All identical, spins 0. |
 
+## Round 15 (run in the cloud session; outputs in `runs/20261018-110321/` and `runs/20261018-110355/`)
+
+```bash
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t24 t80    # t80a/b need the t24 Hessian
+PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t81
+```
+
+| ID | Input | Question | Result |
+|---|---|---|---|
+| t80a–d | `t80{a..d}_*_ccsd4t.in` | TS, IRC, scan and MD with `ccsd4t` (the "?" cells of the capability matrix) | All run and end normally. |
+| t80e–j | `t80{e..j}_*.in` | Gradient, optimization and Hessian with `ccsd` and `ccsd4t` (previously only user reports) | All work; `ccsd4t` includes the (T) correction; Hessians are numerical. |
+| t81a | `t81a_crlf_input.in` | CRLF line endings in v25 | Fails: `'cartesian' ?`, exit 1. |
+| t81b | `t81b_two_task_lines.in` | Two `task=` lines | Only the last (hessian) ran. |
+| t81c | `t81c_task_saddle_two_molecules.in` | `task=saddle` with two structures | Works; stopped at the planar midpoint. |
+| t81d | `t81d_task_transit_two_molecules.in` | `task=transit` with two structures | Bus error, exit 135. |
+| t81e, t81f | `t81e_text_outside_groups.in`, `t81f_text_inside_dynamic.in` | Are keywords after `$end` ignored? | Yes; inside `$dynamic` they are echoed. |
+| t81g | `t81g_single_atom_thermo.in` | Thermochemistry of a single atom | Rotational row `-inf`/`inf`, extra RT in U and H. |
+| t81h | `t81h_optimize_unconverged_scf.in` | Optimization when one step's SCF does not converge | Continues; same result as a normal run. |
+| t81i | `t81i_dihedral_sign_zmatrix.in` | Sign of Priroda's dihedral angles | Opposite to IUPAC (+100 in, −100 standard). |
+
 ## Windows (not run yet)
 
 These need a Windows computer with the files from the `exe64/` folder of the official site: `p1.exe` and

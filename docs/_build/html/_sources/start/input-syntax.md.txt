@@ -201,12 +201,15 @@ Some tasks read more than one `$molecule` group from one input:
 
 - `task=transit`, `task=saddle` and `task=path` take two blocks, the start and the end structure. The atoms must be
   numbered the same way in both. `task=saddle` is not the same as {ref}`$optimize saddle=1 <optimize.saddle>`, the
-  transition-state search from a stored Hessian. This two-block input was reported for versions 8–9 and has not been
-  tested on version 25.
+  transition-state search from a stored Hessian. In a version 25 test, `task=saddle` with the two mirror-image
+  structures of ammonia ran a two-stage search (a one-dimensional maximization between the structures, then a
+  two-dimensional saddle search) and stopped at the planar midpoint, 0.00003 hartree above the fully optimized
+  transition state. `task=transit` with the same input crashed with a bus error after printing its internal
+  coordinates. `task=path` was not tested.
 - `task=uniq` takes any number of blocks and filters out duplicate structures; the official example has 157.
 
 These tasks are undocumented; see {ref}`$control task <control.task>` and {ref}`$uniq <group.uniq>`.
-<!-- src: 03 §5, §9; 01 §4.9; 09 (task names exist in v25) --> <!-- verify -->
+<!-- src: 03 §5, §9; 01 §4.9; 09 (task names exist in v25); 08 t81c, t81d (task=uniq: 08 review check) -->
 
 ## Text outside groups
 
@@ -239,7 +242,7 @@ $end
  Energy =   -76.36539137
 ```
 
-<!-- src: 01 §4, §4.8, §4.9 (pattern of the official example inputs; atoms and energy replaced by the water of 08 t01) --> <!-- verify -->
+<!-- src: 01 §4, §4.8, §4.9 (pattern of the official example inputs; atoms and energy replaced by the water of 08 t01); 08 t81e, t81f (tested in a short task=thermostat run: v and h after $end are not echoed, inside $dynamic they are) -->
 
 
 In version 25 a line of text before the first group and a disabled group with its leftover `$end`
@@ -347,9 +350,11 @@ Typographic quotes
   <!-- src: 04 #64 -->
 
 Two `task=` lines
-: A second `task=` line does not start a second job; in version 6, users reported that only the first task ran.
-  `task=optimize+hessian` is the only combination the program understands. Run other sequences as separate jobs.
-  <!-- src: 04 #69, #70 (v6; optimize+hessian "not in all versions"); 09 (optimize+hessian is one task name in v25) --> <!-- verify -->
+: A second `task=` line does not start a second job. In version 25 the last one wins: with `task=optimize` and then
+  `task=hessian` in `$control`, only the Hessian was computed, and nothing was printed about the first line. In version 6
+  users reported that only the first task ran. `task=optimize+hessian` is the only combination the program
+  understands. Run other sequences as separate jobs.
+  <!-- src: 04 #69, #70 (v6; optimize+hessian "not in all versions"); 09 (optimize+hessian is one task name in v25); 08 t81b -->
 
 
 Windows line endings (CRLF)
