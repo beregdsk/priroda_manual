@@ -307,8 +307,9 @@ output, so use it on a Hessian output, not on an optimization output that has on
 
 ### Step 4: compute the Hessian
 
-After step 3, `nh3_freq.in` looks like this, with your optimized values in place of these coordinates. Two optional
-lines are added here: `print=+molden` (for viewing the vibrations, see [](#qs-molden)) and a `$thermo` group:
+After step 3, `nh3_freq.in` holds the optimized geometry from `nh3.out` and, after `$end`, its `Energy =` line. Two
+optional lines are added here by hand: `print=+molden` (for viewing the vibrations, see [](#qs-molden)) and a
+`$thermo` group:
 
 ```text
 $system mem=128 disk=1 $end
@@ -321,26 +322,28 @@ $end
 $optimize tol=1e-5 steps=100 $end
 $thermo sigma=3 $end
 $molecule
- charge=0 mult=1
  z-matrix
  set=L1
    7
-   1    1    1.02672223
-   1    1    1.02672140    2    104.150240
-   1    1    1.02671372    2    104.144601   -3    104.150290
+   1    1    1.02753254
+   1    1    1.02744669    2    104.120811
+   1    1    1.02748748    2    104.112983   -3    104.135802
 $end
+ Energy =    -56.4988651558
 ```
-<!-- src: structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10; the same input without $thermo and $optimize ran on version 25 as 08 t13 -->
+<!-- src: produced by the step 3 commands from the 08 t11 output, plus the two lines; run as shown on version 25 in 08 (review check); structure from 06 §5 steps 8-9; print=+molden from 06 §3, §9; $thermo sigma from input.txt, 03 §10 -->
 
-The `$optimize` group is ignored by a Hessian run but does no harm, and it is useful again if you have to go back to
-step 1. {ref}`sigma <thermo.sigma>` is the rotational symmetry number used in the thermochemistry; for ammonia
+In a version 25 test, a Hessian run with this input did no optimization: the `$optimize` group did no harm, and it is
+useful again if you have to go back to step 1. {ref}`sigma <thermo.sigma>` is the rotational symmetry number used in the thermochemistry; for ammonia
 (point group C3v) it is 3. **Priroda does not work it out itself**: without `sigma=` it uses 1, and the entropy comes
-out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The default temperature is 298.15 K; other temperatures go in
+out too large by R ln σ (2.18 cal/(mol·K) for ammonia). The free energy G is then too low by T·R ln σ, about
+0.65 kcal/mol for ammonia at 298.15 K. The default temperature is 298.15 K; other temperatures go in
 {ref}`temperature <thermo.temperature>`.
-<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K), t44 (sigma=3 lowers S by R ln 3) -->
+<!-- src: input.txt $thermo; 03 §10 (sigma = R ln σ correction to S); 08 t13 (no sigma detected, T = 298.150 K), t44 (sigma=3 lowers S by R ln 3, H unchanged, G shifted by T·ΔS: 9.0519 vs 9.7029) -->
 
-For DFT the Hessian is analytic; the output announces it with `ANALYTIC SECOND DERIVATIVES OF SCF ENERGY`.
-<!-- src: 04 #460; 08 t13 -->
+With `theory=dft` (pure functionals) the Hessian is analytic; the output announces it with
+`ANALYTIC SECOND DERIVATIVES OF SCF ENERGY`. With `theory=ridft` (hybrids) it is computed numerically.
+<!-- src: 04 #460; 08 t13, t32a (ridft: NUMERICAL COMPUTATION OF SECOND DERIVATIVES) -->
 
 ### Step 5: check the frequencies
 
@@ -353,15 +356,15 @@ For ammonia, version 25 printed:
  *------*---------*--------*---------*---------*--------*-----------*-----------*
  | Mode | Freq.   | Mass.  | IR Int. |Raman A. |Raman D.| ROA (90)  | ROA (180) |
  *------*---------*--------*---------*---------*--------*-----------*-----------*
- |    1 | 1095.36 |   1.18 | 111.670 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    2 | 1635.36 |   1.06 |  12.058 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    3 | 1635.49 |   1.06 |  12.054 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    4 | 3371.36 |   1.03 |   3.443 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    5 | 3488.82 |   1.09 |   0.493 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
- |    6 | 3488.95 |   1.09 |   0.494 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    1 | 1099.30 |   1.18 | 111.146 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    2 | 1636.22 |   1.06 |  12.006 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    3 | 1636.60 |   1.06 |  12.008 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    4 | 3363.03 |   1.03 |   3.508 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    5 | 3479.92 |   1.09 |   0.530 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
+ |    6 | 3480.84 |   1.09 |   0.522 |   0.000 | 0.0000 |   0.00000 |   0.00000 |
  *------*---------*--------*---------*---------*--------*-----------*-----------*
 ```
-<!-- src: 08 t13 (verbatim) -->
+<!-- src: 08 (review check: the step 4 input at the t11 geometry, verbatim); table layout as 08 t13 -->
 
 The columns are the frequency in cm⁻¹, the reduced mass in amu and the IR intensity in km/mol. The Raman columns
 stay zero in a plain Hessian run; for Raman intensities, run `task=dipole` first and append its `num>` lines (see
@@ -370,9 +373,9 @@ stay zero in a plain Hessian run; for Raman intensities, run `task=dipole` first
 <!-- src: 08 t13, t56; keywords/control.yaml (task=dipole for Raman) -->
 
 ```bash
-grep -A 12 "Harmonic Frequencies" nh3_freq.out
+grep -A 14 "Harmonic Frequencies" nh3_freq.out
 ```
-<!-- src: 08 t13 (checked) -->
+<!-- src: 08 (review check: heading 5 lines, 3 border lines, 6 modes, closing border; -A 14 shows all) -->
 
 An imaginary frequency is printed with a trailing `i`. Planar ammonia, the transition state of the inversion,
 gives one:
@@ -388,9 +391,9 @@ gives one:
 
 Put the Hessian you just computed into the optimization input. It is printed as a `$Energy` group on `eng>` lines.
 Starting from a good Hessian, the optimizer can move off the saddle point. In a version 25 test that started
-exactly on a saddle point (planar ammonia), it reached the pyramidal minimum in 19 steps; from a near-symmetric
-structure it usually takes fewer.
-<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow); 08 t43 -->
+exactly on a saddle point (planar ammonia), it reached the pyramidal minimum in 19 steps. Forum users report that
+one such re-optimization cycle is usually enough.
+<!-- src: 06 §5 step 13; 03 §8 (ClAlMe2 case, verification workflow; "one cycle is usually enough"); 08 t43 -->
 
 ```bash
 sed -e 's/task=hessian/task=optimize/' nh3_freq.in > nh3_opt2.in
@@ -400,37 +403,36 @@ sed -n 's/^eng>//p' nh3_freq.out | awk '/\$Energy/{buf=""} {buf=buf $0 "\n"} END
 <!-- src: awk last-block pattern from 06 §6 (reconstruction of lasteng); 03 §14 (paste $Energy after $molecule's $end) -->
 
 The second command appends only the last `$Energy` group, after `$molecule`. Do not leave an older `$Energy` group in
-the file. Then run `nh3_opt2.in` and go back to step 2. (`ge nh3_freq` does the appending in place, if you work with
-the official scripts.)
+the file. Then run `nh3_opt2.in` and go back to step 2. (With the official scripts, `ge nh3_freq` appends the group
+to `nh3_freq.in`; then change its task to `optimize`.)
 
 ### Step 7: read the thermochemistry
 
 Once all frequencies are real, the end of the Hessian output holds the zero-point energy and a table of thermodynamic
-functions. The KNC wiki points to the string `ZPVE`. Version 25 prints the table at 298.150 K by default; this
-older user output (molecule not stated) shows 298.000 K:
-<!-- src: 06 §5 step 14; 08 t13 -->
+functions. The KNC wiki points to the string `ZPVE`. For `nh3_freq.in` (with `sigma=3`), version 25 printed:
+<!-- src: 06 §5 step 14; 08 (review check) -->
 
 ```text
- E =  -196.328936    E0 =  -196.191669
+ E =   -56.498867    E0 =   -56.465387
 
- ZPVE = 0.137267 a.u. =   86.1366 kcal/mol
+ ZPVE = 0.033480 a.u. =   21.0089 kcal/mol
 
  ----------------------------------------------------------------------
- T =  298.000 K      ln(Q)       S          U          H          G
+ T =  298.150 K      ln(Q)       S          U          H          G
                               cal/mol*K  kcal/mol   kcal/mol   kcal/mol
  ----------------------------------------------------------------------
- translational      16.9514    38.6542     0.8883     1.4805   -10.0385
- rotational         11.1465    25.1313     0.8883     0.8883    -6.6008
- vibrational         0.6842     4.7490    87.1466    87.1466    85.7314
- total              28.7821    68.5345    88.9232    89.5154    69.0921
+ translational      14.8304    34.4393     0.8887     1.4812    -8.7869
+ rotational          4.2951    11.5161     0.8887     0.8887    -2.5448
+ vibrational         0.0057     0.0757    21.0280    21.0280    21.0055
+ total              19.1312    46.0311    22.8055    23.3980     9.6738
  ----------------------------------------------------------------------
 ```
-<!-- src: 04 #476 (amge, Dec 2021, verbatim) -->
+<!-- src: 08 (review check: the step 4 input, verbatim) -->
 
 How to read it:
 
 - `E` is the electronic energy in hartree. `E0 = E + ZPVE` is the energy corrected for the zero-point vibrational
-  energy (here −196.328936 + 0.137267 = −196.191669).
+  energy (here −56.498867 + 0.033480 = −56.465387).
 - The `U`, `H` and `G` columns are **thermal corrections** in kcal/mol, not total values. They already contain the
   ZPVE. The program does not print the total enthalpy or free energy; you add them yourself.
 - Take the corrections from the `total` row and add them to **E, not E0**. Adding them to `E0` would count the
@@ -439,15 +441,16 @@ How to read it:
   H = E + ddH,  G = E + ddG,  with ddH = `H` (total) and ddG = `G` (total).
 
 - Convert units before adding: 1 hartree = 627.51 kcal/mol. For the table above,
-  G = −196.328936 × 627.51 + 69.0921 = −123129.28 kcal/mol, or −196.328936 + 69.0921 / 627.51 = −196.218831 hartree.
+  G = −56.498867 × 627.51 + 9.6738 = −35443.93 kcal/mol, or −56.498867 + 9.6738 / 627.51 = −56.483451 hartree.
 - The entropy `S` (cal/(mol·K)) is taken from the `total` row as it stands.
 
-<!-- src: 04 #44, #134/#135 (H=E+ddH, G=E+ddG; use E not E0), #224/#225 (E0 = E + ZPVE), #474 (627.51), #476 (worked G) -->
+<!-- src: 04 #44, #134/#135 (H=E+ddH, G=E+ddG; use E not E0), #224/#225 (E0 = E + ZPVE), #474 (627.51), #476 (E not E0 in a worked example); numbers from 08 (review check) -->
 
 :::{warning}
-For a **single atom**, the table is wrong: the rotational row contains `-inf`/`inf` or a spurious RT term. Use only
-the translational contribution for atoms. Older versions were also reported to put an extra RT into the enthalpy of
-monoatomic species. <!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80 -->
+For a **single atom**, users reported (2012, version not stated) that the table is wrong: the rotational row
+contains `-inf`/`inf` or a spurious RT term. Use only the translational contribution for atoms. Older versions were
+also reported to put an extra RT into the enthalpy of monoatomic species. Version 25 was not tested.
+<!-- src: 03 §10 (monoatomic -inf table, extra RT); 04 #80 --> <!-- verify -->
 :::
 
 The temperature is printed in the `T =` line. Version 25 uses 298.150 K; outputs posted by users of older versions
@@ -469,10 +472,10 @@ $end
 ```
 <!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values; 08 t14 (optimize+hessian works in v25) -->
 
-This is the only combined task that works: two `task=` lines do not chain jobs, and only the first one runs.
-`optimize+hessian` existed in Priroda 2, was missing in versions 6 to 8, and is available again from version 9.
-If the resulting Hessian shows an imaginary frequency, you still need step 6.
-<!-- src: 04 §0 (only combined task; two task= lines); 03 §8 (version history) -->
+This is the only combined task in version 25. Two `task=` lines do not chain jobs: users report that only the
+first one runs. `optimize+hessian` existed in Priroda 2, was reported missing in versions 6 and 8, and is available
+again from version 9. If the resulting Hessian shows an imaginary frequency, you still need step 6.
+<!-- src: 09 (optimize+hessian is the only combined entry in the task table); 04 §0 (two task= lines, forum report); 03 §8 ("gone in v6/v8", back in v9) -->
 
 (qs-reading-output)=
 ## Reading the output
@@ -527,7 +530,8 @@ a table of bond orders. With `print=+charges`, DFT runs print Hirshfeld charges 
 ```
 <!-- src: keywords/control.yaml print; 06 §3, §8; 04 #79; 08 t01 (verbatim, timing line removed) -->
 
-The `total` row of the Hirshfeld block sums the electron populations, not the charges.
+The `total` row of the Hirshfeld block sums the electron populations, not the charges (10.0003, close to the
+10 electrons of water). <!-- src: 08 t01 -->
 
 (qs-molden)=
 ### Viewing results in Molden
@@ -569,7 +573,8 @@ structure.
 
 **pri2mol.** The Perl script `pri2mol` by the forum user amge, available from
 `http://limor1.nioch.nsc.ru/quant/program/pri2mol/`, converts a Priroda output into Molden and XYZ files: geometries,
-vibrations, orbitals, NMR shifts and density critical points. Priroda's own viewer, `xm`, is on the download site.
+vibrations, orbitals, NMR shifts and density critical points. The download site also has `xm`, a molecule viewer
+that takes a Priroda input file.
 <!-- src: 04 §0, §14 (URL), #502, #508-#509; 02 §7.1; 01 §2.2 (xm) -->
 
 ## Where next

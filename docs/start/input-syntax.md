@@ -12,7 +12,7 @@ $system mem=512 disk=-512 path=/tmp $end
 $control
  task=optimize
  theory=dft
- basis=/home/user/priroda/basis.in
+ basis=/opt/priroda/basis.in
 $end
 $optimize tol=1e-5 steps=100 $end
 $molecule
@@ -36,25 +36,29 @@ A group starts with `$` followed by the group name and ends with `$end`. It may 
 $scf conv=1e-7 $end
 
 $scf
- convergence=1e-7
  procedure=bfgs
+ convergence=1e-7
 $end
 ```
+<!-- src: 08 t04; 08 (review check: conv=1e-7 alone, procedure before and after convergence) -->
+
 
 Inside a group, `keyword=value` pairs are separated by spaces or line breaks, and several pairs can share a line
 (`theory=qm_n3 basis=qm.in`). Blank lines inside a group are allowed.
 <!-- src: input.txt; 01 §4.2; 02 §3; 05 §5 -->
 
-The order of the groups does not matter, and neither does the order of keywords within a group. The exceptions are
-`$molecule` and `$Energy`, whose contents are ordered data.
-<!-- src: 06 §2 -->
+The order of the groups does not matter, and neither does the order of keywords within a group. The exception is
+`$molecule`, whose contents are ordered data. (The KNC wiki FAQ also lists `$Energy`, but version 25 reads it with
+the same keyword reader as the other groups.)
+<!-- src: 06 §2; 09 (energy read by the generic namelist reader; only $molecule by mol_input) -->
+
 
 Groups you do not need can be left out; most keywords have sensible defaults. `input.txt` advises changing only what
 the problem requires.
 <!-- src: input.txt; 06 §2 -->
 
-Two groups can also share a line: `$scf conv=1e-7 $end $grid acc=1e-9 $end` sets both values in version 25. Every
-input in the sources starts each group on a new line, which is easier to read.
+Two groups can also share a line: `$scf conv=1e-7,1e-3 $end $grid acc=1e-9 $end` sets both values in version 25.
+Inputs in the sources normally start each group on a new line, which is easier to read.
 <!-- src: 08 t04 -->
 
 ## Keywords
@@ -63,8 +67,9 @@ input in the sources starts each group on a new line, which is easier to read.
 
 Group names, keyword names and keyword values are case-insensitive: `$System` and `$system`, `theory=riDFT` and
 `theory=ridft`, `functional=pbe` and `functional=PBE` are the same. File names are the exception, because Linux file
-names are case-sensitive. This applies to `basis=`, `save=` and `path=`.
-<!-- src: 06 §2, §3 ($System); 05 §5; 01 §4.11 -->
+names are case-sensitive. This applies to `basis=`, `save=`, `path=` and other file names, such as `file=` in
+`$dynamic` and `$uniq`.
+<!-- src: 06 §2, §3 ($System); 05 §5; 01 §4.8, §4.9, §4.11 -->
 
 ### Abbreviations
 
@@ -90,11 +95,15 @@ Keywords belong to their group. The same name can mean different things in diffe
 {ref}`$d2edr2 <d2edr2.steps>` selects displacement steps of a numerical Hessian.
 
 :::{warning}
-A prefix must stay unambiguous within its group. How Priroda resolves a prefix that matches two keywords is not
-documented. In version 6, when `$optimize` contained both `step=` and `steps=`, the maximum number of steps was taken
-from `step`. In inputs you keep or share, prefer the full keyword names; they are also easier to search for.
+A prefix must stay unambiguous within its group. In `$scf`, `co` matches both `convergence` and `core`; in version 25,
+`$scf co=1e-7 $end` stopped with `unknown name e-7`, a message that does not point to the cause. In inputs you keep
+or share, prefer the full keyword names; they are also easier to search for.
 :::
-<!-- src: 03 §8 (v6 step/steps); input.txt -->
+<!-- src: 09 ($scf names); 08 (review check: co=1e-7); input.txt -->
+
+Do not give the same keyword twice in one group, even in different spellings. In version 6, an `$optimize` group with
+both `step=` and `steps=` took the maximum number of steps from `step`.
+<!-- src: 03 §8 (v6 step/steps, Evgeniy) -->
 
 A misspelled or unknown keyword name stops the run right after the basis-set echo, with a message naming the group
 and the keyword:
@@ -109,11 +118,22 @@ optimization (`unknown name coordinated`) but was ignored in an energy run, whic
 clean energy run therefore does not prove that the rest of the input is correct.
 <!-- src: 08 t40, t40b, t40c -->
 
-The same message can appear for a keyword you spelled correctly. In version 25,
-`$scf convergence=1e-7 iterations=250 $end` stops with `unknown name terations`: the value list of `convergence`
-takes the first letter of the next keyword. Give `convergence` both of its values, or put it last in the group;
-see {ref}`$scf convergence <scf.convergence>`.
-<!-- src: 05 §5.1; 08 t07a, t07b, t22a-c -->
+The same message can appear for a keyword you spelled correctly. In version 25, `convergence=` with a single value,
+followed by `iterations=`, stops the run with the name of `iterations` cut short:
+
+- `$scf convergence=1e-7 iterations=250 $end` printed `unknown name terations` on the machine of the first test
+  rounds, also with the two keywords on separate lines;
+- the same input printed `unknown name erations` in later runs of the `p4_d` executable on another machine. There
+  the message was the same for every value tried (`1e-5`, `1e-6`, `1e-7`, `1e-10`, `0.000001`, `1.0e-6`, and `1e-6,`
+  with a trailing comma), and `iter=50` gave `unknown name er`.
+
+Other keywords after a one-value `convergence=` were read normally (`procedure`, `restrict`, `xmax`, `diagm`,
+`temperature`, `fraction`, `core`, `eemin`, `aw`), but `n1=` stopped the run with `no '$end' found, 'convergence'`.
+The problem disappears when `convergence` gets both of its values (`convergence=1e-6,1e-3 iterations=50`) or comes
+after `iterations`. Give `convergence` both values, or put it last in the group; see
+{ref}`$scf convergence <scf.convergence>`.
+<!-- src: 05 §5.1; 08 t07a, t07b, t22a-c; 08 (review check: convergence value series, iter=, n1=, other keywords); slurm s02-s04 first attempt (erations with 1e-10) -->
+
 
 ## Values
 
@@ -142,11 +162,12 @@ Flag strings
   <!-- src: input.txt; 06 §3; 04 #460 -->
 
 Quoted strings
-: A file name or path may be put in double quotes, and must be if it contains special characters:
-  `basis="3z.bas"`, `path="/home/user/priroda/scratch"`. Use the straight ASCII double quote `"`. Typographic quotes
+: A file name or path may be put in double quotes. The quotes are optional: `basis="3z.bas"` and `basis=basis.in`
+  both work, as does `path="/scratch/priroda"`. Use the straight ASCII double quote `"`. Typographic quotes
   break the name, and two single quotes do not count as a double quote: `basis=''3z.bas''` fails with
-  `error opening file ''3z.bas''`.
-  <!-- src: input.txt; 03 §2, §5; 04 #64 -->
+  `error opening file ''3z.bas''`. Avoid spaces and non-ASCII characters in file names, directory names and the
+  host name.
+  <!-- src: input.txt; 03 §2 (amg: no Cyrillic or spaces), §5; 05 §5; 04 #64 -->
 
 ## The `$molecule` group
 
@@ -179,11 +200,13 @@ in the {ref}`$molecule <group.molecule>` reference.
 Some tasks read more than one `$molecule` group from one input:
 
 - `task=transit`, `task=saddle` and `task=path` take two blocks, the start and the end structure. The atoms must be
-  numbered the same way in both.
+  numbered the same way in both. `task=saddle` is not the same as {ref}`$optimize saddle=1 <optimize.saddle>`, the
+  transition-state search from a stored Hessian. This two-block input was reported for versions 8–9 and has not been
+  tested on version 25.
 - `task=uniq` takes any number of blocks and filters out duplicate structures; the official example has 157.
 
 These tasks are undocumented; see {ref}`$control task <control.task>` and {ref}`$uniq <group.uniq>`.
-<!-- src: 03 §5, §9; 01 §4.9 -->
+<!-- src: 03 §5, §9; 01 §4.9; 09 (task names exist in v25) --> <!-- verify -->
 
 ## Text outside groups
 
@@ -207,13 +230,17 @@ $dynamic
 $end
  v=500.0
  h=0.1
-$molecule
- ...
+$molecule charge=0 mult=1 cartesian
+ set=L1
+  8    0.000000    0.000000    0.117300
+  1    0.000000    0.757200   -0.469200
+  1    0.000000   -0.757200   -0.469200
 $end
- Energy =   -783.83738426
+ Energy =   -76.36539137
 ```
 
-<!-- src: 01 §4, §4.8, §4.9 -->
+<!-- src: 01 §4, §4.8, §4.9 (pattern of the official example inputs; atoms and energy replaced by the water of 08 t01) --> <!-- verify -->
+
 
 In version 25 a line of text before the first group and a disabled group with its leftover `$end`
 (`integral dir=1 $end`) are both ignored: the result is identical to the same input without them. Text inside a
@@ -226,15 +253,15 @@ functional at PBE, with no message. Always use `$`.
 
 ## Appending results of earlier runs
 
-Priroda writes results that can be reused as input into the main output file. Each such line carries a prefix, for
+Priroda writes reusable results into the main output file. Each such line carries a prefix, for
 example `eng>` or `num>`. Strip the prefix and append the lines to the next input. The program has no separate
 restart file for these data; SCF orbitals are the exception, saved with {ref}`$control save <control.save>`.
 <!-- src: 06 §4 -->
 
 ### `$Energy` from `eng>` lines
 
-A run prints its energy, dipole, gradient and, after `task=hessian`, the Hessian as an
-{ref}`$Energy <group.Energy>` group on lines prefixed with `eng>`:
+A run prints its energy and dipole, plus the gradient when one is computed and, after `task=hessian`, the Hessian, as
+an {ref}`$Energy <group.Energy>` group on lines prefixed with `eng>`:
 
 ```text
 eng>$Energy
@@ -246,7 +273,7 @@ eng>    1.27590122e-07 -9.81695012e-09  2.56258122e-06
 eng>$end
 ```
 
-<!-- src: 06 §4 -->
+<!-- src: 06 §4; 08 t01 (task=energy prints only E= and D=) -->
 
 To reuse it, remove the prefix and append the block to the end of the next input, after `$molecule`:
 

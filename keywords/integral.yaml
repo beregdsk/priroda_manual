@@ -17,7 +17,7 @@ keywords:
         job claims not to fit in memory, or crashes with `write VMNN(…)?`.
     example: "$integral direct=1 rout=2 $end"
     status: undocumented
-    sources: ["input.txt (annotation corrupted)", "03 #0, §17", "05 §2"]
+    sources: ["input.txt (annotation corrupted)", "03 #0, §3, §17", "05 §4.2"]
     verified_against: null
   - name: routine
     type: integer

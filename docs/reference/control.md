@@ -18,7 +18,7 @@ Job type, level of theory, basis-set file, Hamiltonian and printing.
 **Type:** enum\
 **Default:** `gradient`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09; 08 t50, t57a
+**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09; 08 t50, t57a; 08 t13, t14, t56, t69a-f
 
 Job type.
 
@@ -44,17 +44,18 @@ Job type.
 | `conical` | Conical intersection of states 0 and 1 (v9 banner). Untested. *(undocumented)* |
 | `anharmonic` | Anharmonic corrections to vibrational energies; slow. *(undocumented)* |
 | `opt_n1` | Optimizer for very large systems (used for 8060 atoms with `theory=qm_n2`). Pairs with `$optimize mod=1`. *(undocumented)* |
-| `thermostat` | Molecular dynamics with a thermostat; see `$dynamic`. Ran with every tested theory in version 25. *(undocumented)* |
-| `uniq` | Filter duplicate structures among several `$molecule` blocks; see `$uniq`. *(undocumented)* |
+| `thermostat` | Molecular dynamics with a thermostat; see `$dynamic`. In version 25 it ran with `dft`, `ridft`, `rimp2`, `ccsd`, `tddft` and `qm_n3`. *(undocumented)* |
+| `uniq` | Apparently filters duplicate structures among several `$molecule` blocks; see `$uniq` (inferred from the official example; untested). *(undocumented)* |
 
 ```{note}
 Two `task=` lines do not chain jobs: only the first one runs. Apart from `optimize+hessian`, sequences such
 as optimize→NMR need separate runs or an external driver script.
 **A misspelled task name gives no error**: version 25 sets up the run and stops quietly, as for `check`.
-`task=critical` does not work; density critical points come from `print=+density`.
+`critical` is not a task name in version 25, so it stops silently like any unknown task. Users found that
+`task=crytical` gave nothing; density critical points come from `print=+density`.
 `task=QM` appears only in the header of the shipped `qm.in` parameter file and is not a user task.
-The binary contains further task words (`IRC4`, `PATHX`, `PATHR`, `STERIC`, `POLARIZABILITY`, `MMDYNAMIC`,
-and others) that are untested or need data that is not distributed.
+The version 25 program contains further task names (`irc4`, `pathx`, `pathr`, `chain`, `walk`, `steric`,
+`polarizability`, and others) that are untested or need data that is not distributed.
 ```
 
 **See also:** {ref}`saddle ($optimize) <optimize.saddle>`, {ref}`points ($optimize) <optimize.points>`, {ref}`print ($control) <control.print>`
@@ -68,7 +69,7 @@ and others) that are untested or need data that is not distributed.
 **Type:** enum\
 **Default:** `dft`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46; 08 t50b
+**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46; 08 t50b; 08 t78a-d; 09
 
 Theoretical method.
 
@@ -90,11 +91,11 @@ Theoretical method.
 | `mp4dq` | MP4(DQ). |
 | `mp4sdq` | MP4(SDQ). |
 | `mp4sdtq` | MP4(SDTQ) (RHF). |
-| `ccs` | CCS. With an HF reference it returns the HF energy. |
+| `ccs` | CCS. Returns the HF energy, as expected: CCS adds no correlation energy to an HF reference. |
 | `ccd` | CCD. |
 | `ccsd` | CCSD (RHF/UHF). |
 | `ccsd4t` | CCSD(T). |
-| `ccsdsd` | CCSD for an excited state, closed-shell (RHF) only; the state is chosen with `state=`, as for `cis` and `tddft`. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state's total energy in `eng>`. Without `state=` it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD by the v5 keyword page. *(undocumented)* |
+| `ccsdsd` | CCSD for an excited state, closed-shell (RHF) only; the state is chosen with `state=`, as for `cis` and `tddft`. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state's total energy in `eng>`. Without `state=` it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD for excited states (RHF) by the v5 keyword page. |
 | `qm_n3` | Laikov's semiempirical QM model. Needs `basis=qm.in` and no `set=`; parameters exist for H, Li–F, Na–Cl, Sc–Cu. Runs in version 25, with a short output of its own (no summary box, no `E  =` line). *(undocumented)* |
 | `qm_n2` | Earlier variant of the QM model, used for very large systems with `task=opt_n1`. *(undocumented)* |
 
@@ -105,17 +106,17 @@ Theoretical method.
 or `tddft`, older versions silently drop the exact exchange. In version 25, `theory=dft` stops right after
 printing the basis sets, with no error message in the output and exit status 1. `theory=tddft` still runs:
 it reports `PBE1` in the summary box but leaves out the exact exchange, so the energies are wrong (water:
-`Ex` -6.61 instead of about -8.95 hartree, total energy about 2.2 hartree too high), and the run ends
+`Ex` -6.61 instead of about -8.95 hartree, ground-state total energy about 2.2 hartree above PBE), and the run ends
 normally.
 
-The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. In version 25,
+The ab initio list comes from the v5 keyword page and a 2011 user test (v6), which was energy-only. In version 25,
 water energies run to completion with `hf`, `rihf`, `cis`, `mp2`, `mp3`, `mp4dq`, `mp4sdq`, `mp4sdtq`, `ccs`,
 `ccd`, `ccsd` and `ccsd4t`; an `hf` optimization also worked, so HF gradients exist. For `ridft` and
 `rimp2`, `task=hessian` works by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND
 DERIVATIVES`); for `dft` it is analytic. These
 were reported **not** working in v6: `mp4`, `rimp4`, `rimp4sdtq`, `rimp4sdq`, `riccsd`, `riccsd4t`. They
-either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
-CCSDT, …); none has been reported working.
+either crash or return the HF energy. The version 25 program contains many more method names (`MCSCF`,
+`CASSCF`, `CISD`, `LCCD+MP2`, …); none has been tested.
 ```
 
 **See also:** {ref}`functional ($dft) <dft.functional>`
@@ -145,7 +146,7 @@ wavelength, transition moment, oscillator strength), and `E  =` was the total en
 **Type:** string\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 01 §4.11, §6; 03 §5; 04 §0; 08 t03
+**Sources:** input.txt; Dft.rtf; 01 §4.11, §6; 03 §5, §6; 04 §0, #257; 08 t03
 
 Default: basis-set data are read from the input file itself.
 
@@ -155,7 +156,7 @@ quotes break parsing.
 
 ```{note}
 Shipped files include `basis.in` (Λ/L family, default set `L1`), `basis4.in` (scalar-relativistic L family;
-needs `four=1`), `3z.bas` (DFT only, Z ≤ 54), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
+needs `four=1`), `3z.bas` (Z ≤ 54; recommended for DFT only, as users report large errors with ab initio methods), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
 `b4s*.in`, and `qm.in`. In version 25 a relative name such as `basis=basis.in` works when the file is in the
 directory the program is started from. An absolute path is still the safest choice for parallel and batch
 runs.
@@ -199,7 +200,7 @@ Required with the relativistic basis file `basis4.in`. Without it, version 25 st
 **Type:** enum\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.2; 06 §1; 08 t35
+**Sources:** input.txt; 01 §4.2; 06 §1; 08 t35; 09 (dual)
 
 Default: `finite` for four-component theory, `point` for non-relativistic theory.
 
@@ -212,6 +213,7 @@ Nuclear model. The official example inputs write it as `nuc=finite`.
 |---|---|
 | `finite` | Gaussian nuclear model (L. Visscher, K. G. Dyall, At. Data Nucl. Data Tables 67 (1997) 207–224). |
 | `point` | Point-nucleus model. |
+| `dual` | Found in the version 25 program; its meaning is unknown. *(undocumented)* |
 
 ```{note}
 A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa. With

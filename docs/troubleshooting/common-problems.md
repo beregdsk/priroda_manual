@@ -356,11 +356,12 @@ degenerate shell of O2.
 <!-- src: 08 t75a-d -->
 
 :::{note}
-If an excited configuration does turn up in a molecule without degenerate orbitals, starting from other vectors
-(`$guess read=1` with vectors of a related calculation) or reordering the starting orbitals with
-{ref}`na <guess.na>` and {ref}`nb <guess.nb>` is the usual remedy. It has not been tested here, because no such case
-was found.
+If an excited configuration does turn up in a molecule without degenerate orbitals, two tools are available: start
+from other vectors (`$guess read=1` with vectors of a related calculation), or reorder the starting orbitals with
+{ref}`na <guess.na>` and {ref}`nb <guess.nb>`. Neither was tested for this manual on such a case, because none was
+found.
 :::
+<!-- src: 06 §10 (na, nb); 03 §7 (reading vectors) -->
 
 ### Heavy elements
 
@@ -378,7 +379,10 @@ vectors. <!-- src: 06 §10 -->
   unusual and may be worth changing.
   <!-- src: 05 §7.2 (EvgeniX 2015; the restrict=1 suggestion is the research note's own interpretation) -->
 - An HfCl2 molecule (PBE, `four=1`, `basis4.in`, `set=L3`, `accuracy=1e-10`) would not converge. Nobody replied.
-  <!-- src: 05 §7.3 (YuraM 2016) -->
+  Two things in the posted input are worth checking in such a case (this is the manual's observation, not a tested
+  fix): it had `$guess read=1` in the same job that wrote the vectors with `save=`, so the start depended on whatever
+  vector file already existed; and it used `mult=1` for a d² Hf(II) compound.
+  <!-- src: 05 §7.3 (YuraM 2016; input has save=m1_HfCl2_1.chk, $guess read=1, mult=1) -->
 
 (troubleshooting.optimization)=
 ## Geometry optimization problems
@@ -386,21 +390,23 @@ vectors. <!-- src: 06 §10 -->
 ### The optimization does not converge within `steps`
 
 The default limit is 128 steps in version 25 and 50 in older versions (see {ref}`steps <optimize.steps>`). When the
-limit is reached, the output just ends: there is no message and no `MOL>` block. The documentation's advice is that
-an optimization still running after about 50 steps usually has some other problem, and raising `steps` rarely helps.
-What users do instead:
-<!-- src: keywords/optimize.yaml steps; 06 §10; 08 t12, t14 -->
+limit is reached, the output just ends: there is no message and no `MOL>` block. `Dft.rtf`, an older unofficial
+Russian description, warns that an optimization not converged after about 50 steps very likely has something wrong
+with it, and that computing a Hessian first helps in many cases. So don't simply raise `steps`. What users do:
+<!-- src: keywords/optimize.yaml steps; 08 t12, t14; Dft.rtf (00_Dft_rtf_utf8.txt line 83) -->
 
 - **Restart from the last geometry.** The limor1 `pri` script restarts Priroda from the last geometry whenever an
   optimization runs out of steps. This helps when the optimizer cycles around one geometry even after 300 steps.
   <!-- src: 02 §5.4 (pri); 06 §10 (FAQ, lastgeo) -->
 - **Supply a Hessian.** Run `task=hessian`, append its `$Energy` block (the `eng>` lines) to the input, and optimize
   again. See {ref}`$Energy <group.Energy>`. <!-- src: 06 §10; 02 §5.4 -->
-- **Use Cartesian coordinates.** {ref}`cartesian=1 <optimize.cartesian>` is described in the documentation as a
-  last resort, but users find it more robust for automated runs and for floppy systems such as explicit solvation
-  shells. <!-- src: 06 §10; 02 §5.4; 04 #352 -->
+- **Use Cartesian coordinates.** {ref}`cartesian=1 <optimize.cartesian>` is called a last resort on the v5 keyword
+  page, but the limor1 `conformers` script uses it for automated runs, and one experienced user says floppy systems
+  such as explicit solvation shells have to be optimized in Cartesian coordinates. In version 25 tests on CO2 and
+  acetylene it needed 6 steps, against 12 and 24 in internal coordinates.
+  <!-- src: 06 §10; 02 §5.4 (conformers); 04 #352; 08 t76a-e -->
 
-Users also say that Priroda's optimizer is weaker than Gaussian's, while its SCF is stronger.
+One experienced user found Priroda's optimizer weaker than Gaussian's, while its SCF is stronger (2013).
 <!-- src: 04 #194 -->
 
 ### Crash with `process 0 got signal 6` and `too few`
@@ -444,13 +450,13 @@ input geometry, and `$optimize sym=1` keeps that symmetry during the optimizatio
 
 ### A scan starts from a mangled geometry
 
-**Cause.** Priroda's dihedral angles have the opposite sign to the convention used by Molden, MOPAC, GAMESS and most
-other programs. A dihedral {ref}`value <optimize.value>` copied from another program makes the first scan point a
+**Cause.** Priroda's dihedral angles have the opposite sign to the convention used by Molden, MOPAC and GAMESS. A dihedral {ref}`value <optimize.value>` copied from another program makes the first scan point a
 scrambled structure that has nothing to do with the input geometry.
 
 **Fix.** Flip the sign of every dihedral value taken from another program. The user who hit this confirmed that
-flipping the signs fixed it, and the sign difference is reported independently on the other forum.
-<!-- src: 04 #271, #276, #278, #279 (confirmed); 03 §15 (amg) -->
+flipping the signs fixed it. The user who answered (amge) had reported the sign difference on qchem.ru in 2008, for
+"all versions" of that time. Neither report covers version 25.
+<!-- src: 04 #271, #276, #278, #279 (confirmed); 03 §15 (amg, Oct 2008; amg and amge are probably the same person) --> <!-- verify -->
 
 A scan that requested 10 points but computed only 7 (and 11 of 20) was reported once and never explained.
 <!-- src: 04 #60; 04 §21 -->
@@ -459,8 +465,9 @@ A scan that requested 10 points but computed only 7 (and 11 of 20) was reported 
 
 An IRC must start from a properly optimized transition state with an accurate Hessian in the input. Find the TS
 first (`task=optimize` with {ref}`saddle=1 <optimize.saddle>`), compute the Hessian there, check that it has exactly
-one imaginary frequency and that this mode is the reaction you want, and only then run `task=irc`. An IRC started
-from an unoptimized geometry gives two points with {ref}`back=0 <optimize.back>` and no curve with `back=1`.
+one imaginary frequency and that this mode is the reaction you want, and only then run `task=irc`. In one reported
+case, an IRC started from an unoptimized geometry gave two points with {ref}`back=0 <optimize.back>` and no curve
+with `back=1`; an experienced user called this typical of an under-optimized geometry.
 <!-- src: 04 #92, #93, #100, #102 -->
 
 ### IRC stops with `Vicinity of a Stationary Point(?) --- STOP.`
@@ -478,10 +485,10 @@ step size; see {ref}`radius <optimize.radius>`:
 
 This advice comes from one experienced user. <!-- src: 04 #295, #298 -->
 
-In a version 25 test on a hydrogen shift (HCN ⇄ HNC), step sizes of 0.03, 0.1 (the default) and 0.3 all reached both
-minima without stopping early, so the default is a sensible start even for a light atom. The step size changed
-the cost and how close to the minimum the path ended: 60–69 points with 0.03, 19–21 with 0.1, and 7 with 0.3, which
-stopped farthest from the minimum (gradient 0.010 against 0.0003–0.006).
+In a version 25 test on a hydrogen shift (HCN ⇄ HNC), step sizes of 0.03 and 0.1 (the default) reached both minima
+without stopping early; 0.3, run toward HCN only, also reached its minimum. So the default is a sensible start even
+for a light atom. The step size changed the cost and how close to the minimum the path ended: 60–69 points with
+0.03, 19–21 with 0.1, and 7 with 0.3, which stopped farthest from the minimum (gradient 0.010 against 0.0003–0.006).
 <!-- src: 08 t77d-h -->
 
 An IRC can also end with `Energy Minimum Passed --- STOP.` right after the `Vicinity` message, when its last point
@@ -502,13 +509,14 @@ has to be repeated three or four times. Priroda has no option to recompute the H
 
 **Cause.** Hybrid functionals (B3LYP, PBE0/PBE1, ...) are applied only with {ref}`theory=ridft <control.theory>`.
 With `theory=dft` or `theory=tddft`, older versions (reported for v6 to v8) ran without any error message but used
-zero exact exchange, so the result was a pure-GGA-like calculation labelled as a hybrid. The developer was told about
+zero exact exchange: the exact-exchange part was simply dropped, so the result matched neither the hybrid nor a pure
+GGA. The developer was told about
 it and, according to a user who corresponded with him, did not intend to change it.
-<!-- src: 03 §11 (sanya, amg); 04 #96, #99 -->
+<!-- src: 03 §11 (sanya, amg); 04 #96, #99, #310; 08 t46 (what dropping exact exchange does) -->
 
 Newer builds (reported in 2014) refuse with `theory=dft`: the job prints `Basis set input:` twice and stops with
-`application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0` (on stderr), before the summary box. Several users
-reproduced this, and version 25 does the same.
+`application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0` (on stderr), before the summary box. Another user
+reproduced it with a known-good input, and version 25 does the same.
 <!-- src: 04 #307-#310; 08 t08 -->
 
 :::{warning}
@@ -530,8 +538,8 @@ for TDDFT. There is no hybrid TDDFT in Priroda.
 The reported causes are all basis problems:
 
 - **No basis for an element.** A molecule containing Bi was run with `3z.bas`, which covers only Z ≤ 54. Use
-  `sbk.bas` (ECPs on every element) or `basis4.in` with {ref}`four=1 <control.four>`.
-  <!-- src: 04 #334-#336 (Гесс, amge) -->
+  `sbk.bas` (ECP basis up to Rn, Z ≤ 86) or `basis4.in` with {ref}`four=1 <control.four>`.
+  <!-- src: 04 #334-#336 (Гесс, amge); 01 §3.4, §6.1 (sbk.bas: ECP and 3z basis up to Z = 86) -->
 - **ECP not read.** In one case nothing was computed and there was no error message. The output showed zeros for one
   element in the basis table, and no sign that the ECP had been read. The cause was a defect in the user's basis file;
   `20+sbk.bas` worked. <!-- src: 04 #447-#451 -->
@@ -547,7 +555,9 @@ have a non-zero number of basis functions.
 A closed-shell TDDFT run on version 25 printed non-zero oscillator strengths in its `Electronic Spectrum:` table
 with the default settings. <!-- src: 08 t33 -->
 
-The reported cause of all-zero values: with `restrict=0`, singlet and triplet excitations get mixed. Use `restrict=1` and compute one multiplicity per run.
+The reported cause of all-zero values: with `restrict=0` set explicitly, singlet and triplet excitations get mixed.
+Use {ref}`$scf restrict=1 <scf.restrict>` (the default for a closed-shell singlet) and compute one multiplicity per
+run.
 The user who reported the problem confirmed the fix.
 <!-- src: 03 §11 (Marsel, sanya) -->
 
@@ -574,7 +584,7 @@ relayed by a user.
 
 For a monoatomic species the enthalpy has an extra RT, and the rotational entropy is printed as `-inf`. Correct these
 by hand and keep only the translational terms.
-<!-- src: 03 §15 (Evgeniy, Llewule); 04 §0 -->
+<!-- src: 03 §15 (Evgeniy, Llewule); 04 #80 (EvgeniX) -->
 
 ### Results depend on the number of processes
 
@@ -592,7 +602,7 @@ used. <!-- src: 03 §3; keywords/system.yaml -->
 
 **Cause.** The {ref}`memory <system.memory>` limit in `$system` is too small for the job. Version 25 stops right after
 the basis-set echo with a line such as `need 12544 + 7905408 = 7917952 bytes.` (here for water with `mem=2`); the
-last number is what the job needs at that point. Raise `memory` above it.
+last number, in bytes (here about 7.6 MB), is what the job needs at that point. Set `memory` (in MB) above it.
 <!-- src: 08 t61 -->
 
 ### `malloc(...) failed`
@@ -604,8 +614,9 @@ requested with a negative {ref}`disk <system.disk>`. The number in the message i
 **Fix.** Ask for less than the node really has free:
 
 - With a RAM disk, `memory` plus |`disk`| (both in MB), times the number of processes, must fit in physical RAM.
-  An example from a 24 GB node is `memory=9000 disk=-14000`. Several users confirmed this rule.
-  <!-- src: 04 #462, #463, #468, #471 -->
+  One experienced user's example for a 24 GB node, `memory=9000 disk=-14000`, assumes one process per node. Another
+  user's limit, `memory=9250 disk=-9250`, fits this rule.
+  <!-- src: 04 #196 (values per process); 03 §3; 04 #462, #463, #468, #471 -->
 - The 32-bit Windows (Cygwin) builds cannot allocate more than about 1 GB. 512 MB was enough for most DFT jobs.
   Several users confirmed this limit. The 64-bit Windows build with `cygwin1.dll` is reported to have no such limit.
   <!-- src: 04 #94, #95, #104, #105, #210, #211, #370 -->
@@ -616,15 +627,14 @@ A message beginning `We need 1.5 GB of memory...` was reported once. One reply g
 
 ### `out of disk space`
 
-**Symptom.** `0: out of disk space (VNNNN), <N>KB`, or a similar message naming another array (version 25:
-`0: out of disk space (grid_W), 8213824` for a 1 MB RAM disk), such as
-`(ci.Rnvvo)`.
+**Symptom.** `0: out of disk space (VNNNN), <N>KB`, or a similar message naming another array, such as
+`(ci.Rnvvo)`. Version 25 with a 1 MB RAM disk (`disk=-1`) printed `0: out of disk space (grid_W), 8213824`.
+<!-- src: 04 #289; 08 t62 -->
 
 **Fix.**
 
-- Raise {ref}`disk <system.disk>` above the amount reported. Remember that the value is per process. One user's
-  correlated Hessian that ran out of disk on 16 processes then ran with `disk=40` on one fast drive.
-  <!-- src: 03 §4; 04 #289, #290; 04 §19 -->
+- Raise {ref}`disk <system.disk>` above the amount reported. Remember that the value is per process.
+  <!-- src: 03 §4; 04 #289, #290 -->
 - Conventional MP2 is very disk-hungry. Use `theory=rimp2` instead.
   <!-- src: 03 §4 (sanya, Evgeniy) -->
 - Check that `cartesian` or `z-matrix` in `$molecule` matches the coordinates you actually gave; wrong coordinates
@@ -641,7 +651,7 @@ A failure to read a scratch file during MP2 (`0: read file ./tmp/...`) was given
 
 A 7-atom RI-MP2 job with `four=1`, `basis4.in` and `set=L22` claimed not to fit in memory however much was given,
 while smaller and larger basis sets ran. A second user reproduced it and got `0: write VMNN(11753704:14042536)?`.
-Both found that direct integrals avoid the problem:
+The first user found that direct integrals avoid the problem:
 
 ```text
 $integral direct=1 $end
@@ -658,16 +668,18 @@ a RAM disk with a negative `disk` value. Never put scratch on NFS.
 <!-- src: 04 #462, #465; 06 §10; 08 t64 -->
 
 A job that stops while writing a scratch file, with a message like
-`0: write file /tmp/tmp9633.11 (leAX): fd=21 ...`, was reported once during an analytic Hessian and not answered.
-A full scratch directory or a file-size limit is a plausible cause, but this is a guess; check the free space and the
-`disk=` setting. <!-- src: 04 #460; 04 §17 (unverified inference) -->
+`0: write file /tmp/tmp9633.11 (leAX): fd=21 ...`, was reported once (2020) during an analytic Hessian on a cluster.
+An experienced user replied that no `path=` was set, so scratch went to `/tmp`, probably on the master node, where
+quotas can make the job fail, and advised the cluster's scratch area. The asker then tried a `tmp` folder and got the
+same error; the case was not resolved. Check the free space, the quotas and the `disk=` setting.
+<!-- src: 04 #460, #462, #463 -->
 
 If Priroda does not get enough memory or scratch, it stops with an error; it does not fall back to a slower
 algorithm. <!-- src: 04 #199 -->
 
 ### Slow runs: disk speed
 
-Priroda is very demanding of disk speed. For all methods except GGA DFT, the documentation warns that performance
+Priroda is very demanding of disk speed. For all methods except GGA DFT, `input.txt` warns that performance
 degrades "terribly" if more than one process reads and writes large files on the same physical drive. Options, in order of
 preference:
 
@@ -678,9 +690,6 @@ preference:
   can be much faster overall: one RI-MP2 optimization went from 2 to 20 steps per night.
 <!-- src: 04 #181, #192, #194, #293; 03 §3, §17; input.txt lines 39-41 -->
 
-One user with 16 processes ignored the warning and put all scratch on one fast disk.
-<!-- src: 04 #293 -->
-
 (troubleshooting.parallel)=
 ## Parallel and MPI problems
 
@@ -689,8 +698,8 @@ One user with 16 processes ignored the warning and put all scratch on one fast d
 **Cause.** RI methods, RI-MP2 and RI-DFT included, hang forever if any process gets no work. This happens when the job
 is too small for the number of processes. Two experienced users confirmed it and called it a bug.
 
-**How to recognize it.** After `integral estimates`, the output lists the blocks per node. Look for a line with
-`0 blocks`:
+**How to recognize it.** After `integral estimates`, the output lists the blocks per node. In a normal run every node
+has work, as here; a hung job shows `0 blocks` on some node:
 
 ```text
     2892490 blocks,    103625770 integrals on node  0
@@ -703,17 +712,18 @@ is too small for the number of processes. Two experienced users confirmed it and
 Older reports describe similar hangs: small jobs on many processors hang (v6/v7); MP2 on a 102-atom complex died with
 signal 8 on more than about 24 cores (v7, MVAPICH); a v6 Hessian on 4 cores could hang at `Solving for responses ...`.
 The v6 advice was at most 2 cores for a Hessian and at most 4 for an optimization. Another user ran DFT, including
-Hessians, on 24–32 cores without trouble, so this advice is disputed. Parallel runs work properly only from version
-16 on.
+Hessians, on 24–32 cores without trouble, so this advice is disputed. In 2018 an experienced user said the Windows
+builds run in parallel only from version 16, and that the v6 Hessian uses at most 2 cores, the v17 one 4 or more.
 <!-- src: 03 §3, §15 (Evgeniy, sanya); 04 #401 -->
 
 ### Little or no speed-up from more cores
 
-- DFT scales well within one node but gains little beyond 6–8 cores: one user measured at most 10% more from 32
-  cores than from 6–8. Another measured 101, 63 and 37 s for the same optimization on 8, 12 and 24 cores.
-  <!-- src: 04 #343, #344 -->
-- Running across several nodes gives no gain. Several experienced users report this.
-  <!-- src: 04 #344, #417, #462 -->
+- Reports on DFT scaling within one node disagree: one experienced user found at most 10% more from 32 cores than
+  from 6–8, while another measured 101, 63 and 37 s for the same optimization on 8, 12 and 24 cores.
+  <!-- src: 04 #343, #344 (2016) -->
+- For DFT, running across several nodes gives no gain; one experienced user said so on three occasions. RI-MP2 is
+  different: in a v8 benchmark on 4 nodes with scratch in RAM it ran 6× faster than on 2 cores of one node.
+  <!-- src: 04 #344, #417, #462 (all amge); 03 §3 (v8 benchmark, Evgeniy 2008) -->
 - In a DFT run most of the memory and all the disk I/O stay on rank 0, so spreading a DFT job over nodes does not
   spread its memory. RI-MP2 distributes memory better.
   <!-- src: 03 §3 (v8 benchmarks); 04 #185, #343 -->
@@ -741,7 +751,7 @@ See {ref}`running-batch` for a complete job script.
 
 ### Starting a parallel run on Linux
 
-Version 25 must be started through an MPI launcher, such as the `mpiexec` from the official site:
+A parallel version 25 run must be started through an MPI launcher, such as the `mpiexec` from the official site:
 `./mpiexec -np 4 ./p job.in job.out`. `./p -np 4 job.in job.out`, which worked in versions 6 and 10, now stops with
 `input file '-np'?.`. With version 10, starting through the bundled `mpiexec` once failed with
 `Error in system call mpiexec: No such file or directory` or `mpiexec could not exec p`. Use absolute paths for the

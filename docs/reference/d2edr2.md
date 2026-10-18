@@ -9,6 +9,8 @@
 
 Numerical Hessian by finite differences of the gradient.
 
+**Relevant when:** `numerical Hessian: task = hessian with theory = ridft | rimp2 | tddft | qm_n3, or $control derivative = numeric. An analytic dft Hessian does not use this group.`
+
 (d2edr2.length)=
 ## `length`
 
@@ -16,9 +18,12 @@ Numerical Hessian by finite differences of the gradient.
 ```
 
 **Type:** real\
-**Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Default:** `0.001`\
+**Units:** au (bohr)\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 08 t32a, t55 (raw output)
+
+Default: version 25 prints `Step 0.00100000 au FORWARD  for coordinate   1:` for each displacement.
 
 Step length for numerical differentiation of the potential-energy surface.
 
@@ -31,7 +36,7 @@ Step length for numerical differentiation of the potential-energy surface.
 **Type:** switch\
 **Default:** `2`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t55
+**Sources:** input.txt; 08 t32a; 08 t55
 
 Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.
 
@@ -42,6 +47,10 @@ Number of displacements per coordinate. More accurate numerical Hessians may als
 |---|---|
 | `1` | One displacement per coordinate. |
 | `2` | Two displacements per coordinate. More accurate but twice as slow. (**default**) |
+
+```{note}
+With the default, version 25 printed a FORWARD and a BACKWARD step for every coordinate.
+```
 
 **See also:** {ref}`convergence ($scf) <scf.convergence>`
 
@@ -64,8 +73,10 @@ across separate runs and then combined.
 
 ```{note}
 Not the same keyword as `$optimize steps`. Tested in version 25 with water (`ridft`, `displace=1`, steps 0–9):
-two partial runs (`steps=0,4`, `steps=5,9`) and a combining run with `steps=-1` gave the same frequencies as a
-one-run Hessian to within 0.4 cm⁻¹. The combining run does no SCF. The collecting command in `input.txt`
+two partial runs (`steps=0,4`, `steps=5,9`) and a combining run with `displace=1 steps=-1` gave the same
+frequencies, to within 0.4 cm⁻¹, as a one-run Hessian with the default `displace=2`. The combining run does no
+SCF. Keep the same `displace` value in every part and in the combining run. Each part writes one numbered group
+per displacement (`$Energy000`, `$Energy001`, …) on `num>` lines. The collecting command in `input.txt`
 (`grep "num>" … | sed "s/\.*num>//g"`) leaves the file names that `grep` adds at the start of each line;
 the example uses `grep -h` instead.
 ```
@@ -80,6 +91,8 @@ $d2edr2 disp=1 steps=19,27 $end    # mol.in3
 $d2edr2 disp=1 steps=28,36 $end    # mol.in4
 # collect the partial results into one input:
 grep -h "^num>" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num>//' >> mol.in
-# add the line below and run once more to process them:
-$d2edr2 steps=-1 $end
+# in mol.in, replace the $d2edr2 line with the one below and run once more to process them:
+$d2edr2 disp=1 steps=-1 $end
 ```
+
+**See also:** {ref}`E ($Energy) <Energy.E>`

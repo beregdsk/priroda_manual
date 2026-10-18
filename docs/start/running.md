@@ -276,8 +276,8 @@ crash, delete the leftovers yourself.
 <!-- src: input.txt; 04 #20, #460, #465; 02 §5.2; 08 Slurm tests (s02, s04); deletion after a normal run: 06 §4 (Tutorial v6) -->
 
 When neither `path=` nor `TMPDIR` is set, version 25 puts scratch files in `/tmp` (echo `Disk:   1g '/tmp'`), as
-version 6 did. `input.txt` says the current working directory instead, and a 2020 user report gives the directory of the
-input file; neither matches version 25. `/tmp` is often small or shared, so set `path=` or `TMPDIR` for real jobs.
+version 6 did. `input.txt` says the current working directory instead, and a 2020 user report gives the directory of
+the input file; neither matches version 25. `/tmp` is often small or shared, so set `path=` or `TMPDIR` for real jobs.
 <!-- src: input.txt; 04 #465, #20; 08 t64 (TMPDIR unset: /tmp; TMPDIR set: used) -->
 
 On Windows there is no `/tmp`. Without `path=` or `TMPDIR`, older versions stopped after printing
@@ -349,18 +349,17 @@ What is known about parallel performance:
 - **Memory per process does not drop** when you add processes, and in a parallel Hessian nearly all of the disk use is
   on rank 0.
   <!-- src: 04 #181, #185 -->
-- **RI-MP2 parallelizes better than DFT**, according to one user "at least in memory". The v5 documentation limits useful parallelism to
-  Nproc ≤ min(N_atoms, N_occ) and recommends a number of processes that divides the number of occupied orbitals
+- **RI-MP2 parallelizes better than DFT**, according to one user "at least in memory". The v5 documentation limits useful
+  parallelism to Nproc ≤ min(N_atoms, N_occ) and recommends a number of processes that divides the number of occupied orbitals
   nearly evenly. For N_occ = 14 it rates 2, 7 or 14 processes as best, 3 or 5 as acceptable, 6 as poor and 13 as very
   bad.
   <!-- src: 04 #343; 06 §3 -->
 - **Small RI jobs on many processes can hang** (reported in 2015; not tested in version 25). RI-MP2 and RI-DFT hang
-  with no message when a process receives no work. The output then shows a line `0 blocks ... on node N` after `integral estimates`. Run small RI jobs on one or a
-  few cores.
+  with no message when a process receives no work. The output then shows a line `0 blocks ... on node N` after
+  `integral estimates`. Run small RI jobs on one or a few cores.
   <!-- src: 05 §3.1 -->
-- **Several independent jobs often beat one parallel job.** On a 4-core machine in 2009, for jobs not
-  limited by disk, four single-core jobs ran about 30% faster in total than the same jobs run one after another on
-  4 cores each.
+- **Several independent jobs often beat one parallel job.** On a 4-core machine in 2009, for jobs not limited by
+  disk, four single-core jobs ran about 30% faster in total than the same jobs run one after another on 4 cores each.
   <!-- src: 03 §3 (amg, May 2009) -->
 
 :::{note}
@@ -418,9 +417,10 @@ Two lines matter more than they look:
 <!-- src: 08 Slurm tests (s01 as written; limit found by test: 192 variables run, 193 refused, exit 255) -->
 
 When a job is cancelled (`scancel`) or reaches its time limit, Slurm sends signal 15 (SIGTERM). Priroda then writes
-`process 0 got signal 15` to the output, deletes its own scratch files, and stops; Slurm's own log file says
-`CANCELLED` or `CANCELLED ... DUE TO TIME LIMIT`. The `rm` at the end of the script does not run, so the empty
-scratch directory stays. To remove it as well, set the clean-up as a trap before starting Priroda:
+`process 0 got signal 15` and then `process 0 got signal 2` to the output, deletes its own scratch files, and stops;
+Slurm's own log file says `CANCELLED` or `CANCELLED ... DUE TO TIME LIMIT`. The `rm` at the end of the script does
+not run, so the empty scratch directory stays. To remove it as well, set the clean-up as a trap before starting
+Priroda: replace the lines of the script from `env -i` through `exit $status` with these.
 
 ```text
 trap 'rm -rf "$TMPDIR"' EXIT
@@ -436,8 +436,8 @@ Two jobs of one process each ran side by side on the same node without trouble, 
 directory. <!-- src: 08 Slurm tests (s05) -->
 
 Under PBS/Torque the same steps read the number of cores from `$PBS_NODEFILE`. This script was not tested; it
-uses `env -i` and `exit $status` for the same reasons as the SLURM one. PBS often provides a per-job local
-scratch directory and deletes it after the job.
+uses `env -i` and `exit $status` for the same reasons as the SLURM one. Some PBS sites (e.g. KNC) provide a
+per-job local scratch directory and delete it after the job.
 <!-- src: 06 §7 (PBS_Tutorial) -->
 
 ```text
@@ -473,11 +473,11 @@ that site only.
 :::
 <!-- src: 06 §7 -->
 
-A run stopped from outside, by the batch system's time limit, `scancel` or `kill`, ends its output with
-`process 0 got signal 15` (SIGTERM) and no further message. Give long jobs enough wall time: in a version 25 test,
-the analytic Hessian of a 22-atom copper complex with L2 basis and a fine grid did not finish within an hour on one
+A run killed with signal 15 alone (for example by `timeout` or `kill`) ends its output with
+`process 0 got signal 15` and no further message; under Slurm a `process 0 got signal 2` line follows, as described
+above. Give long jobs enough wall time: in a version 25 test, the analytic Hessian of a 22-atom copper complex with L2 basis and a fine grid did not finish within an hour on one
 core, after a 6-step optimization that had taken most of that hour.
-<!-- src: 08 t72 -->
+<!-- src: 08 t72 (timeout kill); 08 Slurm tests (s02, s04) -->
 
 ## Input file requirements
 
@@ -493,8 +493,8 @@ The input is a plain text file. Write it in a plain-text editor, not a word proc
   break the basis-file name.
   <!-- src: 04 #64 -->
 
-An input with CRLF line endings fails in `$molecule`, because the carriage return becomes part of the keyword. The
-output stops after a line like this, where the keyword `z-matrix` or `cartesian` is shown garbled by the carriage
+Users of versions 6–10 reported that an input with CRLF line endings fails in `$molecule`, because the carriage
+return becomes part of the keyword. The output stops after a line like this, where the keyword `z-matrix` or `cartesian` is shown garbled by the carriage
 return:
 
 ```text
@@ -504,7 +504,7 @@ return:
 
 Variants seen are `?rtesian` for `cartesian`, `'z-matrix' ?`, and `'cartesian` followed by `' ?` on the next line. A
 less obvious case: an input edited in Word ran `task=scan` as a plain optimization.
-<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 -->
+<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) --> <!-- verify: CRLF symptoms in v25 -->
 
 To check and fix the line endings on Linux:
 
@@ -532,18 +532,19 @@ Give the basis file as a **full path**:
 $control task=optimize basis=/home/user/priroda/basis/basis.in $end
 ```
 
-A relative name is looked up relative to the directory the program runs in; in version 25, `basis=basis.in` works
-when the file is in that directory. One user's parallel run stopped after
+In version 25, `basis=basis.in` works when the file is in the directory you run from, which in the test was also
+the directory of the input. One user's parallel run stopped after
 the node list with `application called MPI_Abort(MPI_COMM_WORLD, 1) - process 0` and worked once the basis file was
 given with its full path.
 <!-- src: 04 #152-#154; 01 §2.4 (Windows: qm.in found in the current directory); 08 t03 -->
 
-- Put the name in double quotes if the path contains special characters: `basis="/data/basis sets/basis.in"`. Two
-  single quotes do not work; `basis=''3z.bas''` fails with `error opening file ''3z.bas''`.
+- The name can be put in double quotes: `basis="3z.bas"` works. Two single quotes do not work; `basis=''3z.bas''`
+  fails with `error opening file ''3z.bas''`.
   <!-- src: 03 §2; 02 §3 -->
 - Windows paths work: `basis=D:\NMR\Nature\basis\6-31+G(d)`.
   <!-- src: 04 #319 -->
-- The relativistic file `basis4.in` needs `four=1` in `$control`. Without it the basis input fails.
-  <!-- src: 04 #206-#208, #336 -->
+- The relativistic file `basis4.in` needs `four=1` in `$control`. Without it the basis input fails: in version 25
+  the output ends right after `Basis set input: '…/basis4.in'` with the single line `1?`.
+  <!-- src: 04 #206-#208, #336; 08 t49 -->
 
 Which basis files exist and which sets they contain is described with {ref}`$control basis <control.basis>`.

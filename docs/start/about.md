@@ -109,8 +109,8 @@ Notes to the table:
    molecule it silently computed only the UHF energy. It is not in `input.txt`; only the v5 keyword page and the
    program itself list it. <!-- src: 06 §3; 03 §11; 09; 08 t78a-d -->
 8. The Hessian of the excited state given by `state=` (version 25, water, `state=1,3`): numerical, with two
-   imaginary modes. The input geometry was a standard water geometry, not a stationary point of the excited state,
-   so these numbers only show negative curvature there. <!-- src: 08 t65a -->
+   imaginary modes. The geometry was the ground-state test geometry, not optimized for the excited state, so these
+   numbers only show negative curvature there. <!-- src: 08 t65a -->
 9. A TDDFT scan of the NH3 umbrella angle in its first excited state worked in version 25 when all three N–H
    bonds were fixed. With only one fixed, the excited state broke another N–H bond (it is dissociative), the
    excitation energy fell from 7.3 to 0.4 eV over 46 steps, and the run then failed: the excited-state equations
@@ -172,7 +172,8 @@ No dummy atoms, so no counterpoise (BSSE) correction
   <!-- src: 04 #146; input.txt -->
 
 No hybrid TDDFT
-: TDDFT is GGA only; see the warning under {ref}`what-priroda-does-not-do`'s preceding section.
+: TDDFT is GGA only. With a hybrid functional, version 25 drops the exact exchange without a warning (see the
+  warning above this section). <!-- src: 03 §11; 08 t46 -->
 
 Other gaps reported by users:
 
@@ -185,10 +186,10 @@ Other gaps reported by users:
 
 ## Version history
 
-Priroda numbers its versions with integers and prints the build date in the output banner, for example
-`Priroda 13 (2013.01.10)`. Energies differ slightly between versions, so keep every calculation you compare on one
-version.
-<!-- src: 01 §2.4; 04 #513, #514 -->
+Since version 6, Priroda numbers its versions with integers; versions 2 and 4 printed decimal sub-versions (2.10,
+4.07). The output banner shows the build date, for example `Priroda 13 (2013.01.10)`. Energies differ slightly
+between versions, so keep every calculation you compare on one version.
+<!-- src: 01 §2.4; 02 §3.3; 04 #513, #514 -->
 
 | Version | Build dates seen | Notes |
 |---|---|---|
@@ -198,29 +199,31 @@ version.
 | 6 | 2006.08.20 | Long the most widely used version: 32- and 64-bit Linux builds with MPI, and a Windows build (`p6.exe`). `optimize+hessian` was removed. Parallel Hessians use at most 2 cores. |
 | 7 | — | Sent as object files for linking against a local MPI library. |
 | 8 | 2008.09.05 | Built on request for a Myrinet cluster. |
-| 9 | 2009–2011 | `optimize+hessian` returned. In mid-2011 the developer fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD. |
+| 9 | — (forum posts 2009–2011) | `optimize+hessian` returned. In mid-2011 Laikov fixed a long-standing bug that in rare cases gave wrong gradients for MP2, MP4, CCSD, CCSD(T), CIS(2) and EOM-CCSD (from his e-mail, relayed on the qchem.ru forum). |
 | 10 | 2011.04.14 | Linux build `p` with a bundled `mpiexec`. |
 | 11 | — | Contains the semiempirical QM model. |
 | 13 | 2013.01.10, 2013.01.21, 2013.09.13 | Builds behind the example outputs on the official site. |
 | 14 | 2014.01.01 | Input geometry echoed with a `<` prefix (`<$molecule`). 8060-atom QM-model run on 32 processes. |
 | 15 | 2015.09.14 | Scalar-relativistic example (Pt complex). |
-| 16, 17 | 2016–2018 | The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the developer removed limits on SCF memory allocation and on the system size for Hessians. |
+| 16, 17 | — (forum posts 2016–2018) | The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the developer removed limits on SCF memory allocation and on the system size for Hessians. |
 | 23 | 2023.06.22 | Newest numbered version reported by users (2024). New functionals `LPBEVV` and `LPBEVVV`. |
-| 25 | 2025.02.28 | Banner `Priroda 25 (2025.02.28)`. The version used for the test runs behind this manual. Its date matches the `p4_d` build on the official site; `p_l` is dated 2025-04-14. The 2025 example inputs use `theory=DFT_n4`. |
+| 25 | 2025.02.28 | Banner `Priroda 25 (2025.02.28)`. The version used for the test runs behind this manual. Its date matches the `p4_d` build on the official site; `p_l` is dated 2025-04-14. One 2025 example input uses `theory=DFT_n4` (with `LPBEVV`). |
 
-<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §2.1, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.3 -->
+<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §1, §3.2, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.1, §5.3 -->
 
-Version numbers missing from the table (3, 12, 18–22, 24) do not appear in any source. The Russian file `Dft_ansi.txt`
-describes Priroda's predecessor, whose input had the groups `$control`, `$coordinates`, `$basis`, `$auxiliary`,
-`$guess`, `$SCF`, `$search`, `$force` and `$hessian`. Version 25 reads none of `$coordinates`, `$auxiliary`, `$search`,
-`$force` and `$hessian`; the geometry now goes in `$molecule`, and optimization settings in `$optimize`.
-<!-- src: 00 (Dft_ansi.txt); 09 (group list of the v25 executable) -->
+Versions 12, 18–22 and 24 do not appear in any source; version 3 is mentioned only for the change of the nucleus
+model. The Russian file `Dft_ansi.txt` describes Priroda's predecessor, whose input had the groups `$control`,
+`$coordinates`, `$basis`, `$auxiliary`, `$guess`, `$SCF`, `$search`, `$force` and `$hessian`. Version 25 reads none
+of `$coordinates`, `$auxiliary`, `$search`, `$force` and `$hessian` as an input group; the geometry now goes in `$molecule`, and optimization settings in
+`$optimize`. (`$AUXILIARY` survives as a section of the old-style basis files `3z.bas` and `sbk.bas` on the official
+site.)
+<!-- src: 00 (Dft_ansi.txt); 09 (group list of the v25 executable); 01 §6 (3z.bas) -->
 
 (how-to-cite)=
 ## How to cite
 
-Priroda has no single program paper for the current version. Users cite the papers below; the first three are the
-list given by the KNC wiki FAQ and repeated in the forums.
+Priroda has no single program paper for the current version. Users cite the papers below. The first five are the
+citation list of the KNC wiki FAQ; the first three are also given in the forums.
 
 Program:
 
@@ -260,4 +263,5 @@ version.
 <!-- src: 03 §1; 04 #302 -->
 
 Also cite the original papers for the functional, and for the Hamiltonian and nuclear model if you use `four=1`.
-{ref}`$dft functional <dft.functional>` and {ref}`$control four <control.four>` give them.
+{ref}`$dft functional <dft.functional>`, {ref}`$control four <control.four>` and
+{ref}`$control nucleus <control.nucleus>` give them.

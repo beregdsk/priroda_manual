@@ -2,15 +2,19 @@ group: d2edr2
 order: 110
 summary:
   en: Numerical Hessian by finite differences of the gradient.
+relevant_when: "numerical Hessian: task = hessian with theory = ridft | rimp2 | tddft | qm_n3, or $control derivative = numeric (an analytic dft Hessian has no displacement steps)"
 keywords:
   - name: length
     type: real
-    default: null
+    default: 0.001
+    units: au (bohr)
+    default_note:
+      en: "version 25 prints `Step 0.00100000 au FORWARD  for coordinate   1:` for each displacement."
     description:
       en: Step length for numerical differentiation of the potential-energy surface.
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t32a, t55 (raw output)"]
+    verified_against: "25 (2025.02.28)"
   - name: displace
     type: switch
     default: 2
@@ -19,9 +23,11 @@ keywords:
       - {value: "2", en: Two displacements per coordinate. More accurate but twice as slow., default: true}
     description:
       en: Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.
+    notes:
+      en: With the default, version 25 printed a FORWARD and a BACKWARD step for every coordinate.
     see_also: [scf.convergence]
     status: current
-    sources: ["input.txt", "08 t55"]
+    sources: ["input.txt", "08 t32a", "08 t55"]
     verified_against: "25 (2025.02.28)"
   - name: steps
     type: list
@@ -41,15 +47,17 @@ keywords:
       $d2edr2 disp=1 steps=28,36 $end    # mol.in4
       # collect the partial results into one input:
       grep -h "^num>" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num>//' >> mol.in
-      # add the line below and run once more to process them:
-      $d2edr2 steps=-1 $end
+      # in mol.in, replace the $d2edr2 line with the one below and run once more to process them:
+      $d2edr2 disp=1 steps=-1 $end
     notes:
       en: |
         Not the same keyword as `$optimize steps`. Tested in version 25 with water (`ridft`, `displace=1`, steps 0–9):
-        two partial runs (`steps=0,4`, `steps=5,9`) and a combining run with `steps=-1` gave the same frequencies as a
-        one-run Hessian to within 0.4 cm⁻¹. The combining run does no SCF. The collecting command in `input.txt`
+        two partial runs (`steps=0,4`, `steps=5,9`) and a combining run with `displace=1 steps=-1` gave the same
+        frequencies, to within 0.4 cm⁻¹, as a one-run Hessian with the default `displace=2`. The combining run does no
+        SCF. Each part writes one numbered group per displacement (`$Energy000`, `$Energy001`, …) on `num>` lines. The collecting command in `input.txt`
         (`grep "num>" … | sed "s/\.*num>//g"`) leaves the file names that `grep` adds at the start of each line;
         the example uses `grep -h` instead.
+    see_also: [Energy.E]
     status: current
-    sources: ["input.txt", "08 t55"]
+    sources: ["input.txt", "08 t55", "08 t32a, t32b, t53, t65"]
     verified_against: "25 (2025.02.28)"

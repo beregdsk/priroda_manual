@@ -9,21 +9,25 @@ sources it rests on.
 ## Test runs
 
 Version 25 test runs
-: Small test inputs (water, ammonia, OH) run on Priroda 25 (2025.02.28) in October 2026 for this manual. Where they
-  confirm or contradict an older source, the manual follows the run and says so. The inputs and outputs are kept with
-  the manual's source files.
+: Small test inputs run on Priroda 25 (2025.02.28) in October 2026 for this manual, first on the project owner's
+  Linux machine and in later rounds also on a 4-core Linux virtual machine. Most use water, ammonia, OH or O₂;
+  others use CO₂, acetylene, HCN, H₂, Cr₂ and a 22-atom Cu(II) complex. Where they confirm or contradict an older
+  source, the manual follows the run and says so. The inputs and outputs are kept with the manual's source files.
+  <!-- src: 08 header, rounds 3, 8, 13, 14 -->
 
 Version 25 executable
-: The Linux build `p4_d` from the official site, whose banner matches the test runs, was examined (not run) to list
-  every group, keyword, task and theory name it reads. This settles which names exist; it says nothing about what
-  they do. The result is on {ref}`binary-keywords`.
+: The Linux build `p4_d` from the official site, whose banner matches the test runs, was examined without running
+  it to list every group, keyword, task and theory name it reads; the same build was later used for the test runs
+  on the virtual machine. This list settles which names exist; it says nothing about what they do. The result is
+  on {ref}`binary-keywords`.
 
 ## Program files from the developer
 
 Official file index
 : <https://rad.chem.msu.ru/~laikov/p_w/>, read in October 2026 (page dated June 2025). A bare listing of executables,
   example inputs and outputs, basis-set and parameter files, and the helper scripts `ge`, `gm` and `grx`. It has no
-  prose documentation. Example outputs from this site are the strongest evidence for defaults and output formats.
+  prose documentation. Example outputs from this site (versions 13–15) are the strongest evidence for those
+  versions; for version 25, the test runs take precedence.
   Windows builds are in the `exe64/` subdirectory.
 
 ## Unofficial keyword lists
@@ -68,8 +72,8 @@ qchem.ru forum, thread "Quantum-chemical program Priroda"
 
 LIMOR page, Novosibirsk Institute of Organic Chemistry
 : <http://limor1.nioch.nsc.ru/priroda.html>. Example inputs, tables of basis-set names, and Perl helper scripts
-  (`pri`, `priin`, `pri2mol` and others) written by users. Much of what the manual says about the output format is
-  inferred from how these scripts parse it.
+  (`pri`, `priin`, `pri2mol` and others) written by users. Much of what the manual says about the output format was
+  first inferred from how these scripts parse it and has since been checked against version 25 output.
 
 ## Published papers
 

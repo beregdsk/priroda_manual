@@ -69,12 +69,13 @@ Convergence tolerance on the gradient (first value) and on the displacement (sec
 **Type:** list\
 **Default:** `0.125,0.015625`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12
+**Sources:** input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12, t15, t76b
 
-Default: echoed by version 25 as `Trust radius = 0.12500000 (max), 0.01562500 (min)`, both in internal coordinates and
-with symmetry (`sym=1`). v6, v13 and v15 echoed `0.2 (max), 0.0125 (min)` in internal coordinates, and
-0.1 / 0.00625 with `cartesian=1`. If only the maximum is given, the minimum is 1/16 of it and the initial value 1/4.
-`Dft.rtf` gives 0.5 (older version).
+Default: echoed by version 25 as `Trust radius = 0.12500000 (max), 0.01562500 (min)` in internal coordinates, with
+symmetry (`sym=1`) and with `cartesian=1`. v13 and v15 echoed 0.2 / 0.0125 in internal coordinates and
+0.1 / 0.00625 with `cartesian=1`; v6 echoed 0.2 / 0.0125 in Cartesian coordinates. `Dft.rtf` gives 0.5
+(older version). `input.txt` says that if only the maximum is given, the minimum is 1/16 of it and the initial
+value 1/4. In version 25 the default minimum is 1/8 of the maximum, so the 1/16 rule is not confirmed there.
 
 
 Trust radius (the largest allowed step), given as maximum, minimum and initial values.
@@ -127,8 +128,8 @@ given, the value of `step` is used; give only one of them.
 
 **Type:** switch\
 **Default:** `0`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.6; 04 #518
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** input.txt; 01 §4.6; 04 #518; 08 t11; 08 t76a-d
 
 Coordinate system for the optimization. The output reports `Coordinates: internal` or `cartesian`.
 
@@ -142,7 +143,9 @@ Coordinate system for the optimization. The output reports `Coordinates: interna
 
 ```{note}
 `cartesian=1` is the fix when the program crashes with `process 0 got signal 6` after a `too few` message in
-the internal-coordinate table.
+the internal-coordinate table. In version 25, bent CO2 and acetylene that became linear during the optimization
+converged in internal coordinates without that crash (the number of internal coordinates dropped instead), and
+also with `cartesian=1`.
 ```
 
 (optimize.back)=
@@ -197,7 +200,7 @@ In a scan the points include both ends: `points=4` gives s = 0, 1/3, 2/3 and 1. 
 **Type:** real\
 **Default:** `0.1`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h
+**Sources:** input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h (t77h: back=0 only)
 
 Default: `0.1` as echoed by version 25 (`r = 0.1000000000`); `Dft.rtf` gives 0.2 (older version).
 
@@ -207,9 +210,11 @@ this distance apart. The IRC coordinate is reported in bohr·amu^1/2.
 ```{note}
 `Vicinity of a Stationary Point(?) --- STOP.` ends an IRC that has reached the region of a minimum; in
 version 25 it was the normal end of a test IRC. Users have also seen it early, when the energy did not
-decrease on a step; changing the step size is the reported fix there. In a version 25 IRC of HCN ⇄ HNC,
-`radius=0.03`, `0.1` and `0.3` all reached both minima: about 65, 20 and 7 points, with the largest step
-stopping farthest from the minimum.
+decrease on a step; changing the step size is the reported fix there. The other normal end is
+`Energy Minimum Passed --- STOP.`, printed after a point that came out higher than the one before; in version
+25 it sometimes followed the `Vicinity` message. In a version 25 IRC of HCN ⇄ HNC, `radius=0.03` and `0.1`
+reached both minima (about 65 and 20 points per direction). `radius=0.3` was run towards HCN only: 7 points,
+stopping farther from the minimum than the smaller radii.
 ```
 
 (optimize.coordinates)=
@@ -253,14 +258,15 @@ List of redundant internal coordinates to use, each given as five integers.
 **Type:** list\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 02 §3.2; 03 §5 (wish list); 04 #372-#373; 08 t37
+**Sources:** input.txt; 02 §3.2; 03 §5 (2010 wish list); 04 #372-#373; 08 t37; 09
 
 Internal coordinates to keep fixed during the optimization, in the same five-integer format as
 `coordinates`. Several entries are separated by commas or spaces.
 
 ```{note}
-Atoms cannot be frozen in Cartesian space; only internal coordinates can be fixed. Two coordinates also cannot
-be constrained to stay equal.
+Users reported in 2010 that atoms could not be frozen in Cartesian space and that two coordinates could not be
+constrained to stay equal. This was not checked in version 25, whose executable contains `$optimize` names of
+unknown meaning (`fragment`, `weight`, `local`) and restraint groups (`$anchor`, `$confine`).
 ```
 
 **See also:** {ref}`value ($optimize) <optimize.value>`, {ref}`coordinates ($optimize) <optimize.coordinates>`
@@ -350,9 +356,9 @@ Amount of optimization output.
 **Status:** undocumented · verified on 25 (2025.02.28)\
 **Sources:** 01 §4.6; 04 #481; 09; 08 t15; 08 t30b
 
-The full name of the `sym=1` used in the official 2023–2025 example inputs (any unique prefix is
-accepted). In version 25, together with `$molecule sym=1,0.01`,
-the optimizer switched to Cartesian coordinates (`Coordinates: cartesian`), printed `symmetry: C3v (6)` at
+Keeps point-group symmetry during the optimization (the optimizer switches to Cartesian coordinates); needs
+`$molecule sym=` as well. The official 2023–2025 example inputs write it as the prefix `sym=1`. In version 25,
+together with `$molecule sym=1,0.01`, the optimizer switched to Cartesian coordinates (`Coordinates: cartesian`), printed `symmetry: C3v (6)` at
 every step, and returned an exactly symmetric structure followed by `MOL> symmetry: C3v`. Without
 `$molecule sym=`, `$optimize sym=1` only switches to Cartesian coordinates and reports `symmetry: C1 (1)`,
 so give both options.
