@@ -1,0 +1,15 @@
+Priroda 20 (2021.03.18)
+copyright (c) Dimitri N. Laikov
+
+ date: Sun Oct 18 17:49:12 2026
+
+ node   0: 'Egor'
+
+ Memory: 256m (256m)
+ Disk:   1g '.'
+
+
+ molecule input: ''
+'cartesian' ?
+
+  process 0 got signal 6
