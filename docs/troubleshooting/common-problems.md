@@ -5,8 +5,8 @@ This chapter is arranged by symptom. Each entry names the likely cause and the f
 
 Almost everything here comes from user forums, not from the developer. Each fix says how well it is supported:
 "confirmed by several users" means more than one person reported that the fix worked, and "single report" means one
-user posted it and nobody confirmed it. Many reports date from Priroda 6 to 10 (2009–2015). Where a problem may
-have been fixed in later builds, the entry says so.
+user posted it and nobody confirmed it. Most reports date from Priroda 6 to 10 (about 2009–2015); a few are from 2008
+or from 2016–2026. Where a problem may have been fixed in later builds, the entry says so.
 
 :::{note}
 Most fixes below have not been checked against a current Priroda binary. Where a test run on version 25
@@ -16,11 +16,14 @@ Most fixes below have not been checked against a current Priroda binary. Where a
 (troubleshooting.input)=
 ## The input is not read, or is read wrongly
 
-When Priroda cannot parse the input it usually stops early, often with no explanation. Before anything else, open
-the output and check what it echoed back: the `Memory:` and `Disk:` lines, the `formula:` line, the summary box
-(number of atoms, charge, multiplicity, method, functional), the `scf:` line and the `grid:` line. If a value you set
-is not shown there, Priroda did not read it.
-<!-- src: 05 §5 (echo lines), 04 #319; 08 t01 (v25 echo lines) -->
+When Priroda cannot parse the input it often stops early, with little or no explanation. Just as often a mistake is
+silently ignored and the run goes on: in version 25 a group written as `&dft` was skipped, an unknown `theory` ran
+Hartree–Fock, an unknown `task` only set up the job, keywords in a group the task does not read were not checked,
+and atomic numbers written as `8.0` gave a wrong molecule (see below). Before anything else, open the output and check
+what it echoed back: the `Memory:` and `Disk:` lines, the `formula:` line, the summary box (number of atoms, charge,
+multiplicity, method, functional), the `scf:` line and the `grid:` line. If a value you set is not shown there,
+Priroda did not read it.
+<!-- src: 05 §5 (echo lines), 04 #319; 08 t01 (v25 echo lines); 08 t23, t50b, t50, t40c, t09 (silently ignored) -->
 
 ### Output stops after `molecule input: ''`
 
@@ -30,7 +33,7 @@ continues with garbled text.
 
 **Cause.** In almost every reported case the input file had Windows (CRLF) line endings. The tail of the output then
 shows a mangled keyword followed by `?`, for example `' ?matrix`, `?rtesian` or `'z-matrix' ?`. Inputs saved as
-Unicode, or edited in Word, fail the same way. Word's "save as text" still writes CRLF line endings.
+Unicode, or edited in Word, were also reported not to be read. Word's "save as text" still writes CRLF line endings.
 <!-- src: 04 #63-#65, #104, #113, #117; 03 §2 (Dimylko, amg) -->
 
 **Fix.** Save the input as plain ASCII text with Unix (LF) line endings, for example with `dos2unix input.in`.
@@ -47,9 +50,9 @@ energy. An older version was reported to stop with `illegal charge/multiplicity`
 integers, and check the `formula:` line and the atom count at the top of every output.
 <!-- src: 03 §5 (Evgeniy, Aug 2011); 08 t09 -->
 
-Avoid Cyrillic letters and spaces in the computer name, directory names and file names. One user's problem with this
-output went away after he had dealt with both line endings and such names.
-<!-- src: 03 §2 (amg, Nov 2011; Dimylko resolved) -->
+One experienced user also advises avoiding Cyrillic letters and spaces in the computer name, directory names and file
+names. In the case where he gave this advice, fixing the line endings alone was reported to solve the problem.
+<!-- src: 03 §2 (amg, Nov 2011; Dimylko resolved "after fixing line endings", 03 line 517) -->
 
 ### `task=scan` runs an optimization, or nothing works on one machine
 
@@ -57,10 +60,11 @@ An input that runs on one computer but not on another, or a `task=scan` that sil
 been traced to the same encoding problem: an input edited in Word or saved as Unicode. Fix it as above.
 <!-- src: 04 #110, #113 -->
 
-Two `task=` lines in one input do not chain jobs. Only the first one runs, and no error is printed. The only combined
-task that works is `task=optimize+hessian`; see {ref}`task <control.task>`. Run other sequences, such as optimization
-followed by NMR, as separate jobs.
-<!-- src: 04 #69, #70 -->
+Two `task=` lines in one input do not chain jobs: in a 2011 report (version 6) only the first one ran, and no error
+was printed. The only combined task name is `task=optimize+hessian`; see {ref}`task <control.task>`. A user in 2011
+added that even this one did not work in all versions. Run other sequences, such as optimization followed by NMR, as
+separate jobs.
+<!-- src: 04 #69, #70; 09 (optimize+hessian is the only combined task name in the v25 binary) --> <!-- verify -->
 
 ### The basis file is not found
 
@@ -103,10 +107,10 @@ On Windows, `cd` into the folder with the input before running `p.exe input.in o
 ### Output stops at `0: opening file /tmp/...` (Windows)
 
 Old Windows builds put scratch files in `/tmp` when nothing else is set (the output echoes `Disk:   1 GB '/tmp'`),
-and Windows has no `/tmp`. Set the scratch directory
-explicitly, for example `$system path=. $end`, or set the `TMPDIR` environment variable before starting the program.
-This is the oldest known problem in both forums and the fix is well established. See {ref}`path <system.path>`.
-<!-- src: 03 §2 (#0, GemmaNC 2009); 04 #20, #21, #128 -->
+and Windows has no `/tmp`. The Linux version 25 has the same default and also honours `TMPDIR`. Set the scratch
+directory explicitly, for example `$system path=. $end`, or set the `TMPDIR` environment variable before starting the
+program. This is the oldest known problem in both forums and the fix is well established. See {ref}`path <system.path>`.
+<!-- src: 03 §2 (#0, GemmaNC 2009); 04 #20, #21, #128; 08 t64a, t64b -->
 
 ### `$scf` settings are ignored or rejected
 
@@ -117,12 +121,12 @@ The parser has a problem when {ref}`convergence <scf.convergence>` is directly f
 $scf convergence=1e-7 iterations=250 $end
 ```
 
-stops the run after the basis-set echo with `*** error in '$scf' : unknown name terations`: the value list of
-`convergence` takes the first letter of the next keyword. With {ref}`procedure=bfgs <scf.procedure>` between them,
-`$scf convergence=1e-7 procedure=bfgs iterations=250 $end`, both values are read. Forum users of 2015 builds saw the
-same error as `unknown name erations`, and one found that the pair worked only with `procedure=bfgs`, which this
-explains.
-<!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b -->
+stops the run after the basis-set echo with `*** error in '$scf' : unknown name terations`. The message names the
+next keyword with its first letters missing; how many are missing depends on the value: with `convergence=1e-10` the
+same run printed `unknown name erations`, as forum users of 2015 builds also reported. With
+{ref}`procedure=bfgs <scf.procedure>` between them, `$scf convergence=1e-7 procedure=bfgs iterations=250 $end`, both
+values are read; one forum user found that the pair worked only with `procedure=bfgs`.
+<!-- src: 05 §5.1 (EvgeniX, amge 2015); 04 #322-#324; 08 t07a, t07b; 08 Slurm tests (first attempt, s02: convergence=1e-10 iterations=200 gave erations) -->
 
 Further tests on version 25 narrowed it down. The problem is a `convergence=` with **one** value followed by another
 keyword, also on the next line. Both of these work:
@@ -132,7 +136,7 @@ $scf convergence=1e-7,1e-3 iterations=250 $end
 $scf iterations=250 convergence=1e-7 $end
 ```
 
-So give both values, or put `convergence` last, and confirm the values in the `scf:` echo line of the output, for
+So give `iterations` before `convergence`, or give `convergence` two values, and confirm the values in the `scf:` echo line of the output, for
 example `scf: conv = 1.0e-07, 1.0e-03; iter=250,16`.
 <!-- src: 08 t22a, t22b, t22c -->
 
@@ -157,9 +161,10 @@ Signs of trouble in the SCF table:
 :::{warning}
 In version 25, a single-point run whose SCF hits the iteration limit prints `no convergence!` and then carries on:
 it prints an energy, orbitals and properties and exits normally. An OH radical with default settings did this after
-the default 32 iterations, still creeping towards convergence. Always check for `converged!`.
+the default 32 iterations, still creeping towards convergence; with `iterations=100` it converged after 34. Always
+check for `converged!`.
 :::
-<!-- src: 08 t10 -->
+<!-- src: 08 t10, t28 -->
 
 The DFT SCF runs on a coarse grid first and then switches to the final grid; the switch is marked by a new
 `grid:` line with the number of points. A short jump in the gradient at that point is normal. Steady growth after it is not (see
@@ -168,29 +173,31 @@ The DFT SCF runs on a coarse grid first and then switches to the final grid; the
 
 ### Check the input first
 
-In several reported failures the SCF was not the real problem. Before changing SCF settings, check:
+In one well-documented failure, several input errors were present besides the SCF trouble. Before changing SCF
+settings, check:
 
 - **Multiplicity.** {ref}`mult <molecule.mult>` must match the electron count. One failing input gave `mult=0` for
   an odd number of electrons, and the summary box showed `Spin multiplicity 0`.
 - **Theory and functional.** A hybrid functional with `theory=dft` is wrong; see
   {ref}`troubleshooting.hybrid`.
-- **Basis.** Non-native basis sets and diffuse functions converge badly. Priroda's auxiliary (fitting) bases are not
-  designed for foreign orbital bases. Use a native basis, or start from a geometry optimized in one.
+- **Basis.** Non-native basis sets and diffuse functions converge badly. A non-native basis file must also supply a
+  fitting (auxiliary) basis, and a badly prepared one causes trouble. Use a native basis, or start from a geometry
+  optimized in one.
 - **Geometry.** A very poor starting geometry can by itself prevent SCF convergence. Pre-optimize with a cheap pure
   functional (for example PBE with `theory=dft`) before switching to the target method.
 <!-- src: 04 #319 (input), #320, #321 (amge); 04 §8 "My observations on #319" (the research note's own analysis, not posted in the thread) -->
 
 ### Restart from saved vectors
 
-This is the technique most often recommended by experienced users, on both forums, and the limor1 `pri` driver
-script automates it:
+This technique is recommended on both forums (by amg and by amge, who may be the same person), and the limor1 `pri`
+driver script automates it:
 <!-- src: 03 §7 (amg 2010, Gd@C60 mult=7); 04 #306 (amge 2014); 02 §5.3 (pri) -->
 
 1. Cap the number of SCF iterations at a moderate value, for example `iterations=10` in {ref}`$scf <group.scf>`.
    Choose the cap so that `hmin` does not run away.
 2. Have Priroda write its vectors with {ref}`save <control.save>` in {ref}`$control <group.control>`.
-3. When the run stops with `SCF is far from convergence`, add `$guess read=1 $end` (see {ref}`read <guess.read>`)
-   and rerun with the latest geometry.
+3. When the SCF ends with `no convergence!` (older versions stopped with `SCF is far from convergence`), add
+   `$guess read=1 $end` (see {ref}`read <guess.read>`) and rerun with the latest geometry.
 4. Repeat until the SCF converges.
 
 ```text
@@ -203,7 +210,7 @@ $end
 $scf iterations=10 $end
 $guess read=1 $end
 ```
-<!-- src: 08 t27, t71b -->
+<!-- src: 08 t27, t71b (both task=energy; what a v25 optimization does after an unconverged SCF is untested) --> <!-- verify -->
 
 In version 25 the output of a restarted run shows `Initial Guess (-1)` and `vectors from 'job.vec'`; a normal start
 shows `Initial Guess (2)`. Each restart continues from where the previous run stopped, and goes straight to the
@@ -213,7 +220,7 @@ run, the loop converged in the fourth run, after about 12 iterations in all.
 
 Leave out the `$guess` line in the first run. Vectors from a converged run of an easier case, or of the same molecule
 at another geometry, also work as a starting point.
-<!-- src: 03 §7 (sanya, amg agreed) -->
+<!-- src: 03 §7 (sanya, amg agreed); 05 §7.1 (EvgeniX, fix 2); 08 t74b (vectors of another multiplicity accepted) -->
 
 ### Switch the SCF procedure and tighten the grid
 
@@ -253,9 +260,9 @@ diverged, with the total energy reaching +29 hartree. BLYP behaved the same way.
 <!-- src: 05 §7.1 (EvgeniX 2015) -->
 
 :::{note}
-The same input converges in version 25: with the original BFGS settings in 48 iterations, and with the default
-Newton–Raphson procedure in 10 iterations and about half the time. The fine-grid divergence was a problem of the
-2015 build. If you meet it in a current version, the fixes below are still the ones to try.
+The same molecule and SCF settings, run as a single point, converge in version 25: with the original BFGS settings in
+48 iterations, and with the default Newton–Raphson procedure in 10 iterations and about half the time. The
+divergence did not reproduce. If you meet it in a current version, the fixes below are still the ones to try.
 :::
 <!-- src: 08 t70a, t70b -->
 
@@ -267,8 +274,8 @@ Newton–Raphson procedure in 10 iterations and about half the time. The fine-gr
   $scf restrict=0 convergence=1e-10 $end
   ```
   Each optimization step then starts from the previous wavefunction. In version 25 this route converged the
-  optimization of the complex in 6 steps, with every SCF converging, and the SCF of the Hessian step converged on
-  the fine grid as well. <!-- src: 05 §7.1 (amge); 08 t72 -->
+  optimization of the complex in 6 steps, with every SCF converging, and the Hessian finished: 32 minutes in all on
+  8 processes, with one small imaginary frequency (6.11i cm⁻¹). <!-- src: 05 §7.1 (amge); 08 t72 (round 9, 8 processes) -->
 - Save the wavefunction at the start of the optimization with {ref}`save <control.save>` and read it into the Hessian
   job with `$guess read=1`. For an already optimized structure, the guess built from scratch turned out to be poor.
   <!-- src: 05 §7.1 (EvgeniX) -->
@@ -276,39 +283,11 @@ Newton–Raphson procedure in 10 iterations and about half the time. The fine-gr
 (troubleshooting.open-shell-singlet)=
 ### Open-shell singlets and broken symmetry
 
-For an open-shell (broken-symmetry) singlet, the older sources recommend an unrestricted calculation with the HOMO
-and LUMO of the guess mixed:
-
-```text
-$scf restrict=0 $end
-$guess mix=1 $end
-```
-<!-- src: 03 §7; 06 §10 (Alder-ene example); keywords/guess.yaml mix -->
-
-:::{warning}
-In version 25 tests `mix=1` had no visible effect: no run with it broke the symmetry, not even stretched H2 with
-UHF, the textbook case. Use the triplet-vectors route described below, and check the result.
-:::
-<!-- src: 08 t60, t73, t79 -->
-
-See {ref}`restrict <scf.restrict>` and {ref}`mix <guess.mix>`. With non-RI pure DFT (`theory=dft`, PBE or BLYP), one
-user found that `restrict=0 mix=1` converged back to the restricted solution, with identical energies and identical
-alpha and beta orbital energies. RI-DFT broke the symmetry in his case. Another user notes that pure GGA functionals
-often do not break symmetry, and suggests a hybrid (with `theory=ridft`) or a Hartree–Fock calculation first.
-<!-- src: 03 §7 (Evgeniy Feb 2011; qadir) -->
-
-In version 25 tests, `restrict=0 mix=1` converged back to the restricted solution for singlet O2, with both
-`theory=dft` (PBE) and `theory=ridft` (PBE1), and for the Cr2 dimer with both the default and the `bfgs` procedure:
-the energies equalled the closed-shell ones exactly. The same happened for H2 stretched to 2.5 Å, with both HF and
-PBE, for every integer value of `mix` tried (1, 2, −1, 10, 45, 90): the singlet stayed at the restricted energy,
-−0.8632 hartree for HF, although the triplet lies at −0.9972. An unrestricted SCF in Priroda keeps whatever symmetry
-its starting orbitals have, and `mix=1` did not supply the asymmetry.
-<!-- src: 08 t60a, t60b, t73a-c, t79a-e and the round-14 runs; t48b (closed-shell reference) -->
-
-Starting the singlet from the vectors of the triplet worked: run the triplet with {ref}`save <control.save>`, then
-the singlet with `restrict=0` and `$guess read=1` (the program accepts vectors of another multiplicity). For O2 this
-converged, after many iterations, to a broken-symmetry singlet 0.048 hartree below the closed-shell one and 0.015
-hartree above the triplet. Give such runs plenty of {ref}`iterations <scf.iterations>`.
+For an open-shell (broken-symmetry) singlet, start the unrestricted singlet from the vectors of the triplet. This is
+the route that worked in version 25 tests: run the triplet with {ref}`save <control.save>`, then the singlet with
+`restrict=0` and `$guess read=1` (the program accepts vectors of another multiplicity). For O2 this converged, after
+many iterations, to a broken-symmetry singlet 0.048 hartree below the closed-shell one and 0.015 hartree above the
+triplet. Give such runs plenty of {ref}`iterations <scf.iterations>`, and check the result as described below.
 <!-- src: 08 t74a-c -->
 
 This route works only when the triplet's orbitals themselves give the singlet an asymmetric start. For O2 they did,
@@ -323,6 +302,37 @@ vectors with `restrict=1`, which fell back to the closed-shell energy. Use the s
 decide.
 <!-- src: 08 t74c, t74d -->
 
+The older sources recommend instead an unrestricted calculation with the HOMO and LUMO of the guess mixed:
+
+```text
+$scf restrict=0 $end
+$guess mix=1 $end
+```
+<!-- src: 03 §7; 06 §10 (Alder-ene example); keywords/guess.yaml mix -->
+
+:::{warning}
+In version 25 tests `mix=1` had no visible effect: no run with it broke the symmetry, not even stretched H2 with
+UHF, the textbook case. Use the triplet-vectors route above, and check the result.
+:::
+<!-- src: 08 t60, t73, t79 -->
+
+See {ref}`restrict <scf.restrict>` and {ref}`mix <guess.mix>`. In version 25 tests, `restrict=0 mix=1` converged back
+to the restricted solution for singlet O2 with `theory=dft` (PBE) and for the Cr2 dimer with both the default and the
+`bfgs` procedure: the energies equalled the closed-shell ones exactly. With `theory=ridft` (PBE1) the O2 run also gave
+identical alpha and beta orbital energies, but no closed-shell reference was run, so that case is undecided. The same
+happened for H2 stretched to 2.5 Å, with both HF and PBE, for every integer value of `mix` tried (1, 2, −1, 10, 45,
+90): the singlet stayed at the restricted energy, −0.8632 hartree for HF, although the triplet lies at −0.9972. An
+unrestricted SCF in Priroda keeps whatever symmetry its starting orbitals have, and `mix=1` did not supply the
+asymmetry.
+<!-- src: 08 t60a, t60b, t73a-c, t79a-e and the round-14 runs; t48b (closed-shell reference for PBE only) -->
+
+In a 2011 forum report with non-RI pure DFT (`theory=dft`, PBE or BLYP), `restrict=0 mix=1` likewise converged back
+to the restricted solution, with identical energies and identical alpha and beta orbital energies. With RI-DFT the
+same user got an unrestricted energy about 3 microhartree lower, which he took as broken symmetry. Another user notes
+that pure GGA functionals often do not break symmetry, and suggests a hybrid (with `theory=ridft`) or a Hartree–Fock
+calculation first.
+<!-- src: 03 §7 (Evgeniy Feb 2011: RI-PBE 3.3e-6, RI-BLYP 2.8e-6 hartree lower; qadir) -->
+
 (troubleshooting.lumo-below-homo)=
 ### LUMO below the HOMO
 
@@ -333,15 +343,16 @@ set of degenerate orbitals that a closed-shell calculation cannot fill in order.
 
 The second case happened for singlet O2 in version 25 tests. In a closed-shell (`mult=1`) run the pair occupies one
 of the two degenerate π* orbitals. The occupied orbital ended at −0.178 hartree, above the empty one at −0.219.
-Starting with the two orbitals swapped ({ref}`na <guess.na>`, {ref}`nb <guess.nb>`), or from the triplet's vectors
-with `restrict=1`, gave the same state and energy, since filling the other π* orbital is equivalent by symmetry. For such
+Starting with the two orbitals swapped ({ref}`na <guess.na>`, {ref}`nb <guess.nb>`; whether the swap took effect is
+not shown in the output), or from the triplet's vectors with `restrict=1`, gave the same state and energy, since filling the other π* orbital is equivalent by symmetry. For such
 molecules the closed-shell energy is not a meaningful singlet energy: use an unrestricted broken-symmetry run (see
 {ref}`troubleshooting.open-shell-singlet`) or the high-spin state.
 <!-- src: 08 t48b, t74d, t74e -->
 
 The first case could not be produced in version 25 tests. Water started with its HOMO and LUMO swapped, either from
 the default guess or from vectors read from a file, went back to the ground state every time; the swap only made
-the SCF take two to three times more iterations. So LUMO-below-HOMO most likely points to degenerate orbitals.
+the SCF take two to three times more iterations. In the version 25 tests, the only persistent case was the
+degenerate shell of O2.
 <!-- src: 08 t75a-d -->
 
 :::{note}

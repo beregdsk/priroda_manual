@@ -24,8 +24,8 @@ keywords:
       - {value: conical, en: "Conical intersection of states 0 and 1 (v9 banner). Untested.", status: undocumented}
       - {value: anharmonic, en: Anharmonic corrections to vibrational energies; slow., status: undocumented}
       - {value: opt_n1, en: "Optimizer for very large systems (used for 8060 atoms with `theory=qm_n2`). Pairs with `$optimize mod=1`.", status: undocumented}
-      - {value: thermostat, en: "Molecular dynamics with a thermostat; see `$dynamic`. Ran with every tested theory in version 25.", status: undocumented}
-      - {value: uniq, en: "Filter duplicate structures among several `$molecule` blocks; see `$uniq`.", status: undocumented}
+      - {value: thermostat, en: "Molecular dynamics with a thermostat; see `$dynamic`. In version 25 it ran with `dft`, `ridft`, `rimp2`, `ccsd`, `tddft` and `qm_n3`.", status: undocumented}
+      - {value: uniq, en: "Apparently filters duplicate structures among several `$molecule` blocks; see `$uniq` (inferred from the official example; untested).", status: undocumented}
     description:
       en: Job type.
     notes:
@@ -33,13 +33,14 @@ keywords:
         Two `task=` lines do not chain jobs: only the first one runs. Apart from `optimize+hessian`, sequences such
         as optimize→NMR need separate runs or an external driver script.
         **A misspelled task name gives no error**: version 25 sets up the run and stops quietly, as for `check`.
-        `task=critical` does not work; density critical points come from `print=+density`.
+        `critical` is not a task name in version 25, so it stops silently like any unknown task. Users found that
+        `task=crytical` gave nothing; density critical points come from `print=+density`.
         `task=QM` appears only in the header of the shipped `qm.in` parameter file and is not a user task.
-        The binary contains further task words (`IRC4`, `PATHX`, `PATHR`, `STERIC`, `POLARIZABILITY`, `MMDYNAMIC`,
-        and others) that are untested or need data that is not distributed.
+        The version 25 program contains further task names (`irc4`, `pathx`, `pathr`, `chain`, `walk`, `steric`,
+        `polarizability`, and others) that are untested or need data that is not distributed.
     see_also: [optimize.saddle, optimize.points, control.print]
     status: current
-    sources: ["input.txt", "Dft.rtf (default gradient, check)", "02 §3.2 (pri: default gradient)", "03 §5", "04 #69-#73, #145, #478, #497", "01 §4.2", "08 t02, t18, t26, t34, t36, t37", "09", "08 t50, t57a"]
+    sources: ["input.txt", "Dft.rtf (default gradient, check)", "02 §3.2 (pri: default gradient)", "03 §5", "04 #69-#73, #145, #478, #497", "01 §4.2", "08 t02, t18, t26, t34, t36, t37", "09", "08 t50, t57a", "08 t13, t14, t56, t69a-f"]
     verified_against: "25 (2025.02.28)"
   - name: theory
     type: enum
@@ -58,11 +59,11 @@ keywords:
       - {value: mp4dq, en: MP4(DQ).}
       - {value: mp4sdq, en: MP4(SDQ).}
       - {value: mp4sdtq, en: MP4(SDTQ) (RHF).}
-      - {value: ccs, en: CCS. With an HF reference it returns the HF energy.}
+      - {value: ccs, en: "CCS. Returns the HF energy, as expected: CCS adds no correlation energy to an HF reference."}
       - {value: ccd, en: CCD.}
       - {value: ccsd, en: "CCSD (RHF/UHF)."}
       - {value: ccsd4t, en: CCSD(T).}
-      - {value: ccsdsd, en: "CCSD for an excited state, closed-shell (RHF) only; the state is chosen with `state=`, as for `cis` and `tddft`. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state's total energy in `eng>`. Without `state=` it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD by the v5 keyword page.", status: undocumented}
+      - {value: ccsdsd, en: "CCSD for an excited state, closed-shell (RHF) only; the state is chosen with `state=`, as for `cis` and `tddft`. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state's total energy in `eng>`. Without `state=` it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD for excited states (RHF) by the v5 keyword page."}
       - {value: qm_n3, en: "Laikov's semiempirical QM model. Needs `basis=qm.in` and no `set=`; parameters exist for H, Li–F, Na–Cl, Sc–Cu. Runs in version 25, with a short output of its own (no summary box, no `E  =` line).", status: undocumented}
       - {value: qm_n2, en: "Earlier variant of the QM model, used for very large systems with `task=opt_n1`.", status: undocumented}
     description:
@@ -75,20 +76,20 @@ keywords:
         or `tddft`, older versions silently drop the exact exchange. In version 25, `theory=dft` stops right after
         printing the basis sets, with no error message in the output and exit status 1. `theory=tddft` still runs:
         it reports `PBE1` in the summary box but leaves out the exact exchange, so the energies are wrong (water:
-        `Ex` -6.61 instead of about -8.95 hartree, total energy about 2.2 hartree too high), and the run ends
+        `Ex` -6.61 instead of about -8.95 hartree, ground-state total energy about 2.2 hartree above PBE), and the run ends
         normally.
 
-        The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. In version 25,
+        The ab initio list comes from the v5 keyword page and a 2011 user test (v6), which was energy-only. In version 25,
         water energies run to completion with `hf`, `rihf`, `cis`, `mp2`, `mp3`, `mp4dq`, `mp4sdq`, `mp4sdtq`, `ccs`,
         `ccd`, `ccsd` and `ccsd4t`; an `hf` optimization also worked, so HF gradients exist. For `ridft` and
         `rimp2`, `task=hessian` works by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND
         DERIVATIVES`); for `dft` it is analytic. These
         were reported **not** working in v6: `mp4`, `rimp4`, `rimp4sdtq`, `rimp4sdq`, `riccsd`, `riccsd4t`. They
-        either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
-        CCSDT, …); none has been reported working.
+        either crash or return the HF energy. The version 25 program contains many more method names (`MCSCF`,
+        `CASSCF`, `CISD`, `LCCD+MP2`, …); none has been tested.
     see_also: [dft.functional]
     status: current
-    sources: ["input.txt", "Dft.rtf (default dft)", "06 §3 (v5 ab initio list)", "03 §5 (Evgeniy 2011 test)", "04 #96, #99, #307-#310", "01 §3.1, §4.2", "08 t02, t08, t17, t31-t33, t38, t39, t46", "08 t50b"]
+    sources: ["input.txt", "Dft.rtf (default dft)", "06 §3 (v5 ab initio list)", "03 §5 (Evgeniy 2011 test)", "04 #96, #99, #307-#310", "01 §3.1, §4.2", "08 t02, t08, t17, t31-t33, t38, t39, t46", "08 t50b", "08 t78a-d", "09"]
     verified_against: "25 (2025.02.28)"
   - name: state
     type: list
@@ -115,13 +116,13 @@ keywords:
     notes:
       en: |
         Shipped files include `basis.in` (Λ/L family, default set `L1`), `basis4.in` (scalar-relativistic L family;
-        needs `four=1`), `3z.bas` (DFT only, Z ≤ 54), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
+        needs `four=1`), `3z.bas` (Z ≤ 54; recommended for DFT only, as users report large errors with ab initio methods), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
         `b4s*.in`, and `qm.in`. In version 25 a relative name such as `basis=basis.in` works when the file is in the
         directory the program is started from. An absolute path is still the safest choice for parallel and batch
         runs.
     see_also: [molecule.set, control.four]
     status: current
-    sources: ["input.txt", "Dft.rtf", "01 §4.11, §6", "03 §5", "04 §0", "08 t03"]
+    sources: ["input.txt", "Dft.rtf", "01 §4.11, §6", "03 §5, §6", "04 §0, #257", "08 t03"]
     verified_against: "25 (2025.02.28)"
   - name: four
     type: switch
@@ -145,6 +146,7 @@ keywords:
     values:
       - {value: finite, en: "Gaussian nuclear model (L. Visscher, K. G. Dyall, At. Data Nucl. Data Tables 67 (1997) 207–224)."}
       - {value: point, en: Point-nucleus model.}
+      - {value: dual, en: "Found in the version 25 program; its meaning is unknown.", status: undocumented}
     description:
       en: Nuclear model. The official example inputs write it as `nuc=finite`.
     notes:
@@ -154,7 +156,7 @@ keywords:
         element.
     see_also: [control.four]
     status: current
-    sources: ["input.txt", "01 §4.2", "06 §1", "08 t35"]
+    sources: ["input.txt", "01 §4.2", "06 §1", "08 t35", "09 (dual)"]
     verified_against: "25 (2025.02.28)"
   - name: print
     type: flags

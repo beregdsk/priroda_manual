@@ -2,32 +2,37 @@
 # Getting started
 
 This chapter takes you through three things: a single-point energy of water, a geometry optimization of ammonia
-followed by a Hessian that proves the structure is a minimum, and the parts of the output you need to read along the
-way. To download the program, see {ref}`obtaining-priroda`; for the examples you need one Linux executable (for
-example `p`) and `basis.in`. {doc}`running` covers running the program in more detail.
+followed by a Hessian that confirms the structure is a minimum, and the parts of the output you need to read along
+the way. To download the program, see {ref}`obtaining-priroda`; for the examples you need one Linux executable and
+`basis.in`. {doc}`running` covers running the program in more detail.
 
-The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. A few
-excerpts come from outputs posted by users of older versions; the text says so where it matters.
-<!-- src: 08 -->
+The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. That
+build date matches the file `p4_d` on the download site; the file `p` there is an older build (2023-06-25), so its
+output can differ from the excerpts here. A few excerpts come from outputs posted by users of older versions; the
+text says so where it matters.
+<!-- src: 08 (header: banner date matches p4_d, p dated 2023-06-25); 01 §2.2 -->
 
 ## Before you start
 
-Four practical points save most first-time failures.
+Three practical points save most first-time failures.
 
 - **Plain text with Unix line endings.** Write inputs as plain ASCII with LF line endings and straight quotes. A file
-  saved with Windows (CRLF) line endings gives errors such as `molecule input: ''` or `?rtesian`, or makes
-  `task=scan` silently run an optimization. Convert such files with `dos2unix`.
-  <!-- src: 04 §0 (CRLF symptoms) -->
+  saved with Windows (CRLF) line endings gives errors such as `molecule input: '' 'cartesian ' ?` or `?rtesian`.
+  One user's `task=scan` silently ran an optimization, and CRLF line endings were blamed for it. Convert such files
+  with `dos2unix`.
+  <!-- src: 04 §0 (CRLF symptoms), line 379 (#173/#174), #110, #113 (amge's diagnosis, not a confirmed test) -->
 - **Give the basis file by its full path.** The {ref}`basis <control.basis>` keyword names the basis-set file.
-  A relative name works in version 25 when the file is in the directory you run from, but relative names have
-  failed in older versions and in parallel runs, so an absolute path is the safe choice. The examples below use
+  A relative name works in version 25 when the file is in the directory you run from, also in parallel runs, but
+  relative names have failed in older versions (including parallel runs in version 10), so an absolute path is the
+  safe choice. The examples below use
   `/home/user/priroda/basis.in`; replace it with the location of `basis.in` on your machine.
-  <!-- src: 04 §0, #154 (full path to the basis file); 08 t03 -->
+  <!-- src: 04 §0, #154 (full path to the basis file, v10 parallel); 08 t03, t59 -->
 - **Atomic numbers are integers.** Each atom line in `$molecule` starts with the atomic number written as an integer
   (`8`, not `8.0` and not `O`). A real number such as `8.0` gives no error: the program silently reads a different
   molecule. <!-- src: keywords/molecule.yaml body; 08 t09 -->
-- **Running.** A serial run is `p input output`. Parallel runs are described in {doc}`running`.
-  <!-- src: 04 §0 (running); 06 §7; 08 t01 -->
+
+A serial run is `p input output`. Parallel runs are described in {doc}`running`.
+<!-- src: 04 §0 (running); 06 §7; 08 t01 -->
 
 ## A single-point energy
 
@@ -67,9 +72,9 @@ Group by group:
 - {ref}`$dft <group.dft>` selects the {ref}`functional <dft.functional>`. PBE is already the default, so this line
   only makes the choice visible. <!-- src: 01 §4.3 (default PBE) -->
 - {ref}`$molecule <group.molecule>` holds the {ref}`charge <molecule.charge>`, the
-  {ref}`multiplicity <molecule.mult>` (2S+1), the geometry, and the basis set. The geometry is given in Cartesian coordinates (Å), one line per atom: atomic number, then x, y,
-  z. {ref}`set=L1 <molecule.set>` picks the set named `L1` from `basis.in`. `L1` is also the default
-  set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, §6.2; 04 §0 (L1 ≈ cc-pVDZ) -->
+  {ref}`multiplicity <molecule.mult>` (2S+1), the geometry, and the basis set. The geometry is given in Cartesian
+  coordinates (Å), one line per atom: atomic number, then x, y, z. {ref}`set=L1 <molecule.set>` picks the set named
+  `L1` from `basis.in`. `L1` is also the default set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, §6.2; 04 §0 (L1 ≈ cc-pVDZ) -->
 
 :::{note}
 Hybrid functionals such as `PBE1` or `B3LYP` need {ref}`theory=ridft <control.theory>`. With `theory=dft`, older
@@ -112,9 +117,9 @@ method and functional are what you meant:
 ```
 <!-- src: 08 t01 (verbatim) -->
 
-The electron counts are per spin. "Number of core electrons" counts core orbitals (here the oxygen 1s); it matters
-only for correlated methods.
-<!-- src: 08 t01, t16 (inferred from the counts) -->
+The electron counts are per spin. "Number of core electrons" appears to count core orbitals (here the oxygen 1s).
+In an RI-MP2 test, removing the core changed this count to 0 and changed the correlation energy.
+<!-- src: 08 t01, t16 (core-orbital reading inferred from the counts) -->
 
 Two lines then echo the SCF and grid settings, including defaults you did not set:
 
@@ -125,16 +130,17 @@ Two lines then echo the SCF and grid settings, including defaults you did not se
 <!-- src: 08 t01 (verbatim, two non-adjacent lines) -->
 
 Next comes the SCF iteration table (columns for the energy, the energy change and the gradient, with indented
-micro-iterations). The grid is enlarged partway through, which is why the energy jumps once. A successful SCF ends
-with the line `converged!`.
-<!-- src: 08 t01; 02 §3.3 (SCF markers) -->
+micro-iterations). Partway through, a `grid:` line marks the switch to the fine integration grid; the gradient
+jumps there, and in larger molecules the energy can jump too. A successful SCF ends with the line `converged!`.
+<!-- src: 08 t01 (gradient 3.6e-5 to 3.8e-4 at the grid switch, energy keeps falling), t70a (energy jump +0.0023); 02 §3.3 (SCF markers) -->
 
 :::{warning}
-If the SCF fails, the program prints `no convergence!` (or, in older versions, `SCF is far from convergence`) and
-then **carries on**: it prints an energy, orbitals and properties, and exits normally. The numbers are not usable.
-Always look for `converged!` before trusting a result; {ref}`troubleshooting.common-problems` lists the fixes.
+If the SCF fails, the program prints `no convergence!` and then **carries on**: it prints an energy, orbitals and
+properties, and exits normally. The numbers are not usable. (Older versions then also printed
+`SCF is far from convergence` and stopped.) Always look for `converged!` before trusting a result;
+{ref}`troubleshooting.common-problems` lists the fixes.
 :::
-<!-- src: 08 t10 (no convergence, exit status 0); 01 §7 item 8 -->
+<!-- src: 08 t10 (no convergence, exit status 0); 04 #306, #319 (both messages, then exit); 02 §3.3, §5.3 -->
 
 The total energy follows, in hartree, on the line starting with `E  =`, together with its components:
 
@@ -244,10 +250,10 @@ MOL> Energy =    -56.4988651558
 ```
 <!-- src: 08 t11 (verbatim) -->
 
-The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. Only
-a charge or multiplicity that differs from the defaults (0 and 1) is written: `nh3.in` gives no such line, and an
-OH⁻ optimization gave `MOL> charge=-1`. So the block can be pasted into the next input as it is.
-<!-- src: 01 §7 item 9; 08 t11, t29; 06 §4 (NpO2 example: charge=2 mult=2) -->
+The block keeps the coordinate type of the input: a Z-matrix input gives a Z-matrix with the optimized values. The
+charge and multiplicity seem to be written only when they differ from the defaults (0 and 1): `nh3.in` gives no such
+line, and an OH⁻ optimization gave `MOL> charge=-1`. So the block can be pasted into the next input as it is.
+<!-- src: 01 §7 item 9; 08 t11, t29 (inferred; a non-default mult not tested in v25); 06 §4 (NpO2 example: charge=2 mult=2) -->
 
 ### Step 3: take the final geometry
 
@@ -263,8 +269,9 @@ sed -n 's/^MOL>//p' nh3.out >> nh3_freq.in
 
 The first command assumes that `$molecule` is the last group of the input, as in all examples here. The `Energy = ...`
 line that ends up after `$end` does no harm: text outside a group is ignored. A normal optimization prints the `MOL>`
-block only once. A scan or an IRC prints one per point, so there you would pick the block you need.
-<!-- src: 01 §4 (text after $end ignored); 02 §3.3 (marker per point in scan/IRC) -->
+block only once. A scan prints one `MOL>` block per point (and repeats them as `SCAN>` blocks), so there you pick
+the block you need; an IRC prints its points as `IRC>` blocks instead.
+<!-- src: 01 §4 (text after $end ignored); 08 t26, t37, t68f (MOL and SCAN blocks per point), t77d (no MOL lines, IRC blocks) -->
 
 :::{note}
 **If the optimization did not converge**, there are no `MOL>` lines, and the program prints no message about it:
@@ -276,9 +283,10 @@ reached. Every step prints the geometry for the next step as a `$molecule` group
 sed -n 's/^mol>//p' nh3.out | awk '/\$molecule/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'
 ```
 
-The official `gm` script (below) falls back to the input echo (lines starting with `<$molecule`) when there are no
-`MOL>` lines.
-<!-- src: 06 §5 step 7, §6 (awk pattern); 02 §3.3; 01 §8 (gm fallback); 08 t11, t12 (mol lines every step, no message at the step limit; recipe checked on t12) -->
+On an output with no `MOL>` lines, the official `gm` script (below) falls back to the input echo (lines starting
+with `<$molecule`), which is your *starting* geometry. For a Cartesian input there is no such echo, and `gm` stops
+with `mol?`. Use the command above instead.
+<!-- src: 06 §5 step 7, §6 (awk pattern); 02 §3.3; 01 §8 (gm fallback, mol? exit); 08 t11 (echo = start geometry), t12 (Cartesian input: no echo; mol lines every step, no message at the step limit; recipe checked on t12) -->
 :::
 
 #### The official helper scripts `ge` and `gm`

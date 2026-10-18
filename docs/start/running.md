@@ -7,10 +7,11 @@ arguments.
 (obtaining-priroda)=
 ## Obtaining Priroda
 
-Priroda is free of charge. Everything you need to run it can be downloaded from the official site,
-<https://rad.chem.msu.ru/~laikov/p_w/>: the executables, the basis-set files and the helper scripts. Put the
-executable and `basis.in` in a directory of your own. The main Linux executable, `p`, is statically linked, so a
-serial run needs no other libraries. The page is a bare file index with no documentation, license text or contact information. It holds:
+Priroda is free of charge. The executables, the basis-set files and the helper scripts can be downloaded from the
+official site, <https://rad.chem.msu.ru/~laikov/p_w/>. Only parallel runs on Windows need more: an MPI runtime, which
+is not on the site (see {ref}`running-windows-parallel`). Put the executable and `basis.in` in a directory of your
+own. The main Linux executable, `p`, is probably statically linked (see {ref}`executables`). The page is a bare file
+index with no documentation, license text or contact information. It holds:
 
 - Linux x86-64 executables (`p`, `p4`, `p_d`, `p4_d`), builds for particular clusters (`p_l`, `p_mvs1p1`, `p_mvs10p`,
   `p_mvs10q`), an ARM build (`p_arm`), a bundled `mpiexec`, and the molecule viewer `xm`;
@@ -24,7 +25,8 @@ serial run needs no other libraries. The page is a bare file index with no docum
 Which executable to choose is described under {ref}`executables` below.
 
 Users have also obtained the program by writing to the developer, Dimitri Laikov, by e-mail. Users reported the
-address `dimitri_laikov@mail.ru` from 2010 to 2018; earlier it was `laikov@physto.se`. Users note that he does not always answer quickly.
+address `dimitri_laikov@mail.ru` from 2010 to 2018; earlier it was `laikov@physto.se`. Users note that he does not
+always answer quickly.
 <!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
 
 :::{note}
@@ -44,20 +46,20 @@ attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask t
 
 ### Linux
 
-The official site lists these Linux files. Sizes and dates are those of the 2025 file index.
+The official site lists these Linux files. Dates are from the official file index (checked October 2026).
 <!-- src: 01 §2.1, §2.2 -->
 
 | File | Date | Description |
 |---|---|---|
-| `p` | 2023-06-25 | Main x86-64 executable, statically linked. |
+| `p` | 2023-06-25 | Main x86-64 executable, probably statically linked. |
 | `p4` | 2023-06-25 | Build "for FMA/AVX2" processors. |
 | `p_d` | 2021-11-12 | Dynamically linked build. |
 | `p4_d` | 2025-02-28 | Dynamically linked FMA/AVX2 build. |
-| `p_l` | 2025-04-14 | Build for a particular cluster, started through the site's Intel MPI wrapper. |
+| `p_l` | 2025-04-14 | Build for a particular cluster, started through a cluster-side Intel MPI wrapper. |
 | `p_mvs1p1`, `p_mvs10p`, `p_mvs10q` | 2019–2023 | Builds for particular clusters. |
 | `p_arm`, `mpiexec_arm` | 2015-09-23 | ARM build and its MPI launcher. |
 | `mpiexec` | 2012-09-09 | MPI launcher shipped with `p`. |
-| `xm` | 2025-04-24 | The developer's molecule viewer. It takes a Priroda input file as its argument (`xm C60.qm.in`). |
+| `xm` | 2025-04-24 | A molecule viewer. It takes a Priroda input file as its argument (`xm C60.qm.in`). |
 
 That `p` is statically linked is inferred from the description of `p_d` as "dynamically linked". The site does not say
 which cluster each `p_mvs*` and `p_l` build is for.
@@ -146,8 +148,8 @@ exactly the serial energy.
 <!-- src: 08 t21b -->
 
 Older versions also accepted `p -np 4 input.in output.out`, which users ran with versions 6 and 10. **Version 25 does
-not**: it takes `-np` as the input file name, prints `input file '-np'?.` and stops. One site ran version 14 as
-`mpiexec -np 4 p input.in`, with the system's MPI launcher.
+not**: it takes `-np` as the input file name, prints `input file '-np'?.` and stops. One site ran version 14 with
+the bundled `mpiexec` (`mpiexec -np N p input.in`, output to standard output).
 <!-- src: 04 #66, #150-#154; 02 §5.1; 08 t21a -->
 
 Check the start of the output. A parallel run prints the number of processes and one line per process:
@@ -161,13 +163,13 @@ Check the start of the output. A parallel run prints the number of processes and
 
 <!-- src: 04 #152; 01 §2.6 -->
 
-The cluster builds are started through the cluster's own MPI. The official example for `p_l` under SLURM is:
+The official site gives one example for a cluster build, `p_l` under SLURM:
 
 ```text
 sbatch -p test -n 16 -t 6 impi ~/bin/p_l file.{in,out}
 ```
 
-Here `impi` is that cluster's wrapper script for Intel MPI, not part of Priroda.
+Here `impi` is presumably that cluster's Intel MPI wrapper script; it is not part of Priroda.
 <!-- src: 01 §2.1 (impi inferred) -->
 
 (running-windows-parallel)=
@@ -178,6 +180,8 @@ The official site shows this command for a two-process run:
 ```text
 mpirun.exe -np 2 p.exe C60.qm.in C60.qm.w.2.out
 ```
+
+The current index has no `p.exe`: use `p_190306.exe` in place of `p.exe`, here and in the commands below.
 
 The MPI runtime is not on the site. Users assembled it from Cygwin as follows:
 <!-- src: 01 §2.1; 04 #365, #370, #397, #472 -->
@@ -197,7 +201,7 @@ The MPI runtime is not on the site. Users assembled it from Cygwin as follows:
 
    ```text
    cd /d "C:\Priroda"
-   set TMPDIR="%TEMP%"
+   set "TMPDIR=%TEMP%"
    orterun.exe -np 2 p.exe "C:\Work\file.in" "C:\Work\file.out"
    ```
 
@@ -206,7 +210,7 @@ The MPI runtime is not on the site. Users assembled it from Cygwin as follows:
 Problems reported with this setup:
 
 - The recipe needs a Priroda build that supports parallel runs. Version 6 (`p6.exe`) failed with an OpenMPI
-  `agent-not-found` error; users moved to version 17. <!-- src: 04 #398, #401 -->
+  `agent-not-found` error; the user was advised to use version 17 or later. <!-- src: 04 #398, #401 -->
 - On a computer connected by Wi-Fi that also has a wired network adapter, OpenMPI stops with
   `tcp_peer_send_blocking: send() to socket 12 failed: Transport endpoint is not connected (128)`. Disable the wired
   adapter. <!-- src: 04 #397 -->
@@ -232,8 +236,8 @@ $system memory=2048 disk=-2048 path=/scratch/user $end
 
 {ref}`memory <system.memory>`
 : Memory in MB. Two values set rank 0 and the other ranks separately: `mem=2048,256` gives the master process
-  2048 MB and every other process 256 MB. In a parallel run, most of the memory and all of the disk storage are
-  used by rank 0, so give the other ranks less.
+  2048 MB and every other process 256 MB. The v5 documentation says that in a parallel run most of the memory and
+  all of the disk storage are used by rank 0. That is why a small second value works: the other ranks need less.
   <!-- src: 01 §4.1; 06 §3 -->
 
 {ref}`disk <system.disk>`
@@ -250,24 +254,31 @@ $system memory=2048 disk=-2048 path=/scratch/user $end
 
 ### Keeping scratch in memory
 
-With a negative `disk`, `memory` plus |`disk`| must fit into the physical RAM for each process, or the run stops at
-once with `malloc(...) failed`. One user's setting for a 24 GB node is `memory=9000 disk=-14000`. Keeping the scratch
-in RAM is faster than any disk. In one RI-MP2 benchmark on 8 cores it cut the time from 86 minutes (scratch on disk)
-to 12.4 minutes.
-<!-- src: 04 #462, #463, #471; 03 §3 (v8 benchmark) -->
+With a negative `disk`, `memory` plus |`disk`| is taken by every process, so the sum over all processes must fit
+into the node's physical RAM, or the run stops at once with `malloc(...) failed`. With `mem=a,b` and `disk=a,b`,
+rank 0 takes the first values and every other rank the second. One user's setting for a 24 GB node is
+`memory=9000 disk=-14000`; that fills the node with **one** process. On several processes, give the other ranks
+small second values or lower the limits.
+<!-- src: 04 #462, #463, #471; 01 §4.1 -->
+
+Keeping the scratch in RAM is faster than a local disk; one user calls it "a bit faster". In an older cluster
+benchmark the gain was larger: a version 8 RI-MP2 job on 8 cores (4 nodes) took 12.4 minutes with scratch in RAM,
+against 72 minutes on 2 cores with scratch on disk and 86 minutes on 8 cores with direct SCF and scratch on disk.
+<!-- src: 04 #462; 03 §3 (v8 benchmark, mpich/Myrinet, 4 nodes x 2 cores) -->
 
 ### Where scratch files go
 
 The scratch directory is taken from `path=`, then from the `TMPDIR` environment variable. The files are named
-`tmp<number>.<rank>`, for example `/tmp/tmp2960.0`; in version 25 each process of a parallel run wrote its
-own file, named like `tmp5345.0000`. Priroda deletes them at the end of a normal run; after a crash,
-delete the leftovers yourself.
-<!-- src: input.txt; 04 #20, #465; 06 §4 (Tutorial v6); 02 §5.2 -->
+`tmp<number>.<suffix>`, for example `/tmp/tmp2960.0` or `/tmp/tmp9633.11`. In version 25 each process of a parallel
+run wrote its own file with a different number and the same suffix (`tmp5345.0000`, `tmp5346.0000`). Priroda deletes
+them at the end of a normal run, and in version 25 also when the job is stopped with signal 15 (SIGTERM). After a
+crash, delete the leftovers yourself.
+<!-- src: input.txt; 04 #20, #460, #465; 02 §5.2; 08 Slurm tests (s02, s04); deletion after a normal run: 06 §4 (Tutorial v6) -->
 
 When neither `path=` nor `TMPDIR` is set, version 25 puts scratch files in `/tmp` (echo `Disk:   1g '/tmp'`), as
-version 6 did. `input.txt` says the current working directory instead, and a 2020 user report the directory of the
+version 6 did. `input.txt` says the current working directory instead, and a 2020 user report gives the directory of the
 input file; neither matches version 25. `/tmp` is often small or shared, so set `path=` or `TMPDIR` for real jobs.
-<!-- src: input.txt; 04 #465; 04 #20; 08 t64 (TMPDIR unset: /tmp; TMPDIR set: used) -->
+<!-- src: input.txt; 04 #465, #20; 08 t64 (TMPDIR unset: /tmp; TMPDIR set: used) -->
 
 On Windows there is no `/tmp`. Without `path=` or `TMPDIR`, older versions stopped after printing
 `0: opening file /tmp/tmp2960.0`. Use `$system path=. $end` (the current directory) or set `TMPDIR`.
@@ -302,58 +313,59 @@ Users also recommend more RAM over faster disks. Scratch on a separate SSD helps
 
 Priroda does not fall back to a slower algorithm when memory or scratch runs out. The run stops with an error such as
 `need … bytes.` (the `memory` limit is too small), `malloc(536870912) failed` (the machine cannot supply the memory)
-or `0: out of disk space (VNNNN), 184441541KB` (scratch). The number in the disk
-message is the amount needed. Raise the limit in `$system`, move to a node with more resources, or choose a cheaper
+or, for scratch, `0: out of disk space (grid_W), 8213824` (version 25; older versions printed the number with
+`KB`). Raise the limit in `$system`, move to a node with more resources, or choose a cheaper
 method (RI-MP2 instead of conventional MP2).
 <!-- src: 04 #58, #199; 03 §4; 08 t61, t62 -->
 
 If you omit `$system`, version 6 printed `Memory: 128 (128) MB` and `Disk: 1 GB '/tmp'`. Version 25 prints
-`Memory: 256m + 512m (256m + 512m)` and no `Disk:` line: 256 MB of memory and a 512 MB RAM disk per process.
+`Memory: 256m + 512m (256m + 512m)` and no `Disk:` line. Read by the echo format, that is 256 MB of memory and a
+512 MB RAM disk per process.
 That is enough for small molecules only, so always give `$system` for anything larger than a test.
 <!-- src: 03 §2; 04 §4 (#20); 08 t02 (RAM-disk reading inferred from the echo format) -->
 
-(running-parallel-scaling)=
 If a run fails for lack of memory or disk, see {ref}`troubleshooting.memory`.
 
+(running-parallel-scaling)=
 ## Parallel performance
 
-Users consistently report the following:
+What is known about parallel performance:
 <!-- src: 04 §0 -->
 
-- **DFT scales well within one node, up to about 6–8 cores.** Beyond 8 cores the gain is at most about 10%, even for
-  large systems. One 38-step optimization took 101, 63 and 37 s on single nodes with 8, 12 and 24 cores. A small
-  PBE/L1 optimization with version 10 took 81.5, 42.5, 29.8 and 29.3 s on 1–4 cores.
-  <!-- src: 04 #343, #344, #154 -->
-- **Parallel results equal serial ones.** In version 25 tests on 2 processes, a water energy and a numerical
-  `ridft` Hessian gave exactly the serial numbers; the Hessian took 4.9 s instead of 7.2 s. An optimization plus
-  analytic Hessian of a 22-atom copper complex (OLYP/L2, fine grid) took 32 min on 8 processes of one node; on one
-  process it had not finished after an hour.
-  <!-- src: 08 t21b, t63 (vs t32a), t72 (8 processes vs 1) -->
+- **DFT speeds up within one node; reports differ on how far.** One user found in 2016 that beyond 6–8 cores the gain
+  is at most about 10%, even for large systems such as (C60)9. Another measured a 38-step optimization of a small
+  molecule at 101, 63 and 37 s on single nodes with 8, 12 and 24 cores. A small PBE/L1 optimization with version 10
+  took 81.5, 42.5, 29.8 and 29.3 s on 1–4 cores. In a version 25 test, a numerical `ridft` Hessian of water took
+  4.9 s on 2 processes instead of 7.2 s. An optimization plus analytic Hessian of a 22-atom copper complex
+  (OLYP/L2, fine grid) took 32 min on 8 processes of one node; on one process it had not finished after an hour.
+  <!-- src: 04 #343, #344, #154; 08 t63 (vs t32a), t72 (8 processes vs 1) -->
+- **Parallel results equal serial ones in version 25 tests.** On 2 processes, a water energy and a numerical
+  `ridft` Hessian gave exactly the serial numbers. In version 6, results were reported to differ in the last digits
+  between runs on different numbers of processes, and an unstable TS search once followed different paths for
+  different `-np`.
+  <!-- src: 08 t21b, t63 (vs t32a); 03 §3 (amg, Nov 2008) -->
 - **Running across nodes gives no gain for DFT.** Use one node per job.
   <!-- src: 04 #344, #462; 03 §3 -->
 - **Memory per process does not drop** when you add processes, and in a parallel Hessian nearly all of the disk use is
   on rank 0.
   <!-- src: 04 #181, #185 -->
-- **RI-MP2 parallelizes better than DFT**, at least in memory. The v5 documentation limits useful parallelism to
+- **RI-MP2 parallelizes better than DFT**, according to one user "at least in memory". The v5 documentation limits useful parallelism to
   Nproc ≤ min(N_atoms, N_occ) and recommends a number of processes that divides the number of occupied orbitals
   nearly evenly. For N_occ = 14 it rates 2, 7 or 14 processes as best, 3 or 5 as acceptable, 6 as poor and 13 as very
   bad.
   <!-- src: 04 #343; 06 §3 -->
-- **Small RI jobs on many processes can hang.** RI-MP2 and RI-DFT hang with no message when a process receives no
-  work. The output then shows a line `0 blocks ... on node N` after `integral estimates`. Run small RI jobs on one or a
+- **Small RI jobs on many processes can hang** (reported in 2015; not tested in version 25). RI-MP2 and RI-DFT hang
+  with no message when a process receives no work. The output then shows a line `0 blocks ... on node N` after `integral estimates`. Run small RI jobs on one or a
   few cores.
   <!-- src: 05 §3.1 -->
-- **Several independent jobs often beat one parallel job.** On a 4-core machine, four single-core jobs ran about 30%
-  faster in total than the same jobs run one after another on 4 cores each.
-  <!-- src: 03 §3 (amg, 2009) -->
-
-Results can differ in the last digits between runs on different numbers of processes. An unstable TS search was once
-seen to follow different paths for different `-np`.
-<!-- src: 03 §3 (amg, Nov 2008) -->
+- **Several independent jobs often beat one parallel job.** On a 4-core machine in 2009, for jobs not
+  limited by disk, four single-core jobs ran about 30% faster in total than the same jobs run one after another on
+  4 cores each.
+  <!-- src: 03 §3 (amg, May 2009) -->
 
 :::{note}
 Older versions scaled worse. In version 6 a parallel Hessian could use at most 2 cores and could hang on 4, and a
-version 7 MP2 run hung on more than about 24 cores. Use version 17 or later for parallel work.
+version 7 MP2 run crashed (signal 8) on more than about 24 cores. Use version 17 or later for parallel work.
 :::
 <!-- src: 03 §3; 04 #66, #401 -->
 
