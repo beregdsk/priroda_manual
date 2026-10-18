@@ -24,7 +24,7 @@ In version 25, a two-process DFT run left one scratch file per process.
 **Default:** `256`\
 **Units:** MB\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02, t58a
+**Sources:** input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02, t58a, w04 (same echo in the Windows version 20)
 
 Default: echoed by version 25 when `$system` is omitted.
 
@@ -82,7 +82,7 @@ $system mem=2048,256 disk=-256,-1 $end
 **Type:** string\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 03 §2; 04 #465; 08 t01, t64
+**Sources:** input.txt; 03 §2; 04 #465; 08 t01, t64, w02a-d, w03
 
 Default: the `TMPDIR` environment variable, otherwise `/tmp` (version 25). `input.txt` says the current working directory.
 
@@ -92,9 +92,10 @@ Those directories should be on different physical drives. The value may be doubl
 
 ```{note}
 For all methods except GGA DFT, performance degrades "terribly" if more than one process reads and writes
-large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-`/tmp`, use `path=.`. Version 25, run without `path=`, used `TMPDIR` when it was set and `/tmp` when it was
-not (echo `Disk:   1g '/tmp'`).
+large files on the same physical drive. Never put temporary files on NFS. Version 25, run without `path=`,
+used `TMPDIR` when it was set and `/tmp` when it was not (echo `Disk:   1g '/tmp'`). The Windows `p1.exe`
+(version 20) does the same, and as Windows has no `/tmp` the run then stops at `0: opening file /tmp/…`. Use
+`path=.`, set `TMPDIR` to a Windows path without quotes (`set TMPDIR=%TEMP%` in `cmd.exe`), or use a RAM disk.
 ```
 
 **Example:**

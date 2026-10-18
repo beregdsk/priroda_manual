@@ -279,7 +279,7 @@ In version 25, a two-process DFT run left one scratch file per process.</p>
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">256</span></code><br />
 <strong>Units:</strong> MB<br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02, t58a</p>
+<strong>Sources:</strong> input.txt; 01 §4.1 (two values); 06 §3 (estimate); 03 §4, 04 #196 (per process); 08 t02, t58a, w04 (same echo in the Windows version 20)</p>
 <p>Default: echoed by version 25 when <code class="docutils literal notranslate"><span class="pre">$system</span></code> is omitted.</p>
 <p>Memory limit in megabytes. A second value sets the limit for the other MPI ranks: <code class="docutils literal notranslate"><span class="pre">mem=2048,256</span></code> gives rank 0
 2048 MB and every other rank 256 MB. A single value applies to all ranks. The output echoes the result as
@@ -323,7 +323,7 @@ In version 25, <code class="docutils literal notranslate"><span class="pre">disk
 <p id="index-3"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 03 §2; 04 #465; 08 t01, t64</p>
+<strong>Sources:</strong> input.txt; 03 §2; 04 #465; 08 t01, t64, w02a-d, w03</p>
 <p>Default: the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable, otherwise <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> (version 25). <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says the current working directory.</p>
 <p>Directory for temporary disk files. For parallel runs you can give a colon-separated list with one path per
 process: <code class="docutils literal notranslate"><span class="pre">path=/tmpa:/tmpb:/tmpc:/tmpd</span></code> makes process 1 write to <code class="docutils literal notranslate"><span class="pre">/tmpa</span></code>, process 2 to <code class="docutils literal notranslate"><span class="pre">/tmpb</span></code>, and so on.
@@ -331,9 +331,10 @@ Those directories should be on different physical drives. The value may be doubl
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For all methods except GGA DFT, performance degrades “terribly” if more than one process reads and writes
-large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, use <code class="docutils literal notranslate"><span class="pre">path=.</span></code>. Version 25, run without <code class="docutils literal notranslate"><span class="pre">path=</span></code>, used <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> when it was set and <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when it was
-not (echo <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>).</p>
+large files on the same physical drive. Never put temporary files on NFS. Version 25, run without <code class="docutils literal notranslate"><span class="pre">path=</span></code>,
+used <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> when it was set and <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when it was not (echo <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>). The Windows <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code>
+(version 20) does the same, and as Windows has no <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> the run then stops at <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">/tmp/…</span></code>. Use
+<code class="docutils literal notranslate"><span class="pre">path=.</span></code>, set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> to a Windows path without quotes (<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=%TEMP%</span></code> in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>), or use a RAM disk.</p>
 </div>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system path=/tmpa:/tmpb:/tmpc:/tmpd $end

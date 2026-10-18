@@ -101,16 +101,23 @@ capital letters in its name without complaint.
 <!-- src: 04 #161; 06 §10 (case-sensitive names); 08 t19 -->
 
 On Windows, `cd` into the folder with the input before running `p.exe input.in output.out`. One user still got
-`cannot open input file` after doing that, and the thread never found the cause.
-<!-- src: 04 #130-#133 -->
+`cannot open input file` after doing that, and the thread never found the cause. Giving full Windows paths for both
+files, such as `p1.exe C:\Work\mol.in C:\Work\mol.out`, works from any folder.
+<!-- src: 04 #130-#133; 08 w09 -->
 
 ### Output stops at `0: opening file /tmp/...` (Windows)
 
-Old Windows builds put scratch files in `/tmp` when nothing else is set (the output echoes `Disk:   1 GB '/tmp'`),
-and Windows has no `/tmp`. The Linux version 25 has the same default and also honours `TMPDIR`. Set the scratch
-directory explicitly, for example `$system path=. $end`, or set the `TMPDIR` environment variable before starting the
-program. This is the oldest known problem in both forums and the fix is well established. See {ref}`path <system.path>`.
-<!-- src: 03 §2 (#0, GemmaNC 2009); 04 #20, #21, #128; 08 t64a, t64b -->
+Windows builds put scratch files in `/tmp` when nothing else is set (the output echoes `Disk:   1g '/tmp'`), and
+Windows has no `/tmp`. The current `p1.exe` (version 20) still does this: the output ends with
+`0: opening file /tmp/tmp978.0000` and `process 0 got signal 6`. The Linux version 25 has the same default and also
+honours `TMPDIR`. Set the scratch directory explicitly, for example `$system path=. $end`, or set the `TMPDIR`
+environment variable before starting the program. A RAM disk (negative {ref}`disk <system.disk>`) also avoids the
+problem. This is the oldest known problem in both forums. See {ref}`path <system.path>`.
+<!-- src: 03 §2 (#0, GemmaNC 2009); 04 #20, #21, #128; 08 t64a, t64b, w02a-d, w03 -->
+
+In `cmd.exe`, write `set TMPDIR=%TEMP%` or `set "TMPDIR=%TEMP%"`. With `set TMPDIR="%TEMP%"` the quotes become part
+of the value: the `Disk:` echo shows the quoted path appended to the current directory, and the run stops in the same
+way. <!-- src: 08 w02b, w02c -->
 
 ### `$scf` settings are ignored or rejected
 
@@ -628,8 +635,8 @@ requested with a negative {ref}`disk <system.disk>`. The number in the message i
   user's limit, `memory=9250 disk=-9250`, fits this rule.
   <!-- src: 04 #196 (values per process); 03 §3; 04 #462, #463, #468, #471 -->
 - The 32-bit Windows (Cygwin) builds cannot allocate more than about 1 GB. 512 MB was enough for most DFT jobs.
-  Several users confirmed this limit. The 64-bit Windows build with `cygwin1.dll` is reported to have no such limit.
-  <!-- src: 04 #94, #95, #104, #105, #210, #211, #370 -->
+  Several users confirmed this limit. The 64-bit Windows build `p1.exe` ran with `mem=3000`.
+  <!-- src: 04 #94, #95, #104, #105, #210, #211, #370; 08 w07 -->
 
 A message beginning `We need 1.5 GB of memory...` was reported once. One reply guessed that it is about RAM
 (`memory=`), not disk space. It may be an older form of the `need … bytes.` message above.
@@ -791,20 +798,30 @@ Old Windows builds were serial only. For a parallel 64-bit run (version 16 or la
    `cygopen-pal-13.dll`, `cygopen-rte-12.dll` and `orterun.exe` next to the Priroda executable. Take
    `cygwin1.dll` from the same Cygwin installation, because the other DLLs work only with it. These are the names
    from a 2017 Cygwin. A 2018 report says newer OpenMPI packages ship `cygopen-pal-40.dll` and
-   `cygopen-rte-40.dll` instead; take those.
-2. To run outside the Cygwin terminal, create a `dev` directory one level above the directory you start Priroda from,
-   with subdirectories `shm` and `mqueue`. For Priroda in `C:\Priroda 16` that means `C:\dev\shm` and
-   `C:\dev\mqueue`. Without them Cygwin prints `Warning: '/dev/shm' does not exists or is not a directory.`
-3. Set `TMPDIR` and start the run from `cmd.exe`:
+   `cygopen-rte-40.dll` instead. Those do **not** work with `p_190306.exe`, even renamed: see the note below.
+2. To run outside the Cygwin terminal, create a `dev` directory one level above the directory that holds
+   `cygwin1.dll`, with subdirectories `shm` and `mqueue`. For Priroda in `C:\Priroda 16` that means `C:\dev\shm`
+   and `C:\dev\mqueue`. Without them Cygwin prints `Warning: '/dev/shm' does not exists or is not a directory.`
+3. Set `TMPDIR` and start the run from `cmd.exe`. The command as posted was:
    ```text
    cd /d "C:\Priroda 16"
    set TMPDIR="%TEMP%"
    "orterun.exe" -np 2 ./p16_64_parallel.exe "C:\Work\file.in" "C:\Work\file.out"
    ```
-   This is the command as posted. In `cmd.exe`, `set TMPDIR="%TEMP%"` keeps the quotes as part of the value;
-   `set "TMPDIR=%TEMP%"` does not. Which form the Cygwin build expects was not tested.
+   Write `set "TMPDIR=%TEMP%"` instead: with `set TMPDIR="%TEMP%"` the quotes stay in the value, and the run stops
+   at `0: opening file …` unless the input sets `path=`.
 4. If the program is in a system directory such as `C:\Program Files`, run it as administrator.
-<!-- src: 04 #370 (EvgeniX), #360, #362, #472 --> <!-- verify -->
+<!-- src: 04 #370 (EvgeniX), #360, #362, #472; 08 w02c, w13 -->
+
+:::{note}
+A test in 2026 on Windows 10 (with a Cygwin installation on `PATH`) got `p_190306.exe` running on 2 processes.
+It needed the `-12`/`-13` DLLs and `orterun.exe` from an older OpenMPI package (files dated 2016-06-21). With the
+current `-40` DLLs, or those renamed to the old names, the programs exited at once with code -1073741515
+(0xC0000135, a required DLL was not found). The path of the Priroda executable had to be written with forward
+slashes: `orterun.exe -np 2 C:/Priroda/p_190306.exe file.in file.out`. With backslashes, `orterun.exe` stopped with
+`orterun:exe-not-found`. The full setup is in {ref}`running-windows-parallel`.
+:::
+<!-- src: 08 w13 -->
 
 Network problems reported with this setup:
 
@@ -815,8 +832,8 @@ Network problems reported with this setup:
   <!-- src: 04 #374 --> <!-- verify -->
 
 A 2021 attempt to follow this recipe on Windows 10 failed with an error that was posted only as a screenshot; no fix
-was posted. One user runs Priroda under WSL on Windows instead; no details of that setup were posted.
-<!-- src: 04 #472, #508 -->
+was posted. The `-40` DLLs described in the note above may have been the cause. One user runs Priroda under WSL on Windows instead; no details of that setup were posted.
+<!-- src: 04 #472, #508; cause inferred from 08 w13 -->
 
 :::{warning}
 Not every build on the official site is reliable. A note there once said that the `w64/*.exe` 64-bit Cygwin builds

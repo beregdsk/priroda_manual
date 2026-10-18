@@ -380,7 +380,7 @@ PRIRODA=/path/to/p BASIS=/abs/path/to/basis.in ./run.sh t81
 | t81h | `t81h_optimize_unconverged_scf.in` | Optimization when one step's SCF does not converge | Continues; same result as a normal run. |
 | t81i | `t81i_dihedral_sign_zmatrix.in` | Sign of Priroda's dihedral angles | Opposite to IUPAC (+100 in, −100 standard). |
 
-## Windows (not run yet)
+## Windows (run 2026-10-18)
 
 These need a Windows computer with the files from the `exe64/` folder of the official site: `p1.exe` and
 `cygwin1.dll` in one folder, and `basis.in`. For w13 also `p_190306.exe` and, for the 2-process run, an MPI launcher
@@ -397,35 +397,40 @@ powershell -ExecutionPolicy Bypass -File .\run_windows.ps1 w02 w05    # selected
 ```
 
 Optional: `$env:PRIRODA_MPI = "C:\Priroda\p_190306.exe"` and `$env:MPIRUN = "C:\Priroda\orterun.exe"`.
+`p_190306.exe` and `orterun.exe` need `cygmpi-12.dll`, `cygopen-pal-13.dll`, `cygopen-rte-12.dll` and
+`cyggcc_s-seh-1.dll` from an older Cygwin OpenMPI package; the current `-40` DLLs do not work (w13).
 Outputs go to `runs\win-<date>\`; `env.txt` there lists the Windows version and the exe and DLL files next to the
 program, which the results depend on. The script writes every input with Unix line endings, whatever git did on
 checkout; only w06 gets Windows endings. The Linux water energy to compare with is t01, E = -76.3653913723.
 
 | ID | Input | Question | What to look at in the output | Where it is used | Result |
 |---|---|---|---|---|---|
-| w01 | `w01_energy.in` | Does `p1.exe` run with only `cygwin1.dll` next to it? Which version is it (the file is dated 2021)? | Banner (version, date); `converged!`; E = t01? | running.md (Windows); about.md (versions) | |
-| w02a | `w02_scratch_default.in` | `disk=1`, no `path=`, `TMPDIR` unset: does the run stop at `opening file /tmp/...`, and where does `Disk:` point? | `Disk:` echo; where the output stops | running.md (scratch on Windows); common-problems (`/tmp` on Windows); `system.path` | |
-| w02b | (same) | `set TMPDIR=%TEMP%` in cmd.exe | `Disk:` echo; runs? | running.md | |
-| w02c | (same) | `set TMPDIR="%TEMP%"` (with the quotes, as in the forum recipe in running.md) | `Disk:` echo; runs? Do the quotes break it? | running.md (parallel recipe, step 5) | |
-| w02d | (same) | `TMPDIR` set to a Windows path (`C:\...\w02d_tmp`) | `Disk:` echo (converted to `/cygdrive/...`?); runs? | running.md | |
-| w03 | `w03_ramdisk.in` | `disk=-256` (RAM disk), no `path=`, `TMPDIR` unset: does that avoid the `/tmp` problem? | Runs?; `Disk:` echo | `system.disk`; common-problems | |
-| w04 | `w04_no_system.in` | No `$system` group, `TMPDIR` unset: does a beginner's input run? | Runs?; `Memory:` echo | getting-started; `system.memory` | |
-| w05a | (w01) | Basis path with backslashes, `basis=C:\...\basis.in` | Runs? | running.md (basis path) | |
-| w05b | (w01) | Basis path with forward slashes, `basis=C:/.../basis.in` | Runs? | running.md | |
-| w05c | (w01) | Relative `basis=basis.in`, the file next to the input | Runs? | running.md | |
-| w06 | (w01, CRLF) | Input with Windows line endings: does the Windows build cope, or does it fail as on Linux? | `molecule input: ''`, `?rtesian` or a normal run | input-syntax; common-problems (CRLF) | |
-| w07 | `w07_memory_3gb.in` | `mem=3000`: no `malloc(...) failed` in the 64-bit build? | `Memory:` echo; runs? | running.md (1 GB limit of 32-bit builds) | |
-| w08 | (w01, no output file) | Does the output go to the console? | `w08_stdout.stdout` | running.md | |
-| w09 | (w01) | Started from another folder with full Windows paths for input and output | Runs? | common-problems (`cannot open input file`) | |
-| w10a | (w01) | Run inside a folder whose name has a space | Runs? | running.md (no spaces in names) | |
-| w10b | (w01) | Run from outside, quoted relative paths with a space | Runs? | running.md | |
-| w11 | `w11_optimize.in` | Water optimization (`path=.`) | `OPTIMIZATION CONVERGED`; final E | running.md | |
-| w12 | `w12_hessian.in` | Water analytic Hessian (`path=.`) | Frequencies; same as Linux v25? | running.md | |
-| w13a | (w01) | `p_190306.exe` on 2 processes through `MPIRUN` | Process lines; E = t01? | running.md (parallel runs on Windows) | |
-| w13b | (w01) | `p_190306.exe` started directly, without a launcher | Runs serially, or fails for lack of MPI? | running.md | |
+| w01 | `w01_energy.in` | Does `p1.exe` run with only `cygwin1.dll` next to it? Which version is it (the file is dated 2021)? | Banner (version, date); `converged!`; E = t01? | running.md (Windows); about.md (versions) || Runs. Banner `Priroda 20 (2021.03.18)`; E = t01. |
+| w02a | `w02_scratch_default.in` | `disk=1`, no `path=`, `TMPDIR` unset: does the run stop at `opening file /tmp/...`, and where does `Disk:` point? | `Disk:` echo; where the output stops | running.md (scratch on Windows); common-problems (`/tmp` on Windows); `system.path` || Stops at `0: opening file /tmp/tmp978.0000`, signal 6, exit 1. |
+| w02b | (same) | `set TMPDIR=%TEMP%` in cmd.exe | `Disk:` echo; runs? | running.md || Runs; `Disk:` shows `/Users/User/AppData/Local/Temp` (`C:\` is `/`). |
+| w02c | (same) | `set TMPDIR="%TEMP%"` (with the quotes, as in the forum recipe in running.md) | `Disk:` echo; runs? Do the quotes break it? | running.md (parallel recipe, step 5) || Fails: the quotes stay in the value, taken as a relative path; exit 1. |
+| w02d | (same) | `TMPDIR` set to a Windows path (`C:\...\w02d_tmp`) | `Disk:` echo (converted to `/cygdrive/...`?); runs? | running.md || Runs; converted to `/Users/...` (not `/cygdrive`). |
+| w03 | `w03_ramdisk.in` | `disk=-256` (RAM disk), no `path=`, `TMPDIR` unset: does that avoid the `/tmp` problem? | Runs?; `Disk:` echo | `system.disk`; common-problems || Runs; no `Disk:` line. |
+| w04 | `w04_no_system.in` | No `$system` group, `TMPDIR` unset: does a beginner's input run? | Runs?; `Memory:` echo | getting-started; `system.memory` || Runs; `Memory: 256m + 512m`, as Linux v25. |
+| w05a | (w01) | Basis path with backslashes, `basis=C:\...\basis.in` | Runs? | running.md (basis path) || Runs. |
+| w05b | (w01) | Basis path with forward slashes, `basis=C:/.../basis.in` | Runs? | running.md || Runs. |
+| w05c | (w01) | Relative `basis=basis.in`, the file next to the input | Runs? | running.md || Runs. |
+| w06 | (w01, CRLF) | Input with Windows line endings: does the Windows build cope, or does it fail as on Linux? | `molecule input: ''`, `?rtesian` or a normal run | input-syntax; common-problems (CRLF) || Fails as on Linux: `'cartesian' ?`, exit 1. |
+| w07 | `w07_memory_3gb.in` | `mem=3000`: no `malloc(...) failed` in the 64-bit build? | `Memory:` echo; runs? | running.md (1 GB limit of 32-bit builds) || Runs; `Memory: 3000m`. |
+| w08 | (w01, no output file) | Does the output go to the console? | `w08_stdout.stdout` | running.md || Yes. |
+| w09 | (w01) | Started from another folder with full Windows paths for input and output | Runs? | common-problems (`cannot open input file`) || Runs. |
+| w10a | (w01) | Run inside a folder whose name has a space | Runs? | running.md (no spaces in names) || Runs. |
+| w10b | (w01) | Run from outside, quoted relative paths with a space | Runs? | running.md || Runs. |
+| w11 | `w11_optimize.in` | Water optimization (`path=.`) | `OPTIMIZATION CONVERGED`; final E | running.md || Converged in 5 steps; E = -76.36581156. |
+| w12 | `w12_hessian.in` | Water analytic Hessian (`path=.`) | Frequencies; same as Linux v25? | running.md || 1572.3, 3895.0, 4006.5 cm⁻¹, as Linux. |
+| w13a | (w01) | `p_190306.exe` on 2 processes through `MPIRUN` | Process lines; E = t01? | running.md (parallel runs on Windows) || Works only with the 2016 OpenMPI DLLs (`-12`/`-13` names) and forward slashes in the exe path; E = -76.3653932143 (v19). |
+| w13b | (w01) | `p_190306.exe` started directly, without a launcher | Runs serially, or fails for lack of MPI? | running.md || Runs serially (v19). |
 
 At the end `status.txt` lists scratch files left in the run folder and whether a `tmp` folder appeared next to the
 program's folder (where Cygwin without an installation puts `/tmp` *(inferred)*).
+
+Results are in `research/08_test_runs_v25.md` (section "Windows tests"). `p1.exe` is version 20 and
+`p_190306.exe` version 19, not 25.
 
 ## Still not covered
 

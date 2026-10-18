@@ -157,7 +157,8 @@ if (Selected "w13") {
     $pm = (Resolve-Path $env:PRIRODA_MPI).Path
     if ($env:MPIRUN) {
       Prep "w01_energy.in" (J $out "w13a_parallel.in")
-      Run "w13a_parallel" (Resolve-Path $env:MPIRUN).Path @("-np", "2", $pm, "w13a_parallel.in", "w13a_parallel.out") $out @{ TMPDIR = $out }
+      # orterun.exe does not find the program from a backslash path (orterun:exe-not-found): pass it with forward slashes
+      Run "w13a_parallel" (Resolve-Path $env:MPIRUN).Path @("-np", "2", ($pm -replace "\\", "/"), "w13a_parallel.in", "w13a_parallel.out") $out @{ TMPDIR = $out }
     } else { Note "w13a skipped: MPIRUN not set" }
     Prep "w01_energy.in" (J $out "w13b_mpi_build_serial.in")
     Run "w13b_mpi_build_serial" $pm @("w13b_mpi_build_serial.in", "w13b_mpi_build_serial.out")

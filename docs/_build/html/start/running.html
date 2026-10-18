@@ -404,7 +404,12 @@ site. Scripts and forum posts written for those versions use these names. This m
 </div>
 <p>For serial runs you need only <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> and <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> in the same directory. A full Cygwin installation is not
 required, and no administrator rights are needed. For parallel runs see <a class="reference internal" href="#running-windows-parallel"><span class="std std-ref">Parallel runs on Windows</span></a>.</p>
-<!-- src: 04 #362, #370 -->
+<!-- src: 04 #362, #370; 08 w01 -->
+<p>The Windows builds are older than the Linux one: <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> prints <code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">20</span> <span class="pre">(2021.03.18)</span></code> and <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> prints
+<code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">19</span> <span class="pre">(2019.03.06)</span></code>. For water the serial <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> gave the same energy as Linux version 25 to all printed
+digits, and the same optimized geometry and frequencies. Features added after version 20 are missing from the
+Windows builds.</p>
+<!-- src: 08 w01, w11, w12, w13b -->
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In 2017 users referred to the parallel Windows build as <code class="docutils literal notranslate"><span class="pre">exe64/p.exe</span></code>. The current index has no <code class="docutils literal notranslate"><span class="pre">p.exe</span></code>; the newest
@@ -412,8 +417,8 @@ parallel build there is <code class="docutils literal notranslate"><span class="
 </div>
 <!-- src: 04 #370; 01 §2.2 -->
 <p>Old 32-bit Windows builds could not allocate more than about 1 GB of memory; <code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code> appeared above that.
-Users report that the 64-bit build has no such limit.</p>
-<!-- src: 04 #94-#105, #210, #211, #370 -->
+The 64-bit <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> ran with <code class="docutils literal notranslate"><span class="pre">mem=3000</span></code> without trouble.</p>
+<!-- src: 04 #94-#105, #210, #211, #370; 08 w07 -->
 </section>
 </section>
 <section id="running-a-calculation">
@@ -437,10 +442,13 @@ output, and the basis file inside the input.</p>
 punctuation, with no spaces or Cyrillic. This also applies to the computer name on Windows. File names are
 case-sensitive on Linux, although keywords are not.</p>
 <!-- src: 04 #171; 03 §2 (amg, Nov 2011); 06 §2 -->
+<p>The Windows <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20) did run in a folder with a space in its name, both from inside it and from outside
+with the paths in double quotes. Full Windows paths such as <code class="docutils literal notranslate"><span class="pre">C:\Work\mol.in</span></code> work for the input and output files.</p>
+<!-- src: 08 w09, w10 -->
 <p>One user of an older version saw the complaint <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">output</span> <span class="pre">file</span> <span class="pre">'tasK.out'?</span></code> when the output file name contained a
 capital letter. Version 25 writes to an output file with capital letters in its name without complaint.</p>
 <!-- src: 04 #161; 08 t19 -->
-<p>If no output file is given (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">input.in</span></code>), the output goes to standard output. <!-- src: 03 §2; 02 §5.1; 08 t20 --></p>
+<p>If no output file is given (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">input.in</span></code>), the output goes to standard output. <!-- src: 03 §2; 02 §5.1; 08 t20, w08 --></p>
 </section>
 <section id="parallel-runs-on-linux">
 <h3>Parallel runs on Linux<a class="headerlink" href="#parallel-runs-on-linux" title="Link to this heading">¶</a></h3>
@@ -486,22 +494,37 @@ the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec
 plus the <code class="docutils literal notranslate"><span class="pre">openmpi</span></code> package.</p></li>
 <li><p>Copy these files from the Cygwin installation into the directory with the Priroda executable:
 <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cyggcc_s-seh-1.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygmpi-12.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-pal-13.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-rte-12.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code>.
-Newer OpenMPI packages have <code class="docutils literal notranslate"><span class="pre">cygopen-pal-40.dll</span></code> and <code class="docutils literal notranslate"><span class="pre">cygopen-rte-40.dll</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">-13</span></code>/<code class="docutils literal notranslate"><span class="pre">-12</span></code> files; take
-those. Take <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> from the same installation, because the other DLLs work only with matching versions.
+Take <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> from the same installation, because the other DLLs work only with matching versions.
 After this, Cygwin itself is no longer needed.</p></li>
-<li><p>Create a directory <code class="docutils literal notranslate"><span class="pre">dev</span></code> one level above the directory you start Priroda from, with subdirectories <code class="docutils literal notranslate"><span class="pre">shm</span></code> and
-<code class="docutils literal notranslate"><span class="pre">mqueue</span></code>. For Priroda in <code class="docutils literal notranslate"><span class="pre">C:\Priroda</span></code>, that means <code class="docutils literal notranslate"><span class="pre">C:\dev\shm</span></code> and <code class="docutils literal notranslate"><span class="pre">C:\dev\mqueue</span></code>. Without a Cygwin installation,
-the Cygwin libraries take the parent of the start directory as the root <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p></li>
+<li><p>Create a directory <code class="docutils literal notranslate"><span class="pre">dev</span></code> one level above the directory that holds <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code>, with subdirectories <code class="docutils literal notranslate"><span class="pre">shm</span></code> and
+<code class="docutils literal notranslate"><span class="pre">mqueue</span></code>. For Priroda in <code class="docutils literal notranslate"><span class="pre">C:\Priroda</span></code>, that means <code class="docutils literal notranslate"><span class="pre">C:\dev\shm</span></code> and <code class="docutils literal notranslate"><span class="pre">C:\dev\mqueue</span></code>. The Cygwin libraries take the
+parent of the directory that holds <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> as the root <code class="docutils literal notranslate"><span class="pre">/</span></code>: with the DLL in <code class="docutils literal notranslate"><span class="pre">C:\Priroda</span></code>, <code class="docutils literal notranslate"><span class="pre">C:\Users</span></code> is
+<code class="docutils literal notranslate"><span class="pre">/Users</span></code>.</p></li>
 <li><p>If the program is in a system directory such as <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span></code>, run it as administrator.</p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> and start the run from <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd /d "C:\Priroda"
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> and start the run from <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>, giving the path of the Priroda executable with forward slashes:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd /d C:\Work
 set "TMPDIR=%TEMP%"
-orterun.exe -np 2 p.exe "C:\Work\file.in" "C:\Work\file.out"
+C:\Priroda\orterun.exe -np 2 C:/Priroda/p_190306.exe file.in file.out
 </pre></div>
 </div>
 </li>
 </ol>
-<!-- src: 04 #370, #397, #472 -->
+<!-- src: 04 #370, #397, #472; 08 w02b, w13a -->
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> needs exactly the files <code class="docutils literal notranslate"><span class="pre">cygmpi-12.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-pal-13.dll</span></code> and <code class="docutils literal notranslate"><span class="pre">cygopen-rte-12.dll</span></code>. Current
+Cygwin OpenMPI packages ship <code class="docutils literal notranslate"><span class="pre">cygmpi-40.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-pal-40.dll</span></code> and <code class="docutils literal notranslate"><span class="pre">cygopen-rte-40.dll</span></code> instead. With those,
+or with those copied under the old names, the program and <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> exit at once with code -1073741515
+(0xC0000135, a required DLL was not found), and nothing is printed. A test in 2026 worked with the <code class="docutils literal notranslate"><span class="pre">-12</span></code>/<code class="docutils literal notranslate"><span class="pre">-13</span></code> files
+and <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> from an older OpenMPI package (files dated 2016-06-21). Take <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> from the same package
+as the DLLs.</p>
+</div>
+<!-- src: 08 w13 -->
+<p>That test ran on Windows 10 with a Cygwin installation on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> then printed
+<code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">on</span> <span class="pre">2</span> <span class="pre">processors</span></code> and gave the same energy as a serial run. With a backslash path to the executable
+(<code class="docutils literal notranslate"><span class="pre">C:\Priroda\p_190306.exe</span></code>), <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> stopped with <code class="docutils literal notranslate"><span class="pre">orterun:exe-not-found</span></code>. Started directly, without
+<code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code>, <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> runs serially.</p>
+<!-- src: 08 w13a, w13b -->
 <p>Problems reported with this setup:</p>
 <ul class="simple">
 <li><p>The recipe needs a Priroda build that supports parallel runs. Version 6 (<code class="docutils literal notranslate"><span class="pre">p6.exe</span></code>) failed with an OpenMPI
@@ -516,9 +539,9 @@ adapter. <!-- src: 04 #397 --></p></li>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>A user reported in 2021 that this recipe no longer worked on Windows 10 with a current Cygwin, and no fix was posted.
-Expect to adapt it to the Cygwin and OpenMPI versions you have.</p>
+The likely cause is the newer OpenMPI DLLs described above. A PC without a Cygwin installation was not tested.</p>
 </div>
-<!-- src: 04 #472 -->
+<!-- src: 04 #472; 08 w13 (likely cause inferred) -->
 </section>
 </section>
 <section id="memory-disk-and-scratch-system">
@@ -571,9 +594,18 @@ crash, delete the leftovers yourself.</p>
 version 6 did. <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says the current working directory instead, and a 2020 user report gives the directory of
 the input file; neither matches version 25. <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> is often small or shared, so set <code class="docutils literal notranslate"><span class="pre">path=</span></code> or <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> for real jobs.</p>
 <!-- src: input.txt; 04 #465, #20; 08 t64 (TMPDIR unset: /tmp; TMPDIR set: used) -->
-<p>On Windows there is no <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. Without <code class="docutils literal notranslate"><span class="pre">path=</span></code> or <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, older versions stopped after printing
-<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">/tmp/tmp2960.0</span></code>. Use <code class="docutils literal notranslate"><span class="pre">$system</span> <span class="pre">path=.</span> <span class="pre">$end</span></code> (the current directory) or set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>.</p>
-<!-- src: 04 #20, #21; 03 §2 -->
+<p>On Windows there is no <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. Without <code class="docutils literal notranslate"><span class="pre">path=</span></code> or <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, the run stops after printing
+<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">/tmp/tmp978.0000</span></code> (the number varies), and the output ends with <code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">0</span> <span class="pre">got</span> <span class="pre">signal</span> <span class="pre">6</span></code>. This
+still happens with <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20). Any of these avoids it:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$system</span> <span class="pre">path=.</span> <span class="pre">$end</span></code> (the current directory);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> set to a Windows path: in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=%TEMP%</span></code> or <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">&quot;TMPDIR=%TEMP%&quot;</span></code>. Do not write
+<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=&quot;%TEMP%&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> keeps the quotes in the value, Priroda takes the result as a relative path, and
+the run stops in the same way;</p></li>
+<li><p>a RAM disk (negative <code class="docutils literal notranslate"><span class="pre">disk</span></code>), which needs no scratch directory. An input with no <code class="docutils literal notranslate"><span class="pre">$system</span></code> group gets a 512 MB RAM
+disk and runs.</p></li>
+</ul>
+<!-- src: 04 #20, #21; 03 §2; 08 w02a-d, w03, w04 -->
 </section>
 <section id="disk-speed">
 <h3>Disk speed<a class="headerlink" href="#disk-speed" title="Link to this heading">¶</a></h3>
@@ -789,7 +821,8 @@ return:</p>
 less obvious case: an input edited in Word ran <code class="docutils literal notranslate"><span class="pre">task=scan</span></code> as a plain optimization.</p>
 <!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) -->
 <p>Version 25 behaves the same way: a water input saved with Windows line endings stopped after <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code>
-with the line <code class="docutils literal notranslate"><span class="pre">'cartesian'</span> <span class="pre">?</span></code>, exit status 1. <!-- src: 08 t81a --></p>
+with the line <code class="docutils literal notranslate"><span class="pre">'cartesian'</span> <span class="pre">?</span></code>, exit status 1. The Windows build <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20) stops in the same place, so
+the input needs Unix line endings on Windows too. <!-- src: 08 t81a, w06 --></p>
 <p>To check and fix the line endings on Linux:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file mol.in        # reports "with CRLF line terminators" if the file has Windows endings
 dos2unix mol.in
@@ -820,8 +853,9 @@ given with its full path.</p>
 fails with <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">''3z.bas''</span></code>.</p>
 <!-- src: 03 §2; 02 §3 -->
 </li>
-<li><p>Windows paths work: <code class="docutils literal notranslate"><span class="pre">basis=D:\NMR\Nature\basis\6-31+G(d)</span></code>.</p>
-<!-- src: 04 #319 -->
+<li><p>Windows paths work: <code class="docutils literal notranslate"><span class="pre">basis=D:\NMR\Nature\basis\6-31+G(d)</span></code>. In a test, <code class="docutils literal notranslate"><span class="pre">basis=C:\Priroda\basis.in</span></code>,
+<code class="docutils literal notranslate"><span class="pre">basis=C:/Priroda/basis.in</span></code> and <code class="docutils literal notranslate"><span class="pre">basis=basis.in</span></code> (the file in the directory the run started from) all worked.</p>
+<!-- src: 04 #319; 08 w05 -->
 </li>
 <li><p>The relativistic file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>. Without it the basis input fails: in version 25
 the output ends right after <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span> <span class="pre">'…/basis4.in'</span></code> with the single line <code class="docutils literal notranslate"><span class="pre">1?</span></code>.</p>

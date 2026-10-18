@@ -362,16 +362,22 @@ directory in the command line simply did not exist. Work in a directory you own 
 capital letters in its name without complaint.</p>
 <!-- src: 04 #161; 06 §10 (case-sensitive names); 08 t19 -->
 <p>On Windows, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the folder with the input before running <code class="docutils literal notranslate"><span class="pre">p.exe</span> <span class="pre">input.in</span> <span class="pre">output.out</span></code>. One user still got
-<code class="docutils literal notranslate"><span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">input</span> <span class="pre">file</span></code> after doing that, and the thread never found the cause.</p>
-<!-- src: 04 #130-#133 -->
+<code class="docutils literal notranslate"><span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">input</span> <span class="pre">file</span></code> after doing that, and the thread never found the cause. Giving full Windows paths for both
+files, such as <code class="docutils literal notranslate"><span class="pre">p1.exe</span> <span class="pre">C:\Work\mol.in</span> <span class="pre">C:\Work\mol.out</span></code>, works from any folder.</p>
+<!-- src: 04 #130-#133; 08 w09 -->
 </section>
 <section id="output-stops-at-0-opening-file-tmp-windows">
 <h3>Output stops at <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">/tmp/...</span></code> (Windows)<a class="headerlink" href="#output-stops-at-0-opening-file-tmp-windows" title="Link to this heading">¶</a></h3>
-<p>Old Windows builds put scratch files in <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when nothing else is set (the output echoes <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1</span> <span class="pre">GB</span> <span class="pre">'/tmp'</span></code>),
-and Windows has no <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. The Linux version 25 has the same default and also honours <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>. Set the scratch
-directory explicitly, for example <code class="docutils literal notranslate"><span class="pre">$system</span> <span class="pre">path=.</span> <span class="pre">$end</span></code>, or set the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable before starting the
-program. This is the oldest known problem in both forums and the fix is well established. See <a class="reference internal" href="../reference/system.html#system-path"><span class="std std-ref">path</span></a>.</p>
-<!-- src: 03 §2 (#0, GemmaNC 2009); 04 #20, #21, #128; 08 t64a, t64b -->
+<p>Windows builds put scratch files in <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> when nothing else is set (the output echoes <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>), and
+Windows has no <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. The current <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20) still does this: the output ends with
+<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">/tmp/tmp978.0000</span></code> and <code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">0</span> <span class="pre">got</span> <span class="pre">signal</span> <span class="pre">6</span></code>. The Linux version 25 has the same default and also
+honours <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>. Set the scratch directory explicitly, for example <code class="docutils literal notranslate"><span class="pre">$system</span> <span class="pre">path=.</span> <span class="pre">$end</span></code>, or set the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>
+environment variable before starting the program. A RAM disk (negative <a class="reference internal" href="../reference/system.html#system-disk"><span class="std std-ref">disk</span></a>) also avoids the
+problem. This is the oldest known problem in both forums. See <a class="reference internal" href="../reference/system.html#system-path"><span class="std std-ref">path</span></a>.</p>
+<!-- src: 03 §2 (#0, GemmaNC 2009); 04 #20, #21, #128; 08 t64a, t64b, w02a-d, w03 -->
+<p>In <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>, write <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=%TEMP%</span></code> or <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">&quot;TMPDIR=%TEMP%&quot;</span></code>. With <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=&quot;%TEMP%&quot;</span></code> the quotes become part
+of the value: the <code class="docutils literal notranslate"><span class="pre">Disk:</span></code> echo shows the quoted path appended to the current directory, and the run stops in the same
+way. <!-- src: 08 w02b, w02c --></p>
 </section>
 <section id="scf-settings-are-ignored-or-rejected">
 <h3><code class="docutils literal notranslate"><span class="pre">$scf</span></code> settings are ignored or rejected<a class="headerlink" href="#scf-settings-are-ignored-or-rejected" title="Link to this heading">¶</a></h3>
@@ -859,8 +865,8 @@ user’s limit, <code class="docutils literal notranslate"><span class="pre">mem
 <!-- src: 04 #196 (values per process); 03 §3; 04 #462, #463, #468, #471 -->
 </li>
 <li><p>The 32-bit Windows (Cygwin) builds cannot allocate more than about 1 GB. 512 MB was enough for most DFT jobs.
-Several users confirmed this limit. The 64-bit Windows build with <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> is reported to have no such limit.</p>
-<!-- src: 04 #94, #95, #104, #105, #210, #211, #370 -->
+Several users confirmed this limit. The 64-bit Windows build <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> ran with <code class="docutils literal notranslate"><span class="pre">mem=3000</span></code>.</p>
+<!-- src: 04 #94, #95, #104, #105, #210, #211, #370; 08 w07 -->
 </li>
 </ul>
 <p>A message beginning <code class="docutils literal notranslate"><span class="pre">We</span> <span class="pre">need</span> <span class="pre">1.5</span> <span class="pre">GB</span> <span class="pre">of</span> <span class="pre">memory...</span></code> was reported once. One reply guessed that it is about RAM
@@ -1019,22 +1025,32 @@ program and home directories, and then to rule out causes one by one. <!-- src: 
 <code class="docutils literal notranslate"><span class="pre">cygopen-pal-13.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-rte-12.dll</span></code> and <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> next to the Priroda executable. Take
 <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> from the same Cygwin installation, because the other DLLs work only with it. These are the names
 from a 2017 Cygwin. A 2018 report says newer OpenMPI packages ship <code class="docutils literal notranslate"><span class="pre">cygopen-pal-40.dll</span></code> and
-<code class="docutils literal notranslate"><span class="pre">cygopen-rte-40.dll</span></code> instead; take those.</p></li>
-<li><p>To run outside the Cygwin terminal, create a <code class="docutils literal notranslate"><span class="pre">dev</span></code> directory one level above the directory you start Priroda from,
-with subdirectories <code class="docutils literal notranslate"><span class="pre">shm</span></code> and <code class="docutils literal notranslate"><span class="pre">mqueue</span></code>. For Priroda in <code class="docutils literal notranslate"><span class="pre">C:\Priroda</span> <span class="pre">16</span></code> that means <code class="docutils literal notranslate"><span class="pre">C:\dev\shm</span></code> and
-<code class="docutils literal notranslate"><span class="pre">C:\dev\mqueue</span></code>. Without them Cygwin prints <code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">'/dev/shm'</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exists</span> <span class="pre">or</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">directory.</span></code></p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> and start the run from <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>:</p>
+<code class="docutils literal notranslate"><span class="pre">cygopen-rte-40.dll</span></code> instead. Those do <strong>not</strong> work with <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code>, even renamed: see the note below.</p></li>
+<li><p>To run outside the Cygwin terminal, create a <code class="docutils literal notranslate"><span class="pre">dev</span></code> directory one level above the directory that holds
+<code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code>, with subdirectories <code class="docutils literal notranslate"><span class="pre">shm</span></code> and <code class="docutils literal notranslate"><span class="pre">mqueue</span></code>. For Priroda in <code class="docutils literal notranslate"><span class="pre">C:\Priroda</span> <span class="pre">16</span></code> that means <code class="docutils literal notranslate"><span class="pre">C:\dev\shm</span></code>
+and <code class="docutils literal notranslate"><span class="pre">C:\dev\mqueue</span></code>. Without them Cygwin prints <code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">'/dev/shm'</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exists</span> <span class="pre">or</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">directory.</span></code></p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> and start the run from <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>. The command as posted was:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd /d "C:\Priroda 16"
 set TMPDIR="%TEMP%"
 "orterun.exe" -np 2 ./p16_64_parallel.exe "C:\Work\file.in" "C:\Work\file.out"
 </pre></div>
 </div>
-<p>This is the command as posted. In <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=&quot;%TEMP%&quot;</span></code> keeps the quotes as part of the value;
-<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">&quot;TMPDIR=%TEMP%&quot;</span></code> does not. Which form the Cygwin build expects was not tested.</p>
+<p>Write <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">&quot;TMPDIR=%TEMP%&quot;</span></code> instead: with <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=&quot;%TEMP%&quot;</span></code> the quotes stay in the value, and the run stops
+at <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">…</span></code> unless the input sets <code class="docutils literal notranslate"><span class="pre">path=</span></code>.</p>
 </li>
 <li><p>If the program is in a system directory such as <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span></code>, run it as administrator.</p></li>
 </ol>
-<!-- src: 04 #370 (EvgeniX), #360, #362, #472 --> <!-- verify -->
+<!-- src: 04 #370 (EvgeniX), #360, #362, #472; 08 w02c, w13 -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A test in 2026 on Windows 10 (with a Cygwin installation on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>) got <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> running on 2 processes.
+It needed the <code class="docutils literal notranslate"><span class="pre">-12</span></code>/<code class="docutils literal notranslate"><span class="pre">-13</span></code> DLLs and <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> from an older OpenMPI package (files dated 2016-06-21). With the
+current <code class="docutils literal notranslate"><span class="pre">-40</span></code> DLLs, or those renamed to the old names, the programs exited at once with code -1073741515
+(0xC0000135, a required DLL was not found). The path of the Priroda executable had to be written with forward
+slashes: <code class="docutils literal notranslate"><span class="pre">orterun.exe</span> <span class="pre">-np</span> <span class="pre">2</span> <span class="pre">C:/Priroda/p_190306.exe</span> <span class="pre">file.in</span> <span class="pre">file.out</span></code>. With backslashes, <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> stopped with
+<code class="docutils literal notranslate"><span class="pre">orterun:exe-not-found</span></code>. The full setup is in <a class="reference internal" href="../start/running.html#running-windows-parallel"><span class="std std-ref">Parallel runs on Windows</span></a>.</p>
+</div>
+<!-- src: 08 w13 -->
 <p>Network problems reported with this setup:</p>
 <ul>
 <li><p>On a PC connected by WiFi that also has a LAN adapter, OpenMPI failed with
@@ -1046,8 +1062,8 @@ set TMPDIR="%TEMP%"
 </li>
 </ul>
 <p>A 2021 attempt to follow this recipe on Windows 10 failed with an error that was posted only as a screenshot; no fix
-was posted. One user runs Priroda under WSL on Windows instead; no details of that setup were posted.</p>
-<!-- src: 04 #472, #508 -->
+was posted. The <code class="docutils literal notranslate"><span class="pre">-40</span></code> DLLs described in the note above may have been the cause. One user runs Priroda under WSL on Windows instead; no details of that setup were posted.</p>
+<!-- src: 04 #472, #508; cause inferred from 08 w13 -->
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Not every build on the official site is reliable. A note there once said that the <code class="docutils literal notranslate"><span class="pre">w64/*.exe</span></code> 64-bit Cygwin builds

@@ -205,12 +205,14 @@ between versions, so keep every calculation you compare on one version.
 | 14 | 2014.01.01 | Input geometry echoed with a `<` prefix (`<$molecule`). 8060-atom QM-model run on 32 processes. |
 | 15 | 2015.09.14 | Scalar-relativistic example (Pt complex). |
 | 16, 17 | — (forum posts 2016–2018) | The Windows build runs in parallel from version 16. Version 17 runs Hessians on 4 or more cores. Around 2016 the developer removed limits on SCF memory allocation and on the system size for Hessians. |
+| 19 | 2019.03.06 | Banner of `p_190306.exe`, the parallel Windows build on the official site. |
+| 20 | 2021.03.18 | Banner of `p1.exe`, the serial Windows build on the official site. |
 | 23 | 2023.06.22 | Newest numbered version reported by users (2024). New functionals `LPBEVV` and `LPBEVVV`. |
 | 25 | 2025.02.28 | Banner `Priroda 25 (2025.02.28)`. The version used for the test runs behind this manual. Its date matches the `p4_d` build on the official site; `p_l` is dated 2025-04-14. One 2025 example input uses `theory=DFT_n4` (with `LPBEVV`). |
 
-<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §1, §3.2, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.1, §5.3 -->
+<!-- src: v2/v4 banners: 02 §3.3; v2/v6/v9 optimize+hessian: 04 #145, 03 §8; v3→v4 nucleus: 06 §1; v5: 06 header, §1, §3; v6: 03 §1, 04 #401; v7/v8: 03 §1; v9 bug fix: 03 §1; v10: 04 #152; v11: 02 §1, §3.2, §5.10; v13–v15: 01 §2.4; v14 echo: 01 §10; v16/17: 04 #401, #339; v19/v20: 08 w01, w13b; v23: 04 #509, #512; v25: 08; 2025: 01 §2.2, §5.1, §5.3 -->
 
-Versions 12, 18–22 and 24 do not appear in any source; version 3 is mentioned only for the change of the nucleus
+Versions 12, 18, 21, 22 and 24 do not appear in any source; version 3 is mentioned only for the change of the nucleus
 model. The Russian file `Dft_ansi.txt` describes Priroda's predecessor, whose input had the groups `$control`,
 `$coordinates`, `$basis`, `$auxiliary`, `$guess`, `$SCF`, `$search`, `$force` and `$hessian`. Version 25 reads none
 of `$coordinates`, `$auxiliary`, `$search`, `$force` and `$hessian` as an input group; the geometry now goes in `$molecule`, and optimization settings in

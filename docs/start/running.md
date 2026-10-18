@@ -86,7 +86,13 @@ The Windows build is a Cygwin build for x86-64. It is in the `exe64/` directory 
 
 For serial runs you need only `p1.exe` and `cygwin1.dll` in the same directory. A full Cygwin installation is not
 required, and no administrator rights are needed. For parallel runs see {ref}`running-windows-parallel`.
-<!-- src: 04 #362, #370 -->
+<!-- src: 04 #362, #370; 08 w01 -->
+
+The Windows builds are older than the Linux one: `p1.exe` prints `Priroda 20 (2021.03.18)` and `p_190306.exe` prints
+`Priroda 19 (2019.03.06)`. For water the serial `p1.exe` gave the same energy as Linux version 25 to all printed
+digits, and the same optimized geometry and frequencies. Features added after version 20 are missing from the
+Windows builds.
+<!-- src: 08 w01, w11, w12, w13b -->
 
 :::{note}
 In 2017 users referred to the parallel Windows build as `exe64/p.exe`. The current index has no `p.exe`; the newest
@@ -95,8 +101,8 @@ parallel build there is `p_190306.exe`.
 <!-- src: 04 #370; 01 §2.2 -->
 
 Old 32-bit Windows builds could not allocate more than about 1 GB of memory; `malloc(...) failed` appeared above that.
-Users report that the 64-bit build has no such limit.
-<!-- src: 04 #94-#105, #210, #211, #370 -->
+The 64-bit `p1.exe` ran with `mem=3000` without trouble.
+<!-- src: 04 #94-#105, #210, #211, #370; 08 w07 -->
 
 ## Running a calculation
 
@@ -126,11 +132,15 @@ punctuation, with no spaces or Cyrillic. This also applies to the computer name 
 case-sensitive on Linux, although keywords are not.
 <!-- src: 04 #171; 03 §2 (amg, Nov 2011); 06 §2 -->
 
+The Windows `p1.exe` (version 20) did run in a folder with a space in its name, both from inside it and from outside
+with the paths in double quotes. Full Windows paths such as `C:\Work\mol.in` work for the input and output files.
+<!-- src: 08 w09, w10 -->
+
 One user of an older version saw the complaint `0: output file 'tasK.out'?` when the output file name contained a
 capital letter. Version 25 writes to an output file with capital letters in its name without complaint.
 <!-- src: 04 #161; 08 t19 -->
 
-If no output file is given (`p input.in`), the output goes to standard output. <!-- src: 03 §2; 02 §5.1; 08 t20 -->
+If no output file is given (`p input.in`), the output goes to standard output. <!-- src: 03 §2; 02 §5.1; 08 t20, w08 -->
 
 ### Parallel runs on Linux
 
@@ -190,22 +200,38 @@ The MPI runtime is not on the site. Users assembled it from Cygwin as follows:
    plus the `openmpi` package.
 2. Copy these files from the Cygwin installation into the directory with the Priroda executable:
    `cygwin1.dll`, `cyggcc_s-seh-1.dll`, `cygmpi-12.dll`, `cygopen-pal-13.dll`, `cygopen-rte-12.dll`, `orterun.exe`.
-   Newer OpenMPI packages have `cygopen-pal-40.dll` and `cygopen-rte-40.dll` instead of the `-13`/`-12` files; take
-   those. Take `cygwin1.dll` from the same installation, because the other DLLs work only with matching versions.
+   Take `cygwin1.dll` from the same installation, because the other DLLs work only with matching versions.
    After this, Cygwin itself is no longer needed.
-3. Create a directory `dev` one level above the directory you start Priroda from, with subdirectories `shm` and
-   `mqueue`. For Priroda in `C:\Priroda`, that means `C:\dev\shm` and `C:\dev\mqueue`. Without a Cygwin installation,
-   the Cygwin libraries take the parent of the start directory as the root `/`.
+3. Create a directory `dev` one level above the directory that holds `cygwin1.dll`, with subdirectories `shm` and
+   `mqueue`. For Priroda in `C:\Priroda`, that means `C:\dev\shm` and `C:\dev\mqueue`. The Cygwin libraries take the
+   parent of the directory that holds `cygwin1.dll` as the root `/`: with the DLL in `C:\Priroda`, `C:\Users` is
+   `/Users`.
 4. If the program is in a system directory such as `C:\Program Files`, run it as administrator.
-5. Set `TMPDIR` and start the run from `cmd.exe`:
+5. Set `TMPDIR` and start the run from `cmd.exe`, giving the path of the Priroda executable with forward slashes:
 
    ```text
-   cd /d "C:\Priroda"
+   cd /d C:\Work
    set "TMPDIR=%TEMP%"
-   orterun.exe -np 2 p.exe "C:\Work\file.in" "C:\Work\file.out"
+   C:\Priroda\orterun.exe -np 2 C:/Priroda/p_190306.exe file.in file.out
    ```
 
-<!-- src: 04 #370, #397, #472 -->
+<!-- src: 04 #370, #397, #472; 08 w02b, w13a -->
+
+:::{important}
+`p_190306.exe` needs exactly the files `cygmpi-12.dll`, `cygopen-pal-13.dll` and `cygopen-rte-12.dll`. Current
+Cygwin OpenMPI packages ship `cygmpi-40.dll`, `cygopen-pal-40.dll` and `cygopen-rte-40.dll` instead. With those,
+or with those copied under the old names, the program and `orterun.exe` exit at once with code -1073741515
+(0xC0000135, a required DLL was not found), and nothing is printed. A test in 2026 worked with the `-12`/`-13` files
+and `orterun.exe` from an older OpenMPI package (files dated 2016-06-21). Take `orterun.exe` from the same package
+as the DLLs.
+:::
+<!-- src: 08 w13 -->
+
+That test ran on Windows 10 with a Cygwin installation on `PATH`. `p_190306.exe` then printed
+`parallel on 2 processors` and gave the same energy as a serial run. With a backslash path to the executable
+(`C:\Priroda\p_190306.exe`), `orterun.exe` stopped with `orterun:exe-not-found`. Started directly, without
+`orterun.exe`, `p_190306.exe` runs serially.
+<!-- src: 08 w13a, w13b -->
 
 Problems reported with this setup:
 
@@ -220,9 +246,9 @@ Problems reported with this setup:
 
 :::{warning}
 A user reported in 2021 that this recipe no longer worked on Windows 10 with a current Cygwin, and no fix was posted.
-Expect to adapt it to the Cygwin and OpenMPI versions you have.
+The likely cause is the newer OpenMPI DLLs described above. A PC without a Cygwin installation was not tested.
 :::
-<!-- src: 04 #472 -->
+<!-- src: 04 #472; 08 w13 (likely cause inferred) -->
 
 ## Memory, disk and scratch: `$system`
 
@@ -280,9 +306,17 @@ version 6 did. `input.txt` says the current working directory instead, and a 202
 the input file; neither matches version 25. `/tmp` is often small or shared, so set `path=` or `TMPDIR` for real jobs.
 <!-- src: input.txt; 04 #465, #20; 08 t64 (TMPDIR unset: /tmp; TMPDIR set: used) -->
 
-On Windows there is no `/tmp`. Without `path=` or `TMPDIR`, older versions stopped after printing
-`0: opening file /tmp/tmp2960.0`. Use `$system path=. $end` (the current directory) or set `TMPDIR`.
-<!-- src: 04 #20, #21; 03 §2 -->
+On Windows there is no `/tmp`. Without `path=` or `TMPDIR`, the run stops after printing
+`0: opening file /tmp/tmp978.0000` (the number varies), and the output ends with `process 0 got signal 6`. This
+still happens with `p1.exe` (version 20). Any of these avoids it:
+
+- `$system path=. $end` (the current directory);
+- `TMPDIR` set to a Windows path: in `cmd.exe`, `set TMPDIR=%TEMP%` or `set "TMPDIR=%TEMP%"`. Do not write
+  `set TMPDIR="%TEMP%"`: `cmd.exe` keeps the quotes in the value, Priroda takes the result as a relative path, and
+  the run stops in the same way;
+- a RAM disk (negative `disk`), which needs no scratch directory. An input with no `$system` group gets a 512 MB RAM
+  disk and runs.
+<!-- src: 04 #20, #21; 03 §2; 08 w02a-d, w03, w04 -->
 
 ### Disk speed
 
@@ -507,7 +541,8 @@ less obvious case: an input edited in Word ran `task=scan` as a plain optimizati
 <!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) -->
 
 Version 25 behaves the same way: a water input saved with Windows line endings stopped after `molecule input: ''`
-with the line `'cartesian' ?`, exit status 1. <!-- src: 08 t81a -->
+with the line `'cartesian' ?`, exit status 1. The Windows build `p1.exe` (version 20) stops in the same place, so
+the input needs Unix line endings on Windows too. <!-- src: 08 t81a, w06 -->
 
 To check and fix the line endings on Linux:
 
@@ -544,8 +579,9 @@ given with its full path.
 - The name can be put in double quotes: `basis="3z.bas"` works. Two single quotes do not work; `basis=''3z.bas''`
   fails with `error opening file ''3z.bas''`.
   <!-- src: 03 §2; 02 §3 -->
-- Windows paths work: `basis=D:\NMR\Nature\basis\6-31+G(d)`.
-  <!-- src: 04 #319 -->
+- Windows paths work: `basis=D:\NMR\Nature\basis\6-31+G(d)`. In a test, `basis=C:\Priroda\basis.in`,
+  `basis=C:/Priroda/basis.in` and `basis=basis.in` (the file in the directory the run started from) all worked.
+  <!-- src: 04 #319; 08 w05 -->
 - The relativistic file `basis4.in` needs `four=1` in `$control`. Without it the basis input fails: in version 25
   the output ends right after `Basis set input: '…/basis4.in'` with the single line `1?`.
   <!-- src: 04 #206-#208, #336; 08 t49 -->

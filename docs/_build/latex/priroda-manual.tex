@@ -824,6 +824,26 @@ The Windows build runs in parallel from version 16. Version 17 runs Hessians on 
 \\
 \sphinxhline
 \sphinxAtStartPar
+19
+&
+\sphinxAtStartPar
+2019.03.06
+&
+\sphinxAtStartPar
+Banner of \sphinxcode{\sphinxupquote{p\_190306.exe}}, the parallel Windows build on the official site.
+\\
+\sphinxhline
+\sphinxAtStartPar
+20
+&
+\sphinxAtStartPar
+2021.03.18
+&
+\sphinxAtStartPar
+Banner of \sphinxcode{\sphinxupquote{p1.exe}}, the serial Windows build on the official site.
+\\
+\sphinxhline
+\sphinxAtStartPar
 23
 &
 \sphinxAtStartPar
@@ -850,7 +870,7 @@ Banner \sphinxcode{\sphinxupquote{Priroda 25 (2025.02.28)}}. The version used fo
 
 
 \sphinxAtStartPar
-Versions 12, 18\textendash{}22 and 24 do not appear in any source; version 3 is mentioned only for the change of the nucleus
+Versions 12, 18, 21, 22 and 24 do not appear in any source; version 3 is mentioned only for the change of the nucleus
 model. The Russian file \sphinxcode{\sphinxupquote{Dft\_ansi.txt}} describes Priroda’s predecessor, whose input had the groups \sphinxcode{\sphinxupquote{\$control}},
 \sphinxcode{\sphinxupquote{\$coordinates}}, \sphinxcode{\sphinxupquote{\$basis}}, \sphinxcode{\sphinxupquote{\$auxiliary}}, \sphinxcode{\sphinxupquote{\$guess}}, \sphinxcode{\sphinxupquote{\$SCF}}, \sphinxcode{\sphinxupquote{\$search}}, \sphinxcode{\sphinxupquote{\$force}} and \sphinxcode{\sphinxupquote{\$hessian}}. Version 25 reads none
 of \sphinxcode{\sphinxupquote{\$coordinates}}, \sphinxcode{\sphinxupquote{\$auxiliary}}, \sphinxcode{\sphinxupquote{\$search}}, \sphinxcode{\sphinxupquote{\$force}} and \sphinxcode{\sphinxupquote{\$hessian}} as an input group; the geometry now goes in \sphinxcode{\sphinxupquote{\$molecule}}, and optimization settings in
@@ -1237,6 +1257,14 @@ required, and no administrator rights are needed. For parallel runs see {\hyperr
 
 
 
+\sphinxAtStartPar
+The Windows builds are older than the Linux one: \sphinxcode{\sphinxupquote{p1.exe}} prints \sphinxcode{\sphinxupquote{Priroda 20 (2021.03.18)}} and \sphinxcode{\sphinxupquote{p\_190306.exe}} prints
+\sphinxcode{\sphinxupquote{Priroda 19 (2019.03.06)}}. For water the serial \sphinxcode{\sphinxupquote{p1.exe}} gave the same energy as Linux version 25 to all printed
+digits, and the same optimized geometry and frequencies. Features added after version 20 are missing from the
+Windows builds.
+
+
+
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 In 2017 users referred to the parallel Windows build as \sphinxcode{\sphinxupquote{exe64/p.exe}}. The current index has no \sphinxcode{\sphinxupquote{p.exe}}; the newest
@@ -1247,7 +1275,7 @@ parallel build there is \sphinxcode{\sphinxupquote{p\_190306.exe}}.
 
 \sphinxAtStartPar
 Old 32\sphinxhyphen{}bit Windows builds could not allocate more than about 1 GB of memory; \sphinxcode{\sphinxupquote{malloc(...) failed}} appeared above that.
-Users report that the 64\sphinxhyphen{}bit build has no such limit.
+The 64\sphinxhyphen{}bit \sphinxcode{\sphinxupquote{p1.exe}} ran with \sphinxcode{\sphinxupquote{mem=3000}} without trouble.
 
 
 
@@ -1284,6 +1312,12 @@ output, and the basis file inside the input.
 Run in a directory you own and can write to. Keep file and directory names to Latin letters, digits and simple
 punctuation, with no spaces or Cyrillic. This also applies to the computer name on Windows. File names are
 case\sphinxhyphen{}sensitive on Linux, although keywords are not.
+
+
+
+\sphinxAtStartPar
+The Windows \sphinxcode{\sphinxupquote{p1.exe}} (version 20) did run in a folder with a space in its name, both from inside it and from outside
+with the paths in double quotes. Full Windows paths such as \sphinxcode{\sphinxupquote{C:\textbackslash{}Work\textbackslash{}mol.in}} work for the input and output files.
 
 
 
@@ -1374,15 +1408,15 @@ plus the \sphinxcode{\sphinxupquote{openmpi}} package.
 \sphinxAtStartPar
 Copy these files from the Cygwin installation into the directory with the Priroda executable:
 \sphinxcode{\sphinxupquote{cygwin1.dll}}, \sphinxcode{\sphinxupquote{cyggcc\_s\sphinxhyphen{}seh\sphinxhyphen{}1.dll}}, \sphinxcode{\sphinxupquote{cygmpi\sphinxhyphen{}12.dll}}, \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}pal\sphinxhyphen{}13.dll}}, \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}rte\sphinxhyphen{}12.dll}}, \sphinxcode{\sphinxupquote{orterun.exe}}.
-Newer OpenMPI packages have \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}pal\sphinxhyphen{}40.dll}} and \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}rte\sphinxhyphen{}40.dll}} instead of the \sphinxcode{\sphinxupquote{\sphinxhyphen{}13}}/\sphinxcode{\sphinxupquote{\sphinxhyphen{}12}} files; take
-those. Take \sphinxcode{\sphinxupquote{cygwin1.dll}} from the same installation, because the other DLLs work only with matching versions.
+Take \sphinxcode{\sphinxupquote{cygwin1.dll}} from the same installation, because the other DLLs work only with matching versions.
 After this, Cygwin itself is no longer needed.
 
 \item {} 
 \sphinxAtStartPar
-Create a directory \sphinxcode{\sphinxupquote{dev}} one level above the directory you start Priroda from, with subdirectories \sphinxcode{\sphinxupquote{shm}} and
-\sphinxcode{\sphinxupquote{mqueue}}. For Priroda in \sphinxcode{\sphinxupquote{C:\textbackslash{}Priroda}}, that means \sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}shm}} and \sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}mqueue}}. Without a Cygwin installation,
-the Cygwin libraries take the parent of the start directory as the root \sphinxcode{\sphinxupquote{/}}.
+Create a directory \sphinxcode{\sphinxupquote{dev}} one level above the directory that holds \sphinxcode{\sphinxupquote{cygwin1.dll}}, with subdirectories \sphinxcode{\sphinxupquote{shm}} and
+\sphinxcode{\sphinxupquote{mqueue}}. For Priroda in \sphinxcode{\sphinxupquote{C:\textbackslash{}Priroda}}, that means \sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}shm}} and \sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}mqueue}}. The Cygwin libraries take the
+parent of the directory that holds \sphinxcode{\sphinxupquote{cygwin1.dll}} as the root \sphinxcode{\sphinxupquote{/}}: with the DLL in \sphinxcode{\sphinxupquote{C:\textbackslash{}Priroda}}, \sphinxcode{\sphinxupquote{C:\textbackslash{}Users}} is
+\sphinxcode{\sphinxupquote{/Users}}.
 
 \item {} 
 \sphinxAtStartPar
@@ -1390,15 +1424,35 @@ If the program is in a system directory such as \sphinxcode{\sphinxupquote{C:\te
 
 \item {} 
 \sphinxAtStartPar
-Set \sphinxcode{\sphinxupquote{TMPDIR}} and start the run from \sphinxcode{\sphinxupquote{cmd.exe}}:
+Set \sphinxcode{\sphinxupquote{TMPDIR}} and start the run from \sphinxcode{\sphinxupquote{cmd.exe}}, giving the path of the Priroda executable with forward slashes:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-cd /d \PYGZdq{}C:\PYGZbs{}Priroda\PYGZdq{}
+cd /d C:\PYGZbs{}Work
 set \PYGZdq{}TMPDIR=\PYGZpc{}TEMP\PYGZpc{}\PYGZdq{}
-orterun.exe \PYGZhy{}np 2 p.exe \PYGZdq{}C:\PYGZbs{}Work\PYGZbs{}file.in\PYGZdq{} \PYGZdq{}C:\PYGZbs{}Work\PYGZbs{}file.out\PYGZdq{}
+C:\PYGZbs{}Priroda\PYGZbs{}orterun.exe \PYGZhy{}np 2 C:/Priroda/p\PYGZus{}190306.exe file.in file.out
 \end{sphinxVerbatim}
 
 \end{enumerate}
+
+
+
+\begin{sphinxadmonition}{important}{Important:}
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{p\_190306.exe}} needs exactly the files \sphinxcode{\sphinxupquote{cygmpi\sphinxhyphen{}12.dll}}, \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}pal\sphinxhyphen{}13.dll}} and \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}rte\sphinxhyphen{}12.dll}}. Current
+Cygwin OpenMPI packages ship \sphinxcode{\sphinxupquote{cygmpi\sphinxhyphen{}40.dll}}, \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}pal\sphinxhyphen{}40.dll}} and \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}rte\sphinxhyphen{}40.dll}} instead. With those,
+or with those copied under the old names, the program and \sphinxcode{\sphinxupquote{orterun.exe}} exit at once with code \sphinxhyphen{}1073741515
+(0xC0000135, a required DLL was not found), and nothing is printed. A test in 2026 worked with the \sphinxcode{\sphinxupquote{\sphinxhyphen{}12}}/\sphinxcode{\sphinxupquote{\sphinxhyphen{}13}} files
+and \sphinxcode{\sphinxupquote{orterun.exe}} from an older OpenMPI package (files dated 2016\sphinxhyphen{}06\sphinxhyphen{}21). Take \sphinxcode{\sphinxupquote{orterun.exe}} from the same package
+as the DLLs.
+\end{sphinxadmonition}
+
+
+
+\sphinxAtStartPar
+That test ran on Windows 10 with a Cygwin installation on \sphinxcode{\sphinxupquote{PATH}}. \sphinxcode{\sphinxupquote{p\_190306.exe}} then printed
+\sphinxcode{\sphinxupquote{parallel on 2 processors}} and gave the same energy as a serial run. With a backslash path to the executable
+(\sphinxcode{\sphinxupquote{C:\textbackslash{}Priroda\textbackslash{}p\_190306.exe}}), \sphinxcode{\sphinxupquote{orterun.exe}} stopped with \sphinxcode{\sphinxupquote{orterun:exe\sphinxhyphen{}not\sphinxhyphen{}found}}. Started directly, without
+\sphinxcode{\sphinxupquote{orterun.exe}}, \sphinxcode{\sphinxupquote{p\_190306.exe}} runs serially.
 
 
 
@@ -1430,7 +1484,7 @@ With the Ethernet cable unplugged, one user’s run used only two of the cores.
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
 A user reported in 2021 that this recipe no longer worked on Windows 10 with a current Cygwin, and no fix was posted.
-Expect to adapt it to the Cygwin and OpenMPI versions you have.
+The likely cause is the newer OpenMPI DLLs described above. A PC without a Cygwin installation was not tested.
 \end{sphinxadmonition}
 
 
@@ -1513,8 +1567,26 @@ the input file; neither matches version 25. \sphinxcode{\sphinxupquote{/tmp}} is
 
 
 \sphinxAtStartPar
-On Windows there is no \sphinxcode{\sphinxupquote{/tmp}}. Without \sphinxcode{\sphinxupquote{path=}} or \sphinxcode{\sphinxupquote{TMPDIR}}, older versions stopped after printing
-\sphinxcode{\sphinxupquote{0: opening file /tmp/tmp2960.0}}. Use \sphinxcode{\sphinxupquote{\$system path=. \$end}} (the current directory) or set \sphinxcode{\sphinxupquote{TMPDIR}}.
+On Windows there is no \sphinxcode{\sphinxupquote{/tmp}}. Without \sphinxcode{\sphinxupquote{path=}} or \sphinxcode{\sphinxupquote{TMPDIR}}, the run stops after printing
+\sphinxcode{\sphinxupquote{0: opening file /tmp/tmp978.0000}} (the number varies), and the output ends with \sphinxcode{\sphinxupquote{process 0 got signal 6}}. This
+still happens with \sphinxcode{\sphinxupquote{p1.exe}} (version 20). Any of these avoids it:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{\$system path=. \$end}} (the current directory);
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{TMPDIR}} set to a Windows path: in \sphinxcode{\sphinxupquote{cmd.exe}}, \sphinxcode{\sphinxupquote{set TMPDIR=\%TEMP\%}} or \sphinxcode{\sphinxupquote{set "TMPDIR=\%TEMP\%"}}. Do not write
+\sphinxcode{\sphinxupquote{set TMPDIR="\%TEMP\%"}}: \sphinxcode{\sphinxupquote{cmd.exe}} keeps the quotes in the value, Priroda takes the result as a relative path, and
+the run stops in the same way;
+
+\item {} 
+\sphinxAtStartPar
+a RAM disk (negative \sphinxcode{\sphinxupquote{disk}}), which needs no scratch directory. An input with no \sphinxcode{\sphinxupquote{\$system}} group gets a 512 MB RAM
+disk and runs.
+
+\end{itemize}
 
 
 
@@ -1855,7 +1927,8 @@ less obvious case: an input edited in Word ran \sphinxcode{\sphinxupquote{task=s
 
 \sphinxAtStartPar
 Version 25 behaves the same way: a water input saved with Windows line endings stopped after \sphinxcode{\sphinxupquote{molecule input: \textquotesingle{}\textquotesingle{}}}
-with the line \sphinxcode{\sphinxupquote{\textquotesingle{}cartesian\textquotesingle{} ?}}, exit status 1. 
+with the line \sphinxcode{\sphinxupquote{\textquotesingle{}cartesian\textquotesingle{} ?}}, exit status 1. The Windows build \sphinxcode{\sphinxupquote{p1.exe}} (version 20) stops in the same place, so
+the input needs Unix line endings on Windows too. 
 
 \sphinxAtStartPar
 To check and fix the line endings on Linux:
@@ -1908,7 +1981,8 @@ fails with \sphinxcode{\sphinxupquote{error opening file \textquotesingle{}\text
 
 \item {} 
 \sphinxAtStartPar
-Windows paths work: \sphinxcode{\sphinxupquote{basis=D:\textbackslash{}NMR\textbackslash{}Nature\textbackslash{}basis\textbackslash{}6\sphinxhyphen{}31+G(d)}}.
+Windows paths work: \sphinxcode{\sphinxupquote{basis=D:\textbackslash{}NMR\textbackslash{}Nature\textbackslash{}basis\textbackslash{}6\sphinxhyphen{}31+G(d)}}. In a test, \sphinxcode{\sphinxupquote{basis=C:\textbackslash{}Priroda\textbackslash{}basis.in}},
+\sphinxcode{\sphinxupquote{basis=C:/Priroda/basis.in}} and \sphinxcode{\sphinxupquote{basis=basis.in}} (the file in the directory the run started from) all worked.
 
 
 
@@ -3552,7 +3626,7 @@ In version 25, a two\sphinxhyphen{}process DFT run left one scratch file per pro
 \sphinxstylestrong{Default:} \sphinxcode{\sphinxupquote{256}}\\
 \sphinxstylestrong{Units:} MB\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 01 \S{}4.1 (two values); 06 \S{}3 (estimate); 03 \S{}4, 04 \#196 (per process); 08 t02, t58a
+\sphinxstylestrong{Sources:} input.txt; 01 \S{}4.1 (two values); 06 \S{}3 (estimate); 03 \S{}4, 04 \#196 (per process); 08 t02, t58a, w04 (same echo in the Windows version 20)
 
 \sphinxAtStartPar
 Default: echoed by version 25 when \sphinxcode{\sphinxupquote{\$system}} is omitted.
@@ -3615,7 +3689,7 @@ In version 25, \sphinxcode{\sphinxupquote{disk=\sphinxhyphen{}512}} was echoed a
 \sphinxstylestrong{Type:} string\\
 \sphinxstylestrong{Default:} \sphinxstyleemphasis{none stated}\\
 \sphinxstylestrong{Status:} current · verified on 25 (2025.02.28)\\
-\sphinxstylestrong{Sources:} input.txt; 03 \S{}2; 04 \#465; 08 t01, t64
+\sphinxstylestrong{Sources:} input.txt; 03 \S{}2; 04 \#465; 08 t01, t64, w02a\sphinxhyphen{}d, w03
 
 \sphinxAtStartPar
 Default: the \sphinxcode{\sphinxupquote{TMPDIR}} environment variable, otherwise \sphinxcode{\sphinxupquote{/tmp}} (version 25). \sphinxcode{\sphinxupquote{input.txt}} says the current working directory.
@@ -3628,9 +3702,10 @@ Those directories should be on different physical drives. The value may be doubl
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
 For all methods except GGA DFT, performance degrades “terribly” if more than one process reads and writes
-large files on the same physical drive. Never put temporary files on NFS. On Windows (Cygwin), which has no
-\sphinxcode{\sphinxupquote{/tmp}}, use \sphinxcode{\sphinxupquote{path=.}}. Version 25, run without \sphinxcode{\sphinxupquote{path=}}, used \sphinxcode{\sphinxupquote{TMPDIR}} when it was set and \sphinxcode{\sphinxupquote{/tmp}} when it was
-not (echo \sphinxcode{\sphinxupquote{Disk:   1g \textquotesingle{}/tmp\textquotesingle{}}}).
+large files on the same physical drive. Never put temporary files on NFS. Version 25, run without \sphinxcode{\sphinxupquote{path=}},
+used \sphinxcode{\sphinxupquote{TMPDIR}} when it was set and \sphinxcode{\sphinxupquote{/tmp}} when it was not (echo \sphinxcode{\sphinxupquote{Disk:   1g \textquotesingle{}/tmp\textquotesingle{}}}). The Windows \sphinxcode{\sphinxupquote{p1.exe}}
+(version 20) does the same, and as Windows has no \sphinxcode{\sphinxupquote{/tmp}} the run then stops at \sphinxcode{\sphinxupquote{0: opening file /tmp/…}}. Use
+\sphinxcode{\sphinxupquote{path=.}}, set \sphinxcode{\sphinxupquote{TMPDIR}} to a Windows path without quotes (\sphinxcode{\sphinxupquote{set TMPDIR=\%TEMP\%}} in \sphinxcode{\sphinxupquote{cmd.exe}}), or use a RAM disk.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -6696,7 +6771,8 @@ capital letters in its name without complaint.
 
 \sphinxAtStartPar
 On Windows, \sphinxcode{\sphinxupquote{cd}} into the folder with the input before running \sphinxcode{\sphinxupquote{p.exe input.in output.out}}. One user still got
-\sphinxcode{\sphinxupquote{cannot open input file}} after doing that, and the thread never found the cause.
+\sphinxcode{\sphinxupquote{cannot open input file}} after doing that, and the thread never found the cause. Giving full Windows paths for both
+files, such as \sphinxcode{\sphinxupquote{p1.exe C:\textbackslash{}Work\textbackslash{}mol.in C:\textbackslash{}Work\textbackslash{}mol.out}}, works from any folder.
 
 
 
@@ -6704,12 +6780,19 @@ On Windows, \sphinxcode{\sphinxupquote{cd}} into the folder with the input befor
 \subsection{Output stops at \sphinxstyleliteralintitle{\sphinxupquote{0: opening file /tmp/...}} (Windows)}
 \label{\detokenize{troubleshooting/common-problems:output-stops-at-0-opening-file-tmp-windows}}
 \sphinxAtStartPar
-Old Windows builds put scratch files in \sphinxcode{\sphinxupquote{/tmp}} when nothing else is set (the output echoes \sphinxcode{\sphinxupquote{Disk:   1 GB \textquotesingle{}/tmp\textquotesingle{}}}),
-and Windows has no \sphinxcode{\sphinxupquote{/tmp}}. The Linux version 25 has the same default and also honours \sphinxcode{\sphinxupquote{TMPDIR}}. Set the scratch
-directory explicitly, for example \sphinxcode{\sphinxupquote{\$system path=. \$end}}, or set the \sphinxcode{\sphinxupquote{TMPDIR}} environment variable before starting the
-program. This is the oldest known problem in both forums and the fix is well established. See {\hyperref[\detokenize{reference/system:system-path}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{path}}}}}.
+Windows builds put scratch files in \sphinxcode{\sphinxupquote{/tmp}} when nothing else is set (the output echoes \sphinxcode{\sphinxupquote{Disk:   1g \textquotesingle{}/tmp\textquotesingle{}}}), and
+Windows has no \sphinxcode{\sphinxupquote{/tmp}}. The current \sphinxcode{\sphinxupquote{p1.exe}} (version 20) still does this: the output ends with
+\sphinxcode{\sphinxupquote{0: opening file /tmp/tmp978.0000}} and \sphinxcode{\sphinxupquote{process 0 got signal 6}}. The Linux version 25 has the same default and also
+honours \sphinxcode{\sphinxupquote{TMPDIR}}. Set the scratch directory explicitly, for example \sphinxcode{\sphinxupquote{\$system path=. \$end}}, or set the \sphinxcode{\sphinxupquote{TMPDIR}}
+environment variable before starting the program. A RAM disk (negative {\hyperref[\detokenize{reference/system:system-disk}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{disk}}}}}) also avoids the
+problem. This is the oldest known problem in both forums. See {\hyperref[\detokenize{reference/system:system-path}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{path}}}}}.
 
 
+
+\sphinxAtStartPar
+In \sphinxcode{\sphinxupquote{cmd.exe}}, write \sphinxcode{\sphinxupquote{set TMPDIR=\%TEMP\%}} or \sphinxcode{\sphinxupquote{set "TMPDIR=\%TEMP\%"}}. With \sphinxcode{\sphinxupquote{set TMPDIR="\%TEMP\%"}} the quotes become part
+of the value: the \sphinxcode{\sphinxupquote{Disk:}} echo shows the quoted path appended to the current directory, and the run stops in the same
+way. 
 
 
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{\$scf}} settings are ignored or rejected}
@@ -7468,7 +7551,7 @@ user’s limit, \sphinxcode{\sphinxupquote{memory=9250 disk=\sphinxhyphen{}9250}
 \item {} 
 \sphinxAtStartPar
 The 32\sphinxhyphen{}bit Windows (Cygwin) builds cannot allocate more than about 1 GB. 512 MB was enough for most DFT jobs.
-Several users confirmed this limit. The 64\sphinxhyphen{}bit Windows build with \sphinxcode{\sphinxupquote{cygwin1.dll}} is reported to have no such limit.
+Several users confirmed this limit. The 64\sphinxhyphen{}bit Windows build \sphinxcode{\sphinxupquote{p1.exe}} ran with \sphinxcode{\sphinxupquote{mem=3000}}.
 
 
 
@@ -7734,17 +7817,17 @@ From a 64\sphinxhyphen{}bit Cygwin installation with OpenMPI, copy \sphinxcode{\
 \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}pal\sphinxhyphen{}13.dll}}, \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}rte\sphinxhyphen{}12.dll}} and \sphinxcode{\sphinxupquote{orterun.exe}} next to the Priroda executable. Take
 \sphinxcode{\sphinxupquote{cygwin1.dll}} from the same Cygwin installation, because the other DLLs work only with it. These are the names
 from a 2017 Cygwin. A 2018 report says newer OpenMPI packages ship \sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}pal\sphinxhyphen{}40.dll}} and
-\sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}rte\sphinxhyphen{}40.dll}} instead; take those.
+\sphinxcode{\sphinxupquote{cygopen\sphinxhyphen{}rte\sphinxhyphen{}40.dll}} instead. Those do \sphinxstylestrong{not} work with \sphinxcode{\sphinxupquote{p\_190306.exe}}, even renamed: see the note below.
 
 \item {} 
 \sphinxAtStartPar
-To run outside the Cygwin terminal, create a \sphinxcode{\sphinxupquote{dev}} directory one level above the directory you start Priroda from,
-with subdirectories \sphinxcode{\sphinxupquote{shm}} and \sphinxcode{\sphinxupquote{mqueue}}. For Priroda in \sphinxcode{\sphinxupquote{C:\textbackslash{}Priroda 16}} that means \sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}shm}} and
-\sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}mqueue}}. Without them Cygwin prints \sphinxcode{\sphinxupquote{Warning: \textquotesingle{}/dev/shm\textquotesingle{} does not exists or is not a directory.}}
+To run outside the Cygwin terminal, create a \sphinxcode{\sphinxupquote{dev}} directory one level above the directory that holds
+\sphinxcode{\sphinxupquote{cygwin1.dll}}, with subdirectories \sphinxcode{\sphinxupquote{shm}} and \sphinxcode{\sphinxupquote{mqueue}}. For Priroda in \sphinxcode{\sphinxupquote{C:\textbackslash{}Priroda 16}} that means \sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}shm}}
+and \sphinxcode{\sphinxupquote{C:\textbackslash{}dev\textbackslash{}mqueue}}. Without them Cygwin prints \sphinxcode{\sphinxupquote{Warning: \textquotesingle{}/dev/shm\textquotesingle{} does not exists or is not a directory.}}
 
 \item {} 
 \sphinxAtStartPar
-Set \sphinxcode{\sphinxupquote{TMPDIR}} and start the run from \sphinxcode{\sphinxupquote{cmd.exe}}:
+Set \sphinxcode{\sphinxupquote{TMPDIR}} and start the run from \sphinxcode{\sphinxupquote{cmd.exe}}. The command as posted was:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 cd /d \PYGZdq{}C:\PYGZbs{}Priroda 16\PYGZdq{}
@@ -7753,14 +7836,26 @@ set TMPDIR=\PYGZdq{}\PYGZpc{}TEMP\PYGZpc{}\PYGZdq{}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-This is the command as posted. In \sphinxcode{\sphinxupquote{cmd.exe}}, \sphinxcode{\sphinxupquote{set TMPDIR="\%TEMP\%"}} keeps the quotes as part of the value;
-\sphinxcode{\sphinxupquote{set "TMPDIR=\%TEMP\%"}} does not. Which form the Cygwin build expects was not tested.
+Write \sphinxcode{\sphinxupquote{set "TMPDIR=\%TEMP\%"}} instead: with \sphinxcode{\sphinxupquote{set TMPDIR="\%TEMP\%"}} the quotes stay in the value, and the run stops
+at \sphinxcode{\sphinxupquote{0: opening file …}} unless the input sets \sphinxcode{\sphinxupquote{path=}}.
 
 \item {} 
 \sphinxAtStartPar
 If the program is in a system directory such as \sphinxcode{\sphinxupquote{C:\textbackslash{}Program Files}}, run it as administrator.
 
 \end{enumerate}
+
+
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+A test in 2026 on Windows 10 (with a Cygwin installation on \sphinxcode{\sphinxupquote{PATH}}) got \sphinxcode{\sphinxupquote{p\_190306.exe}} running on 2 processes.
+It needed the \sphinxcode{\sphinxupquote{\sphinxhyphen{}12}}/\sphinxcode{\sphinxupquote{\sphinxhyphen{}13}} DLLs and \sphinxcode{\sphinxupquote{orterun.exe}} from an older OpenMPI package (files dated 2016\sphinxhyphen{}06\sphinxhyphen{}21). With the
+current \sphinxcode{\sphinxupquote{\sphinxhyphen{}40}} DLLs, or those renamed to the old names, the programs exited at once with code \sphinxhyphen{}1073741515
+(0xC0000135, a required DLL was not found). The path of the Priroda executable had to be written with forward
+slashes: \sphinxcode{\sphinxupquote{orterun.exe \sphinxhyphen{}np 2 C:/Priroda/p\_190306.exe file.in file.out}}. With backslashes, \sphinxcode{\sphinxupquote{orterun.exe}} stopped with
+\sphinxcode{\sphinxupquote{orterun:exe\sphinxhyphen{}not\sphinxhyphen{}found}}. The full setup is in {\hyperref[\detokenize{start/running:running-windows-parallel}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Parallel runs on Windows}}}}}.
+\end{sphinxadmonition}
 
 
 
@@ -7784,7 +7879,7 @@ With the Ethernet cable unplugged, only some cores were used. Plugging it back i
 
 \sphinxAtStartPar
 A 2021 attempt to follow this recipe on Windows 10 failed with an error that was posted only as a screenshot; no fix
-was posted. One user runs Priroda under WSL on Windows instead; no details of that setup were posted.
+was posted. The \sphinxcode{\sphinxupquote{\sphinxhyphen{}40}} DLLs described in the note above may have been the cause. One user runs Priroda under WSL on Windows instead; no details of that setup were posted.
 
 
 

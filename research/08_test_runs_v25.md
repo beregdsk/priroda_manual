@@ -17,6 +17,7 @@ each round's outputs replaced the previous ones in `tests/runs/`; older rounds a
 - round 13, run in the cloud session on `p4_d` (Linux, 4 cores): `tests/runs/20261017-182407/` (t76, t77), `20261017-183348/` (t68f); Slurm tests in `tests/runs/slurm-*`;
 - round 14 (cloud session): `tests/runs/20261017-191941/` (t78), `20261017-192031/` (t79, with t79a/b failing on `print=+charges`), `20261017-192046/` (t79a/b rerun);
 - round 15 (cloud session): `tests/runs/20261018-110321/` (t24, t80), `20261018-110355/` (t81).
+- Windows tests (w01–w13, Priroda 19 and 20): `tests/runs/win-20261018-*`; see the section at the end.
 
 Energies were identical in every rerun. Banner: `Priroda 25 (2025.02.28)`, so the version number is **25**. The date matches the `p4_d` file on the
 official site (`p` there is dated 2023-06-25); which file was run was not recorded.
@@ -330,3 +331,52 @@ and opened both in Molden: both files open correctly. Cite as `08 Molden check`.
 
 Every output ends with a repeated timing summary in which some lines show `0.0%` followed by a huge garbage number.
 This is a display bug in the timing table *(inferred)* and does not affect results.
+
+## Windows tests (`tests/run_windows.ps1`, w01–w13)
+
+Run by the project owner on 2026-10-18 on one Windows 10 PC (`Microsoft Windows NT 10.0.19045.0`, `node 0: 'Egor'`),
+serial unless stated. These are **not** version 25: `p1.exe` from `exe64/` prints `Priroda 20 (2021.03.18)`, and the
+parallel `p_190306.exe` prints `Priroda 19 (2019.03.06)`. A Cygwin installation was on `PATH` (`cygpath` found), so
+the tests do not show what happens on a PC without Cygwin. Outputs: `tests/runs/win-20261018-174904/` (w01–w12);
+w13 attempts in `win-20261018-181148/` to `-191238/` (all failed to start, see w13); the working w13 run in
+`win-20261018-191435/`. Cite as `08 wNN`.
+
+| Test | Result |
+|---|---|
+| w01 | `p1.exe` with only `cygwin1.dll` next to it runs: banner `Priroda 20 (2021.03.18)`, water PBE/L1 E = -76.3653913723, identical to Linux v25 t01. |
+| w02a | `disk=1`, no `path=`, `TMPDIR` unset: echo `Disk:   1g '/tmp'`; the output ends with `0: opening file /tmp/tmp978.0000` and `process 0 got signal 6`; exit 1. |
+| w02b | `set TMPDIR=%TEMP%` in `cmd.exe`: echo `Disk:   1g '/Users/User/AppData/Local/Temp'`, i.e. the Windows path `C:\Users\User\AppData\Local\Temp` converted to a Cygwin path with `C:\` as `/`; runs normally. |
+| w02c | `set TMPDIR="%TEMP%"` (quotes, as in the forum recipe): the quotes stay in the value; echo `Disk:   1g '/Users/User/Desktop/priroda_manual/tests/runs/win-20261018-174904/"C:/Users/User/AppData/Local/Temp"'` (taken as a relative path), output ends with `0: opening file …/"C/tmp584.0000` and `process 0 got signal 6`; exit 1. |
+| w02d | `TMPDIR` set (from PowerShell) to a Windows path `C:\…\w02d_tmp`: converted to `/Users/…/w02d_tmp`; runs normally. |
+| w03 | `disk=-256` (RAM disk), no `path=`, `TMPDIR` unset: echo `Memory: 256m + 256m (256m + 256m)`, no `Disk:` line; runs normally. |
+| w04 | No `$system` group, `TMPDIR` unset: echo `Memory: 256m + 512m (256m + 512m)` (as Linux v25 t02), no `Disk:` line; runs normally. |
+| w05 | `basis=C:\Priroda\basis.in` (backslashes), `basis=C:/Priroda/basis.in` (forward slashes) and `basis=basis.in` with the file next to the input (run from that folder): all three run, same energy. |
+| w06 | The w01 input with CRLF line endings: output ends with `molecule input: ''`, `'cartesian' ?`, `process 0 got signal 6`; exit 1. Same as Linux v25 t81a. |
+| w07 | `mem=3000`: echo `Memory: 3000m (3000m)`; runs normally, no `malloc(...) failed`. |
+| w08 | No output file given: the output goes to the console (captured as `w08_stdout.stdout`). |
+| w09 | Started from another folder with full Windows paths (`C:\…\w09_fullpath.in`, `C:\…\w09_fullpath.out`): runs normally. |
+| w10 | A folder named `dir with space`: a) run inside it; b) run from its parent with the relative paths `"dir with space\w10b….in"` and `"…out"` quoted: both run normally. |
+| w11 | Water optimization (`path=.`): `OPTIMIZATION CONVERGED in 5 steps!`, final E -76.36581156. |
+| w12 | Water analytic Hessian (`path=.`): frequencies 1572.3, 3895.0, 4006.5 cm⁻¹, as Linux v25 (t53/t56: 1572.29, 3895.05, 4006.43). |
+| w13b | `p_190306.exe` started directly, without a launcher, once its DLLs were present: runs serially (`node 0` only, no `parallel on` line), E = -76.3653932143 (version 19; 1.8·10⁻⁶ hartree from versions 20 and 25). |
+| w13a | `p_190306.exe` on 2 processes with `orterun.exe`. See below. |
+
+w13, getting the parallel build to start:
+- With `MPIRUN` set to `C:\Priroda\mpirun` (no such program) the script could not start it.
+- With `orterun.exe` and the DLLs of the current Cygwin OpenMPI package (`cygmpi-40.dll`, `cygopen-pal-40.dll`,
+  `cygopen-rte-40.dll`, dated 2023-12-02), both `p_190306.exe` and `orterun.exe` exited at once with
+  -1073741515 (0xC0000135, "a required DLL was not found"). Copying the same files under the names `cygmpi-12.dll`,
+  `cygopen-pal-13.dll` and `cygopen-rte-12.dll` did not help (same exit code).
+- It started once `cygmpi-12.dll`, `cygopen-pal-13.dll`, `cygopen-rte-12.dll` and `orterun.exe` from an older
+  OpenMPI package (files dated 2016-06-21) were next to the program, together with `cyggcc_s-seh-1.dll` and
+  `cygwin1.dll`. `C:\dev\shm` and `C:\dev\mqueue` existed at that point; whether they are needed was not tested.
+- From the script, with the full Windows path `C:\Priroda\p_190306.exe`, `orterun.exe` stopped with exit 134 and
+  `orterun:exe-not-found` (the text of that message could not be shown: `/usr/share/openmpi/help-orterun.txt: No
+  such file or directory`).
+- Run by hand as `C:/Priroda/orterun.exe -np 2 C:/Priroda/p_190306.exe ./runs/…/w13a_parallel.in
+  ./runs/…/w13a_parallel.stdout` (forward slashes): `parallel on 2 processors`, `node 0` and `node 1`,
+  E = -76.3653932143 (same as serial w13b).
+
+Also seen: the timing summary of the Windows build has the same garbage number as Linux v25 (see Cosmetic).
+After the w13 attempts the folder above the program had a `tmp` folder (`C:\tmp`); it was not there during w01–w12,
+and no test shows whether creating it would make the w02a case work.
