@@ -41,6 +41,8 @@ latex_elements = {
 \DeclareUnicodeCharacter{2717}{\ensuremath{\times}}
 \DeclareUnicodeCharacter{039B}{\ensuremath{\Lambda}}
 \DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}}
+\DeclareUnicodeCharacter{03C0}{\ensuremath{\pi}}
+\DeclareUnicodeCharacter{21C4}{\ensuremath{\rightleftarrows}}
 \DeclareUnicodeCharacter{2264}{\ensuremath{\le}}
 \DeclareUnicodeCharacter{2212}{\ensuremath{-}}
 \DeclareUnicodeCharacter{207A}{\textsuperscript{+}}

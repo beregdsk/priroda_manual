@@ -5,148 +5,149 @@
 \let\spxextra \sphinxstyleindexextra
 
   \bigletter {\sphinxsymbolsname}
-  \item \spxentry{\$Energy}, \hyperpage{57}
-  \item \spxentry{\$atoms}, \hyperpage{48}
-  \item \spxentry{\$control}, \hyperpage{34}
-  \item \spxentry{\$d2edr2}, \hyperpage{54}
-  \item \spxentry{\$dft}, \hyperpage{45}
-  \item \spxentry{\$dynamic}, \hyperpage{58}
-  \item \spxentry{\$grid}, \hyperpage{46}
-  \item \spxentry{\$guess}, \hyperpage{42}
-  \item \spxentry{\$integral}, \hyperpage{47}
-  \item \spxentry{\$molecule}, \hyperpage{40}
-  \item \spxentry{\$nmr}, \hyperpage{56}
-  \item \spxentry{\$optimize}, \hyperpage{48}
-  \item \spxentry{\$scf}, \hyperpage{43}
-  \item \spxentry{\$system}, \hyperpage{32}
-  \item \spxentry{\$thermo}, \hyperpage{55}
-  \item \spxentry{\$uniq}, \hyperpage{60}
+  \item \spxentry{\$Energy}, \hyperpage{59}
+  \item \spxentry{\$atoms}, \hyperpage{50}
+  \item \spxentry{\$control}, \hyperpage{35}
+  \item \spxentry{\$d2edr2}, \hyperpage{56}
+  \item \spxentry{\$dft}, \hyperpage{47}
+  \item \spxentry{\$dynamic}, \hyperpage{61}
+  \item \spxentry{\$grid}, \hyperpage{48}
+  \item \spxentry{\$guess}, \hyperpage{43}
+  \item \spxentry{\$integral}, \hyperpage{49}
+  \item \spxentry{\$molecule}, \hyperpage{41}
+  \item \spxentry{\$nmr}, \hyperpage{58}
+  \item \spxentry{\$optimize}, \hyperpage{50}
+  \item \spxentry{\$scf}, \hyperpage{45}
+  \item \spxentry{\$system}, \hyperpage{33}
+  \item \spxentry{\$thermo}, \hyperpage{57}
+  \item \spxentry{\$uniq}, \hyperpage{63}
 
   \indexspace
   \bigletter A
-  \item \spxentry{A}\spxextra{\$Energy}, \hyperpage{58}
-  \item \spxentry{accuracy}\spxextra{\$grid}, \hyperpage{46}
+  \item \spxentry{A}\spxextra{\$Energy}, \hyperpage{60}
+  \item \spxentry{accuracy}\spxextra{\$grid}, \hyperpage{48}
+  \item \spxentry{Ax}\spxextra{\$Energy}, \hyperpage{61}
 
   \indexspace
   \bigletter B
-  \item \spxentry{back}\spxextra{\$optimize}, \hyperpage{51}
-  \item \spxentry{basis}\spxextra{\$control}, \hyperpage{37}
+  \item \spxentry{back}\spxextra{\$optimize}, \hyperpage{53}
+  \item \spxentry{basis}\spxextra{\$control}, \hyperpage{38}
 
   \indexspace
   \bigletter C
-  \item \spxentry{cartesian}\spxextra{\$optimize}, \hyperpage{50}
-  \item \spxentry{charge}\spxextra{\$molecule}, \hyperpage{40}
-  \item \spxentry{convergence}\spxextra{\$scf}, \hyperpage{43}
-  \item \spxentry{coordinates}\spxextra{\$optimize}, \hyperpage{51}
-  \item \spxentry{core}\spxextra{\$atoms}, \hyperpage{48}
-  \item \spxentry{core}\spxextra{\$scf}, \hyperpage{45}
+  \item \spxentry{cartesian}\spxextra{\$optimize}, \hyperpage{52}
+  \item \spxentry{charge}\spxextra{\$molecule}, \hyperpage{41}
+  \item \spxentry{convergence}\spxextra{\$scf}, \hyperpage{45}
+  \item \spxentry{coordinates}\spxextra{\$optimize}, \hyperpage{54}
+  \item \spxentry{core}\spxextra{\$atoms}, \hyperpage{50}
+  \item \spxentry{core}\spxextra{\$scf}, \hyperpage{47}
 
   \indexspace
   \bigletter D
-  \item \spxentry{d}\spxextra{\$dynamic}, \hyperpage{59}
-  \item \spxentry{D}\spxextra{\$Energy}, \hyperpage{58}
-  \item \spxentry{d1small}\spxextra{\$scf}, \hyperpage{45}
-  \item \spxentry{derivative}\spxextra{\$control}, \hyperpage{39}
-  \item \spxentry{direct}\spxextra{\$integral}, \hyperpage{47}
-  \item \spxentry{disk}\spxextra{\$system}, \hyperpage{33}
-  \item \spxentry{displace}\spxextra{\$d2edr2}, \hyperpage{54}
-  \item \spxentry{distance}\spxextra{\$uniq}, \hyperpage{60}
-  \item \spxentry{Dx}\spxextra{\$Energy}, \hyperpage{58}
+  \item \spxentry{D}\spxextra{\$Energy}, \hyperpage{60}
+  \item \spxentry{d1small}\spxextra{\$scf}, \hyperpage{47}
+  \item \spxentry{derivative}\spxextra{\$control}, \hyperpage{40}
+  \item \spxentry{direct}\spxextra{\$integral}, \hyperpage{49}
+  \item \spxentry{disk}\spxextra{\$system}, \hyperpage{34}
+  \item \spxentry{displace}\spxextra{\$d2edr2}, \hyperpage{56}
+  \item \spxentry{distance}\spxextra{\$uniq}, \hyperpage{63}
+  \item \spxentry{dx}\spxextra{\$dynamic}, \hyperpage{61}
+  \item \spxentry{Dx}\spxextra{\$Energy}, \hyperpage{60}
 
   \indexspace
   \bigletter E
-  \item \spxentry{e}\spxextra{\$dynamic}, \hyperpage{59}
-  \item \spxentry{E}\spxextra{\$Energy}, \hyperpage{57}
+  \item \spxentry{e}\spxextra{\$dynamic}, \hyperpage{61}
+  \item \spxentry{E}\spxextra{\$Energy}, \hyperpage{59}
 
   \indexspace
   \bigletter F
-  \item \spxentry{file}\spxextra{\$dynamic}, \hyperpage{60}
-  \item \spxentry{fix}\spxextra{\$optimize}, \hyperpage{52}
-  \item \spxentry{follow}\spxextra{\$optimize}, \hyperpage{50}
-  \item \spxentry{four}\spxextra{\$control}, \hyperpage{37}
-  \item \spxentry{functional}\spxextra{\$dft}, \hyperpage{45}
+  \item \spxentry{file}\spxextra{\$dynamic}, \hyperpage{62}
+  \item \spxentry{fix}\spxextra{\$optimize}, \hyperpage{54}
+  \item \spxentry{follow}\spxextra{\$optimize}, \hyperpage{52}
+  \item \spxentry{four}\spxextra{\$control}, \hyperpage{39}
+  \item \spxentry{functional}\spxextra{\$dft}, \hyperpage{47}
 
   \indexspace
   \bigletter G
-  \item \spxentry{G}\spxextra{\$Energy}, \hyperpage{57}
-  \item \spxentry{gradient}\spxextra{\$optimize}, \hyperpage{53}
+  \item \spxentry{G}\spxextra{\$Energy}, \hyperpage{60}
+  \item \spxentry{gradient}\spxextra{\$optimize}, \hyperpage{55}
 
   \indexspace
   \bigletter H
-  \item \spxentry{h}\spxextra{\$dynamic}, \hyperpage{60}
-  \item \spxentry{H}\spxextra{\$Energy}, \hyperpage{57}
+  \item \spxentry{H}\spxextra{\$Energy}, \hyperpage{60}
+  \item \spxentry{hb}\spxextra{\$dynamic}, \hyperpage{62}
 
   \indexspace
   \bigletter I
-  \item \spxentry{i}\spxextra{\$dynamic}, \hyperpage{59}
-  \item \spxentry{iterations}\spxextra{\$scf}, \hyperpage{44}
+  \item \spxentry{i}\spxextra{\$dynamic}, \hyperpage{62}
+  \item \spxentry{iterations}\spxextra{\$scf}, \hyperpage{46}
 
   \indexspace
   \bigletter L
-  \item \spxentry{length}\spxextra{\$d2edr2}, \hyperpage{54}
+  \item \spxentry{length}\spxextra{\$d2edr2}, \hyperpage{56}
 
   \indexspace
   \bigletter M
-  \item \spxentry{m}\spxextra{\$dynamic}, \hyperpage{59}
-  \item \spxentry{mass}\spxextra{\$molecule}, \hyperpage{40}
-  \item \spxentry{mass}\spxextra{\$thermo}, \hyperpage{56}
-  \item \spxentry{mcore}\spxextra{\$atoms}, \hyperpage{48}
-  \item \spxentry{memory}\spxextra{\$system}, \hyperpage{32}
-  \item \spxentry{mix}\spxextra{\$guess}, \hyperpage{43}
-  \item \spxentry{model}\spxextra{\$optimize}, \hyperpage{54}
-  \item \spxentry{mult}\spxextra{\$molecule}, \hyperpage{40}
+  \item \spxentry{m}\spxextra{\$dynamic}, \hyperpage{62}
+  \item \spxentry{mass}\spxextra{\$molecule}, \hyperpage{42}
+  \item \spxentry{mass}\spxextra{\$thermo}, \hyperpage{58}
+  \item \spxentry{mcore}\spxextra{\$atoms}, \hyperpage{50}
+  \item \spxentry{memory}\spxextra{\$system}, \hyperpage{33}
+  \item \spxentry{mix}\spxextra{\$guess}, \hyperpage{44}
+  \item \spxentry{model}\spxextra{\$optimize}, \hyperpage{56}
+  \item \spxentry{mult}\spxextra{\$molecule}, \hyperpage{42}
 
   \indexspace
   \bigletter N
-  \item \spxentry{n}\spxextra{\$dynamic}, \hyperpage{59}
-  \item \spxentry{na}\spxextra{\$guess}, \hyperpage{42}
-  \item \spxentry{nb}\spxextra{\$guess}, \hyperpage{42}
-  \item \spxentry{nucleus}\spxextra{\$control}, \hyperpage{38}
+  \item \spxentry{n}\spxextra{\$dynamic}, \hyperpage{62}
+  \item \spxentry{na}\spxextra{\$guess}, \hyperpage{44}
+  \item \spxentry{nb}\spxextra{\$guess}, \hyperpage{44}
+  \item \spxentry{nucleus}\spxextra{\$control}, \hyperpage{39}
 
   \indexspace
   \bigletter P
-  \item \spxentry{path}\spxextra{\$system}, \hyperpage{33}
-  \item \spxentry{points}\spxextra{\$nmr}, \hyperpage{56}
-  \item \spxentry{points}\spxextra{\$optimize}, \hyperpage{51}
-  \item \spxentry{print}\spxextra{\$control}, \hyperpage{38}
-  \item \spxentry{print}\spxextra{\$optimize}, \hyperpage{53}
-  \item \spxentry{procedure}\spxextra{\$scf}, \hyperpage{44}
+  \item \spxentry{path}\spxextra{\$system}, \hyperpage{34}
+  \item \spxentry{points}\spxextra{\$nmr}, \hyperpage{59}
+  \item \spxentry{points}\spxextra{\$optimize}, \hyperpage{53}
+  \item \spxentry{print}\spxextra{\$control}, \hyperpage{40}
+  \item \spxentry{print}\spxextra{\$optimize}, \hyperpage{55}
+  \item \spxentry{procedure}\spxextra{\$scf}, \hyperpage{46}
 
   \indexspace
   \bigletter R
-  \item \spxentry{radius}\spxextra{\$optimize}, \hyperpage{51}
-  \item \spxentry{read}\spxextra{\$guess}, \hyperpage{42}
-  \item \spxentry{restrict}\spxextra{\$scf}, \hyperpage{43}
-  \item \spxentry{routine}\spxextra{\$integral}, \hyperpage{47}
+  \item \spxentry{radius}\spxextra{\$optimize}, \hyperpage{53}
+  \item \spxentry{read}\spxextra{\$guess}, \hyperpage{43}
+  \item \spxentry{restrict}\spxextra{\$scf}, \hyperpage{45}
+  \item \spxentry{routine}\spxextra{\$integral}, \hyperpage{49}
 
   \indexspace
   \bigletter S
-  \item \spxentry{saddle}\spxextra{\$optimize}, \hyperpage{49}
-  \item \spxentry{save}\spxextra{\$control}, \hyperpage{39}
-  \item \spxentry{set}\spxextra{\$molecule}, \hyperpage{41}
-  \item \spxentry{sigma}\spxextra{\$thermo}, \hyperpage{55}
-  \item \spxentry{standard}\spxextra{\$nmr}, \hyperpage{56}
-  \item \spxentry{state}\spxextra{\$control}, \hyperpage{37}
-  \item \spxentry{steps}\spxextra{\$d2edr2}, \hyperpage{54}
-  \item \spxentry{steps}\spxextra{\$optimize}, \hyperpage{50}
-  \item \spxentry{sym}\spxextra{\$molecule}, \hyperpage{41}
-  \item \spxentry{symmetry}\spxextra{\$optimize}, \hyperpage{53}
+  \item \spxentry{saddle}\spxextra{\$optimize}, \hyperpage{51}
+  \item \spxentry{save}\spxextra{\$control}, \hyperpage{41}
+  \item \spxentry{set}\spxextra{\$molecule}, \hyperpage{42}
+  \item \spxentry{sigma}\spxextra{\$thermo}, \hyperpage{57}
+  \item \spxentry{standard}\spxextra{\$nmr}, \hyperpage{58}
+  \item \spxentry{state}\spxextra{\$control}, \hyperpage{38}
+  \item \spxentry{steps}\spxextra{\$d2edr2}, \hyperpage{57}
+  \item \spxentry{steps}\spxextra{\$optimize}, \hyperpage{52}
+  \item \spxentry{sym}\spxextra{\$molecule}, \hyperpage{43}
+  \item \spxentry{symmetry}\spxextra{\$optimize}, \hyperpage{55}
 
   \indexspace
   \bigletter T
-  \item \spxentry{task}\spxextra{\$control}, \hyperpage{34}
-  \item \spxentry{temperature}\spxextra{\$thermo}, \hyperpage{55}
-  \item \spxentry{theory}\spxextra{\$control}, \hyperpage{36}
-  \item \spxentry{tolerance}\spxextra{\$optimize}, \hyperpage{49}
-  \item \spxentry{trust}\spxextra{\$optimize}, \hyperpage{49}
+  \item \spxentry{task}\spxextra{\$control}, \hyperpage{35}
+  \item \spxentry{temperature}\spxextra{\$thermo}, \hyperpage{58}
+  \item \spxentry{theory}\spxextra{\$control}, \hyperpage{37}
+  \item \spxentry{tolerance}\spxextra{\$optimize}, \hyperpage{51}
+  \item \spxentry{trust}\spxextra{\$optimize}, \hyperpage{51}
 
   \indexspace
   \bigletter U
-  \item \spxentry{unit}\spxextra{\$molecule}, \hyperpage{41}
+  \item \spxentry{unit}\spxextra{\$molecule}, \hyperpage{42}
 
   \indexspace
   \bigletter V
-  \item \spxentry{v}\spxextra{\$dynamic}, \hyperpage{59}
-  \item \spxentry{value}\spxextra{\$optimize}, \hyperpage{52}
+  \item \spxentry{v1}\spxextra{\$dynamic}, \hyperpage{62}
+  \item \spxentry{value}\spxextra{\$optimize}, \hyperpage{54}
 
 \end{sphinxtheindex}

@@ -1,89 +1,90 @@
-\indexentry{\$system@\spxentry{\$system}|hyperpage}{32}
-\indexentry{memory (\$system)@\spxentry{memory}\spxextra{\$system}|hyperpage}{32}
-\indexentry{disk (\$system)@\spxentry{disk}\spxextra{\$system}|hyperpage}{33}
-\indexentry{path (\$system)@\spxentry{path}\spxextra{\$system}|hyperpage}{33}
-\indexentry{\$control@\spxentry{\$control}|hyperpage}{34}
-\indexentry{task (\$control)@\spxentry{task}\spxextra{\$control}|hyperpage}{34}
-\indexentry{theory (\$control)@\spxentry{theory}\spxextra{\$control}|hyperpage}{36}
-\indexentry{state (\$control)@\spxentry{state}\spxextra{\$control}|hyperpage}{37}
-\indexentry{basis (\$control)@\spxentry{basis}\spxextra{\$control}|hyperpage}{37}
-\indexentry{four (\$control)@\spxentry{four}\spxextra{\$control}|hyperpage}{37}
-\indexentry{nucleus (\$control)@\spxentry{nucleus}\spxextra{\$control}|hyperpage}{38}
-\indexentry{print (\$control)@\spxentry{print}\spxextra{\$control}|hyperpage}{38}
-\indexentry{derivative (\$control)@\spxentry{derivative}\spxextra{\$control}|hyperpage}{39}
-\indexentry{save (\$control)@\spxentry{save}\spxextra{\$control}|hyperpage}{39}
-\indexentry{\$molecule@\spxentry{\$molecule}|hyperpage}{40}
-\indexentry{charge (\$molecule)@\spxentry{charge}\spxextra{\$molecule}|hyperpage}{40}
-\indexentry{mult (\$molecule)@\spxentry{mult}\spxextra{\$molecule}|hyperpage}{40}
-\indexentry{mass (\$molecule)@\spxentry{mass}\spxextra{\$molecule}|hyperpage}{40}
-\indexentry{set (\$molecule)@\spxentry{set}\spxextra{\$molecule}|hyperpage}{41}
-\indexentry{unit (\$molecule)@\spxentry{unit}\spxextra{\$molecule}|hyperpage}{41}
-\indexentry{sym (\$molecule)@\spxentry{sym}\spxextra{\$molecule}|hyperpage}{41}
-\indexentry{\$guess@\spxentry{\$guess}|hyperpage}{42}
-\indexentry{read (\$guess)@\spxentry{read}\spxextra{\$guess}|hyperpage}{42}
-\indexentry{na (\$guess)@\spxentry{na}\spxextra{\$guess}|hyperpage}{42}
-\indexentry{nb (\$guess)@\spxentry{nb}\spxextra{\$guess}|hyperpage}{42}
-\indexentry{mix (\$guess)@\spxentry{mix}\spxextra{\$guess}|hyperpage}{43}
-\indexentry{\$scf@\spxentry{\$scf}|hyperpage}{43}
-\indexentry{restrict (\$scf)@\spxentry{restrict}\spxextra{\$scf}|hyperpage}{43}
-\indexentry{convergence (\$scf)@\spxentry{convergence}\spxextra{\$scf}|hyperpage}{43}
-\indexentry{iterations (\$scf)@\spxentry{iterations}\spxextra{\$scf}|hyperpage}{44}
-\indexentry{procedure (\$scf)@\spxentry{procedure}\spxextra{\$scf}|hyperpage}{44}
-\indexentry{d1small (\$scf)@\spxentry{d1small}\spxextra{\$scf}|hyperpage}{45}
-\indexentry{core (\$scf)@\spxentry{core}\spxextra{\$scf}|hyperpage}{45}
-\indexentry{\$dft@\spxentry{\$dft}|hyperpage}{45}
-\indexentry{functional (\$dft)@\spxentry{functional}\spxextra{\$dft}|hyperpage}{45}
-\indexentry{\$grid@\spxentry{\$grid}|hyperpage}{46}
-\indexentry{accuracy (\$grid)@\spxentry{accuracy}\spxextra{\$grid}|hyperpage}{46}
-\indexentry{\$integral@\spxentry{\$integral}|hyperpage}{47}
-\indexentry{direct (\$integral)@\spxentry{direct}\spxextra{\$integral}|hyperpage}{47}
-\indexentry{routine (\$integral)@\spxentry{routine}\spxextra{\$integral}|hyperpage}{47}
-\indexentry{\$atoms@\spxentry{\$atoms}|hyperpage}{48}
-\indexentry{core (\$atoms)@\spxentry{core}\spxextra{\$atoms}|hyperpage}{48}
-\indexentry{mcore (\$atoms)@\spxentry{mcore}\spxextra{\$atoms}|hyperpage}{48}
-\indexentry{\$optimize@\spxentry{\$optimize}|hyperpage}{48}
-\indexentry{saddle (\$optimize)@\spxentry{saddle}\spxextra{\$optimize}|hyperpage}{49}
-\indexentry{tolerance (\$optimize)@\spxentry{tolerance}\spxextra{\$optimize}|hyperpage}{49}
-\indexentry{trust (\$optimize)@\spxentry{trust}\spxextra{\$optimize}|hyperpage}{49}
-\indexentry{follow (\$optimize)@\spxentry{follow}\spxextra{\$optimize}|hyperpage}{50}
-\indexentry{steps (\$optimize)@\spxentry{steps}\spxextra{\$optimize}|hyperpage}{50}
-\indexentry{cartesian (\$optimize)@\spxentry{cartesian}\spxextra{\$optimize}|hyperpage}{50}
-\indexentry{back (\$optimize)@\spxentry{back}\spxextra{\$optimize}|hyperpage}{51}
-\indexentry{points (\$optimize)@\spxentry{points}\spxextra{\$optimize}|hyperpage}{51}
-\indexentry{radius (\$optimize)@\spxentry{radius}\spxextra{\$optimize}|hyperpage}{51}
-\indexentry{coordinates (\$optimize)@\spxentry{coordinates}\spxextra{\$optimize}|hyperpage}{51}
-\indexentry{fix (\$optimize)@\spxentry{fix}\spxextra{\$optimize}|hyperpage}{52}
-\indexentry{value (\$optimize)@\spxentry{value}\spxextra{\$optimize}|hyperpage}{52}
-\indexentry{gradient (\$optimize)@\spxentry{gradient}\spxextra{\$optimize}|hyperpage}{53}
-\indexentry{print (\$optimize)@\spxentry{print}\spxextra{\$optimize}|hyperpage}{53}
-\indexentry{symmetry (\$optimize)@\spxentry{symmetry}\spxextra{\$optimize}|hyperpage}{53}
-\indexentry{model (\$optimize)@\spxentry{model}\spxextra{\$optimize}|hyperpage}{54}
-\indexentry{\$d2edr2@\spxentry{\$d2edr2}|hyperpage}{54}
-\indexentry{length (\$d2edr2)@\spxentry{length}\spxextra{\$d2edr2}|hyperpage}{54}
-\indexentry{displace (\$d2edr2)@\spxentry{displace}\spxextra{\$d2edr2}|hyperpage}{54}
-\indexentry{steps (\$d2edr2)@\spxentry{steps}\spxextra{\$d2edr2}|hyperpage}{54}
-\indexentry{\$thermo@\spxentry{\$thermo}|hyperpage}{55}
-\indexentry{sigma (\$thermo)@\spxentry{sigma}\spxextra{\$thermo}|hyperpage}{55}
-\indexentry{temperature (\$thermo)@\spxentry{temperature}\spxextra{\$thermo}|hyperpage}{55}
-\indexentry{mass (\$thermo)@\spxentry{mass}\spxextra{\$thermo}|hyperpage}{56}
-\indexentry{\$nmr@\spxentry{\$nmr}|hyperpage}{56}
-\indexentry{standard (\$nmr)@\spxentry{standard}\spxextra{\$nmr}|hyperpage}{56}
-\indexentry{points (\$nmr)@\spxentry{points}\spxextra{\$nmr}|hyperpage}{56}
-\indexentry{\$Energy@\spxentry{\$Energy}|hyperpage}{57}
-\indexentry{E (\$Energy)@\spxentry{E}\spxextra{\$Energy}|hyperpage}{57}
-\indexentry{G (\$Energy)@\spxentry{G}\spxextra{\$Energy}|hyperpage}{57}
-\indexentry{H (\$Energy)@\spxentry{H}\spxextra{\$Energy}|hyperpage}{57}
-\indexentry{D (\$Energy)@\spxentry{D}\spxextra{\$Energy}|hyperpage}{58}
-\indexentry{Dx (\$Energy)@\spxentry{Dx}\spxextra{\$Energy}|hyperpage}{58}
-\indexentry{A (\$Energy)@\spxentry{A}\spxextra{\$Energy}|hyperpage}{58}
-\indexentry{\$dynamic@\spxentry{\$dynamic}|hyperpage}{58}
-\indexentry{e (\$dynamic)@\spxentry{e}\spxextra{\$dynamic}|hyperpage}{59}
-\indexentry{d (\$dynamic)@\spxentry{d}\spxextra{\$dynamic}|hyperpage}{59}
-\indexentry{n (\$dynamic)@\spxentry{n}\spxextra{\$dynamic}|hyperpage}{59}
-\indexentry{m (\$dynamic)@\spxentry{m}\spxextra{\$dynamic}|hyperpage}{59}
-\indexentry{i (\$dynamic)@\spxentry{i}\spxextra{\$dynamic}|hyperpage}{59}
-\indexentry{v (\$dynamic)@\spxentry{v}\spxextra{\$dynamic}|hyperpage}{59}
-\indexentry{h (\$dynamic)@\spxentry{h}\spxextra{\$dynamic}|hyperpage}{60}
-\indexentry{file (\$dynamic)@\spxentry{file}\spxextra{\$dynamic}|hyperpage}{60}
-\indexentry{\$uniq@\spxentry{\$uniq}|hyperpage}{60}
-\indexentry{distance (\$uniq)@\spxentry{distance}\spxextra{\$uniq}|hyperpage}{60}
+\indexentry{\$system@\spxentry{\$system}|hyperpage}{33}
+\indexentry{memory (\$system)@\spxentry{memory}\spxextra{\$system}|hyperpage}{33}
+\indexentry{disk (\$system)@\spxentry{disk}\spxextra{\$system}|hyperpage}{34}
+\indexentry{path (\$system)@\spxentry{path}\spxextra{\$system}|hyperpage}{34}
+\indexentry{\$control@\spxentry{\$control}|hyperpage}{35}
+\indexentry{task (\$control)@\spxentry{task}\spxextra{\$control}|hyperpage}{35}
+\indexentry{theory (\$control)@\spxentry{theory}\spxextra{\$control}|hyperpage}{37}
+\indexentry{state (\$control)@\spxentry{state}\spxextra{\$control}|hyperpage}{38}
+\indexentry{basis (\$control)@\spxentry{basis}\spxextra{\$control}|hyperpage}{38}
+\indexentry{four (\$control)@\spxentry{four}\spxextra{\$control}|hyperpage}{39}
+\indexentry{nucleus (\$control)@\spxentry{nucleus}\spxextra{\$control}|hyperpage}{39}
+\indexentry{print (\$control)@\spxentry{print}\spxextra{\$control}|hyperpage}{40}
+\indexentry{derivative (\$control)@\spxentry{derivative}\spxextra{\$control}|hyperpage}{40}
+\indexentry{save (\$control)@\spxentry{save}\spxextra{\$control}|hyperpage}{41}
+\indexentry{\$molecule@\spxentry{\$molecule}|hyperpage}{41}
+\indexentry{charge (\$molecule)@\spxentry{charge}\spxextra{\$molecule}|hyperpage}{41}
+\indexentry{mult (\$molecule)@\spxentry{mult}\spxextra{\$molecule}|hyperpage}{42}
+\indexentry{mass (\$molecule)@\spxentry{mass}\spxextra{\$molecule}|hyperpage}{42}
+\indexentry{set (\$molecule)@\spxentry{set}\spxextra{\$molecule}|hyperpage}{42}
+\indexentry{unit (\$molecule)@\spxentry{unit}\spxextra{\$molecule}|hyperpage}{42}
+\indexentry{sym (\$molecule)@\spxentry{sym}\spxextra{\$molecule}|hyperpage}{43}
+\indexentry{\$guess@\spxentry{\$guess}|hyperpage}{43}
+\indexentry{read (\$guess)@\spxentry{read}\spxextra{\$guess}|hyperpage}{43}
+\indexentry{na (\$guess)@\spxentry{na}\spxextra{\$guess}|hyperpage}{44}
+\indexentry{nb (\$guess)@\spxentry{nb}\spxextra{\$guess}|hyperpage}{44}
+\indexentry{mix (\$guess)@\spxentry{mix}\spxextra{\$guess}|hyperpage}{44}
+\indexentry{\$scf@\spxentry{\$scf}|hyperpage}{45}
+\indexentry{restrict (\$scf)@\spxentry{restrict}\spxextra{\$scf}|hyperpage}{45}
+\indexentry{convergence (\$scf)@\spxentry{convergence}\spxextra{\$scf}|hyperpage}{45}
+\indexentry{iterations (\$scf)@\spxentry{iterations}\spxextra{\$scf}|hyperpage}{46}
+\indexentry{procedure (\$scf)@\spxentry{procedure}\spxextra{\$scf}|hyperpage}{46}
+\indexentry{d1small (\$scf)@\spxentry{d1small}\spxextra{\$scf}|hyperpage}{47}
+\indexentry{core (\$scf)@\spxentry{core}\spxextra{\$scf}|hyperpage}{47}
+\indexentry{\$dft@\spxentry{\$dft}|hyperpage}{47}
+\indexentry{functional (\$dft)@\spxentry{functional}\spxextra{\$dft}|hyperpage}{47}
+\indexentry{\$grid@\spxentry{\$grid}|hyperpage}{48}
+\indexentry{accuracy (\$grid)@\spxentry{accuracy}\spxextra{\$grid}|hyperpage}{48}
+\indexentry{\$integral@\spxentry{\$integral}|hyperpage}{49}
+\indexentry{direct (\$integral)@\spxentry{direct}\spxextra{\$integral}|hyperpage}{49}
+\indexentry{routine (\$integral)@\spxentry{routine}\spxextra{\$integral}|hyperpage}{49}
+\indexentry{\$atoms@\spxentry{\$atoms}|hyperpage}{50}
+\indexentry{core (\$atoms)@\spxentry{core}\spxextra{\$atoms}|hyperpage}{50}
+\indexentry{mcore (\$atoms)@\spxentry{mcore}\spxextra{\$atoms}|hyperpage}{50}
+\indexentry{\$optimize@\spxentry{\$optimize}|hyperpage}{50}
+\indexentry{saddle (\$optimize)@\spxentry{saddle}\spxextra{\$optimize}|hyperpage}{51}
+\indexentry{tolerance (\$optimize)@\spxentry{tolerance}\spxextra{\$optimize}|hyperpage}{51}
+\indexentry{trust (\$optimize)@\spxentry{trust}\spxextra{\$optimize}|hyperpage}{51}
+\indexentry{follow (\$optimize)@\spxentry{follow}\spxextra{\$optimize}|hyperpage}{52}
+\indexentry{steps (\$optimize)@\spxentry{steps}\spxextra{\$optimize}|hyperpage}{52}
+\indexentry{cartesian (\$optimize)@\spxentry{cartesian}\spxextra{\$optimize}|hyperpage}{52}
+\indexentry{back (\$optimize)@\spxentry{back}\spxextra{\$optimize}|hyperpage}{53}
+\indexentry{points (\$optimize)@\spxentry{points}\spxextra{\$optimize}|hyperpage}{53}
+\indexentry{radius (\$optimize)@\spxentry{radius}\spxextra{\$optimize}|hyperpage}{53}
+\indexentry{coordinates (\$optimize)@\spxentry{coordinates}\spxextra{\$optimize}|hyperpage}{54}
+\indexentry{fix (\$optimize)@\spxentry{fix}\spxextra{\$optimize}|hyperpage}{54}
+\indexentry{value (\$optimize)@\spxentry{value}\spxextra{\$optimize}|hyperpage}{54}
+\indexentry{gradient (\$optimize)@\spxentry{gradient}\spxextra{\$optimize}|hyperpage}{55}
+\indexentry{print (\$optimize)@\spxentry{print}\spxextra{\$optimize}|hyperpage}{55}
+\indexentry{symmetry (\$optimize)@\spxentry{symmetry}\spxextra{\$optimize}|hyperpage}{55}
+\indexentry{model (\$optimize)@\spxentry{model}\spxextra{\$optimize}|hyperpage}{56}
+\indexentry{\$d2edr2@\spxentry{\$d2edr2}|hyperpage}{56}
+\indexentry{length (\$d2edr2)@\spxentry{length}\spxextra{\$d2edr2}|hyperpage}{56}
+\indexentry{displace (\$d2edr2)@\spxentry{displace}\spxextra{\$d2edr2}|hyperpage}{56}
+\indexentry{steps (\$d2edr2)@\spxentry{steps}\spxextra{\$d2edr2}|hyperpage}{57}
+\indexentry{\$thermo@\spxentry{\$thermo}|hyperpage}{57}
+\indexentry{sigma (\$thermo)@\spxentry{sigma}\spxextra{\$thermo}|hyperpage}{57}
+\indexentry{temperature (\$thermo)@\spxentry{temperature}\spxextra{\$thermo}|hyperpage}{58}
+\indexentry{mass (\$thermo)@\spxentry{mass}\spxextra{\$thermo}|hyperpage}{58}
+\indexentry{\$nmr@\spxentry{\$nmr}|hyperpage}{58}
+\indexentry{standard (\$nmr)@\spxentry{standard}\spxextra{\$nmr}|hyperpage}{58}
+\indexentry{points (\$nmr)@\spxentry{points}\spxextra{\$nmr}|hyperpage}{59}
+\indexentry{\$Energy@\spxentry{\$Energy}|hyperpage}{59}
+\indexentry{E (\$Energy)@\spxentry{E}\spxextra{\$Energy}|hyperpage}{59}
+\indexentry{G (\$Energy)@\spxentry{G}\spxextra{\$Energy}|hyperpage}{60}
+\indexentry{H (\$Energy)@\spxentry{H}\spxextra{\$Energy}|hyperpage}{60}
+\indexentry{D (\$Energy)@\spxentry{D}\spxextra{\$Energy}|hyperpage}{60}
+\indexentry{Dx (\$Energy)@\spxentry{Dx}\spxextra{\$Energy}|hyperpage}{60}
+\indexentry{A (\$Energy)@\spxentry{A}\spxextra{\$Energy}|hyperpage}{60}
+\indexentry{Ax (\$Energy)@\spxentry{Ax}\spxextra{\$Energy}|hyperpage}{61}
+\indexentry{\$dynamic@\spxentry{\$dynamic}|hyperpage}{61}
+\indexentry{e (\$dynamic)@\spxentry{e}\spxextra{\$dynamic}|hyperpage}{61}
+\indexentry{dx (\$dynamic)@\spxentry{dx}\spxextra{\$dynamic}|hyperpage}{61}
+\indexentry{n (\$dynamic)@\spxentry{n}\spxextra{\$dynamic}|hyperpage}{62}
+\indexentry{m (\$dynamic)@\spxentry{m}\spxextra{\$dynamic}|hyperpage}{62}
+\indexentry{i (\$dynamic)@\spxentry{i}\spxextra{\$dynamic}|hyperpage}{62}
+\indexentry{v1 (\$dynamic)@\spxentry{v1}\spxextra{\$dynamic}|hyperpage}{62}
+\indexentry{hb (\$dynamic)@\spxentry{hb}\spxextra{\$dynamic}|hyperpage}{62}
+\indexentry{file (\$dynamic)@\spxentry{file}\spxextra{\$dynamic}|hyperpage}{62}
+\indexentry{\$uniq@\spxentry{\$uniq}|hyperpage}{63}
+\indexentry{distance (\$uniq)@\spxentry{distance}\spxextra{\$uniq}|hyperpage}{63}
