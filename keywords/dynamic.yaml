@@ -5,13 +5,15 @@ summary:
 relevant_when: "task = thermostat"
 body:
   en: |
-    Known only from the official example inputs and a third-party input generator. Every meaning below is
-    inferred, except `file`.
+    Known from the official example inputs, a third-party input generator, the names in the version 25 executable
+    and one version 25 test. Only the meaning of `n` and `file` is shown by output; the rest is inferred.
 
     In version 25, `task=thermostat` with `e=0.001 d=0.03 n=20,5 m=10 i=1` ran with every tested theory (`dft`,
-    `ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`). The output has one line per step, `point N: s … E … g …`, where
+    `ridft`, `rimp2`, `ccsd`, `tddft`, `qm_n3`). The header echoes `e = 0.00100000` and
+    `dx = 0.03000000 L = 20,-5;10`. The output has one line per step, `point N: s … E … g …`, where
     negative point numbers are equilibration steps (the second value of `n`) and positive ones the production steps
-    (the first value). In the program, `d` and `h` are prefixes of the keywords `dx` and `hb`.
+    (the first value). The official example (below) writes `d=` and the generator script writes `h=` and `v=`;
+    these are prefixes of the full names `dx`, `hb` and `v1`.
 
     ```text
     $dynamic
@@ -29,58 +31,60 @@ keywords:
     default: null
     units: hartree
     description:
-      en: "Thermostat temperature as kT (inferred: a generator script sets e = T/315775)."
+      en: "Thermostat temperature as kT (inferred: a generator script sets e = T/315775). Version 25 echoes it as `e = 0.00100000`."
     status: undocumented
-    sources: ["01 §4.8", "02 §3.2"]
+    sources: ["01 §4.8", "02 §3.2", "08 t69", "09"]
     verified_against: null
-  - name: d
+  - name: dx
     type: real
     default: null
     description:
-      en: Time step (inferred).
+      en: "Time step (inferred). The examples write the prefix `d=`; version 25 echoes it as `dx = 0.03000000`."
     status: undocumented
-    sources: ["01 §4.8", "02 §3.2"]
+    sources: ["01 §4.8", "02 §3.2", "08 t69", "09"]
     verified_against: null
   - name: n
     type: list
     default: null
     description:
-      en: Number of steps and print interval (inferred).
+      en: |
+        Two values: the number of production steps, then the number of equilibration steps. In version 25, `n=20,5`
+        gave 26 points, `point -5` … `point 20`, and the echo `L = 20,-5;10`.
     status: undocumented
-    sources: ["01 §4.8", "02 §3.2"]
-    verified_against: null
+    sources: ["01 §4.8", "02 §3.2", "08 t69", "09"]
+    verified_against: "25 (2025.02.28)"
   - name: m
     type: integer
     default: null
     description:
-      en: Meaning not known.
+      en: "Meaning not known. With `m=10`, version 25 printed `;10` at the end of the echo `L = 20,-5;10`."
     status: undocumented
-    sources: ["01 §4.8", "02 §3.2"]
+    sources: ["01 §4.8", "02 §3.2", "08 t69", "09"]
     verified_against: null
   - name: i
     type: integer
     default: null
     description:
-      en: Run index or random seed (inferred).
+      en: Run index or random seed (inferred). Version 25 does not echo it.
     status: undocumented
-    sources: ["01 §4.8", "02 §3.2"]
+    sources: ["01 §4.8", "02 §3.2", "08 t69", "09"]
     verified_against: null
-  - name: v
+  - name: v1
     type: real
     default: null
     units: bohr³ per atom
     description:
-      en: Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred).
+      en: Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred). Written as the prefix `v=` in the generator script.
     status: undocumented
-    sources: ["01 §4.8", "02 §3.2"]
+    sources: ["01 §4.8", "02 §3.2", "09"]
     verified_against: null
-  - name: h
+  - name: hb
     type: real
     default: null
     description:
-      en: Stiffness of the cavity wall (inferred).
+      en: Stiffness of the cavity wall (inferred). Written as the prefix `h=` in the generator script.
     status: undocumented
-    sources: ["01 §4.8", "02 §3.2"]
+    sources: ["01 §4.8", "02 §3.2", "09"]
     verified_against: null
   - name: file
     type: string

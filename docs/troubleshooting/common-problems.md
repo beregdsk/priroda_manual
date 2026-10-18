@@ -791,6 +791,8 @@ Old Windows builds were serial only. For a parallel 64-bit run (version 16 or la
    set TMPDIR="%TEMP%"
    "orterun.exe" -np 2 ./p16_64_parallel.exe "C:\Work\file.in" "C:\Work\file.out"
    ```
+   This is the command as posted. In `cmd.exe`, `set TMPDIR="%TEMP%"` keeps the quotes as part of the value;
+   `set "TMPDIR=%TEMP%"` does not. Which form the Cygwin build expects was not tested.
 4. If the program is in a system directory such as `C:\Program Files`, run it as administrator.
 <!-- src: 04 #370 (EvgeniX), #360, #362, #472 --> <!-- verify -->
 

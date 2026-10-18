@@ -281,8 +281,8 @@ To reuse it, remove the prefix and append the block to the end of the next input
 sed -n 's/^eng>//p' mol.out >> mol.in
 ```
 
-The `ge` script on the official site does the same. It also skips the first block when the output contains a
-`NUMERICAL AND ANALYTICAL GRADIENT` section.
+The `ge` script on the official site does the same. When the output contains a `NUMERICAL AND ANALYTICAL GRADIENT`
+section, it ignores everything before that section.
 <!-- src: 01 §8; 03 §8 (perl one-liner); 03 §14 -->
 
 :::{warning}
@@ -294,7 +294,7 @@ program uses the **last** one, even when an earlier one matches the geometry.
 
 A stored Hessian is required by {ref}`$optimize saddle=1 <optimize.saddle>` and `task=irc`. It also helps difficult
 minimizations, and it lets you redo the vibrational analysis or the thermochemistry without recomputing.
-<!-- src: Dft.rtf; 06 §4, §5; energy.yaml -->
+<!-- src: Dft.rtf lines 79, 103; 06 §4, §5; 08 t25, t26, t66 -->
 
 ### `num>` lines
 
@@ -320,8 +320,15 @@ Partial results of a numerical calculation are printed on lines prefixed with `n
 After `OPTIMIZATION CONVERGED`, the final geometry is printed as a ready-made `$molecule` group on lines prefixed with
 `MOL>`. Strip the prefix to continue from that geometry. The `gm` script on the official site replaces the `$molecule`
 group of the input with it. Because `gm` replaces everything from `$molecule` to the end of the file, keep
-`$molecule` as the last group of your inputs, followed only by appended result blocks.
-<!-- src: 01 §7, §8; 06 §4 -->
+`$molecule` as the last group of your inputs. Anything appended after it, including an `$Energy` group with a
+Hessian, is deleted by `gm`; append such blocks again afterwards.
+<!-- src: 01 §7, §8 (gm: sed stops at $molecule); 02 (same for pri); 06 §4 -->
+
+An optimization that runs out of steps prints no `MOL>` lines in version 25. The geometry of each step is printed on
+lines prefixed with lowercase `mol>`; the block from the last step is the geometry to restart from. `gm` finds
+neither `MOL>` lines nor an input echo in such an output and stops with `mol?`, so strip the last `mol>` block by
+hand.
+<!-- src: 08 t12 (only mol blocks, no input echo in the output); 01 §8 (gm script) -->
 
 ## Common mistakes
 
