@@ -29,7 +29,7 @@ keywords:
         `298.15`: version 25 prints `T =  298.150 K`, as `Dft.rtf` states. Older posted outputs also show `298.000 K`
         (2011, 2021), so set `temperature=` explicitly when comparing with other versions.
     status: current
-    sources: ["input.txt", "Dft.rtf", "08 t13", "08 t44"]
+    sources: ["input.txt", "Dft.rtf", "08 t13", "08 t44", "04 #80, #476"]
     verified_against: "25 (2025.02.28)"
   - name: mass
     type: list

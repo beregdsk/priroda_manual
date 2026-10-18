@@ -17,18 +17,20 @@ keywords:
       en: |
         The index is 10·Z: `core(280)` is nickel, `core(80)` oxygen. In version 25, `core(80)=0,0,0,0` removed the
         oxygen 1s from the frozen core of an RI-MP2 run. The output reports the frozen core as `atom   8 core =  1`
-        and `Number of core electrons 1`; the number there counts core orbitals, not electrons.
+        and `Number of core electrons 1`; the number there apparently counts core orbitals, not electrons (the C60
+        example output also prints `Number of core  electrons 60` for 60 carbon atoms).
     see_also: [scf.core, atoms.mcore]
     status: current
-    sources: ["input.txt", "08 t16"]
+    sources: ["input.txt", "08 t16", "01 §7"]
     verified_against: "25 (2025.02.28)"
   - name: mcore
     type: integer
     default: null
     description:
       en: |
-        A simple way to add outer-core shells to the correlation treatment: `mcore=M` adds all shells whose principal
-        quantum number is lower than that of the outermost valence shell by less than M.
+        A simple way to add outer-core shells to the correlation treatment. `input.txt` says: "mcore=M means to add all
+        shells with principal quantum number M less than that of the outermost valence shell", i.e. the shells with
+        n = n(valence) − M. Whether shells between those and the valence shell are also added is not stated.
     see_also: [atoms.core]
     status: current
     sources: ["input.txt"]

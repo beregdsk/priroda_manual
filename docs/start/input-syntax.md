@@ -322,13 +322,13 @@ After `OPTIMIZATION CONVERGED`, the final geometry is printed as a ready-made `$
 group of the input with it. Because `gm` replaces everything from `$molecule` to the end of the file, keep
 `$molecule` as the last group of your inputs. Anything appended after it, including an `$Energy` group with a
 Hessian, is deleted by `gm`; append such blocks again afterwards.
-<!-- src: 01 §7, §8 (gm: sed stops at $molecule); 02 (same for pri); 06 §4 -->
+<!-- src: 01 §7, §8 (gm: sed stops at $molecule); 06 §4 -->
 
 An optimization that runs out of steps prints no `MOL>` lines in version 25. The geometry of each step is printed on
 lines prefixed with lowercase `mol>`; the block from the last step is the geometry to restart from. `gm` finds
 neither `MOL>` lines nor an input echo in such an output and stops with `mol?`, so strip the last `mol>` block by
 hand.
-<!-- src: 08 t12 (only mol blocks, no input echo in the output); 01 §8 (gm script) -->
+<!-- src: 08 t12 (two steps, two mol blocks, no MOL lines, no input echo; checked in the round 1-3 output); 01 §8 (gm script) -->
 
 ## Common mistakes
 
@@ -337,8 +337,9 @@ Non-integer atomic numbers
   rest of the group shifts. In version 25 this gives no error at all: water written with `8.0` and `1.0` ran as an
   oxygen atom plus three empty centres with Z=0, and printed a meaningless energy. Older versions were reported to
   stop with `illegal charge/multiplicity`. Check the `formula:` line near the top of the output. Element symbols
-  (`O`) are not accepted either.
-  <!-- src: 03 §5; molecule.yaml; 08 t09 -->
+  are not accepted either: in version 25, water written with `O` and `H` stopped after `molecule input: ''` with the
+  line `'o' ?`.
+  <!-- src: 03 §5; 08 t09; 08 (review check: element symbols) -->
 
 Typographic quotes
 : Word processors and some web pages turn `"` into curly or angle quotes, which break file names in `basis=` and
@@ -346,9 +347,10 @@ Typographic quotes
   <!-- src: 04 #64 -->
 
 Two `task=` lines
-: A second `task=` line does not start a second job; only the first task runs. `task=optimize+hessian` is the only
-  combination the program understands. Run other sequences as separate jobs.
-  <!-- src: 04 #69, #70 -->
+: A second `task=` line does not start a second job; in version 6, users reported that only the first task ran.
+  `task=optimize+hessian` is the only combination the program understands. Run other sequences as separate jobs.
+  <!-- src: 04 #69, #70 (v6; optimize+hessian "not in all versions"); 09 (optimize+hessian is one task name in v25) --> <!-- verify -->
+
 
 Windows line endings (CRLF)
 : The run stops in `$molecule` with `molecule input: ''` followed by a garbled `' ?matrix` or `?rtesian`. Convert the
@@ -362,13 +364,14 @@ Misspelled task or theory name
   <!-- src: 08 t50, t50b -->
 
 Hybrid functional without `theory=ridft`
-: Older versions ran without the exact exchange. With `theory=dft`, version 25 stops after the basis-set echo with
-  no message; with `theory=tddft` it still runs without the exact exchange and gives wrong energies. See
+: Older versions ran but gave wrong results. With `theory=dft`, version 25 stops after the basis-set echo with no
+  message in the output file (stderr shows only `MPI_Abort`); with `theory=tddft` it still runs without the exact exchange and gives wrong energies. See
   {ref}`$control theory <control.theory>`.
   <!-- src: 04 #96, #310; 08 t08, t46 -->
 
 `basis4.in` without `four=1`
-: The relativistic basis file needs `four=1` in `$control`.
-  <!-- src: 04 #207, #208 -->
+: The relativistic basis file needs `four=1` in `$control`. Without it, version 25 stops right after the line
+  `Basis set input:` with the single line `1?`.
+  <!-- src: 04 #207, #208; 08 t49 -->
 
 More input problems, with their exact error messages, are listed in {ref}`troubleshooting.input`.

@@ -19,8 +19,9 @@ keywords:
       # computed for Si(CH3)4; usable for a series of hydrocarbons
     notes:
       en: |
-        A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
-        different TMS values (e.g. `standard(1)=31.3867 standard(6)=181.9781`) for other settings. Compute TMS with
+        A reference shielding is only valid for the method, basis set and grid it was computed with. A user input
+        posted on a forum has other TMS values (`standard(1)=31.3867 standard(6)=181.9781`), presumably for other
+        settings. Compute TMS with
         exactly the settings of the production run. Without `standard`, version 25 prints `shift=` as minus the
         isotropic shielding; with it, `shift = standard − isotropic shielding`.
     status: current
