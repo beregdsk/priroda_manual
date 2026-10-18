@@ -336,8 +336,14 @@ This is a display bug in the timing table *(inferred)* and does not affect resul
 
 Run by the project owner on 2026-10-18 on one Windows 10 PC (`Microsoft Windows NT 10.0.19045.0`, `node 0: 'Egor'`),
 serial unless stated. These are **not** version 25: `p1.exe` from `exe64/` prints `Priroda 20 (2021.03.18)`, and the
-parallel `p_190306.exe` prints `Priroda 19 (2019.03.06)`. A Cygwin installation was on `PATH` (`cygpath` found), so
-the tests do not show what happens on a PC without Cygwin. Outputs: `tests/runs/win-20261018-174904/` (w01–w12);
+parallel `p_190306.exe` prints `Priroda 19 (2019.03.06)`. Cygwin was **not** installed for w01–w12 and the failed w13
+attempts (project owner's report); `env.txt` nevertheless found a `cygpath` on `PATH`, probably from another program
+*(inferred)*. Cygwin was installed only for the last w13 runs: a 64-bit installation from an archived 2016 snapshot,
+which the owner picked from the list of old versions on the Cygwin site (about the third entry), to get the old
+OpenMPI DLLs. That list's 2016 entry is
+`http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2016/08/30/104235` (Cygwin Time Machine; the
+site says to run setup with `--allow-unsupported-windows --site <URL>` and `--no-verify`); which snapshot was used
+exactly was not recorded. Outputs: `tests/runs/win-20261018-174904/` (w01–w12);
 w13 attempts in `win-20261018-181148/` to `-191238/` (all failed to start, see w13); the working w13 run in
 `win-20261018-191435/`. Cite as `08 wNN`.
 

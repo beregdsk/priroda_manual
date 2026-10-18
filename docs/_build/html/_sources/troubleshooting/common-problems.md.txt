@@ -814,8 +814,9 @@ Old Windows builds were serial only. For a parallel 64-bit run (version 16 or la
 <!-- src: 04 #370 (EvgeniX), #360, #362, #472; 08 w02c, w13 -->
 
 :::{note}
-A test in 2026 on Windows 10 (with a Cygwin installation on `PATH`) got `p_190306.exe` running on 2 processes.
-It needed the `-12`/`-13` DLLs and `orterun.exe` from an older OpenMPI package (files dated 2016-06-21). With the
+A test in 2026 on Windows 10 got `p_190306.exe` running on 2 processes. It needed the `-12`/`-13` DLLs and
+`orterun.exe` from an older OpenMPI package (files dated 2016-06-21), installed from an archived 2016 Cygwin
+snapshot. With the
 current `-40` DLLs, or those renamed to the old names, the programs exited at once with code -1073741515
 (0xC0000135, a required DLL was not found). The path of the Priroda executable had to be written with forward
 slashes: `orterun.exe -np 2 C:/Priroda/p_190306.exe file.in file.out`. With backslashes, `orterun.exe` stopped with

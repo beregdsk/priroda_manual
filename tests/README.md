@@ -398,7 +398,8 @@ powershell -ExecutionPolicy Bypass -File .\run_windows.ps1 w02 w05    # selected
 
 Optional: `$env:PRIRODA_MPI = "C:\Priroda\p_190306.exe"` and `$env:MPIRUN = "C:\Priroda\orterun.exe"`.
 `p_190306.exe` and `orterun.exe` need `cygmpi-12.dll`, `cygopen-pal-13.dll`, `cygopen-rte-12.dll` and
-`cyggcc_s-seh-1.dll` from an older Cygwin OpenMPI package; the current `-40` DLLs do not work (w13).
+`cyggcc_s-seh-1.dll` from an older Cygwin OpenMPI package (an archived 2016 snapshot, see running.md); the current
+`-40` DLLs do not work (w13). w01–w12 ran without Cygwin installed.
 Outputs go to `runs\win-<date>\`; `env.txt` there lists the Windows version and the exe and DLL files next to the
 program, which the results depend on. The script writes every input with Unix line endings, whatever git did on
 checkout; only w06 gets Windows endings. The Linux water energy to compare with is t01, E = -76.3653913723.

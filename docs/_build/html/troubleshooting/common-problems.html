@@ -1043,8 +1043,9 @@ at <code class="docutils literal notranslate"><span class="pre">0:</span> <span 
 <!-- src: 04 #370 (EvgeniX), #360, #362, #472; 08 w02c, w13 -->
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A test in 2026 on Windows 10 (with a Cygwin installation on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>) got <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> running on 2 processes.
-It needed the <code class="docutils literal notranslate"><span class="pre">-12</span></code>/<code class="docutils literal notranslate"><span class="pre">-13</span></code> DLLs and <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> from an older OpenMPI package (files dated 2016-06-21). With the
+<p>A test in 2026 on Windows 10 got <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> running on 2 processes. It needed the <code class="docutils literal notranslate"><span class="pre">-12</span></code>/<code class="docutils literal notranslate"><span class="pre">-13</span></code> DLLs and
+<code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> from an older OpenMPI package (files dated 2016-06-21), installed from an archived 2016 Cygwin
+snapshot. With the
 current <code class="docutils literal notranslate"><span class="pre">-40</span></code> DLLs, or those renamed to the old names, the programs exited at once with code -1073741515
 (0xC0000135, a required DLL was not found). The path of the Priroda executable had to be written with forward
 slashes: <code class="docutils literal notranslate"><span class="pre">orterun.exe</span> <span class="pre">-np</span> <span class="pre">2</span> <span class="pre">C:/Priroda/p_190306.exe</span> <span class="pre">file.in</span> <span class="pre">file.out</span></code>. With backslashes, <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> stopped with

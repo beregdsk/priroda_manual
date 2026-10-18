@@ -520,7 +520,15 @@ and <code class="docutils literal notranslate"><span class="pre">orterun.exe</sp
 as the DLLs.</p>
 </div>
 <!-- src: 08 w13 -->
-<p>That test ran on Windows 10 with a Cygwin installation on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> then printed
+<p>To get the old files, install Cygwin from an archived snapshot instead of the current one. The Cygwin installation
+page (<a class="reference external" href="https://cygwin.com/install.html">https://cygwin.com/install.html</a>) lists archived snapshots for old Windows versions. The 2016 x86_64 snapshot
+there worked:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>setup-x86_64.exe --allow-unsupported-windows --no-verify --site http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2016/08/30/104235
+</pre></div>
+</div>
+<p>Select the <code class="docutils literal notranslate"><span class="pre">openmpi</span></code> package, then copy the files listed in step 2 from the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of that installation.</p>
+<!-- src: 08 w13 (snapshot from the owner's report; options from cygwin.com/install.html) --> <!-- verify: exact snapshot not recorded -->
+<p>That test ran on Windows 10 with the old Cygwin installed. <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> then printed
 <code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">on</span> <span class="pre">2</span> <span class="pre">processors</span></code> and gave the same energy as a serial run. With a backslash path to the executable
 (<code class="docutils literal notranslate"><span class="pre">C:\Priroda\p_190306.exe</span></code>), <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> stopped with <code class="docutils literal notranslate"><span class="pre">orterun:exe-not-found</span></code>. Started directly, without
 <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code>, <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> runs serially.</p>
@@ -539,7 +547,8 @@ adapter. <!-- src: 04 #397 --></p></li>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>A user reported in 2021 that this recipe no longer worked on Windows 10 with a current Cygwin, and no fix was posted.
-The likely cause is the newer OpenMPI DLLs described above. A PC without a Cygwin installation was not tested.</p>
+The likely cause is the newer OpenMPI DLLs described above. The serial build was tested on a PC without Cygwin;
+the parallel run was tested only with the old Cygwin installed.</p>
 </div>
 <!-- src: 04 #472; 08 w13 (likely cause inferred) -->
 </section>

@@ -1449,7 +1449,21 @@ as the DLLs.
 
 
 \sphinxAtStartPar
-That test ran on Windows 10 with a Cygwin installation on \sphinxcode{\sphinxupquote{PATH}}. \sphinxcode{\sphinxupquote{p\_190306.exe}} then printed
+To get the old files, install Cygwin from an archived snapshot instead of the current one. The Cygwin installation
+page (\sphinxurl{https://cygwin.com/install.html}) lists archived snapshots for old Windows versions. The 2016 x86\_64 snapshot
+there worked:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+setup\PYGZhy{}x86\PYGZus{}64.exe \PYGZhy{}\PYGZhy{}allow\PYGZhy{}unsupported\PYGZhy{}windows \PYGZhy{}\PYGZhy{}no\PYGZhy{}verify \PYGZhy{}\PYGZhy{}site http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2016/08/30/104235
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Select the \sphinxcode{\sphinxupquote{openmpi}} package, then copy the files listed in step 2 from the \sphinxcode{\sphinxupquote{bin}} directory of that installation.
+
+
+
+\sphinxAtStartPar
+That test ran on Windows 10 with the old Cygwin installed. \sphinxcode{\sphinxupquote{p\_190306.exe}} then printed
 \sphinxcode{\sphinxupquote{parallel on 2 processors}} and gave the same energy as a serial run. With a backslash path to the executable
 (\sphinxcode{\sphinxupquote{C:\textbackslash{}Priroda\textbackslash{}p\_190306.exe}}), \sphinxcode{\sphinxupquote{orterun.exe}} stopped with \sphinxcode{\sphinxupquote{orterun:exe\sphinxhyphen{}not\sphinxhyphen{}found}}. Started directly, without
 \sphinxcode{\sphinxupquote{orterun.exe}}, \sphinxcode{\sphinxupquote{p\_190306.exe}} runs serially.
@@ -1484,7 +1498,8 @@ With the Ethernet cable unplugged, one user’s run used only two of the cores.
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
 A user reported in 2021 that this recipe no longer worked on Windows 10 with a current Cygwin, and no fix was posted.
-The likely cause is the newer OpenMPI DLLs described above. A PC without a Cygwin installation was not tested.
+The likely cause is the newer OpenMPI DLLs described above. The serial build was tested on a PC without Cygwin;
+the parallel run was tested only with the old Cygwin installed.
 \end{sphinxadmonition}
 
 
@@ -7849,8 +7864,9 @@ If the program is in a system directory such as \sphinxcode{\sphinxupquote{C:\te
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-A test in 2026 on Windows 10 (with a Cygwin installation on \sphinxcode{\sphinxupquote{PATH}}) got \sphinxcode{\sphinxupquote{p\_190306.exe}} running on 2 processes.
-It needed the \sphinxcode{\sphinxupquote{\sphinxhyphen{}12}}/\sphinxcode{\sphinxupquote{\sphinxhyphen{}13}} DLLs and \sphinxcode{\sphinxupquote{orterun.exe}} from an older OpenMPI package (files dated 2016\sphinxhyphen{}06\sphinxhyphen{}21). With the
+A test in 2026 on Windows 10 got \sphinxcode{\sphinxupquote{p\_190306.exe}} running on 2 processes. It needed the \sphinxcode{\sphinxupquote{\sphinxhyphen{}12}}/\sphinxcode{\sphinxupquote{\sphinxhyphen{}13}} DLLs and
+\sphinxcode{\sphinxupquote{orterun.exe}} from an older OpenMPI package (files dated 2016\sphinxhyphen{}06\sphinxhyphen{}21), installed from an archived 2016 Cygwin
+snapshot. With the
 current \sphinxcode{\sphinxupquote{\sphinxhyphen{}40}} DLLs, or those renamed to the old names, the programs exited at once with code \sphinxhyphen{}1073741515
 (0xC0000135, a required DLL was not found). The path of the Priroda executable had to be written with forward
 slashes: \sphinxcode{\sphinxupquote{orterun.exe \sphinxhyphen{}np 2 C:/Priroda/p\_190306.exe file.in file.out}}. With backslashes, \sphinxcode{\sphinxupquote{orterun.exe}} stopped with

@@ -15,198 +15,198 @@
 \contentsline {subsection}{\numberline {2.3.2}Parallel runs on Linux}{9}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Parallel runs on Windows}{10}{subsection.2.3.3}%
 \contentsline {section}{\numberline {2.4}Memory, disk and scratch: \sphinxstyleliteralintitle {\sphinxupquote {\$system}}}{11}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Keeping scratch in memory}{11}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.1}Keeping scratch in memory}{12}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Where scratch files go}{12}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}Disk speed}{12}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}When the limits are too small}{12}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.4}When the limits are too small}{13}{subsection.2.4.4}%
 \contentsline {section}{\numberline {2.5}Parallel performance}{13}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Batch systems}{13}{section.2.6}%
-\contentsline {section}{\numberline {2.7}Input file requirements}{15}{section.2.7}%
+\contentsline {section}{\numberline {2.6}Batch systems}{14}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Input file requirements}{16}{section.2.7}%
 \contentsline {section}{\numberline {2.8}Basis\sphinxhyphen {}set files}{16}{section.2.8}%
-\contentsline {chapter}{\numberline {3}Getting started}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Before you start}{17}{section.3.1}%
-\contentsline {section}{\numberline {3.2}A single\sphinxhyphen {}point energy}{17}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}The input}{17}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}What to look for in the output}{18}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Optimizing a geometry and confirming a minimum}{20}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Step 1: optimize}{20}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Step 2: check convergence}{20}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Step 3: take the final geometry}{21}{subsection.3.3.3}%
-\contentsline {subsubsection}{The official helper scripts \sphinxstyleliteralintitle {\sphinxupquote {ge}} and \sphinxstyleliteralintitle {\sphinxupquote {gm}}}{22}{subsubsection*.3}%
-\contentsline {subsection}{\numberline {3.3.4}Step 4: compute the Hessian}{22}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}Step 5: check the frequencies}{22}{subsection.3.3.5}%
-\contentsline {subsection}{\numberline {3.3.6}Step 6: if a frequency is imaginary, re\sphinxhyphen {}optimize}{23}{subsection.3.3.6}%
-\contentsline {subsection}{\numberline {3.3.7}Step 7: read the thermochemistry}{23}{subsection.3.3.7}%
-\contentsline {subsection}{\numberline {3.3.8}The one\sphinxhyphen {}run alternative: \sphinxstyleliteralintitle {\sphinxupquote {task=optimize+hessian}}}{24}{subsection.3.3.8}%
-\contentsline {section}{\numberline {3.4}Reading the output}{25}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Where things are}{25}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Charges and bond orders}{25}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Viewing results in Molden}{26}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}Where next}{26}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Input syntax}{27}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Groups}{27}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Keywords}{28}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Case}{28}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Abbreviations}{28}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}Values}{29}{section.4.3}%
-\contentsline {section}{\numberline {4.4}The \sphinxstyleliteralintitle {\sphinxupquote {\$molecule}} group}{29}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Several \sphinxstyleliteralintitle {\sphinxupquote {\$molecule}} blocks}{30}{subsection.4.4.1}%
-\contentsline {section}{\numberline {4.5}Text outside groups}{30}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Appending results of earlier runs}{31}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}\sphinxstyleliteralintitle {\sphinxupquote {\$Energy}} from \sphinxstyleliteralintitle {\sphinxupquote {eng\textgreater {}}} lines}{31}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}\sphinxstyleliteralintitle {\sphinxupquote {num\textgreater {}}} lines}{31}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Optimized geometry from \sphinxstyleliteralintitle {\sphinxupquote {MOL\textgreater {}}} lines}{32}{subsection.4.6.3}%
-\contentsline {section}{\numberline {4.7}Common mistakes}{32}{section.4.7}%
-\contentsline {chapter}{\numberline {5}Input reference}{34}{chapter.5}%
-\contentsline {section}{\numberline {5.1}\sphinxstyleliteralintitle {\sphinxupquote {\$system}}}{34}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}\sphinxstyleliteralintitle {\sphinxupquote {memory}}}{34}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}\sphinxstyleliteralintitle {\sphinxupquote {disk}}}{35}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}\sphinxstyleliteralintitle {\sphinxupquote {path}}}{35}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}\sphinxstyleliteralintitle {\sphinxupquote {\$control}}}{36}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}\sphinxstyleliteralintitle {\sphinxupquote {task}}}{36}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}\sphinxstyleliteralintitle {\sphinxupquote {theory}}}{38}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}\sphinxstyleliteralintitle {\sphinxupquote {state}}}{40}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}\sphinxstyleliteralintitle {\sphinxupquote {basis}}}{40}{subsection.5.2.4}%
-\contentsline {subsection}{\numberline {5.2.5}\sphinxstyleliteralintitle {\sphinxupquote {four}}}{40}{subsection.5.2.5}%
-\contentsline {subsection}{\numberline {5.2.6}\sphinxstyleliteralintitle {\sphinxupquote {nucleus}}}{41}{subsection.5.2.6}%
-\contentsline {subsection}{\numberline {5.2.7}\sphinxstyleliteralintitle {\sphinxupquote {print}}}{41}{subsection.5.2.7}%
-\contentsline {subsection}{\numberline {5.2.8}\sphinxstyleliteralintitle {\sphinxupquote {derivative}}}{42}{subsection.5.2.8}%
-\contentsline {subsection}{\numberline {5.2.9}\sphinxstyleliteralintitle {\sphinxupquote {save}}}{42}{subsection.5.2.9}%
-\contentsline {section}{\numberline {5.3}\sphinxstyleliteralintitle {\sphinxupquote {\$molecule}}}{43}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}\sphinxstyleliteralintitle {\sphinxupquote {charge}}}{43}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}\sphinxstyleliteralintitle {\sphinxupquote {mult}}}{43}{subsection.5.3.2}%
-\contentsline {subsection}{\numberline {5.3.3}\sphinxstyleliteralintitle {\sphinxupquote {mass}}}{44}{subsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.3.4}\sphinxstyleliteralintitle {\sphinxupquote {set}}}{44}{subsection.5.3.4}%
-\contentsline {subsection}{\numberline {5.3.5}\sphinxstyleliteralintitle {\sphinxupquote {unit}}}{44}{subsection.5.3.5}%
-\contentsline {subsection}{\numberline {5.3.6}\sphinxstyleliteralintitle {\sphinxupquote {sym}}}{45}{subsection.5.3.6}%
-\contentsline {section}{\numberline {5.4}\sphinxstyleliteralintitle {\sphinxupquote {\$guess}}}{45}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}\sphinxstyleliteralintitle {\sphinxupquote {read}}}{45}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}\sphinxstyleliteralintitle {\sphinxupquote {na}}}{45}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}\sphinxstyleliteralintitle {\sphinxupquote {nb}}}{46}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}\sphinxstyleliteralintitle {\sphinxupquote {mix}}}{46}{subsection.5.4.4}%
-\contentsline {section}{\numberline {5.5}\sphinxstyleliteralintitle {\sphinxupquote {\$scf}}}{47}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}\sphinxstyleliteralintitle {\sphinxupquote {restrict}}}{47}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}\sphinxstyleliteralintitle {\sphinxupquote {convergence}}}{47}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}\sphinxstyleliteralintitle {\sphinxupquote {iterations}}}{48}{subsection.5.5.3}%
-\contentsline {subsection}{\numberline {5.5.4}\sphinxstyleliteralintitle {\sphinxupquote {procedure}}}{48}{subsection.5.5.4}%
-\contentsline {subsection}{\numberline {5.5.5}\sphinxstyleliteralintitle {\sphinxupquote {d1small}}}{49}{subsection.5.5.5}%
-\contentsline {subsection}{\numberline {5.5.6}\sphinxstyleliteralintitle {\sphinxupquote {core}}}{49}{subsection.5.5.6}%
-\contentsline {section}{\numberline {5.6}\sphinxstyleliteralintitle {\sphinxupquote {\$dft}}}{49}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}\sphinxstyleliteralintitle {\sphinxupquote {functional}}}{49}{subsection.5.6.1}%
-\contentsline {section}{\numberline {5.7}\sphinxstyleliteralintitle {\sphinxupquote {\$grid}}}{50}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}\sphinxstyleliteralintitle {\sphinxupquote {accuracy}}}{50}{subsection.5.7.1}%
-\contentsline {section}{\numberline {5.8}\sphinxstyleliteralintitle {\sphinxupquote {\$integral}}}{51}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}\sphinxstyleliteralintitle {\sphinxupquote {direct}}}{51}{subsection.5.8.1}%
-\contentsline {subsection}{\numberline {5.8.2}\sphinxstyleliteralintitle {\sphinxupquote {routine}}}{51}{subsection.5.8.2}%
-\contentsline {section}{\numberline {5.9}\sphinxstyleliteralintitle {\sphinxupquote {\$atoms}}}{52}{section.5.9}%
-\contentsline {subsection}{\numberline {5.9.1}\sphinxstyleliteralintitle {\sphinxupquote {core}}}{52}{subsection.5.9.1}%
-\contentsline {subsection}{\numberline {5.9.2}\sphinxstyleliteralintitle {\sphinxupquote {mcore}}}{52}{subsection.5.9.2}%
-\contentsline {section}{\numberline {5.10}\sphinxstyleliteralintitle {\sphinxupquote {\$optimize}}}{52}{section.5.10}%
-\contentsline {subsection}{\numberline {5.10.1}\sphinxstyleliteralintitle {\sphinxupquote {saddle}}}{53}{subsection.5.10.1}%
-\contentsline {subsection}{\numberline {5.10.2}\sphinxstyleliteralintitle {\sphinxupquote {tolerance}}}{53}{subsection.5.10.2}%
-\contentsline {subsection}{\numberline {5.10.3}\sphinxstyleliteralintitle {\sphinxupquote {trust}}}{53}{subsection.5.10.3}%
-\contentsline {subsection}{\numberline {5.10.4}\sphinxstyleliteralintitle {\sphinxupquote {follow}}}{54}{subsection.5.10.4}%
-\contentsline {subsection}{\numberline {5.10.5}\sphinxstyleliteralintitle {\sphinxupquote {steps}}}{54}{subsection.5.10.5}%
-\contentsline {subsection}{\numberline {5.10.6}\sphinxstyleliteralintitle {\sphinxupquote {cartesian}}}{54}{subsection.5.10.6}%
-\contentsline {subsection}{\numberline {5.10.7}\sphinxstyleliteralintitle {\sphinxupquote {back}}}{55}{subsection.5.10.7}%
-\contentsline {subsection}{\numberline {5.10.8}\sphinxstyleliteralintitle {\sphinxupquote {points}}}{55}{subsection.5.10.8}%
-\contentsline {subsection}{\numberline {5.10.9}\sphinxstyleliteralintitle {\sphinxupquote {radius}}}{55}{subsection.5.10.9}%
-\contentsline {subsection}{\numberline {5.10.10}\sphinxstyleliteralintitle {\sphinxupquote {coordinates}}}{56}{subsection.5.10.10}%
-\contentsline {subsection}{\numberline {5.10.11}\sphinxstyleliteralintitle {\sphinxupquote {fix}}}{56}{subsection.5.10.11}%
-\contentsline {subsection}{\numberline {5.10.12}\sphinxstyleliteralintitle {\sphinxupquote {value}}}{56}{subsection.5.10.12}%
-\contentsline {subsection}{\numberline {5.10.13}\sphinxstyleliteralintitle {\sphinxupquote {gradient}}}{57}{subsection.5.10.13}%
-\contentsline {subsection}{\numberline {5.10.14}\sphinxstyleliteralintitle {\sphinxupquote {print}}}{57}{subsection.5.10.14}%
-\contentsline {subsection}{\numberline {5.10.15}\sphinxstyleliteralintitle {\sphinxupquote {symmetry}}}{57}{subsection.5.10.15}%
-\contentsline {subsection}{\numberline {5.10.16}\sphinxstyleliteralintitle {\sphinxupquote {model}}}{58}{subsection.5.10.16}%
-\contentsline {section}{\numberline {5.11}\sphinxstyleliteralintitle {\sphinxupquote {\$d2edr2}}}{58}{section.5.11}%
-\contentsline {subsection}{\numberline {5.11.1}\sphinxstyleliteralintitle {\sphinxupquote {length}}}{58}{subsection.5.11.1}%
-\contentsline {subsection}{\numberline {5.11.2}\sphinxstyleliteralintitle {\sphinxupquote {displace}}}{58}{subsection.5.11.2}%
-\contentsline {subsection}{\numberline {5.11.3}\sphinxstyleliteralintitle {\sphinxupquote {steps}}}{59}{subsection.5.11.3}%
-\contentsline {section}{\numberline {5.12}\sphinxstyleliteralintitle {\sphinxupquote {\$thermo}}}{59}{section.5.12}%
-\contentsline {subsection}{\numberline {5.12.1}\sphinxstyleliteralintitle {\sphinxupquote {sigma}}}{59}{subsection.5.12.1}%
-\contentsline {subsection}{\numberline {5.12.2}\sphinxstyleliteralintitle {\sphinxupquote {temperature}}}{60}{subsection.5.12.2}%
-\contentsline {subsection}{\numberline {5.12.3}\sphinxstyleliteralintitle {\sphinxupquote {mass}}}{60}{subsection.5.12.3}%
-\contentsline {section}{\numberline {5.13}\sphinxstyleliteralintitle {\sphinxupquote {\$nmr}}}{60}{section.5.13}%
-\contentsline {subsection}{\numberline {5.13.1}\sphinxstyleliteralintitle {\sphinxupquote {standard}}}{60}{subsection.5.13.1}%
-\contentsline {subsection}{\numberline {5.13.2}\sphinxstyleliteralintitle {\sphinxupquote {points}}}{61}{subsection.5.13.2}%
-\contentsline {section}{\numberline {5.14}\sphinxstyleliteralintitle {\sphinxupquote {\$Energy}}}{61}{section.5.14}%
-\contentsline {subsection}{\numberline {5.14.1}\sphinxstyleliteralintitle {\sphinxupquote {E}}}{61}{subsection.5.14.1}%
-\contentsline {subsection}{\numberline {5.14.2}\sphinxstyleliteralintitle {\sphinxupquote {G}}}{62}{subsection.5.14.2}%
-\contentsline {subsection}{\numberline {5.14.3}\sphinxstyleliteralintitle {\sphinxupquote {H}}}{62}{subsection.5.14.3}%
-\contentsline {subsection}{\numberline {5.14.4}\sphinxstyleliteralintitle {\sphinxupquote {D}}}{62}{subsection.5.14.4}%
-\contentsline {subsection}{\numberline {5.14.5}\sphinxstyleliteralintitle {\sphinxupquote {Dx}}}{62}{subsection.5.14.5}%
-\contentsline {subsection}{\numberline {5.14.6}\sphinxstyleliteralintitle {\sphinxupquote {A}}}{62}{subsection.5.14.6}%
-\contentsline {subsection}{\numberline {5.14.7}\sphinxstyleliteralintitle {\sphinxupquote {Ax}}}{63}{subsection.5.14.7}%
-\contentsline {section}{\numberline {5.15}\sphinxstyleliteralintitle {\sphinxupquote {\$dynamic}}}{63}{section.5.15}%
-\contentsline {subsection}{\numberline {5.15.1}\sphinxstyleliteralintitle {\sphinxupquote {e}}}{63}{subsection.5.15.1}%
-\contentsline {subsection}{\numberline {5.15.2}\sphinxstyleliteralintitle {\sphinxupquote {dx}}}{63}{subsection.5.15.2}%
-\contentsline {subsection}{\numberline {5.15.3}\sphinxstyleliteralintitle {\sphinxupquote {n}}}{64}{subsection.5.15.3}%
-\contentsline {subsection}{\numberline {5.15.4}\sphinxstyleliteralintitle {\sphinxupquote {m}}}{64}{subsection.5.15.4}%
-\contentsline {subsection}{\numberline {5.15.5}\sphinxstyleliteralintitle {\sphinxupquote {i}}}{64}{subsection.5.15.5}%
-\contentsline {subsection}{\numberline {5.15.6}\sphinxstyleliteralintitle {\sphinxupquote {v1}}}{64}{subsection.5.15.6}%
-\contentsline {subsection}{\numberline {5.15.7}\sphinxstyleliteralintitle {\sphinxupquote {hb}}}{64}{subsection.5.15.7}%
-\contentsline {subsection}{\numberline {5.15.8}\sphinxstyleliteralintitle {\sphinxupquote {file}}}{64}{subsection.5.15.8}%
-\contentsline {section}{\numberline {5.16}\sphinxstyleliteralintitle {\sphinxupquote {\$uniq}}}{65}{section.5.16}%
-\contentsline {subsection}{\numberline {5.16.1}\sphinxstyleliteralintitle {\sphinxupquote {distance}}}{65}{subsection.5.16.1}%
-\contentsline {chapter}{\numberline {6}Solving common problems}{66}{chapter.6}%
-\contentsline {section}{\numberline {6.1}The input is not read, or is read wrongly}{66}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Output stops after \sphinxstyleliteralintitle {\sphinxupquote {molecule input: \textquotesingle {}\textquotesingle {}}}}{66}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}The molecule is wrong: odd formula, extra atoms}{67}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}\sphinxstyleliteralintitle {\sphinxupquote {task=scan}} runs an optimization, or nothing works on one machine}{67}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}The basis file is not found}{67}{subsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.1.5}The input or output file cannot be opened}{67}{subsection.6.1.5}%
-\contentsline {subsection}{\numberline {6.1.6}Output stops at \sphinxstyleliteralintitle {\sphinxupquote {0: opening file /tmp/...}} (Windows)}{68}{subsection.6.1.6}%
-\contentsline {subsection}{\numberline {6.1.7}\sphinxstyleliteralintitle {\sphinxupquote {\$scf}} settings are ignored or rejected}{68}{subsection.6.1.7}%
-\contentsline {section}{\numberline {6.2}SCF does not converge or diverges}{68}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Recognizing the problem}{68}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Check the input first}{69}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Restart from saved vectors}{69}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Switch the SCF procedure and tighten the grid}{70}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Divergence after the switch to the fine grid (open\sphinxhyphen {}shell transition\sphinxhyphen {}metal complex)}{70}{subsection.6.2.5}%
-\contentsline {subsection}{\numberline {6.2.6}Open\sphinxhyphen {}shell singlets and broken symmetry}{71}{subsection.6.2.6}%
-\contentsline {subsection}{\numberline {6.2.7}LUMO below the HOMO}{71}{subsection.6.2.7}%
-\contentsline {subsection}{\numberline {6.2.8}Heavy elements}{72}{subsection.6.2.8}%
-\contentsline {subsection}{\numberline {6.2.9}Cases without a known fix}{72}{subsection.6.2.9}%
-\contentsline {section}{\numberline {6.3}Geometry optimization problems}{72}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}The optimization does not converge within \sphinxstyleliteralintitle {\sphinxupquote {steps}}}{72}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Crash with \sphinxstyleliteralintitle {\sphinxupquote {process 0 got signal 6}} and \sphinxstyleliteralintitle {\sphinxupquote {too few}}}{73}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}The optimization “converges” in one step}{73}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}A symmetric structure stays symmetric}{73}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}A scan starts from a mangled geometry}{73}{subsection.6.3.5}%
-\contentsline {subsection}{\numberline {6.3.6}IRC gives only two points, or no curve}{73}{subsection.6.3.6}%
-\contentsline {subsection}{\numberline {6.3.7}IRC stops with \sphinxstyleliteralintitle {\sphinxupquote {Vicinity of a Stationary Point(?) \sphinxhyphen {}\sphinxhyphen {}\sphinxhyphen {} STOP.}}}{74}{subsection.6.3.7}%
-\contentsline {subsection}{\numberline {6.3.8}IRC ends near a minimum but not in it}{74}{subsection.6.3.8}%
-\contentsline {section}{\numberline {6.4}Wrong or suspicious results}{74}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Hybrid functional silently ignored}{74}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}NaN energy, or an optimization that stops after one step}{75}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}TDDFT oscillator strengths are all zero}{75}{subsection.6.4.3}%
-\contentsline {subsection}{\numberline {6.4.4}The dipole moment is zero}{75}{subsection.6.4.4}%
-\contentsline {subsection}{\numberline {6.4.5}Energies differ between Priroda versions}{75}{subsection.6.4.5}%
-\contentsline {subsection}{\numberline {6.4.6}The printed energy components do not add up to E}{75}{subsection.6.4.6}%
-\contentsline {subsection}{\numberline {6.4.7}Thermochemistry of single atoms}{75}{subsection.6.4.7}%
-\contentsline {subsection}{\numberline {6.4.8}Results depend on the number of processes}{75}{subsection.6.4.8}%
-\contentsline {section}{\numberline {6.5}Memory, disk and scratch errors}{76}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}\sphinxstyleliteralintitle {\sphinxupquote {need … bytes.}}}{76}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}\sphinxstyleliteralintitle {\sphinxupquote {malloc(...) failed}}}{76}{subsection.6.5.2}%
-\contentsline {subsection}{\numberline {6.5.3}\sphinxstyleliteralintitle {\sphinxupquote {out of disk space}}}{76}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}A small RI\sphinxhyphen {}MP2 job does not fit in memory}{76}{subsection.6.5.4}%
-\contentsline {subsection}{\numberline {6.5.5}Where scratch files go}{77}{subsection.6.5.5}%
-\contentsline {subsection}{\numberline {6.5.6}Slow runs: disk speed}{77}{subsection.6.5.6}%
-\contentsline {section}{\numberline {6.6}Parallel and MPI problems}{77}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}A parallel RI job hangs with no message}{77}{subsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.6.2}Little or no speed\sphinxhyphen {}up from more cores}{77}{subsection.6.6.2}%
-\contentsline {subsection}{\numberline {6.6.3}\sphinxstyleliteralintitle {\sphinxupquote {Environment is too large (max is 193)}}}{78}{subsection.6.6.3}%
-\contentsline {subsection}{\numberline {6.6.4}Starting a parallel run on Linux}{78}{subsection.6.6.4}%
-\contentsline {subsection}{\numberline {6.6.5}Windows}{78}{subsection.6.6.5}%
-\contentsline {chapter}{\numberline {7}Keywords in the program}{80}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Groups for everyday work}{80}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Groups of little\sphinxhyphen {}documented tasks}{81}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Task names}{81}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Theory names}{82}{section.7.4}%
-\contentsline {chapter}{\numberline {8}Sources}{83}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Test runs}{83}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Program files from the developer}{83}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Unofficial keyword lists}{83}{section.8.3}%
-\contentsline {section}{\numberline {8.4}User\sphinxhyphen {}written material}{84}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Published papers}{84}{section.8.5}%
-\contentsline {chapter}{Index}{85}{section*.4}%
+\contentsline {chapter}{\numberline {3}Getting started}{18}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Before you start}{18}{section.3.1}%
+\contentsline {section}{\numberline {3.2}A single\sphinxhyphen {}point energy}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}The input}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}What to look for in the output}{19}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Optimizing a geometry and confirming a minimum}{21}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Step 1: optimize}{21}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Step 2: check convergence}{21}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Step 3: take the final geometry}{22}{subsection.3.3.3}%
+\contentsline {subsubsection}{The official helper scripts \sphinxstyleliteralintitle {\sphinxupquote {ge}} and \sphinxstyleliteralintitle {\sphinxupquote {gm}}}{23}{subsubsection*.3}%
+\contentsline {subsection}{\numberline {3.3.4}Step 4: compute the Hessian}{23}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Step 5: check the frequencies}{23}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Step 6: if a frequency is imaginary, re\sphinxhyphen {}optimize}{24}{subsection.3.3.6}%
+\contentsline {subsection}{\numberline {3.3.7}Step 7: read the thermochemistry}{24}{subsection.3.3.7}%
+\contentsline {subsection}{\numberline {3.3.8}The one\sphinxhyphen {}run alternative: \sphinxstyleliteralintitle {\sphinxupquote {task=optimize+hessian}}}{25}{subsection.3.3.8}%
+\contentsline {section}{\numberline {3.4}Reading the output}{26}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Where things are}{26}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Charges and bond orders}{26}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Viewing results in Molden}{27}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Where next}{27}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Input syntax}{28}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Groups}{28}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Keywords}{29}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Case}{29}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Abbreviations}{29}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Values}{30}{section.4.3}%
+\contentsline {section}{\numberline {4.4}The \sphinxstyleliteralintitle {\sphinxupquote {\$molecule}} group}{30}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Several \sphinxstyleliteralintitle {\sphinxupquote {\$molecule}} blocks}{31}{subsection.4.4.1}%
+\contentsline {section}{\numberline {4.5}Text outside groups}{31}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Appending results of earlier runs}{32}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}\sphinxstyleliteralintitle {\sphinxupquote {\$Energy}} from \sphinxstyleliteralintitle {\sphinxupquote {eng\textgreater {}}} lines}{32}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}\sphinxstyleliteralintitle {\sphinxupquote {num\textgreater {}}} lines}{32}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Optimized geometry from \sphinxstyleliteralintitle {\sphinxupquote {MOL\textgreater {}}} lines}{33}{subsection.4.6.3}%
+\contentsline {section}{\numberline {4.7}Common mistakes}{33}{section.4.7}%
+\contentsline {chapter}{\numberline {5}Input reference}{35}{chapter.5}%
+\contentsline {section}{\numberline {5.1}\sphinxstyleliteralintitle {\sphinxupquote {\$system}}}{35}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}\sphinxstyleliteralintitle {\sphinxupquote {memory}}}{35}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}\sphinxstyleliteralintitle {\sphinxupquote {disk}}}{36}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}\sphinxstyleliteralintitle {\sphinxupquote {path}}}{36}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}\sphinxstyleliteralintitle {\sphinxupquote {\$control}}}{37}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}\sphinxstyleliteralintitle {\sphinxupquote {task}}}{37}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}\sphinxstyleliteralintitle {\sphinxupquote {theory}}}{39}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}\sphinxstyleliteralintitle {\sphinxupquote {state}}}{41}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}\sphinxstyleliteralintitle {\sphinxupquote {basis}}}{41}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}\sphinxstyleliteralintitle {\sphinxupquote {four}}}{41}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}\sphinxstyleliteralintitle {\sphinxupquote {nucleus}}}{42}{subsection.5.2.6}%
+\contentsline {subsection}{\numberline {5.2.7}\sphinxstyleliteralintitle {\sphinxupquote {print}}}{42}{subsection.5.2.7}%
+\contentsline {subsection}{\numberline {5.2.8}\sphinxstyleliteralintitle {\sphinxupquote {derivative}}}{43}{subsection.5.2.8}%
+\contentsline {subsection}{\numberline {5.2.9}\sphinxstyleliteralintitle {\sphinxupquote {save}}}{43}{subsection.5.2.9}%
+\contentsline {section}{\numberline {5.3}\sphinxstyleliteralintitle {\sphinxupquote {\$molecule}}}{44}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}\sphinxstyleliteralintitle {\sphinxupquote {charge}}}{44}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}\sphinxstyleliteralintitle {\sphinxupquote {mult}}}{44}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}\sphinxstyleliteralintitle {\sphinxupquote {mass}}}{45}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}\sphinxstyleliteralintitle {\sphinxupquote {set}}}{45}{subsection.5.3.4}%
+\contentsline {subsection}{\numberline {5.3.5}\sphinxstyleliteralintitle {\sphinxupquote {unit}}}{45}{subsection.5.3.5}%
+\contentsline {subsection}{\numberline {5.3.6}\sphinxstyleliteralintitle {\sphinxupquote {sym}}}{46}{subsection.5.3.6}%
+\contentsline {section}{\numberline {5.4}\sphinxstyleliteralintitle {\sphinxupquote {\$guess}}}{46}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}\sphinxstyleliteralintitle {\sphinxupquote {read}}}{46}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}\sphinxstyleliteralintitle {\sphinxupquote {na}}}{46}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}\sphinxstyleliteralintitle {\sphinxupquote {nb}}}{47}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}\sphinxstyleliteralintitle {\sphinxupquote {mix}}}{47}{subsection.5.4.4}%
+\contentsline {section}{\numberline {5.5}\sphinxstyleliteralintitle {\sphinxupquote {\$scf}}}{48}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}\sphinxstyleliteralintitle {\sphinxupquote {restrict}}}{48}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}\sphinxstyleliteralintitle {\sphinxupquote {convergence}}}{48}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}\sphinxstyleliteralintitle {\sphinxupquote {iterations}}}{49}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}\sphinxstyleliteralintitle {\sphinxupquote {procedure}}}{49}{subsection.5.5.4}%
+\contentsline {subsection}{\numberline {5.5.5}\sphinxstyleliteralintitle {\sphinxupquote {d1small}}}{50}{subsection.5.5.5}%
+\contentsline {subsection}{\numberline {5.5.6}\sphinxstyleliteralintitle {\sphinxupquote {core}}}{50}{subsection.5.5.6}%
+\contentsline {section}{\numberline {5.6}\sphinxstyleliteralintitle {\sphinxupquote {\$dft}}}{50}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}\sphinxstyleliteralintitle {\sphinxupquote {functional}}}{50}{subsection.5.6.1}%
+\contentsline {section}{\numberline {5.7}\sphinxstyleliteralintitle {\sphinxupquote {\$grid}}}{51}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}\sphinxstyleliteralintitle {\sphinxupquote {accuracy}}}{51}{subsection.5.7.1}%
+\contentsline {section}{\numberline {5.8}\sphinxstyleliteralintitle {\sphinxupquote {\$integral}}}{52}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}\sphinxstyleliteralintitle {\sphinxupquote {direct}}}{52}{subsection.5.8.1}%
+\contentsline {subsection}{\numberline {5.8.2}\sphinxstyleliteralintitle {\sphinxupquote {routine}}}{52}{subsection.5.8.2}%
+\contentsline {section}{\numberline {5.9}\sphinxstyleliteralintitle {\sphinxupquote {\$atoms}}}{53}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}\sphinxstyleliteralintitle {\sphinxupquote {core}}}{53}{subsection.5.9.1}%
+\contentsline {subsection}{\numberline {5.9.2}\sphinxstyleliteralintitle {\sphinxupquote {mcore}}}{53}{subsection.5.9.2}%
+\contentsline {section}{\numberline {5.10}\sphinxstyleliteralintitle {\sphinxupquote {\$optimize}}}{53}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}\sphinxstyleliteralintitle {\sphinxupquote {saddle}}}{54}{subsection.5.10.1}%
+\contentsline {subsection}{\numberline {5.10.2}\sphinxstyleliteralintitle {\sphinxupquote {tolerance}}}{54}{subsection.5.10.2}%
+\contentsline {subsection}{\numberline {5.10.3}\sphinxstyleliteralintitle {\sphinxupquote {trust}}}{54}{subsection.5.10.3}%
+\contentsline {subsection}{\numberline {5.10.4}\sphinxstyleliteralintitle {\sphinxupquote {follow}}}{55}{subsection.5.10.4}%
+\contentsline {subsection}{\numberline {5.10.5}\sphinxstyleliteralintitle {\sphinxupquote {steps}}}{55}{subsection.5.10.5}%
+\contentsline {subsection}{\numberline {5.10.6}\sphinxstyleliteralintitle {\sphinxupquote {cartesian}}}{55}{subsection.5.10.6}%
+\contentsline {subsection}{\numberline {5.10.7}\sphinxstyleliteralintitle {\sphinxupquote {back}}}{56}{subsection.5.10.7}%
+\contentsline {subsection}{\numberline {5.10.8}\sphinxstyleliteralintitle {\sphinxupquote {points}}}{56}{subsection.5.10.8}%
+\contentsline {subsection}{\numberline {5.10.9}\sphinxstyleliteralintitle {\sphinxupquote {radius}}}{56}{subsection.5.10.9}%
+\contentsline {subsection}{\numberline {5.10.10}\sphinxstyleliteralintitle {\sphinxupquote {coordinates}}}{57}{subsection.5.10.10}%
+\contentsline {subsection}{\numberline {5.10.11}\sphinxstyleliteralintitle {\sphinxupquote {fix}}}{57}{subsection.5.10.11}%
+\contentsline {subsection}{\numberline {5.10.12}\sphinxstyleliteralintitle {\sphinxupquote {value}}}{57}{subsection.5.10.12}%
+\contentsline {subsection}{\numberline {5.10.13}\sphinxstyleliteralintitle {\sphinxupquote {gradient}}}{58}{subsection.5.10.13}%
+\contentsline {subsection}{\numberline {5.10.14}\sphinxstyleliteralintitle {\sphinxupquote {print}}}{58}{subsection.5.10.14}%
+\contentsline {subsection}{\numberline {5.10.15}\sphinxstyleliteralintitle {\sphinxupquote {symmetry}}}{58}{subsection.5.10.15}%
+\contentsline {subsection}{\numberline {5.10.16}\sphinxstyleliteralintitle {\sphinxupquote {model}}}{59}{subsection.5.10.16}%
+\contentsline {section}{\numberline {5.11}\sphinxstyleliteralintitle {\sphinxupquote {\$d2edr2}}}{59}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}\sphinxstyleliteralintitle {\sphinxupquote {length}}}{59}{subsection.5.11.1}%
+\contentsline {subsection}{\numberline {5.11.2}\sphinxstyleliteralintitle {\sphinxupquote {displace}}}{59}{subsection.5.11.2}%
+\contentsline {subsection}{\numberline {5.11.3}\sphinxstyleliteralintitle {\sphinxupquote {steps}}}{60}{subsection.5.11.3}%
+\contentsline {section}{\numberline {5.12}\sphinxstyleliteralintitle {\sphinxupquote {\$thermo}}}{60}{section.5.12}%
+\contentsline {subsection}{\numberline {5.12.1}\sphinxstyleliteralintitle {\sphinxupquote {sigma}}}{60}{subsection.5.12.1}%
+\contentsline {subsection}{\numberline {5.12.2}\sphinxstyleliteralintitle {\sphinxupquote {temperature}}}{61}{subsection.5.12.2}%
+\contentsline {subsection}{\numberline {5.12.3}\sphinxstyleliteralintitle {\sphinxupquote {mass}}}{61}{subsection.5.12.3}%
+\contentsline {section}{\numberline {5.13}\sphinxstyleliteralintitle {\sphinxupquote {\$nmr}}}{61}{section.5.13}%
+\contentsline {subsection}{\numberline {5.13.1}\sphinxstyleliteralintitle {\sphinxupquote {standard}}}{61}{subsection.5.13.1}%
+\contentsline {subsection}{\numberline {5.13.2}\sphinxstyleliteralintitle {\sphinxupquote {points}}}{62}{subsection.5.13.2}%
+\contentsline {section}{\numberline {5.14}\sphinxstyleliteralintitle {\sphinxupquote {\$Energy}}}{62}{section.5.14}%
+\contentsline {subsection}{\numberline {5.14.1}\sphinxstyleliteralintitle {\sphinxupquote {E}}}{62}{subsection.5.14.1}%
+\contentsline {subsection}{\numberline {5.14.2}\sphinxstyleliteralintitle {\sphinxupquote {G}}}{63}{subsection.5.14.2}%
+\contentsline {subsection}{\numberline {5.14.3}\sphinxstyleliteralintitle {\sphinxupquote {H}}}{63}{subsection.5.14.3}%
+\contentsline {subsection}{\numberline {5.14.4}\sphinxstyleliteralintitle {\sphinxupquote {D}}}{63}{subsection.5.14.4}%
+\contentsline {subsection}{\numberline {5.14.5}\sphinxstyleliteralintitle {\sphinxupquote {Dx}}}{63}{subsection.5.14.5}%
+\contentsline {subsection}{\numberline {5.14.6}\sphinxstyleliteralintitle {\sphinxupquote {A}}}{63}{subsection.5.14.6}%
+\contentsline {subsection}{\numberline {5.14.7}\sphinxstyleliteralintitle {\sphinxupquote {Ax}}}{64}{subsection.5.14.7}%
+\contentsline {section}{\numberline {5.15}\sphinxstyleliteralintitle {\sphinxupquote {\$dynamic}}}{64}{section.5.15}%
+\contentsline {subsection}{\numberline {5.15.1}\sphinxstyleliteralintitle {\sphinxupquote {e}}}{64}{subsection.5.15.1}%
+\contentsline {subsection}{\numberline {5.15.2}\sphinxstyleliteralintitle {\sphinxupquote {dx}}}{64}{subsection.5.15.2}%
+\contentsline {subsection}{\numberline {5.15.3}\sphinxstyleliteralintitle {\sphinxupquote {n}}}{65}{subsection.5.15.3}%
+\contentsline {subsection}{\numberline {5.15.4}\sphinxstyleliteralintitle {\sphinxupquote {m}}}{65}{subsection.5.15.4}%
+\contentsline {subsection}{\numberline {5.15.5}\sphinxstyleliteralintitle {\sphinxupquote {i}}}{65}{subsection.5.15.5}%
+\contentsline {subsection}{\numberline {5.15.6}\sphinxstyleliteralintitle {\sphinxupquote {v1}}}{65}{subsection.5.15.6}%
+\contentsline {subsection}{\numberline {5.15.7}\sphinxstyleliteralintitle {\sphinxupquote {hb}}}{65}{subsection.5.15.7}%
+\contentsline {subsection}{\numberline {5.15.8}\sphinxstyleliteralintitle {\sphinxupquote {file}}}{65}{subsection.5.15.8}%
+\contentsline {section}{\numberline {5.16}\sphinxstyleliteralintitle {\sphinxupquote {\$uniq}}}{66}{section.5.16}%
+\contentsline {subsection}{\numberline {5.16.1}\sphinxstyleliteralintitle {\sphinxupquote {distance}}}{66}{subsection.5.16.1}%
+\contentsline {chapter}{\numberline {6}Solving common problems}{67}{chapter.6}%
+\contentsline {section}{\numberline {6.1}The input is not read, or is read wrongly}{67}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Output stops after \sphinxstyleliteralintitle {\sphinxupquote {molecule input: \textquotesingle {}\textquotesingle {}}}}{67}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}The molecule is wrong: odd formula, extra atoms}{68}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}\sphinxstyleliteralintitle {\sphinxupquote {task=scan}} runs an optimization, or nothing works on one machine}{68}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}The basis file is not found}{68}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}The input or output file cannot be opened}{68}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.1.6}Output stops at \sphinxstyleliteralintitle {\sphinxupquote {0: opening file /tmp/...}} (Windows)}{69}{subsection.6.1.6}%
+\contentsline {subsection}{\numberline {6.1.7}\sphinxstyleliteralintitle {\sphinxupquote {\$scf}} settings are ignored or rejected}{69}{subsection.6.1.7}%
+\contentsline {section}{\numberline {6.2}SCF does not converge or diverges}{69}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Recognizing the problem}{69}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Check the input first}{70}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Restart from saved vectors}{70}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Switch the SCF procedure and tighten the grid}{71}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Divergence after the switch to the fine grid (open\sphinxhyphen {}shell transition\sphinxhyphen {}metal complex)}{71}{subsection.6.2.5}%
+\contentsline {subsection}{\numberline {6.2.6}Open\sphinxhyphen {}shell singlets and broken symmetry}{72}{subsection.6.2.6}%
+\contentsline {subsection}{\numberline {6.2.7}LUMO below the HOMO}{72}{subsection.6.2.7}%
+\contentsline {subsection}{\numberline {6.2.8}Heavy elements}{73}{subsection.6.2.8}%
+\contentsline {subsection}{\numberline {6.2.9}Cases without a known fix}{73}{subsection.6.2.9}%
+\contentsline {section}{\numberline {6.3}Geometry optimization problems}{73}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}The optimization does not converge within \sphinxstyleliteralintitle {\sphinxupquote {steps}}}{73}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Crash with \sphinxstyleliteralintitle {\sphinxupquote {process 0 got signal 6}} and \sphinxstyleliteralintitle {\sphinxupquote {too few}}}{74}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}The optimization “converges” in one step}{74}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}A symmetric structure stays symmetric}{74}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}A scan starts from a mangled geometry}{74}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}IRC gives only two points, or no curve}{74}{subsection.6.3.6}%
+\contentsline {subsection}{\numberline {6.3.7}IRC stops with \sphinxstyleliteralintitle {\sphinxupquote {Vicinity of a Stationary Point(?) \sphinxhyphen {}\sphinxhyphen {}\sphinxhyphen {} STOP.}}}{75}{subsection.6.3.7}%
+\contentsline {subsection}{\numberline {6.3.8}IRC ends near a minimum but not in it}{75}{subsection.6.3.8}%
+\contentsline {section}{\numberline {6.4}Wrong or suspicious results}{75}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Hybrid functional silently ignored}{75}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}NaN energy, or an optimization that stops after one step}{76}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}TDDFT oscillator strengths are all zero}{76}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}The dipole moment is zero}{76}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}Energies differ between Priroda versions}{76}{subsection.6.4.5}%
+\contentsline {subsection}{\numberline {6.4.6}The printed energy components do not add up to E}{76}{subsection.6.4.6}%
+\contentsline {subsection}{\numberline {6.4.7}Thermochemistry of single atoms}{76}{subsection.6.4.7}%
+\contentsline {subsection}{\numberline {6.4.8}Results depend on the number of processes}{76}{subsection.6.4.8}%
+\contentsline {section}{\numberline {6.5}Memory, disk and scratch errors}{77}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}\sphinxstyleliteralintitle {\sphinxupquote {need … bytes.}}}{77}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}\sphinxstyleliteralintitle {\sphinxupquote {malloc(...) failed}}}{77}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}\sphinxstyleliteralintitle {\sphinxupquote {out of disk space}}}{77}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}A small RI\sphinxhyphen {}MP2 job does not fit in memory}{77}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.5}Where scratch files go}{78}{subsection.6.5.5}%
+\contentsline {subsection}{\numberline {6.5.6}Slow runs: disk speed}{78}{subsection.6.5.6}%
+\contentsline {section}{\numberline {6.6}Parallel and MPI problems}{78}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}A parallel RI job hangs with no message}{78}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Little or no speed\sphinxhyphen {}up from more cores}{78}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}\sphinxstyleliteralintitle {\sphinxupquote {Environment is too large (max is 193)}}}{79}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}Starting a parallel run on Linux}{79}{subsection.6.6.4}%
+\contentsline {subsection}{\numberline {6.6.5}Windows}{79}{subsection.6.6.5}%
+\contentsline {chapter}{\numberline {7}Keywords in the program}{81}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Groups for everyday work}{81}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Groups of little\sphinxhyphen {}documented tasks}{82}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Task names}{82}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Theory names}{83}{section.7.4}%
+\contentsline {chapter}{\numberline {8}Sources}{84}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Test runs}{84}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Program files from the developer}{84}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Unofficial keyword lists}{84}{section.8.3}%
+\contentsline {section}{\numberline {8.4}User\sphinxhyphen {}written material}{85}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Published papers}{85}{section.8.5}%
+\contentsline {chapter}{Index}{86}{section*.4}%

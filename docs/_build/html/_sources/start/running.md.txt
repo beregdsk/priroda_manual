@@ -227,7 +227,18 @@ as the DLLs.
 :::
 <!-- src: 08 w13 -->
 
-That test ran on Windows 10 with a Cygwin installation on `PATH`. `p_190306.exe` then printed
+To get the old files, install Cygwin from an archived snapshot instead of the current one. The Cygwin installation
+page (<https://cygwin.com/install.html>) lists archived snapshots for old Windows versions. The 2016 x86_64 snapshot
+there worked:
+
+```text
+setup-x86_64.exe --allow-unsupported-windows --no-verify --site http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2016/08/30/104235
+```
+
+Select the `openmpi` package, then copy the files listed in step 2 from the `bin` directory of that installation.
+<!-- src: 08 w13 (snapshot from the owner's report; options from cygwin.com/install.html) --> <!-- verify: exact snapshot not recorded -->
+
+That test ran on Windows 10 with the old Cygwin installed. `p_190306.exe` then printed
 `parallel on 2 processors` and gave the same energy as a serial run. With a backslash path to the executable
 (`C:\Priroda\p_190306.exe`), `orterun.exe` stopped with `orterun:exe-not-found`. Started directly, without
 `orterun.exe`, `p_190306.exe` runs serially.
@@ -246,7 +257,8 @@ Problems reported with this setup:
 
 :::{warning}
 A user reported in 2021 that this recipe no longer worked on Windows 10 with a current Cygwin, and no fix was posted.
-The likely cause is the newer OpenMPI DLLs described above. A PC without a Cygwin installation was not tested.
+The likely cause is the newer OpenMPI DLLs described above. The serial build was tested on a PC without Cygwin;
+the parallel run was tested only with the old Cygwin installed.
 :::
 <!-- src: 04 #472; 08 w13 (likely cause inferred) -->
 
