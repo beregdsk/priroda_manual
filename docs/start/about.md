@@ -57,7 +57,7 @@ Semiempirical model
 
 Parallel execution
 : MPI parallelism. Users report no gain from more than one node. Within one node the reports differ: one user saw
-  little gain beyond 6–8 cores, another a good speed-up up to 24 cores. See {doc}`running`.
+  little gain beyond 6–8 cores, another a good speed-up up to 24 cores. See {doc}`parallel`.
   <!-- src: 04 #343, #344, #462 -->
 
 Experienced users report that Priroda is markedly faster than general-purpose programs for routine GGA work. One
@@ -69,21 +69,22 @@ Experienced users report that Priroda is markedly faster than general-purpose pr
 The table shows which `task=` values are known to work with each `theory=` value. It is assembled from example inputs,
 user reports and the test runs on version 25, not from a statement by the developer.
 
-- ✓: shown to work in an example input, a user report or a test run.
-- –: not available, according to the sources.
+- [✓]{.yes}: shown to work in an example input, a user report or a test run.
+- [–]{.no}: not available, according to the sources.
 
+{.capability}
 | Task | `dft` | `ridft` | `tddft` | `rimp2` | `ccsd` | `ccsd4t` | `qm_n3` |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| `energy` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `gradient` | ✓ | ✓ | ✓ | ✓ | ✓ (1) | ✓ (1) | ✓ |
-| `hessian` | ✓ (2) | ✓ (3) | ✓ (3, 8) | ✓ (3) | ✓ (3) | ✓ (3) | ✓ (3) |
-| `optimize` | ✓ | ✓ | ✓ (4) | ✓ | ✓ (1) | ✓ (1) | ✓ |
-| TS (`saddle=1`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `irc` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `scan` | ✓ | ✓ | ✓ (9) | ✓ | ✓ | ✓ | ✓ |
-| `nmr` | ✓ (5) | – | – | – | – | – | – |
-| TDDFT excited states | – | – (6) | ✓ | – | – (7) | – (7) | – |
-| MD (`thermostat`) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `energy` | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} |
+| `gradient` | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} (1) | [✓]{.yes} (1) | [✓]{.yes} |
+| `hessian` | [✓]{.yes} (2) | [✓]{.yes} (3) | [✓]{.yes} (3, 8) | [✓]{.yes} (3) | [✓]{.yes} (3) | [✓]{.yes} (3) | [✓]{.yes} (3) |
+| `optimize` | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} (4) | [✓]{.yes} | [✓]{.yes} (1) | [✓]{.yes} (1) | [✓]{.yes} |
+| TS (`saddle=1`) | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} |
+| `irc` | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} |
+| `scan` | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} (9) | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} |
+| `nmr` | [✓]{.yes} (5) | [–]{.no} | [–]{.no} | [–]{.no} | [–]{.no} | [–]{.no} | [–]{.no} |
+| TDDFT excited states | [–]{.no} | [–]{.no} (6) | [✓]{.yes} | [–]{.no} | [–]{.no} (7) | [–]{.no} (7) | [–]{.no} |
+| MD (`thermostat`) | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} | [✓]{.yes} |
 
 <!-- src: energy: 06 §3, 05 §15, 04 #158, 01 §5.4, 08 t17 (ccsd, ccsd4t); gradient/optimize: 01 §5.1 (ridft), 06 §3 (riMP2 example), 04 #146 (CCSD), 04 #255 (CCSD(T)), 03 §11 (tddft), 01 §5.4 (qm_n3); hessian: 05 §10, 04 #255, #291, 08 t32a, t32b, t65a, t65b; TS/IRC/scan: 06 §3, 02 §4, 03 §9, 08 t25, t26, t37, t66-t68, t80a-c (ccsd4t); MD: 08 t69, t80d (ccsd4t), 01 §5.7; nmr: input.txt, 04 #96, 08 t34; tddft: 08 t33; qm_n3 energy: 08 t39 -->
 
@@ -106,7 +107,7 @@ Notes to the table:
 7. Excited states at the coupled-cluster level use a different `theory=` value, `ccsdsd`, for closed-shell (RHF)
    molecules, with the state chosen by `state=`. In a version 25 test on water it gave the first excited state 0.338
    hartree (9.2 eV) above the CCSD ground state, against 0.370 hartree for CIS in the same basis. For an open-shell
-   molecule it silently computed only the UHF energy. It is not in `input.txt`; only the v5 keyword page and the
+   molecule it silently computed only the UHF energy. It is not in `input.txt`; only the version 5 keyword page and the
    program itself list it. <!-- src: 06 §3; 03 §11; 09; 08 t78a-d -->
 8. The Hessian of the excited state given by `state=` (version 25, water, `state=1,3`): numerical, with two
    imaginary modes. The geometry was the ground-state test geometry, not optimized for the excited state, so these
@@ -140,7 +141,7 @@ Check this list before planning a project around Priroda.
 Limited use of point-group symmetry
 : Symmetry is used only to symmetrize a structure and keep it symmetric; no source reports a speed-up from it.
   Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
-  Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
+  Hessian is needed to show whether it is a minimum. Newer outputs (version 13 onwards) print a detected point group, and
   the official 2023–2025 example inputs use `sym=1` in `$molecule` and `$optimize`. These options are not described
   in any written source. In version 25 tests, `$molecule sym=1,0.01` symmetrized the structure and `$optimize sym=1`
   kept the symmetry during the optimization; each option alone does only half of this. `$optimize sym=1` also

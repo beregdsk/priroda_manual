@@ -40,6 +40,7 @@ Text after `$end`, such as the `Energy = …` lines that helper scripts append, 
 `molecule input: ''` near the top of every output is normal and not an error.
 
 (molecule.charge)=
+{.kw}
 ## `charge`
 
 ```{index} single: charge ($molecule)
@@ -53,6 +54,7 @@ Text after `$end`, such as the `Energy = …` lines that helper scripts append, 
 Molecular charge.
 
 (molecule.mult)=
+{.kw}
 ## `mult`
 
 ```{index} single: mult ($molecule)
@@ -66,6 +68,7 @@ Molecular charge.
 Spin multiplicity, 2S+1.
 
 (molecule.mass)=
+{.kw}
 ## `mass`
 
 ```{index} single: mass ($molecule)
@@ -87,6 +90,7 @@ both Cartesian and Z-matrix input. Not tested in version 25.
 ```
 
 (molecule.set)=
+{.kw}
 ## `set`
 
 ```{index} single: set ($molecule)
@@ -105,7 +109,7 @@ combine arbitrary orbital and auxiliary sets.
 
 **Example:**
 
-```text
+```priroda
 $molecule
  z-matrix
  set=L2
@@ -119,6 +123,7 @@ $end
 **See also:** {ref}`basis ($control) <control.basis>`
 
 (molecule.unit)=
+{.kw}
 ## `unit`
 
 ```{index} single: unit ($molecule)
@@ -139,6 +144,7 @@ Length unit of the coordinates. The default unit is Å. In version 25, water giv
 | `b` | Coordinates in bohr. |
 
 (molecule.sym)=
+{.kw}
 ## `sym`
 
 ```{index} single: sym ($molecule)

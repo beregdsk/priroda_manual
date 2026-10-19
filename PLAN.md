@@ -27,7 +27,7 @@ Every Part II chapter follows one template: *Overview → Minimal input → Key 
 **Part II: Typical calculations**
 5. Single points: DFT vs riDFT, **the hybrid trap** (hybrids silently lose exact exchange outside `theory=ridft`), functionals, grids.
 6. Geometry optimization: internal vs `cartesian=1`, `tol`, `trust`, `fix`/`value`, `opt_n1` for large systems, the restart loop (`gm` script).
-7. TS, IRC, scans: scan → hessian → `saddle=1` with the Hessian in the input → IRC both directions (`back=`) → re-optimize endpoints. Covers 1D/2D scans, the inverted dihedral sign, `transit`/`path`/`conical` (status to be verified).
+7. TS, IRC, scans (**written**: `docs/tasks/ts-irc-scan.md`, built as Part II): scan → hessian → `saddle=1` with the Hessian in the input → IRC both directions (`back=`) → re-optimize endpoints. Covers 1D/2D scans, the inverted dihedral sign, `transit`/`path`/`conical` (status to be verified).
 8. Hessians, frequencies, thermochemistry: analytic vs `$d2edr2` numerical, distributed numerical Hessian via `num>`, `$thermo`, reading H/G from the "total" row, the monoatomic RT, Raman via `task=dipole`, anharmonic.
 9. Correlated methods: RI-MP2, CCSD, CCSD(T); frozen core (`$atoms core/mcore`), `$integral direct=1`, memory/disk sizing, known MPI hang.
 10. Scalar-relativistic `four=1`: `nucleus=finite`, `basis4.in`/`b4s*.in`, point- vs finite-nucleus basis compatibility.
@@ -40,10 +40,10 @@ Every Part II chapter follows one template: *Overview → Minimal input → Key 
 **Part III: Methods and theory** (short, ORCA-style)
 16. Density fitting. 17. Functionals table. 18. Basis-set families: Λ/L (L0…L7777, m/a/+ variants, Lx, `_k`), 3z, SBK, b2/b2u/b4s, and orbital ↔ auxiliary pairing. 19. Adaptive grids. 20. Scalar-relativistic Hamiltonian. 21. Optimizer and coordinates. 22. QM model.
 
-**Part IV: Input reference** (currently built as Part II; one chapter per group, in input-writing order, generated from YAML)
+**Part IV: Input reference** (currently built as Part III; one chapter per group, in input-writing order, generated from YAML)
 `$system`, `$control`, `$molecule`, `$guess`, `$scf`, `$dft`, `$grid`, `$integral`, `$atoms`, `$optimize`, `$d2edr2`, `$thermo`, `$nmr`, `$dynamic`, `$uniq`, `$Energy`, basis-file format (`$kinetic`, `$auxiliary`, ECP, gc). Includes a master group table and an alphabetical index.
 
-**Part V: Troubleshooting** (currently built as Part III)
+**Part V: Troubleshooting** (currently built as Part IV)
 23. Solving common problems (symptom → cause → fix): SCF divergence, optimization failures, NaN/missing basis, memory/disk errors, MPI hangs.
 24. ~~Error-message index~~ Dropped (D6). Verbatim messages stay in the symptom entries of chapter 23.
 25. Version differences and obsolete keywords (the old `$SCF`/`$search`/`$force` names from `Dft_ansi.txt`, and how the defaults changed).

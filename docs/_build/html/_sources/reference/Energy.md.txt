@@ -28,6 +28,7 @@ eng>$end
 ```
 
 (Energy.E)=
+{.kw}
 ## `E`
 
 ```{index} single: E ($Energy)
@@ -42,6 +43,7 @@ eng>$end
 Total energy.
 
 (Energy.G)=
+{.kw}
 ## `G`
 
 ```{index} single: G ($Energy)
@@ -56,6 +58,7 @@ Total energy.
 Cartesian gradient (3N values).
 
 (Energy.H)=
+{.kw}
 ## `H`
 
 ```{index} single: H ($Energy)
@@ -75,6 +78,7 @@ numerical Hessian are all read by the combining run (`$d2edr2 steps=-1`).
 **See also:** {ref}`saddle ($optimize) <optimize.saddle>`, {ref}`steps ($d2edr2) <d2edr2.steps>`
 
 (Energy.D)=
+{.kw}
 ## `D`
 
 ```{index} single: D ($Energy)
@@ -89,6 +93,7 @@ numerical Hessian are all read by the combining run (`$d2edr2 steps=-1`).
 Dipole moment (3 values), written next to `E=`.
 
 (Energy.Dx)=
+{.kw}
 ## `Dx`
 
 ```{index} single: Dx ($Energy)
@@ -102,6 +107,7 @@ Dipole moment (3 values), written next to `E=`.
 Dipole derivatives with respect to nuclear coordinates (inferred from use: IR/Raman intensities).
 
 (Energy.A)=
+{.kw}
 ## `A`
 
 ```{index} single: A ($Energy)
@@ -119,6 +125,7 @@ second derivative of the energy with respect to the field). Written by an analyt
 **See also:** {ref}`Ax ($Energy) <Energy.Ax>`
 
 (Energy.Ax)=
+{.kw}
 ## `Ax`
 
 ```{index} single: Ax ($Energy)

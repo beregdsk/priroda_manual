@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex priroda-manual.idx"] 1792387770.41301 "priroda-manual.idx" "priroda-manual.ind" "priroda-manual" 1792387772.40249 0
-  "priroda-manual.idx" 1792387772.23671 6864 96de14121197c4780c7476e370987f89 "pdflatex"
+["makeindex priroda-manual.idx"] 1792388526.86053 "priroda-manual.idx" "priroda-manual.ind" "priroda-manual" 1792388531.13174 0
+  "priroda-manual.idx" 1792388530.95675 6864 f5c8645721d8a48d3dd74113e51d038f "pdflatex"
   (generated)
   "priroda-manual.ilg"
   "priroda-manual.ind"
   (rewritten before read)
-["pdflatex"] 1792387770.43219 "priroda-manual.tex" "priroda-manual.pdf" "priroda-manual" 1792387772.40266 0
+["pdflatex"] 1792388529.02105 "priroda-manual.tex" "priroda-manual.pdf" "priroda-manual" 1792388531.13206 0
   "/etc/texmf/web2c/texmf.cnf" 1792227075.36652 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcit1000.600pk" 1792321041.78549 11252 d2a847517ded3866172c8abb9f77b1c4 ""
   "/root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1792227130.17326 11524 0ce0bbbe69fb18b9a20078257fd524b0 ""
@@ -28,6 +28,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1246382020 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1246382020 940 228d6584342e91276bf566bcf9716b83 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm" 1136768653 1532 9162035f4e7176612125649e348e2195 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmitt10.tfm" 1136768653 768 2297ad2ac26f37e67f756dad27c77d68 ""
@@ -44,6 +45,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm" 1136768653 772 9a936b7f5e2ff0557fce0f62822f0bbf ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm" 1136768653 768 d7b9a2629a0c353102ad947dc9221d49 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb" 1248133631 36554 b67dc2cfa451409e100b3fcf5f506509 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb" 1248133631 26057 fad158094905eaf20f4ae3782af0c45c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
@@ -162,13 +164,15 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1792227079.44074 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1792227107 6800784 1189a1fb33d567df0c9f3f5cb74896ad ""
-  "priroda-manual.aux" 1792387772.22871 76924 b38b90e5572954753cb3dd6c363f4aed "pdflatex"
-  "priroda-manual.ind" 1792387770.42841 5945 285fe22f4e85da2d0541ab3e15ce3886 "makeindex priroda-manual.idx"
-  "priroda-manual.out" 1792387772.23271 32147 54358ed47e487d211d48889ad69b0cf4 "pdflatex"
-  "priroda-manual.tex" 1792387763.16143 406553 415f76717063a9ec8e6bccdcb9cad3d9 ""
-  "priroda-manual.toc" 1792387772.23671 23523 ff4cf1bb082fbbbb0241039598bb770c "pdflatex"
+  "graphviz-360b054e8705d7ca4f3db5597b4fa7c127a746d4.pdf" 1792388524.13328 13445 e7440bbe64d3ca5e59d38540d0ecee91 ""
+  "graphviz-d896494036dd41b7b24596ce158611154f56fdc4.pdf" 1792388524.22075 10426 38ce30866f842c66fc1eaa14e9f79dba ""
+  "priroda-manual.aux" 1792388530.95275 83693 8b37a9483113a4574d183f8a344a60f5 "pdflatex"
+  "priroda-manual.ind" 1792388526.8767 5945 993e2596d0511adec9c636eca99bd03b "makeindex priroda-manual.idx"
+  "priroda-manual.out" 1792388530.95675 36257 39a60151295fc57e27c3a28b4ed13927 "pdflatex"
+  "priroda-manual.tex" 1792388524.41458 456542 53d9f22839a064bf099e71bde7a2bdbd ""
+  "priroda-manual.toc" 1792388530.95675 25695 fa46e0fcd3235330ac5a50e299662bc8 "pdflatex"
   "sphinx.sty" 1792226905.50896 54203 ee7fe875437470f5328ee20661bb9f1d ""
-  "sphinxhighlight.sty" 1792387762.38671 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1792388523.68875 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxlatexadmonitions.sty" 1792226905.51031 19111 5e67a0f91439018bceb7cadf319345e6 ""
   "sphinxlatexcontainers.sty" 1792226905.51102 900 d61f923db071a7b54d3cee8a1e6935d3 ""
   "sphinxlatexgraphics.sty" 1792226905.51128 4918 c9266041d02bc615d54b890e96e3acd3 ""
@@ -183,7 +187,7 @@
   "sphinxlatexstyletext.sty" 1792226905.51451 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1792226905.51517 57643 7f1013c2fa11942370d867527bdda568 ""
   "sphinxmanual.cls" 1792226905.51551 4241 7b0d7a37df7b5715fb0dbd585c52ecdb ""
-  "sphinxmessages.sty" 1792387763.16588 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1792388524.41868 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1792226905.51582 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1792226905.51616 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1792226905.51655 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""

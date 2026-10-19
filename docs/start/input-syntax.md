@@ -7,7 +7,7 @@ groups. The individual keywords are in the {doc}`input reference <../reference/i
 
 A complete input for an NH3 optimization, adapted from the KNC wiki FAQ:
 
-```text
+```priroda
 $system mem=512 disk=-512 path=/tmp $end
 $control
  task=optimize
@@ -32,7 +32,7 @@ $end
 
 A group starts with `$` followed by the group name and ends with `$end`. It may sit on one line or span several:
 
-```text
+```priroda
 $scf conv=1e-7 $end
 
 $scf
@@ -94,11 +94,9 @@ Keywords belong to their group. The same name can mean different things in diffe
 {ref}`$optimize <optimize.steps>` is the maximum number of optimization cycles, while `steps` in
 {ref}`$d2edr2 <d2edr2.steps>` selects displacement steps of a numerical Hessian.
 
-:::{warning}
 A prefix must stay unambiguous within its group. In `$scf`, `co` matches both `convergence` and `core`; in version 25,
 `$scf co=1e-7 $end` stopped with `unknown name e-7`, a message that does not point to the cause. In inputs you keep
 or share, prefer the full keyword names; they are also easier to search for.
-:::
 <!-- src: 09 ($scf names); 08 (review check: co=1e-7); input.txt -->
 
 Do not give the same keyword twice in one group, even in different spellings. In version 6, an `$optimize` group with
@@ -169,7 +167,7 @@ Quoted strings
 
 The first items may share the opening line:
 
-```text
+```priroda
 $molecule charge=0 mult=1 cartesian
  set=L1
   8    0.000000    0.000000    0.117300
@@ -214,7 +212,7 @@ the same purpose, and the official example inputs use it to switch input off:
 - **Keep notes after `$end`.** Helper scripts append result lines such as `Energy = …` after the `$molecule` group,
   where they do no harm.
 
-```text
+```priroda
 integral dir=1 $end
 $dynamic
  e=0.001

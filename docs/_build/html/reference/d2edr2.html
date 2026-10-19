@@ -9,7 +9,9 @@
         <title>$d2edr2 - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -193,11 +207,16 @@
   <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
 </ul>
@@ -270,7 +289,7 @@
 <span id="group-d2edr2"></span><h1><code class="docutils literal notranslate"><span class="pre">$d2edr2</span></code><a class="headerlink" href="#d2edr2" title="Link to this heading">¶</a></h1>
 <p id="index-0">Numerical Hessian by finite differences of the gradient.</p>
 <p><strong>Relevant when:</strong> <code class="docutils literal notranslate"><span class="pre">numerical</span> <span class="pre">Hessian:</span> <span class="pre">task</span> <span class="pre">=</span> <span class="pre">hessian</span> <span class="pre">with</span> <span class="pre">theory</span> <span class="pre">=</span> <span class="pre">ridft</span> <span class="pre">|</span> <span class="pre">rimp2</span> <span class="pre">|</span> <span class="pre">tddft</span> <span class="pre">|</span> <span class="pre">qm_n3,</span> <span class="pre">or</span> <span class="pre">$control</span> <span class="pre">derivative</span> <span class="pre">=</span> <span class="pre">numeric</span> <span class="pre">(an</span> <span class="pre">analytic</span> <span class="pre">dft</span> <span class="pre">Hessian</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">displacement</span> <span class="pre">steps)</span></code></p>
-<section id="length">
+<section class="kw" id="length">
 <span id="d2edr2-length"></span><h2><code class="docutils literal notranslate"><span class="pre">length</span></code><a class="headerlink" href="#length" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.001</span></code><br />
@@ -280,7 +299,7 @@
 <p>Step length for numerical differentiation of the potential-energy surface.</p>
 <p><strong>About the default:</strong> version 25 prints <code class="docutils literal notranslate"><span class="pre">Step</span> <span class="pre">0.00100000</span> <span class="pre">au</span> <span class="pre">FORWARD</span>&#160; <span class="pre">for</span> <span class="pre">coordinate</span>&#160;&#160; <span class="pre">1:</span></code> for each displacement.</p>
 </section>
-<section id="displace">
+<section class="kw" id="displace">
 <span id="d2edr2-displace"></span><h2><code class="docutils literal notranslate"><span class="pre">displace</span></code><a class="headerlink" href="#displace" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">2</span></code><br />
@@ -310,7 +329,7 @@
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="scf.html#scf-convergence"><span class="std std-ref">convergence ($scf)</span></a></p>
 </section>
-<section id="steps">
+<section class="kw" id="steps">
 <span id="d2edr2-steps"></span><h2><code class="docutils literal notranslate"><span class="pre">steps</span></code><a class="headerlink" href="#steps" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0,-1</span></code><br />
@@ -330,15 +349,15 @@ SCF. Each part writes one numbered group per displacement (<code class="docutils
 the example uses <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-h</span></code> instead.</p>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># 12-atom molecule, four inputs run in parallel on different machines:
-$d2edr2 disp=1 steps= 0, 9 $end    # mol.in1
-$d2edr2 disp=1 steps=10,18 $end    # mol.in2
-$d2edr2 disp=1 steps=19,27 $end    # mol.in3
-$d2edr2 disp=1 steps=28,36 $end    # mol.in4
-# collect the partial results into one input:
-grep -h "^num&gt;" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num&gt;//' &gt;&gt; mol.in
-# in mol.in, replace the $d2edr2 line with the one below and run once more to process them:
-$d2edr2 disp=1 steps=-1 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="c"># 12-atom molecule, four inputs run in parallel on different machines:</span>
+<span class="kn">$d2edr2</span><span class="w"> </span><span class="na">disp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="na">steps</span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="o">,</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="kn">$end</span><span class="c">    # mol.in1</span>
+<span class="kn">$d2edr2</span><span class="w"> </span><span class="na">disp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="na">steps</span><span class="o">=</span><span class="m">10</span><span class="o">,</span><span class="m">18</span><span class="w"> </span><span class="kn">$end</span><span class="c">    # mol.in2</span>
+<span class="kn">$d2edr2</span><span class="w"> </span><span class="na">disp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="na">steps</span><span class="o">=</span><span class="m">19</span><span class="o">,</span><span class="m">27</span><span class="w"> </span><span class="kn">$end</span><span class="c">    # mol.in3</span>
+<span class="kn">$d2edr2</span><span class="w"> </span><span class="na">disp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="na">steps</span><span class="o">=</span><span class="m">28</span><span class="o">,</span><span class="m">36</span><span class="w"> </span><span class="kn">$end</span><span class="c">    # mol.in4</span>
+<span class="c"># collect the partial results into one input:</span>
+<span class="c">grep -h "^num&gt;" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num&gt;//' &gt;&gt; mol.in</span>
+<span class="c"># in mol.in, replace the </span><span class="kn">$d2edr2</span><span class="w"> </span><span class="no">line</span><span class="w"> </span><span class="no">with</span><span class="w"> </span><span class="no">the</span><span class="w"> </span><span class="no">one</span><span class="w"> </span><span class="no">below</span><span class="w"> </span><span class="no">and</span><span class="w"> </span><span class="no">run</span><span class="w"> </span><span class="no">once</span><span class="w"> </span><span class="no">more</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">process</span><span class="w"> </span><span class="no">them:</span>
+$<span class="no">d2edr2</span><span class="w"> </span><span class="na">disp</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="na">steps</span><span class="o">=</span><span class="m">-1</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="Energy.html#energy-e"><span class="std std-ref">E ($Energy)</span></a></p>

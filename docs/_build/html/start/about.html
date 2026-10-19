@@ -3,13 +3,15 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Installing and running" href="running.html"><link rel="prev" title="Priroda Unofficial Manual" href="../index.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Getting started" href="getting-started.html"><link rel="prev" title="Priroda Unofficial Manual" href="../index.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
         <title>About Priroda - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -193,11 +207,16 @@
   <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">Installing and running</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
 </ul>
@@ -315,7 +334,7 @@ for Molden.</p>
 <!-- src: 01 §3.1, §5.9; 04 #480 -->
 </dd>
 <dt>Parallel execution</dt><dd><p>MPI parallelism. Users report no gain from more than one node. Within one node the reports differ: one user saw
-little gain beyond 6–8 cores, another a good speed-up up to 24 cores. See <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a>.</p>
+little gain beyond 6–8 cores, another a good speed-up up to 24 cores. See <a class="reference internal" href="parallel.html"><span class="doc">Parallel and cluster runs</span></a>.</p>
 <!-- src: 04 #343, #344, #462 -->
 </dd>
 </dl>
@@ -328,11 +347,11 @@ little gain beyond 6–8 cores, another a good speed-up up to 24 cores. See <a c
 <p>The table shows which <code class="docutils literal notranslate"><span class="pre">task=</span></code> values are known to work with each <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value. It is assembled from example inputs,
 user reports and the test runs on version 25, not from a statement by the developer.</p>
 <ul class="simple">
-<li><p>✓: shown to work in an example input, a user report or a test run.</p></li>
-<li><p>–: not available, according to the sources.</p></li>
+<li><p><span class="yes">✓</span>: shown to work in an example input, a user report or a test run.</p></li>
+<li><p><span class="no">–</span>: not available, according to the sources.</p></li>
 </ul>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
+<div class="table-wrapper colwidths-auto capability docutils container">
+<table class="capability docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Task</p></th>
 <th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">dft</span></code></p></th>
@@ -346,94 +365,94 @@ user reports and the test runs on version 25, not from a statement by the develo
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">energy</span></code></p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gradient</span></code></p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓ (1)</p></td>
-<td class="text-center"><p>✓ (1)</p></td>
-<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span> (1)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (1)</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hessian</span></code></p></td>
-<td class="text-center"><p>✓ (2)</p></td>
-<td class="text-center"><p>✓ (3)</p></td>
-<td class="text-center"><p>✓ (3, 8)</p></td>
-<td class="text-center"><p>✓ (3)</p></td>
-<td class="text-center"><p>✓ (3)</p></td>
-<td class="text-center"><p>✓ (3)</p></td>
-<td class="text-center"><p>✓ (3)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (2)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (3)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (3, 8)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (3)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (3)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (3)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (3)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">optimize</span></code></p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓ (4)</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓ (1)</p></td>
-<td class="text-center"><p>✓ (1)</p></td>
-<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span> (4)</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span> (1)</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (1)</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
 </tr>
 <tr class="row-even"><td><p>TS (<code class="docutils literal notranslate"><span class="pre">saddle=1</span></code>)</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irc</span></code></p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scan</span></code></p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓ (9)</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span> (9)</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nmr</span></code></p></td>
-<td class="text-center"><p>✓ (5)</p></td>
-<td class="text-center"><p>–</p></td>
-<td class="text-center"><p>–</p></td>
-<td class="text-center"><p>–</p></td>
-<td class="text-center"><p>–</p></td>
-<td class="text-center"><p>–</p></td>
-<td class="text-center"><p>–</p></td>
+<td class="text-center"><p><span class="yes">✓</span> (5)</p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
 </tr>
 <tr class="row-even"><td><p>TDDFT excited states</p></td>
-<td class="text-center"><p>–</p></td>
-<td class="text-center"><p>– (6)</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>–</p></td>
-<td class="text-center"><p>– (7)</p></td>
-<td class="text-center"><p>– (7)</p></td>
-<td class="text-center"><p>–</p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
+<td class="text-center"><p><span class="no">–</span> (6)</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
+<td class="text-center"><p><span class="no">–</span> (7)</p></td>
+<td class="text-center"><p><span class="no">–</span> (7)</p></td>
+<td class="text-center"><p><span class="no">–</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>MD (<code class="docutils literal notranslate"><span class="pre">thermostat</span></code>)</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
-<td class="text-center"><p>✓</p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
+<td class="text-center"><p><span class="yes">✓</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -458,7 +477,7 @@ energy. Relativistic NMR is not implemented (Laikov, relayed by a user), and use
 <li><p>Excited states at the coupled-cluster level use a different <code class="docutils literal notranslate"><span class="pre">theory=</span></code> value, <code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code>, for closed-shell (RHF)
 molecules, with the state chosen by <code class="docutils literal notranslate"><span class="pre">state=</span></code>. In a version 25 test on water it gave the first excited state 0.338
 hartree (9.2 eV) above the CCSD ground state, against 0.370 hartree for CIS in the same basis. For an open-shell
-molecule it silently computed only the UHF energy. It is not in <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>; only the v5 keyword page and the
+molecule it silently computed only the UHF energy. It is not in <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>; only the version 5 keyword page and the
 program itself list it. <!-- src: 06 §3; 03 §11; 09; 08 t78a-d --></p></li>
 <li><p>The Hessian of the excited state given by <code class="docutils literal notranslate"><span class="pre">state=</span></code> (version 25, water, <code class="docutils literal notranslate"><span class="pre">state=1,3</span></code>): numerical, with two
 imaginary modes. The geometry was the ground-state test geometry, not optimized for the excited state, so these
@@ -490,7 +509,7 @@ message or silently lose their exact exchange; see <a class="reference internal"
 <dl class="simple myst">
 <dt>Limited use of point-group symmetry</dt><dd><p>Symmetry is used only to symmetrize a structure and keep it symmetric; no source reports a speed-up from it.
 Older versions always run in C1. A symmetric starting structure stays symmetric during optimization, so a
-Hessian is needed to show whether it is a minimum. Newer outputs (v13 onwards) print a detected point group, and
+Hessian is needed to show whether it is a minimum. Newer outputs (version 13 onwards) print a detected point group, and
 the official 2023–2025 example inputs use <code class="docutils literal notranslate"><span class="pre">sym=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> and <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. These options are not described
 in any written source. In version 25 tests, <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code> symmetrized the structure and <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code>
 kept the symmetry during the optimization; each option alone does only half of this. <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">sym=1</span></code> also
@@ -675,12 +694,12 @@ version.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="running.html">
+          <a class="next-page" href="getting-started.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Installing and running</div>
+                <div class="title">Getting started</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.17)  19 OCT 2026 05:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.17)  19 OCT 2026 05:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -741,24 +741,24 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 (./priroda-manual.aux)
 \openout1 = `priroda-manual.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -818,25 +818,25 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 82.
+Package hyperref Info: Link coloring ON on input line 84.
 (./priroda-manual.out) (./priroda-manual.out)
 \@outlinefile=\write5
 \openout5 = `priroda-manual.out'.
 
-Package hyperref Info: Option `pageanchor' set `false' on input line 90.
+Package hyperref Info: Option `pageanchor' set `false' on input line 92.
 <<ot1.cmap>>
 
 LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
-(Font)              using `OT1/cmss/bx/n' instead on input line 90.
+(Font)              using `OT1/cmss/bx/n' instead on input line 92.
 
 <<oml.cmap>><<oms.cmap>><<omx.cmap>>
-LaTeX Font Info:    Trying to load font information for U+msa on input line 90.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 92.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 90.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 92.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -846,13 +846,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./priroda-manual.toc<<ot1
 tt.cmap>>
 LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 
-17.
-LaTeX Font Info:    No file OMScmtt.fd. on input line 17.
+35.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 35.
 
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 17.
+(Font)              for symbol `textbackslash' on input line 35.
 
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
 1.
@@ -868,11 +868,13 @@ File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 
  [2] [1
 
+] [2
+
 ]
 Chapter 1.
-[2
+[3
 
-] [3] [4]
+] [4] [5]
 LaTeX Font Info:    Trying to load font information for OML+cmtt on input line 
 1.
 LaTeX Font Info:    No file OMLcmtt.fd. on input line 1.
@@ -883,384 +885,449 @@ LaTeX Font Warning: Font shape `OML/cmtt/m/n' undefined
 (Font)              for symbol `textless' on input line 1.
 
 
-Overfull \hbox (2.58331pt too wide) in paragraph at lines 864--864
+Overfull \hbox (2.58331pt too wide) in paragraph at lines 893--893
 []\OT1/cmss/m/n/10 Ver-
  []
 
 
-Overfull \hbox (1.38885pt too wide) in paragraph at lines 864--864
+Overfull \hbox (1.38885pt too wide) in paragraph at lines 893--893
 \OT1/cmss/m/n/10 sion| 
  []
 
 
-Underfull \hbox (badness 7256) in paragraph at lines 864--864
+Underfull \hbox (badness 7256) in paragraph at lines 893--893
 []\OT1/cmss/m/n/10 Build dates
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 []\OT1/cmr/m/n/10 2002.01.14
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 []\OT1/cmr/m/n/10 2004.09.14
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 []\OT1/cmr/m/n/10 | (fo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 \OT1/cmr/m/n/10 rum posts
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 []\OT1/cmr/m/n/10 2013.01.10,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 \OT1/cmr/m/n/10 2013.01.21,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 []\OT1/cmr/m/n/10 16,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 []\OT1/cmr/m/n/10 | (fo-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 864--864
+Underfull \hbox (badness 10000) in paragraph at lines 893--893
 \OT1/cmr/m/n/10 rum posts
  []
 
-[5] [6]
+[6] [7]
 Chapter 2.
-[7
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2023-06-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2023-06-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2021-11-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2025-02-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2025-04-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmtt/m/n/10 p[]mvs1p1\OT1/cmr/m/n/10 , \OT1/cmtt/m/n/10 p[]mvs10p\OT1/cm
-r/m/n/10 ,
- []
-
-
-Overfull \hbox (7.24219pt too wide) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2019{2023| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2015-09-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2012-09-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1153--1153
-[]\OT1/cmr/m/n/10 2025-04-
- []
-
-[8] [9]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1373.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1057.
 
- [10]
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1506.
+[8
 
+] [9] [10]
 
+pdfTeX warning: pdflatex (file ./graphviz-360b054e8705d7ca4f3db5597b4fa7c127a74
+6d4.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> all
+owed
+<graphviz-360b054e8705d7ca4f3db5597b4fa7c127a746d4.pdf, id=1163, 1064.97874pt x
+ 217.81375pt>
+File: graphviz-360b054e8705d7ca4f3db5597b4fa7c127a746d4.pdf Graphic file (type 
+pdf)
+<use graphviz-360b054e8705d7ca4f3db5597b4fa7c127a746d4.pdf>
+Package pdftex.def Info: graphviz-360b054e8705d7ca4f3db5597b4fa7c127a746d4.pdf 
+ used on input line 1260.
+(pdftex.def)             Requested size: 469.74586pt x 96.07431pt.
+[11 <./graphviz-360b054e8705d7ca4f3db5597b4fa7c127a746d4.pdf>]
+Overfull \vbox (10.28374pt too high) detected at line 1391
+ []
+
+[12]
 
 LaTeX Font Warning: Font shape `OMS/cmtt/bx/n' undefined
 (Font)              using `OMS/cmtt/m/n' instead
-(Font)              for symbol `textbackslash' on input line 1506.
+(Font)              for symbol `textbackslash' on input line 1394.
+
+[13] [14]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1621.
+
+ [15]
+Underfull \hbox (badness 6910) in paragraph at lines 1755--1755
+[]\OT1/cmr/m/n/10 the sum-mary box (\OT1/cmtt/m/n/10 Number of atoms\OT1/cmr/m/
+n/10 ,
+ []
+
+[16] [17]
+Chapter 3.
+[18
+
+] [19]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2146.
+
 
 
 LaTeX Font Warning: Font shape `TS1/cmtt/bx/n' undefined
 (Font)              using `TS1/cmtt/m/n' instead
 (Font)              for symbol `textdollar' on input line 1.
 
-[11] [12] [13] [14] [15] [16] [17]
-Chapter 3.
-[18
-
-] [19] [20] [21] [22] [23] [24]
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2639.
-
- [25]
-Underfull \hbox (badness 6910) in paragraph at lines 2773--2773
-[]\OT1/cmr/m/n/10 the sum-mary box (\OT1/cmtt/m/n/10 Number of atoms\OT1/cmr/m/
-n/10 ,
- []
-
-[26] [27]
-Chapter 4.
-[28
-
-] [29] [30] [31]
+[20] [21]
 
 LaTeX Font Warning: Font shape `OML/cmtt/bx/n' undefined
 (Font)              using `OML/cmm/m/it' instead
 (Font)              for symbol `textgreater' on input line 1.
 
-[32] [33]
+[22] [23]
+Chapter 4.
+[24
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2023-06-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2023-06-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2021-11-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2025-02-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2025-04-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmtt/m/n/10 p[]mvs1p1\OT1/cmr/m/n/10 , \OT1/cmtt/m/n/10 p[]mvs10p\OT1/cm
+r/m/n/10 ,
+ []
+
+
+Overfull \hbox (7.24219pt too wide) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2019{2023| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2015-09-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2012-09-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2634--2634
+[]\OT1/cmr/m/n/10 2025-04-
+ []
+
+[25] [26] [27] [28] [29]
 Chapter 5.
-[34
+[30
+
+] [31] [32] [33] [34] [35
+
+]
+Chapter 6.
+
+
+pdfTeX warning: pdflatex (file ./graphviz-d896494036dd41b7b24596ce158611154f56f
+dc4.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> all
+owed
+<graphviz-d896494036dd41b7b24596ce158611154f56fdc4.pdf, id=1396, 894.34125pt x 
+174.6525pt>
+File: graphviz-d896494036dd41b7b24596ce158611154f56fdc4.pdf Graphic file (type 
+pdf)
+<use graphviz-d896494036dd41b7b24596ce158611154f56fdc4.pdf>
+Package pdftex.def Info: graphviz-d896494036dd41b7b24596ce158611154f56fdc4.pdf 
+ used on input line 3561.
+(pdftex.def)             Requested size: 469.76817pt x 91.73657pt.
+[36
+
+ <./graphviz-d896494036dd41b7b24596ce158611154f56fdc4.pdf>] [37] [38]
+[39] [40] [41]
+Overfull \hbox (1.03662pt too wide) in paragraph at lines 4109--4109
+[]\OT1/cmss/m/n/10 Task| 
+ []
+
+
+Overfull \hbox (13.0363pt too wide) in paragraph at lines 4109--4109
+[]\OT1/cmtt/m/n/10 saddle| 
+ []
+
+
+Overfull \hbox (18.28625pt too wide) in paragraph at lines 4109--4109
+[]\OT1/cmtt/m/n/10 transit| 
+ []
+
+
+Overfull \hbox (2.53639pt too wide) in paragraph at lines 4109--4109
+[]\OT1/cmtt/m/n/10 path| 
+ []
+
+[42] [43] [44] [45
+
+]
+Chapter 7.
+[46
 
 ]
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/it' undefined
 (Font)              using `OMS/cmtt/m/n' instead
-(Font)              for symbol `textbackslash' on input line 3659.
+(Font)              for symbol `textbackslash' on input line 4419.
 
-[35]
-Underfull \hbox (badness 5302) in paragraph at lines 3885--3885
+[47]
+Underfull \hbox (badness 5302) in paragraph at lines 4645--4645
 []|\OT1/cmr/m/n/10 Op-ti-mizer for very large sys-tems (used for 8060 atoms wit
 h
  []
 
 
-Underfull \hbox (badness 5302) in paragraph at lines 3885--3885
+Underfull \hbox (badness 5302) in paragraph at lines 4645--4645
 []|\OT1/cmr/m/n/10 Op-ti-mizer for very large sys-tems (used for 8060 atoms wit
 h
  []
 
-[36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47] [48] [49] [50]
-[51] [52] [53] [54] [55] [56] [57]
-Underfull \hbox (badness 5954) in paragraph at lines 6034--6036
+[48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58] [59] [60] [61] [62]
+[63] [64] [65] [66] [67] [68] [69]
+Underfull \hbox (badness 5954) in paragraph at lines 6794--6796
 []\OT1/cmr/bx/n/10 Rel-e-vant when: \OT1/cmtt/m/n/10 numerical Hessian: task = 
 hessian with theory = ridft | rimp2 | tddft
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6034--6036
+Underfull \hbox (badness 10000) in paragraph at lines 6794--6796
 \OT1/cmtt/m/n/10 | qm[]n3, or \TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 control deriv
 ative = numeric (an analytic dft Hessian has no displacement
  []
 
-[58] [59] [60] [61] [62] [63] [64] [65]
-Chapter 6.
-[66
+[70] [71] [72] [73] [74] [75] [76] [77] [78
 
-] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78]
-Chapter 7.
+]
+Chapter 8.
+[79
 
-Overfull \hbox (8.73692pt too wide) in paragraph at lines 7929--7929
+] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90] [91]
+Appendix A.
+
+Overfull \hbox (8.73692pt too wide) in paragraph at lines 8687--8687
 []\OT1/cmss/m/n/10 Group| 
  []
 
 
-Overfull \hbox (5.04105pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (5.04105pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 sys-
  []
 
 
-Overfull \hbox (6.82991pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (6.82991pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 con-
  []
 
 
-Overfull \hbox (2.30498pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (2.30498pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 scf[][]| 
  []
 
 
-Overfull \hbox (0.87859pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (0.87859pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 dft[][]| 
  []
 
 
-Overfull \hbox (6.45772pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (6.45772pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 grid[][]| 
  []
 
 
-Overfull \hbox (0.69664pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (0.69664pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 in-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7929--7929
+Underfull \hbox (badness 10000) in paragraph at lines 8687--8687
 \OT1/cmr/m/it/10 te-
  []
 
 
-Overfull \hbox (15.06183pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (15.06183pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 atoms[][]| 
  []
 
 
-Overfull \hbox (11.99516pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (11.99516pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 guess[][]| 
  []
 
 
-Overfull \hbox (2.22997pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (2.22997pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 op-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7929--7929
+Underfull \hbox (badness 10000) in paragraph at lines 8687--8687
 \OT1/cmr/m/it/10 ti-
  []
 
 
-Overfull \hbox (4.00479pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (4.00479pt too wide) in paragraph at lines 8687--8687
 \OT1/cmr/m/it/10 mize[][]| 
  []
 
 
-Overfull \hbox (18.53542pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (18.53542pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 d2edr2[][]| 
  []
 
 
-Overfull \hbox (19.59996pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (19.59996pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 thermo[][]| 
  []
 
 
-Overfull \hbox (7.52298pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (7.52298pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 nmr[][]| 
  []
 
 
-Overfull \hbox (4.41328pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (4.41328pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 En-
  []
 
 
-Overfull \hbox (1.96585pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (1.96585pt too wide) in paragraph at lines 8687--8687
 \OT1/cmr/m/it/10 ergy[][]| 
  []
 
 
-Overfull \hbox (7.97021pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (7.97021pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 uniq[][]| 
  []
 
 
-Overfull \hbox (1.9744pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (1.9744pt too wide) in paragraph at lines 8687--8687
 [][][]\TS1/cmr/m/it/10 $\OT1/cmr/m/it/10 dy-
  []
 
 
-Overfull \hbox (10.46309pt too wide) in paragraph at lines 7929--7929
+Overfull \hbox (10.46309pt too wide) in paragraph at lines 8687--8687
 \OT1/cmr/m/it/10 namic[][]| 
  []
 
-[79
+[92
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\OT1/cmr/m/n/10 electrostatic-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 optimize
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 \OT1/cmr/m/n/10 (sec-ond
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 dynamic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 \OT1/cmr/m/n/10 (other read-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\OT1/cmtt/m/n/10 task=dynamic\OT1/cmr/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 \OT1/cmtt/m/n/10 dynamicn2\OT1/cmr/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 orient\OT1/cmr/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 anchor\OT1/cmr/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 fmatrix\OT1/cmr/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\OT1/cmr/m/n/10 start-ing or-bitals
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 scf \OT1/cmr/m/n/10 (QM
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8166--8166
+Underfull \hbox (badness 10000) in paragraph at lines 8924--8924
 []\TS1/cmtt/bx/n/10 $\OT1/cmtt/m/n/10 integral
  []
 
-[80] [81]
-Chapter 8.
-[82
+[93] [94]
+Appendix B.
+[95
 
-] (./priroda-manual.ind [83] [84
+] (./priroda-manual.ind [96] [97
 
 
-] [85
+] [98
 
 ]) (./priroda-manual.aux)
  ***********
@@ -1272,16 +1339,16 @@ L3 programming layer <2024-01-22>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `priroda-manual.out' has not changed.
-(rerunfilecheck)             Checksum: 54358ED47E487D211D48889AD69B0CF4;32147.
+(rerunfilecheck)             Checksum: 39A60151295FC57E27C3A28B4ED13927;36257.
  ) 
 Here is how much of TeX's memory you used:
- 17518 strings out of 476182
- 302133 string characters out of 5795594
- 2109975 words of memory out of 5000000
- 38814 multiletter control sequences out of 15000+600000
- 569858 words of font info for 81 fonts, out of 8000000 for 9000
+ 17644 strings out of 476182
+ 305082 string characters out of 5795594
+ 2091975 words of memory out of 5000000
+ 38889 multiletter control sequences out of 15000+600000
+ 571078 words of font info for 85 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,16n,83p,2372b,672s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,16n,83p,2372b,676s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcit1000.600pk> </
 root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1200.600pk> </root/
 .texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1440.600pk> </root/.texl
@@ -1289,27 +1356,28 @@ ive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1000.600pk> </root/.texlive20
 23/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </root/.texlive2023/te
 xmf-var/fonts/pk/ljfour/jknappen/ec/tctt1000.600pk></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmitt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
-ymbols/msam10.pfb>
-Output written on priroda-manual.pdf (88 pages, 559713 bytes).
+ts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmitt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols
+/msam10.pfb>
+Output written on priroda-manual.pdf (101 pages, 630036 bytes).
 PDF statistics:
- 2067 PDF objects out of 2073 (max. 8388607)
- 1810 compressed objects within 19 object streams
- 334 named destinations out of 1000 (max. 500000)
- 1709 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2312 PDF objects out of 2487 (max. 8388607)
+ 2032 compressed objects within 21 object streams
+ 381 named destinations out of 1000 (max. 500000)
+ 1927 words of extra memory for PDF output out of 10000 (max. 10000000)
 

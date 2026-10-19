@@ -12,12 +12,22 @@ from the official site, <https://rad.chem.msu.ru/~laikov/p_w/>.
 The manual is in English and is a work in progress. Each keyword entry says which sources it rests on and whether it
 has been checked against a running binary.
 
+## Read the manual
+
+You don't need anything else from this repository to read the manual:
+
+- **Online:** <https://beregdsk.github.io/priroda_manual/>
+- **PDF:** <https://beregdsk.github.io/priroda_manual/priroda-manual.pdf>
+
+Both are rebuilt from the `main` branch on every change, so they are always the latest version.
+
 ## Contents of the manual
 
-- **Part I. Introduction**: about Priroda, installing and running it, getting started (first calculations and how to
-  read the output), input syntax.
-- **Part II. Input reference**: every known keyword, group by group, generated from `keywords/*.yaml`.
-- **Part III. Troubleshooting**: common problems, by symptom.
+- **Part I. Introduction**: about Priroda, getting started (first calculations and how to read the output), input
+  syntax, installing and running it, parallel and cluster runs.
+- **Part II. Calculations**: transition states, IRC and scans.
+- **Part III. Input reference**: every known keyword, group by group, generated from `keywords/*.yaml`.
+- **Part IV. Troubleshooting**: common problems, by symptom.
 - **Appendix**: every keyword name found in the program file, and the sources.
 
 ## Building
@@ -31,7 +41,10 @@ make pdf     # docs/_build/latex/priroda-manual.pdf (needs pdflatex and latexmk)
 make keywords  # only validate keywords/*.yaml and regenerate docs/reference/
 ```
 
-`make html` treats every warning as an error.
+`make html` treats every warning as an error. The diagrams need Graphviz (`dot`).
+
+On GitHub, `.github/workflows/pages.yml` builds both formats on every push to `main` and publishes them at the links
+above. It needs a one-time setting: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 ## Repository layout
 

@@ -39,7 +39,7 @@ A serial run is `p input output`. Parallel runs are described in {doc}`running`.
 
 Save the following as `water.in`:
 
-```text
+```priroda
 $system mem=128 disk=1 $end
 $control
  task=energy
@@ -180,6 +180,28 @@ The standard beginner procedure, as taught on the KNC wiki, alternates between o
    compute a new Hessian.
 5. When all frequencies are real, read the thermochemistry.
 
+```{graphviz}
+:caption: The optimize–Hessian loop. Steps refer to the sections below.
+:align: center
+
+digraph loop {
+  rankdir=LR; bgcolor="transparent"; nodesep=0.35; ranksep=0.45;
+  node [shape=box, style="rounded,filled", fillcolor="#e8f0e6", color="#2f5d3a", fontcolor="#1d2b20", fontsize=11, margin="0.15,0.07"];
+  edge [color="#7d8f80", fontcolor="#7d8f80", fontsize=10, arrowsize=0.7];
+  opt  [label="task=optimize\n(step 1)"];
+  conv [label="OPTIMIZATION\nCONVERGED?\n(step 2)", shape=diamond, fillcolor="#fbf1dc", color="#b97a12", margin="0.02,0.02"];
+  hess [label="task=hessian\nat MOL> geometry\n(steps 3-4)"];
+  imag [label="imaginary\nfrequency?\n(step 5)", shape=diamond, fillcolor="#fbf1dc", color="#b97a12", margin="0.02,0.02"];
+  thermo [label="read the\nthermochemistry\n(step 7)", fillcolor="#2f5d3a", fontcolor="white"];
+  opt -> conv;
+  conv -> hess [label="yes"];
+  conv -> opt [label="no: restart from\nlast mol> geometry"];
+  hess -> imag;
+  imag -> thermo [label="no"];
+  imag -> opt [label="yes: append $Energy\n(step 6)"];
+}
+```
+
 The Hessian check matters most when the start geometry is symmetric. An experienced user reports that Priroda's
 optimizer rarely leaves imaginary frequencies, except when the starting structure is symmetric and the optimizer keeps
 that symmetry; then the check is compulsory. <!-- src: 03 §8 (amg, Nov 2011) -->
@@ -188,7 +210,7 @@ that symmetry; then the check is compulsory. <!-- src: 03 §8 (amg, Nov 2011) --
 
 Save the following as `nh3.in`:
 
-```text
+```priroda
 $system mem=128 disk=1 $end
 $control
  task=optimize
@@ -309,7 +331,7 @@ After step 3, `nh3_freq.in` holds the optimized geometry from `nh3.out` and, aft
 optional lines are added here by hand: `print=+molden` (for viewing the vibrations, see [](#qs-molden)) and a
 `$thermo` group:
 
-```text
+```priroda
 $system mem=128 disk=1 $end
 $control
  task=hessian
@@ -461,7 +483,7 @@ also show `298.000 K`. Set {ref}`temperature <thermo.temperature>` explicitly wh
 You can let one job optimize the structure and then compute the Hessian at the converged geometry. In `nh3.in`,
 change the task line:
 
-```text
+```priroda
 $control
  task=optimize+hessian
  theory=dft
@@ -579,6 +601,7 @@ that takes a Priroda input file.
 ## Where next
 
 - {doc}`input-syntax` explains groups, keyword abbreviation, arrays and restart blocks.
-- {doc}`running` covers memory, scratch disks and parallel runs.
+- {doc}`running` covers memory and scratch disks, and {doc}`parallel` parallel runs and batch jobs.
+- {doc}`../tasks/ts-irc-scan` continues from here to transition states and reaction paths.
 - The {doc}`input reference <../reference/index>` describes every known keyword, group by group.
 - {ref}`troubleshooting.common-problems` helps when a run fails.

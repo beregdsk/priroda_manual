@@ -10,6 +10,7 @@
 Spin restriction, convergence, iteration limits and SCF solver.
 
 (scf.restrict)=
+{.kw}
 ## `restrict`
 
 ```{index} single: restrict ($scf)
@@ -35,6 +36,7 @@ Spin restriction.
 **See also:** {ref}`mix ($guess) <guess.mix>`
 
 (scf.convergence)=
+{.kw}
 ## `convergence`
 
 ```{index} single: convergence ($scf)
@@ -65,6 +67,7 @@ every value tried). Other keywords after a one-value `convergence=`, such as `re
 **See also:** {ref}`iterations ($scf) <scf.iterations>`, {ref}`procedure ($scf) <scf.procedure>`
 
 (scf.iterations)=
+{.kw}
 ## `iterations`
 
 ```{index} single: iterations ($scf)
@@ -94,6 +97,7 @@ Raising the limit moderately is fine: an OH radical failed at the default 32 ite
 **See also:** {ref}`convergence ($scf) <scf.convergence>`, {ref}`read ($guess) <guess.read>`
 
 (scf.procedure)=
+{.kw}
 ## `procedure`
 
 ```{index} single: procedure ($scf)
@@ -118,12 +122,13 @@ Algorithm for solving the SCF equations. If one procedure fails, try the other.
 
 **Example:**
 
-```text
+```priroda
 $scf convergence=1e-7 procedure=bfgs iterations=250 $end
 $grid accuracy=1e-9 $end
 ```
 
 (scf.d1small)=
+{.kw}
 ## `d1small`
 
 ```{index} single: d1small ($scf)
@@ -147,6 +152,7 @@ Small-component density in quadratically convergent SCF.
 **See also:** {ref}`four ($control) <control.four>`
 
 (scf.core)=
+{.kw}
 ## `core`
 
 ```{index} single: core ($scf)

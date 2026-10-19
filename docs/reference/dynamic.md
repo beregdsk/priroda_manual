@@ -33,6 +33,7 @@ $end
 ```
 
 (dynamic.e)=
+{.kw}
 ## `e`
 
 ```{index} single: e ($dynamic)
@@ -47,6 +48,7 @@ $end
 Thermostat temperature as kT (inferred: a generator script sets e = T/315775). Version 25 echoes it as `e = 0.00100000`.
 
 (dynamic.dx)=
+{.kw}
 ## `dx`
 
 ```{index} single: dx ($dynamic)
@@ -60,6 +62,7 @@ Thermostat temperature as kT (inferred: a generator script sets e = T/315775). V
 Time step (inferred). The examples write the prefix `d=`; version 25 echoes it as `dx = 0.03000000`.
 
 (dynamic.n)=
+{.kw}
 ## `n`
 
 ```{index} single: n ($dynamic)
@@ -74,6 +77,7 @@ Two values: the number of production steps, then the number of equilibration ste
 gave 26 points, `point -5` … `point 20`, and the echo `L = 20,-5;10`.
 
 (dynamic.m)=
+{.kw}
 ## `m`
 
 ```{index} single: m ($dynamic)
@@ -87,6 +91,7 @@ gave 26 points, `point -5` … `point 20`, and the echo `L = 20,-5;10`.
 Meaning not known. With `m=10`, version 25 printed `;10` at the end of the echo `L = 20,-5;10`.
 
 (dynamic.i)=
+{.kw}
 ## `i`
 
 ```{index} single: i ($dynamic)
@@ -100,6 +105,7 @@ Meaning not known. With `m=10`, version 25 printed `;10` at the end of the echo 
 Run index or random seed (inferred). Version 25 does not echo it.
 
 (dynamic.v1)=
+{.kw}
 ## `v1`
 
 ```{index} single: v1 ($dynamic)
@@ -114,6 +120,7 @@ Run index or random seed (inferred). Version 25 does not echo it.
 Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred). Written as the prefix `v=` in the generator script.
 
 (dynamic.hb)=
+{.kw}
 ## `hb`
 
 ```{index} single: hb ($dynamic)
@@ -127,6 +134,7 @@ Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (i
 Stiffness of the cavity wall (inferred). Written as the prefix `h=` in the generator script.
 
 (dynamic.file)=
+{.kw}
 ## `file`
 
 ```{index} single: file ($dynamic)

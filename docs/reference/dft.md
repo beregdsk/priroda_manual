@@ -10,6 +10,7 @@
 Exchange–correlation functional.
 
 (dft.functional)=
+{.kw}
 ## `functional`
 
 ```{index} single: functional ($dft)

@@ -10,6 +10,7 @@
 Adaptive integration grid for DFT.
 
 (grid.accuracy)=
+{.kw}
 ## `accuracy`
 
 ```{index} single: accuracy ($grid)

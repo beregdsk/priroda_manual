@@ -9,7 +9,9 @@
         <title>$control - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -193,11 +207,16 @@
   <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
 </ul>
@@ -269,7 +288,7 @@
 <section class="tex2jax_ignore mathjax_ignore" id="control">
 <span id="group-control"></span><h1><code class="docutils literal notranslate"><span class="pre">$control</span></code><a class="headerlink" href="#control" title="Link to this heading">¶</a></h1>
 <p id="index-0">Job type, level of theory, basis-set file, Hamiltonian and printing.</p>
-<section id="task">
+<section class="kw" id="task">
 <span id="control-task"></span><h2><code class="docutils literal notranslate"><span class="pre">task</span></code><a class="headerlink" href="#task" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">gradient</span></code><br />
@@ -357,7 +376,7 @@ The version 25 program contains further task names (<code class="docutils litera
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-saddle"><span class="std std-ref">saddle ($optimize)</span></a>, <a class="reference internal" href="optimize.html#optimize-points"><span class="std std-ref">points ($optimize)</span></a>, <a class="reference internal" href="#control-print"><span class="std std-ref">print ($control)</span></a></p>
 </section>
-<section id="theory">
+<section class="kw" id="theory">
 <span id="control-theory"></span><h2><code class="docutils literal notranslate"><span class="pre">theory</span></code><a class="headerlink" href="#theory" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">dft</span></code><br />
@@ -454,7 +473,7 @@ either crash or return the HF energy. The version 25 program contains many more 
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="dft.html#dft-functional"><span class="std std-ref">functional ($dft)</span></a></p>
 </section>
-<section id="state">
+<section class="kw" id="state">
 <span id="control-state"></span><h2><code class="docutils literal notranslate"><span class="pre">state</span></code><a class="headerlink" href="#state" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -465,7 +484,7 @@ is the number of states N included in the iterative solution of the equations (<
 <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> with <code class="docutils literal notranslate"><span class="pre">state=1,5</span></code> printed all five states in an <code class="docutils literal notranslate"><span class="pre">Electronic</span> <span class="pre">Spectrum:</span></code> table (excitation energy,
 wavelength, transition moment, oscillator strength), and <code class="docutils literal notranslate"><span class="pre">E</span>&#160; <span class="pre">=</span></code> was the total energy of state 1.</p>
 </section>
-<section id="basis">
+<section class="kw" id="basis">
 <span id="control-basis"></span><h2><code class="docutils literal notranslate"><span class="pre">basis</span></code><a class="headerlink" href="#basis" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -485,7 +504,7 @@ runs.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-set"><span class="std std-ref">set ($molecule)</span></a>, <a class="reference internal" href="#control-four"><span class="std std-ref">four ($control)</span></a></p>
 </section>
-<section id="four">
+<section class="kw" id="four">
 <span id="control-four"></span><h2><code class="docutils literal notranslate"><span class="pre">four</span></code><a class="headerlink" href="#four" title="Link to this heading">¶</a></h2>
 <p id="index-5"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
@@ -515,7 +534,7 @@ runs.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#control-nucleus"><span class="std std-ref">nucleus ($control)</span></a>, <a class="reference internal" href="scf.html#scf-d1small"><span class="std std-ref">d1small ($scf)</span></a></p>
 </section>
-<section id="nucleus">
+<section class="kw" id="nucleus">
 <span id="control-nucleus"></span><h2><code class="docutils literal notranslate"><span class="pre">nucleus</span></code><a class="headerlink" href="#nucleus" title="Link to this heading">¶</a></h2>
 <p id="index-6"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -551,7 +570,7 @@ element.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#control-four"><span class="std std-ref">four ($control)</span></a></p>
 </section>
-<section id="print">
+<section class="kw" id="print">
 <span id="control-print"></span><h2><code class="docutils literal notranslate"><span class="pre">print</span></code><a class="headerlink" href="#print" title="Link to this heading">¶</a></h2>
 <p id="index-7"><strong>Type:</strong> flags<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -592,11 +611,11 @@ The leading <code class="docutils literal notranslate"><span class="pre">+</span
 </table>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$control print=+vectors+molden $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$control</span><span class="w"> </span><span class="na">print</span><span class="o">=</span><span class="nb">+vectors+molden</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 </section>
-<section id="derivative">
+<section class="kw" id="derivative">
 <span id="control-derivative"></span><h2><code class="docutils literal notranslate"><span class="pre">derivative</span></code><a class="headerlink" href="#derivative" title="Link to this heading">¶</a></h2>
 <p id="index-8"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -625,7 +644,7 @@ analytic Hessian to within 0.2 cm⁻¹.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="d2edr2.html#d2edr2-steps"><span class="std std-ref">steps ($d2edr2)</span></a></p>
 </section>
-<section id="save">
+<section class="kw" id="save">
 <span id="control-save"></span><h2><code class="docutils literal notranslate"><span class="pre">save</span></code><a class="headerlink" href="#save" title="Link to this heading">¶</a></h2>
 <p id="index-9"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />

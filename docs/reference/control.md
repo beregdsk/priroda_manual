@@ -10,6 +10,7 @@
 Job type, level of theory, basis-set file, Hamiltonian and printing.
 
 (control.task)=
+{.kw}
 ## `task`
 
 ```{index} single: task ($control)
@@ -61,6 +62,7 @@ The version 25 program contains further task names (`irc4`, `pathx`, `pathr`, `c
 **See also:** {ref}`saddle ($optimize) <optimize.saddle>`, {ref}`points ($optimize) <optimize.points>`, {ref}`print ($control) <control.print>`
 
 (control.theory)=
+{.kw}
 ## `theory`
 
 ```{index} single: theory ($control)
@@ -122,6 +124,7 @@ either crash or return the HF energy. The version 25 program contains many more 
 **See also:** {ref}`functional ($dft) <dft.functional>`
 
 (control.state)=
+{.kw}
 ## `state`
 
 ```{index} single: state ($control)
@@ -138,6 +141,7 @@ is the number of states N included in the iterative solution of the equations (`
 wavelength, transition moment, oscillator strength), and `E  =` was the total energy of state 1.
 
 (control.basis)=
+{.kw}
 ## `basis`
 
 ```{index} single: basis ($control)
@@ -165,6 +169,7 @@ runs.
 **See also:** {ref}`set ($molecule) <molecule.set>`, {ref}`four ($control) <control.four>`
 
 (control.four)=
+{.kw}
 ## `four`
 
 ```{index} single: four ($control)
@@ -192,6 +197,7 @@ Required with the relativistic basis file `basis4.in`. Without it, version 25 st
 **See also:** {ref}`nucleus ($control) <control.nucleus>`, {ref}`d1small ($scf) <scf.d1small>`
 
 (control.nucleus)=
+{.kw}
 ## `nucleus`
 
 ```{index} single: nucleus ($control)
@@ -224,6 +230,7 @@ element.
 **See also:** {ref}`four ($control) <control.four>`
 
 (control.print)=
+{.kw}
 ## `print`
 
 ```{index} single: print ($control)
@@ -252,11 +259,12 @@ The leading `+` can be omitted (`print=charges+bonds`).
 
 **Example:**
 
-```text
+```priroda
 $control print=+vectors+molden $end
 ```
 
 (control.derivative)=
+{.kw}
 ## `derivative`
 
 ```{index} single: derivative ($control)
@@ -284,6 +292,7 @@ analytic Hessian to within 0.2 cm⁻¹.
 **See also:** {ref}`steps ($d2edr2) <d2edr2.steps>`
 
 (control.save)=
+{.kw}
 ## `save`
 
 ```{index} single: save ($control)

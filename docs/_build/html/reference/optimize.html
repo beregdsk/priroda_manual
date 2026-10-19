@@ -9,7 +9,9 @@
         <title>$optimize - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -193,11 +207,16 @@
   <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
 </ul>
@@ -270,7 +289,7 @@
 <span id="group-optimize"></span><h1><code class="docutils literal notranslate"><span class="pre">$optimize</span></code><a class="headerlink" href="#optimize" title="Link to this heading">¶</a></h1>
 <p id="index-0">Geometry optimization, saddle-point search, IRC and relaxed scans.</p>
 <p><strong>Relevant when:</strong> <code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">=</span> <span class="pre">optimize</span> <span class="pre">|</span> <span class="pre">optimize+hessian</span> <span class="pre">|</span> <span class="pre">irc</span> <span class="pre">|</span> <span class="pre">scan</span> <span class="pre">|</span> <span class="pre">opt_n1</span></code></p>
-<section id="saddle">
+<section class="kw" id="saddle">
 <span id="optimize-saddle"></span><h2><code class="docutils literal notranslate"><span class="pre">saddle</span></code><a class="headerlink" href="#saddle" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
@@ -304,7 +323,7 @@ negative value.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-follow"><span class="std std-ref">follow ($optimize)</span></a>, <a class="reference internal" href="Energy.html#energy-h"><span class="std std-ref">H ($Energy)</span></a></p>
 </section>
-<section id="tolerance">
+<section class="kw" id="tolerance">
 <span id="optimize-tolerance"></span><h2><code class="docutils literal notranslate"><span class="pre">tolerance</span></code><a class="headerlink" href="#tolerance" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.0001,0.01</span></code><br />
@@ -315,7 +334,7 @@ negative value.</p>
 <p><strong>About the default:</strong> if only the first value is given, the second is 100 times larger (the recommended setting).</p>
 <p><strong>See also:</strong> <a class="reference internal" href="grid.html#grid-accuracy"><span class="std std-ref">accuracy ($grid)</span></a></p>
 </section>
-<section id="trust">
+<section class="kw" id="trust">
 <span id="optimize-trust"></span><h2><code class="docutils literal notranslate"><span class="pre">trust</span></code><a class="headerlink" href="#trust" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.125,0.015625</span></code><br />
@@ -328,7 +347,7 @@ symmetry (<code class="docutils literal notranslate"><span class="pre">sym=1</sp
 (older version). <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says that if only the maximum is given, the minimum is 1/16 of it and the initial
 value 1/4. Version 25 uses 1/8 instead: <code class="docutils literal notranslate"><span class="pre">trust=0.2</span></code> alone was echoed as <code class="docutils literal notranslate"><span class="pre">0.20000000</span> <span class="pre">(max),</span> <span class="pre">0.02500000</span> <span class="pre">(min)</span></code>.</p>
 </section>
-<section id="follow">
+<section class="kw" id="follow">
 <span id="optimize-follow"></span><h2><code class="docutils literal notranslate"><span class="pre">follow</span></code><a class="headerlink" href="#follow" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
@@ -338,7 +357,7 @@ value 1/4. Version 25 uses 1/8 instead: <code class="docutils literal notranslat
 <p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>; version 25 echoes <code class="docutils literal notranslate"><span class="pre">Saddle</span> <span class="pre">point</span> <span class="pre">search:</span> <span class="pre">follow</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-saddle"><span class="std std-ref">saddle ($optimize)</span></a></p>
 </section>
-<section id="steps">
+<section class="kw" id="steps">
 <span id="optimize-steps"></span><h2><code class="docutils literal notranslate"><span class="pre">steps</span></code><a class="headerlink" href="#steps" title="Link to this heading">¶</a></h2>
 <p id="index-5"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">128</span></code><br />
@@ -356,7 +375,7 @@ given, the value of <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-tolerance"><span class="std std-ref">tolerance ($optimize)</span></a>, <a class="reference internal" href="d2edr2.html#d2edr2-steps"><span class="std std-ref">steps ($d2edr2)</span></a></p>
 </section>
-<section id="cartesian">
+<section class="kw" id="cartesian">
 <span id="optimize-cartesian"></span><h2><code class="docutils literal notranslate"><span class="pre">cartesian</span></code><a class="headerlink" href="#cartesian" title="Link to this heading">¶</a></h2>
 <p id="index-6"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
@@ -388,7 +407,7 @@ converged in internal coordinates without that crash (the number of internal coo
 also with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>.</p>
 </div>
 </section>
-<section id="back">
+<section class="kw" id="back">
 <span id="optimize-back"></span><h2><code class="docutils literal notranslate"><span class="pre">back</span></code><a class="headerlink" href="#back" title="Link to this heading">¶</a></h2>
 <p id="index-7"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
@@ -417,7 +436,7 @@ an IRC does not end at a converged minimum.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-points"><span class="std std-ref">points ($optimize)</span></a>, <a class="reference internal" href="#optimize-radius"><span class="std std-ref">radius ($optimize)</span></a></p>
 </section>
-<section id="points">
+<section class="kw" id="points">
 <span id="optimize-points"></span><h2><code class="docutils literal notranslate"><span class="pre">points</span></code><a class="headerlink" href="#points" title="Link to this heading">¶</a></h2>
 <p id="index-8"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -428,7 +447,7 @@ In a scan the points include both ends: <code class="docutils literal notranslat
 <code class="docutils literal notranslate"><span class="pre">points</span></code> is reached when it arrives at a minimum.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-value"><span class="std std-ref">value ($optimize)</span></a></p>
 </section>
-<section id="radius">
+<section class="kw" id="radius">
 <span id="optimize-radius"></span><h2><code class="docutils literal notranslate"><span class="pre">radius</span></code><a class="headerlink" href="#radius" title="Link to this heading">¶</a></h2>
 <p id="index-9"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.1</span></code><br />
@@ -448,7 +467,7 @@ reached both minima (about 65 and 20 points per direction). <code class="docutil
 stopping farther from the minimum than the smaller radii.</p>
 </div>
 </section>
-<section id="coordinates">
+<section class="kw" id="coordinates">
 <span id="optimize-coordinates"></span><h2><code class="docutils literal notranslate"><span class="pre">coordinates</span></code><a class="headerlink" href="#coordinates" title="Link to this heading">¶</a></h2>
 <p id="index-10"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -488,7 +507,7 @@ stopping farther from the minimum than the smaller radii.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-fix"><span class="std std-ref">fix ($optimize)</span></a></p>
 </section>
-<section id="fix">
+<section class="kw" id="fix">
 <span id="optimize-fix"></span><h2><code class="docutils literal notranslate"><span class="pre">fix</span></code><a class="headerlink" href="#fix" title="Link to this heading">¶</a></h2>
 <p id="index-11"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -504,7 +523,7 @@ unknown meaning (<code class="docutils literal notranslate"><span class="pre">fr
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-value"><span class="std std-ref">value ($optimize)</span></a>, <a class="reference internal" href="#optimize-coordinates"><span class="std std-ref">coordinates ($optimize)</span></a></p>
 </section>
-<section id="value">
+<section class="kw" id="value">
 <span id="optimize-value"></span><h2><code class="docutils literal notranslate"><span class="pre">value</span></code><a class="headerlink" href="#value" title="Link to this heading">¶</a></h2>
 <p id="index-12"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -521,19 +540,19 @@ values.</p>
 the sign of any torsion value taken from another program, or the scan starts from a mangled geometry.</p>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$optimize
- fix   =1,7,9,0,0, 1,8,10,0,0, 3,8,7,9,0, 3,10,9,7,0
- val(1)=1.6,       1.7
- val(5)=2.0,       2.1
- points=5
-$end
-# 5 optimizations: r(7-9) = 1.6 … 2.0, r(8-10) = 1.7 … 2.1;
-# the last two fixed coordinates keep their input values
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$optimize</span>
+<span class="w"> </span><span class="na">fix</span><span class="w">   </span><span class="o">=</span><span class="m">1</span><span class="o">,</span><span class="m">7</span><span class="o">,</span><span class="m">9</span><span class="o">,</span><span class="m">0</span><span class="o">,</span><span class="m">0</span><span class="o">,</span><span class="w"> </span><span class="m">1</span><span class="o">,</span><span class="m">8</span><span class="o">,</span><span class="m">10</span><span class="o">,</span><span class="m">0</span><span class="o">,</span><span class="m">0</span><span class="o">,</span><span class="w"> </span><span class="m">3</span><span class="o">,</span><span class="m">8</span><span class="o">,</span><span class="m">7</span><span class="o">,</span><span class="m">9</span><span class="o">,</span><span class="m">0</span><span class="o">,</span><span class="w"> </span><span class="m">3</span><span class="o">,</span><span class="m">10</span><span class="o">,</span><span class="m">9</span><span class="o">,</span><span class="m">7</span><span class="o">,</span><span class="m">0</span>
+<span class="w"> </span><span class="na">val(1)</span><span class="o">=</span><span class="m">1.6</span><span class="o">,</span><span class="w">       </span><span class="m">1.7</span>
+<span class="w"> </span><span class="na">val(5)</span><span class="o">=</span><span class="m">2.0</span><span class="o">,</span><span class="w">       </span><span class="m">2.1</span>
+<span class="w"> </span><span class="na">points</span><span class="o">=</span><span class="m">5</span>
+<span class="kn">$end</span>
+<span class="c"># 5 optimizations: r(7-9) = 1.6 … 2.0, r(8-10) = 1.7 … 2.1;</span>
+<span class="c"># the last two fixed coordinates keep their input values</span>
 </pre></div>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-fix"><span class="std std-ref">fix ($optimize)</span></a>, <a class="reference internal" href="#optimize-points"><span class="std std-ref">points ($optimize)</span></a></p>
 </section>
-<section id="gradient">
+<section class="kw" id="gradient">
 <span id="optimize-gradient"></span><h2><code class="docutils literal notranslate"><span class="pre">gradient</span></code><a class="headerlink" href="#gradient" title="Link to this heading">¶</a></h2>
 <p id="index-13"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -543,7 +562,7 @@ $end
 This excludes the gradient terms from the internal/Cartesian transformation at the first geometry.
 Otherwise keep the default.</p>
 </section>
-<section id="print">
+<section class="kw" id="print">
 <span id="optimize-print"></span><h2><code class="docutils literal notranslate"><span class="pre">print</span></code><a class="headerlink" href="#print" title="Link to this heading">¶</a></h2>
 <p id="index-14"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -568,7 +587,7 @@ Otherwise keep the default.</p>
 </table>
 </div>
 </section>
-<section id="symmetry">
+<section class="kw" id="symmetry">
 <span id="optimize-symmetry"></span><h2><code class="docutils literal notranslate"><span class="pre">symmetry</span></code><a class="headerlink" href="#symmetry" title="Link to this heading">¶</a></h2>
 <p id="index-15"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -582,7 +601,7 @@ every step, and returned an exactly symmetric structure followed by <code class=
 so give both options.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-sym"><span class="std std-ref">sym ($molecule)</span></a></p>
 </section>
-<section id="model">
+<section class="kw" id="model">
 <span id="optimize-model"></span><h2><code class="docutils literal notranslate"><span class="pre">model</span></code><a class="headerlink" href="#model" title="Link to this heading">¶</a></h2>
 <p id="index-16"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />

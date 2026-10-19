@@ -31,6 +31,7 @@ Prose fields are dicts keyed by language ({en: ...}). Only English is written fo
 another language can be added later as a sibling key without changing the schema.
 """
 
+import re
 from pathlib import Path
 
 import yaml
@@ -161,6 +162,7 @@ def render_keyword(group, kw, lang, lab):
     status += f" · {lab['verified']} {kw['verified_against']}" if kw["verified_against"] else f" · {lab['unverified']}"
     lines = [
         f"({anchor})=",
+        "{.kw}",  # section class for the HTML theme (needs the attrs_block MyST extension)
         f"## `{kw['name']}`",
         "",
         "```{index} single: " + f"{kw['name']} (${group})",
@@ -192,7 +194,9 @@ def render_keyword(group, kw, lang, lab):
     if kw.get("notes"):
         lines += ["```{note}", text(kw["notes"], lang).strip(), "```", ""]
     if kw.get("example"):
-        lines += [f"**{lab['example']}:**", "", "```text", kw["example"].rstrip(), "```", ""]
+        # A fragment without a group (e.g. one atom line) would be lexed as text outside a group.
+        lang = "priroda" if re.search(r"\$\w", kw["example"]) else "text"
+        lines += [f"**{lab['example']}:**", "", f"```{lang}", kw["example"].rstrip(), "```", ""]
     if kw.get("see_also"):
         refs = ", ".join(
             f"{{ref}}`{r.split('.', 1)[1]} (${r.split('.', 1)[0]}) <{r}>`" for r in kw["see_also"]
@@ -233,6 +237,8 @@ def render_index(groups, lang):
     return (
         GENERATED_HEADER.format(file="*.yaml")
         + "# Input reference\n\n"
+        + "One page per input group, in the order groups are usually written. Each keyword entry gives its type, "
+        "default, status and sources. For an alphabetical list of all keywords, see the {ref}`index <genindex>`.\n\n"
         + f"| {lab['groups']} | {lab['purpose']} |\n|---|---|\n{rows}\n\n"
         + f"```{{toctree}}\n:hidden:\n\n{toc}\n```\n"
     )

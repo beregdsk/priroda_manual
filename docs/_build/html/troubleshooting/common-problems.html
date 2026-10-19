@@ -9,7 +9,9 @@
         <title>Solving common problems - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -193,11 +207,16 @@
   <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Solving common problems</a></li>
 </ul>
@@ -268,14 +287,10 @@
           <section class="tex2jax_ignore mathjax_ignore" id="solving-common-problems">
 <span id="troubleshooting-common-problems"></span><h1>Solving common problems<a class="headerlink" href="#solving-common-problems" title="Link to this heading">¶</a></h1>
 <p>This chapter is arranged by symptom. Each entry names the likely cause and the fix that users have reported.</p>
-<p>Almost everything here comes from user forums, not from the developer. Where a fix rests on a single report that
-nobody confirmed, the entry says so. Most reports date from Priroda 6 to 10 (about 2009–2015); a few are from 2008
-or from 2016–2026. Where a problem may have been fixed in later builds, the entry says so.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Most fixes below have not been checked against a current Priroda binary. Where a test run on version 25
-(2025.02.28) confirmed or contradicted a report, the entry says so.</p>
-</div>
+<p>Almost everything here comes from user forums, not from the developer, and most reports date from Priroda 6 to 10
+(about 2009–2015). Most fixes have not been checked against a current binary. Each entry says when a fix rests on a
+single unconfirmed report, when a test run on version 25 (2025.02.28) confirmed or contradicted it, and when a
+problem may have been fixed in later builds.</p>
 <section id="the-input-is-not-read-or-is-read-wrongly">
 <span id="troubleshooting-input"></span><h2>The input is not read, or is read wrongly<a class="headerlink" href="#the-input-is-not-read-or-is-read-wrongly" title="Link to this heading">¶</a></h2>
 <p>When Priroda cannot parse the input it often stops early, with little or no explanation. Just as often a mistake is
@@ -379,7 +394,7 @@ The serial <code class="docutils literal notranslate"><span class="pre">p1.exe</
 <span id="troubleshooting-scf-parser"></span><h3><code class="docutils literal notranslate"><span class="pre">$scf</span></code> settings are ignored or rejected<a class="headerlink" href="#scf-settings-are-ignored-or-rejected" title="Link to this heading">¶</a></h3>
 <p>The parser has a problem when <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">convergence</span></a> is directly followed by another keyword in
 <a class="reference internal" href="../reference/scf.html#group-scf"><span class="std std-ref">$scf</span></a>. In version 25,</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf convergence=1e-7 iterations=250 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$scf</span><span class="w"> </span><span class="na">convergence</span><span class="o">=</span><span class="m">1e-7</span><span class="w"> </span><span class="na">iterations</span><span class="o">=</span><span class="m">250</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <p>stops the run after the basis-set echo with <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">error</span> <span class="pre">in</span> <span class="pre">'$scf'</span> <span class="pre">:</span> <span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code>. The message names
@@ -392,8 +407,8 @@ values are read; one forum user found that the pair worked only with <code class
 <p>Further tests on version 25 narrowed it down. The problem is a <code class="docutils literal notranslate"><span class="pre">convergence=</span></code> with <strong>one</strong> value followed by
 <code class="docutils literal notranslate"><span class="pre">iterations=</span></code>, also on the next line; other keywords after it, such as <code class="docutils literal notranslate"><span class="pre">restrict=</span></code> or <code class="docutils literal notranslate"><span class="pre">procedure=</span></code>, were read
 correctly, except <code class="docutils literal notranslate"><span class="pre">n1=</span></code>, which stopped the run with <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">'$end'</span> <span class="pre">found,</span> <span class="pre">'convergence'</span></code>. Both of these work:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf convergence=1e-7,1e-3 iterations=250 $end
-$scf iterations=250 convergence=1e-7 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$scf</span><span class="w"> </span><span class="na">convergence</span><span class="o">=</span><span class="m">1e-7</span><span class="o">,</span><span class="m">1e-3</span><span class="w"> </span><span class="na">iterations</span><span class="o">=</span><span class="m">250</span><span class="w"> </span><span class="kn">$end</span>
+<span class="kn">$scf</span><span class="w"> </span><span class="na">iterations</span><span class="o">=</span><span class="m">250</span><span class="w"> </span><span class="na">convergence</span><span class="o">=</span><span class="m">1e-7</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <p>So give <code class="docutils literal notranslate"><span class="pre">iterations</span></code> before <code class="docutils literal notranslate"><span class="pre">convergence</span></code>, or give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> two values, and confirm the values in the <code class="docutils literal notranslate"><span class="pre">scf:</span></code> echo line of the output, for
@@ -459,14 +474,14 @@ Choose the cap so that <code class="docutils literal notranslate"><span class="p
 <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span> <span class="pre">$end</span></code> (see <a class="reference internal" href="../reference/guess.html#guess-read"><span class="std std-ref">read</span></a>) and rerun with the latest geometry.</p></li>
 <li><p>Repeat until the SCF converges.</p></li>
 </ol>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$control
- task=optimize
- theory=dft
- basis="basis.in"
- save=job.vec
-$end
-$scf iterations=10 $end
-$guess read=1 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$control</span>
+<span class="w"> </span><span class="na">task</span><span class="o">=</span><span class="no">optimize</span>
+<span class="w"> </span><span class="na">theory</span><span class="o">=</span><span class="no">dft</span>
+<span class="w"> </span><span class="na">basis</span><span class="o">=</span><span class="s">"basis.in"</span>
+<span class="w"> </span><span class="na">save</span><span class="o">=</span><span class="no">job.vec</span>
+<span class="kn">$end</span>
+<span class="kn">$scf</span><span class="w"> </span><span class="na">iterations</span><span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="kn">$end</span>
+<span class="kn">$guess</span><span class="w"> </span><span class="na">read</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <!-- src: 08 t27, t71b (task=energy) -->
@@ -489,25 +504,22 @@ at another geometry, also work as a starting point.</p>
 <p>The default <a class="reference internal" href="../reference/scf.html#scf-procedure"><span class="std std-ref">procedure</span></a> is Newton–Raphson (<code class="docutils literal notranslate"><span class="pre">nr</span></code>). If it blows up, try <code class="docutils literal notranslate"><span class="pre">bfgs</span></code>, and the other way
 round. One experienced user recommends this setting for difficult cases, “which is nearly all of them”:</p>
 <!-- src: 04 #320 (alxyppv); keywords/scf.yaml procedure -->
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf
- convergence=1e-7
- procedure=bfgs
- iterations=250
-$end
-$grid
- accuracy=1e-9
-$end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$scf</span>
+<span class="w"> </span><span class="na">convergence</span><span class="o">=</span><span class="m">1e-7</span>
+<span class="w"> </span><span class="na">procedure</span><span class="o">=</span><span class="no">bfgs</span>
+<span class="w"> </span><span class="na">iterations</span><span class="o">=</span><span class="m">250</span>
+<span class="kn">$end</span>
+<span class="kn">$grid</span>
+<span class="w"> </span><span class="na">accuracy</span><span class="o">=</span><span class="m">1e-9</span>
+<span class="kn">$end</span>
 </pre></div>
 </div>
 <!-- src: 04 #320; 04 #324 (amge: this fragment works); 08 t07b (the same $scf keywords on one line work in v25) -->
 <p>He notes that the default 16 iterations of the versions of that time are too few for many jobs; version 25
 defaults to 32. If you tighten <a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">convergence</span></a> to <code class="docutils literal notranslate"><span class="pre">1e-8</span></code>, make the grid finer as well, <code class="docutils literal notranslate"><span class="pre">1e-9</span></code> or <code class="docutils literal notranslate"><span class="pre">1e-10</span></code> (see <a class="reference internal" href="../reference/grid.html#grid-accuracy"><span class="std std-ref">accuracy</span></a>).</p>
 <!-- src: 04 #320 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>The user who asked never reported whether this fixed the failing job. <code class="docutils literal notranslate"><span class="pre">bfgs</span></code> is not a cure-all: in the case in the
 next section it may have been part of the problem.</p>
-</div>
 <!-- src: 04 #319-#321; 05 §7.1 -->
 </section>
 <section id="divergence-after-the-switch-to-the-fine-grid-open-shell-transition-metal-complex">
@@ -526,8 +538,8 @@ divergence did not reproduce. If you meet it in a current version, the fixes bel
 <p><strong>Fixes.</strong> Two experienced users solved it in two ways, which they considered equivalent:</p>
 <ul>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> instead of a single-point Hessian, and drop <code class="docutils literal notranslate"><span class="pre">procedure=BFGS</span></code> and <code class="docutils literal notranslate"><span class="pre">iterations</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$control task=optimize+hessian $end
-$scf restrict=0 convergence=1e-10 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$control</span><span class="w"> </span><span class="na">task</span><span class="o">=</span><span class="no">optimize+hessian</span><span class="w"> </span><span class="kn">$end</span>
+<span class="kn">$scf</span><span class="w"> </span><span class="na">restrict</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="na">convergence</span><span class="o">=</span><span class="m">1e-10</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <p>Each optimization step then starts from the previous wavefunction. In version 25 this route converged the
@@ -559,8 +571,8 @@ vectors with <code class="docutils literal notranslate"><span class="pre">restri
 decide.</p>
 <!-- src: 08 t74c, t74d -->
 <p>The older sources recommend instead an unrestricted calculation with the HOMO and LUMO of the guess mixed:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf restrict=0 $end
-$guess mix=1 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$scf</span><span class="w"> </span><span class="na">restrict</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="kn">$end</span>
+<span class="kn">$guess</span><span class="w"> </span><span class="na">mix</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <!-- src: 03 §7; 06 §10 (Alder-ene example); keywords/guess.yaml mix -->
@@ -604,18 +616,15 @@ the default guess or from vectors read from a file, went back to the ground stat
 the SCF take two to three times more iterations. In the version 25 tests, the only persistent case was the
 degenerate shell of O2.</p>
 <!-- src: 08 t75a-d -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>If an excited configuration does turn up in a molecule without degenerate orbitals, two tools are available: start
 from other vectors (<code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> with vectors of a related calculation), or reorder the starting orbitals with
 <a class="reference internal" href="../reference/guess.html#guess-na"><span class="std std-ref">na</span></a> and <a class="reference internal" href="../reference/guess.html#guess-nb"><span class="std std-ref">nb</span></a>. Neither was tested for this manual on such a case, because none was
 found.</p>
-</div>
 <!-- src: 06 §10 (na, nb); 03 §7 (reading vectors) -->
 </section>
 <section id="heavy-elements">
 <h3>Heavy elements<a class="headerlink" href="#heavy-elements" title="Link to this heading">¶</a></h3>
-<p>For scalar-relativistic pure DFT with the heaviest atoms, the v5 documentation suggests
+<p>For scalar-relativistic pure DFT with the heaviest atoms, the version 5 documentation suggests
 <a class="reference internal" href="../reference/scf.html#scf-d1small"><span class="std std-ref">d1small=1</span></a>; without it, the quadratically convergent SCF may fail.</p>
 <!-- src: 06 §10; keywords/scf.yaml d1small -->
 <p>If an orbital ordering problem is suspected, <a class="reference internal" href="../reference/guess.html#guess-na"><span class="std std-ref">na</span></a> and <a class="reference internal" href="../reference/guess.html#guess-nb"><span class="std std-ref">nb</span></a> reorder the starting
@@ -669,7 +678,7 @@ acetylene it needed 6 steps, against 12 and 24 in internal coordinates.</p>
 <p><strong>Symptom.</strong> The optimization dies with <code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">0</span> <span class="pre">got</span> <span class="pre">signal</span> <span class="pre">6</span></code>. In the output of the last step, the
 <code class="docutils literal notranslate"><span class="pre">INTERNAL</span> <span class="pre">COORDINATES</span></code> table ends with <code class="docutils literal notranslate"><span class="pre">too</span> <span class="pre">few</span></code>.</p>
 <p><strong>Fix.</strong> Optimize in Cartesian coordinates:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$optimize cartesian=1 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$optimize</span><span class="w"> </span><span class="na">cartesian</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <p>This was the answer from one experienced user; the asker did not report back.</p>
@@ -713,6 +722,7 @@ started by turning the molecule into its mirror image.</p>
 </section>
 <section id="irc-gives-only-two-points-or-no-curve">
 <h3>IRC gives only two points, or no curve<a class="headerlink" href="#irc-gives-only-two-points-or-no-curve" title="Link to this heading">¶</a></h3>
+<p>The full route from a scan to an IRC is in <a class="reference internal" href="../tasks/ts-irc-scan.html"><span class="doc">Transition states, IRC and scans</span></a>.</p>
 <p>An IRC must start from a properly optimized transition state with an accurate Hessian in the input. Find the TS
 first (<code class="docutils literal notranslate"><span class="pre">task=optimize</span></code> with <a class="reference internal" href="../reference/optimize.html#optimize-saddle"><span class="std std-ref">saddle=1</span></a>), compute the Hessian there, check that it has exactly
 one imaginary frequency and that this mode is the reaction you want, and only then run <code class="docutils literal notranslate"><span class="pre">task=irc</span></code>. In one reported
@@ -754,7 +764,7 @@ has to be repeated three or four times. Priroda has no option to recompute the H
 <section id="hybrid-functional-silently-ignored">
 <span id="troubleshooting-hybrid"></span><h3>Hybrid functional silently ignored<a class="headerlink" href="#hybrid-functional-silently-ignored" title="Link to this heading">¶</a></h3>
 <p><strong>Cause.</strong> Hybrid functionals (B3LYP, PBE0/PBE1, …) are applied only with <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=ridft</span></a>.
-With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> or <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>, older versions (reported for v6 to v8) ran without any error message but used
+With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> or <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>, older versions (reported for versions 6 to 8) ran without any error message but used
 zero exact exchange: the exact-exchange part was simply dropped, so the result matched neither the hybrid nor a pure
 GGA. The developer was told about
 it and, according to a user who corresponded with him, did not intend to change it.</p>
@@ -895,7 +905,7 @@ were, in one experienced user’s words, not worth their cost.</p>
 <p>A 7-atom RI-MP2 job with <code class="docutils literal notranslate"><span class="pre">four=1</span></code>, <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> and <code class="docutils literal notranslate"><span class="pre">set=L22</span></code> claimed not to fit in memory however much was given,
 while smaller and larger basis sets ran. A second user reproduced it and got <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">write</span> <span class="pre">VMNN(11753704:14042536)?</span></code>.
 The first user found that direct integrals avoid the problem:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$integral direct=1 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$integral</span><span class="w"> </span><span class="na">direct</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="../reference/integral.html#integral-direct"><span class="std std-ref">direct</span></a>. <!-- src: 05 §4.2 (EvgeniX, amge 2015) --></p>
@@ -932,18 +942,18 @@ has work, as here; a hung job shows <code class="docutils literal notranslate"><
 </div>
 <p><strong>Fix.</strong> Run small RI jobs on fewer processes, or on one core.</p>
 <!-- src: 05 §3.1 (EvgeniX, amge 2015) -->
-<p>Older reports describe similar hangs: small jobs on many processors hang (v6/v7); MP2 on a 102-atom complex died with
-signal 8 on more than about 24 cores (v7, MVAPICH); a v6 Hessian on 4 cores could hang at <code class="docutils literal notranslate"><span class="pre">Solving</span> <span class="pre">for</span> <span class="pre">responses</span> <span class="pre">...</span></code>.
-The v6 advice was at most 2 cores for a Hessian and at most 4 for an optimization. Another user ran DFT, including
+<p>Older reports describe similar hangs: small jobs on many processors hang (versions 6 and 7); MP2 on a 102-atom complex died with
+signal 8 on more than about 24 cores (version 7, MVAPICH); a version 6 Hessian on 4 cores could hang at <code class="docutils literal notranslate"><span class="pre">Solving</span> <span class="pre">for</span> <span class="pre">responses</span> <span class="pre">...</span></code>.
+The advice for version 6 was at most 2 cores for a Hessian and at most 4 for an optimization. Another user ran DFT, including
 Hessians, on 24–32 cores without trouble, so this advice is disputed. In 2018 an experienced user said the Windows
-builds run in parallel only from version 16, and that the v6 Hessian uses at most 2 cores, the v17 one 4 or more.</p>
+builds run in parallel only from version 16, and that the version 6 Hessian uses at most 2 cores, the version 17 one 4 or more.</p>
 <!-- src: 03 §3, §15 (Evgeniy, sanya); 04 #401 -->
 </section>
 <section id="little-or-no-speed-up-from-more-cores">
 <h3>Little or no speed-up from more cores<a class="headerlink" href="#little-or-no-speed-up-from-more-cores" title="Link to this heading">¶</a></h3>
 <p>This is expected beyond a point. DFT gains nothing across nodes and, by some reports, little beyond 6–8 cores of one
 node; several single-core jobs at once often give more throughput than one parallel job. For RI-MP2, choose a number
-of processes that divides the number of occupied orbitals. The measurements are in <a class="reference internal" href="../start/running.html#running-parallel-scaling"><span class="std std-ref">Parallel performance</span></a>.</p>
+of processes that divides the number of occupied orbitals. The measurements are in <a class="reference internal" href="../start/parallel.html#running-parallel-scaling"><span class="std std-ref">Parallel performance</span></a>.</p>
 <!-- src: 04 #343, #344, #417, #462; 03 §3; 06 §10 -->
 </section>
 <section id="environment-is-too-large-max-is-193">
@@ -956,7 +966,7 @@ variables of their own; a Slurm job in a version 25 test had 210.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>env<span class="w"> </span>-i<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w"> </span><span class="nv">HOME</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">"</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span><span class="w"> </span>./mpiexec<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>./p<span class="w"> </span>input.in<span class="w"> </span>output.out
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="../start/running.html#running-batch"><span class="std std-ref">Batch systems</span></a> for a complete job script.</p>
+<p>See <a class="reference internal" href="../start/parallel.html#running-batch"><span class="std std-ref">Batch systems</span></a> for a complete job script.</p>
 <!-- src: 08 Slurm tests (s01 as written; 192 variables run, 193 refused) -->
 </section>
 <section id="starting-a-parallel-run-on-linux">
@@ -972,7 +982,7 @@ binary, the input, the output and the basis file.</p>
 <li><p>as a secondary message after another fatal error, such as running out of disk. Fix the first error;</p>
 <!-- src: 03 §8 (denis) -->
 </li>
-<li><p>in v6 shared-memory runs on 7 cores. Fewer cores avoided it; cleaning semaphores with <code class="docutils literal notranslate"><span class="pre">ipcrm</span></code> did not help.</p>
+<li><p>in version 6 shared-memory runs on 7 cores. Fewer cores avoided it; cleaning semaphores with <code class="docutils literal notranslate"><span class="pre">ipcrm</span></code> did not help.</p>
 <!-- src: 03 §15 (Chai, Evgeniy) -->
 </li>
 </ul>
@@ -984,7 +994,7 @@ program and home directories, and then to rule out causes one by one. <!-- src: 
 </section>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
-<p>The parallel Windows setup is described in <a class="reference internal" href="../start/running.html#running-windows-parallel"><span class="std std-ref">Parallel runs on Windows</span></a>. Symptoms reported with it:</p>
+<p>The parallel Windows setup is described in <a class="reference internal" href="../start/parallel.html#running-windows-parallel"><span class="std std-ref">Parallel runs on Windows</span></a>. Symptoms reported with it:</p>
 <ul>
 <li><p><strong>The program and <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code> exit at once and print nothing</strong> (exit code -1073741515, 0xC0000135). The OpenMPI
 DLLs are too new: <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> needs <code class="docutils literal notranslate"><span class="pre">cygmpi-12.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-pal-13.dll</span></code> and <code class="docutils literal notranslate"><span class="pre">cygopen-rte-12.dll</span></code>, and

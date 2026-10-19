@@ -12,6 +12,7 @@ Reference shieldings and extra points for NMR shielding calculations.
 **Relevant when:** `task = nmr (theory = dft only)`
 
 (nmr.standard)=
+{.kw}
 ## `standard`
 
 ```{index} single: standard ($nmr)
@@ -35,7 +36,7 @@ isotropic shielding; with it, `shift = standard − isotropic shielding`.
 
 **Example:**
 
-```text
+```priroda
 $nmr
  standard(1)=31.3915
  standard(6)=181.9921
@@ -44,6 +45,7 @@ $end
 ```
 
 (nmr.points)=
+{.kw}
 ## `points`
 
 ```{index} single: points ($nmr)
@@ -61,7 +63,7 @@ shielding printed for the point.
 
 **Example:**
 
-```text
+```priroda
 $nmr
  points=
       0.00000000    0.00000000    0.00000000

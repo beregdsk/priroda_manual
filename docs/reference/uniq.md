@@ -18,6 +18,7 @@ was rotated and translated counted as identical (distance 0), and so did a copy 
 copy with one H moved by 0.043 Å counted as a new structure.
 
 (uniq.distance)=
+{.kw}
 ## `distance`
 
 ```{index} single: distance ($uniq)

@@ -9,7 +9,9 @@
         <title>$system - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -193,11 +207,16 @@
   <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
 </ul>
@@ -273,7 +292,7 @@
 v5 documentation and a v8 benchmark report that most of the memory and all of the disk storage are used by the
 master process (rank 0). RI-MP2 and the other correlated methods write large scratch files on every process.
 In version 25, a two-process DFT run left one scratch file per process.</p>
-<section id="memory">
+<section class="kw" id="memory">
 <span id="system-memory"></span><h2><code class="docutils literal notranslate"><span class="pre">memory</span></code><a class="headerlink" href="#memory" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">256</span></code><br />
@@ -293,7 +312,7 @@ Without a <code class="docutils literal notranslate"><span class="pre">$system</
 <em>(inferred from the echo format)</em>.</p>
 </div>
 </section>
-<section id="disk">
+<section class="kw" id="disk">
 <span id="system-disk"></span><h2><code class="docutils literal notranslate"><span class="pre">disk</span></code><a class="headerlink" href="#disk" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">-512</span></code><br />
@@ -314,11 +333,11 @@ In version 25, <code class="docutils literal notranslate"><span class="pre">disk
 <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>, and conventional MP2 with <code class="docutils literal notranslate"><span class="pre">disk=-1</span></code> stopped with <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(grid_W)</span></code>.</p>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system mem=2048,256 disk=-256,-1 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$system</span><span class="w"> </span><span class="na">mem</span><span class="o">=</span><span class="m">2048</span><span class="o">,</span><span class="m">256</span><span class="w"> </span><span class="na">disk</span><span class="o">=</span><span class="m">-256</span><span class="o">,</span><span class="m">-1</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 </section>
-<section id="path">
+<section class="kw" id="path">
 <span id="system-path"></span><h2><code class="docutils literal notranslate"><span class="pre">path</span></code><a class="headerlink" href="#path" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
@@ -337,7 +356,7 @@ used <code class="docutils literal notranslate"><span class="pre">TMPDIR</span><
 <code class="docutils literal notranslate"><span class="pre">path=.</span></code>, set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> to a Windows path without quotes (<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=%TEMP%</span></code> in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>), or use a RAM disk.</p>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system path=/tmpa:/tmpb:/tmpc:/tmpd $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$system</span><span class="w"> </span><span class="na">path</span><span class="o">=</span><span class="no">/tmpa:/tmpb:/tmpc:/tmpd</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 </section>

@@ -3,13 +3,15 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Input reference" href="../reference/index.html"><link rel="prev" title="Getting started" href="getting-started.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Installing and running" href="running.html"><link rel="prev" title="Getting started" href="getting-started.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
         <title>Input syntax - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -193,11 +207,16 @@
   <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="running.html">Installing and running</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part II. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part III. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
 </ul>
@@ -272,34 +291,34 @@ grouped, and each group starts with <code class="docutils literal notranslate"><
 groups. The individual keywords are in the <a class="reference internal" href="../reference/index.html"><span class="doc">input reference</span></a>.</p>
 <!-- src: input.txt; 06 §2 -->
 <p>A complete input for an NH3 optimization, adapted from the KNC wiki FAQ:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system mem=512 disk=-512 path=/tmp $end
-$control
- task=optimize
- theory=dft
- basis=/opt/priroda/basis.in
-$end
-$optimize tol=1e-5 steps=100 $end
-$molecule
- charge=0 mult=1
- z-matrix
- set=L1
-   7
-   1    1    1.02672223
-   1    1    1.02672140    2    104.150240
-   1    1    1.02671372    2    104.144601   -3    104.150290
-$end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$system</span><span class="w"> </span><span class="na">mem</span><span class="o">=</span><span class="m">512</span><span class="w"> </span><span class="na">disk</span><span class="o">=</span><span class="m">-512</span><span class="w"> </span><span class="na">path</span><span class="o">=</span><span class="no">/tmp</span><span class="w"> </span><span class="kn">$end</span>
+<span class="kn">$control</span>
+<span class="w"> </span><span class="na">task</span><span class="o">=</span><span class="no">optimize</span>
+<span class="w"> </span><span class="na">theory</span><span class="o">=</span><span class="no">dft</span>
+<span class="w"> </span><span class="na">basis</span><span class="o">=</span><span class="no">/opt/priroda/basis.in</span>
+<span class="kn">$end</span>
+<span class="kn">$optimize</span><span class="w"> </span><span class="na">tol</span><span class="o">=</span><span class="m">1e-5</span><span class="w"> </span><span class="na">steps</span><span class="o">=</span><span class="m">100</span><span class="w"> </span><span class="kn">$end</span>
+<span class="kn">$molecule</span>
+<span class="w"> </span><span class="na">charge</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="na">mult</span><span class="o">=</span><span class="m">1</span>
+<span class="w"> </span><span class="kt">z-matrix</span>
+<span class="w"> </span><span class="na">set</span><span class="o">=</span><span class="no">L1</span>
+<span class="w">   </span><span class="m">7</span>
+<span class="w">   </span><span class="m">1</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">1.02672223</span>
+<span class="w">   </span><span class="m">1</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">1.02672140</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">104.150240</span>
+<span class="w">   </span><span class="m">1</span><span class="w">    </span><span class="m">1</span><span class="w">    </span><span class="m">1.02671372</span><span class="w">    </span><span class="m">2</span><span class="w">    </span><span class="m">104.144601</span><span class="w">   </span><span class="m">-3</span><span class="w">    </span><span class="m">104.150290</span>
+<span class="kn">$end</span>
 </pre></div>
 </div>
 <!-- src: 06 §2 (FAQ example 1; basis file and set changed to the current basis.in/L1); run as printed on v25 (08 t58a) -->
 <section id="groups">
 <h2>Groups<a class="headerlink" href="#groups" title="Link to this heading">¶</a></h2>
 <p>A group starts with <code class="docutils literal notranslate"><span class="pre">$</span></code> followed by the group name and ends with <code class="docutils literal notranslate"><span class="pre">$end</span></code>. It may sit on one line or span several:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$scf conv=1e-7 $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$scf</span><span class="w"> </span><span class="na">conv</span><span class="o">=</span><span class="m">1e-7</span><span class="w"> </span><span class="kn">$end</span>
 
-$scf
- procedure=bfgs
- convergence=1e-7
-$end
+<span class="kn">$scf</span>
+<span class="w"> </span><span class="na">procedure</span><span class="o">=</span><span class="no">bfgs</span>
+<span class="w"> </span><span class="na">convergence</span><span class="o">=</span><span class="m">1e-7</span>
+<span class="kn">$end</span>
 </pre></div>
 </div>
 <!-- src: 08 t04; 08 (review check: conv=1e-7 alone, procedure before and after convergence) -->
@@ -371,12 +390,9 @@ sources use, among others:</p>
 <p>Keywords belong to their group. The same name can mean different things in different groups: <code class="docutils literal notranslate"><span class="pre">steps</span></code> in
 <a class="reference internal" href="../reference/optimize.html#optimize-steps"><span class="std std-ref">$optimize</span></a> is the maximum number of optimization cycles, while <code class="docutils literal notranslate"><span class="pre">steps</span></code> in
 <a class="reference internal" href="../reference/d2edr2.html#d2edr2-steps"><span class="std std-ref">$d2edr2</span></a> selects displacement steps of a numerical Hessian.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
 <p>A prefix must stay unambiguous within its group. In <code class="docutils literal notranslate"><span class="pre">$scf</span></code>, <code class="docutils literal notranslate"><span class="pre">co</span></code> matches both <code class="docutils literal notranslate"><span class="pre">convergence</span></code> and <code class="docutils literal notranslate"><span class="pre">core</span></code>; in version 25,
 <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">co=1e-7</span> <span class="pre">$end</span></code> stopped with <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">e-7</span></code>, a message that does not point to the cause. In inputs you keep
 or share, prefer the full keyword names; they are also easier to search for.</p>
-</div>
 <!-- src: 09 ($scf names); 08 (review check: co=1e-7); input.txt -->
 <p>Do not give the same keyword twice in one group, even in different spellings. In version 6, an <code class="docutils literal notranslate"><span class="pre">$optimize</span></code> group with
 both <code class="docutils literal notranslate"><span class="pre">step=</span></code> and <code class="docutils literal notranslate"><span class="pre">steps=</span></code> took the maximum number of steps from <code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
@@ -439,12 +455,12 @@ host name.</p>
 <li><p>one line per atom, optionally preceded by <code class="docutils literal notranslate"><span class="pre">set=</span></code> lines that choose the basis set for the atoms that follow.</p></li>
 </ol>
 <p>The first items may share the opening line:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$molecule charge=0 mult=1 cartesian
- set=L1
-  8    0.000000    0.000000    0.117300
-  1    0.000000    0.757200   -0.469200
-  1    0.000000   -0.757200   -0.469200
-$end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$molecule</span><span class="w"> </span><span class="na">charge</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="na">mult</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="kt">cartesian</span>
+<span class="w"> </span><span class="na">set</span><span class="o">=</span><span class="no">L1</span>
+<span class="w">  </span><span class="m">8</span><span class="w">    </span><span class="m">0.000000</span><span class="w">    </span><span class="m">0.000000</span><span class="w">    </span><span class="m">0.117300</span>
+<span class="w">  </span><span class="m">1</span><span class="w">    </span><span class="m">0.000000</span><span class="w">    </span><span class="m">0.757200</span><span class="w">   </span><span class="m">-0.469200</span>
+<span class="w">  </span><span class="m">1</span><span class="w">    </span><span class="m">0.000000</span><span class="w">   </span><span class="m">-0.757200</span><span class="w">   </span><span class="m">-0.469200</span>
+<span class="kn">$end</span>
 </pre></div>
 </div>
 <!-- src: input.txt; 03 §5 (working inputs); 05 §5; 08 t58b -->
@@ -482,21 +498,21 @@ have no effect.</p></li>
 <li><p><strong>Keep notes after <code class="docutils literal notranslate"><span class="pre">$end</span></code>.</strong> Helper scripts append result lines such as <code class="docutils literal notranslate"><span class="pre">Energy</span> <span class="pre">=</span> <span class="pre">…</span></code> after the <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group,
 where they do no harm.</p></li>
 </ul>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>integral dir=1 $end
-$dynamic
- e=0.001
- d=0.03
- n=1000,100
-$end
- v=500.0
- h=0.1
-$molecule charge=0 mult=1 cartesian
- set=L1
-  8    0.000000    0.000000    0.117300
-  1    0.000000    0.757200   -0.469200
-  1    0.000000   -0.757200   -0.469200
-$end
- Energy =   -76.36539137
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="c">integral dir=1 $end</span>
+<span class="kn">$dynamic</span>
+<span class="w"> </span><span class="na">e</span><span class="o">=</span><span class="m">0.001</span>
+<span class="w"> </span><span class="na">d</span><span class="o">=</span><span class="m">0.03</span>
+<span class="w"> </span><span class="na">n</span><span class="o">=</span><span class="m">1000</span><span class="o">,</span><span class="m">100</span>
+<span class="kn">$end</span>
+<span class="c"> v=500.0</span>
+<span class="c"> h=0.1</span>
+<span class="kn">$molecule</span><span class="w"> </span><span class="na">charge</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="na">mult</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="kt">cartesian</span>
+<span class="w"> </span><span class="na">set</span><span class="o">=</span><span class="no">L1</span>
+<span class="w">  </span><span class="m">8</span><span class="w">    </span><span class="m">0.000000</span><span class="w">    </span><span class="m">0.000000</span><span class="w">    </span><span class="m">0.117300</span>
+<span class="w">  </span><span class="m">1</span><span class="w">    </span><span class="m">0.000000</span><span class="w">    </span><span class="m">0.757200</span><span class="w">   </span><span class="m">-0.469200</span>
+<span class="w">  </span><span class="m">1</span><span class="w">    </span><span class="m">0.000000</span><span class="w">   </span><span class="m">-0.757200</span><span class="w">   </span><span class="m">-0.469200</span>
+<span class="kn">$end</span>
+<span class="c"> Energy =   -76.36539137</span>
 </pre></div>
 </div>
 <!-- src: 01 §4, §4.8, §4.9 (pattern of the official example inputs; atoms and energy replaced by the water of 08 t01); 08 t81e, t81f (tested in a short task=thermostat run: v and h after $end are not echoed, inside $dynamic they are) -->
@@ -627,12 +643,12 @@ unknown <code class="docutils literal notranslate"><span class="pre">theory=</sp
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../reference/index.html">
+          <a class="next-page" href="running.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Input reference</div>
+                <div class="title">Installing and running</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

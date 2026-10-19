@@ -15,6 +15,7 @@ master process (rank 0). RI-MP2 and the other correlated methods write large scr
 In version 25, a two-process DFT run left one scratch file per process.
 
 (system.memory)=
+{.kw}
 ## `memory`
 
 ```{index} single: memory ($system)
@@ -41,6 +42,7 @@ Without a `$system` group, version 25 echoes `Memory: 256m + 512m (256m + 512m)`
 ```
 
 (system.disk)=
+{.kw}
 ## `disk`
 
 ```{index} single: disk ($system)
@@ -69,11 +71,12 @@ In version 25, `disk=-512` was echoed as `Memory: 512m + 512m` with no `Disk:` l
 
 **Example:**
 
-```text
+```priroda
 $system mem=2048,256 disk=-256,-1 $end
 ```
 
 (system.path)=
+{.kw}
 ## `path`
 
 ```{index} single: path ($system)
@@ -100,6 +103,6 @@ used `TMPDIR` when it was set and `/tmp` when it was not (echo `Disk:   1g '/tmp
 
 **Example:**
 
-```text
+```priroda
 $system path=/tmpa:/tmpb:/tmpc:/tmpd $end
 ```

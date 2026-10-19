@@ -10,6 +10,7 @@
 Initial guess for the SCF vectors.
 
 (guess.read)=
+{.kw}
 ## `read`
 
 ```{index} single: read ($guess)
@@ -40,6 +41,7 @@ follow-up job such as a Hessian after an optimization.
 **See also:** {ref}`save ($control) <control.save>`, {ref}`iterations ($scf) <scf.iterations>`
 
 (guess.na)=
+{.kw}
 ## `na`
 
 ```{index} single: na ($guess)
@@ -62,13 +64,14 @@ effect was seen only in the iteration counts, as the output does not print the r
 
 **Example:**
 
-```text
+```priroda
 $guess na(25)=26,25 $end    # swap the 25th and 26th vectors
 ```
 
 **See also:** {ref}`nb ($guess) <guess.nb>`
 
 (guess.nb)=
+{.kw}
 ## `nb`
 
 ```{index} single: nb ($guess)
@@ -90,6 +93,7 @@ Accepted in version 25 together with `na`; as for `na`, the output does not prin
 **See also:** {ref}`na ($guess) <guess.na>`
 
 (guess.mix)=
+{.kw}
 ## `mix`
 
 ```{index} single: mix ($guess)

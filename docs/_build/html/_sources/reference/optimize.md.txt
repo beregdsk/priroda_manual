@@ -12,6 +12,7 @@ Geometry optimization, saddle-point search, IRC and relaxed scans.
 **Relevant when:** `task = optimize | optimize+hessian | irc | scan | opt_n1`
 
 (optimize.saddle)=
+{.kw}
 ## `saddle`
 
 ```{index} single: saddle ($optimize)
@@ -43,6 +44,7 @@ negative value.
 **See also:** {ref}`follow ($optimize) <optimize.follow>`, {ref}`H ($Energy) <Energy.H>`
 
 (optimize.tolerance)=
+{.kw}
 ## `tolerance`
 
 ```{index} single: tolerance ($optimize)
@@ -61,6 +63,7 @@ Convergence tolerance on the gradient (first value) and on the displacement (sec
 **See also:** {ref}`accuracy ($grid) <grid.accuracy>`
 
 (optimize.trust)=
+{.kw}
 ## `trust`
 
 ```{index} single: trust ($optimize)
@@ -81,6 +84,7 @@ value 1/4. Version 25 uses 1/8 instead: `trust=0.2` alone was echoed as `0.20000
 
 
 (optimize.follow)=
+{.kw}
 ## `follow`
 
 ```{index} single: follow ($optimize)
@@ -98,6 +102,7 @@ Follow the n-th Hessian eigenvector in a saddle-point search.
 **See also:** {ref}`saddle ($optimize) <optimize.saddle>`
 
 (optimize.steps)=
+{.kw}
 ## `steps`
 
 ```{index} single: steps ($optimize)
@@ -122,6 +127,7 @@ given, the value of `step` is used; give only one of them.
 **See also:** {ref}`tolerance ($optimize) <optimize.tolerance>`, {ref}`steps ($d2edr2) <d2edr2.steps>`
 
 (optimize.cartesian)=
+{.kw}
 ## `cartesian`
 
 ```{index} single: cartesian ($optimize)
@@ -150,6 +156,7 @@ also with `cartesian=1`.
 ```
 
 (optimize.back)=
+{.kw}
 ## `back`
 
 ```{index} single: back ($optimize)
@@ -176,6 +183,7 @@ an IRC does not end at a converged minimum.
 **See also:** {ref}`points ($optimize) <optimize.points>`, {ref}`radius ($optimize) <optimize.radius>`
 
 (optimize.points)=
+{.kw}
 ## `points`
 
 ```{index} single: points ($optimize)
@@ -193,6 +201,7 @@ In a scan the points include both ends: `points=4` gives s = 0, 1/3, 2/3 and 1. 
 **See also:** {ref}`value ($optimize) <optimize.value>`
 
 (optimize.radius)=
+{.kw}
 ## `radius`
 
 ```{index} single: radius ($optimize)
@@ -219,6 +228,7 @@ stopping farther from the minimum than the smaller radii.
 ```
 
 (optimize.coordinates)=
+{.kw}
 ## `coordinates`
 
 ```{index} single: coordinates ($optimize)
@@ -251,6 +261,7 @@ List of redundant internal coordinates to use, each given as five integers.
 **See also:** {ref}`fix ($optimize) <optimize.fix>`
 
 (optimize.fix)=
+{.kw}
 ## `fix`
 
 ```{index} single: fix ($optimize)
@@ -273,6 +284,7 @@ unknown meaning (`fragment`, `weight`, `local`) and restraint groups (`$anchor`,
 **See also:** {ref}`value ($optimize) <optimize.value>`, {ref}`coordinates ($optimize) <optimize.coordinates>`
 
 (optimize.value)=
+{.kw}
 ## `value`
 
 ```{index} single: value ($optimize)
@@ -297,7 +309,7 @@ the sign of any torsion value taken from another program, or the scan starts fro
 
 **Example:**
 
-```text
+```priroda
 $optimize
  fix   =1,7,9,0,0, 1,8,10,0,0, 3,8,7,9,0, 3,10,9,7,0
  val(1)=1.6,       1.7
@@ -311,6 +323,7 @@ $end
 **See also:** {ref}`fix ($optimize) <optimize.fix>`, {ref}`points ($optimize) <optimize.points>`
 
 (optimize.gradient)=
+{.kw}
 ## `gradient`
 
 ```{index} single: gradient ($optimize)
@@ -326,6 +339,7 @@ This excludes the gradient terms from the internal/Cartesian transformation at t
 Otherwise keep the default.
 
 (optimize.print)=
+{.kw}
 ## `print`
 
 ```{index} single: print ($optimize)
@@ -347,6 +361,7 @@ Amount of optimization output.
 | `1` | Detailed |
 
 (optimize.symmetry)=
+{.kw}
 ## `symmetry`
 
 ```{index} single: symmetry ($optimize)
@@ -367,6 +382,7 @@ so give both options.
 **See also:** {ref}`sym ($molecule) <molecule.sym>`
 
 (optimize.model)=
+{.kw}
 ## `model`
 
 ```{index} single: model ($optimize)

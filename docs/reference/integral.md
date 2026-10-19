@@ -10,6 +10,7 @@
 Integral evaluation for RI methods.
 
 (integral.direct)=
+{.kw}
 ## `direct`
 
 ```{index} single: direct ($integral)
@@ -37,11 +38,12 @@ job claims not to fit in memory, or crashes with `write VMNN(…)?`.
 
 **Example:**
 
-```text
+```priroda
 $integral direct=1 rout=2 $end
 ```
 
 (integral.routine)=
+{.kw}
 ## `routine`
 
 ```{index} single: routine ($integral)

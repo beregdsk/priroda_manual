@@ -3,14 +3,10 @@
 
 This chapter is arranged by symptom. Each entry names the likely cause and the fix that users have reported.
 
-Almost everything here comes from user forums, not from the developer. Where a fix rests on a single report that
-nobody confirmed, the entry says so. Most reports date from Priroda 6 to 10 (about 2009–2015); a few are from 2008
-or from 2016–2026. Where a problem may have been fixed in later builds, the entry says so.
-
-:::{note}
-Most fixes below have not been checked against a current Priroda binary. Where a test run on version 25
-(2025.02.28) confirmed or contradicted a report, the entry says so.
-:::
+Almost everything here comes from user forums, not from the developer, and most reports date from Priroda 6 to 10
+(about 2009–2015). Most fixes have not been checked against a current binary. Each entry says when a fix rests on a
+single unconfirmed report, when a test run on version 25 (2025.02.28) confirmed or contradicted it, and when a
+problem may have been fixed in later builds.
 
 (troubleshooting.input)=
 ## The input is not read, or is read wrongly
@@ -121,7 +117,7 @@ The serial `p1.exe` (version 20) still does this; the output ends with `0: openi
 The parser has a problem when {ref}`convergence <scf.convergence>` is directly followed by another keyword in
 {ref}`$scf <group.scf>`. In version 25,
 
-```text
+```priroda
 $scf convergence=1e-7 iterations=250 $end
 ```
 
@@ -137,7 +133,7 @@ Further tests on version 25 narrowed it down. The problem is a `convergence=` wi
 `iterations=`, also on the next line; other keywords after it, such as `restrict=` or `procedure=`, were read
 correctly, except `n1=`, which stopped the run with `no '$end' found, 'convergence'`. Both of these work:
 
-```text
+```priroda
 $scf convergence=1e-7,1e-3 iterations=250 $end
 $scf iterations=250 convergence=1e-7 $end
 ```
@@ -205,7 +201,7 @@ Experienced users recommend this technique on both forums, and the limor1 `pri` 
    `$guess read=1 $end` (see {ref}`read <guess.read>`) and rerun with the latest geometry.
 4. Repeat until the SCF converges.
 
-```text
+```priroda
 $control
  task=optimize
  theory=dft
@@ -239,7 +235,7 @@ The default {ref}`procedure <scf.procedure>` is Newton–Raphson (`nr`). If it b
 round. One experienced user recommends this setting for difficult cases, "which is nearly all of them":
 <!-- src: 04 #320 (alxyppv); keywords/scf.yaml procedure -->
 
-```text
+```priroda
 $scf
  convergence=1e-7
  procedure=bfgs
@@ -256,10 +252,8 @@ defaults to 32. If you tighten {ref}`convergence
 <scf.convergence>` to `1e-8`, make the grid finer as well, `1e-9` or `1e-10` (see {ref}`accuracy <grid.accuracy>`).
 <!-- src: 04 #320 -->
 
-:::{note}
 The user who asked never reported whether this fixed the failing job. `bfgs` is not a cure-all: in the case in the
 next section it may have been part of the problem.
-:::
 <!-- src: 04 #319-#321; 05 §7.1 -->
 
 (troubleshooting.fine-grid)=
@@ -280,7 +274,7 @@ divergence did not reproduce. If you meet it in a current version, the fixes bel
 **Fixes.** Two experienced users solved it in two ways, which they considered equivalent:
 
 - Run `task=optimize+hessian` instead of a single-point Hessian, and drop `procedure=BFGS` and `iterations`:
-  ```text
+  ```priroda
   $control task=optimize+hessian $end
   $scf restrict=0 convergence=1e-10 $end
   ```
@@ -315,7 +309,7 @@ decide.
 
 The older sources recommend instead an unrestricted calculation with the HOMO and LUMO of the guess mixed:
 
-```text
+```priroda
 $scf restrict=0 $end
 $guess mix=1 $end
 ```
@@ -366,17 +360,15 @@ the SCF take two to three times more iterations. In the version 25 tests, the on
 degenerate shell of O2.
 <!-- src: 08 t75a-d -->
 
-:::{note}
 If an excited configuration does turn up in a molecule without degenerate orbitals, two tools are available: start
 from other vectors (`$guess read=1` with vectors of a related calculation), or reorder the starting orbitals with
 {ref}`na <guess.na>` and {ref}`nb <guess.nb>`. Neither was tested for this manual on such a case, because none was
 found.
-:::
 <!-- src: 06 §10 (na, nb); 03 §7 (reading vectors) -->
 
 ### Heavy elements
 
-For scalar-relativistic pure DFT with the heaviest atoms, the v5 documentation suggests
+For scalar-relativistic pure DFT with the heaviest atoms, the version 5 documentation suggests
 {ref}`d1small=1 <scf.d1small>`; without it, the quadratically convergent SCF may fail.
 <!-- src: 06 §10; keywords/scf.yaml d1small -->
 
@@ -427,7 +419,7 @@ One experienced user found Priroda's optimizer weaker than Gaussian's, while its
 
 **Fix.** Optimize in Cartesian coordinates:
 
-```text
+```priroda
 $optimize cartesian=1 $end
 ```
 
@@ -476,6 +468,8 @@ A scan that requested 10 points but computed only 7 (and 11 of 20) was reported 
 
 ### IRC gives only two points, or no curve
 
+The full route from a scan to an IRC is in {doc}`../tasks/ts-irc-scan`.
+
 An IRC must start from a properly optimized transition state with an accurate Hessian in the input. Find the TS
 first (`task=optimize` with {ref}`saddle=1 <optimize.saddle>`), compute the Hessian there, check that it has exactly
 one imaginary frequency and that this mode is the reaction you want, and only then run `task=irc`. In one reported
@@ -521,7 +515,7 @@ has to be repeated three or four times. Priroda has no option to recompute the H
 ### Hybrid functional silently ignored
 
 **Cause.** Hybrid functionals (B3LYP, PBE0/PBE1, ...) are applied only with {ref}`theory=ridft <control.theory>`.
-With `theory=dft` or `theory=tddft`, older versions (reported for v6 to v8) ran without any error message but used
+With `theory=dft` or `theory=tddft`, older versions (reported for versions 6 to 8) ran without any error message but used
 zero exact exchange: the exact-exchange part was simply dropped, so the result matched neither the hybrid nor a pure
 GGA. The developer was told about
 it and, according to a user who corresponded with him, did not intend to change it.
@@ -666,7 +660,7 @@ A 7-atom RI-MP2 job with `four=1`, `basis4.in` and `set=L22` claimed not to fit 
 while smaller and larger basis sets ran. A second user reproduced it and got `0: write VMNN(11753704:14042536)?`.
 The first user found that direct integrals avoid the problem:
 
-```text
+```priroda
 $integral direct=1 $end
 ```
 
@@ -709,11 +703,11 @@ has work, as here; a hung job shows `0 blocks` on some node:
 **Fix.** Run small RI jobs on fewer processes, or on one core.
 <!-- src: 05 §3.1 (EvgeniX, amge 2015) -->
 
-Older reports describe similar hangs: small jobs on many processors hang (v6/v7); MP2 on a 102-atom complex died with
-signal 8 on more than about 24 cores (v7, MVAPICH); a v6 Hessian on 4 cores could hang at `Solving for responses ...`.
-The v6 advice was at most 2 cores for a Hessian and at most 4 for an optimization. Another user ran DFT, including
+Older reports describe similar hangs: small jobs on many processors hang (versions 6 and 7); MP2 on a 102-atom complex died with
+signal 8 on more than about 24 cores (version 7, MVAPICH); a version 6 Hessian on 4 cores could hang at `Solving for responses ...`.
+The advice for version 6 was at most 2 cores for a Hessian and at most 4 for an optimization. Another user ran DFT, including
 Hessians, on 24–32 cores without trouble, so this advice is disputed. In 2018 an experienced user said the Windows
-builds run in parallel only from version 16, and that the v6 Hessian uses at most 2 cores, the v17 one 4 or more.
+builds run in parallel only from version 16, and that the version 6 Hessian uses at most 2 cores, the version 17 one 4 or more.
 <!-- src: 03 §3, §15 (Evgeniy, sanya); 04 #401 -->
 
 ### Little or no speed-up from more cores
@@ -753,7 +747,7 @@ The message `OOPS: semop lock failed` (with `process N received signal 2` or `6`
 
 - as a secondary message after another fatal error, such as running out of disk. Fix the first error;
   <!-- src: 03 §8 (denis) -->
-- in v6 shared-memory runs on 7 cores. Fewer cores avoided it; cleaning semaphores with `ipcrm` did not help.
+- in version 6 shared-memory runs on 7 cores. Fewer cores avoided it; cleaning semaphores with `ipcrm` did not help.
   <!-- src: 03 §15 (Chai, Evgeniy) -->
 
 It also appeared for one user who ran as a normal user while the same input worked as root. That case was never

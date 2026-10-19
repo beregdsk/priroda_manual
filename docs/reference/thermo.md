@@ -10,6 +10,7 @@
 Thermochemistry after a Hessian calculation.
 
 (thermo.sigma)=
+{.kw}
 ## `sigma`
 
 ```{index} single: sigma ($thermo)
@@ -27,6 +28,7 @@ given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) 
 **About the default:** 1 (version 25 does not detect the symmetry number).
 
 (thermo.temperature)=
+{.kw}
 ## `temperature`
 
 ```{index} single: temperature ($thermo)
@@ -46,6 +48,7 @@ Temperatures at which thermochemistry is printed, up to 50 values. Each temperat
 
 
 (thermo.mass)=
+{.kw}
 ## `mass`
 
 ```{index} single: mass ($thermo)

@@ -18,7 +18,7 @@ make clean
 
 ## Keyword pipeline
 
-The input reference (Part II in the built manual) is not hand-written. `keywords/<group>.yaml` holds one record per keyword (schema in the docstring of `docs/_ext/priroda_keywords.py`). That Sphinx extension runs on `builder-inited` and writes `docs/reference/<group>.md` and `docs/reference/index.md`, so **edit the YAML, never the generated `.md`**.
+The input reference (Part III in the built manual) is not hand-written. `keywords/<group>.yaml` holds one record per keyword (schema in the docstring of `docs/_ext/priroda_keywords.py`). That Sphinx extension runs on `builder-inited` and writes `docs/reference/<group>.md` and `docs/reference/index.md`, so **edit the YAML, never the generated `.md`**.
 
 The extension validates on every build:
 - required fields;
@@ -49,8 +49,11 @@ Record conventions:
   never silent hedging and never invented detail.
 - Link keywords as ``{ref}`steps <optimize.steps>` ``, and groups as ``{ref}`$optimize <group.optimize>` ``. Don't
   restate the reference tables in prose; give the task-level advice and link.
-- Input examples go in ```` ```text ```` blocks and must be syntactically valid Priroda input with integer atomic
-  numbers. Mark untested examples with `<!-- verify -->`.
+- Input examples go in ```` ```priroda ```` blocks (the highlighter in `docs/_ext/priroda_lexer.py`; text outside
+  groups shows as a comment) and must be syntactically valid Priroda input with integer atomic numbers. Program
+  output goes in ```` ```text ````, shell commands in ```` ```bash ````. Mark untested examples with `<!-- verify -->`.
+- Diagrams use the `{graphviz}` directive (SVG in HTML, PDF in LaTeX). Theme colours and fonts are in `docs/conf.py`
+  and `docs/_static/priroda.css`.
 - `make html` must stay warning-free (`-W`).
 
 ## Layout

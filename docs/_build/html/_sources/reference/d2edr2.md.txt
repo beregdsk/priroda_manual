@@ -12,6 +12,7 @@ Numerical Hessian by finite differences of the gradient.
 **Relevant when:** `numerical Hessian: task = hessian with theory = ridft | rimp2 | tddft | qm_n3, or $control derivative = numeric (an analytic dft Hessian has no displacement steps)`
 
 (d2edr2.length)=
+{.kw}
 ## `length`
 
 ```{index} single: length ($d2edr2)
@@ -28,6 +29,7 @@ Step length for numerical differentiation of the potential-energy surface.
 **About the default:** version 25 prints `Step 0.00100000 au FORWARD  for coordinate   1:` for each displacement.
 
 (d2edr2.displace)=
+{.kw}
 ## `displace`
 
 ```{index} single: displace ($d2edr2)
@@ -55,6 +57,7 @@ With the default, version 25 printed a FORWARD and a BACKWARD step for every coo
 **See also:** {ref}`convergence ($scf) <scf.convergence>`
 
 (d2edr2.steps)=
+{.kw}
 ## `steps`
 
 ```{index} single: steps ($d2edr2)
@@ -82,7 +85,7 @@ the example uses `grep -h` instead.
 
 **Example:**
 
-```text
+```priroda
 # 12-atom molecule, four inputs run in parallel on different machines:
 $d2edr2 disp=1 steps= 0, 9 $end    # mol.in1
 $d2edr2 disp=1 steps=10,18 $end    # mol.in2

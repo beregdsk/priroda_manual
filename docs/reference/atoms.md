@@ -10,6 +10,7 @@
 Per-element core definitions for correlated (HF-based) methods.
 
 (atoms.core)=
+{.kw}
 ## `core`
 
 ```{index} single: core ($atoms)
@@ -33,7 +34,7 @@ for the Cl core 1s, 2s, 2p).
 
 **Example:**
 
-```text
+```priroda
 $atoms core(280)=2,1,0,0 $end
 # 1s, 2s, 2p (10 electrons) of nickel are core
 ```
@@ -41,6 +42,7 @@ $atoms core(280)=2,1,0,0 $end
 **See also:** {ref}`core ($scf) <scf.core>`, {ref}`mcore ($atoms) <atoms.mcore>`
 
 (atoms.mcore)=
+{.kw}
 ## `mcore`
 
 ```{index} single: mcore ($atoms)
