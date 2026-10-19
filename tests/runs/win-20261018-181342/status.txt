@@ -1,0 +1,4 @@
+w13a_parallel exit=-1073741515 time=0s
+w13b_mpi_build_serial exit=-1073741515 time=0s
+no scratch files left in the run folder
+folder above the program after the runs: tmp exists=False

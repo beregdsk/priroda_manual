@@ -10,6 +10,7 @@
 Integral evaluation for RI methods.
 
 (integral.direct)=
+{.kw}
 ## `direct`
 
 ```{index} single: direct ($integral)
@@ -18,7 +19,7 @@ Integral evaluation for RI methods.
 **Type:** switch\
 **Default:** `0`\
 **Status:** undocumented · not verified\
-**Sources:** input.txt (annotation corrupted); 03 #0, §17; 05 §2
+**Sources:** `input.txt`, chemport.ru forum, qchem.ru forum
 
 Selects direct (recomputed) Coulomb integrals for RI methods.
 
@@ -37,11 +38,12 @@ job claims not to fit in memory, or crashes with `write VMNN(…)?`.
 
 **Example:**
 
-```text
+```priroda
 $integral direct=1 rout=2 $end
 ```
 
 (integral.routine)=
+{.kw}
 ## `routine`
 
 ```{index} single: routine ($integral)
@@ -50,7 +52,7 @@ $integral direct=1 rout=2 $end
 **Type:** integer\
 **Default:** `0`\
 **Status:** undocumented · not verified\
-**Sources:** input.txt (annotation corrupted); 03 #0
+**Sources:** `input.txt`, qchem.ru forum
 
 Algorithm for the two-electron integrals in correlated methods. `input.txt`'s example uses `rout=2`, but no
 source explains the value 2.

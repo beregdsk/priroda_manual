@@ -1,0 +1,16 @@
+$system mem=256 disk=1 $end
+$control
+ task=optimize
+ theory=dft
+ basis=@BASIS@
+$end
+$optimize saddle=1 steps=100 $end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  6      0.000000    0.000000    0.000000
+  7      0.000000    0.000000    1.190000
+  1      1.132000    0.000000    0.366000
+$end
+@ENERGY_FROM_t77a@

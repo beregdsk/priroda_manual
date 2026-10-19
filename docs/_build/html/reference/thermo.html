@@ -6,10 +6,12 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$nmr" href="nmr.html"><link rel="prev" title="$d2edr2" href="d2edr2.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$thermo - Priroda User Manual</title>
+        <title>$thermo - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -161,7 +175,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +196,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -190,14 +204,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +238,14 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -265,32 +288,36 @@
 <section class="tex2jax_ignore mathjax_ignore" id="thermo">
 <span id="group-thermo"></span><h1><code class="docutils literal notranslate"><span class="pre">$thermo</span></code><a class="headerlink" href="#thermo" title="Link to this heading">¶</a></h1>
 <p id="index-0">Thermochemistry after a Hessian calculation.</p>
-<section id="sigma">
+<section class="kw" id="sigma">
 <span id="thermo-sigma"></span><h2><code class="docutils literal notranslate"><span class="pre">sigma</span></code><a class="headerlink" href="#sigma" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> integer<br />
-<strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
-<p>Rotational symmetry number for thermochemistry.</p>
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
+<p>Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless <code class="docutils literal notranslate"><span class="pre">sigma=</span></code> is
+given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3). With
+<code class="docutils literal notranslate"><span class="pre">sigma=3</span></code>, NH3 gave S = 46.03 cal/(mol·K) at 298.15 K.</p>
+<p><strong>About the default:</strong> 1 (version 25 does not detect the symmetry number).</p>
 </section>
-<section id="temperature">
+<section class="kw" id="temperature">
 <span id="thermo-temperature"></span><h2><code class="docutils literal notranslate"><span class="pre">temperature</span></code><a class="headerlink" href="#temperature" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> list<br />
-<strong>Default:</strong> <em>none stated</em><br />
+<strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">298.15</span></code><br />
 <strong>Units:</strong> K<br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">298.15</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, but posted outputs show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code> (2011, 2021) as well as <code class="docutils literal notranslate"><span class="pre">298.150</span> <span class="pre">K</span></code> (2013).
-Set <code class="docutils literal notranslate"><span class="pre">temperature=</span></code> explicitly when the exact value matters.</p>
-<p>Temperatures at which thermochemistry is printed, up to 50 values.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
+<p>Temperatures at which thermochemistry is printed, up to 50 values. Each temperature gets its own table:
+<code class="docutils literal notranslate"><span class="pre">temperature=200,298.15,400</span></code> printed three.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">298.15</span></code>: version 25 prints <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span>&#160; <span class="pre">298.150</span> <span class="pre">K</span></code>, as <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> states. Older posted outputs also show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code>
+(2011, 2021), so set <code class="docutils literal notranslate"><span class="pre">temperature=</span></code> explicitly when comparing with other versions.</p>
 </section>
-<section id="mass">
+<section class="kw" id="mass">
 <span id="thermo-mass"></span><h2><code class="docutils literal notranslate"><span class="pre">mass</span></code><a class="headerlink" href="#mass" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> amu<br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> Dft.rtf</p>
+<strong>Sources:</strong> <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code></p>
 <p>Atomic masses for vibrational analysis and thermochemistry. Use it to redo the analysis for other isotopes
 from a stored Hessian (<code class="docutils literal notranslate"><span class="pre">$Energy</span></code>) without recomputing it.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-mass"><span class="std std-ref">mass ($molecule)</span></a>, <a class="reference internal" href="Energy.html#energy-h"><span class="std std-ref">H ($Energy)</span></a></p>
@@ -326,7 +353,7 @@ from a stored Hessian (<code class="docutils literal notranslate"><span class="p
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

@@ -1,0 +1,16 @@
+$system mem=128 disk=1 $end
+$control
+ task=hessian
+ theory=dft
+ basis=@BASIS@
+ print=+molden
+$end
+$molecule
+ charge=0 mult=1
+ z-matrix
+ set=L1
+   7
+   1    1    1.02672223
+   1    1    1.02672140    2    104.150240
+   1    1    1.02671372    2    104.144601   -3    104.150290
+$end

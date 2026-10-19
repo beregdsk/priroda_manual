@@ -1,0 +1,7 @@
+w13a_parallel exit=134 time=1s
+w13b_mpi_build_serial exit=0 time=2s
+no scratch files left in the run folder
+folder above the program after the runs: tmp exists=True
+
+note: successful after changing the slashes:
+C:/Priroda/orterun.exe -np 2 C:/Priroda/p_190306.exe ./runs/win-20261018-191435/w13a_parallel.in ./runs/win-20261018-191435/w13a_parallel.stdout

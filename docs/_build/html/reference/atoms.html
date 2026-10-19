@@ -6,10 +6,12 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$optimize" href="optimize.html"><link rel="prev" title="$integral" href="integral.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$atoms - Priroda User Manual</title>
+        <title>$atoms - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -161,7 +175,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +196,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -190,14 +204,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +238,14 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -265,34 +288,39 @@
 <section class="tex2jax_ignore mathjax_ignore" id="atoms">
 <span id="group-atoms"></span><h1><code class="docutils literal notranslate"><span class="pre">$atoms</span></code><a class="headerlink" href="#atoms" title="Link to this heading">¶</a></h1>
 <p id="index-0">Per-element core definitions for correlated (HF-based) methods.</p>
-<section id="core">
+<section class="kw" id="core">
 <span id="atoms-core"></span><h2><code class="docutils literal notranslate"><span class="pre">core</span></code><a class="headerlink" href="#core" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>For HF-based methods, the number of core shells for L=0,1,2,3, given for each atomic number. The values are
 used only to compute the total number of core electrons in the molecule.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The index in the example, 280 for Ni (Z=28), suggests the layout <code class="docutils literal notranslate"><span class="pre">core(10*Z)=…</span></code>. No source states this
-layout, so it must be verified.</p>
+<p>The index is 10·Z: <code class="docutils literal notranslate"><span class="pre">core(280)</span></code> is nickel, <code class="docutils literal notranslate"><span class="pre">core(80)</span></code> oxygen. In version 25, <code class="docutils literal notranslate"><span class="pre">core(80)=0,0,0,0</span></code> removed the
+oxygen 1s from the frozen core of an RI-MP2 run. The output reports the frozen core as <code class="docutils literal notranslate"><span class="pre">atom</span>&#160;&#160; <span class="pre">8</span> <span class="pre">core</span> <span class="pre">=</span>&#160; <span class="pre">1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">core</span> <span class="pre">electrons</span> <span class="pre">1</span></code>; the number there apparently counts core orbitals, not electrons (the C60
+example output prints <code class="docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">core</span>&#160; <span class="pre">electrons</span> <span class="pre">60</span></code> for 60 carbon atoms, and a version 25 HCl run prints 5
+for the Cl core 1s, 2s, 2p).</p>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$atoms core(280)=2,1,0,0 $end
-# 1s, 2s, 2p (10 electrons) of nickel are core
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$atoms</span><span class="w"> </span><span class="na">core(280)</span><span class="o">=</span><span class="m">2</span><span class="o">,</span><span class="m">1</span><span class="o">,</span><span class="m">0</span><span class="o">,</span><span class="m">0</span><span class="w"> </span><span class="kn">$end</span>
+<span class="c"># 1s, 2s, 2p (10 electrons) of nickel are core</span>
 </pre></div>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="scf.html#scf-core"><span class="std std-ref">core ($scf)</span></a>, <a class="reference internal" href="#atoms-mcore"><span class="std std-ref">mcore ($atoms)</span></a></p>
 </section>
-<section id="mcore">
+<section class="kw" id="mcore">
 <span id="atoms-mcore"></span><h2><code class="docutils literal notranslate"><span class="pre">mcore</span></code><a class="headerlink" href="#mcore" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
-<p>A simple way to add outer-core shells to the correlation treatment: <code class="docutils literal notranslate"><span class="pre">mcore=M</span></code> adds all shells whose principal
-quantum number is lower than that of the outermost valence shell by less than M.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
+<p>A simple way to add outer-core shells to the correlation treatment: <code class="docutils literal notranslate"><span class="pre">mcore=M</span></code> correlates every core shell
+whose principal quantum number is at least n(valence) − M. In version 25, for Cl in an RI-MP2 run of HCl, the
+default core was <code class="docutils literal notranslate"><span class="pre">atom</span>&#160; <span class="pre">17</span> <span class="pre">core</span> <span class="pre">=</span>&#160; <span class="pre">2,</span>&#160; <span class="pre">1</span></code> (1s, 2s, 2p); <code class="docutils literal notranslate"><span class="pre">mcore=1</span></code> left only 1s in the core (<code class="docutils literal notranslate"><span class="pre">core</span> <span class="pre">=</span>&#160; <span class="pre">1</span></code>), and
+<code class="docutils literal notranslate"><span class="pre">mcore=2</span></code> left no core at all.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#atoms-core"><span class="std std-ref">core ($atoms)</span></a></p>
 </section>
 </section>
@@ -326,7 +354,7 @@ quantum number is lower than that of the outermost valence shell by less than M.
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

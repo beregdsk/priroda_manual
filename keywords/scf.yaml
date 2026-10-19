@@ -7,7 +7,7 @@ keywords:
     type: switch
     default: null
     default_note:
-      en: "`1` if the system has an even number of electrons, otherwise `0`."
+      en: "`1` for a closed-shell singlet, otherwise `0`. Version 25 ran O2 with `mult=3` (an even number of electrons) unrestricted without being told."
     values:
       - {value: "0", en: Spin-unrestricted.}
       - {value: "1", en: Spin-restricted (available only for a few methods).}
@@ -15,8 +15,8 @@ keywords:
       en: Spin restriction.
     see_also: [guess.mix]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t48"]
+    verified_against: "25 (2025.02.28)"
   - name: convergence
     type: list
     default: [1e-6, 1e-3]
@@ -24,36 +24,45 @@ keywords:
       en: the first value is for SCF and the second for CP-SCF.
     description:
       en: |
-        SCF and CP-SCF convergence thresholds. The defaults are recommended. To save time in difficult cases you may
+        SCF and CP-SCF convergence thresholds. The SCF value is a threshold on the energy gradient: in version
+        25, an SCF whose gradient stayed near 2·10⁻⁶ ended with `no convergence!` at the default 1e-6. The defaults
+        are recommended. To save time in difficult cases you may
         loosen the SCF value to `1e-5` for preliminary geometry optimizations.
     notes:
       en: |
-        Two problems are reported when `convergence` and `iterations` appear together in `$scf`. In one, the group stops
-        being read or fails with `*** error in '$scf' : unknown name erations`. In the other, the pair has no effect
-        unless `procedure=bfgs` is also given. Reports disagree on whether keyword order matters. Until this is
-        verified, check the `scf options:` echo line in the output.
+        **Put `iterations=` before `convergence=`, or give `convergence` two values.** A one-value `convergence=`
+        followed by `iterations=` stops the run with `*** error in '$scf' : unknown name terations`, also when the
+        two keywords are on separate lines. The message names `iterations` with its first letters missing; how many
+        depended on the machine, not on the value (`terations` on one computer, `erations` with `p4_d` on another, for
+        every value tried). Other keywords after a one-value `convergence=`, such as `restrict=`, were read correctly.
+        `iterations=250 convergence=1e-7` and `convergence=1e-7,1e-3 iterations=250` both work. Check the
+        `scf: conv = …; iter=…` echo line in the output.
     see_also: [scf.iterations, scf.procedure]
     status: current
-    sources: ["input.txt", "01 §4.5 (output echo)", "05 §2", "04 #322-#324"]
-    verified_against: null
+    sources: ["input.txt", "01 §4.5 (output echo, energy gradient)", "05 §5.1", "04 #322-#324", "08 t01, t07a, t07b", "08 t22a-c", "08 t74b (gradient vs threshold)", "08 Slurm (erations)", "08 review check (convergence value series)"]
+    verified_against: "25 (2025.02.28)"
   - name: iterations
     type: list
-    default: [16, 16]
+    default: [32, 16]
     description:
       en: Maximum number of iterations and of microiterations (`iterations=it,micro`).
     default_note:
       en: |
-        `16,16` is what v6, v13 and v15 echo for DFT. A HF run for CCSD showed `48,16`, so the default may depend on
-        the method. `Dft.rtf` gives 30 (older version).
+        Version 25 echoes `iter=32,16` for DFT. v6, v13 and v15 echoed `16,16`, a HF run for CCSD showed `48,16`, and
+        `Dft.rtf` gives 30 (older version). The default may depend on the method and version.
     notes:
       en: |
-        Do not raise this limit hoping for convergence: understand why SCF is not converging. A recommended
-        technique for difficult cases is to cap the run at `iterations=10`, save the vectors (`$control save=`) and
-        restart with `$guess read=1`, repeating as needed.
+        **An unconverged SCF does not stop the run.** Version 25 prints `no convergence!`, then still prints `E =`,
+        the orbitals and the properties, and exits with status 0. Search the output for `no convergence!`.
+
+        Raising the limit moderately is fine: an OH radical failed at the default 32 iterations and converged after
+        34 with `iterations=100`. A very large limit does not replace understanding why the SCF is not converging
+        (`Dft.rtf` warns against it). A recommended technique for difficult cases is to cap the run at
+        `iterations=10`, save the vectors (`$control save=`) and restart with `$guess read=1`, repeating as needed.
     see_also: [scf.convergence, guess.read]
     status: current
-    sources: ["input.txt", "01 §4.5", "04 #319", "05 §5", "Dft.rtf", "02 §3.2 (pri help)", "04 #306"]
-    verified_against: null
+    sources: ["input.txt", "01 §4.5", "04 #319", "05 §5", "Dft.rtf", "02 §3.2 (pri help)", "04 #306", "08 t01, t10, t28, t71b"]
+    verified_against: "25 (2025.02.28)"
   - name: procedure
     type: enum
     default: nr
@@ -68,8 +77,8 @@ keywords:
       $scf convergence=1e-7 procedure=bfgs iterations=250 $end
       $grid accuracy=1e-9 $end
     status: current
-    sources: ["input.txt", "Dft.rtf", "04 #320"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf", "04 #320", "08 t07b"]
+    verified_against: "25 (2025.02.28)"
   - name: d1small
     type: switch
     default: 0

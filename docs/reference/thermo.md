@@ -10,37 +10,45 @@
 Thermochemistry after a Hessian calculation.
 
 (thermo.sigma)=
+{.kw}
 ## `sigma`
 
 ```{index} single: sigma ($thermo)
 ```
 
 **Type:** integer\
-**Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Default:** `1`\
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, `input.txt`
 
-Rotational symmetry number for thermochemistry.
+Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless `sigma=` is
+given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3). With
+`sigma=3`, NH3 gave S = 46.03 cal/(mol·K) at 298.15 K.
+
+**About the default:** 1 (version 25 does not detect the symmetry number).
 
 (thermo.temperature)=
+{.kw}
 ## `temperature`
 
 ```{index} single: temperature ($thermo)
 ```
 
 **Type:** list\
-**Default:** *none stated*\
+**Default:** `298.15`\
 **Units:** K\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, chemport.ru forum
 
-Default: `298.15` according to `Dft.rtf`, but posted outputs show `298.000 K` (2011, 2021) as well as `298.150 K` (2013).
-Set `temperature=` explicitly when the exact value matters.
+Temperatures at which thermochemistry is printed, up to 50 values. Each temperature gets its own table:
+`temperature=200,298.15,400` printed three.
 
+**About the default:** `298.15`: version 25 prints `T =  298.150 K`, as `Dft.rtf` states. Older posted outputs also show `298.000 K`
+(2011, 2021), so set `temperature=` explicitly when comparing with other versions.
 
-Temperatures at which thermochemistry is printed, up to 50 values.
 
 (thermo.mass)=
+{.kw}
 ## `mass`
 
 ```{index} single: mass ($thermo)
@@ -50,7 +58,7 @@ Temperatures at which thermochemistry is printed, up to 50 values.
 **Default:** *none stated*\
 **Units:** amu\
 **Status:** undocumented · not verified\
-**Sources:** Dft.rtf
+**Sources:** `Dft.rtf`
 
 Atomic masses for vibrational analysis and thermochemistry. Use it to redo the analysis for other isotopes
 from a stored Hessian (`$Energy`) without recomputing it.

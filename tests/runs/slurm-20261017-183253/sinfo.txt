@@ -1,0 +1,2 @@
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+local*       up   infinite      1   idle vm

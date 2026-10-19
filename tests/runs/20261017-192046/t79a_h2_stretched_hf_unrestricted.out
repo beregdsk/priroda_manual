@@ -1,0 +1,138 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 19:20:47 2026
+
+ node   0: 'vm'
+
+ Memory: 256m (256m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 2 atoms, 2 electrons
+
+ Atomic Coordinates:
+   1     0.00000000   0.00000000   0.00000000
+   1     0.00000000   0.00000000   2.50000000
+ #
+  formula: H2
+  internuclear distances:
+  H1    |
+  H2    |
+     largest =    2.50000
+
+ at.d.=1
+
+ Basis set input: '/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in'
+    1   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    2   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ +---------------------------------------
+ | Number of atoms                      2
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            1
+ | Number of beta  electrons            1
+ | Number of core  electrons            0
+ | Theoretical Method                  HF
+ | Dimension of wavefunction basis     10
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=64,16; xmax = 0.12500; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-08)
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+    1    56
+  mol   112
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  97.4%     0.0
+ time: Initial Guess                    :     0.0  99.9%     0.0
+
+ S,T,V Integrals:
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ s=6.4e-01
+ time: integral estimates               :     0.0  99.2%     0.0
+         215 blocks,         1879 integrals total
+ sparsity=0.8
+ time: Two-Electron Integrals           :     0.0  99.9%     0.0
+
+ Hartree-Fock Equations:
+ it.       energy         change         gradient     change       time
+   0     -0.8614386917   0.0000000000   0.03073129   0.02345874      0.0
+   1     -0.8631180023  -0.0016793106   0.00437677   0.00389929      0.0
+   2     -0.8631529840  -0.0000349817   0.00001700   0.00001460      0.0
+   3     -0.8631529851  -0.0000000011   0.00000302   0.00000294      0.0
+   4     -0.8631529851  -0.0000000000   0.00000009   0.00000009      0.0
+ converged!
+   5     -0.8631529851  -0.0000000000   0.00000000   0.00000000      0.0
+ time: Fock Matrix                      :     0.0  98.4%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Diagonalization                  :     0.0  99.1%     0.0
+ time: SCF Equations                    :     0.0  99.9%     0.0
+ Spin Squared =   0.000000 ( 0.000000)
+ SCF Total Energy =     -0.8631529851
+ Kinetic   Energy =      0.69933353
+ Potential Energy =     -2.16149648
+ Dipole  Moment = {  0.00000,  0.00000,  0.00000} (  0.00000)
+ Quadrupole Moment = {  -2.44371;
+                        -0.00000,  -2.44371;
+                        -0.00000,  -0.00000,  -0.87122}
+
+  E  =      -0.8631529851
+  T  =       0.69933353  V  =      -2.16149648  J  =       0.77467814
+  Ex =      -0.38733907  Ec =       0.00000000
+
+  dipole =   0.000000 au (  0.000000 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -0.343742
+ virtual:
+   2    -0.075962    3     0.845651    4     0.952106    5     0.952106
+   6     0.969792    7     0.982387    8     1.011600    9     1.011600
+  10     1.274027
+
+ One-Electron Energies (beta)
+ occupied:
+   1    -0.343742
+ virtual:
+   2    -0.075962    3     0.845651    4     0.952106    5     0.952106
+   6     0.969792    7     0.982387    8     1.011600    9     1.011600
+  10     1.274027
+
+
+eng>$Energy
+eng> E=-8.6315298510357e-01
+eng> D= 4.40107634e-15  3.01731314e-18  1.76303416e-12
+eng>$end
+
+
+ ============================================================
+
+ Memory used =     3877 KB
+  Disk  used =    10231 KB,            84 KB written,          212 KB read
+
+ CPU  time =    0.67 sec =  0.01 min = 0.00 hr =   99.43%
+ REAL time =    0.67 sec =  0.01 min = 0.00 hr
+ ratio     =   99.43%
+
+ date: Sat Oct 17 19:20:47 2026
+
+ time: Initial Guess                    :     0.0  99.9%     0.0
+ time: atomic calculations              :     0.0  97.4%     0.0
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Coulomb-type Integrals           :     0.0  98.6%     0.0
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: integral estimates               :     0.0  99.2%     0.0
+ time: Two-Electron Integrals           :     0.0  99.9%     0.0
+ time: SCF Equations                    :     0.0  99.9%     0.0
+ time: Fock Matrix                      :     0.0  98.4%     0.0
+ time: Plane Rotations                  :     0.0   0.0%     0.0
+ time: Diagonalization                  :     0.0  99.1%     0.0
+ time: Orthogonalize                    :     0.0  98.5%     0.0
+ time: Rotate                           :     0.0  95.3%     0.0

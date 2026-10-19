@@ -6,10 +6,12 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$molecule" href="molecule.html"><link rel="prev" title="$system" href="system.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$control - Priroda User Manual</title>
+        <title>$control - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -161,7 +175,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +196,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -190,14 +204,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +238,14 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -265,12 +288,12 @@
 <section class="tex2jax_ignore mathjax_ignore" id="control">
 <span id="group-control"></span><h1><code class="docutils literal notranslate"><span class="pre">$control</span></code><a class="headerlink" href="#control" title="Link to this heading">¶</a></h1>
 <p id="index-0">Job type, level of theory, basis-set file, Hamiltonian and printing.</p>
-<section id="task">
+<section class="kw" id="task">
 <span id="control-task"></span><h2><code class="docutils literal notranslate"><span class="pre">task</span></code><a class="headerlink" href="#task" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">gradient</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, version 25 executable, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, qchem.ru forum, LIMOR page</p>
 <p>Job type.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -296,28 +319,28 @@
 <td><p>Optimization followed by a Hessian at the final geometry. The only combined task that works. Present in v2 and v9 and later, absent in v6.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irc</span></code></p></td>
-<td><p>Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (<code class="docutils literal notranslate"><span class="pre">$Energy</span></code>).</p></td>
+<td><p>Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (<code class="docutils literal notranslate"><span class="pre">$Energy</span></code>). Each point is printed on <code class="docutils literal notranslate"><span class="pre">IRC&gt;</span></code> lines with its distance and energy.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scan</span></code></p></td>
-<td><p>Relaxed potential-energy-surface scan over the coordinates in <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">fix</span></code>.</p></td>
+<td><p>Relaxed potential-energy-surface scan over the coordinates in <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">fix</span></code>. The structures and energies are summarized on <code class="docutils literal notranslate"><span class="pre">SCAN&gt;</span></code> lines at the end.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nmr</span></code></p></td>
-<td><p>NMR shielding tensors. Works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>.</p></td>
+<td><p>NMR shielding tensors. Works only with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>: with <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, version 25 silently runs only the ground-state SCF.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dipole</span></code></p></td>
-<td><p>Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities).</p></td>
+<td><p>Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> block.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">check</span></code></p></td>
-<td><p>Process the geometry only. <em>(undocumented)</em></p></td>
+<td><p>Not a task name in the version 25 program. Like any unrecognized task, <code class="docutils literal notranslate"><span class="pre">task=check</span></code> sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF without a message, which makes it a usable input check. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">extremal</span></code></p></td>
 <td><p>Gradient-extremal path (v9 banner “Calculation of Gradient Extremal Path”); slow. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transit</span></code></p></td>
-<td><p>Synchronous transit in internal coordinates. Needs two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). Reported working in v8. <em>(undocumented)</em></p></td>
+<td><p>Synchronous transit in internal coordinates. Needs two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). Reported working in v8. In version 25 a test with two ammonia structures crashed with a bus error after printing the internal coordinates (08 t81d). <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">saddle</span></code></p></td>
-<td><p>Approximate saddle-point search from two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). <em>(undocumented)</em></p></td>
+<td><p>Approximate saddle-point search from two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). Version 25 prints <code class="docutils literal notranslate"><span class="pre">Approximate</span> <span class="pre">Saddle</span> <span class="pre">Point</span> <span class="pre">Search</span></code>, then a one-dimensional maximization between the two structures and a two-dimensional saddle search; for the two mirror images of ammonia it stopped at the planar midpoint (08 t81c). <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">path</span></code></p></td>
 <td><p>Minimum-energy-path optimization from two <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks (start and end). <em>(undocumented)</em></p></td>
@@ -332,10 +355,10 @@
 <td><p>Optimizer for very large systems (used for 8060 atoms with <code class="docutils literal notranslate"><span class="pre">theory=qm_n2</span></code>). Pairs with <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">mod=1</span></code>. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">thermostat</span></code></p></td>
-<td><p>Molecular dynamics with a thermostat; see <code class="docutils literal notranslate"><span class="pre">$dynamic</span></code>. <em>(undocumented)</em></p></td>
+<td><p>Molecular dynamics with a thermostat; see <code class="docutils literal notranslate"><span class="pre">$dynamic</span></code>. In version 25 it ran with <code class="docutils literal notranslate"><span class="pre">dft</span></code>, <code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">ccsd</span></code>, <code class="docutils literal notranslate"><span class="pre">tddft</span></code> and <code class="docutils literal notranslate"><span class="pre">qm_n3</span></code>. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">uniq</span></code></p></td>
-<td><p>Filter duplicate structures among several <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks; see <code class="docutils literal notranslate"><span class="pre">$uniq</span></code>. <em>(undocumented)</em></p></td>
+<td><p>Apparently filters duplicate structures among several <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> blocks; see <code class="docutils literal notranslate"><span class="pre">$uniq</span></code> (inferred from the official example; untested). <em>(undocumented)</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -344,19 +367,21 @@
 <p class="admonition-title">Note</p>
 <p>Two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines do not chain jobs: only the first one runs. Apart from <code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code>, sequences such
 as optimize→NMR need separate runs or an external driver script.
-<code class="docutils literal notranslate"><span class="pre">task=critical</span></code> does not work; density critical points come from <code class="docutils literal notranslate"><span class="pre">print=+density</span></code>.
+<strong>A misspelled task name gives no error</strong>: version 25 sets up the run and stops quietly, as for <code class="docutils literal notranslate"><span class="pre">check</span></code>.
+<code class="docutils literal notranslate"><span class="pre">critical</span></code> is not a task name in version 25, so it stops silently like any unknown task. Users found that
+<code class="docutils literal notranslate"><span class="pre">task=crytical</span></code> gave nothing; density critical points come from <code class="docutils literal notranslate"><span class="pre">print=+density</span></code>.
 <code class="docutils literal notranslate"><span class="pre">task=QM</span></code> appears only in the header of the shipped <code class="docutils literal notranslate"><span class="pre">qm.in</span></code> parameter file and is not a user task.
-The binary contains further task words (<code class="docutils literal notranslate"><span class="pre">IRC4</span></code>, <code class="docutils literal notranslate"><span class="pre">PATHX</span></code>, <code class="docutils literal notranslate"><span class="pre">PATHR</span></code>, <code class="docutils literal notranslate"><span class="pre">STERIC</span></code>, <code class="docutils literal notranslate"><span class="pre">POLARIZABILITY</span></code>, <code class="docutils literal notranslate"><span class="pre">MMDYNAMIC</span></code>,
-and others) that are untested or need data that is not distributed.</p>
+The version 25 program contains further task names (<code class="docutils literal notranslate"><span class="pre">irc4</span></code>, <code class="docutils literal notranslate"><span class="pre">pathx</span></code>, <code class="docutils literal notranslate"><span class="pre">pathr</span></code>, <code class="docutils literal notranslate"><span class="pre">chain</span></code>, <code class="docutils literal notranslate"><span class="pre">walk</span></code>, <code class="docutils literal notranslate"><span class="pre">steric</span></code>,
+<code class="docutils literal notranslate"><span class="pre">polarizability</span></code>, and others) that are untested or need data that is not distributed.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="optimize.html#optimize-saddle"><span class="std std-ref">saddle ($optimize)</span></a>, <a class="reference internal" href="optimize.html#optimize-points"><span class="std std-ref">points ($optimize)</span></a>, <a class="reference internal" href="#control-print"><span class="std std-ref">print ($control)</span></a></p>
 </section>
-<section id="theory">
+<section class="kw" id="theory">
 <span id="control-theory"></span><h2><code class="docutils literal notranslate"><span class="pre">theory</span></code><a class="headerlink" href="#theory" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">dft</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, version 25 executable, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, qchem.ru forum</p>
 <p>Theoretical method.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -370,46 +395,46 @@ and others) that are untested or need data that is not distributed.</p>
 <td><p>GGA DFT with density fitting. Hybrid functionals are <strong>not</strong> applied here: see notes. (<strong>default</strong>)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ridft</span></code></p></td>
-<td><p>Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals.</p></td>
+<td><p>Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals; the default functional is then <code class="docutils literal notranslate"><span class="pre">PBE1</span></code>. Hessians are numerical.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DFT_n4</span></code></p></td>
-<td><p>Newer DFT variant, used by the author with <code class="docutils literal notranslate"><span class="pre">func=LPBEVV</span></code> (2025). <em>(undocumented)</em></p></td>
+<td><p>Newer DFT variant, used in the official example inputs with <code class="docutils literal notranslate"><span class="pre">func=LPBEVV</span></code> (2025). Runs in version 25 (summary box: <code class="docutils literal notranslate"><span class="pre">DFT_N4</span></code>); what it changes is not documented. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tddft</span></code></p></td>
 <td><p>GGA time-dependent DFT (no hybrid TDDFT).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rimp2</span></code></p></td>
-<td><p>RI-MP2.</p></td>
+<td><p>RI-MP2. Hessians are numerical.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hf</span></code></p></td>
-<td><p>Hartree–Fock. <em>(undocumented)</em></p></td>
+<td><p>Hartree–Fock.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rihf</span></code></p></td>
-<td><p>RI Hartree–Fock. <em>(undocumented)</em></p></td>
+<td><p>RI Hartree–Fock.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cis</span></code></p></td>
-<td><p>CIS (RHF/UHF). Slow and disk-hungry. <em>(undocumented)</em></p></td>
+<td><p>CIS (RHF/UHF). Prints a table of excited states; <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span></code> is the total energy of the first excited state. Slow and disk-hungry.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mp2</span></code></p></td>
-<td><p>Conventional MP2 (RHF, UHF, ROHF). Very disk-hungry. <em>(undocumented)</em></p></td>
+<td><p>Conventional MP2 (RHF, UHF, ROHF). Very disk-hungry.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mp3</span></code></p></td>
-<td><p>MP3. <em>(undocumented)</em></p></td>
+<td><p>MP3.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mp4dq</span></code></p></td>
-<td><p>MP4(DQ). <em>(undocumented)</em></p></td>
+<td><p>MP4(DQ).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mp4sdq</span></code></p></td>
-<td><p>MP4(SDQ). <em>(undocumented)</em></p></td>
+<td><p>MP4(SDQ).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mp4sdtq</span></code></p></td>
-<td><p>MP4(SDTQ) (RHF). <em>(undocumented)</em></p></td>
+<td><p>MP4(SDTQ) (RHF).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ccs</span></code></p></td>
-<td><p>CCS. <em>(undocumented)</em></p></td>
+<td><p>CCS. Returns the HF energy, as expected: CCS adds no correlation energy to an HF reference.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ccd</span></code></p></td>
-<td><p>CCD. <em>(undocumented)</em></p></td>
+<td><p>CCD.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ccsd</span></code></p></td>
 <td><p>CCSD (RHF/UHF).</p></td>
@@ -418,10 +443,10 @@ and others) that are untested or need data that is not distributed.</p>
 <td><p>CCSD(T).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ccsdsd</span></code></p></td>
-<td><p>Linear-response (EOM) CCSD for excited states (RHF). <em>(undocumented)</em></p></td>
+<td><p>CCSD for an excited state, closed-shell (RHF) only; the state is chosen with <code class="docutils literal notranslate"><span class="pre">state=</span></code>, as for <code class="docutils literal notranslate"><span class="pre">cis</span></code> and <code class="docutils literal notranslate"><span class="pre">tddft</span></code>. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state’s total energy in <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>. Without <code class="docutils literal notranslate"><span class="pre">state=</span></code> it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD for excited states (RHF) by the v5 keyword page.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">qm_n3</span></code></p></td>
-<td><p>Laikov’s semiempirical QM model. Needs <code class="docutils literal notranslate"><span class="pre">basis=qm.in</span></code>; parameters exist for H, Li–F, Na–Cl, Sc–Cu. <em>(undocumented)</em></p></td>
+<td><p>Laikov’s semiempirical QM model. Needs <code class="docutils literal notranslate"><span class="pre">basis=qm.in</span></code> and no <code class="docutils literal notranslate"><span class="pre">set=</span></code>; parameters exist for H, Li–F, Na–Cl, Sc–Cu. Runs in version 25, with a short output of its own (no summary box, no <code class="docutils literal notranslate"><span class="pre">E</span>&#160; <span class="pre">=</span></code> line). <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">qm_n2</span></code></p></td>
 <td><p>Earlier variant of the QM model, used for very large systems with <code class="docutils literal notranslate"><span class="pre">task=opt_n1</span></code>. <em>(undocumented)</em></p></td>
@@ -431,49 +456,60 @@ and others) that are untested or need data that is not distributed.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
+<p><strong>A misspelled theory name gives no error</strong>: version 25 prints it in the summary box and runs Hartree–Fock.</p>
 <p><strong>Hybrid trap.</strong> Hybrid functionals (<code class="docutils literal notranslate"><span class="pre">PBE1</span></code>, <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code>, …) take effect only with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>
-or <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort with
-<code class="docutils literal notranslate"><span class="pre">MPI_Abort</span></code> after reading the basis twice.</p>
-<p>The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. These
+or <code class="docutils literal notranslate"><span class="pre">tddft</span></code>, older versions silently drop the exact exchange. In version 25, <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> stops right after
+printing the basis sets, with no error message in the output and exit status 1. <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> still runs:
+it reports <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> in the summary box but leaves out the exact exchange, so the energies are wrong (water:
+<code class="docutils literal notranslate"><span class="pre">Ex</span></code> -6.61 instead of about -8.95 hartree, ground-state total energy about 2.2 hartree above PBE), and the run ends
+normally.</p>
+<p>The ab initio list comes from the v5 keyword page and a 2011 user test (v6), which was energy-only. In version 25,
+water energies run to completion with <code class="docutils literal notranslate"><span class="pre">hf</span></code>, <code class="docutils literal notranslate"><span class="pre">rihf</span></code>, <code class="docutils literal notranslate"><span class="pre">cis</span></code>, <code class="docutils literal notranslate"><span class="pre">mp2</span></code>, <code class="docutils literal notranslate"><span class="pre">mp3</span></code>, <code class="docutils literal notranslate"><span class="pre">mp4dq</span></code>, <code class="docutils literal notranslate"><span class="pre">mp4sdq</span></code>, <code class="docutils literal notranslate"><span class="pre">mp4sdtq</span></code>, <code class="docutils literal notranslate"><span class="pre">ccs</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ccd</span></code>, <code class="docutils literal notranslate"><span class="pre">ccsd</span></code> and <code class="docutils literal notranslate"><span class="pre">ccsd4t</span></code>; an <code class="docutils literal notranslate"><span class="pre">hf</span></code> optimization also worked, so HF gradients exist. For <code class="docutils literal notranslate"><span class="pre">ridft</span></code> and
+<code class="docutils literal notranslate"><span class="pre">rimp2</span></code>, <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> works by finite differences of the gradient (<code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">COMPUTATION</span> <span class="pre">OF</span> <span class="pre">SECOND</span> <span class="pre">DERIVATIVES</span></code>); for <code class="docutils literal notranslate"><span class="pre">dft</span></code> it is analytic. These
 were reported <strong>not</strong> working in v6: <code class="docutils literal notranslate"><span class="pre">mp4</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp4</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp4sdtq</span></code>, <code class="docutils literal notranslate"><span class="pre">rimp4sdq</span></code>, <code class="docutils literal notranslate"><span class="pre">riccsd</span></code>, <code class="docutils literal notranslate"><span class="pre">riccsd4t</span></code>. They
-either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
-CCSDT, …); none has been reported working.</p>
+either crash or return the HF energy. The version 25 program contains many more method names (<code class="docutils literal notranslate"><span class="pre">MCSCF</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CASSCF</span></code>, <code class="docutils literal notranslate"><span class="pre">CISD</span></code>, <code class="docutils literal notranslate"><span class="pre">LCCD+MP2</span></code>, …); none has been tested.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="dft.html#dft-functional"><span class="std std-ref">functional ($dft)</span></a></p>
 </section>
-<section id="state">
+<section class="kw" id="state">
 <span id="control-state"></span><h2><code class="docutils literal notranslate"><span class="pre">state</span></code><a class="headerlink" href="#state" title="Link to this heading">¶</a></h2>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>For excited-state methods. The first value is the excited state n whose properties are computed; the second
-is the number of states N included in the iterative solution of the equations (<code class="docutils literal notranslate"><span class="pre">state=n,N</span></code>).</p>
+is the number of states N included in the iterative solution of the equations (<code class="docutils literal notranslate"><span class="pre">state=n,N</span></code>). In version 25,
+<code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> with <code class="docutils literal notranslate"><span class="pre">state=1,5</span></code> printed all five states in an <code class="docutils literal notranslate"><span class="pre">Electronic</span> <span class="pre">Spectrum:</span></code> table (excitation energy,
+wavelength, transition moment, oscillator strength), and <code class="docutils literal notranslate"><span class="pre">E</span>&#160; <span class="pre">=</span></code> was the total energy of state 1.</p>
 </section>
-<section id="basis">
+<section class="kw" id="basis">
 <span id="control-basis"></span><h2><code class="docutils literal notranslate"><span class="pre">basis</span></code><a class="headerlink" href="#basis" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 01 §4.11, §6; 03 §5; 04 §0</p>
-<p>Default: basis-set data are read from the input file itself.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, qchem.ru forum</p>
 <p>Name of the file containing the basis-set data (and ECPs, or QM parameters for <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>). The name may be
 double-quoted, which is needed when the path contains special characters. Use straight quotes: typographic
 quotes break parsing.</p>
+<p><strong>About the default:</strong> basis-set data are read from the input file itself.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Shipped files include <code class="docutils literal notranslate"><span class="pre">basis.in</span></code> (Λ/L family, default set <code class="docutils literal notranslate"><span class="pre">L1</span></code>), <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> (scalar-relativistic L family;
-needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code>), <code class="docutils literal notranslate"><span class="pre">3z.bas</span></code> (DFT only, Z ≤ 54), <code class="docutils literal notranslate"><span class="pre">sbk.bas</span></code> (SBK ECPs, up to Z = 86), <code class="docutils literal notranslate"><span class="pre">b2*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b2u*.in</span></code>,
-<code class="docutils literal notranslate"><span class="pre">b4s*.in</span></code>, and <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>. An absolute path is safest. Chapter “Basis sets” has the full family list.</p>
+needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code>), <code class="docutils literal notranslate"><span class="pre">3z.bas</span></code> (Z ≤ 54; recommended for DFT only, as users report large errors with ab initio methods), <code class="docutils literal notranslate"><span class="pre">sbk.bas</span></code> (SBK ECPs, up to Z = 86), <code class="docutils literal notranslate"><span class="pre">b2*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b2u*.in</span></code>,
+<code class="docutils literal notranslate"><span class="pre">b4s*.in</span></code>, and <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>. In version 25 a relative name such as <code class="docutils literal notranslate"><span class="pre">basis=basis.in</span></code> works when the file is in the
+directory the program is started from. An absolute path is still the safest choice for parallel and batch
+runs.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-set"><span class="std std-ref">set ($molecule)</span></a>, <a class="reference internal" href="#control-four"><span class="std std-ref">four ($control)</span></a></p>
 </section>
-<section id="four">
+<section class="kw" id="four">
 <span id="control-four"></span><h2><code class="docutils literal notranslate"><span class="pre">four</span></code><a class="headerlink" href="#four" title="Link to this heading">¶</a></h2>
 <p id="index-5"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §3.3; 04 #207-#208, #336</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum</p>
 <p>Four-component option.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -494,18 +530,18 @@ needs <code class="docutils literal notranslate"><span class="pre">four=1</span>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Required with the relativistic basis file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>. Forgetting it is a common cause of failed runs with that file.</p>
+<p>Required with the relativistic basis file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>. Without it, version 25 stops right after the <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span></code> line with <code class="docutils literal notranslate"><span class="pre">1?</span></code>.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#control-nucleus"><span class="std std-ref">nucleus ($control)</span></a>, <a class="reference internal" href="scf.html#scf-d1small"><span class="std std-ref">d1small ($scf)</span></a></p>
 </section>
-<section id="nucleus">
+<section class="kw" id="nucleus">
 <span id="control-nucleus"></span><h2><code class="docutils literal notranslate"><span class="pre">nucleus</span></code><a class="headerlink" href="#nucleus" title="Link to this heading">¶</a></h2>
 <p id="index-6"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.2; 06 §1</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">finite</span></code> for four-component theory, <code class="docutils literal notranslate"><span class="pre">point</span></code> for non-relativistic theory.</p>
-<p>Nuclear model. The author’s own inputs write it as <code class="docutils literal notranslate"><span class="pre">nuc=finite</span></code>.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, version 25 executable, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki</p>
+<p>Nuclear model. The official example inputs write it as <code class="docutils literal notranslate"><span class="pre">nuc=finite</span></code>.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">finite</span></code> for four-component theory, <code class="docutils literal notranslate"><span class="pre">point</span></code> for non-relativistic theory.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -520,21 +556,26 @@ needs <code class="docutils literal notranslate"><span class="pre">four=1</span>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">point</span></code></p></td>
 <td><p>Point-nucleus model.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dual</span></code></p></td>
+<td><p>Found in the version 25 program; its meaning is unknown. <em>(undocumented)</em></p></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa.</p>
+<p>A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa. With
+<code class="docutils literal notranslate"><span class="pre">four=1</span></code> and no <code class="docutils literal notranslate"><span class="pre">nucleus=</span></code>, version 25 prints <code class="docutils literal notranslate"><span class="pre">Finite</span> <span class="pre">nucleus</span> <span class="pre">model</span> <span class="pre">(1):</span></code> with the Gaussian parameters of each
+element.</p>
 </div>
 <p><strong>See also:</strong> <a class="reference internal" href="#control-four"><span class="std std-ref">four ($control)</span></a></p>
 </section>
-<section id="print">
+<section class="kw" id="print">
 <span id="control-print"></span><h2><code class="docutils literal notranslate"><span class="pre">print</span></code><a class="headerlink" href="#print" title="Link to this heading">¶</a></h2>
 <p id="index-7"><strong>Type:</strong> flags<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>Printing options. Flags are appended one after another; <code class="docutils literal notranslate"><span class="pre">+</span></code> switches an option on and <code class="docutils literal notranslate"><span class="pre">-</span></code> switches it off.
 The leading <code class="docutils literal notranslate"><span class="pre">+</span></code> can be omitted (<code class="docutils literal notranslate"><span class="pre">print=charges+bonds</span></code>).</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -546,7 +587,7 @@ The leading <code class="docutils literal notranslate"><span class="pre">+</span
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+charges</span></code></p></td>
-<td><p>Hirshfeld charges (DFT methods), printed as “Atomic partitions of the density”.</p></td>
+<td><p>Hirshfeld charges (DFT methods), printed as “Atomic partitions of the density”. With <code class="docutils literal notranslate"><span class="pre">theory=hf</span></code>, version 25 stops after the SCF with <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">read</span> <span class="pre">'Basis2'</span></code> and exit 1.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+bonds</span></code></p></td>
 <td><p>Mulliken populations and bond orders (SCF only), printed as “Overlap populations”.</p></td>
@@ -558,7 +599,7 @@ The leading <code class="docutils literal notranslate"><span class="pre">+</span
 <td><p>SCF vectors.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">+molden</span></code></p></td>
-<td><p>MOLDEN data: vibrations on <code class="docutils literal notranslate"><span class="pre">freq&gt;</span></code> lines for <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code>; with <code class="docutils literal notranslate"><span class="pre">+vectors+molden</span></code> also orbitals on <code class="docutils literal notranslate"><span class="pre">mos&gt;</span></code> lines.</p></td>
+<td><p>MOLDEN data: vibrations on <code class="docutils literal notranslate"><span class="pre">freq&gt;</span></code> lines for <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code>; with <code class="docutils literal notranslate"><span class="pre">+vectors+molden</span></code> also orbitals on <code class="docutils literal notranslate"><span class="pre">mos&gt;</span></code> lines (<code class="docutils literal notranslate"><span class="pre">[Molden</span> <span class="pre">Format]</span></code>, <code class="docutils literal notranslate"><span class="pre">[Atoms]</span> <span class="pre">AU</span></code>, <code class="docutils literal notranslate"><span class="pre">[5D]</span></code>, <code class="docutils literal notranslate"><span class="pre">[GTO]</span></code>, <code class="docutils literal notranslate"><span class="pre">[MO]</span></code> sections).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+density</span></code></p></td>
 <td><p>Critical points of the electron density (QTAIM). Combine with <code class="docutils literal notranslate"><span class="pre">+charges</span></code> to label them. <em>(undocumented)</em></p></td>
@@ -570,18 +611,48 @@ The leading <code class="docutils literal notranslate"><span class="pre">+</span
 </table>
 </div>
 <p><strong>Example:</strong></p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$control print=+vectors+molden $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$control</span><span class="w"> </span><span class="na">print</span><span class="o">=</span><span class="nb">+vectors+molden</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 </section>
-<section id="save">
-<span id="control-save"></span><h2><code class="docutils literal notranslate"><span class="pre">save</span></code><a class="headerlink" href="#save" title="Link to this heading">¶</a></h2>
-<p id="index-8"><strong>Type:</strong> string<br />
+<section class="kw" id="derivative">
+<span id="control-derivative"></span><h2><code class="docutils literal notranslate"><span class="pre">derivative</span></code><a class="headerlink" href="#derivative" title="Link to this heading">¶</a></h2>
+<p id="index-8"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <em>none stated</em><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #306</p>
+<strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, version 25 executable</p>
+<p>How <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> computes the second derivatives. Not in any written source; found in the program and
+tested in version 25, where <code class="docutils literal notranslate"><span class="pre">derivative=numeric</span></code> with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> gave the same water frequencies as the
+analytic Hessian to within 0.2 cm⁻¹.</p>
+<p><strong>About the default:</strong> analytic second derivatives where the method has them (GGA DFT), numerical otherwise.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Value</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">analytic</span></code></p></td>
+<td><p>Analytic second derivatives.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">numeric</span></code></p></td>
+<td><p>Second derivatives by finite differences of the gradient (<code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">COMPUTATION</span> <span class="pre">OF</span> <span class="pre">SECOND</span> <span class="pre">DERIVATIVES</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>See also:</strong> <a class="reference internal" href="d2edr2.html#d2edr2-steps"><span class="std std-ref">steps ($d2edr2)</span></a></p>
+</section>
+<section class="kw" id="save">
+<span id="control-save"></span><h2><code class="docutils literal notranslate"><span class="pre">save</span></code><a class="headerlink" href="#save" title="Link to this heading">¶</a></h2>
+<p id="index-9"><strong>Type:</strong> string<br />
+<strong>Default:</strong> <em>none stated</em><br />
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>File name for saving SCF vectors. With <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> the vectors are read back from the same file.
-This is the basis of the SCF restart technique.</p>
+This is the basis of the SCF restart technique. In version 25, a run with <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> prints
+<code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(-1)</span></code> and <code class="docutils literal notranslate"><span class="pre">vectors</span> <span class="pre">from</span> <span class="pre">'&lt;file&gt;'</span></code>; the normal guess is printed as <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(2)</span></code>.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="guess.html#guess-read"><span class="std std-ref">read ($guess)</span></a></p>
 </section>
 </section>
@@ -615,7 +686,7 @@ This is the basis of the SCF restart technique.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -649,6 +720,7 @@ This is the basis of the SCF restart technique.</p>
 <li><a class="reference internal" href="#four"><code class="docutils literal notranslate"><span class="pre">four</span></code></a></li>
 <li><a class="reference internal" href="#nucleus"><code class="docutils literal notranslate"><span class="pre">nucleus</span></code></a></li>
 <li><a class="reference internal" href="#print"><code class="docutils literal notranslate"><span class="pre">print</span></code></a></li>
+<li><a class="reference internal" href="#derivative"><code class="docutils literal notranslate"><span class="pre">derivative</span></code></a></li>
 <li><a class="reference internal" href="#save"><code class="docutils literal notranslate"><span class="pre">save</span></code></a></li>
 </ul>
 </li>

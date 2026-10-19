@@ -1,0 +1,16 @@
+$system mem=256 disk=1 $end
+$control
+ task=optimize
+ theory=dft
+ basis=@BASIS@
+$end
+$optimize steps=100 $end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  6      0.000000    0.000000    0.000000
+  6      0.000000    0.000000    1.210000
+  1      0.185500    0.000000   -1.053200
+  1     -0.185500    0.000000    2.263200
+$end

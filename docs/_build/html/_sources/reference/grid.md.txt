@@ -10,6 +10,7 @@
 Adaptive integration grid for DFT.
 
 (grid.accuracy)=
+{.kw}
 ## `accuracy`
 
 ```{index} single: accuracy ($grid)
@@ -17,17 +18,17 @@ Adaptive integration grid for DFT.
 
 **Type:** list\
 **Default:** `1e-8,1e-5`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.4 (output echo); Dft.rtf
-
-Default: `1e-8` for the final grid and `1e-5` for the coarse grid used in the first SCF iterations, as echoed by v13/v15
-(`grid: accuracy=1.0e-08,1.0e-05`). `Dft.rtf` gives `1e-7` (older version).
-
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, official site files, `input.txt`, `Dft.rtf`
 
 Target accuracy of the exchange–correlation energy per atom for the adaptively generated grid (DFT
-methods). The default, 1e-8, is a fine grid. Use 1e-7 to speed up geometry optimizations with
-`tolerance<=1e-4`, and 1e-9 for very accurate calculations. The grid grows during the SCF; the output
-reports each size (`Grid: … points`).
+methods). The default, 1e-8, is a fine grid. `input.txt` suggests 1e-7 to speed up geometry optimizations
+with the default `$optimize tolerance=1e-4` or looser, and 1e-9 for very accurate calculations. The grid grows during the SCF; the output
+reports each size on a line such as `grid:    34000   53` (number of points) in the SCF table.
+
+**About the default:** `1e-8` for the final grid and `1e-5` for the coarse grid used in the first SCF iterations, as echoed by v13, v15
+and v25 (`grid: accuracy=1.0e-08,1.0e-05`). `Dft.rtf` gives `1e-7` (older version).
+
 
 ```{note}
 `Dft.rtf` suggests 1e-6 for rough optimizations (`tol=1e-3`) and 1e-8 for floppy molecules optimized to

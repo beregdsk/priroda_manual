@@ -12,6 +12,7 @@ Reference shieldings and extra points for NMR shielding calculations.
 **Relevant when:** `task = nmr (theory = dft only)`
 
 (nmr.standard)=
+{.kw}
 ## `standard`
 
 ```{index} single: standard ($nmr)
@@ -19,21 +20,23 @@ Reference shieldings and extra points for NMR shielding calculations.
 
 **Type:** indexed-array\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 04 #69; 02 §5.7
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, `input.txt`, chemport.ru forum, LIMOR page
 
 Reference shielding constants, indexed by atomic number, for computing chemical shifts. Values are needed
 only for the elements present in the molecule.
 
 ```{note}
-A reference shielding is only valid for the method, basis set and grid it was computed with. Users quote
-different TMS values (e.g. `standard(1)=31.3867 standard(6)=181.9781`) for other settings. Compute TMS with
-exactly the settings of the production run.
+A reference shielding is only valid for the method, basis set and grid it was computed with. A user input
+posted on a forum has other TMS values (`standard(1)=31.3867 standard(6)=181.9781`); the settings they were
+computed with are not given. Compute TMS with
+exactly the settings of the production run. Without `standard`, version 25 prints `shift=` as minus the
+isotropic shielding; with it, `shift = standard − isotropic shielding`.
 ```
 
 **Example:**
 
-```text
+```priroda
 $nmr
  standard(1)=31.3915
  standard(6)=181.9921
@@ -42,6 +45,7 @@ $end
 ```
 
 (nmr.points)=
+{.kw}
 ## `points`
 
 ```{index} single: points ($nmr)
@@ -51,7 +55,7 @@ $end
 **Default:** *none stated*\
 **Units:** Å\
 **Status:** current · not verified\
-**Sources:** input.txt; 02 §3.2; 03 §12
+**Sources:** `input.txt`, qchem.ru forum, LIMOR page
 
 Extra points in space, given as x,y,z triples, at which magnetic shielding tensors are computed in
 addition to the nuclear centres. This is the way to compute NICS: NICS is the negative of the isotropic
@@ -59,7 +63,7 @@ shielding printed for the point.
 
 **Example:**
 
-```text
+```priroda
 $nmr
  points=
       0.00000000    0.00000000    0.00000000

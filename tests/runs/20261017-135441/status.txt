@@ -1,0 +1,7 @@
+t70a_cu_forum_scf exit=0
+t70b_cu_default_nr exit=0
+t71_cu_restart_loop_cycle1 exit=0
+t71_cu_restart_loop converged in cycle 1
+t73a_cr2_default exit=0
+t73b_cr2_broken_symmetry exit=0
+t73c_cr2_bfgs exit=0

@@ -1,0 +1,15 @@
+$system mem=256 disk=1 $end
+$control
+ task=energy
+ theory=hf
+ basis=/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in
+$end
+$scf restrict=0 $end
+$guess mix=1 $end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  1    0.000000    0.000000    0.000000
+  1    0.000000    0.000000    2.500000
+$end

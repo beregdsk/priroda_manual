@@ -1,0 +1,3811 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sat Oct 17 18:24:16 2026
+
+ node   0: 'vm'
+
+ Memory: 256m (256m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 4 atoms, 14 electrons
+
+ Atomic Coordinates:
+   6     0.00000000   0.00000000   0.00000000
+   6     0.00000000   0.00000000   1.21000000
+   1     0.18550000   0.00000000  -1.05320000
+   1    -0.18550000   0.00000000   2.26320000
+ #
+  formula: H2C2
+  internuclear distances:
+  C1    |  C2   : 1.21000  H1   : 1.06941
+  C2    |  C1   : 1.21000  H2   : 1.06941
+  H1    |  C1   : 1.06941
+  H2    |  C2   : 1.06941
+     largest =    3.33709
+
+ atom   6 core =  1
+ at.d.=0
+
+ Basis set input: '/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in'
+    1   6  C :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -3.26, +12.53
+    2   6  C :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -3.26, +12.53
+    3   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+    4   1  H :   5 /  12 : { 2, 1}                             / { 6, 2}                             log2(a) =  -3.47,  +6.37
+
+ Basis set input: '/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in'
+    1   6  C :  40 / 100 : { 6, 4, 3, 1}                       / {10, 9, 7, 4}                       log2(a) =  -2.29, +10.07
+    2   6  C :  40 / 100 : { 6, 4, 3, 1}                       / {10, 9, 7, 4}                       log2(a) =  -2.29, +10.07
+    3   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+    4   1  H :   5 /  15 : { 2, 1}                             / { 6, 3}                             log2(a) =  -2.35,  +6.10
+
+ +---------------------------------------
+ | Number of atoms                      4
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            7
+ | Number of beta  electrons            7
+ | Number of core  electrons            2
+ | Theoretical Method                 DFT
+ | Approximation to E(xc)             PBE
+ | Dimension of wavefunction basis     38
+ | Dimension of   auxiliary  basis     90
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=32,16; xmax = 0.25000; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-06)
+ inv=2: v = 1.5e-05
+ d0 = 7.6e-06, 6.1e-05
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+    1    56
+    6    64
+  mol   240
+
+ Geometry optimization options:
+ Coordinates: internal
+ Tolerance on gradient       = 0.00010000
+ Tolerance on displacement   = 0.01000000
+ Trust radius                = 0.12500000 (max), 0.01562500 (min)
+ Maximum number of steps     =        100
+ Updated hessian used
+
+ Geometry Optimization Step 0:
+    12 cartesian,    9 internal coordinates
+     7 independent variables
+ time: Geometry Optimization            :     0.0  99.9%     0.0
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  99.9%     0.0
+ time: Initial Guess                    :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  95.3%     0.0
+
+  it          E            dE            g          x               t
+ grid:    10752   23
+   0       -77.2272469522  0.0000000000 0.04737460                 0.0
+       1                                0.01487455 0.03776516      0.0
+       2                                0.00288065 0.03856073      0.0
+       3                                0.00017517 0.03799433      0.1
+   1       -77.2453893209 -0.0181423688 0.00145463                 0.1
+       1                                0.00045700 0.00117921      0.0
+       2                                0.00005346 0.00118424      0.0
+       3                                0.00000451 0.00121715      0.1
+       4                                0.00000052 0.00121551      0.1
+ grid:    31896   41
+   2       -77.2459276043 -0.0005382834 0.00038288                 0.3
+       1                                0.00009319 0.00018460      0.0
+       2                                0.00001619 0.00015594      0.0
+       3                                0.00000119 0.00015718      0.1
+       4                                0.00000023 0.00015761      0.1
+   3       -77.2459282418 -0.0000006374 0.00000023                 0.4
+ converged!
+ time: Coulomb-type Integrals           :     0.1  97.5%     0.1
+ time: Grid Construction                :     0.1  99.6%     0.1
+ time: Numerical Integration            :     0.4  99.2%     0.4
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  98.7%     0.0
+ time: Rotate                           :     0.0  98.5%     0.0
+ time: SCF Equations                    :     0.4  98.9%     0.4
+   4 F,   11 F1
+
+  E  =     -77.2459282418
+  T  =      76.80978896  V  =    -228.52947253  J  =      61.21796387
+  Ex =     -10.95092049  Ec =      -0.43038466
+
+  dipole =   0.000000 au (  0.000000 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893713    2    -9.891780    3    -0.680529    4    -0.514790
+   5    -0.444588    6    -0.261351    7    -0.260518
+ virtual:
+   8    -0.002001    9     0.004567   10     0.090149   11     0.159640
+  12     0.402733   13     0.464616   14     0.528271   15     0.536652
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.2%     0.1
+
+
+eng>$Energy
+eng> E=-7.7245928241781e+01
+eng> D=-8.06453127e-10 -7.17390488e-13 -1.32654954e-08
+eng> G=-7.75561620e-03  2.31458663e-13 -2.72778807e-03
+eng>    7.75561628e-03 -3.28571414e-13  2.72778759e-03
+eng>    2.46039738e-03 -2.65475239e-12  3.30984740e-03
+eng>   -2.46039747e-03  2.75186451e-12 -3.30984692e-03
+eng>$end
+
+ G(max) = 0.00822134  |G| = 0.01300762
+
+
+ Geometry Optimization Step 1:
+ Energy:           -77.24592824
+    12 cartesian,    9 internal coordinates
+     7 independent variables
+ include g
+ max. gradient     = 0.0053195 (internal), 0.0077559 (cartesian)
+ max. displacement = 0.0125752 (internal), 0.0096168 (cartesian)
+ iter   0: rmax = 0.0125751784, xmax = 0.0096246260
+ iter   1: rmax = 0.0008643065, xmax = 0.0001763441
+ iter   2: rmax = 0.0008024425, xmax = 0.0000855656
+ iter   3: rmax = 0.0006880722, xmax = 0.0000734847
+ iter   4: rmax = 0.0005900993, xmax = 0.0000630168
+ iter   5: rmax = 0.0005060764, xmax = 0.0000540408
+ iter   6: rmax = 0.0004340176, xmax = 0.0000463437
+ iter   7: rmax = 0.0003722192, xmax = 0.0000397432
+ iter   8: rmax = 0.0003192202, xmax = 0.0000340830
+ iter   9: rmax = 0.0002737677, xmax = 0.0000292290
+ iter  10: rmax = 0.0002347872, xmax = 0.0000250665
+ iter  11: rmax = 0.0002013570, xmax = 0.0000214968
+ iter  12: rmax = 0.0001726870, xmax = 0.0000184356
+ iter  13: rmax = 0.0001480992, xmax = 0.0000158103
+ iter  14: rmax = 0.0001270124, xmax = 0.0000135589
+ iter  15: rmax = 0.0001089282, xmax = 0.0000116281
+ iter  16: rmax = 0.0000934189, xmax = 0.0000099723
+ iter  17: rmax = 0.0000801179, xmax = 0.0000085523
+ iter  18: rmax = 0.0000687109, xmax = 0.0000073345
+ iter  19: rmax = 0.0000589280, xmax = 0.0000062901
+ iter  20: rmax = 0.0000505381, xmax = 0.0000053945
+ iter  21: rmax = 0.0000433429, xmax = 0.0000046263
+ iter  22: rmax = 0.0000371721, xmax = 0.0000039676
+ iter  23: rmax = 0.0000318800, xmax = 0.0000034026
+ iter  24: rmax = 0.0000273414, xmax = 0.0000029181
+ iter  25: rmax = 0.0000234491, xmax = 0.0000025026
+ iter  26: rmax = 0.0000201110, xmax = 0.0000021463
+ iter  27: rmax = 0.0000172481, xmax = 0.0000018407
+ iter  28: rmax = 0.0000147929, xmax = 0.0000015786
+ iter  29: rmax = 0.0000126873, xmax = 0.0000013538
+ iter  30: rmax = 0.0000108815, xmax = 0.0000011610
+ iter  31: rmax = 0.0000093329, xmax = 0.0000009957
+ iter  32: rmax = 0.0000080047, xmax = 0.0000008539
+ iter  33: rmax = 0.0000068657, xmax = 0.0000007324
+ iter  34: rmax = 0.0000058888, xmax = 0.0000006281
+ iter  35: rmax = 0.0000050510, xmax = 0.0000005386
+ iter  36: rmax = 0.0000043326, xmax = 0.0000004619
+ iter  37: rmax = 0.0000037164, xmax = 0.0000003962
+ iter  38: rmax = 0.0000031879, xmax = 0.0000003398
+ iter  39: rmax = 0.0000027347, xmax = 0.0000002914
+ iter  40: rmax = 0.0000023461, xmax = 0.0000002499
+ iter  41: rmax = 0.0000020127, xmax = 0.0000002143
+ iter  42: rmax = 0.0000017269, xmax = 0.0000001838
+ iter  43: rmax = 0.0000014817, xmax = 0.0000001576
+ iter  44: rmax = 0.0000012715, xmax = 0.0000001352
+ iter  45: rmax = 0.0000010911, xmax = 0.0000001159
+ iter  46: rmax = 0.0000009365, xmax = 0.0000000994
+ iter  47: rmax = 0.0000008771, xmax = 0.0000000853
+ iter  48: rmax = 0.0000008802, xmax = 0.0000000731
+ iter  49: rmax = 0.0000008829, xmax = 0.0000000627
+ iter  50: rmax = 0.0000008852, xmax = 0.0000000538
+ iter  51: rmax = 0.0000008872, xmax = 0.0000000461
+ iter  52: rmax = 0.0000008889, xmax = 0.0000000396
+ iter  53: rmax = 0.0000008904, xmax = 0.0000000339
+ iter  54: rmax = 0.0000008916, xmax = 0.0000000291
+ iter  55: rmax = 0.0000008927, xmax = 0.0000000250
+ iter  56: rmax = 0.0000008936, xmax = 0.0000000214
+ iter  57: rmax = 0.0000008944, xmax = 0.0000000184
+ iter  58: rmax = 0.0000008951, xmax = 0.0000000157
+ iter  59: rmax = 0.0000008956, xmax = 0.0000000135
+ iter  60: rmax = 0.0000008961, xmax = 0.0000000116
+ iter  61: rmax = 0.0000008966, xmax = 0.0000000099
+ iter  62: rmax = 0.0000008969, xmax = 0.0000000085
+ iter  63: rmax = 0.0000008972, xmax = 0.0000000073
+ max. displacement = 0.0125752 (internal), 1.1528536 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.00437781  -0.00034897  -0.60507133
+mol>   6    -0.00356501  -0.00034897   0.60521719
+mol>   1     0.18420295   0.00034897  -1.66326389
+mol>   1    -0.18501575   0.00034897   1.66311803
+mol>$end
+
+ Atomic Coordinates:
+   6     0.00437781  -0.00034897  -0.60507133
+   6    -0.00356501  -0.00034897   0.60521719
+   1     0.18420295   0.00034897  -1.66326389
+   1    -0.18501575   0.00034897   1.66311803
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  95.7%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2460604910  0.0000000000 0.00158450                 0.1
+       1                                0.00021270 0.00175160      0.0
+       2                                0.00002296 0.00184365      0.0
+       3                                0.00000569 0.00184400      0.1
+       4                                0.00000251 0.00184392      0.1
+   1       -77.2460849278 -0.0000244368 0.00000241                 0.2
+       1                                0.00000128 0.00000178      0.0
+       2                                0.00000034 0.00000181      0.1
+   2       -77.2460849279 -0.0000000001 0.00000034                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.6%     0.0
+ time: Numerical Integration            :     0.2 100.0%     0.2
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0  98.8%     0.0
+ time: Rotate                           :     0.0  94.7%     0.0
+ time: SCF Equations                    :     0.3  99.9%     0.3
+   7 F,   17 F1
+
+  E  =     -77.2460849279
+  T  =      76.79573914  V  =    -228.45489636  J  =      61.18700484
+  Ex =     -10.94778315  Ec =      -0.43026856
+
+  dipole =   0.000815 au (  0.002071 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.894095    2    -9.892168    3    -0.680212    4    -0.513845
+   5    -0.444033    6    -0.261107    7    -0.260382
+ virtual:
+   8    -0.001214    9     0.004573   10     0.087996   11     0.157309
+  12     0.403215   13     0.464981   14     0.529150   15     0.536448
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246084927864e+01
+eng> D=-5.96129605e-04  5.14902299e-04 -2.07701659e-04
+eng> G=-7.57748511e-03 -2.54382211e-05 -6.64703700e-04
+eng>    7.63386605e-03 -2.54245114e-05  6.93886170e-04
+eng>    2.71274317e-03  2.54377473e-05  2.47758783e-04
+eng>   -2.76912411e-03  2.54249852e-05 -2.76941253e-04
+eng>$end
+
+ G(max) = 0.00766538  |G| = 0.01147977
+
+
+ Geometry Optimization Step 2:
+ Energy:           -77.24608493
+ Energy change:     -0.00015669 (actual)
+                    -0.00009278 (predicted)
+    12 cartesian,    9 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.004441, |dG - HdX| = 0.00692876
+ include g
+ max. gradient     = 0.0048516 (internal), 0.0076342 (cartesian)
+ trust test =-0.6947903, trust radius = 0.0177840
+ Lagrangian multiplier =   0.372194
+ max. displacement = 0.0177840 (internal), 0.0117385 (cartesian)
+ iter   0: rmax = 0.0177839878, xmax = 0.0117469451
+ iter   1: rmax = 0.0002222597, xmax = 0.0001133154
+ iter   2: rmax = 0.0001528004, xmax = 0.0000162737
+ iter   3: rmax = 0.0001311600, xmax = 0.0000137419
+ iter   4: rmax = 0.0001124242, xmax = 0.0000117788
+ iter   5: rmax = 0.0000963650, xmax = 0.0000100962
+ iter   6: rmax = 0.0000826000, xmax = 0.0000086540
+ iter   7: rmax = 0.0000708014, xmax = 0.0000074177
+ iter   8: rmax = 0.0000606885, xmax = 0.0000063581
+ iter   9: rmax = 0.0000520202, xmax = 0.0000054498
+ iter  10: rmax = 0.0000445903, xmax = 0.0000046712
+ iter  11: rmax = 0.0000382219, xmax = 0.0000040039
+ iter  12: rmax = 0.0000327632, xmax = 0.0000034319
+ iter  13: rmax = 0.0000280844, xmax = 0.0000029417
+ iter  14: rmax = 0.0000240740, xmax = 0.0000025214
+ iter  15: rmax = 0.0000206365, xmax = 0.0000021612
+ iter  16: rmax = 0.0000176901, xmax = 0.0000018525
+ iter  17: rmax = 0.0000151646, xmax = 0.0000015878
+ iter  18: rmax = 0.0000129999, xmax = 0.0000013610
+ iter  19: rmax = 0.0000111445, xmax = 0.0000011666
+ iter  20: rmax = 0.0000095541, xmax = 0.0000009999
+ iter  21: rmax = 0.0000081910, xmax = 0.0000008571
+ iter  22: rmax = 0.0000070226, xmax = 0.0000007346
+ iter  23: rmax = 0.0000060211, xmax = 0.0000006297
+ iter  24: rmax = 0.0000051626, xmax = 0.0000005397
+ iter  25: rmax = 0.0000044268, xmax = 0.0000004626
+ iter  26: rmax = 0.0000038353, xmax = 0.0000003965
+ iter  27: rmax = 0.0000038264, xmax = 0.0000003399
+ iter  28: rmax = 0.0000038187, xmax = 0.0000002913
+ iter  29: rmax = 0.0000038121, xmax = 0.0000002497
+ iter  30: rmax = 0.0000038065, xmax = 0.0000002140
+ iter  31: rmax = 0.0000038017, xmax = 0.0000001835
+ iter  32: rmax = 0.0000037975, xmax = 0.0000001572
+ iter  33: rmax = 0.0000037940, xmax = 0.0000001348
+ iter  34: rmax = 0.0000037910, xmax = 0.0000001155
+ iter  35: rmax = 0.0000037884, xmax = 0.0000000990
+ iter  36: rmax = 0.0000037861, xmax = 0.0000000849
+ iter  37: rmax = 0.0000037842, xmax = 0.0000000728
+ iter  38: rmax = 0.0000037826, xmax = 0.0000000624
+ iter  39: rmax = 0.0000037812, xmax = 0.0000000534
+ iter  40: rmax = 0.0000037799, xmax = 0.0000000458
+ iter  41: rmax = 0.0000037789, xmax = 0.0000000393
+ iter  42: rmax = 0.0000037780, xmax = 0.0000000337
+ iter  43: rmax = 0.0000037773, xmax = 0.0000000289
+ iter  44: rmax = 0.0000037766, xmax = 0.0000000247
+ iter  45: rmax = 0.0000037761, xmax = 0.0000000212
+ iter  46: rmax = 0.0000037756, xmax = 0.0000000182
+ iter  47: rmax = 0.0000037752, xmax = 0.0000000156
+ iter  48: rmax = 0.0000037748, xmax = 0.0000000133
+ iter  49: rmax = 0.0000037745, xmax = 0.0000000114
+ iter  50: rmax = 0.0000037743, xmax = 0.0000000098
+ iter  51: rmax = 0.0000037740, xmax = 0.0000000084
+ iter  52: rmax = 0.0000037738, xmax = 0.0000000072
+ iter  53: rmax = 0.0000037737, xmax = 0.0000000062
+ iter  54: rmax = 0.0000037735, xmax = 0.0000000053
+ iter  55: rmax = 0.0000037734, xmax = 0.0000000045
+ iter  56: rmax = 0.0000037733, xmax = 0.0000000039
+ iter  57: rmax = 0.0000037732, xmax = 0.0000000033
+ iter  58: rmax = 0.0000037732, xmax = 0.0000000029
+ iter  59: rmax = 0.0000037731, xmax = 0.0000000024
+ iter  60: rmax = 0.0000037730, xmax = 0.0000000021
+ iter  61: rmax = 0.0000037730, xmax = 0.0000000018
+ iter  62: rmax = 0.0000037730, xmax = 0.0000000015
+ iter  63: rmax = 0.0000037729, xmax = 0.0000000013
+ max. displacement = 0.0177840 (internal), 0.0117485 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.01059488  -0.00029490  -0.60492121
+mol>   6    -0.00897937  -0.00030520   0.60519049
+mol>   1     0.18194347   0.00029821  -1.66565089
+mol>   1    -0.18355897   0.00030190   1.66538161
+mol>$end
+
+ Atomic Coordinates:
+   6     0.01059488  -0.00029490  -0.60492121
+   6    -0.00897937  -0.00030520   0.60519049
+   1     0.18194347   0.00029821  -1.66565089
+   1    -0.18355897   0.00030190   1.66538161
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.8%     0.0
+ time: Orthogonalize                    :     0.0  90.5%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2462171032  0.0000000000 0.00223918                 0.0
+       1                                0.00006988 0.00262195      0.0
+       2                                0.00001579 0.00266549      0.0
+       3                                0.00000819 0.00267115      0.1
+       4                                0.00000261 0.00267239      0.1
+   1       -77.2462609787 -0.0000438755 0.00000256                 0.2
+       1                                0.00000048 0.00000319      0.0
+   2       -77.2462609788 -0.0000000001 0.00000048                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2  99.9%     0.2
+ time: Diagonalize                      :     0.0  99.9%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  94.7%     0.0
+ time: SCF Equations                    :     0.2  99.9%     0.2
+  10 F,   22 F1
+
+  E  =     -77.2462609788
+  T  =      76.79092926  V  =    -228.43431184  J  =      61.17910181
+  Ex =     -10.94694460  Ec =      -0.43024359
+
+  dipole =   0.001315 au (  0.003344 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.894155    2    -9.892228    3    -0.680018    4    -0.513580
+   5    -0.444101    6    -0.260898    7    -0.260317
+ virtual:
+   8    -0.000071    9     0.004618   10     0.087114   11     0.155964
+  12     0.403188   13     0.464702   14     0.530536   15     0.536382
+ time: One-Electron Gradient            :     0.0 100.0%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.7%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246260978788e+01
+eng> D=-1.18232571e-03  4.41573418e-04 -3.70833050e-04
+eng> G=-6.82901207e-03 -2.16385303e-05 -1.98220181e-04
+eng>    6.94597754e-03 -2.30394373e-05  2.41855584e-04
+eng>    2.52391412e-03  2.20886959e-05 -7.30986471e-04
+eng>   -2.64087958e-03  2.25892717e-05  6.87351068e-04
+eng>$end
+
+ G(max) = 0.00695023  |G| = 0.01045624
+
+
+ Geometry Optimization Step 3:
+ Energy:           -77.24626098
+ Energy change:     -0.00017605 (actual)
+                    -0.00015868 (predicted)
+    12 cartesian,    9 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.004441, |dG - HdX| = 0.00002222
+ Hessian update: |dG| = 0.001582, |dG - HdX| = 0.00321540
+ include g
+ max. gradient     = 0.0042613 (internal), 0.0069463 (cartesian)
+ trust test =-1.0245732, trust radius = 0.0177840
+ Lagrangian multiplier =   0.420131
+ max. displacement = 0.0177840 (internal), 0.0116578 (cartesian)
+ iter   0: rmax = 0.0177839878, xmax = 0.0116710760
+ iter   1: rmax = 0.0001104358, xmax = 0.0001167162
+ iter   2: rmax = 0.0000821173, xmax = 0.0000082075
+ iter   3: rmax = 0.0000701569, xmax = 0.0000072361
+ iter   4: rmax = 0.0000600933, xmax = 0.0000061980
+ iter   5: rmax = 0.0000514732, xmax = 0.0000053089
+ iter   6: rmax = 0.0000440896, xmax = 0.0000045473
+ iter   7: rmax = 0.0000377652, xmax = 0.0000038950
+ iter   8: rmax = 0.0000323479, xmax = 0.0000033363
+ iter   9: rmax = 0.0000277077, xmax = 0.0000028577
+ iter  10: rmax = 0.0000237332, xmax = 0.0000024478
+ iter  11: rmax = 0.0000203287, xmax = 0.0000020967
+ iter  12: rmax = 0.0000174126, xmax = 0.0000017959
+ iter  13: rmax = 0.0000149148, xmax = 0.0000015383
+ iter  14: rmax = 0.0000127753, xmax = 0.0000013176
+ iter  15: rmax = 0.0000109427, xmax = 0.0000011286
+ iter  16: rmax = 0.0000093730, xmax = 0.0000009667
+ iter  17: rmax = 0.0000080284, xmax = 0.0000008281
+ iter  18: rmax = 0.0000068767, xmax = 0.0000007093
+ iter  19: rmax = 0.0000058902, xmax = 0.0000006075
+ iter  20: rmax = 0.0000050452, xmax = 0.0000005204
+ iter  21: rmax = 0.0000043215, xmax = 0.0000004457
+ iter  22: rmax = 0.0000037015, xmax = 0.0000003818
+ iter  23: rmax = 0.0000031705, xmax = 0.0000003270
+ iter  24: rmax = 0.0000027156, xmax = 0.0000002801
+ iter  25: rmax = 0.0000023260, xmax = 0.0000002399
+ iter  26: rmax = 0.0000019923, xmax = 0.0000002055
+ iter  27: rmax = 0.0000017064, xmax = 0.0000001760
+ iter  28: rmax = 0.0000014616, xmax = 0.0000001508
+ iter  29: rmax = 0.0000012519, xmax = 0.0000001292
+ iter  30: rmax = 0.0000010722, xmax = 0.0000001106
+ iter  31: rmax = 0.0000009184, xmax = 0.0000000948
+ iter  32: rmax = 0.0000007866, xmax = 0.0000000812
+ iter  33: rmax = 0.0000006737, xmax = 0.0000000695
+ iter  34: rmax = 0.0000005770, xmax = 0.0000000596
+ iter  35: rmax = 0.0000004941, xmax = 0.0000000510
+ iter  36: rmax = 0.0000004232, xmax = 0.0000000437
+ iter  37: rmax = 0.0000003624, xmax = 0.0000000374
+ iter  38: rmax = 0.0000003104, xmax = 0.0000000321
+ iter  39: rmax = 0.0000002658, xmax = 0.0000000275
+ iter  40: rmax = 0.0000002276, xmax = 0.0000000235
+ iter  41: rmax = 0.0000001949, xmax = 0.0000000201
+ iter  42: rmax = 0.0000001668, xmax = 0.0000000173
+ iter  43: rmax = 0.0000001428, xmax = 0.0000000148
+ iter  44: rmax = 0.0000001223, xmax = 0.0000000127
+ iter  45: rmax = 0.0000001047, xmax = 0.0000000108
+ iter  46: rmax = 0.0000000960, xmax = 0.0000000093
+ iter  47: rmax = 0.0000000962, xmax = 0.0000000080
+ iter  48: rmax = 0.0000000963, xmax = 0.0000000068
+ iter  49: rmax = 0.0000000964, xmax = 0.0000000058
+ iter  50: rmax = 0.0000000965, xmax = 0.0000000050
+ iter  51: rmax = 0.0000000965, xmax = 0.0000000043
+ iter  52: rmax = 0.0000000966, xmax = 0.0000000037
+ iter  53: rmax = 0.0000000967, xmax = 0.0000000031
+ iter  54: rmax = 0.0000000967, xmax = 0.0000000027
+ iter  55: rmax = 0.0000000967, xmax = 0.0000000023
+ iter  56: rmax = 0.0000000968, xmax = 0.0000000020
+ iter  57: rmax = 0.0000000968, xmax = 0.0000000017
+ iter  58: rmax = 0.0000000968, xmax = 0.0000000014
+ iter  59: rmax = 0.0000000968, xmax = 0.0000000012
+ iter  60: rmax = 0.0000000969, xmax = 0.0000000011
+ iter  61: rmax = 0.0000000969, xmax = 0.0000000009
+ iter  62: rmax = 0.0000000969, xmax = 0.0000000008
+ iter  63: rmax = 0.0000000969, xmax = 0.0000000007
+ max. displacement = 0.0177840 (internal), 0.0116590 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.01676455  -0.00033037  -0.60456801
+mol>   6    -0.01469766  -0.00034218   0.60489096
+mol>   1     0.17962718   0.00033416  -1.66632176
+mol>   1    -0.18169407   0.00033839   1.66599880
+mol>$end
+
+ Atomic Coordinates:
+   6     0.01676455  -0.00033037  -0.60456801
+   6    -0.01469766  -0.00034218   0.60489096
+   1     0.17962718   0.00033416  -1.66632176
+   1    -0.18169407   0.00033839   1.66599880
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  93.6%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2463777696  0.0000000000 0.00227371                 0.0
+       1                                0.00010358 0.00266050      0.0
+       2                                0.00001845 0.00271465      0.0
+       3                                0.00000910 0.00272738      0.1
+       4                                0.00000294 0.00272875      0.1
+   1       -77.2464236616 -0.0000458919 0.00000286                 0.2
+       1                                0.00000088 0.00000314      0.0
+       2                                0.00000030 0.00000358      0.0
+   2       -77.2464236616 -0.0000000000 0.00000030                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.6%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0  98.4%     0.0
+ time: Rotate                           :     0.0  96.2%     0.0
+ time: SCF Equations                    :     0.3  99.8%     0.3
+  13 F,   28 F1
+
+  E  =     -77.2464236616
+  T  =      76.79189547  V  =    -228.44764188  J  =      61.18574646
+  Ex =     -10.94743570  Ec =      -0.43027075
+
+  dipole =   0.001647 au (  0.004186 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.894011    2    -9.892078    3    -0.679946    4    -0.513629
+   5    -0.444420    6    -0.260772    7    -0.260321
+ virtual:
+   8     0.001071    9     0.004738   10     0.086983   11     0.155309
+  12     0.402923   13     0.464295   14     0.531822   15     0.536346
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246423661611e+01
+eng> D=-1.50883405e-03  4.93968269e-04 -4.37311185e-04
+eng> G=-5.95990688e-03 -2.41928488e-05 -5.60008181e-05
+eng>    6.11108183e-03 -2.57909977e-05  9.98311997e-05
+eng>    2.18478383e-03  2.47054177e-05 -6.49881748e-04
+eng>   -2.33595878e-03  2.52784288e-05  6.06051367e-04
+eng>$end
+
+ G(max) = 0.00611195  |G| = 0.00915975
+
+
+ Geometry Optimization Step 4:
+ Energy:           -77.24642366
+ Energy change:     -0.00016268 (actual)
+                    -0.00016038 (predicted)
+    12 cartesian,    9 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.001582, |dG - HdX| = 0.00001021
+ Hessian update: |dG| = 0.000822, |dG - HdX| = 0.00109232
+ include g
+ max. gradient     = 0.0037738 (internal), 0.0061114 (cartesian)
+ trust test =-0.5998203, trust radius = 0.0251504
+ Lagrangian multiplier =   0.326357
+ max. displacement = 0.0251504 (internal), 0.0236339 (cartesian)
+ iter   0: rmax = 0.0251503573, xmax = 0.0126249282
+ iter   1: rmax = 0.0170275263, xmax = 0.0018332455
+ iter   2: rmax = 0.0144802302, xmax = 0.0013880806
+ iter   3: rmax = 0.0123549889, xmax = 0.0012381707
+ iter   4: rmax = 0.0106288605, xmax = 0.0010499518
+ iter   5: rmax = 0.0091474692, xmax = 0.0008897794
+ iter   6: rmax = 0.0078779140, xmax = 0.0007552590
+ iter   7: rmax = 0.0067909126, xmax = 0.0006415725
+ iter   8: rmax = 0.0058604918, xmax = 0.0005454040
+ iter   9: rmax = 0.0050642865, xmax = 0.0004639734
+ iter  10: rmax = 0.0043830622, xmax = 0.0003949515
+ iter  11: rmax = 0.0038002979, xmax = 0.0003363898
+ iter  12: rmax = 0.0033018177, xmax = 0.0002866575
+ iter  13: rmax = 0.0028754682, xmax = 0.0002443878
+ iter  14: rmax = 0.0025108361, xmax = 0.0002084337
+ iter  15: rmax = 0.0025841345, xmax = 0.0001778307
+ iter  16: rmax = 0.0026520319, xmax = 0.0001517668
+ iter  17: rmax = 0.0027104417, xmax = 0.0001295571
+ iter  18: rmax = 0.0027606419, xmax = 0.0001106228
+ iter  19: rmax = 0.0028037520, xmax = 0.0000944743
+ iter  20: rmax = 0.0028407488, xmax = 0.0000806970
+ iter  21: rmax = 0.0028724813, xmax = 0.0000689391
+ iter  22: rmax = 0.0028996858, xmax = 0.0000589020
+ iter  23: rmax = 0.0029229991, xmax = 0.0000503319
+ iter  24: rmax = 0.0029429709, xmax = 0.0000430129
+ iter  25: rmax = 0.0029600754, xmax = 0.0000367613
+ iter  26: rmax = 0.0029747206, xmax = 0.0000314207
+ iter  27: rmax = 0.0029872575, xmax = 0.0000268578
+ iter  28: rmax = 0.0029979878, xmax = 0.0000229589
+ iter  29: rmax = 0.0030071704, xmax = 0.0000196270
+ iter  30: rmax = 0.0030150275, xmax = 0.0000167796
+ iter  31: rmax = 0.0030217499, xmax = 0.0000143459
+ iter  32: rmax = 0.0030275007, xmax = 0.0000122658
+ iter  33: rmax = 0.0030324201, xmax = 0.0000104877
+ iter  34: rmax = 0.0030366279, xmax = 0.0000089679
+ iter  35: rmax = 0.0030402269, xmax = 0.0000076686
+ iter  36: rmax = 0.0030433050, xmax = 0.0000065579
+ iter  37: rmax = 0.0030459375, xmax = 0.0000056084
+ iter  38: rmax = 0.0030481889, xmax = 0.0000047966
+ iter  39: rmax = 0.0030501141, xmax = 0.0000041027
+ iter  40: rmax = 0.0030517606, xmax = 0.0000035093
+ iter  41: rmax = 0.0030531685, xmax = 0.0000030021
+ iter  42: rmax = 0.0030543724, xmax = 0.0000025684
+ iter  43: rmax = 0.0030554019, xmax = 0.0000021976
+ iter  44: rmax = 0.0030562822, xmax = 0.0000018806
+ iter  45: rmax = 0.0030570349, xmax = 0.0000016095
+ iter  46: rmax = 0.0030576786, xmax = 0.0000013778
+ iter  47: rmax = 0.0030582289, xmax = 0.0000011797
+ iter  48: rmax = 0.0030586995, xmax = 0.0000010103
+ iter  49: rmax = 0.0030591019, xmax = 0.0000008654
+ iter  50: rmax = 0.0030594460, xmax = 0.0000007416
+ iter  51: rmax = 0.0030597401, xmax = 0.0000006357
+ iter  52: rmax = 0.0030599917, xmax = 0.0000005451
+ iter  53: rmax = 0.0030602068, xmax = 0.0000004677
+ iter  54: rmax = 0.0030603907, xmax = 0.0000004016
+ iter  55: rmax = 0.0030605479, xmax = 0.0000003450
+ iter  56: rmax = 0.0030606823, xmax = 0.0000002966
+ iter  57: rmax = 0.0030607973, xmax = 0.0000002552
+ iter  58: rmax = 0.0030608956, xmax = 0.0000002198
+ iter  59: rmax = 0.0030609796, xmax = 0.0000001896
+ iter  60: rmax = 0.0030610515, xmax = 0.0000001637
+ iter  61: rmax = 0.0030611129, xmax = 0.0000001416
+ iter  62: rmax = 0.0030611654, xmax = 0.0000001227
+ iter  63: rmax = 0.0030612104, xmax = 0.0000001066
+ max. displacement = 0.0251504 (internal), 0.0132586 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.02315580  -0.00562017  -0.60419375
+mol>   6    -0.02171379  -0.00519388   0.60440348
+mol>   1     0.17752365   0.00548341  -1.66646048
+mol>   1    -0.17896566   0.00533064   1.66625074
+mol>$end
+
+ Atomic Coordinates:
+   6     0.02315580  -0.00562017  -0.60419375
+   6    -0.02171379  -0.00519388   0.60440348
+   1     0.17752365   0.00548341  -1.66646048
+   1    -0.17896566   0.00533064   1.66625074
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  97.4%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2465040487  0.0000000000 0.00256498                 0.0
+       1                                0.00010542 0.00300688      0.0
+       2                                0.00002108 0.00307772      0.0
+       3                                0.00000507 0.00308881      0.1
+   1       -77.2465748016 -0.0000707528 0.00000498                 0.2
+       1                                0.00000230 0.00000441      0.0
+       2                                0.00000070 0.00000484      0.0
+       3                                0.00000009 0.00000540      0.1
+   2       -77.2465748019 -0.0000000003 0.00000009                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.2  99.6%     0.2
+ time: Diagonalize                      :     0.0  86.0%     0.0
+ time: Matrix Multiply                  :     0.0  99.2%     0.0
+ time: Rotate                           :     0.0  87.8%     0.0
+ time: SCF Equations                    :     0.3  99.6%     0.3
+  16 F,   34 F1
+
+  E  =     -77.2465748019
+  T  =      76.79415906  V  =    -228.46824269  J  =      61.19546015
+  Ex =     -10.94823256  Ec =      -0.43030984
+
+  dipole =   0.007998 au (  0.020329 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893828    2    -9.891886    3    -0.679898    4    -0.513768
+   5    -0.444806    6    -0.260659    7    -0.260335
+ virtual:
+   8     0.002210    9     0.004806   10     0.087095   11     0.154825
+  12     0.402598   13     0.463844   14     0.533091   15     0.536331
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  98.5%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  95.9%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246574801904e+01
+eng> D=-1.05037847e-03  7.92406654e-03 -2.66729223e-04
+eng> G=-5.00504790e-03 -4.27599708e-04 -1.22982576e-04
+eng>    5.11010935e-03 -3.69644644e-04  1.49844829e-04
+eng>    1.81153302e-03  4.09168779e-04 -2.71726777e-04
+eng>   -1.91659447e-03  3.88075573e-04  2.44864525e-04
+eng>$end
+
+ G(max) = 0.00512565  |G| = 0.00767643
+
+
+ Geometry Optimization Step 5:
+ Energy:           -77.24657480
+ Energy change:     -0.00015114 (actual)
+                    -0.00017366 (predicted)
+    12 cartesian,    9 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000822, |dG - HdX| = 0.00001926
+ Hessian update: |dG| = 0.001195, |dG - HdX| = 0.00056970
+ include g
+ max. gradient     = 0.0031919 (internal), 0.0051102 (cartesian)
+ trust test =-0.1672039, trust radius = 0.0355680
+ Lagrangian multiplier =   0.370643
+ max. displacement = 0.0355680 (internal), 0.0314035 (cartesian)
+ iter   0: rmax = 0.0355679763, xmax = 0.0170686379
+ iter   1: rmax = 0.0203174126, xmax = 0.0022106563
+ iter   2: rmax = 0.0174133450, xmax = 0.0018703757
+ iter   3: rmax = 0.0146599578, xmax = 0.0014542575
+ iter   4: rmax = 0.0125563769, xmax = 0.0012341512
+ iter   5: rmax = 0.0107623375, xmax = 0.0010412261
+ iter   6: rmax = 0.0092316128, xmax = 0.0008818212
+ iter   7: rmax = 0.0079292515, xmax = 0.0007469124
+ iter   8: rmax = 0.0068214631, xmax = 0.0006327955
+ iter   9: rmax = 0.0058793330, xmax = 0.0005362979
+ iter  10: rmax = 0.0050781741, xmax = 0.0004546822
+ iter  11: rmax = 0.0048540216, xmax = 0.0003856280
+ iter  12: rmax = 0.0049837973, xmax = 0.0003271760
+ iter  13: rmax = 0.0050963198, xmax = 0.0002776747
+ iter  14: rmax = 0.0051935679, xmax = 0.0002357332
+ iter  15: rmax = 0.0052773938, xmax = 0.0002001806
+ iter  16: rmax = 0.0053494941, xmax = 0.0001700307
+ iter  17: rmax = 0.0054113985, xmax = 0.0001444524
+ iter  18: rmax = 0.0054644704, xmax = 0.0001227448
+ iter  19: rmax = 0.0055099142, xmax = 0.0001043163
+ iter  20: rmax = 0.0055487863, xmax = 0.0000886672
+ iter  21: rmax = 0.0055820087, xmax = 0.0000753750
+ iter  22: rmax = 0.0056103821, xmax = 0.0000640824
+ iter  23: rmax = 0.0056345994, xmax = 0.0000544867
+ iter  24: rmax = 0.0056552591, xmax = 0.0000463316
+ iter  25: rmax = 0.0056728761, xmax = 0.0000393999
+ iter  26: rmax = 0.0056878930, xmax = 0.0000335073
+ iter  27: rmax = 0.0057006898, xmax = 0.0000284976
+ iter  28: rmax = 0.0057115918, xmax = 0.0000242381
+ iter  29: rmax = 0.0057208776, xmax = 0.0000206161
+ iter  30: rmax = 0.0057287852, xmax = 0.0000175361
+ iter  31: rmax = 0.0057355181, xmax = 0.0000149168
+ iter  32: rmax = 0.0057412501, xmax = 0.0000126892
+ iter  33: rmax = 0.0057461295, xmax = 0.0000107947
+ iter  34: rmax = 0.0057502825, xmax = 0.0000091833
+ iter  35: rmax = 0.0057538172, xmax = 0.0000078128
+ iter  36: rmax = 0.0057568253, xmax = 0.0000066470
+ iter  37: rmax = 0.0057593851, xmax = 0.0000056554
+ iter  38: rmax = 0.0057615633, xmax = 0.0000048120
+ iter  39: rmax = 0.0057634168, xmax = 0.0000040946
+ iter  40: rmax = 0.0057649939, xmax = 0.0000034843
+ iter  41: rmax = 0.0057663357, xmax = 0.0000029652
+ iter  42: rmax = 0.0057674774, xmax = 0.0000025236
+ iter  43: rmax = 0.0057684487, xmax = 0.0000021479
+ iter  44: rmax = 0.0057692751, xmax = 0.0000018284
+ iter  45: rmax = 0.0057699782, xmax = 0.0000015565
+ iter  46: rmax = 0.0057705763, xmax = 0.0000013253
+ iter  47: rmax = 0.0057710852, xmax = 0.0000011286
+ iter  48: rmax = 0.0057715181, xmax = 0.0000009613
+ iter  49: rmax = 0.0057718864, xmax = 0.0000008189
+ iter  50: rmax = 0.0057721997, xmax = 0.0000006978
+ iter  51: rmax = 0.0057724663, xmax = 0.0000005948
+ iter  52: rmax = 0.0057726930, xmax = 0.0000005072
+ iter  53: rmax = 0.0057728859, xmax = 0.0000004327
+ iter  54: rmax = 0.0057730500, xmax = 0.0000003692
+ iter  55: rmax = 0.0057731896, xmax = 0.0000003153
+ iter  56: rmax = 0.0057733084, xmax = 0.0000002694
+ iter  57: rmax = 0.0057734094, xmax = 0.0000002304
+ iter  58: rmax = 0.0057734954, xmax = 0.0000001972
+ iter  59: rmax = 0.0057735685, xmax = 0.0000001689
+ iter  60: rmax = 0.0057736307, xmax = 0.0000001449
+ iter  61: rmax = 0.0057736836, xmax = 0.0000001244
+ iter  62: rmax = 0.0057737286, xmax = 0.0000001070
+ iter  63: rmax = 0.0057737669, xmax = 0.0000000922
+ max. displacement = 0.0355680 (internal), 0.0152467 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.02816126   0.00244803  -0.60383965
+mol>   6    -0.02683298   0.00230573   0.60402667
+mol>   1     0.17575822  -0.00240264  -1.66662168
+mol>   1    -0.17708650  -0.00235112   1.66643466
+mol>$end
+
+ Atomic Coordinates:
+   6     0.02816126   0.00244803  -0.60383965
+   6    -0.02683298   0.00230573   0.60402667
+   1     0.17575822  -0.00240264  -1.66662168
+   1    -0.17708650  -0.00235112   1.66643466
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0 100.0%     0.0
+ time: Orthogonalize                    :     0.0  93.0%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2466211818  0.0000000000 0.00194150                 0.0
+       1                                0.00015237 0.00227520      0.0
+       2                                0.00001641 0.00233491      0.0
+       3                                0.00000819 0.00234021      0.1
+       4                                0.00000418 0.00234116      0.1
+       5                                0.00000048 0.00234115      0.1
+   1       -77.2466831697 -0.0000619879 0.00000111                 0.2
+       1                                0.00000025 0.00000093      0.0
+   2       -77.2466831697 -0.0000000000 0.00000025                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Numerical Integration            :     0.2  99.5%     0.2
+ time: Diagonalize                      :     0.0  98.9%     0.0
+ time: Matrix Multiply                  :     0.0  94.9%     0.0
+ time: Rotate                           :     0.0  91.9%     0.0
+ time: SCF Equations                    :     0.3  99.6%     0.3
+  19 F,   40 F1
+
+  E  =     -77.2466831697
+  T  =      76.79585018  V  =    -228.48305329  J  =      61.20239563
+  Ex =     -10.94880453  Ec =      -0.43033725
+
+  dipole =   0.003618 au (  0.009196 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893699    2    -9.891752    3    -0.679871    4    -0.513869
+   5    -0.445068    6    -0.260590    7    -0.260349
+ virtual:
+   8     0.002960    9     0.004935   10     0.087110   11     0.154527
+  12     0.402375   13     0.463523   14     0.533907   15     0.536317
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  97.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246683169713e+01
+eng> D=-9.66132830e-04 -3.47884201e-03 -2.30632951e-04
+eng> G=-4.28770854e-03  1.83799395e-04 -1.30688686e-04
+eng>    4.38402626e-03  1.64555876e-04  1.54276739e-04
+eng>    1.52507365e-03 -1.77675725e-04 -8.68528149e-06
+eng>   -1.62139137e-03 -1.70679545e-04 -1.49027714e-05
+eng>$end
+
+ G(max) = 0.00438983  |G| = 0.00653618
+
+
+ Geometry Optimization Step 6:
+ Energy:           -77.24668317
+ Energy change:     -0.00010837 (actual)
+                    -0.00015037 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.001632, |dG - HdX| = 0.00022909
+ Hessian update: |dG| = 0.001682, |dG - HdX| = 0.00068185
+ include g
+ max. gradient     = 0.0046984 (internal), 0.0043840 (cartesian)
+ trust test = 0.4077991, trust radius = 0.0503007
+ Lagrangian multiplier =   0.352258
+ max. displacement = 0.0503007 (internal), 0.0328169 (cartesian)
+ iter   0: rmax = 0.0503007145, xmax = 0.0325485940
+ iter   1: rmax = 0.0009056316, xmax = 0.0009285608
+ iter   2: rmax = 0.0004807411, xmax = 0.0000469217
+ iter   3: rmax = 0.0004103261, xmax = 0.0000421637
+ iter   4: rmax = 0.0003513780, xmax = 0.0000361641
+ iter   5: rmax = 0.0003009279, xmax = 0.0000309997
+ iter   6: rmax = 0.0002577290, xmax = 0.0000265703
+ iter   7: rmax = 0.0002207372, xmax = 0.0000227717
+ iter   8: rmax = 0.0001890592, xmax = 0.0000195147
+ iter   9: rmax = 0.0001619304, xmax = 0.0000167225
+ iter  10: rmax = 0.0001386968, xmax = 0.0000143290
+ iter  11: rmax = 0.0001187985, xmax = 0.0000122775
+ iter  12: rmax = 0.0001017561, xmax = 0.0000105194
+ iter  13: rmax = 0.0000871595, xmax = 0.0000090127
+ iter  14: rmax = 0.0000746574, xmax = 0.0000077216
+ iter  15: rmax = 0.0000639491, xmax = 0.0000066153
+ iter  16: rmax = 0.0000547771, xmax = 0.0000056674
+ iter  17: rmax = 0.0000469209, xmax = 0.0000048552
+ iter  18: rmax = 0.0000401916, xmax = 0.0000041593
+ iter  19: rmax = 0.0000344276, xmax = 0.0000035632
+ iter  20: rmax = 0.0000294903, xmax = 0.0000030524
+ iter  21: rmax = 0.0000252611, xmax = 0.0000026149
+ iter  22: rmax = 0.0000216385, xmax = 0.0000022400
+ iter  23: rmax = 0.0000185355, xmax = 0.0000019189
+ iter  24: rmax = 0.0000158774, xmax = 0.0000016438
+ iter  25: rmax = 0.0000136006, xmax = 0.0000014081
+ iter  26: rmax = 0.0000116503, xmax = 0.0000012063
+ iter  27: rmax = 0.0000099796, xmax = 0.0000010333
+ iter  28: rmax = 0.0000085486, xmax = 0.0000008852
+ iter  29: rmax = 0.0000073227, xmax = 0.0000007582
+ iter  30: rmax = 0.0000062727, xmax = 0.0000006495
+ iter  31: rmax = 0.0000053732, xmax = 0.0000005564
+ iter  32: rmax = 0.0000046027, xmax = 0.0000004766
+ iter  33: rmax = 0.0000039427, xmax = 0.0000004083
+ iter  34: rmax = 0.0000033773, xmax = 0.0000003497
+ iter  35: rmax = 0.0000028931, xmax = 0.0000002996
+ iter  36: rmax = 0.0000024782, xmax = 0.0000002566
+ iter  37: rmax = 0.0000021229, xmax = 0.0000002198
+ iter  38: rmax = 0.0000018184, xmax = 0.0000001883
+ iter  39: rmax = 0.0000015577, xmax = 0.0000001613
+ iter  40: rmax = 0.0000013343, xmax = 0.0000001382
+ iter  41: rmax = 0.0000011430, xmax = 0.0000001184
+ iter  42: rmax = 0.0000009791, xmax = 0.0000001014
+ iter  43: rmax = 0.0000008387, xmax = 0.0000000869
+ iter  44: rmax = 0.0000007184, xmax = 0.0000000744
+ iter  45: rmax = 0.0000006154, xmax = 0.0000000637
+ iter  46: rmax = 0.0000005272, xmax = 0.0000000546
+ iter  47: rmax = 0.0000004516, xmax = 0.0000000468
+ iter  48: rmax = 0.0000003868, xmax = 0.0000000401
+ iter  49: rmax = 0.0000003314, xmax = 0.0000000343
+ iter  50: rmax = 0.0000002838, xmax = 0.0000000294
+ iter  51: rmax = 0.0000002431, xmax = 0.0000000252
+ iter  52: rmax = 0.0000002083, xmax = 0.0000000216
+ iter  53: rmax = 0.0000001784, xmax = 0.0000000185
+ iter  54: rmax = 0.0000001528, xmax = 0.0000000158
+ iter  55: rmax = 0.0000001309, xmax = 0.0000000136
+ iter  56: rmax = 0.0000001121, xmax = 0.0000000116
+ iter  57: rmax = 0.0000000961, xmax = 0.0000000099
+ iter  58: rmax = 0.0000000823, xmax = 0.0000000085
+ iter  59: rmax = 0.0000000705, xmax = 0.0000000073
+ iter  60: rmax = 0.0000000604, xmax = 0.0000000063
+ iter  61: rmax = 0.0000000517, xmax = 0.0000000054
+ iter  62: rmax = 0.0000000443, xmax = 0.0000000046
+ iter  63: rmax = 0.0000000380, xmax = 0.0000000039
+ max. displacement = 0.0503007 (internal), 0.0326062 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.04482573   0.00101787  -0.60259415
+mol>   6    -0.04408745   0.00097482   0.60267842
+mol>   1     0.17000173  -0.00100420  -1.66766457
+mol>   1    -0.17074001  -0.00098849   1.66758029
+mol>$end
+
+ Atomic Coordinates:
+   6     0.04482573   0.00101787  -0.60259415
+   6    -0.04408745   0.00097482   0.60267842
+   1     0.17000173  -0.00100420  -1.66766457
+   1    -0.17074001  -0.00098849   1.66758029
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  93.1%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  96.9%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2465373111  0.0000000000 0.00652329                 0.0
+       1                                0.00021072 0.00772455      0.0
+       2                                0.00004803 0.00787458      0.0
+       3                                0.00001213 0.00790539      0.1
+   1       -77.2469147487 -0.0003774376 0.00001176                 0.2
+       1                                0.00000610 0.00001064      0.0
+       2                                0.00000163 0.00001265      0.0
+       3                                0.00000037 0.00001327      0.1
+   2       -77.2469147502 -0.0000000015 0.00000037                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0  97.1%     0.0
+ time: Numerical Integration            :     0.2  97.2%     0.2
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  94.7%     0.0
+ time: SCF Equations                    :     0.3  97.2%     0.3
+  22 F,   46 F1
+
+  E  =     -77.2469147502
+  T  =      76.79754803  V  =    -228.50416997  J  =      61.21277961
+  Ex =     -10.94960605  Ec =      -0.43038029
+
+  dipole =   0.001551 au (  0.003942 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893485    2    -9.891528    3    -0.679769    4    -0.513978
+   5    -0.445558    6    -0.260408    7    -0.260355
+ virtual:
+   8     0.004668    9     0.005109   10     0.086965   11     0.153573
+  12     0.401971   13     0.462888   14     0.535748   15     0.536278
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  98.5%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246914750181e+01
+eng> D=-5.36350723e-04 -1.45261355e-03 -8.56481120e-05
+eng> G=-1.99872409e-03  7.55237251e-05  3.40229595e-05
+eng>    2.05289030e-03  6.97705304e-05 -2.99307939e-05
+eng>    6.82226955e-04 -7.36857302e-05  1.92402525e-04
+eng>   -7.36393157e-04 -7.16085253e-05 -1.96494691e-04
+eng>$end
+
+ G(max) = 0.00205429  |G| = 0.00305218
+
+
+ Geometry Optimization Step 7:
+ Energy:           -77.24691475
+ Energy change:     -0.00023158 (actual)
+                    -0.00022936 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.001682, |dG - HdX| = 0.00031864
+ Hessian update: |dG| = 0.003050, |dG - HdX| = 0.00105544
+ include g
+ max. gradient     = 0.0022013 (internal), 0.0020522 (cartesian)
+ trust test =-0.1069300, trust radius = 0.0711360
+ max. displacement = 0.0453280 (internal), 0.0297307 (cartesian)
+ iter   0: rmax = 0.0453280483, xmax = 0.0289523288
+ iter   1: rmax = 0.0065720959, xmax = 0.0044026922
+ iter   2: rmax = 0.0016484031, xmax = 0.0005919651
+ iter   3: rmax = 0.0009450425, xmax = 0.0001709282
+ iter   4: rmax = 0.0007934653, xmax = 0.0000908095
+ iter   5: rmax = 0.0007137385, xmax = 0.0000946946
+ iter   6: rmax = 0.0006181220, xmax = 0.0000816696
+ iter   7: rmax = 0.0005363449, xmax = 0.0000708097
+ iter   8: rmax = 0.0004655854, xmax = 0.0000615999
+ iter   9: rmax = 0.0004039810, xmax = 0.0000535278
+ iter  10: rmax = 0.0003504310, xmax = 0.0000464795
+ iter  11: rmax = 0.0003039269, xmax = 0.0000403406
+ iter  12: rmax = 0.0002635649, xmax = 0.0000350011
+ iter  13: rmax = 0.0002285482, xmax = 0.0000303616
+ iter  14: rmax = 0.0001981770, xmax = 0.0000263331
+ iter  15: rmax = 0.0001718396, xmax = 0.0000228371
+ iter  16: rmax = 0.0001490029, xmax = 0.0000198041
+ iter  17: rmax = 0.0001292026, xmax = 0.0000171734
+ iter  18: rmax = 0.0001120355, xmax = 0.0000148920
+ iter  19: rmax = 0.0000971515, xmax = 0.0000129136
+ iter  20: rmax = 0.0000842467, xmax = 0.0000111982
+ iter  21: rmax = 0.0000730578, xmax = 0.0000097109
+ iter  22: rmax = 0.0000633563, xmax = 0.0000084212
+ iter  23: rmax = 0.0000549442, xmax = 0.0000073029
+ iter  24: rmax = 0.0000476500, xmax = 0.0000063332
+ iter  25: rmax = 0.0000413248, xmax = 0.0000054924
+ iter  26: rmax = 0.0000358399, xmax = 0.0000047633
+ iter  27: rmax = 0.0000310834, xmax = 0.0000041311
+ iter  28: rmax = 0.0000269586, xmax = 0.0000035828
+ iter  29: rmax = 0.0000233814, xmax = 0.0000031073
+ iter  30: rmax = 0.0000202790, xmax = 0.0000026950
+ iter  31: rmax = 0.0000175885, xmax = 0.0000023374
+ iter  32: rmax = 0.0000152551, xmax = 0.0000020273
+ iter  33: rmax = 0.0000132313, xmax = 0.0000017583
+ iter  34: rmax = 0.0000114761, xmax = 0.0000015251
+ iter  35: rmax = 0.0000099537, xmax = 0.0000013227
+ iter  36: rmax = 0.0000086334, xmax = 0.0000011473
+ iter  37: rmax = 0.0000074882, xmax = 0.0000009951
+ iter  38: rmax = 0.0000064950, xmax = 0.0000008631
+ iter  39: rmax = 0.0000056335, xmax = 0.0000007486
+ iter  40: rmax = 0.0000048863, xmax = 0.0000006493
+ iter  41: rmax = 0.0000042382, xmax = 0.0000005632
+ iter  42: rmax = 0.0000036761, xmax = 0.0000004885
+ iter  43: rmax = 0.0000031885, xmax = 0.0000004237
+ iter  44: rmax = 0.0000027656, xmax = 0.0000003675
+ iter  45: rmax = 0.0000023988, xmax = 0.0000003188
+ iter  46: rmax = 0.0000020807, xmax = 0.0000002765
+ iter  47: rmax = 0.0000018047, xmax = 0.0000002398
+ iter  48: rmax = 0.0000015654, xmax = 0.0000002080
+ iter  49: rmax = 0.0000013578, xmax = 0.0000001804
+ iter  50: rmax = 0.0000011777, xmax = 0.0000001565
+ iter  51: rmax = 0.0000010215, xmax = 0.0000001357
+ iter  52: rmax = 0.0000008860, xmax = 0.0000001177
+ iter  53: rmax = 0.0000007685, xmax = 0.0000001021
+ iter  54: rmax = 0.0000006666, xmax = 0.0000000886
+ iter  55: rmax = 0.0000005782, xmax = 0.0000000768
+ iter  56: rmax = 0.0000005015, xmax = 0.0000000666
+ iter  57: rmax = 0.0000004350, xmax = 0.0000000578
+ iter  58: rmax = 0.0000003773, xmax = 0.0000000501
+ iter  59: rmax = 0.0000003273, xmax = 0.0000000435
+ iter  60: rmax = 0.0000002839, xmax = 0.0000000377
+ iter  61: rmax = 0.0000002462, xmax = 0.0000000327
+ iter  62: rmax = 0.0000002136, xmax = 0.0000000284
+ iter  63: rmax = 0.0000001852, xmax = 0.0000000246
+ max. displacement = 0.0453280 (internal), 0.0245744 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05620894   0.00024905  -0.60154556
+mol>   6    -0.05709164   0.00012089   0.60144416
+mol>   1     0.16642674  -0.00020815  -1.66807531
+mol>   1    -0.16554405  -0.00016179   1.66817671
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05620894   0.00024905  -0.60154556
+   6    -0.05709164   0.00012089   0.60144416
+   1     0.16642674  -0.00020815  -1.66807531
+   1    -0.16554405  -0.00016179   1.66817671
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  98.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  97.4%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2467812476  0.0000000000 0.00470611                 0.0
+       1                                0.00015092 0.00558394      0.0
+       2                                0.00002919 0.00569595      0.0
+       3                                0.00001279 0.00570719      0.1
+   1       -77.2469774601 -0.0001962125 0.00001308                 0.2
+       1                                0.00000802 0.00001664      0.0
+       2                                0.00000291 0.00001178      0.0
+       3                                0.00000033 0.00001529      0.1
+   2       -77.2469774632 -0.0000000031 0.00000033                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0  95.9%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  98.4%     0.0
+ time: Rotate                           :     0.0  95.8%     0.0
+ time: SCF Equations                    :     0.3  99.2%     0.3
+  25 F,   52 F1
+
+  E  =     -77.2469774632
+  T  =      76.79843360  V  =    -228.51292833  J  =      61.21697852
+  Ex =     -10.94991471  Ec =      -0.43039587
+
+  dipole =   0.000702 au (  0.001784 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893402    2    -9.891442    3    -0.679753    4    -0.514004
+   5    -0.445696    6    -0.260368    7    -0.260366
+ virtual:
+   8     0.005165    9     0.005181   10     0.086952   11     0.153319
+  12     0.401849   13     0.462742   14     0.536235   15     0.536253
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246977463184e+01
+eng> D= 6.43299030e-04 -2.68802332e-04  8.01407202e-05
+eng> G=-4.40861440e-04  2.19814615e-05  3.08626211e-04
+eng>    3.78199661e-04  4.94838674e-06 -3.31833783e-04
+eng>    1.42339128e-04 -1.65456171e-05  2.40859938e-04
+eng>   -7.96773498e-05 -1.03842312e-05 -2.17652366e-04
+eng>$end
+
+ G(max) = 0.00053860  |G| = 0.00082197
+
+
+ Geometry Optimization Step 8:
+ Energy:           -77.24697746
+ Energy change:     -0.00006271 (actual)
+                    -0.00006587 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.003050, |dG - HdX| = 0.00010242
+ Hessian update: |dG| = 0.002149, |dG - HdX| = 0.00076559
+ include g
+ max. gradient     = 0.0005753 (internal), 0.0004399 (cartesian)
+ trust test =-0.0925590, trust radius = 0.0641035
+ max. displacement = 0.0083716 (internal), 0.0054975 (cartesian)
+ iter   0: rmax = 0.0083716281, xmax = 0.0054345444
+ iter   1: rmax = 0.0009251075, xmax = 0.0006501405
+ iter   2: rmax = 0.0003870882, xmax = 0.0000774341
+ iter   3: rmax = 0.0003163254, xmax = 0.0000230096
+ iter   4: rmax = 0.0002911339, xmax = 0.0000203210
+ iter   5: rmax = 0.0002639074, xmax = 0.0000186371
+ iter   6: rmax = 0.0002388738, xmax = 0.0000167690
+ iter   7: rmax = 0.0002162764, xmax = 0.0000151384
+ iter   8: rmax = 0.0001958454, xmax = 0.0000136701
+ iter   9: rmax = 0.0001773707, xmax = 0.0000123459
+ iter  10: rmax = 0.0001606644, xmax = 0.0000111523
+ iter  11: rmax = 0.0001455557, xmax = 0.0000100766
+ iter  12: rmax = 0.0001318898, xmax = 0.0000091071
+ iter  13: rmax = 0.0001195267, xmax = 0.0000082331
+ iter  14: rmax = 0.0001083400, xmax = 0.0000074451
+ iter  15: rmax = 0.0000982157, xmax = 0.0000067344
+ iter  16: rmax = 0.0000890509, xmax = 0.0000060932
+ iter  17: rmax = 0.0000807529, xmax = 0.0000055146
+ iter  18: rmax = 0.0000732380, xmax = 0.0000049923
+ iter  19: rmax = 0.0000664310, xmax = 0.0000045206
+ iter  20: rmax = 0.0000602639, xmax = 0.0000040944
+ iter  21: rmax = 0.0000546755, xmax = 0.0000037092
+ iter  22: rmax = 0.0000496105, xmax = 0.0000033610
+ iter  23: rmax = 0.0000450191, xmax = 0.0000030461
+ iter  24: rmax = 0.0000408563, xmax = 0.0000027612
+ iter  25: rmax = 0.0000370815, xmax = 0.0000025034
+ iter  26: rmax = 0.0000336581, xmax = 0.0000022701
+ iter  27: rmax = 0.0000305529, xmax = 0.0000020588
+ iter  28: rmax = 0.0000277360, xmax = 0.0000018674
+ iter  29: rmax = 0.0000251804, xmax = 0.0000016940
+ iter  30: rmax = 0.0000228615, xmax = 0.0000015370
+ iter  31: rmax = 0.0000207572, xmax = 0.0000013946
+ iter  32: rmax = 0.0000188474, xmax = 0.0000012655
+ iter  33: rmax = 0.0000171141, xmax = 0.0000011485
+ iter  34: rmax = 0.0000155408, xmax = 0.0000010425
+ iter  35: rmax = 0.0000141127, xmax = 0.0000009462
+ iter  36: rmax = 0.0000128162, xmax = 0.0000008590
+ iter  37: rmax = 0.0000116391, xmax = 0.0000007798
+ iter  38: rmax = 0.0000105705, xmax = 0.0000007079
+ iter  39: rmax = 0.0000096002, xmax = 0.0000006428
+ iter  40: rmax = 0.0000087191, xmax = 0.0000005836
+ iter  41: rmax = 0.0000079191, xmax = 0.0000005299
+ iter  42: rmax = 0.0000071926, xmax = 0.0000004812
+ iter  43: rmax = 0.0000065329, xmax = 0.0000004370
+ iter  44: rmax = 0.0000059338, xmax = 0.0000003968
+ iter  45: rmax = 0.0000053897, xmax = 0.0000003604
+ iter  46: rmax = 0.0000048956, xmax = 0.0000003273
+ iter  47: rmax = 0.0000044468, xmax = 0.0000002972
+ iter  48: rmax = 0.0000040392, xmax = 0.0000002699
+ iter  49: rmax = 0.0000036690, xmax = 0.0000002452
+ iter  50: rmax = 0.0000033327, xmax = 0.0000002227
+ iter  51: rmax = 0.0000030273, xmax = 0.0000002023
+ iter  52: rmax = 0.0000027499, xmax = 0.0000001837
+ iter  53: rmax = 0.0000024980, xmax = 0.0000001669
+ iter  54: rmax = 0.0000022691, xmax = 0.0000001516
+ iter  55: rmax = 0.0000020612, xmax = 0.0000001377
+ iter  56: rmax = 0.0000018724, xmax = 0.0000001250
+ iter  57: rmax = 0.0000017009, xmax = 0.0000001136
+ iter  58: rmax = 0.0000015451, xmax = 0.0000001032
+ iter  59: rmax = 0.0000014035, xmax = 0.0000000937
+ iter  60: rmax = 0.0000012750, xmax = 0.0000000851
+ iter  61: rmax = 0.0000011582, xmax = 0.0000000773
+ iter  62: rmax = 0.0000010521, xmax = 0.0000000702
+ iter  63: rmax = 0.0000009558, xmax = 0.0000000638
+ max. displacement = 0.0083716 (internal), 0.0049045 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05880429   0.00039557  -0.60141237
+mol>   6    -0.05943900   0.00057695   0.60134954
+mol>   1     0.16544566  -0.00045367  -1.66847553
+mol>   1    -0.16481096  -0.00051886   1.66853837
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05880429   0.00039557  -0.60141237
+   6    -0.05943900   0.00057695   0.60134954
+   1     0.16544566  -0.00045367  -1.66847553
+   1    -0.16481096  -0.00051886   1.66853837
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  98.8%     0.0
+
+  it          E            dE            g          x               t
+ grid:    36624   47
+   0       -77.2469742419  0.0000000000 0.00095149                 0.1
+       1                                0.00004641 0.00110876      0.0
+       2                                0.00001039 0.00113039      0.0
+       3                                0.00000438 0.00113583      0.1
+       4                                0.00000103 0.00113712      0.1
+       5                                0.00000007 0.00113643      0.1
+   1       -77.2469823119 -0.0000080700 0.00000024                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Grid Construction                :     0.1  98.7%     0.1
+ time: Numerical Integration            :     0.3  99.4%     0.3
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  99.6%     0.0
+ time: Rotate                           :     0.0  87.4%     0.0
+ time: SCF Equations                    :     0.3  99.5%     0.3
+  27 F,   57 F1
+
+  E  =     -77.2469823119
+  T  =      76.79685857  V  =    -228.50230679  J  =      61.21221892
+  Ex =     -10.94958119  Ec =      -0.43038222
+
+  dipole =   0.000848 au (  0.002155 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893480    2    -9.891524    3    -0.679708    4    -0.513994
+   5    -0.445670    6    -0.260332    7    -0.260332
+ virtual:
+   8     0.005106    9     0.005107   10     0.086828   11     0.153228
+  12     0.401897   13     0.462666   14     0.536293   15     0.536293
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.5%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  98.6%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246982311882e+01
+eng> D= 4.62257631e-04 -7.09231392e-04  4.62495888e-05
+eng> G=-7.01415334e-05  2.34444386e-05 -3.12560966e-06
+eng>    2.36505720e-05  4.77619291e-05 -1.33919857e-06
+eng>    2.96861329e-05 -3.12230227e-05  1.08221121e-04
+eng>    1.68048285e-05 -3.99833450e-05 -1.03756313e-04
+eng>$end
+
+ G(max) = 0.00011648  |G| = 0.00018584
+
+
+ Geometry Optimization Step 9:
+ Energy:           -77.24698231
+ Energy change:     -0.00000485 (actual)
+                    -0.00000246 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ include g
+ max. gradient     = 0.0001085 (internal), 0.0001082 (cartesian)
+ max. displacement = 0.0012912 (internal), 0.0009286 (cartesian)
+ iter   0: rmax = 0.0012912335, xmax = 0.0010028841
+ iter   1: rmax = 0.0004801241, xmax = 0.0001304022
+ iter   2: rmax = 0.0004284097, xmax = 0.0001130053
+ iter   3: rmax = 0.0003702050, xmax = 0.0000525573
+ iter   4: rmax = 0.0003833684, xmax = 0.0000421357
+ iter   5: rmax = 0.0003665333, xmax = 0.0000240427
+ iter   6: rmax = 0.0003405820, xmax = 0.0000211143
+ iter   7: rmax = 0.0003175017, xmax = 0.0000173724
+ iter   8: rmax = 0.0002951057, xmax = 0.0000163862
+ iter   9: rmax = 0.0002730791, xmax = 0.0000156647
+ iter  10: rmax = 0.0002519665, xmax = 0.0000147886
+ iter  11: rmax = 0.0002319837, xmax = 0.0000138693
+ iter  12: rmax = 0.0002132110, xmax = 0.0000129337
+ iter  13: rmax = 0.0001956810, xmax = 0.0000120070
+ iter  14: rmax = 0.0001793883, xmax = 0.0000111077
+ iter  15: rmax = 0.0001643010, xmax = 0.0000102473
+ iter  16: rmax = 0.0001503704, xmax = 0.0000094326
+ iter  17: rmax = 0.0001375376, xmax = 0.0000086673
+ iter  18: rmax = 0.0001257377, xmax = 0.0000079527
+ iter  19: rmax = 0.0001149040, xmax = 0.0000072886
+ iter  20: rmax = 0.0001049692, xmax = 0.0000066737
+ iter  21: rmax = 0.0000958678, xmax = 0.0000061061
+ iter  22: rmax = 0.0000875364, xmax = 0.0000055833
+ iter  23: rmax = 0.0000799148, xmax = 0.0000051028
+ iter  24: rmax = 0.0000729463, xmax = 0.0000046617
+ iter  25: rmax = 0.0000665777, xmax = 0.0000042574
+ iter  26: rmax = 0.0000607593, xmax = 0.0000038872
+ iter  27: rmax = 0.0000554452, xmax = 0.0000035484
+ iter  28: rmax = 0.0000505927, xmax = 0.0000032386
+ iter  29: rmax = 0.0000461627, xmax = 0.0000029555
+ iter  30: rmax = 0.0000421189, xmax = 0.0000026968
+ iter  31: rmax = 0.0000384281, xmax = 0.0000024606
+ iter  32: rmax = 0.0000350599, xmax = 0.0000022449
+ iter  33: rmax = 0.0000319863, xmax = 0.0000020480
+ iter  34: rmax = 0.0000291817, xmax = 0.0000018683
+ iter  35: rmax = 0.0000266228, xmax = 0.0000017044
+ iter  36: rmax = 0.0000242880, xmax = 0.0000015548
+ iter  37: rmax = 0.0000221579, xmax = 0.0000014183
+ iter  38: rmax = 0.0000202145, xmax = 0.0000012937
+ iter  39: rmax = 0.0000184415, xmax = 0.0000011802
+ iter  40: rmax = 0.0000168240, xmax = 0.0000010765
+ iter  41: rmax = 0.0000153484, xmax = 0.0000009820
+ iter  42: rmax = 0.0000140021, xmax = 0.0000008958
+ iter  43: rmax = 0.0000127740, xmax = 0.0000008172
+ iter  44: rmax = 0.0000116536, xmax = 0.0000007454
+ iter  45: rmax = 0.0000106315, xmax = 0.0000006800
+ iter  46: rmax = 0.0000096990, xmax = 0.0000006203
+ iter  47: rmax = 0.0000088484, xmax = 0.0000005659
+ iter  48: rmax = 0.0000080723, xmax = 0.0000005162
+ iter  49: rmax = 0.0000073644, xmax = 0.0000004709
+ iter  50: rmax = 0.0000067185, xmax = 0.0000004296
+ iter  51: rmax = 0.0000061293, xmax = 0.0000003919
+ iter  52: rmax = 0.0000055918, xmax = 0.0000003575
+ iter  53: rmax = 0.0000051014, xmax = 0.0000003261
+ iter  54: rmax = 0.0000046540, xmax = 0.0000002975
+ iter  55: rmax = 0.0000042459, xmax = 0.0000002714
+ iter  56: rmax = 0.0000038736, xmax = 0.0000002476
+ iter  57: rmax = 0.0000035339, xmax = 0.0000002259
+ iter  58: rmax = 0.0000032240, xmax = 0.0000002061
+ iter  59: rmax = 0.0000029413, xmax = 0.0000001880
+ iter  60: rmax = 0.0000026834, xmax = 0.0000001715
+ iter  61: rmax = 0.0000024481, xmax = 0.0000001565
+ iter  62: rmax = 0.0000022334, xmax = 0.0000001427
+ iter  63: rmax = 0.0000020376, xmax = 0.0000001302
+ max. displacement = 0.0012912 (internal), 0.0008222 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05923935   0.00021893  -0.60139166
+mol>   6    -0.05955536   0.00027811   0.60136040
+mol>   1     0.16519897  -0.00023795  -1.66861466
+mol>   1    -0.16488297  -0.00025909   1.66864592
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05923935   0.00021893  -0.60139166
+   6    -0.05955536   0.00027811   0.60136040
+   1     0.16519897  -0.00023795  -1.66861466
+   1    -0.16488297  -0.00025909   1.66864592
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  92.4%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469823018  0.0000000000 0.00010594                 0.1
+       1                                0.00000768 0.00012230      0.0
+       2                                0.00000172 0.00012223      0.0
+       3                                0.00000030 0.00012225      0.1
+   1       -77.2469824465 -0.0000001447 0.00000030                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.1  99.9%     0.1
+ time: Diagonalize                      :     0.0  99.7%     0.0
+ time: Matrix Multiply                  :     0.0  99.6%     0.0
+ time: Rotate                           :     0.0  85.4%     0.0
+ time: SCF Equations                    :     0.2  99.9%     0.2
+  29 F,   60 F1
+
+  E  =     -77.2469824465
+  T  =      76.79639810  V  =    -228.49944605  J  =      61.21096802
+  Ex =     -10.94947639  Ec =      -0.43037803
+
+  dipole =   0.000431 au (  0.001096 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893499    2    -9.891544    3    -0.679698    4    -0.513976
+   5    -0.445652    6    -0.260325    7    -0.260325
+ virtual:
+   8     0.005095    9     0.005095   10     0.086777   11     0.153185
+  12     0.401916   13     0.462669   14     0.536295   15     0.536295
+ time: One-Electron Gradient            :     0.0 100.0%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.8%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246982446507e+01
+eng> D= 2.30910813e-04 -3.63259973e-04  2.34879868e-05
+eng> G=-1.99441450e-05  1.42418373e-05 -1.70532170e-05
+eng>   -3.21573445e-06  2.21827349e-05  1.47912182e-05
+eng>    1.14714811e-05 -1.67857535e-05  3.82590643e-05
+eng>    1.16883984e-05 -1.96388186e-05 -3.59970656e-05
+eng>$end
+
+ G(max) = 0.00004333  |G| = 0.00007285
+
+
+ Geometry Optimization Step 10:
+ Energy:           -77.24698245
+ Energy change:     -0.00000013 (actual)
+                    -0.00000012 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000147, |dG - HdX| = 0.00011264
+ include g
+ max. gradient     = 0.0000370 (internal), 0.0000383 (cartesian)
+ trust test =-0.4217735, trust radius = 0.0156250
+ Lagrangian multiplier =   0.074428
+ max. displacement = 0.0156250 (internal), 0.0125746 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0093530596
+ iter   1: rmax = 0.0053039861, xmax = 0.0017873937
+ iter   2: rmax = 0.0052311452, xmax = 0.0006306383
+ iter   3: rmax = 0.0048470181, xmax = 0.0004504457
+ iter   4: rmax = 0.0045157643, xmax = 0.0003352814
+ iter   5: rmax = 0.0041970715, xmax = 0.0002737700
+ iter   6: rmax = 0.0038830312, xmax = 0.0002333734
+ iter   7: rmax = 0.0035821472, xmax = 0.0002203812
+ iter   8: rmax = 0.0032975363, xmax = 0.0002071634
+ iter   9: rmax = 0.0030302060, xmax = 0.0001936339
+ iter  10: rmax = 0.0027805494, xmax = 0.0001801405
+ iter  11: rmax = 0.0025484605, xmax = 0.0001669710
+ iter  12: rmax = 0.0023334767, xmax = 0.0001543109
+ iter  13: rmax = 0.0021349075, xmax = 0.0001422734
+ iter  14: rmax = 0.0019519238, xmax = 0.0001309223
+ iter  15: rmax = 0.0017836195, xmax = 0.0001202864
+ iter  16: rmax = 0.0016290559, xmax = 0.0001103701
+ iter  17: rmax = 0.0014872920, xmax = 0.0001011613
+ iter  18: rmax = 0.0013574051, xmax = 0.0000926367
+ iter  19: rmax = 0.0012385050, xmax = 0.0000847657
+ iter  20: rmax = 0.0011297426, xmax = 0.0000775135
+ iter  21: rmax = 0.0010303152, xmax = 0.0000708432
+ iter  22: rmax = 0.0009394693, xmax = 0.0000647168
+ iter  23: rmax = 0.0008565009, xmax = 0.0000590968
+ iter  24: rmax = 0.0007807556, xmax = 0.0000539466
+ iter  25: rmax = 0.0007116267, xmax = 0.0000492308
+ iter  26: rmax = 0.0006485536, xmax = 0.0000449160
+ iter  27: rmax = 0.0005910194, xmax = 0.0000409704
+ iter  28: rmax = 0.0005385483, xmax = 0.0000373644
+ iter  29: rmax = 0.0004907031, xmax = 0.0000340702
+ iter  30: rmax = 0.0004470826, xmax = 0.0000310619
+ iter  31: rmax = 0.0004073189, xmax = 0.0000283158
+ iter  32: rmax = 0.0003710752, xmax = 0.0000258096
+ iter  33: rmax = 0.0003380431, xmax = 0.0000235230
+ iter  34: rmax = 0.0003079408, xmax = 0.0000214371
+ iter  35: rmax = 0.0002805103, xmax = 0.0000195347
+ iter  36: rmax = 0.0002555163, xmax = 0.0000178000
+ iter  37: rmax = 0.0002327437, xmax = 0.0000162184
+ iter  38: rmax = 0.0002119960, xmax = 0.0000147765
+ iter  39: rmax = 0.0001930942, xmax = 0.0000134622
+ iter  40: rmax = 0.0001758746, xmax = 0.0000122643
+ iter  41: rmax = 0.0001601882, xmax = 0.0000111726
+ iter  42: rmax = 0.0001458988, xmax = 0.0000101777
+ iter  43: rmax = 0.0001328825, xmax = 0.0000092712
+ iter  44: rmax = 0.0001210260, xmax = 0.0000084452
+ iter  45: rmax = 0.0001102264, xmax = 0.0000076925
+ iter  46: rmax = 0.0001003896, xmax = 0.0000070068
+ iter  47: rmax = 0.0000914298, xmax = 0.0000063822
+ iter  48: rmax = 0.0000832692, xmax = 0.0000058131
+ iter  49: rmax = 0.0000758364, xmax = 0.0000052946
+ iter  50: rmax = 0.0000690667, xmax = 0.0000048224
+ iter  51: rmax = 0.0000629009, xmax = 0.0000043922
+ iter  52: rmax = 0.0000572853, xmax = 0.0000040003
+ iter  53: rmax = 0.0000521709, xmax = 0.0000036434
+ iter  54: rmax = 0.0000475128, xmax = 0.0000033182
+ iter  55: rmax = 0.0000432705, xmax = 0.0000030221
+ iter  56: rmax = 0.0000394069, xmax = 0.0000027524
+ iter  57: rmax = 0.0000358881, xmax = 0.0000025067
+ iter  58: rmax = 0.0000326835, xmax = 0.0000022830
+ iter  59: rmax = 0.0000297649, xmax = 0.0000020792
+ iter  60: rmax = 0.0000271069, xmax = 0.0000018935
+ iter  61: rmax = 0.0000246862, xmax = 0.0000017245
+ iter  62: rmax = 0.0000224816, xmax = 0.0000015705
+ iter  63: rmax = 0.0000204739, xmax = 0.0000014303
+ max. displacement = 0.0156250 (internal), 0.0089087 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05452507   0.00438912  -0.60194341
+mol>   6    -0.05949875   0.00239521   0.60142118
+mol>   1     0.16843291  -0.00375155  -1.66871785
+mol>   1    -0.16345923  -0.00303279   1.66924009
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05452507   0.00438912  -0.60194341
+   6    -0.05949875   0.00239521   0.60142118
+   1     0.16843291  -0.00375155  -1.66871785
+   1    -0.16345923  -0.00303279   1.66924009
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  98.2%     0.0
+ time: Orthogonalize                    :     0.0  93.0%     0.0
+
+  it          E            dE            g          x               t
+ grid:    36840   47
+   0       -77.2469591709  0.0000000000 0.00092902                 0.1
+       1                                0.00007474 0.00110395      0.0
+       2                                0.00002276 0.00113054      0.0
+       3                                0.00000649 0.00113382      0.1
+       4                                0.00000182 0.00113523      0.1
+       5                                0.00000025 0.00113515      0.1
+   1       -77.2469753230 -0.0000161521 0.00000057                 0.3
+ converged!
+ time: Coulomb-type Integrals           :     0.0  98.8%     0.0
+ time: Grid Construction                :     0.1  99.8%     0.1
+ time: Numerical Integration            :     0.3  99.6%     0.3
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  99.2%     0.0
+ time: Rotate                           :     0.0  89.5%     0.0
+ time: SCF Equations                    :     0.3  99.5%     0.3
+  31 F,   65 F1
+
+  E  =     -77.2469753230
+  T  =      76.79460041  V  =    -228.48836499  J  =      61.20614808
+  Ex =     -10.94905544  Ec =      -0.43036117
+
+  dipole =   0.006146 au (  0.015621 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893570    2    -9.891618    3    -0.679663    4    -0.513890
+   5    -0.445567    6    -0.260303    7    -0.260301
+ virtual:
+   8     0.005015    9     0.005056   10     0.086603   11     0.153008
+  12     0.402003   13     0.462721   14     0.536281   15     0.536297
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  97.7%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246975323006e+01
+eng> D= 3.62171782e-03 -4.94664577e-03  4.29802323e-04
+eng> G=-5.15378955e-04  3.84745618e-04 -5.82514055e-05
+eng>    1.49516019e-04  1.15931526e-04  7.97530656e-06
+eng>    3.28506318e-04 -2.98801510e-04 -2.22427524e-04
+eng>    3.73566180e-05 -2.01875634e-04  2.72703623e-04
+eng>$end
+
+ G(max) = 0.00064578  |G| = 0.00090337
+
+
+ Geometry Optimization Step 11:
+ Energy:           -77.24697532
+ Energy change:      0.00000712 (actual)
+                    -0.00000169 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ include g
+ max. gradient     = 0.0006144 (internal), 0.0005154 (cartesian)
+ Lagrangian multiplier =   0.370510
+ max. displacement = 0.0156250 (internal), 0.0124627 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0092021896
+ iter   1: rmax = 0.0051229335, xmax = 0.0042626803
+ iter   2: rmax = 0.0018956736, xmax = 0.0010295439
+ iter   3: rmax = 0.0017087818, xmax = 0.0001829692
+ iter   4: rmax = 0.0015536785, xmax = 0.0001300877
+ iter   5: rmax = 0.0013919522, xmax = 0.0001008024
+ iter   6: rmax = 0.0012575262, xmax = 0.0000906407
+ iter   7: rmax = 0.0011369533, xmax = 0.0000817170
+ iter   8: rmax = 0.0010282470, xmax = 0.0000734972
+ iter   9: rmax = 0.0009303478, xmax = 0.0000661357
+ iter  10: rmax = 0.0008421528, xmax = 0.0000595461
+ iter  11: rmax = 0.0007626625, xmax = 0.0000536444
+ iter  12: rmax = 0.0006909815, xmax = 0.0000483571
+ iter  13: rmax = 0.0006263077, xmax = 0.0000436181
+ iter  14: rmax = 0.0005679238, xmax = 0.0000393681
+ iter  15: rmax = 0.0005151882, xmax = 0.0000355542
+ iter  16: rmax = 0.0004675277, xmax = 0.0000321293
+ iter  17: rmax = 0.0004244298, xmax = 0.0000290515
+ iter  18: rmax = 0.0003854366, xmax = 0.0000262836
+ iter  19: rmax = 0.0003501385, xmax = 0.0000237925
+ iter  20: rmax = 0.0003181692, xmax = 0.0000215487
+ iter  21: rmax = 0.0002892007, xmax = 0.0000195263
+ iter  22: rmax = 0.0002629393, xmax = 0.0000177020
+ iter  23: rmax = 0.0002391214, xmax = 0.0000160553
+ iter  24: rmax = 0.0002175108, xmax = 0.0000145679
+ iter  25: rmax = 0.0001978953, xmax = 0.0000132235
+ iter  26: rmax = 0.0001800842, xmax = 0.0000120076
+ iter  27: rmax = 0.0001639060, xmax = 0.0000109072
+ iter  28: rmax = 0.0001492064, xmax = 0.0000099108
+ iter  29: rmax = 0.0001358461, xmax = 0.0000090081
+ iter  30: rmax = 0.0001236999, xmax = 0.0000081899
+ iter  31: rmax = 0.0001126545, xmax = 0.0000074479
+ iter  32: rmax = 0.0001026079, xmax = 0.0000067747
+ iter  33: rmax = 0.0000934676, xmax = 0.0000061638
+ iter  34: rmax = 0.0000851503, xmax = 0.0000056090
+ iter  35: rmax = 0.0000775804, xmax = 0.0000051051
+ iter  36: rmax = 0.0000706896, xmax = 0.0000046473
+ iter  37: rmax = 0.0000644160, xmax = 0.0000042312
+ iter  38: rmax = 0.0000587033, xmax = 0.0000038529
+ iter  39: rmax = 0.0000535009, xmax = 0.0000035089
+ iter  40: rmax = 0.0000487625, xmax = 0.0000031960
+ iter  41: rmax = 0.0000444462, xmax = 0.0000029113
+ iter  42: rmax = 0.0000405141, xmax = 0.0000026523
+ iter  43: rmax = 0.0000369315, xmax = 0.0000024165
+ iter  44: rmax = 0.0000336672, xmax = 0.0000022019
+ iter  45: rmax = 0.0000306927, xmax = 0.0000020065
+ iter  46: rmax = 0.0000279819, xmax = 0.0000018286
+ iter  47: rmax = 0.0000255114, xmax = 0.0000016665
+ iter  48: rmax = 0.0000232596, xmax = 0.0000015190
+ iter  49: rmax = 0.0000212073, xmax = 0.0000013845
+ iter  50: rmax = 0.0000193365, xmax = 0.0000012620
+ iter  51: rmax = 0.0000176311, xmax = 0.0000011504
+ iter  52: rmax = 0.0000160765, xmax = 0.0000010488
+ iter  53: rmax = 0.0000146592, xmax = 0.0000009561
+ iter  54: rmax = 0.0000133671, xmax = 0.0000008717
+ iter  55: rmax = 0.0000121891, xmax = 0.0000007947
+ iter  56: rmax = 0.0000111150, xmax = 0.0000007246
+ iter  57: rmax = 0.0000101358, xmax = 0.0000006606
+ iter  58: rmax = 0.0000092429, xmax = 0.0000006024
+ iter  59: rmax = 0.0000084287, xmax = 0.0000005492
+ iter  60: rmax = 0.0000076864, xmax = 0.0000005008
+ iter  61: rmax = 0.0000070095, xmax = 0.0000004567
+ iter  62: rmax = 0.0000063923, xmax = 0.0000004164
+ iter  63: rmax = 0.0000058294, xmax = 0.0000003797
+ max. displacement = 0.0156250 (internal), 0.0050076 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05717499   0.00202084  -0.60169282
+mol>   6    -0.05965928   0.00162825   0.60143812
+mol>   1     0.16670132  -0.00189545  -1.66908974
+mol>   1    -0.16421702  -0.00175363   1.66934444
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05717499   0.00202084  -0.60169282
+   6    -0.05965928   0.00162825   0.60143812
+   1     0.16670132  -0.00189545  -1.66908974
+   1    -0.16421702  -0.00175363   1.66934444
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  94.1%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469750934  0.0000000000 0.00060217                 0.1
+       1                                0.00003833 0.00070211      0.0
+       2                                0.00000458 0.00071876      0.0
+       3                                0.00000259 0.00071956      0.1
+       4                                0.00000032 0.00072013      0.1
+   1       -77.2469804096 -0.0000053161 0.00000044                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2 100.0%     0.2
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  91.6%     0.0
+ time: SCF Equations                    :     0.2 100.0%     0.2
+  33 F,   69 F1
+
+  E  =     -77.2469804096
+  T  =      76.79402363  V  =    -228.48502985  J  =      61.20471707
+  Ex =     -10.94892555  Ec =      -0.43035609
+
+  dipole =   0.003222 au (  0.008189 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893591    2    -9.891639    3    -0.679651    4    -0.513861
+   5    -0.445544    6    -0.260295    7    -0.260295
+ virtual:
+   8     0.005041    9     0.005050   10     0.086505   11     0.152936
+  12     0.402026   13     0.462724   14     0.536291   15     0.536294
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.9%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246980409574e+01
+eng> D= 1.80894840e-03 -2.65868416e-03  1.95159389e-04
+eng> G=-2.38123179e-04  1.61455595e-04  4.54425727e-06
+eng>    5.50887505e-05  1.08454688e-04 -3.05677019e-05
+eng>    1.79368894e-04 -1.44502390e-04 -3.46769714e-04
+eng>    3.66553494e-06 -1.25407893e-04  3.72793159e-04
+eng>$end
+
+ G(max) = 0.00041630  |G| = 0.00065310
+
+
+ Geometry Optimization Step 12:
+ Energy:           -77.24698041
+ Energy change:     -0.00000509 (actual)
+                    -0.00001387 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000490, |dG - HdX| = 0.00049607
+ include g
+ max. gradient     = 0.0003710 (internal), 0.0003728 (cartesian)
+ trust test =-0.5062754, trust radius = 0.0220971
+ Lagrangian multiplier =   0.254825
+ max. displacement = 0.0220971 (internal), 0.0181158 (cartesian)
+ iter   0: rmax = 0.0220970869, xmax = 0.0131152925
+ iter   1: rmax = 0.0071255347, xmax = 0.0023233986
+ iter   2: rmax = 0.0068453859, xmax = 0.0012141796
+ iter   3: rmax = 0.0065931492, xmax = 0.0005776759
+ iter   4: rmax = 0.0061500225, xmax = 0.0004543172
+ iter   5: rmax = 0.0056895815, xmax = 0.0003522879
+ iter   6: rmax = 0.0052528826, xmax = 0.0003433036
+ iter   7: rmax = 0.0048340205, xmax = 0.0003245494
+ iter   8: rmax = 0.0044373526, xmax = 0.0003028316
+ iter   9: rmax = 0.0040656932, xmax = 0.0002812576
+ iter  10: rmax = 0.0037196924, xmax = 0.0002601017
+ iter  11: rmax = 0.0033991570, xmax = 0.0002397013
+ iter  12: rmax = 0.0031033467, xmax = 0.0002203118
+ iter  13: rmax = 0.0028311630, xmax = 0.0002020674
+ iter  14: rmax = 0.0025813016, xmax = 0.0001850269
+ iter  15: rmax = 0.0023523540, xmax = 0.0001691997
+ iter  16: rmax = 0.0021428776, xmax = 0.0001545629
+ iter  17: rmax = 0.0019514412, xmax = 0.0001410723
+ iter  18: rmax = 0.0017766562, xmax = 0.0001286712
+ iter  19: rmax = 0.0016171952, xmax = 0.0001172954
+ iter  20: rmax = 0.0014718037, xmax = 0.0001068776
+ iter  21: rmax = 0.0013393058, xmax = 0.0000973499
+ iter  22: rmax = 0.0012186062, xmax = 0.0000886458
+ iter  23: rmax = 0.0011086897, xmax = 0.0000807008
+ iter  24: rmax = 0.0010086190, xmax = 0.0000734539
+ iter  25: rmax = 0.0009175311, xmax = 0.0000668475
+ iter  26: rmax = 0.0008346338, xmax = 0.0000608277
+ iter  27: rmax = 0.0007592007, xmax = 0.0000553446
+ iter  28: rmax = 0.0006905672, xmax = 0.0000503517
+ iter  29: rmax = 0.0006281256, xmax = 0.0000458063
+ iter  30: rmax = 0.0005713213, xmax = 0.0000416691
+ iter  31: rmax = 0.0005196482, xmax = 0.0000379041
+ iter  32: rmax = 0.0004726447, xmax = 0.0000344782
+ iter  33: rmax = 0.0004298902, xmax = 0.0000313612
+ iter  34: rmax = 0.0003910016, xmax = 0.0000285255
+ iter  35: rmax = 0.0003556301, xmax = 0.0000259457
+ iter  36: rmax = 0.0003234579, xmax = 0.0000235991
+ iter  37: rmax = 0.0002941962, xmax = 0.0000214645
+ iter  38: rmax = 0.0002675816, xmax = 0.0000195229
+ iter  39: rmax = 0.0002433750, xmax = 0.0000177568
+ iter  40: rmax = 0.0002213584, xmax = 0.0000161505
+ iter  41: rmax = 0.0002013339, xmax = 0.0000146895
+ iter  42: rmax = 0.0001831210, xmax = 0.0000133606
+ iter  43: rmax = 0.0001665561, xmax = 0.0000121520
+ iter  44: rmax = 0.0001514898, xmax = 0.0000110527
+ iter  45: rmax = 0.0001377866, xmax = 0.0000100528
+ iter  46: rmax = 0.0001253232, xmax = 0.0000091434
+ iter  47: rmax = 0.0001139874, xmax = 0.0000083163
+ iter  48: rmax = 0.0001036771, xmax = 0.0000075640
+ iter  49: rmax = 0.0000942995, xmax = 0.0000068798
+ iter  50: rmax = 0.0000857702, xmax = 0.0000062575
+ iter  51: rmax = 0.0000780126, xmax = 0.0000056915
+ iter  52: rmax = 0.0000709566, xmax = 0.0000051767
+ iter  53: rmax = 0.0000645390, xmax = 0.0000047085
+ iter  54: rmax = 0.0000587018, xmax = 0.0000042826
+ iter  55: rmax = 0.0000533927, xmax = 0.0000038952
+ iter  56: rmax = 0.0000485637, xmax = 0.0000035429
+ iter  57: rmax = 0.0000441716, xmax = 0.0000032225
+ iter  58: rmax = 0.0000401767, xmax = 0.0000029310
+ iter  59: rmax = 0.0000365431, xmax = 0.0000026659
+ iter  60: rmax = 0.0000332382, xmax = 0.0000024248
+ iter  61: rmax = 0.0000302322, xmax = 0.0000022055
+ iter  62: rmax = 0.0000274981, xmax = 0.0000020061
+ iter  63: rmax = 0.0000250112, xmax = 0.0000018246
+ max. displacement = 0.0220971 (internal), 0.0064722 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05425001   0.00544575  -0.60196388
+mol>   6    -0.05980124   0.00100318   0.60136939
+mol>   1     0.16871348  -0.00402498  -1.66865449
+mol>   1    -0.16316226  -0.00242395   1.66924898
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05425001   0.00544575  -0.60196388
+   6    -0.05980124   0.00100318   0.60136939
+   1     0.16871348  -0.00402498  -1.66865449
+   1    -0.16316226  -0.00242395   1.66924898
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  91.2%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469641973  0.0000000000 0.00088142                 0.1
+       1                                0.00003960 0.00110538      0.0
+       2                                0.00001387 0.00112747      0.0
+       3                                0.00000358 0.00113133      0.1
+       4                                0.00000083 0.00113236      0.1
+       5                                0.00000011 0.00113212      0.1
+   1       -77.2469741162 -0.0000099188 0.00000023                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2 100.0%     0.2
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  89.5%     0.0
+ time: SCF Equations                    :     0.2 100.0%     0.2
+  35 F,   74 F1
+
+  E  =     -77.2469741162
+  T  =      76.79473512  V  =    -228.48926690  J  =      61.20655070
+  Ex =     -10.94908221  Ec =      -0.43036228
+
+  dipole =   0.006220 au (  0.015809 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893564    2    -9.891611    3    -0.679668    4    -0.513889
+   5    -0.445567    6    -0.260307    7    -0.260305
+ virtual:
+   8     0.005010    9     0.005065   10     0.086615   11     0.153019
+  12     0.402000   13     0.462731   14     0.536268   15     0.536293
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246974116152e+01
+eng> D= 4.04089988e-03 -4.70165484e-03  4.99042520e-04
+eng> G=-5.38099506e-04  5.37263813e-04 -2.37151313e-05
+eng>    1.30396295e-04 -6.14507652e-05 -3.90279914e-05
+eng>    3.47889531e-04 -3.45910942e-04 -2.08438806e-04
+eng>    5.98136796e-05 -1.29902106e-04  2.71181929e-04
+eng>$end
+
+ G(max) = 0.00076077  |G| = 0.00098954
+
+
+ Geometry Optimization Step 13:
+ Energy:           -77.24697412
+ Energy change:      0.00000629 (actual)
+                    -0.00001236 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000490, |dG - HdX| = 0.00021265
+ Hessian update: |dG| = 0.000615, |dG - HdX| = 0.00013151
+ include g
+ max. gradient     = 0.0006970 (internal), 0.0005381 (cartesian)
+ trust test =-0.2193356, trust radius = 0.0156250
+ Lagrangian multiplier =   0.485539
+ max. displacement = 0.0156250 (internal), 0.0130083 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0094790906
+ iter   1: rmax = 0.0047735966, xmax = 0.0026360745
+ iter   2: rmax = 0.0025877733, xmax = 0.0015491006
+ iter   3: rmax = 0.0018375320, xmax = 0.0004212570
+ iter   4: rmax = 0.0017161667, xmax = 0.0001263036
+ iter   5: rmax = 0.0015444394, xmax = 0.0001320091
+ iter   6: rmax = 0.0013859794, xmax = 0.0001183286
+ iter   7: rmax = 0.0012459050, xmax = 0.0001057009
+ iter   8: rmax = 0.0011203788, xmax = 0.0000947861
+ iter   9: rmax = 0.0010077749, xmax = 0.0000850198
+ iter  10: rmax = 0.0009067832, xmax = 0.0000762798
+ iter  11: rmax = 0.0008161871, xmax = 0.0000684645
+ iter  12: rmax = 0.0007348911, xmax = 0.0000614756
+ iter  13: rmax = 0.0006619136, xmax = 0.0000552243
+ iter  14: rmax = 0.0005963772, xmax = 0.0000496308
+ iter  15: rmax = 0.0005374980, xmax = 0.0000446236
+ iter  16: rmax = 0.0004845770, xmax = 0.0000401391
+ iter  17: rmax = 0.0004369905, xmax = 0.0000361205
+ iter  18: rmax = 0.0003941827, xmax = 0.0000325175
+ iter  19: rmax = 0.0003556577, xmax = 0.0000292851
+ iter  20: rmax = 0.0003209733, xmax = 0.0000263838
+ iter  21: rmax = 0.0002897346, xmax = 0.0000237781
+ iter  22: rmax = 0.0002615893, xmax = 0.0000214367
+ iter  23: rmax = 0.0002362224, xmax = 0.0000193316
+ iter  24: rmax = 0.0002133523, xmax = 0.0000174382
+ iter  25: rmax = 0.0001927271, xmax = 0.0000157344
+ iter  26: rmax = 0.0001741213, xmax = 0.0000142004
+ iter  27: rmax = 0.0001573329, xmax = 0.0000128189
+ iter  28: rmax = 0.0001421808, xmax = 0.0000115741
+ iter  29: rmax = 0.0001285024, xmax = 0.0000104522
+ iter  30: rmax = 0.0001161519, xmax = 0.0000094407
+ iter  31: rmax = 0.0001049984, xmax = 0.0000085284
+ iter  32: rmax = 0.0000949240, xmax = 0.0000077054
+ iter  33: rmax = 0.0000858230, xmax = 0.0000069628
+ iter  34: rmax = 0.0000776001, xmax = 0.0000062924
+ iter  35: rmax = 0.0000701696, xmax = 0.0000056873
+ iter  36: rmax = 0.0000634544, xmax = 0.0000051409
+ iter  37: rmax = 0.0000573849, xmax = 0.0000046474
+ iter  38: rmax = 0.0000518985, xmax = 0.0000042016
+ iter  39: rmax = 0.0000469387, xmax = 0.0000037989
+ iter  40: rmax = 0.0000424547, xmax = 0.0000034350
+ iter  41: rmax = 0.0000384004, xmax = 0.0000031061
+ iter  42: rmax = 0.0000347344, xmax = 0.0000028089
+ iter  43: rmax = 0.0000314194, xmax = 0.0000025403
+ iter  44: rmax = 0.0000284215, xmax = 0.0000022975
+ iter  45: rmax = 0.0000257103, xmax = 0.0000020780
+ iter  46: rmax = 0.0000232583, xmax = 0.0000018795
+ iter  47: rmax = 0.0000210405, xmax = 0.0000017000
+ iter  48: rmax = 0.0000190346, xmax = 0.0000015377
+ iter  49: rmax = 0.0000172202, xmax = 0.0000013910
+ iter  50: rmax = 0.0000155790, xmax = 0.0000012583
+ iter  51: rmax = 0.0000140944, xmax = 0.0000011383
+ iter  52: rmax = 0.0000127514, xmax = 0.0000010297
+ iter  53: rmax = 0.0000115365, xmax = 0.0000009315
+ iter  54: rmax = 0.0000104375, xmax = 0.0000008427
+ iter  55: rmax = 0.0000094433, xmax = 0.0000007624
+ iter  56: rmax = 0.0000085438, xmax = 0.0000006898
+ iter  57: rmax = 0.0000077301, xmax = 0.0000006240
+ iter  58: rmax = 0.0000069939, xmax = 0.0000005646
+ iter  59: rmax = 0.0000063279, xmax = 0.0000005108
+ iter  60: rmax = 0.0000057253, xmax = 0.0000004621
+ iter  61: rmax = 0.0000051801, xmax = 0.0000004181
+ iter  62: rmax = 0.0000046869, xmax = 0.0000003783
+ iter  63: rmax = 0.0000042406, xmax = 0.0000003423
+ max. displacement = 0.0156250 (internal), 0.0054789 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05714934   0.00278982  -0.60165454
+mol>   6    -0.05976147  -0.00044793   0.60137998
+mol>   1     0.16672477  -0.00175438  -1.66882826
+mol>   1    -0.16411264  -0.00058751   1.66910282
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05714934   0.00278982  -0.60165454
+   6    -0.05976147  -0.00044793   0.60137998
+   1     0.16672477  -0.00175438  -1.66882826
+   1    -0.16411264  -0.00058751   1.66910282
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0 100.0%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  93.0%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469742996  0.0000000000 0.00059472                 0.1
+       1                                0.00004852 0.00069230      0.0
+       2                                0.00000546 0.00068721      0.0
+       3                                0.00000375 0.00068743      0.1
+       4                                0.00000066 0.00068813      0.1
+       5                                0.00000009 0.00068853      0.1
+   1       -77.2469804635 -0.0000061640 0.00000014                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2  99.9%     0.2
+ time: Diagonalize                      :     0.0  99.7%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  88.9%     0.0
+ time: SCF Equations                    :     0.2 100.0%     0.2
+  37 F,   79 F1
+
+  E  =     -77.2469804635
+  T  =      76.79501071  V  =    -228.49105832  J  =      61.20733875
+  Ex =     -10.94915125  Ec =      -0.43036507
+
+  dipole =   0.002564 au (  0.006518 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893552    2    -9.891598    3    -0.679672    4    -0.513904
+   5    -0.445585    6    -0.260309    7    -0.260308
+ virtual:
+   8     0.005060    9     0.005072   10     0.086615   11     0.153038
+  12     0.401983   13     0.462710   14     0.536283   15     0.536292
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246980463530e+01
+eng> D= 1.90183246e-03 -1.70641276e-03  2.17149610e-04
+eng> G=-2.37010224e-04  3.04369631e-04  1.02359867e-05
+eng>    4.56878904e-05 -1.31768079e-04 -4.28555290e-05
+eng>    1.65818364e-04 -1.64975281e-04 -1.87134841e-04
+eng>    2.55039697e-05 -7.62627054e-06  2.19754383e-04
+eng>$end
+
+ G(max) = 0.00038590  |G| = 0.00055582
+
+
+ Geometry Optimization Step 14:
+ Energy:           -77.24698046
+ Energy change:     -0.00000635 (actual)
+                    -0.00001498 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000615, |dG - HdX| = 0.00021626
+ Hessian update: |dG| = 0.000532, |dG - HdX| = 0.00015787
+ include g
+ max. gradient     = 0.0003327 (internal), 0.0003044 (cartesian)
+ trust test =-0.1664594, trust radius = 0.0220971
+ Lagrangian multiplier =   0.191574
+ max. displacement = 0.0220971 (internal), 0.0185511 (cartesian)
+ iter   0: rmax = 0.0220970869, xmax = 0.0122985657
+ iter   1: rmax = 0.0080944416, xmax = 0.0018715698
+ iter   2: rmax = 0.0064817631, xmax = 0.0014480668
+ iter   3: rmax = 0.0063344450, xmax = 0.0008386930
+ iter   4: rmax = 0.0062516227, xmax = 0.0004107261
+ iter   5: rmax = 0.0058269369, xmax = 0.0003804225
+ iter   6: rmax = 0.0053993188, xmax = 0.0003270969
+ iter   7: rmax = 0.0050051248, xmax = 0.0003153741
+ iter   8: rmax = 0.0046233474, xmax = 0.0002990842
+ iter   9: rmax = 0.0042581409, xmax = 0.0002800105
+ iter  10: rmax = 0.0039135388, xmax = 0.0002607809
+ iter  11: rmax = 0.0035907237, xmax = 0.0002418420
+ iter  12: rmax = 0.0032899635, xmax = 0.0002234884
+ iter  13: rmax = 0.0030109758, xmax = 0.0002059497
+ iter  14: rmax = 0.0027530789, xmax = 0.0001893612
+ iter  15: rmax = 0.0025153364, xmax = 0.0001737922
+ iter  16: rmax = 0.0022966609, xmax = 0.0001592671
+ iter  17: rmax = 0.0020958870, xmax = 0.0001457793
+ iter  18: rmax = 0.0019118212, xmax = 0.0001333011
+ iter  19: rmax = 0.0017432780, xmax = 0.0001217913
+ iter  20: rmax = 0.0015891026, xmax = 0.0001112001
+ iter  21: rmax = 0.0014481870, xmax = 0.0001014733
+ iter  22: rmax = 0.0013194793, xmax = 0.0000925544
+ iter  23: rmax = 0.0012019893, xmax = 0.0000843870
+ iter  24: rmax = 0.0010947907, xmax = 0.0000769157
+ iter  25: rmax = 0.0009970212, xmax = 0.0000700872
+ iter  26: rmax = 0.0009078815, xmax = 0.0000638508
+ iter  27: rmax = 0.0008266328, xmax = 0.0000581586
+ iter  28: rmax = 0.0007525943, xmax = 0.0000529656
+ iter  29: rmax = 0.0006851397, xmax = 0.0000482300
+ iter  30: rmax = 0.0006236941, xmax = 0.0000439131
+ iter  31: rmax = 0.0005677303, xmax = 0.0000399790
+ iter  32: rmax = 0.0005167655, xmax = 0.0000363945
+ iter  33: rmax = 0.0004703581, xmax = 0.0000331293
+ iter  34: rmax = 0.0004281043, xmax = 0.0000301554
+ iter  35: rmax = 0.0003896354, xmax = 0.0000274472
+ iter  36: rmax = 0.0003546146, xmax = 0.0000249813
+ iter  37: rmax = 0.0003227346, xmax = 0.0000227362
+ iter  38: rmax = 0.0002937152, xmax = 0.0000206923
+ iter  39: rmax = 0.0002673009, xmax = 0.0000188317
+ iter  40: rmax = 0.0002432586, xmax = 0.0000171380
+ iter  41: rmax = 0.0002213760, xmax = 0.0000155965
+ iter  42: rmax = 0.0002014597, xmax = 0.0000141933
+ iter  43: rmax = 0.0001833334, xmax = 0.0000129163
+ iter  44: rmax = 0.0001668367, xmax = 0.0000117540
+ iter  45: rmax = 0.0001518232, xmax = 0.0000106963
+ iter  46: rmax = 0.0001381598, xmax = 0.0000097336
+ iter  47: rmax = 0.0001257254, xmax = 0.0000088575
+ iter  48: rmax = 0.0001144094, xmax = 0.0000080603
+ iter  49: rmax = 0.0001041115, xmax = 0.0000073347
+ iter  50: rmax = 0.0000947401, xmax = 0.0000066744
+ iter  51: rmax = 0.0000862119, xmax = 0.0000060736
+ iter  52: rmax = 0.0000784511, xmax = 0.0000055268
+ iter  53: rmax = 0.0000713888, xmax = 0.0000050293
+ iter  54: rmax = 0.0000649620, xmax = 0.0000045765
+ iter  55: rmax = 0.0000591137, xmax = 0.0000041644
+ iter  56: rmax = 0.0000537917, xmax = 0.0000037895
+ iter  57: rmax = 0.0000489488, xmax = 0.0000034483
+ iter  58: rmax = 0.0000445418, xmax = 0.0000031378
+ iter  59: rmax = 0.0000405316, xmax = 0.0000028553
+ iter  60: rmax = 0.0000368823, xmax = 0.0000025982
+ iter  61: rmax = 0.0000335616, xmax = 0.0000023643
+ iter  62: rmax = 0.0000305398, xmax = 0.0000021514
+ iter  63: rmax = 0.0000277900, xmax = 0.0000019577
+ max. displacement = 0.0220971 (internal), 0.0054610 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05499954   0.00549462  -0.60188763
+mol>   6    -0.06265131  -0.00026298   0.60109885
+mol>   1     0.16910285  -0.00365322  -1.66849492
+mol>   1    -0.16145107  -0.00157842   1.66928370
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05499954   0.00549462  -0.60188763
+   6    -0.06265131  -0.00026298   0.60109885
+   1     0.16910285  -0.00365322  -1.66849492
+   1    -0.16145107  -0.00157842   1.66928370
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  93.0%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469676808  0.0000000000 0.00067082                 0.1
+       1                                0.00005772 0.00065303      0.0
+       2                                0.00000629 0.00063183      0.0
+       3                                0.00000206 0.00062919      0.1
+       4                                0.00000071 0.00062848      0.1
+       5                                0.00000008 0.00062814      0.1
+   1       -77.2469739116 -0.0000062309 0.00000010                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2  99.8%     0.2
+ time: Diagonalize                      :     0.0  99.7%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  90.6%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  39 F,   84 F1
+
+  E  =     -77.2469739116
+  T  =      76.79506965  V  =    -228.49102966  J  =      61.20727661
+  Ex =     -10.94916680  Ec =      -0.43036553
+
+  dipole =   0.006782 au (  0.017237 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893555    2    -9.891602    3    -0.679671    4    -0.513922
+   5    -0.445593    6    -0.260308    7    -0.260306
+ virtual:
+   8     0.005010    9     0.005054   10     0.086677   11     0.153073
+  12     0.401979   13     0.462699   14     0.536283   15     0.536304
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.6%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246973911629e+01
+eng> D= 5.57329977e-03 -3.81365954e-03  6.19881245e-04
+eng> G=-3.61749837e-04  5.80432711e-04 -1.15114022e-04
+eng>   -2.00417116e-04 -1.95262370e-04  4.41161637e-05
+eng>    3.28113811e-04 -3.32298105e-04 -1.17873754e-04
+eng>    2.34053141e-04 -5.28722365e-05  1.88871612e-04
+eng>$end
+
+ G(max) = 0.00069355  |G| = 0.00094153
+
+
+ Geometry Optimization Step 15:
+ Energy:           -77.24697391
+ Energy change:      0.00000655 (actual)
+                    -0.00001080 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000532, |dG - HdX| = 0.00028296
+ Hessian update: |dG| = 0.000554, |dG - HdX| = 0.00049956
+ include g
+ max. gradient     = 0.0006711 (internal), 0.0005804 (cartesian)
+ trust test =-0.5178094, trust radius = 0.0156250
+ Lagrangian multiplier =   0.419295
+ max. displacement = 0.0156250 (internal), 0.0124791 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0084678518
+ iter   1: rmax = 0.0054524993, xmax = 0.0032915840
+ iter   2: rmax = 0.0016688918, xmax = 0.0012645984
+ iter   3: rmax = 0.0005194417, xmax = 0.0001012581
+ iter   4: rmax = 0.0005344995, xmax = 0.0000443557
+ iter   5: rmax = 0.0004795938, xmax = 0.0000405515
+ iter   6: rmax = 0.0004306732, xmax = 0.0000361212
+ iter   7: rmax = 0.0003871434, xmax = 0.0000323729
+ iter   8: rmax = 0.0003481937, xmax = 0.0000290361
+ iter   9: rmax = 0.0003133133, xmax = 0.0000260603
+ iter  10: rmax = 0.0002820532, xmax = 0.0000234042
+ iter  11: rmax = 0.0002540169, xmax = 0.0000210311
+ iter  12: rmax = 0.0002288548, xmax = 0.0000189090
+ iter  13: rmax = 0.0002062576, xmax = 0.0000170097
+ iter  14: rmax = 0.0001859516, xmax = 0.0000153084
+ iter  15: rmax = 0.0001676943, xmax = 0.0000137833
+ iter  16: rmax = 0.0001512707, xmax = 0.0000124152
+ iter  17: rmax = 0.0001364894, xmax = 0.0000111870
+ iter  18: rmax = 0.0001231804, xmax = 0.0000100837
+ iter  19: rmax = 0.0001111922, xmax = 0.0000090921
+ iter  20: rmax = 0.0001003897, xmax = 0.0000082003
+ iter  21: rmax = 0.0000906523, xmax = 0.0000073980
+ iter  22: rmax = 0.0000818723, xmax = 0.0000066757
+ iter  23: rmax = 0.0000739531, xmax = 0.0000060253
+ iter  24: rmax = 0.0000668087, xmax = 0.0000054394
+ iter  25: rmax = 0.0000603616, xmax = 0.0000049113
+ iter  26: rmax = 0.0000545425, xmax = 0.0000044352
+ iter  27: rmax = 0.0000492892, xmax = 0.0000040059
+ iter  28: rmax = 0.0000445458, xmax = 0.0000036186
+ iter  29: rmax = 0.0000402621, xmax = 0.0000032692
+ iter  30: rmax = 0.0000363930, xmax = 0.0000029539
+ iter  31: rmax = 0.0000328979, xmax = 0.0000026692
+ iter  32: rmax = 0.0000297403, xmax = 0.0000024122
+ iter  33: rmax = 0.0000268871, xmax = 0.0000021802
+ iter  34: rmax = 0.0000243089, xmax = 0.0000019706
+ iter  35: rmax = 0.0000219789, xmax = 0.0000017813
+ iter  36: rmax = 0.0000198731, xmax = 0.0000016102
+ iter  37: rmax = 0.0000179697, xmax = 0.0000014557
+ iter  38: rmax = 0.0000162491, xmax = 0.0000013161
+ iter  39: rmax = 0.0000146937, xmax = 0.0000011899
+ iter  40: rmax = 0.0000132875, xmax = 0.0000010759
+ iter  41: rmax = 0.0000120162, xmax = 0.0000009728
+ iter  42: rmax = 0.0000108668, xmax = 0.0000008797
+ iter  43: rmax = 0.0000098275, xmax = 0.0000007954
+ iter  44: rmax = 0.0000088878, xmax = 0.0000007193
+ iter  45: rmax = 0.0000080381, xmax = 0.0000006505
+ iter  46: rmax = 0.0000072697, xmax = 0.0000005883
+ iter  47: rmax = 0.0000065749, xmax = 0.0000005320
+ iter  48: rmax = 0.0000059465, xmax = 0.0000004811
+ iter  49: rmax = 0.0000053783, xmax = 0.0000004351
+ iter  50: rmax = 0.0000048644, xmax = 0.0000003935
+ iter  51: rmax = 0.0000043997, xmax = 0.0000003559
+ iter  52: rmax = 0.0000039793, xmax = 0.0000003219
+ iter  53: rmax = 0.0000035992, xmax = 0.0000002911
+ iter  54: rmax = 0.0000032554, xmax = 0.0000002633
+ iter  55: rmax = 0.0000029445, xmax = 0.0000002381
+ iter  56: rmax = 0.0000026632, xmax = 0.0000002154
+ iter  57: rmax = 0.0000024089, xmax = 0.0000001948
+ iter  58: rmax = 0.0000021788, xmax = 0.0000001762
+ iter  59: rmax = 0.0000019708, xmax = 0.0000001594
+ iter  60: rmax = 0.0000017826, xmax = 0.0000001442
+ iter  61: rmax = 0.0000016123, xmax = 0.0000001304
+ iter  62: rmax = 0.0000014584, xmax = 0.0000001179
+ iter  63: rmax = 0.0000013191, xmax = 0.0000001067
+ max. displacement = 0.0156250 (internal), 0.0055451 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05793390   0.00271262  -0.60155879
+mol>   6    -0.06201513  -0.00067357   0.60114436
+mol>   1     0.16689413  -0.00162963  -1.66863854
+mol>   1    -0.16281290  -0.00040942   1.66905297
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05793390   0.00271262  -0.60155879
+   6    -0.06201513  -0.00067357   0.60114436
+   1     0.16689413  -0.00162963  -1.66863854
+   1    -0.16281290  -0.00040942   1.66905297
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  93.0%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469738394  0.0000000000 0.00062333                 0.1
+       1                                0.00004614 0.00074996      0.0
+       2                                0.00000689 0.00076811      0.0
+       3                                0.00000361 0.00076932      0.1
+       4                                0.00000102 0.00077022      0.1
+       5                                0.00000010 0.00077016      0.1
+   1       -77.2469801233 -0.0000062839 0.00000017                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  98.7%     0.0
+ time: Numerical Integration            :     0.2  98.1%     0.2
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  97.6%     0.0
+ time: Rotate                           :     0.0  91.6%     0.0
+ time: SCF Equations                    :     0.2  98.2%     0.2
+  41 F,   89 F1
+
+  E  =     -77.2469801233
+  T  =      76.79559624  V  =    -228.49448826  J  =      61.20880774
+  Ex =     -10.94928968  Ec =      -0.43037053
+
+  dipole =   0.003338 au (  0.008484 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893531    2    -9.891577    3    -0.679682    4    -0.513940
+   5    -0.445615    6    -0.260315    7    -0.260314
+ virtual:
+   8     0.005068    9     0.005072   10     0.086696   11     0.153108
+  12     0.401954   13     0.462688   14     0.536290   15     0.536297
+ time: One-Electron Gradient            :     0.0 100.0%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.7%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246980123319e+01
+eng> D= 2.97325916e-03 -1.48558968e-03  3.08358464e-04
+eng> G=-8.03546753e-05  3.02736327e-04 -3.20124170e-05
+eng>   -2.18492656e-04 -1.52845650e-04 -1.13844463e-05
+eng>    1.34234019e-04 -1.57032790e-04 -7.29626578e-05
+eng>    1.64613313e-04  7.14211277e-06  1.16359521e-04
+eng>$end
+
+ G(max) = 0.00031485  |G| = 0.00050897
+
+
+ Geometry Optimization Step 16:
+ Energy:           -77.24698012
+ Energy change:     -0.00000621 (actual)
+                    -0.00001638 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000554, |dG - HdX| = 0.00028110
+ Hessian update: |dG| = 0.000544, |dG - HdX| = 0.00018349
+ include g
+ max. gradient     = 0.0003176 (internal), 0.0003027 (cartesian)
+ trust test =-0.1389883, trust radius = 0.0220971
+ Lagrangian multiplier =   0.164279
+ max. displacement = 0.0220971 (internal), 0.0161042 (cartesian)
+ iter   0: rmax = 0.0220970869, xmax = 0.0132232393
+ iter   1: rmax = 0.0101209092, xmax = 0.0040107907
+ iter   2: rmax = 0.0095592063, xmax = 0.0027303714
+ iter   3: rmax = 0.0065299497, xmax = 0.0009261038
+ iter   4: rmax = 0.0057584955, xmax = 0.0007915994
+ iter   5: rmax = 0.0055228046, xmax = 0.0005189836
+ iter   6: rmax = 0.0051638810, xmax = 0.0004482905
+ iter   7: rmax = 0.0048513674, xmax = 0.0003953489
+ iter   8: rmax = 0.0045354265, xmax = 0.0003401310
+ iter   9: rmax = 0.0042177206, xmax = 0.0002933950
+ iter  10: rmax = 0.0039078051, xmax = 0.0002541490
+ iter  11: rmax = 0.0036099782, xmax = 0.0002207126
+ iter  12: rmax = 0.0033266904, xmax = 0.0001921413
+ iter  13: rmax = 0.0030594175, xmax = 0.0001765237
+ iter  14: rmax = 0.0028088616, xmax = 0.0001646073
+ iter  15: rmax = 0.0025751671, xmax = 0.0001528667
+ iter  16: rmax = 0.0023580895, xmax = 0.0001414897
+ iter  17: rmax = 0.0021571185, xmax = 0.0001305998
+ iter  18: rmax = 0.0019715686, xmax = 0.0001202738
+ iter  19: rmax = 0.0018006457, xmax = 0.0001105541
+ iter  20: rmax = 0.0016434954, xmax = 0.0001014580
+ iter  21: rmax = 0.0014992384, xmax = 0.0000929854
+ iter  22: rmax = 0.0013669953, xmax = 0.0000851234
+ iter  23: rmax = 0.0012459044, xmax = 0.0000778506
+ iter  24: rmax = 0.0011351335, xmax = 0.0000711403
+ iter  25: rmax = 0.0010338879, xmax = 0.0000649623
+ iter  26: rmax = 0.0009414153, xmax = 0.0000592845
+ iter  27: rmax = 0.0008570079, xmax = 0.0000540745
+ iter  28: rmax = 0.0007800039, xmax = 0.0000492997
+ iter  29: rmax = 0.0007097868, xmax = 0.0000449287
+ iter  30: rmax = 0.0006457847, xmax = 0.0000409311
+ iter  31: rmax = 0.0005874682, xmax = 0.0000372779
+ iter  32: rmax = 0.0005343490, xmax = 0.0000339418
+ iter  33: rmax = 0.0004859772, xmax = 0.0000308970
+ iter  34: rmax = 0.0004419391, xmax = 0.0000281196
+ iter  35: rmax = 0.0004018551, xmax = 0.0000255872
+ iter  36: rmax = 0.0003653770, xmax = 0.0000232792
+ iter  37: rmax = 0.0003321862, xmax = 0.0000211764
+ iter  38: rmax = 0.0003019907, xmax = 0.0000192611
+ iter  39: rmax = 0.0002745240, xmax = 0.0000175171
+ iter  40: rmax = 0.0002495425, xmax = 0.0000159294
+ iter  41: rmax = 0.0002268236, xmax = 0.0000144843
+ iter  42: rmax = 0.0002061644, xmax = 0.0000131693
+ iter  43: rmax = 0.0001873797, xmax = 0.0000119728
+ iter  44: rmax = 0.0001703008, xmax = 0.0000108843
+ iter  45: rmax = 0.0001547738, xmax = 0.0000098943
+ iter  46: rmax = 0.0001406585, xmax = 0.0000089938
+ iter  47: rmax = 0.0001278274, xmax = 0.0000081749
+ iter  48: rmax = 0.0001161641, xmax = 0.0000074303
+ iter  49: rmax = 0.0001055628, xmax = 0.0000067532
+ iter  50: rmax = 0.0000959272, xmax = 0.0000061376
+ iter  51: rmax = 0.0000871697, xmax = 0.0000055780
+ iter  52: rmax = 0.0000792105, xmax = 0.0000050693
+ iter  53: rmax = 0.0000719771, xmax = 0.0000046068
+ iter  54: rmax = 0.0000654034, xmax = 0.0000041864
+ iter  55: rmax = 0.0000594294, xmax = 0.0000038044
+ iter  56: rmax = 0.0000540005, xmax = 0.0000034571
+ iter  57: rmax = 0.0000490671, xmax = 0.0000031415
+ iter  58: rmax = 0.0000445840, xmax = 0.0000028546
+ iter  59: rmax = 0.0000405103, xmax = 0.0000025939
+ iter  60: rmax = 0.0000368085, xmax = 0.0000023570
+ iter  61: rmax = 0.0000334448, xmax = 0.0000021417
+ iter  62: rmax = 0.0000303882, xmax = 0.0000019461
+ iter  63: rmax = 0.0000276109, xmax = 0.0000017683
+ max. displacement = 0.0220971 (internal), 0.0105679 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05497262   0.00367018  -0.60186689
+mol>   6    -0.06760741   0.00127271   0.60062891
+mol>   1     0.17070136  -0.00290340  -1.66830923
+mol>   1    -0.15806657  -0.00203949   1.66954722
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05497262   0.00367018  -0.60186689
+   6    -0.06760741   0.00127271   0.60062891
+   1     0.17070136  -0.00290340  -1.66830923
+   1    -0.15806657  -0.00203949   1.66954722
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  90.5%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469559666  0.0000000000 0.00104123                 0.1
+       1                                0.00008908 0.00115104      0.0
+       2                                0.00001777 0.00111726      0.0
+       3                                0.00000733 0.00111364      0.1
+       4                                0.00000120 0.00110951      0.1
+       5                                0.00000012 0.00110882      0.1
+   1       -77.2469681866 -0.0000122199 0.00000028                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.2  99.7%     0.2
+ time: Diagonalize                      :     0.0  99.9%     0.0
+ time: Matrix Multiply                  :     0.0  98.7%     0.0
+ time: Rotate                           :     0.0  81.5%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  43 F,   94 F1
+
+  E  =     -77.2469681866
+  T  =      76.79512931  V  =    -228.49147279  J  =      61.20748434
+  Ex =     -10.94917888  Ec =      -0.43036617
+
+  dipole =   0.009931 au (  0.025241 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893551    2    -9.891598    3    -0.679673    4    -0.513920
+   5    -0.445593    6    -0.260308    7    -0.260306
+ virtual:
+   8     0.004975    9     0.005058   10     0.086728   11     0.153067
+  12     0.401977   13     0.462717   14     0.536291   15     0.536303
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246968186556e+01
+eng> D= 9.21391206e-03 -3.60282841e-03  8.59917204e-04
+eng> G=-2.14508977e-04  3.43404737e-04 -8.52512544e-05
+eng>   -7.14667724e-04  2.04981043e-05 -1.76063641e-05
+eng>    3.91294084e-04 -2.40109578e-04 -1.06964173e-04
+eng>    5.37882617e-04 -1.23793263e-04  2.09821791e-04
+eng>$end
+
+ G(max) = 0.00071518  |G| = 0.00111963
+
+
+ Geometry Optimization Step 17:
+ Energy:           -77.24696819
+ Energy change:      0.00001194 (actual)
+                    -0.00001478 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000544, |dG - HdX| = 0.00030176
+ Hessian update: |dG| = 0.000787, |dG - HdX| = 0.00038630
+ include g
+ max. gradient     = 0.0007652 (internal), 0.0007147 (cartesian)
+ trust test =-0.3683950, trust radius = 0.0156250
+ Lagrangian multiplier =   0.320419
+ max. displacement = 0.0156250 (internal), 0.0118154 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0134753806
+ iter   1: rmax = 0.0080458605, xmax = 0.0058831439
+ iter   2: rmax = 0.0025511573, xmax = 0.0018424278
+ iter   3: rmax = 0.0009832517, xmax = 0.0001432167
+ iter   4: rmax = 0.0008096837, xmax = 0.0000527210
+ iter   5: rmax = 0.0007335306, xmax = 0.0000522464
+ iter   6: rmax = 0.0006707356, xmax = 0.0000477781
+ iter   7: rmax = 0.0006124969, xmax = 0.0000437095
+ iter   8: rmax = 0.0005588896, xmax = 0.0000399666
+ iter   9: rmax = 0.0005096540, xmax = 0.0000365128
+ iter  10: rmax = 0.0004644997, xmax = 0.0000333324
+ iter  11: rmax = 0.0004231408, xmax = 0.0000304090
+ iter  12: rmax = 0.0003853000, xmax = 0.0000277260
+ iter  13: rmax = 0.0003507109, xmax = 0.0000252667
+ iter  14: rmax = 0.0003191204, xmax = 0.0000230152
+ iter  15: rmax = 0.0002902896, xmax = 0.0000209558
+ iter  16: rmax = 0.0002639940, xmax = 0.0000190739
+ iter  17: rmax = 0.0002400241, xmax = 0.0000173555
+ iter  18: rmax = 0.0002181851, xmax = 0.0000157874
+ iter  19: rmax = 0.0001982962, xmax = 0.0000143573
+ iter  20: rmax = 0.0001801903, xmax = 0.0000130538
+ iter  21: rmax = 0.0001637131, xmax = 0.0000118662
+ iter  22: rmax = 0.0001487228, xmax = 0.0000107847
+ iter  23: rmax = 0.0001350888, xmax = 0.0000098001
+ iter  24: rmax = 0.0001226915, xmax = 0.0000089041
+ iter  25: rmax = 0.0001114211, xmax = 0.0000080890
+ iter  26: rmax = 0.0001011772, xmax = 0.0000073476
+ iter  27: rmax = 0.0000918679, xmax = 0.0000066734
+ iter  28: rmax = 0.0000834092, xmax = 0.0000060605
+ iter  29: rmax = 0.0000757246, xmax = 0.0000055034
+ iter  30: rmax = 0.0000687440, xmax = 0.0000049971
+ iter  31: rmax = 0.0000624036, xmax = 0.0000045371
+ iter  32: rmax = 0.0000566454, xmax = 0.0000041191
+ iter  33: rmax = 0.0000514163, xmax = 0.0000037395
+ iter  34: rmax = 0.0000466682, xmax = 0.0000033946
+ iter  35: rmax = 0.0000423570, xmax = 0.0000030814
+ iter  36: rmax = 0.0000384430, xmax = 0.0000027970
+ iter  37: rmax = 0.0000348896, xmax = 0.0000025387
+ iter  38: rmax = 0.0000316638, xmax = 0.0000023042
+ iter  39: rmax = 0.0000287357, xmax = 0.0000020913
+ iter  40: rmax = 0.0000260777, xmax = 0.0000018980
+ iter  41: rmax = 0.0000236652, xmax = 0.0000017226
+ iter  42: rmax = 0.0000214755, xmax = 0.0000015633
+ iter  43: rmax = 0.0000194881, xmax = 0.0000014187
+ iter  44: rmax = 0.0000176844, xmax = 0.0000012875
+ iter  45: rmax = 0.0000160474, xmax = 0.0000011683
+ iter  46: rmax = 0.0000145617, xmax = 0.0000010602
+ iter  47: rmax = 0.0000132135, xmax = 0.0000009621
+ iter  48: rmax = 0.0000119900, xmax = 0.0000008730
+ iter  49: rmax = 0.0000108797, xmax = 0.0000007922
+ iter  50: rmax = 0.0000098721, xmax = 0.0000007189
+ iter  51: rmax = 0.0000089578, xmax = 0.0000006523
+ iter  52: rmax = 0.0000081281, xmax = 0.0000005919
+ iter  53: rmax = 0.0000073752, xmax = 0.0000005371
+ iter  54: rmax = 0.0000066920, xmax = 0.0000004873
+ iter  55: rmax = 0.0000060721, xmax = 0.0000004422
+ iter  56: rmax = 0.0000055095, xmax = 0.0000004012
+ iter  57: rmax = 0.0000049991, xmax = 0.0000003641
+ iter  58: rmax = 0.0000045360, xmax = 0.0000003304
+ iter  59: rmax = 0.0000041157, xmax = 0.0000002997
+ iter  60: rmax = 0.0000037344, xmax = 0.0000002720
+ iter  61: rmax = 0.0000033883, xmax = 0.0000002468
+ iter  62: rmax = 0.0000030744, xmax = 0.0000002239
+ iter  63: rmax = 0.0000027895, xmax = 0.0000002032
+ max. displacement = 0.0156250 (internal), 0.0068190 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05730542   0.00101053  -0.60162300
+mol>   6    -0.06399893   0.00130766   0.60095864
+mol>   1     0.16795052  -0.00110549  -1.66847893
+mol>   1    -0.16125701  -0.00121270   1.66914329
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05730542   0.00101053  -0.60162300
+   6    -0.06399893   0.00130766   0.60095864
+   1     0.16795052  -0.00110549  -1.66847893
+   1    -0.16125701  -0.00121270   1.66914329
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  96.6%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469706885  0.0000000000 0.00074593                 0.1
+       1                                0.00006265 0.00080791      0.0
+       2                                0.00000716 0.00078150      0.0
+       3                                0.00000247 0.00077852      0.1
+       4                                0.00000079 0.00077753      0.1
+       5                                0.00000011 0.00077714      0.1
+   1       -77.2469785679 -0.0000078794 0.00000017                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.2  99.9%     0.2
+ time: Diagonalize                      :     0.0  99.9%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  87.4%     0.0
+ time: SCF Equations                    :     0.2  99.9%     0.2
+  45 F,   99 F1
+
+  E  =     -77.2469785679
+  T  =      76.79570230  V  =    -228.49498729  J  =      61.20900302
+  Ex =     -10.94931795  Ec =      -0.43037161
+
+  dipole =   0.005184 au (  0.013178 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893529    2    -9.891576    3    -0.679683    4    -0.513953
+   5    -0.445626    6    -0.260314    7    -0.260314
+ virtual:
+   8     0.005048    9     0.005073   10     0.086732   11     0.153129
+  12     0.401946   13     0.462675   14     0.536300   15     0.536303
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.7%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  96.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246978567928e+01
+eng> D= 4.87932897e-03 -1.68920778e-03  4.66091960e-04
+eng> G=-7.87979097e-05  6.51437465e-05 -9.57883053e-05
+eng>   -4.11350042e-04  1.05147522e-04  3.01674055e-05
+eng>    1.93072849e-04 -7.79266315e-05 -2.45299428e-05
+eng>    2.97075103e-04 -9.23646371e-05  9.01508426e-05
+eng>$end
+
+ G(max) = 0.00042565  |G| = 0.00059133
+
+
+ Geometry Optimization Step 18:
+ Energy:           -77.24697857
+ Energy change:     -0.00001038 (actual)
+                    -0.00002628 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000787, |dG - HdX| = 0.00019982
+ Hessian update: |dG| = 0.000628, |dG - HdX| = 0.00009334
+ include g
+ max. gradient     = 0.0004356 (internal), 0.0004114 (cartesian)
+ trust test =-0.0831800, trust radius = 0.0220971
+ Lagrangian multiplier =   0.081937
+ max. displacement = 0.0220971 (internal), 0.0197432 (cartesian)
+ iter   0: rmax = 0.0220970869, xmax = 0.0168608131
+ iter   1: rmax = 0.0130375323, xmax = 0.0035994308
+ iter   2: rmax = 0.0132535905, xmax = 0.0022758418
+ iter   3: rmax = 0.0104555529, xmax = 0.0013106439
+ iter   4: rmax = 0.0087816573, xmax = 0.0008686301
+ iter   5: rmax = 0.0079429338, xmax = 0.0006693068
+ iter   6: rmax = 0.0070339396, xmax = 0.0006166469
+ iter   7: rmax = 0.0061687952, xmax = 0.0005280552
+ iter   8: rmax = 0.0054266853, xmax = 0.0004606196
+ iter   9: rmax = 0.0047810199, xmax = 0.0004057137
+ iter  10: rmax = 0.0042153615, xmax = 0.0003562340
+ iter  11: rmax = 0.0037206701, xmax = 0.0003124709
+ iter  12: rmax = 0.0032881327, xmax = 0.0002741453
+ iter  13: rmax = 0.0030459269, xmax = 0.0002406510
+ iter  14: rmax = 0.0028246825, xmax = 0.0002114211
+ iter  15: rmax = 0.0026120735, xmax = 0.0001859340
+ iter  16: rmax = 0.0024097272, xmax = 0.0001637149
+ iter  17: rmax = 0.0022185992, xmax = 0.0001481832
+ iter  18: rmax = 0.0020391532, xmax = 0.0001366584
+ iter  19: rmax = 0.0018714956, xmax = 0.0001261040
+ iter  20: rmax = 0.0017154774, xmax = 0.0001161300
+ iter  21: rmax = 0.0015707712, xmax = 0.0001067616
+ iter  22: rmax = 0.0014369281, xmax = 0.0000980049
+ iter  23: rmax = 0.0013134215, xmax = 0.0000898529
+ iter  24: rmax = 0.0011996789, xmax = 0.0000822891
+ iter  25: rmax = 0.0010951053, xmax = 0.0000752907
+ iter  26: rmax = 0.0009991014, xmax = 0.0000688307
+ iter  27: rmax = 0.0009110752, xmax = 0.0000628795
+ iter  28: rmax = 0.0008304516, xmax = 0.0000574066
+ iter  29: rmax = 0.0007566779, xmax = 0.0000523808
+ iter  30: rmax = 0.0006892278, xmax = 0.0000477716
+ iter  31: rmax = 0.0006276039, xmax = 0.0000435490
+ iter  32: rmax = 0.0005713389, xmax = 0.0000396843
+ iter  33: rmax = 0.0005199954, xmax = 0.0000361503
+ iter  34: rmax = 0.0004731663, xmax = 0.0000329209
+ iter  35: rmax = 0.0004304733, xmax = 0.0000299719
+ iter  36: rmax = 0.0003915664, xmax = 0.0000272804
+ iter  37: rmax = 0.0003561220, xmax = 0.0000248253
+ iter  38: rmax = 0.0003238420, xmax = 0.0000225867
+ iter  39: rmax = 0.0002944520, xmax = 0.0000205464
+ iter  40: rmax = 0.0002676999, xmax = 0.0000186875
+ iter  41: rmax = 0.0002433542, xmax = 0.0000169944
+ iter  42: rmax = 0.0002212029, xmax = 0.0000154527
+ iter  43: rmax = 0.0002010518, xmax = 0.0000140493
+ iter  44: rmax = 0.0001827231, xmax = 0.0000127721
+ iter  45: rmax = 0.0001660545, xmax = 0.0000116099
+ iter  46: rmax = 0.0001508975, xmax = 0.0000105525
+ iter  47: rmax = 0.0001371167, xmax = 0.0000095908
+ iter  48: rmax = 0.0001245884, xmax = 0.0000087161
+ iter  49: rmax = 0.0001131999, xmax = 0.0000079207
+ iter  50: rmax = 0.0001028483, xmax = 0.0000071975
+ iter  51: rmax = 0.0000934400, xmax = 0.0000065400
+ iter  52: rmax = 0.0000848895, xmax = 0.0000059422
+ iter  53: rmax = 0.0000771193, xmax = 0.0000053989
+ iter  54: rmax = 0.0000700584, xmax = 0.0000049051
+ iter  55: rmax = 0.0000636425, xmax = 0.0000044563
+ iter  56: rmax = 0.0000578128, xmax = 0.0000040485
+ iter  57: rmax = 0.0000525162, xmax = 0.0000036778
+ iter  58: rmax = 0.0000477039, xmax = 0.0000033410
+ iter  59: rmax = 0.0000433319, xmax = 0.0000030350
+ iter  60: rmax = 0.0000393600, xmax = 0.0000027570
+ iter  61: rmax = 0.0000357517, xmax = 0.0000025044
+ iter  62: rmax = 0.0000324738, xmax = 0.0000022749
+ iter  63: rmax = 0.0000294961, xmax = 0.0000020664
+ max. displacement = 0.0220971 (internal), 0.0077090 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05337475   0.00027783  -0.60194869
+mol>   6    -0.06807837   0.00411421   0.60051139
+mol>   1     0.17189657  -0.00150468  -1.66778789
+mol>   1    -0.15719295  -0.00288736   1.66922520
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05337475   0.00027783  -0.60194869
+   6    -0.06807837   0.00411421   0.60051139
+   1     0.17189657  -0.00150468  -1.66778789
+   1    -0.15719295  -0.00288736   1.66922520
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  98.6%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  96.9%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469523040  0.0000000000 0.00095780                 0.1
+       1                                0.00008259 0.00105919      0.0
+       2                                0.00000889 0.00102528      0.0
+       3                                0.00000516 0.00102242      0.1
+       4                                0.00000136 0.00102000      0.1
+       5                                0.00000015 0.00101928      0.1
+   1       -77.2469644960 -0.0000121919 0.00000024                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.4%     0.0
+ time: Numerical Integration            :     0.2  99.5%     0.2
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  99.7%     0.0
+ time: Rotate                           :     0.0  94.4%     0.0
+ time: SCF Equations                    :     0.2  99.5%     0.2
+  47 F,  104 F1
+
+  E  =     -77.2469644960
+  T  =      76.79665959  V  =    -228.50099502  J  =      61.21164821
+  Ex =     -10.94952626  Ec =      -0.43038017
+
+  dipole =   0.011233 au (  0.028553 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893488    2    -9.891533    3    -0.679707    4    -0.513978
+   5    -0.445651    6    -0.260330    7    -0.260329
+ virtual:
+   8     0.004986    9     0.005098   10     0.086920   11     0.153210
+  12     0.401912   13     0.462715   14     0.536283   15     0.536295
+ time: One-Electron Gradient            :     0.0 100.0%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.7%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  94.3%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246964495958e+01
+eng> D= 1.07223583e-02 -3.20114365e-03  9.86831553e-04
+eng> G=-3.68817477e-04 -9.65092471e-05 -4.66065651e-05
+eng>   -7.06568750e-04  4.18320991e-04 -7.87710575e-05
+eng>    4.68964993e-04 -6.81358703e-05  1.35700523e-04
+eng>    6.06421234e-04 -2.53675874e-04 -1.03229003e-05
+eng>$end
+
+ G(max) = 0.00082489  |G| = 0.00122603
+
+
+ Geometry Optimization Step 19:
+ Energy:           -77.24696450
+ Energy change:      0.00001407 (actual)
+                    -0.00001597 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000628, |dG - HdX| = 0.00015008
+ Hessian update: |dG| = 0.000803, |dG - HdX| = 0.00027960
+ include g
+ max. gradient     = 0.0009750 (internal), 0.0007066 (cartesian)
+ trust test =-0.1736970, trust radius = 0.0156250
+ Lagrangian multiplier =   0.224376
+ max. displacement = 0.0156250 (internal), 0.0124342 (cartesian)
+ iter   0: rmax = 0.0156250000, xmax = 0.0130000925
+ iter   1: rmax = 0.0077443109, xmax = 0.0036528013
+ iter   2: rmax = 0.0065797169, xmax = 0.0025341024
+ iter   3: rmax = 0.0033745500, xmax = 0.0008274068
+ iter   4: rmax = 0.0032359710, xmax = 0.0004639166
+ iter   5: rmax = 0.0026902853, xmax = 0.0002851401
+ iter   6: rmax = 0.0022898397, xmax = 0.0002448429
+ iter   7: rmax = 0.0020175085, xmax = 0.0002002825
+ iter   8: rmax = 0.0018774740, xmax = 0.0001742181
+ iter   9: rmax = 0.0017589873, xmax = 0.0001535916
+ iter  10: rmax = 0.0016409732, xmax = 0.0001351496
+ iter  11: rmax = 0.0015249695, xmax = 0.0001190838
+ iter  12: rmax = 0.0014127005, xmax = 0.0001051261
+ iter  13: rmax = 0.0013052724, xmax = 0.0000929655
+ iter  14: rmax = 0.0012033605, xmax = 0.0000823498
+ iter  15: rmax = 0.0011073403, xmax = 0.0000730652
+ iter  16: rmax = 0.0010173669, xmax = 0.0000649293
+ iter  17: rmax = 0.0009334359, xmax = 0.0000577863
+ iter  18: rmax = 0.0008554297, xmax = 0.0000530598
+ iter  19: rmax = 0.0007831519, xmax = 0.0000489801
+ iter  20: rmax = 0.0007163538, xmax = 0.0000451223
+ iter  21: rmax = 0.0006547542, xmax = 0.0000414964
+ iter  22: rmax = 0.0005980533, xmax = 0.0000381055
+ iter  23: rmax = 0.0005459441, xmax = 0.0000349471
+ iter  24: rmax = 0.0004981199, xmax = 0.0000320153
+ iter  25: rmax = 0.0004542797, xmax = 0.0000293015
+ iter  26: rmax = 0.0004141327, xmax = 0.0000267955
+ iter  27: rmax = 0.0003774003, xmax = 0.0000244861
+ iter  28: rmax = 0.0003438182, xmax = 0.0000223615
+ iter  29: rmax = 0.0003131370, xmax = 0.0000204099
+ iter  30: rmax = 0.0002851230, xmax = 0.0000186194
+ iter  31: rmax = 0.0002595578, xmax = 0.0000169787
+ iter  32: rmax = 0.0002362381, xmax = 0.0000154766
+ iter  33: rmax = 0.0002149756, xmax = 0.0000141026
+ iter  34: rmax = 0.0001955957, xmax = 0.0000128467
+ iter  35: rmax = 0.0001779377, xmax = 0.0000116995
+ iter  36: rmax = 0.0001618532, xmax = 0.0000106522
+ iter  37: rmax = 0.0001472057, xmax = 0.0000096966
+ iter  38: rmax = 0.0001338700, xmax = 0.0000088250
+ iter  39: rmax = 0.0001217312, xmax = 0.0000080303
+ iter  40: rmax = 0.0001106837, xmax = 0.0000073061
+ iter  41: rmax = 0.0001006313, xmax = 0.0000066463
+ iter  42: rmax = 0.0000914856, xmax = 0.0000060454
+ iter  43: rmax = 0.0000831660, xmax = 0.0000054981
+ iter  44: rmax = 0.0000755988, xmax = 0.0000049999
+ iter  45: rmax = 0.0000687167, xmax = 0.0000045465
+ iter  46: rmax = 0.0000624582, xmax = 0.0000041338
+ iter  47: rmax = 0.0000567674, xmax = 0.0000037583
+ iter  48: rmax = 0.0000515932, xmax = 0.0000034167
+ iter  49: rmax = 0.0000468891, xmax = 0.0000031059
+ iter  50: rmax = 0.0000426125, xmax = 0.0000028233
+ iter  51: rmax = 0.0000387250, xmax = 0.0000025662
+ iter  52: rmax = 0.0000351912, xmax = 0.0000023325
+ iter  53: rmax = 0.0000319792, xmax = 0.0000021199
+ iter  54: rmax = 0.0000290597, xmax = 0.0000019267
+ iter  55: rmax = 0.0000264063, xmax = 0.0000017510
+ iter  56: rmax = 0.0000239948, xmax = 0.0000015913
+ iter  57: rmax = 0.0000218031, xmax = 0.0000014461
+ iter  58: rmax = 0.0000198114, xmax = 0.0000013141
+ iter  59: rmax = 0.0000180014, xmax = 0.0000011942
+ iter  60: rmax = 0.0000163565, xmax = 0.0000010852
+ iter  61: rmax = 0.0000148618, xmax = 0.0000009861
+ iter  62: rmax = 0.0000135036, xmax = 0.0000008960
+ iter  63: rmax = 0.0000122694, xmax = 0.0000008142
+ max. displacement = 0.0156250 (internal), 0.0100857 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05654935  -0.00041511  -0.60168784
+mol>   6    -0.06274124   0.00207526   0.60106589
+mol>   1     0.16805377  -0.00038123  -1.66837986
+mol>   1    -0.16186188  -0.00127892   1.66900180
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05654935  -0.00041511  -0.60168784
+   6    -0.06274124   0.00207526   0.60106589
+   1     0.16805377  -0.00038123  -1.66837986
+   1    -0.16186188  -0.00127892   1.66900180
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0 100.0%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  91.7%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469675842  0.0000000000 0.00103093                 0.1
+       1                                0.00008718 0.00114840      0.0
+       2                                0.00001069 0.00111369      0.0
+       3                                0.00000707 0.00111113      0.1
+       4                                0.00000110 0.00110705      0.1
+       5                                0.00000011 0.00110648      0.1
+   1       -77.2469791685 -0.0000115843 0.00000029                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.2  99.9%     0.2
+ time: Diagonalize                      :     0.0  99.6%     0.0
+ time: Matrix Multiply                  :     0.0  99.4%     0.0
+ time: Rotate                           :     0.0  87.0%     0.0
+ time: SCF Equations                    :     0.2  99.8%     0.2
+  49 F,  109 F1
+
+  E  =     -77.2469791685
+  T  =      76.79603795  V  =    -228.49701801  J  =      61.20988338
+  Ex =     -10.94939562  Ec =      -0.43037467
+
+  dipole =   0.004693 au (  0.011929 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893516    2    -9.891562    3    -0.679689    4    -0.513969
+   5    -0.445641    6    -0.260319    7    -0.260318
+ virtual:
+   8     0.005060    9     0.005077   10     0.086767   11     0.153165
+  12     0.401931   13     0.462666   14     0.536299   15     0.536303
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246979168517e+01
+eng> D= 4.51299972e-03 -1.20973927e-03  4.42194354e-04
+eng> G=-1.94827244e-04 -1.06506221e-04 -1.13233777e-04
+eng>   -2.57696616e-04  2.28322565e-04  4.87610617e-05
+eng>    2.17491060e-04 -6.28398696e-07  3.52419272e-05
+eng>    2.35032799e-04 -1.21187945e-04  2.92307883e-05
+eng>$end
+
+ G(max) = 0.00034773  |G| = 0.00054988
+
+
+ Geometry Optimization Step 20:
+ Energy:           -77.24697917
+ Energy change:     -0.00001467 (actual)
+                    -0.00002525 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000803, |dG - HdX| = 0.00011202
+ Hessian update: |dG| = 0.000787, |dG - HdX| = 0.00015019
+ include g
+ max. gradient     = 0.0004458 (internal), 0.0002577 (cartesian)
+ trust test =-0.0303089, trust radius = 0.0220971
+ max. displacement = 0.0149210 (internal), 0.0115583 (cartesian)
+ iter   0: rmax = 0.0149210156, xmax = 0.0113445642
+ iter   1: rmax = 0.0078479246, xmax = 0.0014120437
+ iter   2: rmax = 0.0076736231, xmax = 0.0006885864
+ iter   3: rmax = 0.0066781298, xmax = 0.0007726198
+ iter   4: rmax = 0.0057316565, xmax = 0.0004562521
+ iter   5: rmax = 0.0051098758, xmax = 0.0004064873
+ iter   6: rmax = 0.0045473697, xmax = 0.0003966069
+ iter   7: rmax = 0.0040188764, xmax = 0.0003512895
+ iter   8: rmax = 0.0035544679, xmax = 0.0003082573
+ iter   9: rmax = 0.0031477876, xmax = 0.0002723962
+ iter  10: rmax = 0.0027898586, xmax = 0.0002405044
+ iter  11: rmax = 0.0024750211, xmax = 0.0002121734
+ iter  12: rmax = 0.0021981638, xmax = 0.0001872247
+ iter  13: rmax = 0.0019545795, xmax = 0.0001653086
+ iter  14: rmax = 0.0017400988, xmax = 0.0001460785
+ iter  15: rmax = 0.0015510579, xmax = 0.0001292152
+ iter  16: rmax = 0.0013975064, xmax = 0.0001144281
+ iter  17: rmax = 0.0012938253, xmax = 0.0001014567
+ iter  18: rmax = 0.0011953654, xmax = 0.0000900703
+ iter  19: rmax = 0.0011024563, xmax = 0.0000800659
+ iter  20: rmax = 0.0010152351, xmax = 0.0000712661
+ iter  21: rmax = 0.0009336987, xmax = 0.0000635163
+ iter  22: rmax = 0.0008577431, xmax = 0.0000566821
+ iter  23: rmax = 0.0007871937, xmax = 0.0000506469
+ iter  24: rmax = 0.0007218282, xmax = 0.0000453094
+ iter  25: rmax = 0.0006613932, xmax = 0.0000405821
+ iter  26: rmax = 0.0006056177, xmax = 0.0000365285
+ iter  27: rmax = 0.0005542226, xmax = 0.0000335021
+ iter  28: rmax = 0.0005069275, xmax = 0.0000307027
+ iter  29: rmax = 0.0004634564, xmax = 0.0000281180
+ iter  30: rmax = 0.0004235410, xmax = 0.0000257353
+ iter  31: rmax = 0.0003869232, xmax = 0.0000235420
+ iter  32: rmax = 0.0003533572, xmax = 0.0000215255
+ iter  33: rmax = 0.0003226099, xmax = 0.0000196734
+ iter  34: rmax = 0.0002944620, xmax = 0.0000179740
+ iter  35: rmax = 0.0002687078, xmax = 0.0000164159
+ iter  36: rmax = 0.0002451551, xmax = 0.0000149885
+ iter  37: rmax = 0.0002236250, xmax = 0.0000136815
+ iter  38: rmax = 0.0002039514, xmax = 0.0000124855
+ iter  39: rmax = 0.0001859805, xmax = 0.0000113916
+ iter  40: rmax = 0.0001695699, xmax = 0.0000103916
+ iter  41: rmax = 0.0001545883, xmax = 0.0000094777
+ iter  42: rmax = 0.0001409147, xmax = 0.0000086429
+ iter  43: rmax = 0.0001284375, xmax = 0.0000078805
+ iter  44: rmax = 0.0001170546, xmax = 0.0000071844
+ iter  45: rmax = 0.0001066716, xmax = 0.0000065491
+ iter  46: rmax = 0.0000972025, xmax = 0.0000059693
+ iter  47: rmax = 0.0000885679, xmax = 0.0000054404
+ iter  48: rmax = 0.0000806954, xmax = 0.0000049579
+ iter  49: rmax = 0.0000735185, xmax = 0.0000045179
+ iter  50: rmax = 0.0000669766, xmax = 0.0000041166
+ iter  51: rmax = 0.0000610141, xmax = 0.0000037507
+ iter  52: rmax = 0.0000555800, xmax = 0.0000034172
+ iter  53: rmax = 0.0000506280, xmax = 0.0000031131
+ iter  54: rmax = 0.0000461157, xmax = 0.0000028360
+ iter  55: rmax = 0.0000420042, xmax = 0.0000025836
+ iter  56: rmax = 0.0000382582, xmax = 0.0000023540
+ iter  57: rmax = 0.0000348454, xmax = 0.0000021446
+ iter  58: rmax = 0.0000317363, xmax = 0.0000019538
+ iter  59: rmax = 0.0000289040, xmax = 0.0000017799
+ iter  60: rmax = 0.0000263239, xmax = 0.0000016214
+ iter  61: rmax = 0.0000239738, xmax = 0.0000014769
+ iter  62: rmax = 0.0000218331, xmax = 0.0000013453
+ iter  63: rmax = 0.0000198832, xmax = 0.0000012254
+ max. displacement = 0.0149210 (internal), 0.0023089 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05532756  -0.00042223  -0.60176802
+mol>   6    -0.06290162   0.00220918   0.60100875
+mol>   1     0.16892202  -0.00041922  -1.66816438
+mol>   1    -0.16134796  -0.00136773   1.66892365
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05532756  -0.00042223  -0.60176802
+   6    -0.06290162   0.00220918   0.60100875
+   1     0.16892202  -0.00041922  -1.66816438
+   1    -0.16134796  -0.00136773   1.66892365
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0 100.0%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  92.4%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469771129  0.0000000000 0.00019538                 0.1
+       1                                0.00001598 0.00022633      0.0
+       2                                0.00000250 0.00023186      0.0
+       3                                0.00000130 0.00023284      0.1
+       4                                0.00000050 0.00023305      0.1
+   1       -77.2469777162 -0.0000006033 0.00000050                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2  99.9%     0.2
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  89.5%     0.0
+ time: SCF Equations                    :     0.2  99.9%     0.2
+  51 F,  113 F1
+
+  E  =     -77.2469777162
+  T  =      76.79662974  V  =    -228.50091798  J  =      61.21162330
+  Ex =     -10.94952487  Ec =      -0.43038001
+
+  dipole =   0.005697 au (  0.014480 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893488    2    -9.891532    3    -0.679704    4    -0.513979
+   5    -0.445655    6    -0.260330    7    -0.260329
+ virtual:
+   8     0.005076    9     0.005100   10     0.086828   11     0.153202
+  12     0.401910   13     0.462686   14     0.536288   15     0.536293
+ time: One-Electron Gradient            :     0.0 100.0%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  99.7%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246977716242e+01
+eng> D= 5.51827957e-03 -1.30214524e-03  5.53711307e-04
+eng> G=-3.26286888e-04 -1.11101127e-04 -2.03849622e-05
+eng>   -2.27495709e-04  2.42059035e-04 -4.91973259e-05
+eng>    2.87831257e-04 -1.83318056e-06  9.88559179e-05
+eng>    2.65951340e-04 -1.29124727e-04 -2.92736299e-05
+eng>$end
+
+ G(max) = 0.00034529  |G| = 0.00064255
+
+
+ Geometry Optimization Step 21:
+ Energy:           -77.24697772
+ Energy change:      0.00000145 (actual)
+                    -0.00000577 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000787, |dG - HdX| = 0.00010468
+ Hessian update: |dG| = 0.000240, |dG - HdX| = 0.00009355
+ include g
+ max. gradient     = 0.0006012 (internal), 0.0003263 (cartesian)
+ trust test =-0.2392591, trust radius = 0.0156250
+ max. displacement = 0.0141903 (internal), 0.0105129 (cartesian)
+ iter   0: rmax = 0.0141903096, xmax = 0.0107054221
+ iter   1: rmax = 0.0061103507, xmax = 0.0006685344
+ iter   2: rmax = 0.0055194901, xmax = 0.0005033298
+ iter   3: rmax = 0.0048876174, xmax = 0.0004978118
+ iter   4: rmax = 0.0042304051, xmax = 0.0004037154
+ iter   5: rmax = 0.0036915638, xmax = 0.0003349816
+ iter   6: rmax = 0.0032363960, xmax = 0.0003035125
+ iter   7: rmax = 0.0028306107, xmax = 0.0002677749
+ iter   8: rmax = 0.0024758568, xmax = 0.0002325884
+ iter   9: rmax = 0.0021685707, xmax = 0.0002025236
+ iter  10: rmax = 0.0019018286, xmax = 0.0001764778
+ iter  11: rmax = 0.0017947862, xmax = 0.0001537633
+ iter  12: rmax = 0.0016850800, xmax = 0.0001340476
+ iter  13: rmax = 0.0015751664, xmax = 0.0001169693
+ iter  14: rmax = 0.0014672086, xmax = 0.0001021833
+ iter  15: rmax = 0.0013626818, xmax = 0.0000893830
+ iter  16: rmax = 0.0012625573, xmax = 0.0000782981
+ iter  17: rmax = 0.0011674376, xmax = 0.0000686927
+ iter  18: rmax = 0.0010776561, xmax = 0.0000603618
+ iter  19: rmax = 0.0009933509, xmax = 0.0000554749
+ iter  20: rmax = 0.0009145196, xmax = 0.0000518092
+ iter  21: rmax = 0.0008410600, xmax = 0.0000482313
+ iter  22: rmax = 0.0007728011, xmax = 0.0000447811
+ iter  23: rmax = 0.0007095259, xmax = 0.0000414848
+ iter  24: rmax = 0.0006509882, xmax = 0.0000383586
+ iter  25: rmax = 0.0005969255, xmax = 0.0000354109
+ iter  26: rmax = 0.0005470683, xmax = 0.0000326448
+ iter  27: rmax = 0.0005011469, xmax = 0.0000300590
+ iter  28: rmax = 0.0004588959, xmax = 0.0000276496
+ iter  29: rmax = 0.0004200582, xmax = 0.0000254108
+ iter  30: rmax = 0.0003843869, xmax = 0.0000233351
+ iter  31: rmax = 0.0003516470, xmax = 0.0000214145
+ iter  32: rmax = 0.0003216163, xmax = 0.0000196402
+ iter  33: rmax = 0.0002940855, xmax = 0.0000180034
+ iter  34: rmax = 0.0002688585, xmax = 0.0000164955
+ iter  35: rmax = 0.0002457524, xmax = 0.0000151076
+ iter  36: rmax = 0.0002245968, xmax = 0.0000138315
+ iter  37: rmax = 0.0002052335, xmax = 0.0000126591
+ iter  38: rmax = 0.0001875158, xmax = 0.0000115827
+ iter  39: rmax = 0.0001713082, xmax = 0.0000105951
+ iter  40: rmax = 0.0001564855, xmax = 0.0000096895
+ iter  41: rmax = 0.0001429321, xmax = 0.0000088595
+ iter  42: rmax = 0.0001305418, xmax = 0.0000080991
+ iter  43: rmax = 0.0001192166, xmax = 0.0000074027
+ iter  44: rmax = 0.0001088665, xmax = 0.0000067652
+ iter  45: rmax = 0.0000994089, xmax = 0.0000061818
+ iter  46: rmax = 0.0000907678, xmax = 0.0000056479
+ iter  47: rmax = 0.0000828737, xmax = 0.0000051597
+ iter  48: rmax = 0.0000756627, xmax = 0.0000047131
+ iter  49: rmax = 0.0000690763, xmax = 0.0000043049
+ iter  50: rmax = 0.0000630609, xmax = 0.0000039317
+ iter  51: rmax = 0.0000575674, xmax = 0.0000035905
+ iter  52: rmax = 0.0000525508, xmax = 0.0000032788
+ iter  53: rmax = 0.0000479700, xmax = 0.0000029939
+ iter  54: rmax = 0.0000437874, xmax = 0.0000027337
+ iter  55: rmax = 0.0000399685, xmax = 0.0000024959
+ iter  56: rmax = 0.0000364820, xmax = 0.0000022787
+ iter  57: rmax = 0.0000332989, xmax = 0.0000020804
+ iter  58: rmax = 0.0000303931, xmax = 0.0000018992
+ iter  59: rmax = 0.0000277404, xmax = 0.0000017337
+ iter  60: rmax = 0.0000253188, xmax = 0.0000015827
+ iter  61: rmax = 0.0000231083, xmax = 0.0000014447
+ iter  62: rmax = 0.0000210906, xmax = 0.0000013187
+ iter  63: rmax = 0.0000192488, xmax = 0.0000012037
+ max. displacement = 0.0141903 (internal), 0.0023755 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05658459   0.00004555  -0.60167348
+mol>   6    -0.06173826   0.00110432   0.60115774
+mol>   1     0.16772100  -0.00038403  -1.66853966
+mol>   1    -0.16256733  -0.00076584   1.66905540
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05658459   0.00004555  -0.60167348
+   6    -0.06173826   0.00110432   0.60115774
+   1     0.16772100  -0.00038403  -1.66853966
+   1    -0.16256733  -0.00076584   1.66905540
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  93.0%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469788566  0.0000000000 0.00028888                 0.1
+       1                                0.00002409 0.00035281      0.0
+       2                                0.00000282 0.00036248      0.0
+       3                                0.00000157 0.00036307      0.1
+       4                                0.00000060 0.00036329      0.1
+       5                                0.00000010 0.00036326      0.1
+   1       -77.2469804187 -0.0000015622 0.00000013                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2 100.0%     0.2
+ time: Diagonalize                      :     0.0  99.9%     0.0
+ time: Matrix Multiply                  :     0.0  95.0%     0.0
+ time: Rotate                           :     0.0  89.5%     0.0
+ time: SCF Equations                    :     0.2 100.0%     0.2
+  53 F,  118 F1
+
+  E  =     -77.2469804187
+  T  =      76.79576280  V  =    -228.49573409  J  =      61.20938372
+  Ex =     -10.94932481  Ec =      -0.43037207
+
+  dipole =   0.003866 au (  0.009826 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893520    2    -9.891566    3    -0.679687    4    -0.513935
+   5    -0.445617    6    -0.260319    7    -0.260319
+ virtual:
+   8     0.005077    9     0.005089   10     0.086706   11     0.153106
+  12     0.401949   13     0.462702   14     0.536289   15     0.536290
+ time: One-Electron Gradient            :     0.0 100.0%     0.0
+ time: Coulomb-type Gradient            :     0.0 100.0%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246980418737e+01
+eng> D= 3.75506140e-03 -8.37859528e-04  3.77955077e-04
+eng> G=-2.36211796e-04 -2.89356525e-05  2.68514539e-05
+eng>   -1.42096465e-04  1.13460396e-04 -7.17393463e-05
+eng>    2.13246793e-04 -1.65792685e-05 -6.74862374e-05
+eng>    1.65061468e-04 -6.79454748e-05  1.12374130e-04
+eng>$end
+
+ G(max) = 0.00023949  |G| = 0.00043630
+
+
+ Geometry Optimization Step 22:
+ Energy:           -77.24698042
+ Energy change:     -0.00000270 (actual)
+                    -0.00000636 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000240, |dG - HdX| = 0.00000804
+ Hessian update: |dG| = 0.000352, |dG - HdX| = 0.00001945
+ include g
+ max. gradient     = 0.0004158 (internal), 0.0002362 (cartesian)
+ trust test = 0.0277319, trust radius = 0.0200681
+ max. displacement = 0.0092052 (internal), 0.0067597 (cartesian)
+ iter   0: rmax = 0.0092051982, xmax = 0.0070458299
+ iter   1: rmax = 0.0037912763, xmax = 0.0003625308
+ iter   2: rmax = 0.0033240374, xmax = 0.0003002216
+ iter   3: rmax = 0.0029018597, xmax = 0.0002712828
+ iter   4: rmax = 0.0025281347, xmax = 0.0002420254
+ iter   5: rmax = 0.0021996697, xmax = 0.0002114000
+ iter   6: rmax = 0.0019146021, xmax = 0.0001838575
+ iter   7: rmax = 0.0016677494, xmax = 0.0001598361
+ iter   8: rmax = 0.0014540077, xmax = 0.0001386970
+ iter   9: rmax = 0.0013073165, xmax = 0.0001202496
+ iter  10: rmax = 0.0012390124, xmax = 0.0001042633
+ iter  11: rmax = 0.0011669326, xmax = 0.0000904446
+ iter  12: rmax = 0.0010936361, xmax = 0.0000785172
+ iter  13: rmax = 0.0010209049, xmax = 0.0000682312
+ iter  14: rmax = 0.0009499629, xmax = 0.0000593636
+ iter  15: rmax = 0.0008816295, xmax = 0.0000517178
+ iter  16: rmax = 0.0008164303, xmax = 0.0000451226
+ iter  17: rmax = 0.0007546766, xmax = 0.0000415907
+ iter  18: rmax = 0.0006965245, xmax = 0.0000390569
+ iter  19: rmax = 0.0006420180, xmax = 0.0000365274
+ iter  20: rmax = 0.0005911213, xmax = 0.0000340471
+ iter  21: rmax = 0.0005437428, xmax = 0.0000316470
+ iter  22: rmax = 0.0004997529, xmax = 0.0000293479
+ iter  23: rmax = 0.0004589974, xmax = 0.0000271627
+ iter  24: rmax = 0.0004213070, xmax = 0.0000250987
+ iter  25: rmax = 0.0003865050, xmax = 0.0000231589
+ iter  26: rmax = 0.0003544122, xmax = 0.0000213432
+ iter  27: rmax = 0.0003248512, xmax = 0.0000196494
+ iter  28: rmax = 0.0002976488, xmax = 0.0000180738
+ iter  29: rmax = 0.0002726377, xmax = 0.0000166117
+ iter  30: rmax = 0.0002496583, xmax = 0.0000152574
+ iter  31: rmax = 0.0002285589, xmax = 0.0000140053
+ iter  32: rmax = 0.0002091966, xmax = 0.0000128492
+ iter  33: rmax = 0.0001914371, xmax = 0.0000117831
+ iter  34: rmax = 0.0001751546, xmax = 0.0000108012
+ iter  35: rmax = 0.0001602320, xmax = 0.0000098975
+ iter  36: rmax = 0.0001465602, xmax = 0.0000090666
+ iter  37: rmax = 0.0001340383, xmax = 0.0000083031
+ iter  38: rmax = 0.0001225725, xmax = 0.0000076020
+ iter  39: rmax = 0.0001120762, xmax = 0.0000069586
+ iter  40: rmax = 0.0001024694, xmax = 0.0000063683
+ iter  41: rmax = 0.0000936784, xmax = 0.0000058271
+ iter  42: rmax = 0.0000856354, xmax = 0.0000053310
+ iter  43: rmax = 0.0000782776, xmax = 0.0000048765
+ iter  44: rmax = 0.0000715478, xmax = 0.0000044601
+ iter  45: rmax = 0.0000653930, xmax = 0.0000040788
+ iter  46: rmax = 0.0000597647, xmax = 0.0000037297
+ iter  47: rmax = 0.0000546184, xmax = 0.0000034102
+ iter  48: rmax = 0.0000499133, xmax = 0.0000031178
+ iter  49: rmax = 0.0000456118, xmax = 0.0000028502
+ iter  50: rmax = 0.0000416796, xmax = 0.0000026054
+ iter  51: rmax = 0.0000380853, xmax = 0.0000023815
+ iter  52: rmax = 0.0000348000, xmax = 0.0000021767
+ iter  53: rmax = 0.0000317973, xmax = 0.0000019894
+ iter  54: rmax = 0.0000290530, xmax = 0.0000018182
+ iter  55: rmax = 0.0000265450, xmax = 0.0000016616
+ iter  56: rmax = 0.0000242531, xmax = 0.0000015184
+ iter  57: rmax = 0.0000221587, xmax = 0.0000013876
+ iter  58: rmax = 0.0000202448, xmax = 0.0000012679
+ iter  59: rmax = 0.0000184960, xmax = 0.0000011586
+ iter  60: rmax = 0.0000168980, xmax = 0.0000010586
+ iter  61: rmax = 0.0000154379, xmax = 0.0000009673
+ iter  62: rmax = 0.0000141038, xmax = 0.0000008838
+ iter  63: rmax = 0.0000128849, xmax = 0.0000008075
+ max. displacement = 0.0092052 (internal), 0.0021356 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05771470   0.00017189  -0.60155404
+mol>   6    -0.06084034   0.00050299   0.60124172
+mol>   1     0.16666296  -0.00027765  -1.66862572
+mol>   1    -0.16353732  -0.00039723   1.66893804
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05771470   0.00017189  -0.60155404
+   6    -0.06084034   0.00050299   0.60124172
+   1     0.16666296  -0.00027765  -1.66862572
+   1    -0.16353732  -0.00039723   1.66893804
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.8%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  90.0%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469810485  0.0000000000 0.00024020                 0.1
+       1                                0.00002076 0.00026750      0.0
+       2                                0.00000228 0.00025904      0.0
+       3                                0.00000121 0.00025828      0.1
+       4                                0.00000026 0.00025765      0.1
+   1       -77.2469817518 -0.0000007033 0.00000025                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Numerical Integration            :     0.2  99.9%     0.2
+ time: Diagonalize                      :     0.0  99.9%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  97.1%     0.0
+ time: SCF Equations                    :     0.2  99.9%     0.2
+  55 F,  122 F1
+
+  E  =     -77.2469817518
+  T  =      76.79588269  V  =    -228.49649037  J  =      61.20971725
+  Ex =     -10.94935241  Ec =      -0.43037318
+
+  dipole =   0.002341 au (  0.005951 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893515    2    -9.891560    3    -0.679689    4    -0.513940
+   5    -0.445622    6    -0.260320    7    -0.260320
+ virtual:
+   8     0.005089    9     0.005093   10     0.086709   11     0.153116
+  12     0.401944   13     0.462699   14     0.536289   15     0.536289
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  96.4%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  95.4%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246981751810e+01
+eng> D= 2.27749150e-03 -4.91803796e-04  2.29297991e-04
+eng> G=-1.46867221e-04  2.51470654e-06  4.56105641e-05
+eng>   -8.25273877e-05  4.70544976e-05 -7.22795596e-05
+eng>    1.31583273e-04 -1.67549802e-05 -6.14503160e-05
+eng>    9.78113353e-05 -3.28142240e-05  8.81193115e-05
+eng>$end
+
+ G(max) = 0.00015381  |G| = 0.00027872
+
+
+ Geometry Optimization Step 23:
+ Energy:           -77.24698175
+ Energy change:     -0.00000133 (actual)
+                    -0.00000265 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000352, |dG - HdX| = 0.00001076
+ Hessian update: |dG| = 0.000192, |dG - HdX| = 0.00005537
+ include g
+ max. gradient     = 0.0002527 (internal), 0.0001469 (cartesian)
+ trust test =-0.1245316, trust radius = 0.0156250
+ max. displacement = 0.0054265 (internal), 0.0039167 (cartesian)
+ iter   0: rmax = 0.0054264663, xmax = 0.0041399652
+ iter   1: rmax = 0.0020735560, xmax = 0.0002599547
+ iter   2: rmax = 0.0017485745, xmax = 0.0001713692
+ iter   3: rmax = 0.0015120628, xmax = 0.0001468975
+ iter   4: rmax = 0.0013391413, xmax = 0.0001261389
+ iter   5: rmax = 0.0011656401, xmax = 0.0001153422
+ iter   6: rmax = 0.0010107029, xmax = 0.0000952671
+ iter   7: rmax = 0.0008806156, xmax = 0.0000823097
+ iter   8: rmax = 0.0007683314, xmax = 0.0000718378
+ iter   9: rmax = 0.0007199445, xmax = 0.0000622604
+ iter  10: rmax = 0.0006811275, xmax = 0.0000539245
+ iter  11: rmax = 0.0006406811, xmax = 0.0000467495
+ iter  12: rmax = 0.0005998749, xmax = 0.0000405595
+ iter  13: rmax = 0.0005595994, xmax = 0.0000352216
+ iter  14: rmax = 0.0005204604, xmax = 0.0000306207
+ iter  15: rmax = 0.0004828602, xmax = 0.0000266549
+ iter  16: rmax = 0.0004470537, xmax = 0.0000244467
+ iter  17: rmax = 0.0004131873, xmax = 0.0000230249
+ iter  18: rmax = 0.0003813292, xmax = 0.0000215864
+ iter  19: rmax = 0.0003514911, xmax = 0.0000201621
+ iter  20: rmax = 0.0003236446, xmax = 0.0000187738
+ iter  21: rmax = 0.0002977332, xmax = 0.0000174364
+ iter  22: rmax = 0.0002736814, xmax = 0.0000161595
+ iter  23: rmax = 0.0002514018, xmax = 0.0000149491
+ iter  24: rmax = 0.0002307995, xmax = 0.0000138080
+ iter  25: rmax = 0.0002117764, xmax = 0.0000127373
+ iter  26: rmax = 0.0001942337, xmax = 0.0000117364
+ iter  27: rmax = 0.0001780737, xmax = 0.0000108037
+ iter  28: rmax = 0.0001632014, xmax = 0.0000099367
+ iter  29: rmax = 0.0001495252, xmax = 0.0000091326
+ iter  30: rmax = 0.0001369579, xmax = 0.0000083882
+ iter  31: rmax = 0.0001254166, xmax = 0.0000077002
+ iter  32: rmax = 0.0001148233, xmax = 0.0000070652
+ iter  33: rmax = 0.0001051047, xmax = 0.0000064797
+ iter  34: rmax = 0.0000961924, xmax = 0.0000059405
+ iter  35: rmax = 0.0000880224, xmax = 0.0000054444
+ iter  36: rmax = 0.0000805353, xmax = 0.0000049882
+ iter  37: rmax = 0.0000736762, xmax = 0.0000045690
+ iter  38: rmax = 0.0000673938, xmax = 0.0000041840
+ iter  39: rmax = 0.0000616411, xmax = 0.0000038307
+ iter  40: rmax = 0.0000563744, xmax = 0.0000035065
+ iter  41: rmax = 0.0000515537, xmax = 0.0000032093
+ iter  42: rmax = 0.0000471417, xmax = 0.0000029368
+ iter  43: rmax = 0.0000431046, xmax = 0.0000026870
+ iter  44: rmax = 0.0000394108, xmax = 0.0000024582
+ iter  45: rmax = 0.0000360317, xmax = 0.0000022487
+ iter  46: rmax = 0.0000329407, xmax = 0.0000020568
+ iter  47: rmax = 0.0000301136, xmax = 0.0000018811
+ iter  48: rmax = 0.0000275280, xmax = 0.0000017203
+ iter  49: rmax = 0.0000251636, xmax = 0.0000015731
+ iter  50: rmax = 0.0000230014, xmax = 0.0000014384
+ iter  51: rmax = 0.0000210244, xmax = 0.0000013151
+ iter  52: rmax = 0.0000192169, xmax = 0.0000012024
+ iter  53: rmax = 0.0000175643, xmax = 0.0000010993
+ iter  54: rmax = 0.0000160534, xmax = 0.0000010049
+ iter  55: rmax = 0.0000146723, xmax = 0.0000009187
+ iter  56: rmax = 0.0000134097, xmax = 0.0000008398
+ iter  57: rmax = 0.0000122555, xmax = 0.0000007676
+ iter  58: rmax = 0.0000112006, xmax = 0.0000007017
+ iter  59: rmax = 0.0000102363, xmax = 0.0000006413
+ iter  60: rmax = 0.0000093549, xmax = 0.0000005862
+ iter  61: rmax = 0.0000085492, xmax = 0.0000005358
+ iter  62: rmax = 0.0000078129, xmax = 0.0000004897
+ iter  63: rmax = 0.0000071400, xmax = 0.0000004475
+ max. displacement = 0.0054265 (internal), 0.0015336 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05852624   0.00017792  -0.60147214
+mol>   6    -0.06026221   0.00018842   0.60129757
+mol>   1     0.16591582  -0.00018115  -1.66859564
+mol>   1    -0.16417985  -0.00018519   1.66877021
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05852624   0.00017792  -0.60147214
+   6    -0.06026221   0.00018842   0.60129757
+   1     0.16591582  -0.00018115  -1.66859564
+   1    -0.16417985  -0.00018519   1.66877021
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  26.2%     0.0
+ time: Orthogonalize                    :     0.0  91.7%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469819853  0.0000000000 0.00016414                 0.1
+       1                                0.00001406 0.00018157      0.0
+       2                                0.00000162 0.00017637      0.0
+       3                                0.00000049 0.00017580      0.1
+   1       -77.2469822793 -0.0000002940 0.00000049                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  77.0%     0.0
+ time: Numerical Integration            :     0.1  96.3%     0.1
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  83.5%     0.0
+ time: SCF Equations                    :     0.2  93.3%     0.2
+  57 F,  125 F1
+
+  E  =     -77.2469822793
+  T  =      76.79618973  V  =    -228.49818281  J  =      61.21041902
+  Ex =     -10.94942861  Ec =      -0.43037610
+
+  dipole =   0.001299 au (  0.003301 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893507    2    -9.891552    3    -0.679694    4    -0.513967
+   5    -0.445643    6    -0.260323    7    -0.260323
+ virtual:
+   8     0.005090    9     0.005091   10     0.086754   11     0.153164
+  12     0.401926   13     0.462673   14     0.536295   15     0.536295
+ time: One-Electron Gradient            :     0.0  99.9%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1 100.0%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246982279300e+01
+eng> D= 1.26493650e-03 -2.66898959e-04  1.24372201e-04
+eng> G=-7.25431157e-05  1.26924925e-05 -2.27988067e-05
+eng>   -5.44253601e-05  1.41441944e-05  6.00228609e-06
+eng>    6.69530919e-05 -1.31634789e-05  1.13629713e-05
+eng>    6.00153839e-05 -1.36732081e-05  5.43354931e-06
+eng>$end
+
+ G(max) = 0.00007709  |G| = 0.00013321
+
+
+ Geometry Optimization Step 24:
+ Energy:           -77.24698228
+ Energy change:     -0.00000053 (actual)
+                    -0.00000095 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000192, |dG - HdX| = 0.00000947
+ Hessian update: |dG| = 0.000169, |dG - HdX| = 0.00002541
+ include g
+ max. gradient     = 0.0001373 (internal), 0.0000725 (cartesian)
+ trust test =-0.0970034, trust radius = 0.0156250
+ max. displacement = 0.0027169 (internal), 0.0018988 (cartesian)
+ iter   0: rmax = 0.0027169453, xmax = 0.0020339319
+ iter   1: rmax = 0.0009391463, xmax = 0.0001883974
+ iter   2: rmax = 0.0007229432, xmax = 0.0001117531
+ iter   3: rmax = 0.0005974918, xmax = 0.0000944138
+ iter   4: rmax = 0.0005403513, xmax = 0.0000561042
+ iter   5: rmax = 0.0004642734, xmax = 0.0000530124
+ iter   6: rmax = 0.0003966014, xmax = 0.0000388113
+ iter   7: rmax = 0.0003835345, xmax = 0.0000329581
+ iter   8: rmax = 0.0003649913, xmax = 0.0000288432
+ iter   9: rmax = 0.0003446835, xmax = 0.0000246840
+ iter  10: rmax = 0.0003237101, xmax = 0.0000210906
+ iter  11: rmax = 0.0003025933, xmax = 0.0000180600
+ iter  12: rmax = 0.0002818004, xmax = 0.0000154750
+ iter  13: rmax = 0.0002616526, xmax = 0.0000141196
+ iter  14: rmax = 0.0002423533, xmax = 0.0000134085
+ iter  15: rmax = 0.0002240269, xmax = 0.0000126475
+ iter  16: rmax = 0.0002067409, xmax = 0.0000118663
+ iter  17: rmax = 0.0001905228, xmax = 0.0000110860
+ iter  18: rmax = 0.0001753710, xmax = 0.0000103212
+ iter  19: rmax = 0.0001612641, xmax = 0.0000095821
+ iter  20: rmax = 0.0001481668, xmax = 0.0000088751
+ iter  21: rmax = 0.0001360351, xmax = 0.0000082044
+ iter  22: rmax = 0.0001248197, xmax = 0.0000075720
+ iter  23: rmax = 0.0001144680, xmax = 0.0000069788
+ iter  24: rmax = 0.0001049267, xmax = 0.0000064246
+ iter  25: rmax = 0.0000961424, xmax = 0.0000059086
+ iter  26: rmax = 0.0000880631, xmax = 0.0000054294
+ iter  27: rmax = 0.0000806385, xmax = 0.0000049855
+ iter  28: rmax = 0.0000738203, xmax = 0.0000045751
+ iter  29: rmax = 0.0000675631, xmax = 0.0000041962
+ iter  30: rmax = 0.0000618237, xmax = 0.0000038469
+ iter  31: rmax = 0.0000565618, xmax = 0.0000035252
+ iter  32: rmax = 0.0000517396, xmax = 0.0000032293
+ iter  33: rmax = 0.0000473219, xmax = 0.0000029573
+ iter  34: rmax = 0.0000432760, xmax = 0.0000027075
+ iter  35: rmax = 0.0000395717, xmax = 0.0000024782
+ iter  36: rmax = 0.0000361810, xmax = 0.0000022679
+ iter  37: rmax = 0.0000330779, xmax = 0.0000020750
+ iter  38: rmax = 0.0000302386, xmax = 0.0000018982
+ iter  39: rmax = 0.0000276411, xmax = 0.0000017362
+ iter  40: rmax = 0.0000252652, xmax = 0.0000015879
+ iter  41: rmax = 0.0000230921, xmax = 0.0000014521
+ iter  42: rmax = 0.0000211050, xmax = 0.0000013277
+ iter  43: rmax = 0.0000192879, xmax = 0.0000012139
+ iter  44: rmax = 0.0000176266, xmax = 0.0000011097
+ iter  45: rmax = 0.0000161078, xmax = 0.0000010144
+ iter  46: rmax = 0.0000147194, xmax = 0.0000009273
+ iter  47: rmax = 0.0000134502, xmax = 0.0000008475
+ iter  48: rmax = 0.0000122902, xmax = 0.0000007746
+ iter  49: rmax = 0.0000112299, xmax = 0.0000007080
+ iter  50: rmax = 0.0000102609, xmax = 0.0000006470
+ iter  51: rmax = 0.0000093753, xmax = 0.0000005913
+ iter  52: rmax = 0.0000085660, xmax = 0.0000005403
+ iter  53: rmax = 0.0000078264, xmax = 0.0000004937
+ iter  54: rmax = 0.0000071505, xmax = 0.0000004512
+ iter  55: rmax = 0.0000065330, xmax = 0.0000004122
+ iter  56: rmax = 0.0000059687, xmax = 0.0000003767
+ iter  57: rmax = 0.0000054530, xmax = 0.0000003442
+ iter  58: rmax = 0.0000049819, xmax = 0.0000003145
+ iter  59: rmax = 0.0000045515, xmax = 0.0000002873
+ iter  60: rmax = 0.0000041581, xmax = 0.0000002625
+ iter  61: rmax = 0.0000037988, xmax = 0.0000002398
+ iter  62: rmax = 0.0000034705, xmax = 0.0000002191
+ iter  63: rmax = 0.0000031705, xmax = 0.0000002002
+ max. displacement = 0.0027169 (internal), 0.0010320 (cartesian)
+mol>$molecule
+mol> cartesian
+mol> set=L1
+mol>   6     0.05907232   0.00012502  -0.60141694
+mol>   6    -0.05983531   0.00003116   0.60133994
+mol>   1     0.16540531  -0.00009487  -1.66862102
+mol>   1    -0.16464232  -0.00006131   1.66869802
+mol>$end
+
+ Atomic Coordinates:
+   6     0.05907232   0.00012502  -0.60141694
+   6    -0.05983531   0.00003116   0.60133994
+   1     0.16540531  -0.00009487  -1.66862102
+   1    -0.16464232  -0.00006131   1.66869802
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0  99.9%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.9%     0.0
+ time: Orthogonalize                    :     0.0  95.3%     0.0
+
+  it          E            dE            g          x               t
+   0       -77.2469823315  0.0000000000 0.00011474                 0.1
+       1                                0.00000982 0.00012731      0.0
+       2                                0.00000155 0.00012366      0.0
+       3                                0.00000081 0.00012336      0.1
+       4                                0.00000005 0.00012286      0.1
+   1       -77.2469824571 -0.0000001256 0.00000005                 0.2
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.7%     0.0
+ time: Numerical Integration            :     0.2  99.9%     0.2
+ time: Diagonalize                      :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  98.0%     0.0
+ time: Rotate                           :     0.0  85.4%     0.0
+ time: SCF Equations                    :     0.2  99.9%     0.2
+  59 F,  129 F1
+
+  E  =     -77.2469824571
+  T  =      76.79627159  V  =    -228.49862345  J  =      61.21060407
+  Ex =     -10.94944836  Ec =      -0.43037686
+
+  dipole =   0.000570 au (  0.001449 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1    -9.893504    2    -9.891550    3    -0.679695    4    -0.513973
+   5    -0.445648    6    -0.260323    7    -0.260323
+ virtual:
+   8     0.005091    9     0.005091   10     0.086765   11     0.153176
+  12     0.401921   13     0.462667   14     0.536297   15     0.536297
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  92.8%     0.0
+ time: Ex. - Corr.  Gradient            :     0.1  96.9%     0.1
+
+
+eng>$Energy
+eng> E=-7.7246982457084e+01
+eng> D= 5.55872453e-04 -1.13808461e-04  5.62031810e-05
+eng> G=-2.70709162e-05  1.20004039e-05 -3.60307050e-05
+eng>   -2.86574820e-05 -5.90313018e-07  2.82416857e-05
+eng>    2.65129104e-05 -7.97044756e-06  2.61765349e-05
+eng>    2.92154877e-05 -3.43964333e-06 -1.83875156e-05
+eng>$end
+
+ G(max) = 0.00004664  |G| = 0.00008031
+
+
+ Geometry Optimization Step 25:
+ Energy:           -77.24698246
+ Energy change:     -0.00000018 (actual)
+                    -0.00000026 (predicted)
+    12 cartesian,    7 internal coordinates
+     7 independent variables
+ Hessian update: |dG| = 0.000169, |dG - HdX| = 0.00000581
+ Hessian update: |dG| = 0.000091, |dG - HdX| = 0.00001031
+ include g
+ max. gradient     = 0.0000587 (internal), 0.0000360 (cartesian)
+ trust test = 0.0100309, trust radius = 0.0156250
+ max. displacement = 0.0011330 (internal), 0.0007985 (cartesian)
+ iter   0: rmax = 0.0011329660, xmax = 0.0008398140
+ iter   1: rmax = 0.0003575752, xmax = 0.0000737918
+ iter   2: rmax = 0.0002729059, xmax = 0.0000487690
+ iter   3: rmax = 0.0002088838, xmax = 0.0000426290
+ iter   4: rmax = 0.0001904834, xmax = 0.0000175447
+ iter   5: rmax = 0.0001659724, xmax = 0.0000200944
+ iter   6: rmax = 0.0001524013, xmax = 0.0000142512
+ iter   7: rmax = 0.0001470306, xmax = 0.0000115584
+ iter   8: rmax = 0.0001394694, xmax = 0.0000101447
+ iter   9: rmax = 0.0001312461, xmax = 0.0000086721
+ iter  10: rmax = 0.0001229009, xmax = 0.0000073645
+ iter  11: rmax = 0.0001145930, xmax = 0.0000062689
+ iter  12: rmax = 0.0001064749, xmax = 0.0000057267
+ iter  13: rmax = 0.0000986564, xmax = 0.0000054540
+ iter  14: rmax = 0.0000912045, xmax = 0.0000051542
+ iter  15: rmax = 0.0000841578, xmax = 0.0000048416
+ iter  16: rmax = 0.0000775351, xmax = 0.0000045263
+ iter  17: rmax = 0.0000713411, xmax = 0.0000042152
+ iter  18: rmax = 0.0000655706, xmax = 0.0000039132
+ iter  19: rmax = 0.0000602115, xmax = 0.0000036237
+ iter  20: rmax = 0.0000552474, xmax = 0.0000033484
+ iter  21: rmax = 0.0000506590, xmax = 0.0000030887
+ iter  22: rmax = 0.0000464254, xmax = 0.0000028449
+ iter  23: rmax = 0.0000425249, xmax = 0.0000026171
+ iter  24: rmax = 0.0000389359, xmax = 0.0000024051
+ iter  25: rmax = 0.0000356369, xmax = 0.0000022083
+ iter  26: rmax = 0.0000326072, xmax = 0.0000020260
+ iter  27: rmax = 0.0000298270, xmax = 0.0000018576
+ iter  28: rmax = 0.0000272774, xmax = 0.0000017023
+ iter  29: rmax = 0.0000249406, xmax = 0.0000015592
+ iter  30: rmax = 0.0000227998, xmax = 0.0000014276
+ iter  31: rmax = 0.0000208395, xmax = 0.0000013066
+ iter  32: rmax = 0.0000190451, xmax = 0.0000011955
+ iter  33: rmax = 0.0000174031, xmax = 0.0000010936
+ iter  34: rmax = 0.0000159009, xmax = 0.0000010001
+ iter  35: rmax = 0.0000145270, xmax = 0.0000009144
+ iter  36: rmax = 0.0000132706, xmax = 0.0000008359
+ iter  37: rmax = 0.0000121220, xmax = 0.0000007640
+ iter  38: rmax = 0.0000110721, xmax = 0.0000006982
+ iter  39: rmax = 0.0000101125, xmax = 0.0000006380
+ iter  40: rmax = 0.0000092355, xmax = 0.0000005830
+ iter  41: rmax = 0.0000084342, xmax = 0.0000005326
+ iter  42: rmax = 0.0000077021, xmax = 0.0000004865
+ iter  43: rmax = 0.0000070333, xmax = 0.0000004444
+ iter  44: rmax = 0.0000064223, xmax = 0.0000004059
+ iter  45: rmax = 0.0000058642, xmax = 0.0000003708
+ iter  46: rmax = 0.0000053545, xmax = 0.0000003386
+ iter  47: rmax = 0.0000048890, xmax = 0.0000003092
+ iter  48: rmax = 0.0000044638, xmax = 0.0000002824
+ iter  49: rmax = 0.0000040755, xmax = 0.0000002579
+ iter  50: rmax = 0.0000037209, xmax = 0.0000002355
+ iter  51: rmax = 0.0000033971, xmax = 0.0000002150
+ iter  52: rmax = 0.0000031015, xmax = 0.0000001963
+ iter  53: rmax = 0.0000028315, xmax = 0.0000001792
+ iter  54: rmax = 0.0000025850, xmax = 0.0000001637
+ iter  55: rmax = 0.0000023599, xmax = 0.0000001494
+ iter  56: rmax = 0.0000021544, xmax = 0.0000001364
+ iter  57: rmax = 0.0000019668, xmax = 0.0000001246
+ iter  58: rmax = 0.0000017955, xmax = 0.0000001137
+ iter  59: rmax = 0.0000016391, xmax = 0.0000001038
+ iter  60: rmax = 0.0000014964, xmax = 0.0000000948
+ iter  61: rmax = 0.0000013660, xmax = 0.0000000865
+ iter  62: rmax = 0.0000012470, xmax = 0.0000000790
+ iter  63: rmax = 0.0000011384, xmax = 0.0000000721
+ max. displacement = 0.0011330 (internal), 0.0004824 (cartesian)
+ OPTIMIZATION CONVERGED in 24 steps!
+MOL>$molecule
+MOL> cartesian
+MOL> set=L1
+MOL>   6     0.05907232   0.00012502  -0.60141694
+MOL>   6    -0.05983531   0.00003116   0.60133994
+MOL>   1     0.16540531  -0.00009487  -1.66862102
+MOL>   1    -0.16464232  -0.00006131   1.66869802
+MOL>$end
+MOL> Energy =    -77.2469824571
+
+ Atomic Coordinates:
+   6     0.05907232   0.00012502  -0.60141694
+   6    -0.05983531   0.00003116   0.60133994
+   1     0.16540531  -0.00009487  -1.66862102
+   1    -0.16464232  -0.00006131   1.66869802
+ #
+
+ time: Geometry Optimization            :     0.0 100.0%     0.0
+
+ ============================================================
+
+ Memory used =     7795 KB
+  Disk  used =    22090 KB,         20337 KB written,        50052 KB read
+
+ CPU  time =    9.16 sec =  0.15 min = 0.00 hr =   99.20%
+ REAL time =    9.23 sec =  0.15 min = 0.00 hr
+ ratio     =   99.20%
+
+ date: Sat Oct 17 18:24:26 2026
+
+ time: Geometry Optimization            :     0.0   0.0% 344998750710781360453042645773472222480660863843619259931769380141446210833645252044237746354729272661977346282103557595719219843000732436518206103674674330959297531278614050839512744236511367781245250496979787418326783620022272.0
+ time: Initial Guess                    :     0.0   0.0% 100363249704241091960007347051512219767519883816844815549033441913972642382405744170290784350499791163731164440969308949392945369909061150645721688324198433265620427030823237861007246809183624122504431792664702619746304.0
+ time: atomic calculations              :     0.0  99.9%     0.0
+ time: One-Electron Integrals           :     0.0  99.6%     0.0
+ time: Coulomb-type Integrals           :     0.8  98.4%     0.8
+ time: Diagonalize                      :     0.0  99.3%     0.0
+ time: Matrix Multiply                  :     0.0  99.4%     0.0
+ time: SCF Equations                    :     5.9   0.0% 707896986634783764097792834087562382381549651055026890852391337875087494987656032676331483424939538382633366481557086095406942359789060917735791845637121235220624000701745554903327938310725173248.0
+ time: Inversion of V-Matrix            :     0.0   0.0% 2832204130262763029867961263600132581772671935051999444205568.0
+ time: Orthogonalize                    :     0.0  98.9%     0.0
+ time: Grid Construction                :     0.3  99.4%     0.3
+ time: Numerical Integration            :     5.0  99.4%     5.0
+ time: Rotate                           :     0.0  98.3%     0.0
+ time: scf x                            :     2.8  99.4%     2.9
+ time: One-Electron Gradient            :     0.1 100.0%     0.1
+ time: Coulomb-type Gradient            :     0.3  99.3%     0.3
+ time: Ex. - Corr.  Gradient            :     2.0   0.0% 2828311202546423571565478735843926863872903602436124190965760.0

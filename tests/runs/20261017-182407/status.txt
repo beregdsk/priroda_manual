@@ -1,0 +1,13 @@
+t76a_co2_bent_internal exit=0
+t76b_co2_bent_cartesian exit=0
+t76c_c2h2_bent_internal exit=0
+t76d_c2h2_bent_cartesian exit=0
+t76e_c2h2_linear_internal exit=0
+t77a_hcn_ts_guess_hessian exit=0
+t77b_hcn_saddle exit=0
+t77c_hcn_ts_hessian exit=0
+t77d_hcn_irc_rdefault_back0 exit=0
+t77e_hcn_irc_rdefault_back1 exit=0
+t77f_hcn_irc_r003_back0 exit=0
+t77g_hcn_irc_r003_back1 exit=0
+t77h_hcn_irc_r03_back0 exit=0

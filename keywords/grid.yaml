@@ -8,14 +8,14 @@ keywords:
     default: [1e-8, 1e-5]
     default_note:
       en: |
-        `1e-8` for the final grid and `1e-5` for the coarse grid used in the first SCF iterations, as echoed by v13/v15
-        (`grid: accuracy=1.0e-08,1.0e-05`). `Dft.rtf` gives `1e-7` (older version).
+        `1e-8` for the final grid and `1e-5` for the coarse grid used in the first SCF iterations, as echoed by v13, v15
+        and v25 (`grid: accuracy=1.0e-08,1.0e-05`). `Dft.rtf` gives `1e-7` (older version).
     description:
       en: |
         Target accuracy of the exchange–correlation energy per atom for the adaptively generated grid (DFT
-        methods). The default, 1e-8, is a fine grid. Use 1e-7 to speed up geometry optimizations with
-        `tolerance<=1e-4`, and 1e-9 for very accurate calculations. The grid grows during the SCF; the output
-        reports each size (`Grid: … points`).
+        methods). The default, 1e-8, is a fine grid. `input.txt` suggests 1e-7 to speed up geometry optimizations
+        with the default `$optimize tolerance=1e-4` or looser, and 1e-9 for very accurate calculations. The grid grows during the SCF; the output
+        reports each size on a line such as `grid:    34000   53` (number of points) in the SCF table.
     notes:
       en: |
         `Dft.rtf` suggests 1e-6 for rough optimizations (`tol=1e-3`) and 1e-8 for floppy molecules optimized to
@@ -23,5 +23,5 @@ keywords:
         cannot reach unlimited accuracy. This conflicts with `input.txt`'s 1e-9 for very accurate work.
     see_also: [optimize.tolerance]
     status: current
-    sources: ["input.txt", "01 §4.4 (output echo)", "Dft.rtf"]
-    verified_against: null
+    sources: ["input.txt", "01 §4.4 (output echo)", "Dft.rtf", "08 t01, t04"]
+    verified_against: "25 (2025.02.28)"

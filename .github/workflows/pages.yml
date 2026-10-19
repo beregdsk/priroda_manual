@@ -1,0 +1,60 @@
+# Builds the manual (HTML and PDF) on every push to main and publishes it on GitHub Pages:
+#   https://beregdsk.github.io/priroda_manual/                     HTML
+#   https://beregdsk.github.io/priroda_manual/priroda-manual.pdf   PDF
+# One-time setup: repository Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+name: Publish manual
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Sphinx
+        run: python -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-base \
+            texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended tex-gyre
+
+      - name: Build HTML and PDF
+        run: |
+          make clean
+          make html
+          make pdf
+          cp docs/_build/latex/priroda-manual.pdf docs/_build/html/
+          rm -rf docs/_build/html/.doctrees
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_build/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

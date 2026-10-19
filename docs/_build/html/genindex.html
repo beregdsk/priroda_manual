@@ -4,10 +4,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#"><link rel="search" title="Search" href="search.html">
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 --><title>Index - Priroda User Manual</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 --><title>Index - Priroda Unofficial Manual</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/priroda.css?v=aff5c028" />
     
     
 
@@ -16,18 +18,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -159,7 +173,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -180,7 +194,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -188,14 +202,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="start/running.html">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="start/quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -217,10 +236,14 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="binary-keywords.html">Keywords in the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -310,6 +333,8 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="reference/grid.html#index-1">accuracy ($grid)</a>
 </li>
+        <li><a href="reference/Energy.html#index-7">Ax ($Energy)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -356,11 +381,11 @@
   <h2>D</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="reference/dynamic.html#index-2">d ($dynamic)</a>
-</li>
         <li><a href="reference/Energy.html#index-4">D ($Energy)</a>
 </li>
         <li><a href="reference/scf.html#index-5">d1small ($scf)</a>
+</li>
+        <li><a href="reference/control.html#index-8">derivative ($control)</a>
 </li>
         <li><a href="reference/integral.html#index-1">direct ($integral)</a>
 </li>
@@ -370,7 +395,9 @@
 </li>
         <li><a href="reference/d2edr2.html#index-2">displace ($d2edr2)</a>
 </li>
-        <li><a href="reference/uniq.html#index-1">dist ($uniq)</a>
+        <li><a href="reference/uniq.html#index-1">distance ($uniq)</a>
+</li>
+        <li><a href="reference/dynamic.html#index-2">dx ($dynamic)</a>
 </li>
         <li><a href="reference/Energy.html#index-5">Dx ($Energy)</a>
 </li>
@@ -430,11 +457,11 @@
   <h2>H</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="reference/dynamic.html#index-7">h ($dynamic)</a>
+        <li><a href="reference/Energy.html#index-3">H ($Energy)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="reference/Energy.html#index-3">H ($Energy)</a>
+        <li><a href="reference/dynamic.html#index-7">hb ($dynamic)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -484,7 +511,7 @@
 </li>
         <li><a href="reference/guess.html#index-4">mix ($guess)</a>
 </li>
-        <li><a href="reference/optimize.html#index-16">mod ($optimize)</a>
+        <li><a href="reference/optimize.html#index-16">model ($optimize)</a>
 </li>
         <li><a href="reference/molecule.html#index-2">mult ($molecule)</a>
 </li>
@@ -560,7 +587,7 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="reference/optimize.html#index-1">saddle ($optimize)</a>
 </li>
-        <li><a href="reference/control.html#index-8">save ($control)</a>
+        <li><a href="reference/control.html#index-9">save ($control)</a>
 </li>
         <li><a href="reference/molecule.html#index-4">set ($molecule)</a>
 </li>
@@ -579,11 +606,9 @@
 </li>
         </ul></li>
         <li><a href="reference/molecule.html#index-6">sym ($molecule)</a>
-
-        <ul>
-          <li><a href="reference/optimize.html#index-15">($optimize)</a>
 </li>
-        </ul></li>
+        <li><a href="reference/optimize.html#index-15">symmetry ($optimize)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -622,7 +647,7 @@
   <h2>V</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="reference/dynamic.html#index-6">v ($dynamic)</a>
+        <li><a href="reference/dynamic.html#index-6">v1 ($dynamic)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
@@ -644,7 +669,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

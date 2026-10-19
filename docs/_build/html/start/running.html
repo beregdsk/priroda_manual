@@ -3,13 +3,15 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Quickstart: your first calculations" href="quickstart.html"><link rel="prev" title="About Priroda" href="about.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Parallel and cluster runs" href="parallel.html"><link rel="prev" title="Input syntax" href="input-syntax.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>Installing and running - Priroda User Manual</title>
+        <title>Installing and running - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -161,7 +175,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +196,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -190,14 +204,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about.html">About Priroda</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +238,14 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -266,11 +289,45 @@
 <p>Priroda has no installer. You copy an executable, the basis-set files you need and, for parallel runs, the MPI
 launcher into a directory, write an input file, and start the program with the input and output file names as
 arguments.</p>
+<section id="obtaining-priroda">
+<span id="id1"></span><h2>Obtaining Priroda<a class="headerlink" href="#obtaining-priroda" title="Link to this heading">¶</a></h2>
+<p>Priroda is free of charge. The executables, the basis-set files and the helper scripts can be downloaded from the
+official site, <a class="reference external" href="https://rad.chem.msu.ru/~laikov/p_w/">https://rad.chem.msu.ru/~laikov/p_w/</a>. Only parallel runs on Windows need more: an MPI runtime, which
+is not on the site (see <a class="reference internal" href="parallel.html#running-windows-parallel"><span class="std std-ref">Parallel runs on Windows</span></a>). Put the executable and <code class="docutils literal notranslate"><span class="pre">basis.in</span></code> in a directory of your
+own. The main Linux executable, <code class="docutils literal notranslate"><span class="pre">p</span></code>, is probably statically linked (see <a class="reference internal" href="#executables"><span class="std std-ref">Executables</span></a>). The page is a bare file
+index with no documentation, license text or contact information. It holds:</p>
+<ul class="simple">
+<li><p>Linux x86-64 executables (<code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">p4</span></code>, <code class="docutils literal notranslate"><span class="pre">p_d</span></code>, <code class="docutils literal notranslate"><span class="pre">p4_d</span></code>), builds for particular clusters (<code class="docutils literal notranslate"><span class="pre">p_l</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs1p1</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs10p</span></code>,
+<code class="docutils literal notranslate"><span class="pre">p_mvs10q</span></code>), an ARM build (<code class="docutils literal notranslate"><span class="pre">p_arm</span></code>), a bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>, and the molecule viewer <code class="docutils literal notranslate"><span class="pre">xm</span></code>;</p></li>
+<li><p>Windows (Cygwin, x86-64) executables in <code class="docutils literal notranslate"><span class="pre">exe64/</span></code>;</p></li>
+<li><p>example inputs and outputs;</p></li>
+<li><p>basis-set and parameter files (<code class="docutils literal notranslate"><span class="pre">basis.in</span></code>, <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b2*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">b4s*.in</span></code>, <code class="docutils literal notranslate"><span class="pre">3z.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">sbk.bas</span></code>, <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>);</p></li>
+<li><p>small shell scripts: <code class="docutils literal notranslate"><span class="pre">ge</span></code> (append the <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> block from an output to the input), <code class="docutils literal notranslate"><span class="pre">gm</span></code> (replace <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> with
+the optimized geometry) and <code class="docutils literal notranslate"><span class="pre">grx</span></code> (join two IRC halves).</p></li>
+</ul>
+<!-- src: 01 §2.1, §2.2, §2.5, §8; 04 #503 -->
+<p>Which executable to choose is described under <a class="reference internal" href="#executables"><span class="std std-ref">Executables</span></a> below.</p>
+<p>Users have also obtained the program by writing to the developer, Dimitri Laikov, by e-mail. Users reported the
+address <code class="docutils literal notranslate"><span class="pre">dimitri_laikov&#64;mail.ru</span></code> from 2010 to 2018; earlier it was <code class="docutils literal notranslate"><span class="pre">laikov&#64;physto.se</span></code>. Users note that he does not
+always answer quickly.</p>
+<!-- src: 04 #2, #121, #287, #377, #406; 03 §1 -->
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The legal status is not stated on the official site. A 2009 presentation relayed on a forum said that Priroda is
+registered with Rospatent and distributed through the company OOO “Dimonta”. A user reported in 2018 that the developer
+had said, a couple of years earlier, that there was no licence agreement. Users customarily ask the developer’s
+permission before using the program.</p>
+</div>
+<!-- src: 03 §1; 04 #2, #404, #443-#445 -->
+<p>The official site has hosted builds with known defects. In 2016 it carried a note that the <code class="docutils literal notranslate"><span class="pre">w64/*.exe</span></code> builds (an
+attempt at 64-bit Cygwin) had a DFT/ECP bug. If a build behaves strangely, ask the developer whether it is the right one.</p>
+<!-- src: 04 #366 -->
+</section>
 <section id="executables">
-<h2>Executables<a class="headerlink" href="#executables" title="Link to this heading">¶</a></h2>
+<span id="id2"></span><h2>Executables<a class="headerlink" href="#executables" title="Link to this heading">¶</a></h2>
 <section id="linux">
 <h3>Linux<a class="headerlink" href="#linux" title="Link to this heading">¶</a></h3>
-<p>The author’s site lists these Linux files. Sizes and dates are those of the 2025 file index.</p>
+<p>The official site lists these Linux files. Dates are from the official file index (checked October 2026).</p>
 <!-- src: 01 §2.1, §2.2 -->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -283,7 +340,7 @@ arguments.</p>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">p</span></code></p></td>
 <td><p>2023-06-25</p></td>
-<td><p>Main x86-64 executable, statically linked.</p></td>
+<td><p>Main x86-64 executable, probably statically linked.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">p4</span></code></p></td>
 <td><p>2023-06-25</p></td>
@@ -299,7 +356,7 @@ arguments.</p>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">p_l</span></code></p></td>
 <td><p>2025-04-14</p></td>
-<td><p>Build for a particular cluster, started through the site’s Intel MPI wrapper.</p></td>
+<td><p>Build for a particular cluster, started through a cluster-side Intel MPI wrapper.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">p_mvs1p1</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs10p</span></code>, <code class="docutils literal notranslate"><span class="pre">p_mvs10q</span></code></p></td>
 <td><p>2019–2023</p></td>
@@ -315,7 +372,7 @@ arguments.</p>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xm</span></code></p></td>
 <td><p>2025-04-24</p></td>
-<td><p>The author’s molecule viewer. It takes a Priroda input file as its argument (<code class="docutils literal notranslate"><span class="pre">xm</span> <span class="pre">C60.qm.in</span></code>).</p></td>
+<td><p>A molecule viewer. It takes a Priroda input file as its argument (<code class="docutils literal notranslate"><span class="pre">xm</span> <span class="pre">C60.qm.in</span></code>).</p></td>
 </tr>
 </tbody>
 </table>
@@ -330,7 +387,7 @@ site. Scripts and forum posts written for those versions use these names. This m
 </section>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">¶</a></h3>
-<p>The Windows build is a Cygwin build for x86-64. It is in the <code class="docutils literal notranslate"><span class="pre">exe64/</span></code> directory of the author’s site:</p>
+<p>The Windows build is a Cygwin build for x86-64. It is in the <code class="docutils literal notranslate"><span class="pre">exe64/</span></code> directory of the official site:</p>
 <!-- src: 01 §2.2 -->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -365,17 +422,19 @@ site. Scripts and forum posts written for those versions use these names. This m
 </table>
 </div>
 <p>For serial runs you need only <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> and <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> in the same directory. A full Cygwin installation is not
-required, and no administrator rights are needed. For parallel runs see <a class="reference internal" href="#running-windows-parallel"><span class="std std-ref">Parallel runs on Windows</span></a>.</p>
-<!-- src: 04 #362, #370 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+required, and no administrator rights are needed. For parallel runs see <a class="reference internal" href="parallel.html#running-windows-parallel"><span class="std std-ref">Parallel runs on Windows</span></a>.</p>
+<!-- src: 04 #362, #370; 08 w01 -->
+<p>The Windows builds are older than the Linux one: <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> prints <code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">20</span> <span class="pre">(2021.03.18)</span></code> and <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> prints
+<code class="docutils literal notranslate"><span class="pre">Priroda</span> <span class="pre">19</span> <span class="pre">(2019.03.06)</span></code>. For water the serial <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> gave the same energy as Linux version 25 to all printed
+digits, and the same optimized geometry and frequencies. Features added after version 20 are missing from the
+Windows builds.</p>
+<!-- src: 08 w01, w11, w12, w13b -->
 <p>In 2017 users referred to the parallel Windows build as <code class="docutils literal notranslate"><span class="pre">exe64/p.exe</span></code>. The current index has no <code class="docutils literal notranslate"><span class="pre">p.exe</span></code>; the newest
 parallel build there is <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code>.</p>
-</div>
 <!-- src: 04 #370; 01 §2.2 -->
 <p>Old 32-bit Windows builds could not allocate more than about 1 GB of memory; <code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code> appeared above that.
-Users report that the 64-bit build has no such limit.</p>
-<!-- src: 04 #94-#105, #210, #211, #370 -->
+The 64-bit <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> ran with <code class="docutils literal notranslate"><span class="pre">mem=3000</span></code> without trouble.</p>
+<!-- src: 04 #94-#105, #210, #211, #370; 08 w07 -->
 </section>
 </section>
 <section id="running-a-calculation">
@@ -383,11 +442,11 @@ Users report that the 64-bit build has no such limit.</p>
 <section id="serial-runs">
 <h3>Serial runs<a class="headerlink" href="#serial-runs" title="Link to this heading">¶</a></h3>
 <p>Give the input file first and the output file second:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p input.in output.out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>p<span class="w"> </span>input.in<span class="w"> </span>output.out
 </pre></div>
 </div>
 <p>On Windows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p1.exe input.in output.out
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>p1.exe input.in output.out
 </pre></div>
 </div>
 <!-- src: 01 §2.1; 04 #64, #127, #504 -->
@@ -399,29 +458,29 @@ output, and the basis file inside the input.</p>
 punctuation, with no spaces or Cyrillic. This also applies to the computer name on Windows. File names are
 case-sensitive on Linux, although keywords are not.</p>
 <!-- src: 04 #171; 03 §2 (amg, Nov 2011); 06 §2 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>One user saw the complaint <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">output</span> <span class="pre">file</span> <span class="pre">'tasK.out'?</span></code> when the output file name contained a capital letter.
-This is not confirmed. Lower-case file names avoid the question.</p>
-</div>
-<!-- src: 04 #161 --> <!-- verify -->
-<p>Older versions also wrote the output to standard output when no output file was given. <!-- src: 03 §2; 02 §5.1 --></p>
-<!-- verify -->
+<p>The Windows <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20) did run in a folder with a space in its name, both from inside it and from outside
+with the paths in double quotes. Full Windows paths such as <code class="docutils literal notranslate"><span class="pre">C:\Work\mol.in</span></code> work for the input and output files.</p>
+<!-- src: 08 w09, w10 -->
+<p>One user of an older version saw the complaint <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">output</span> <span class="pre">file</span> <span class="pre">'tasK.out'?</span></code> when the output file name contained a
+capital letter. Version 25 writes to an output file with capital letters in its name without complaint.</p>
+<!-- src: 04 #161; 08 t19 -->
+<p>If no output file is given (<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">input.in</span></code>), the output goes to standard output. <!-- src: 03 §2; 02 §5.1; 08 t20, w08 --></p>
 </section>
 <section id="parallel-runs-on-linux">
 <h3>Parallel runs on Linux<a class="headerlink" href="#parallel-runs-on-linux" title="Link to this heading">¶</a></h3>
-<p>Priroda is parallelized with MPI. Three command forms appear in the sources, and which one works depends on the build:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p -np 4 input.in output.out                  # the executable starts its own processes
-./mpiexec -np 4 ./p input.in output.out      # the mpiexec shipped with p
-mpiexec -np 4 p input.in                     # as used for version 14 at one site
+<p>Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. The official site shows the
+<code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> that it ships next to <code class="docutils literal notranslate"><span class="pre">p</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mpiexec<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>./p<span class="w"> </span>input.in<span class="w"> </span>output.out
 </pre></div>
 </div>
-<!-- src: 04 #66, #151, #153; 01 §2.1; 02 §5.1 -->
-<p>The first form is what users ran with versions 6 and 10. The second is what the author’s site shows for the current
-<code class="docutils literal notranslate"><span class="pre">p</span></code> and its bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code>. In one report with version 10, starting through the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> failed while
-<code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">4</span></code> worked, but that run also had a relative basis-file path, which can cause the same failure. Try the form
-from the author’s site first.</p>
-<!-- src: 04 #150-#154; 01 §2.1 --> <!-- verify -->
+<!-- src: 01 §2.1; 08 t21b (works in v25) -->
+<p>The output then starts with <code class="docutils literal notranslate"><span class="pre">parallel</span> <span class="pre">on</span> <span class="pre">4</span> <span class="pre">processors</span></code> and one <code class="docutils literal notranslate"><span class="pre">node</span> <span class="pre">N:</span></code> line per process. A two-process test gave
+exactly the serial energy.</p>
+<!-- src: 08 t21b -->
+<p>Older versions also accepted <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">-np</span> <span class="pre">4</span> <span class="pre">input.in</span> <span class="pre">output.out</span></code>, which users ran with versions 6 and 10. <strong>Version 25 does
+not</strong>: it takes <code class="docutils literal notranslate"><span class="pre">-np</span></code> as the input file name, prints <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">file</span> <span class="pre">'-np'?.</span></code> and stops. One site ran version 14 with
+the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> (<code class="docutils literal notranslate"><span class="pre">mpiexec</span> <span class="pre">-np</span> <span class="pre">N</span> <span class="pre">p</span> <span class="pre">input.in</span></code>, output to standard output).</p>
+<!-- src: 04 #66, #150-#154; 02 §5.1; 08 t21a -->
 <p>Check the start of the output. A parallel run prints the number of processes and one line per process:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> parallel on  4 processors
  node  0: 'linux-ldmm'
@@ -430,59 +489,13 @@ from the author’s site first.</p>
 </pre></div>
 </div>
 <!-- src: 04 #152; 01 §2.6 -->
-<p>The cluster builds are started through the cluster’s own MPI. The author’s example for <code class="docutils literal notranslate"><span class="pre">p_l</span></code> under SLURM is:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sbatch -p test -n 16 -t 6 impi ~/bin/p_l file.{in,out}
+<p>The official site gives one example for a cluster build, <code class="docutils literal notranslate"><span class="pre">p_l</span></code> under Slurm:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbatch<span class="w"> </span>-p<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-n<span class="w"> </span><span class="m">16</span><span class="w"> </span>-t<span class="w"> </span><span class="m">6</span><span class="w"> </span>impi<span class="w"> </span>~/bin/p_l<span class="w"> </span>file.<span class="o">{</span><span class="k">in</span>,out<span class="o">}</span>
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">impi</span></code> is that cluster’s wrapper script for Intel MPI, not part of Priroda.</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">impi</span></code> is presumably that cluster’s Intel MPI wrapper script; it is not part of Priroda.</p>
 <!-- src: 01 §2.1 (impi inferred) -->
-</section>
-<section id="parallel-runs-on-windows">
-<span id="running-windows-parallel"></span><h3>Parallel runs on Windows<a class="headerlink" href="#parallel-runs-on-windows" title="Link to this heading">¶</a></h3>
-<p>The author’s site shows this command for a two-process run:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun.exe -np 2 p.exe C60.qm.in C60.qm.w.2.out
-</pre></div>
-</div>
-<p>The MPI runtime is not on the site. Users assembled it from Cygwin as follows:</p>
-<!-- src: 01 §2.1; 04 #365, #370, #397, #472 -->
-<ol class="arabic">
-<li><p>Download the 64-bit Cygwin installer (<code class="docutils literal notranslate"><span class="pre">setup-x86_64.exe</span></code> from <a class="reference external" href="https://cygwin.com">https://cygwin.com</a>). Install the default packages
-plus the <code class="docutils literal notranslate"><span class="pre">openmpi</span></code> package.</p></li>
-<li><p>Copy these files from the Cygwin installation into the directory with the Priroda executable:
-<code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cyggcc_s-seh-1.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygmpi-12.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-pal-13.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">cygopen-rte-12.dll</span></code>, <code class="docutils literal notranslate"><span class="pre">orterun.exe</span></code>.
-Newer OpenMPI packages have <code class="docutils literal notranslate"><span class="pre">cygopen-pal-40.dll</span></code> and <code class="docutils literal notranslate"><span class="pre">cygopen-rte-40.dll</span></code> instead of the <code class="docutils literal notranslate"><span class="pre">-13</span></code>/<code class="docutils literal notranslate"><span class="pre">-12</span></code> files; take
-those. Take <code class="docutils literal notranslate"><span class="pre">cygwin1.dll</span></code> from the same installation, because the other DLLs work only with matching versions.
-After this, Cygwin itself is no longer needed.</p></li>
-<li><p>Create a directory <code class="docutils literal notranslate"><span class="pre">dev</span></code> one level above the directory you start Priroda from, with subdirectories <code class="docutils literal notranslate"><span class="pre">shm</span></code> and
-<code class="docutils literal notranslate"><span class="pre">mqueue</span></code>. For Priroda in <code class="docutils literal notranslate"><span class="pre">C:\Priroda</span></code>, that means <code class="docutils literal notranslate"><span class="pre">C:\dev\shm</span></code> and <code class="docutils literal notranslate"><span class="pre">C:\dev\mqueue</span></code>. Without a Cygwin installation,
-the Cygwin libraries take the parent of the start directory as the root <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p></li>
-<li><p>If the program is in a system directory such as <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span></code>, run it as administrator.</p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> and start the run from <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd /d "C:\Priroda"
-set TMPDIR="%TEMP%"
-orterun.exe -np 2 p.exe "C:\Work\file.in" "C:\Work\file.out"
-</pre></div>
-</div>
-</li>
-</ol>
-<!-- src: 04 #370, #397, #472 -->
-<p>Problems reported with this setup:</p>
-<ul class="simple">
-<li><p>The recipe needs a Priroda build that supports parallel runs. Version 6 (<code class="docutils literal notranslate"><span class="pre">p6.exe</span></code>) failed with an OpenMPI
-<code class="docutils literal notranslate"><span class="pre">agent-not-found</span></code> error; users moved to version 17. <!-- src: 04 #398, #401 --></p></li>
-<li><p>On a computer connected by Wi-Fi that also has a wired network adapter, OpenMPI stops with
-<code class="docutils literal notranslate"><span class="pre">tcp_peer_send_blocking:</span> <span class="pre">send()</span> <span class="pre">to</span> <span class="pre">socket</span> <span class="pre">12</span> <span class="pre">failed:</span> <span class="pre">Transport</span> <span class="pre">endpoint</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">connected</span> <span class="pre">(128)</span></code>. Disable the wired
-adapter. <!-- src: 04 #397 --></p></li>
-<li><p>With the Ethernet cable unplugged, one user’s run used only two of the cores. <!-- src: 04 #374 --></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Warning:</span> <span class="pre">'/dev/shm'</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exists</span> <span class="pre">or</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">directory.</span></code> means the Cygwin environment is missing. Create the
-<code class="docutils literal notranslate"><span class="pre">dev</span></code> directories (step 3), or start from a Cygwin shell. <!-- src: 04 #360, #370 --></p></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A user reported in 2021 that this recipe no longer worked on Windows 10 with a current Cygwin, and no fix was posted.
-Expect to adapt it to the Cygwin and OpenMPI versions you have.</p>
-</div>
-<!-- src: 04 #472 -->
+<p>Parallel runs on Windows, scaling and batch-job scripts are covered in <a class="reference internal" href="parallel.html"><span class="doc">Parallel and cluster runs</span></a>.</p>
 </section>
 </section>
 <section id="memory-disk-and-scratch-system">
@@ -490,18 +503,18 @@ Expect to adapt it to the Cygwin and OpenMPI versions you have.</p>
 <p>The <a class="reference internal" href="../reference/system.html#group-system"><span class="std std-ref">$system</span></a> group sets the resources. Every limit applies <strong>per MPI process</strong>.
 <code class="docutils literal notranslate"><span class="pre">disk=10</span></code> on four processes can use up to 40 GB.</p>
 <!-- src: input.txt; 03 §3; 04 #196 -->
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$system memory=2048 disk=-2048 path=/scratch/user $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$system</span><span class="w"> </span><span class="na">memory</span><span class="o">=</span><span class="m">2048</span><span class="w"> </span><span class="na">disk</span><span class="o">=</span><span class="m">-2048</span><span class="w"> </span><span class="na">path</span><span class="o">=</span><span class="no">/scratch/user</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
 <dl class="simple myst">
 <dt><a class="reference internal" href="../reference/system.html#system-memory"><span class="std std-ref">memory</span></a></dt><dd><p>Memory in MB. Two values set rank 0 and the other ranks separately: <code class="docutils literal notranslate"><span class="pre">mem=2048,256</span></code> gives the master process
-2048 MB and every other process 256 MB. In a parallel run, most of the memory and all of the disk storage are
-used by rank 0, so give the other ranks less.</p>
+2048 MB and every other process 256 MB. The version 5 documentation says that in a parallel run most of the memory and
+all of the disk storage are used by rank 0. That is why a small second value works: the other ranks need less.</p>
 <!-- src: 01 §4.1; 06 §3 -->
 </dd>
 <dt><a class="reference internal" href="../reference/system.html#system-disk"><span class="std std-ref">disk</span></a></dt><dd><p>A positive value is scratch disk in <strong>GB</strong>. The program opens one scratch file per gigabyte. A negative value is
 scratch kept in memory, in <strong>MB</strong> (a RAM disk): <code class="docutils literal notranslate"><span class="pre">disk=-2048</span></code> holds 2048 MB of scratch in RAM. A second value
-applies to the other ranks, as for <code class="docutils literal notranslate"><span class="pre">memory</span></code>; the author typically gives them <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+applies to the other ranks, as for <code class="docutils literal notranslate"><span class="pre">memory</span></code>; the official example inputs typically give them <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
 <!-- src: input.txt; Dft.rtf; 04 #196, #468; 01 §4.1 -->
 </dd>
 <dt><a class="reference internal" href="../reference/system.html#system-path"><span class="std std-ref">path</span></a></dt><dd><p>The scratch directory. A colon-separated list gives one directory per process, which pays off only when the
@@ -511,39 +524,52 @@ enough.</p>
 </dd>
 </dl>
 <section id="keeping-scratch-in-memory">
-<h3>Keeping scratch in memory<a class="headerlink" href="#keeping-scratch-in-memory" title="Link to this heading">¶</a></h3>
-<p>With a negative <code class="docutils literal notranslate"><span class="pre">disk</span></code>, <code class="docutils literal notranslate"><span class="pre">memory</span></code> plus |<code class="docutils literal notranslate"><span class="pre">disk</span></code>| must fit into the physical RAM for each process, or the run stops at
-once with <code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code>. One user’s setting for a 24 GB node is <code class="docutils literal notranslate"><span class="pre">memory=9000</span> <span class="pre">disk=-14000</span></code>. Keeping the scratch
-in RAM is faster than any disk. In one RI-MP2 benchmark on 8 cores it cut the time from 86 minutes (scratch on disk)
-to 12.4 minutes.</p>
-<!-- src: 04 #462, #463, #471; 03 §3 (v8 benchmark) -->
+<span id="running-ram-disk"></span><h3>Keeping scratch in memory<a class="headerlink" href="#keeping-scratch-in-memory" title="Link to this heading">¶</a></h3>
+<p>With a negative <code class="docutils literal notranslate"><span class="pre">disk</span></code>, <code class="docutils literal notranslate"><span class="pre">memory</span></code> plus |<code class="docutils literal notranslate"><span class="pre">disk</span></code>| is taken by every process, so the sum over all processes must fit
+into the node’s physical RAM, or the run stops at once with <code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code>. With <code class="docutils literal notranslate"><span class="pre">mem=a,b</span></code> and <code class="docutils literal notranslate"><span class="pre">disk=a,b</span></code>,
+rank 0 takes the first values and every other rank the second. One user’s setting for a 24 GB node is
+<code class="docutils literal notranslate"><span class="pre">memory=9000</span> <span class="pre">disk=-14000</span></code>; that fills the node with <strong>one</strong> process. On several processes, give the other ranks
+small second values or lower the limits.</p>
+<!-- src: 04 #462, #463, #471; 01 §4.1 -->
+<p>Keeping the scratch in RAM is faster than a local disk; one user calls it “a bit faster”. In an older cluster
+benchmark the gain was larger: a version 8 RI-MP2 job on 8 cores (4 nodes) took 12.4 minutes with scratch in RAM,
+against 72 minutes on 2 cores with scratch on disk and 86 minutes on 8 cores with direct SCF and scratch on disk.</p>
+<!-- src: 04 #462; 03 §3 (v8 benchmark, mpich/Myrinet, 4 nodes x 2 cores) -->
 </section>
 <section id="where-scratch-files-go">
-<h3>Where scratch files go<a class="headerlink" href="#where-scratch-files-go" title="Link to this heading">¶</a></h3>
+<span id="running-scratch"></span><h3>Where scratch files go<a class="headerlink" href="#where-scratch-files-go" title="Link to this heading">¶</a></h3>
 <p>The scratch directory is taken from <code class="docutils literal notranslate"><span class="pre">path=</span></code>, then from the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable. The files are named
-<code class="docutils literal notranslate"><span class="pre">tmp&lt;number&gt;.&lt;rank&gt;</span></code>, for example <code class="docutils literal notranslate"><span class="pre">/tmp/tmp2960.0</span></code>. Priroda deletes them at the end of a normal run; after a crash,
-delete the leftovers yourself.</p>
-<!-- src: input.txt; 04 #20, #465; 06 §4 (Tutorial v6); 02 §5.2 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The fallback when neither <code class="docutils literal notranslate"><span class="pre">path=</span></code> nor <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> is set is reported differently. <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says the current working
-directory. A 2020 user report says the directory of the input file. Version 6 printed <code class="docutils literal notranslate"><span class="pre">Disk:</span> <span class="pre">1</span> <span class="pre">GB</span> <span class="pre">'/tmp'</span></code> when
-<code class="docutils literal notranslate"><span class="pre">$system</span></code> was omitted. Set <code class="docutils literal notranslate"><span class="pre">path=</span></code> or <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> explicitly.</p>
-</div>
-<!-- src: input.txt; 04 #465; 04 #20 --> <!-- verify -->
-<p>On Windows there is no <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. Without <code class="docutils literal notranslate"><span class="pre">path=</span></code> or <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, older versions stopped after printing
-<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">/tmp/tmp2960.0</span></code>. Use <code class="docutils literal notranslate"><span class="pre">$system</span> <span class="pre">path=.</span> <span class="pre">$end</span></code> (the current directory) or set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>.</p>
-<!-- src: 04 #20, #21; 03 §2 -->
+<code class="docutils literal notranslate"><span class="pre">tmp&lt;number&gt;.&lt;suffix&gt;</span></code>, for example <code class="docutils literal notranslate"><span class="pre">/tmp/tmp2960.0</span></code> or <code class="docutils literal notranslate"><span class="pre">/tmp/tmp9633.11</span></code>. In version 25 each process of a parallel
+run wrote its own file with a different number and the same suffix (<code class="docutils literal notranslate"><span class="pre">tmp5345.0000</span></code>, <code class="docutils literal notranslate"><span class="pre">tmp5346.0000</span></code>). Priroda deletes
+them at the end of a normal run, and in version 25 also when the job is stopped with signal 15 (SIGTERM). After a
+crash, delete the leftovers yourself.</p>
+<!-- src: input.txt; 04 #20, #460, #465; 02 §5.2; 08 Slurm tests (s02, s04); deletion after a normal run: 06 §4 (Tutorial v6) -->
+<p>When neither <code class="docutils literal notranslate"><span class="pre">path=</span></code> nor <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> is set, version 25 puts scratch files in <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> (echo <code class="docutils literal notranslate"><span class="pre">Disk:</span>&#160;&#160; <span class="pre">1g</span> <span class="pre">'/tmp'</span></code>), as
+version 6 did. <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says the current working directory instead, and a 2020 user report gives the directory of
+the input file; neither matches version 25. <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> is often small or shared, so set <code class="docutils literal notranslate"><span class="pre">path=</span></code> or <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> for real jobs.</p>
+<!-- src: input.txt; 04 #465, #20; 08 t64 (TMPDIR unset: /tmp; TMPDIR set: used) -->
+<p>On Windows there is no <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>. Without <code class="docutils literal notranslate"><span class="pre">path=</span></code> or <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>, the run stops after printing
+<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">/tmp/tmp978.0000</span></code> (the number varies), and the output ends with <code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">0</span> <span class="pre">got</span> <span class="pre">signal</span> <span class="pre">6</span></code>. This
+still happens with <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20). Any of these avoids it:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$system</span> <span class="pre">path=.</span> <span class="pre">$end</span></code> (the current directory);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> set to a Windows path: in <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=%TEMP%</span></code> or <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">&quot;TMPDIR=%TEMP%&quot;</span></code>. Do not write
+<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">TMPDIR=&quot;%TEMP%&quot;</span></code>: <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code> keeps the quotes in the value, Priroda takes the result as a relative path, and
+the run stops in the same way;</p></li>
+<li><p>a RAM disk (negative <code class="docutils literal notranslate"><span class="pre">disk</span></code>), which needs no scratch directory. An input with no <code class="docutils literal notranslate"><span class="pre">$system</span></code> group gets a 512 MB RAM
+disk and runs.</p></li>
+</ul>
+<!-- src: 04 #20, #21; 03 §2; 08 w02a-d, w03, w04 -->
 </section>
 <section id="disk-speed">
-<h3>Disk speed<a class="headerlink" href="#disk-speed" title="Link to this heading">¶</a></h3>
+<span id="running-disk-speed"></span><h3>Disk speed<a class="headerlink" href="#disk-speed" title="Link to this heading">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Never put scratch files on NFS or another network file system. On most clusters the home directories are on NFS;
 use the node-local scratch disk instead.</p>
 </div>
 <!-- src: input.txt; 06 §3, §7 -->
-<p>Priroda is sensitive to disk speed. The author’s documentation warns that for all methods except GGA DFT, performance
+<p>Priroda is sensitive to disk speed. The unofficial keyword list <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> warns that for all methods except GGA DFT, performance
 “will be degraded terribly” if more than one process reads and writes large files on the same physical drive. In
 order of preference:</p>
 <!-- src: input.txt; 04 #181, #293 -->
@@ -562,121 +588,21 @@ longer in CPU time. In a disk-bound RI-MP2 optimization another user got 20 step
 <section id="when-the-limits-are-too-small">
 <h3>When the limits are too small<a class="headerlink" href="#when-the-limits-are-too-small" title="Link to this heading">¶</a></h3>
 <p>Priroda does not fall back to a slower algorithm when memory or scratch runs out. The run stops with an error such as
-<code class="docutils literal notranslate"><span class="pre">malloc(536870912)</span> <span class="pre">failed</span></code> (memory) or <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(VNNNN),</span> <span class="pre">184441541KB</span></code> (scratch). The number in the disk
-message is the amount needed. Raise the limit in <code class="docutils literal notranslate"><span class="pre">$system</span></code>, move to a node with more resources, or choose a cheaper
+<code class="docutils literal notranslate"><span class="pre">need</span> <span class="pre">…</span> <span class="pre">bytes.</span></code> (the <code class="docutils literal notranslate"><span class="pre">memory</span></code> limit is too small), <code class="docutils literal notranslate"><span class="pre">malloc(536870912)</span> <span class="pre">failed</span></code> (the machine cannot supply the memory)
+or, for scratch, <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">disk</span> <span class="pre">space</span> <span class="pre">(grid_W),</span> <span class="pre">8213824</span></code> (version 25; older versions printed the number with
+<code class="docutils literal notranslate"><span class="pre">KB</span></code>). Raise the limit in <code class="docutils literal notranslate"><span class="pre">$system</span></code>, move to a node with more resources, or choose a cheaper
 method (RI-MP2 instead of conventional MP2).</p>
-<!-- src: 04 #58, #199; 03 §4 -->
-<p>If you omit <code class="docutils literal notranslate"><span class="pre">$system</span></code>, version 6 printed <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">128</span> <span class="pre">(128)</span> <span class="pre">MB</span></code> and <code class="docutils literal notranslate"><span class="pre">Disk:</span> <span class="pre">1</span> <span class="pre">GB</span> <span class="pre">'/tmp'</span></code>. Defaults in current versions
-are not documented, so always give <code class="docutils literal notranslate"><span class="pre">$system</span></code> for anything larger than a test.</p>
-<!-- src: 03 §2; 04 §4 (#20) --> <!-- verify -->
-<p id="running-parallel-scaling">If a run fails for lack of memory or disk, see <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-memory"><span class="std std-ref">Memory, disk and scratch errors</span></a>.</p>
+<!-- src: 04 #58, #199; 03 §4; 08 t61, t62 -->
+<p>If you omit <code class="docutils literal notranslate"><span class="pre">$system</span></code>, version 6 printed <code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">128</span> <span class="pre">(128)</span> <span class="pre">MB</span></code> and <code class="docutils literal notranslate"><span class="pre">Disk:</span> <span class="pre">1</span> <span class="pre">GB</span> <span class="pre">'/tmp'</span></code>. Version 25 prints
+<code class="docutils literal notranslate"><span class="pre">Memory:</span> <span class="pre">256m</span> <span class="pre">+</span> <span class="pre">512m</span> <span class="pre">(256m</span> <span class="pre">+</span> <span class="pre">512m)</span></code> and no <code class="docutils literal notranslate"><span class="pre">Disk:</span></code> line. Read by the echo format, that is 256 MB of memory and a
+512 MB RAM disk per process.
+That is enough for small molecules only, so always give <code class="docutils literal notranslate"><span class="pre">$system</span></code> for anything larger than a test.</p>
+<!-- src: 03 §2; 04 §4 (#20); 08 t02 (RAM-disk reading inferred from the echo format) -->
+<p>If a run fails for lack of memory or disk, see <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-memory"><span class="std std-ref">Memory, disk and scratch errors</span></a>.</p>
 </section>
-</section>
-<section id="parallel-performance">
-<h2>Parallel performance<a class="headerlink" href="#parallel-performance" title="Link to this heading">¶</a></h2>
-<p>Users consistently report the following:</p>
-<!-- src: 04 §0 -->
-<ul>
-<li><p><strong>DFT scales well within one node, up to about 6–8 cores.</strong> Beyond 8 cores the gain is at most about 10%, even for
-large systems. One 38-step optimization took 101, 63 and 37 s on single nodes with 8, 12 and 24 cores. A small
-PBE/L1 optimization with version 10 took 81.5, 42.5, 29.8 and 29.3 s on 1–4 cores.</p>
-<!-- src: 04 #343, #344, #154 -->
-</li>
-<li><p><strong>Running across nodes gives no gain for DFT.</strong> Use one node per job.</p>
-<!-- src: 04 #344, #462; 03 §3 -->
-</li>
-<li><p><strong>Memory per process does not drop</strong> when you add processes, and in a parallel Hessian nearly all of the disk use is
-on rank 0.</p>
-<!-- src: 04 #181, #185 -->
-</li>
-<li><p><strong>RI-MP2 parallelizes better than DFT</strong>, at least in memory. The v5 documentation limits useful parallelism to
-Nproc ≤ min(N_atoms, N_occ) and recommends a number of processes that divides the number of occupied orbitals
-nearly evenly. For N_occ = 14 it rates 2, 7 or 14 processes as best, 3 or 5 as acceptable, 6 as poor and 13 as very
-bad.</p>
-<!-- src: 04 #343; 06 §3 -->
-</li>
-<li><p><strong>Small RI jobs on many processes can hang.</strong> RI-MP2 and RI-DFT hang with no message when a process receives no
-work. The output then shows a line <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">blocks</span> <span class="pre">...</span> <span class="pre">on</span> <span class="pre">node</span> <span class="pre">N</span></code> after <code class="docutils literal notranslate"><span class="pre">integral</span> <span class="pre">estimates</span></code>. Run small RI jobs on one or a
-few cores.</p>
-<!-- src: 05 §3.1 -->
-</li>
-<li><p><strong>Several independent jobs often beat one parallel job.</strong> On a 4-core machine, four single-core jobs ran about 30%
-faster in total than the same jobs run one after another on 4 cores each.</p>
-<!-- src: 03 §3 (amg, 2009) -->
-</li>
-</ul>
-<p>Results can differ in the last digits between runs on different numbers of processes. An unstable TS search was once
-seen to follow different paths for different <code class="docutils literal notranslate"><span class="pre">-np</span></code>.</p>
-<!-- src: 03 §3 (amg, Nov 2008) -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Older versions scaled worse. In version 6 a parallel Hessian could use at most 2 cores and could hang on 4, and a
-version 7 MP2 run hung on more than about 24 cores. Use version 17 or later for parallel work.</p>
-</div>
-<!-- src: 03 §3; 04 #66, #401 -->
-<p>Hangs, crashes and poor speed-up in parallel runs are covered in <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-parallel"><span class="std std-ref">Parallel and MPI problems</span></a>.</p>
-</section>
-<section id="batch-systems">
-<h2>Batch systems<a class="headerlink" href="#batch-systems" title="Link to this heading">¶</a></h2>
-<p>Priroda needs nothing special from a batch system. The job script has to:</p>
-<ol class="arabic simple">
-<li><p>request <strong>one node</strong> and the number of cores you will use (see <a class="reference internal" href="#running-parallel-scaling"><span class="std std-ref">parallel performance above</span></a>);</p></li>
-<li><p>point the scratch to the node’s local disk or to RAM, by exporting <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> or by <code class="docutils literal notranslate"><span class="pre">path=</span></code> in <code class="docutils literal notranslate"><span class="pre">$system</span></code>;</p></li>
-<li><p>make the memory request cover <code class="docutils literal notranslate"><span class="pre">memory</span></code> + |negative <code class="docutils literal notranslate"><span class="pre">disk</span></code>| for every process;</p></li>
-<li><p>start Priroda with the input and output file names.</p></li>
-</ol>
-<!-- src: 06 §7; 04 #462 -->
-<p>A SLURM script along these lines should work. Directory names and module setup are site-specific.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
-#SBATCH --job-name=mol
-#SBATCH --nodes=1
-#SBATCH --ntasks=8
-#SBATCH --time=24:00:00
-
-PRIRODA=$HOME/priroda/p                      # full path to the executable
-cd "$SLURM_SUBMIT_DIR"
-export TMPDIR=/local/scratch/$SLURM_JOB_ID   # node-local disk; site-specific
-mkdir -p "$TMPDIR"
-
-"$PRIRODA" -np "$SLURM_NTASKS" mol.in mol.out
-# or, if your build needs it:  ./mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out
-
-rm -rf "$TMPDIR"
-</pre></div>
-</div>
-<!-- verify -->
-<p>Under PBS/Torque the same steps read the number of cores from <code class="docutils literal notranslate"><span class="pre">$PBS_NODEFILE</span></code>. PBS often provides a per-job local
-scratch directory and deletes it after the job.</p>
-<!-- src: 06 §7 (PBS_Tutorial) -->
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
-#PBS -N mol
-#PBS -l nodes=1:ppn=8,walltime=24:00:00
-
-cd "$PBS_O_WORKDIR"
-NP=$(wc -l &lt; "$PBS_NODEFILE")
-export TMPDIR=/local/scratch/$PBS_JOBID      # site-specific
-mkdir -p "$TMPDIR"
-
-$HOME/priroda/p -np "$NP" mol.in mol.out
-
-rm -rf "$TMPDIR"
-</pre></div>
-</div>
-<!-- verify -->
-<p>If <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> on the node is small or has a quota, a large job dies writing a scratch file, for example
-<code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">write</span> <span class="pre">file</span> <span class="pre">/tmp/tmp9633.11</span> <span class="pre">(leAX):</span> <span class="pre">...</span></code>. Point the scratch at the cluster’s scratch file system or at RAM.</p>
-<!-- src: 04 #460, #462 -->
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>Historical: the KNC wrappers.</strong> The Kazan Scientific Centre clusters (2006–2012) provided the wrappers
-<code class="docutils literal notranslate"><span class="pre">pbspriroda5</span></code>, <code class="docutils literal notranslate"><span class="pre">pbspriroda5-mpi</span></code> and <code class="docutils literal notranslate"><span class="pre">pbspriroda6</span></code>, called as <code class="docutils literal notranslate"><span class="pre">pbspriroda6</span> <span class="pre">file_name</span> <span class="pre">-time</span> <span class="pre">hh:mm:ss</span> <span class="pre">-queue</span> <span class="pre">queue</span> <span class="pre">-mem</span> <span class="pre">MB</span> <span class="pre">-disk</span> <span class="pre">size</span> <span class="pre">-procs</span> <span class="pre">1:ppn=N</span></code>. The wrappers wrote the <code class="docutils literal notranslate"><span class="pre">$system</span></code> group themselves from <code class="docutils literal notranslate"><span class="pre">-mem</span></code> and <code class="docutils literal notranslate"><span class="pre">-disk</span></code>, so
-inputs submitted through them had to omit <code class="docutils literal notranslate"><span class="pre">$system</span></code>. Forum posts and old FAQs that mention these commands refer to
-that site only.</p>
-</div>
-<!-- src: 06 §7 -->
 </section>
 <section id="input-file-requirements">
-<h2>Input file requirements<a class="headerlink" href="#input-file-requirements" title="Link to this heading">¶</a></h2>
+<span id="running-input-files"></span><h2>Input file requirements<a class="headerlink" href="#input-file-requirements" title="Link to this heading">¶</a></h2>
 <p>The input is a plain text file. Write it in a plain-text editor, not a word processor.</p>
 <ul>
 <li><p><strong>Plain ASCII.</strong> Keywords, values and file names should contain ASCII characters only. Do not save the file as
@@ -692,8 +618,8 @@ break the basis-file name.</p>
 <!-- src: 04 #64 -->
 </li>
 </ul>
-<p>An input with CRLF line endings fails in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>, because the carriage return becomes part of the keyword. The
-output stops after a line like this, where the keyword <code class="docutils literal notranslate"><span class="pre">z-matrix</span></code> or <code class="docutils literal notranslate"><span class="pre">cartesian</span></code> is shown garbled by the carriage
+<p>Users of versions 6–10 reported that an input with CRLF line endings fails in <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>, because the carriage
+return becomes part of the keyword. The output stops after a line like this, where the keyword <code class="docutils literal notranslate"><span class="pre">z-matrix</span></code> or <code class="docutils literal notranslate"><span class="pre">cartesian</span></code> is shown garbled by the carriage
 return:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span> molecule input: ''
 ' ?matrix
@@ -701,10 +627,13 @@ return:</p>
 </div>
 <p>Variants seen are <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code> for <code class="docutils literal notranslate"><span class="pre">cartesian</span></code>, <code class="docutils literal notranslate"><span class="pre">'z-matrix'</span> <span class="pre">?</span></code>, and <code class="docutils literal notranslate"><span class="pre">'cartesian</span></code> followed by <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">?</span></code> on the next line. A
 less obvious case: an input edited in Word ran <code class="docutils literal notranslate"><span class="pre">task=scan</span></code> as a plain optimization.</p>
-<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 -->
+<!-- src: 04 #63-#65, #110, #113, #172; 03 §2, §15 (versions 6-10, 2010-2012) -->
+<p>Version 25 behaves the same way: a water input saved with Windows line endings stopped after <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span></code>
+with the line <code class="docutils literal notranslate"><span class="pre">'cartesian'</span> <span class="pre">?</span></code>, exit status 1. The Windows build <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20) stops in the same place, so
+the input needs Unix line endings on Windows too. <!-- src: 08 t81a, w06 --></p>
 <p>To check and fix the line endings on Linux:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file mol.in        # reports "with CRLF line terminators" if the file has Windows endings
-dos2unix mol.in
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>file<span class="w"> </span>mol.in<span class="w">        </span><span class="c1"># reports "with CRLF line terminators" if the file has Windows endings</span>
+dos2unix<span class="w"> </span>mol.in
 </pre></div>
 </div>
 <p>Running <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code> on a file that already has Unix line endings does no harm. On Windows, Notepad++ and the FAR
@@ -719,23 +648,26 @@ Manager editor (Shift+F2, then UNIX (LF)) can convert line endings.</p>
 it, the default set of the file is used. Without <code class="docutils literal notranslate"><span class="pre">basis=</span></code>, the basis data are read from the input file itself.</p>
 <!-- src: input.txt; 03 §5 -->
 <p>Give the basis file as a <strong>full path</strong>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$control task=optimize basis=/home/user/priroda/basis/basis.in $end
+<div class="highlight-priroda notranslate"><div class="highlight"><pre><span></span><span class="kn">$control</span><span class="w"> </span><span class="na">task</span><span class="o">=</span><span class="no">optimize</span><span class="w"> </span><span class="na">basis</span><span class="o">=</span><span class="no">/home/user/priroda/basis/basis.in</span><span class="w"> </span><span class="kn">$end</span>
 </pre></div>
 </div>
-<p>A relative name is looked up relative to the directory the program runs in. One user’s parallel run stopped after
+<p>In version 25, <code class="docutils literal notranslate"><span class="pre">basis=basis.in</span></code> works when the file is in the directory you run from, which in the test was also
+the directory of the input. One user’s parallel run stopped after
 the node list with <code class="docutils literal notranslate"><span class="pre">application</span> <span class="pre">called</span> <span class="pre">MPI_Abort(MPI_COMM_WORLD,</span> <span class="pre">1)</span> <span class="pre">-</span> <span class="pre">process</span> <span class="pre">0</span></code> and worked once the basis file was
 given with its full path.</p>
-<!-- src: 04 #152-#154; 01 §2.4 (Windows: qm.in found in the current directory) -->
+<!-- src: 04 #152-#154; 01 §2.4 (Windows: qm.in found in the current directory); 08 t03 -->
 <ul>
-<li><p>Put the name in double quotes if the path contains special characters: <code class="docutils literal notranslate"><span class="pre">basis=&quot;/data/basis</span> <span class="pre">sets/basis.in&quot;</span></code>. Two
-single quotes do not work; <code class="docutils literal notranslate"><span class="pre">basis=''3z.bas''</span></code> fails with <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">''3z.bas''</span></code>.</p>
+<li><p>The name can be put in double quotes: <code class="docutils literal notranslate"><span class="pre">basis=&quot;3z.bas&quot;</span></code> works. Two single quotes do not work; <code class="docutils literal notranslate"><span class="pre">basis=''3z.bas''</span></code>
+fails with <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">opening</span> <span class="pre">file</span> <span class="pre">''3z.bas''</span></code>.</p>
 <!-- src: 03 §2; 02 §3 -->
 </li>
-<li><p>Windows paths work: <code class="docutils literal notranslate"><span class="pre">basis=D:\NMR\Nature\basis\6-31+G(d)</span></code>.</p>
-<!-- src: 04 #319 -->
+<li><p>Windows paths work: <code class="docutils literal notranslate"><span class="pre">basis=D:\NMR\Nature\basis\6-31+G(d)</span></code>. In a test, <code class="docutils literal notranslate"><span class="pre">basis=C:\Priroda\basis.in</span></code>,
+<code class="docutils literal notranslate"><span class="pre">basis=C:/Priroda/basis.in</span></code> and <code class="docutils literal notranslate"><span class="pre">basis=basis.in</span></code> (the file in the directory the run started from) all worked.</p>
+<!-- src: 04 #319; 08 w05 -->
 </li>
-<li><p>The relativistic file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>. Without it the basis input fails.</p>
-<!-- src: 04 #206-#208, #336 -->
+<li><p>The relativistic file <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>. Without it the basis input fails: in version 25
+the output ends right after <code class="docutils literal notranslate"><span class="pre">Basis</span> <span class="pre">set</span> <span class="pre">input:</span> <span class="pre">'…/basis4.in'</span></code> with the single line <code class="docutils literal notranslate"><span class="pre">1?</span></code>.</p>
+<!-- src: 04 #206-#208, #336; 08 t49 -->
 </li>
 </ul>
 <p>Which basis files exist and which sets they contain is described with <a class="reference internal" href="../reference/control.html#control-basis"><span class="std std-ref">$control basis</span></a>.</p>
@@ -747,23 +679,23 @@ single quotes do not work; <code class="docutils literal notranslate"><span clas
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="quickstart.html">
+          <a class="next-page" href="parallel.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Quickstart: your first calculations</div>
+                <div class="title">Parallel and cluster runs</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="about.html">
+          <a class="prev-page" href="input-syntax.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">About Priroda</div>
+                <div class="title">Input syntax</div>
                 
               </div>
             </a>
@@ -771,7 +703,7 @@ single quotes do not work; <code class="docutils literal notranslate"><span clas
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -798,6 +730,7 @@ single quotes do not work; <code class="docutils literal notranslate"><span clas
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Installing and running</a><ul>
+<li><a class="reference internal" href="#obtaining-priroda">Obtaining Priroda</a></li>
 <li><a class="reference internal" href="#executables">Executables</a><ul>
 <li><a class="reference internal" href="#linux">Linux</a></li>
 <li><a class="reference internal" href="#windows">Windows</a></li>
@@ -806,7 +739,6 @@ single quotes do not work; <code class="docutils literal notranslate"><span clas
 <li><a class="reference internal" href="#running-a-calculation">Running a calculation</a><ul>
 <li><a class="reference internal" href="#serial-runs">Serial runs</a></li>
 <li><a class="reference internal" href="#parallel-runs-on-linux">Parallel runs on Linux</a></li>
-<li><a class="reference internal" href="#parallel-runs-on-windows">Parallel runs on Windows</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#memory-disk-and-scratch-system">Memory, disk and scratch: <code class="docutils literal notranslate"><span class="pre">$system</span></code></a><ul>
@@ -816,8 +748,6 @@ single quotes do not work; <code class="docutils literal notranslate"><span clas
 <li><a class="reference internal" href="#when-the-limits-are-too-small">When the limits are too small</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#parallel-performance">Parallel performance</a></li>
-<li><a class="reference internal" href="#batch-systems">Batch systems</a></li>
 <li><a class="reference internal" href="#input-file-requirements">Input file requirements</a></li>
 <li><a class="reference internal" href="#basis-set-files">Basis-set files</a></li>
 </ul>

@@ -1,0 +1,12 @@
+$system mem=256 disk=1 $end
+$control
+ task=hessian
+ theory=dft
+ basis=@BASIS@
+$end
+$molecule
+ charge=0 mult=1
+ cartesian
+ set=L1
+  10   0.0  0.0  0.0
+$end

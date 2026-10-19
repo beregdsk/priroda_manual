@@ -6,10 +6,12 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$integral" href="integral.html"><link rel="prev" title="$dft" href="dft.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$grid - Priroda User Manual</title>
+        <title>$grid - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -161,7 +175,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +196,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -190,14 +204,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +238,14 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -265,18 +288,18 @@
 <section class="tex2jax_ignore mathjax_ignore" id="grid">
 <span id="group-grid"></span><h1><code class="docutils literal notranslate"><span class="pre">$grid</span></code><a class="headerlink" href="#grid" title="Link to this heading">¶</a></h1>
 <p id="index-0">Adaptive integration grid for DFT.</p>
-<section id="accuracy">
+<section class="kw" id="accuracy">
 <span id="grid-accuracy"></span><h2><code class="docutils literal notranslate"><span class="pre">accuracy</span></code><a class="headerlink" href="#accuracy" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-8,1e-5</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §4.4 (output echo); Dft.rtf</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">1e-8</span></code> for the final grid and <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for the coarse grid used in the first SCF iterations, as echoed by v13/v15
-(<code class="docutils literal notranslate"><span class="pre">grid:</span> <span class="pre">accuracy=1.0e-08,1.0e-05</span></code>). <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives <code class="docutils literal notranslate"><span class="pre">1e-7</span></code> (older version).</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code></p>
 <p>Target accuracy of the exchange–correlation energy per atom for the adaptively generated grid (DFT
-methods). The default, 1e-8, is a fine grid. Use 1e-7 to speed up geometry optimizations with
-<code class="docutils literal notranslate"><span class="pre">tolerance&lt;=1e-4</span></code>, and 1e-9 for very accurate calculations. The grid grows during the SCF; the output
-reports each size (<code class="docutils literal notranslate"><span class="pre">Grid:</span> <span class="pre">…</span> <span class="pre">points</span></code>).</p>
+methods). The default, 1e-8, is a fine grid. <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> suggests 1e-7 to speed up geometry optimizations
+with the default <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">tolerance=1e-4</span></code> or looser, and 1e-9 for very accurate calculations. The grid grows during the SCF; the output
+reports each size on a line such as <code class="docutils literal notranslate"><span class="pre">grid:</span>&#160;&#160;&#160; <span class="pre">34000</span>&#160;&#160; <span class="pre">53</span></code> (number of points) in the SCF table.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-8</span></code> for the final grid and <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for the coarse grid used in the first SCF iterations, as echoed by v13, v15
+and v25 (<code class="docutils literal notranslate"><span class="pre">grid:</span> <span class="pre">accuracy=1.0e-08,1.0e-05</span></code>). <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives <code class="docutils literal notranslate"><span class="pre">1e-7</span></code> (older version).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> suggests 1e-6 for rough optimizations (<code class="docutils literal notranslate"><span class="pre">tol=1e-3</span></code>) and 1e-8 for floppy molecules optimized to
@@ -316,7 +339,7 @@ cannot reach unlimited accuracy. This conflicts with <code class="docutils liter
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

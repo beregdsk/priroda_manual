@@ -6,10 +6,12 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="$grid" href="grid.html"><link rel="prev" title="$scf" href="scf.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>$dft - Priroda User Manual</title>
+        <title>$dft - Priroda Unofficial Manual</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/priroda.css?v=aff5c028" />
     
     
 
@@ -18,18 +20,30 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
+  --color-brand-primary: #2f5d3a;
+  --color-brand-content: #2f6b42;
+  --color-brand-visited: #5a4a7a;
+  --font-stack: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-stack--monospace: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+  --font-stack--headings: 'Fraunces', Georgia, serif;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --color-brand-primary: #9fd3a8;
+  --color-brand-content: #a9dbb2;
+  --color-brand-visited: #c4b5e8;
   
       }
     }
@@ -161,7 +175,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Priroda User Manual</div></a>
+      <a href="../index.html"><div class="brand">Priroda Unofficial Manual</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +196,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">Priroda User Manual</span>
+  <span class="sidebar-brand-text">Priroda Unofficial Manual</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -190,14 +204,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Part I. Getting started</span></p>
+  <p class="caption" role="heading"><span class="caption-text">Part I. Introduction</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../start/about.html">About Priroda</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../start/quickstart.html">Quickstart: your first calculations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start/input-syntax.html">Input syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/running.html">Installing and running</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start/parallel.html">Parallel and cluster runs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part IV. Input reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part II. Calculations</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tasks/ts-irc-scan.html">Transition states, IRC and scans</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Part III. Input reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Input reference</a><input aria-label="Toggle navigation of Input reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="system.html"><code class="docutils literal notranslate"><span class="pre">$system</span></code></a></li>
@@ -219,10 +238,14 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Part V. Troubleshooting</span></p>
+<p class="caption" role="heading"><span class="caption-text">Part IV. Troubleshooting</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/common-problems.html">Solving common problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/error-messages.html">Error message index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../binary-keywords.html">Keywords in the program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sources.html">Sources</a></li>
 </ul>
 
 </div>
@@ -265,14 +288,14 @@
 <section class="tex2jax_ignore mathjax_ignore" id="dft">
 <span id="group-dft"></span><h1><code class="docutils literal notranslate"><span class="pre">$dft</span></code><a class="headerlink" href="#dft" title="Link to this heading">¶</a></h1>
 <p id="index-0">Exchange–correlation functional.</p>
-<section id="functional">
+<section class="kw" id="functional">
 <span id="dft-functional"></span><h2><code class="docutils literal notranslate"><span class="pre">functional</span></code><a class="headerlink" href="#functional" title="Link to this heading">¶</a></h2>
 <p id="index-1"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">PBE</span></code><br />
-<strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt; 01 §3.2; 03 §5 (strings); 04 §0</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">PBE</span></code> (the default GGA); <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> for <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</p>
+<strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum, qchem.ru forum</p>
 <p>Exchange–correlation approximation for DFT methods.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">PBE</span></code> (the default GGA); <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> for <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -294,7 +317,7 @@
 <td><p>Handy–Cohen exchange + LYP correlation, J. Chem. Phys. 117 (2002) 1441.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PBE1</span></code></p></td>
-<td><p>PBE hybrid with 1/4 exact exchange, J. Chem. Phys. 110 (1999) 6158. Default for <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</p></td>
+<td><p>PBE hybrid with 1/4 exact exchange (PBE0), J. Chem. Phys. 110 (1999) 6158. Default for <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">B3LYP_PW</span></code></p></td>
 <td><p>Becke three-parameter hybrid with PW local correlation (see notes).</p></td>
@@ -303,10 +326,10 @@
 <td><p>Becke three-parameter hybrid (see notes).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">LPBEVV</span></code></p></td>
-<td><p>Newer functional used by the author with <code class="docutils literal notranslate"><span class="pre">theory=DFT_n4</span></code> (2025). <em>(undocumented)</em></p></td>
+<td><p>Newer functional used in the official example inputs with <code class="docutils literal notranslate"><span class="pre">theory=DFT_n4</span></code> (2025). Runs in version 25; its definition is not documented. <em>(undocumented)</em></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">LPBEVVV</span></code></p></td>
-<td><p>Newer functional used by the author with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> (2023–2025). <em>(undocumented)</em></p></td>
+<td><p>Newer functional used in the official example inputs with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code> (2023–2025). Runs in version 25; its definition is not documented. <em>(undocumented)</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -317,10 +340,14 @@
 Exc = 0.2·Ex(HF) + 0.8·(0.9·Ex(B) + 0.1·Ex(S)) + 0.81·Ec(LYP) + 0.19·Ec(LSD).
 Ec(LSD) is the local correlation of either Phys. Rev. B 45 (1992) 13244 (PW) or Can. J. Phys. 58 (1980) 1200 (VWN).
 <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> points out that some commercial programs use VWN, although Becke himself used PW
-(J. Chem. Phys. 98 (1993) 5648).</p>
+(J. Chem. Phys. 98 (1993) 5648). It does not say which name uses which form. Presumably <code class="docutils literal notranslate"><span class="pre">B3LYP_PW</span></code> uses PW and
+<code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> uses VWN (inferred from the names; untested). Which VWN parametrization would be used is not stated;
+<code class="docutils literal notranslate"><span class="pre">VWN5</span></code> appears among the v6 functional names.</p>
 <p><strong>Hybrids (<code class="docutils literal notranslate"><span class="pre">PBE1</span></code>, <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code>, <code class="docutils literal notranslate"><span class="pre">B3LYP_PW</span></code>) require <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>.</strong> With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> or <code class="docutils literal notranslate"><span class="pre">tddft</span></code> they either
 run silently without exact exchange or abort; see <code class="docutils literal notranslate"><span class="pre">$control</span> <span class="pre">theory</span></code>.</p>
-<p>No empirical dispersion correction (D3 or similar) is available. The v6 binary contains further functional
+<p>No empirical dispersion correction (D3 or similar) is available, and a user relayed that none is planned.
+The names <code class="docutils literal notranslate"><span class="pre">LPBEVV</span></code> and <code class="docutils literal notranslate"><span class="pre">LPBEVVV</span></code> may stand for a VV10-type nonlocal (dispersion) correlation (inferred from the
+names and the π-stacked examples; unverified). The v6 binary contains further functional
 names (<code class="docutils literal notranslate"><span class="pre">VWN5</span></code>, <code class="docutils literal notranslate"><span class="pre">SLYP0</span></code>, <code class="docutils literal notranslate"><span class="pre">BPBE</span></code>, <code class="docutils literal notranslate"><span class="pre">HFLSD</span></code>, <code class="docutils literal notranslate"><span class="pre">HFPBE</span></code>, <code class="docutils literal notranslate"><span class="pre">B2PBE</span></code>, <code class="docutils literal notranslate"><span class="pre">B3PBE</span></code>, <code class="docutils literal notranslate"><span class="pre">HFLYP</span></code>, <code class="docutils literal notranslate"><span class="pre">B1LYP</span></code>, <code class="docutils literal notranslate"><span class="pre">B2LYP</span></code>), none of
 them documented or tested.</p>
 </div>
@@ -357,7 +384,7 @@ them documented or tested.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2026, Priroda manual contributors
+                Copyright &#169; 2026. Program by Dimitri Laikov
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

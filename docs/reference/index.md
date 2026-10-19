@@ -2,6 +2,8 @@
 
 # Input reference
 
+One page per input group, in the order groups are usually written. Each keyword entry gives its type, default, status and sources. For an alphabetical list of all keywords, see the {ref}`index <genindex>`.
+
 | Group | Purpose |
 |---|---|
 | {ref}`$system <group.system>` | Memory, disk and scratch-directory limits. |

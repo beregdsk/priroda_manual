@@ -15,20 +15,25 @@ keywords:
       # 1s, 2s, 2p (10 electrons) of nickel are core
     notes:
       en: |
-        The index in the example, 280 for Ni (Z=28), suggests the layout `core(10*Z)=…`. No source states this
-        layout, so it must be verified.
+        The index is 10·Z: `core(280)` is nickel, `core(80)` oxygen. In version 25, `core(80)=0,0,0,0` removed the
+        oxygen 1s from the frozen core of an RI-MP2 run. The output reports the frozen core as `atom   8 core =  1`
+        and `Number of core electrons 1`; the number there apparently counts core orbitals, not electrons (the C60
+        example output prints `Number of core  electrons 60` for 60 carbon atoms, and a version 25 HCl run prints 5
+        for the Cl core 1s, 2s, 2p).
     see_also: [scf.core, atoms.mcore]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t16", "01 §7", "08 (review check)"]
+    verified_against: "25 (2025.02.28)"
   - name: mcore
     type: integer
     default: null
     description:
       en: |
-        A simple way to add outer-core shells to the correlation treatment: `mcore=M` adds all shells whose principal
-        quantum number is lower than that of the outermost valence shell by less than M.
+        A simple way to add outer-core shells to the correlation treatment: `mcore=M` correlates every core shell
+        whose principal quantum number is at least n(valence) − M. In version 25, for Cl in an RI-MP2 run of HCl, the
+        default core was `atom  17 core =  2,  1` (1s, 2s, 2p); `mcore=1` left only 1s in the core (`core =  1`), and
+        `mcore=2` left no core at all.
     see_also: [atoms.core]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 (review check)"]
+    verified_against: "25 (2025.02.28)"

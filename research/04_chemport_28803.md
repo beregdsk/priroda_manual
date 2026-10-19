@@ -580,7 +580,7 @@ English summary:
   ```
 - Default (no $system): Memory 128 MB, Disk 1 GB, scratch `/tmp` (seen in #20 output: `Memory: 128 (128) MB`, `Disk:   1 GB '/tmp'`).
 - On Windows the default `/tmp` does not exist → hang/failure at `0: opening file /tmp/tmp2960.0`. Fix: add `$system path=. $end` — #21 EvgeniX, 27 Feb 2009 [experienced user].
-- Temp file naming: `/tmp/tmp<PID>.<rank>` e.g. `/tmp/tmp2960.0` (#20).
+- Temp file naming: `/tmp/tmp<number>.<suffix>` e.g. `/tmp/tmp2960.0` (#20). (Earlier read here as `<PID>.<rank>`; in v25 two processes wrote `tmp5345.0000` and `tmp5346.0000`, so the suffix is not the rank: 08 Slurm tests s02.)
 - `malloc(536870912) failed` = program tried to allocate 512 MB RAM and failed — #58 Droog_Andrey, 26 Feb 2011 (during a scan). User found a solution herself but did not say what (#59) — presumably lower `memory=` to what is physically available [unverified].
 
 ### Memory, disk, temp files — pages 5-8, posts #81-#160, 2011-08..2012-04

@@ -1,0 +1,7 @@
+$system mem=256 disk=1 $end
+$control
+ task=hessian
+ theory=dft
+ basis=@BASIS@
+$end
+@MOL_FROM_t77b@

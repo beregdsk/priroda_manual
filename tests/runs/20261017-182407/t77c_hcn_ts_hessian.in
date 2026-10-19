@@ -1,0 +1,13 @@
+$system mem=256 disk=1 $end
+$control
+ task=hessian
+ theory=dft
+ basis=/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in
+$end
+$molecule
+ cartesian
+ set=L1
+   6    -0.38764722   0.00000000  -0.52922493
+   7    -0.35863431   0.00000000   0.66492317
+   1     0.74628153   0.00000000  -0.13569824
+$end

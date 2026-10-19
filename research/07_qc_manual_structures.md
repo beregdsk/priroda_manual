@@ -313,6 +313,9 @@ C. Physical constants and units. D. Glossary. E. Change log / version history. F
 
 ### 3.2 (b) Keyword-entry template for `$group` keywords
 
+*The example values and advice in this template (for instance "raising `steps` rarely helps") are illustrative
+filling, written to show the format. They are not taken from any Priroda source and must not be cited.*
+
 Use a fixed field set that merges Psi4 (Type/Default/Possible values), CP2K (Usage, Lone keyword, References,
 Mentions), GAMESS (default flagged per value, dependency rules), and TURBOMOLE (status tags). It needs four
 fields specific to Priroda: **Group**, **Minimum abbreviation**, **Array/multi-value form**, and **Verified

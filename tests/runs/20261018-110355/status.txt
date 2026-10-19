@@ -1,0 +1,9 @@
+t81a_crlf_input exit=1
+t81b_two_task_lines exit=0
+t81c_task_saddle_two_molecules exit=0
+t81d_task_transit_two_molecules exit=135
+t81e_text_outside_groups exit=0
+t81f_text_inside_dynamic exit=0
+t81g_single_atom_thermo exit=0
+t81h_optimize_unconverged_scf exit=0
+t81i_dihedral_sign_zmatrix exit=0

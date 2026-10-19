@@ -1,0 +1,231 @@
+Priroda 25 (2025.02.28)
+copyright (c) Dimitri N. Laikov
+
+ date: Sun Oct 18 11:04:01 2026
+
+ node   0: 'vm'
+
+ Memory: 256m (256m)
+ Disk:   1g '/tmp'
+
+
+ molecule input: ''
+ 1 atoms, 10 electrons
+
+ Atomic Coordinates:
+  10     0.00000000   0.00000000   0.00000000
+ #
+
+ atom  10 core =  1
+ at.d.=0
+
+ Basis set input: '/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in'
+    1  10 Ne :  14 /  46 : { 3, 2, 1}                          / {10, 7, 3}                          log2(a) =  -1.93, +13.94
+
+ Basis set input: '/tmp/claude-0/-home-user/bdfaba3a-6392-5b69-97da-63e0daa39ee3/scratchpad/pr/basis.in'
+    1  10 Ne :  40 / 100 : { 6, 4, 3, 1}                       / {10, 9, 7, 4}                       log2(a) =  -0.95, +11.48
+
+ +---------------------------------------
+ | Number of atoms                      1
+ | Charge of molecule                   0
+ | Spin multiplicity                    1
+ | Number of alpha electrons            5
+ | Number of beta  electrons            5
+ | Number of core  electrons            1
+ | Theoretical Method                 DFT
+ | Approximation to E(xc)             PBE
+ | Dimension of wavefunction basis     14
+ | Dimension of   auxiliary  basis     40
+ | Hamiltonian: non-relativistic
+ +---------------------------------------
+
+ scf: conv = 1.0e-06, 1.0e-03; iter=32,16; xmax = 0.25000; 0s; n1=12
+ cut-off for S,T,V integrals: 1.0e-10 (1.0e-06)
+ inv=2: v = 1.5e-05
+ d0 = 7.6e-06, 6.1e-05
+
+ grid: accuracy=1.0e-08,1.0e-05, cut=1.0e-10,1.0e-07, t=-1
+ atom    nr
+   10    64
+  mol    64
+
+ ANALYTICAL COMPUTATION OF SECOND DERIVATIVES
+
+
+ Initial Guess (2)
+ time: atomic calculations              :     0.0  99.7%     0.0
+ time: Initial Guess                    :     0.0  99.9%     0.0
+
+ SCF
+ time: One-Electron Integrals           :     0.0 100.0%     0.0
+ time: Inversion of V-Matrix            :     0.0  99.7%     0.0
+ time: Orthogonalize                    :     0.0  95.4%     0.0
+
+  it          E            dE            g          x               t
+ grid:     1664    7
+   0      -128.8257557315  0.0000000000 0.13180289                 0.0
+       1                                0.02157943 0.03007401      0.0
+       2                                0.00034506 0.03153058      0.0
+   1      -128.8511596259 -0.0254038944 0.00031094                 0.0
+       1                                0.00015236 0.00002732      0.0
+       2                                0.00000048 0.00002688      0.0
+ grid:     1664    7
+   2      -128.8511596486 -0.0000000228 0.00000048                 0.0
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Grid Construction                :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.0 100.0%     0.0
+ time: Diagonalize                      :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  91.2%     0.0
+ time: SCF Equations                    :     0.0 100.0%     0.0
+   3 F,    4 F1
+
+  E  =    -128.8511596486
+  T  =     128.37814613  V  =    -311.01782300  J  =      66.20774023
+  Ex =     -12.06768537  Ec =      -0.35153764
+
+  dipole =   0.000000 au (  0.000000 D)
+
+ One-Electron Energies (alpha)
+ occupied:
+   1   -30.455968    2    -1.295375    3    -0.453408    4    -0.453408
+   5    -0.453408
+ virtual:
+   6     1.649893    7     1.649893    8     1.649893    9     2.060201
+  10     3.920418   11     3.920418   12     3.920418   13     3.920418
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.0  99.9%     0.0
+
+ -----------------------------------------
+ ANALYTIC SECOND DERIVATIVES OF SCF ENERGY
+ -----------------------------------------
+ time: One-Electron 2nd Derivatives     :     0.0  99.9%     0.0
+ time: Coulomb-type 2nd Derivatives     :     0.0 100.0%     0.0
+ time: Ex. - Corr.  2nd Derivatives     :     0.0 100.0%     0.0
+ time: Coulomb-type 1st Derivatives     :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Response            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  1st Derivatives     :     0.0  98.6%     0.0
+ time: One-Electron 1st Derivatives     :     0.0  99.9%     0.0
+ time: Coulomb-type 1st Derivatives     :     0.0  99.9%     0.0
+ time: Coulomb-type Integrals           :     0.0  99.8%     0.0
+ time: Matrix Multiply                  :     0.0  95.3%     0.0
+ time: Coulomb-type Integrals           :     0.0 100.0%     0.0
+ time: Matrix Multiply                  :     0.0  84.2%     0.0
+ Solving for responses   1 -   3
+ iter =  0  N =   3  rmax = 0.00000000
+ converged!
+ Solving for responses   4 -   6
+ iter =  0  N =   3  rmax = 0.08812362
+ iter =  1  N =   6  rmax = 0.00309180
+ iter =  2  N =   9  rmax = 0.00000017
+ converged!
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Matrix Multiply                  :     0.0  98.9%     0.0
+.
+ time: Dot Products                     :     0.0  93.9%     0.0
+ time: ANALYTIC SECOND DERIVATIVES      :     0.0  99.9%     0.0
+
+
+eng>$Energy
+eng> E=-1.2885115964864e+02
+eng> D=-2.96121713e-16 -2.31983887e-12  3.00285047e-16
+eng> A=-6.29402654e-01
+eng>    8.18095591e-15 -6.29402654e-01
+eng>   -4.23966418e-15 -4.39231984e-15 -6.29402654e-01
+eng> G= 0.00000000e+00  0.00000000e+00  0.00000000e+00
+eng> Dx= 3.55270717e-15  2.95726543e-31  2.80222807e-31
+eng>    -3.10459907e-31  3.57224612e-15  6.81779200e-32
+eng>     1.14015053e-31  7.06334807e-32  3.55506506e-15
+eng> H= 7.27595761e-12 -4.93038066e-31  7.27595761e-12 -3.94430453e-31 -1.97215226e-31  7.27595761e-12
+eng>$end
+
+ G(max) = 0.00000000  |G| = 0.00000000
+
+ Dipole Polarizability:
+     0.629403
+    -0.000000     0.629403
+     0.000000     0.000000     0.629403
+
+ ========================================
+ VIBRATIONAL ANALYSIS and THERMOCHEMISTRY
+ ========================================
+
+  Atomic Masses (amu)
+   1   Ne   19.992440
+
+ Tensor of Inertia (amu*bohr*bohr)
+     0.0000     0.0000     0.0000
+     0.0000     0.0000     0.0000
+     0.0000     0.0000     0.0000
+         Principal Moments
+     0.0000     0.0000     0.0000
+ Linear molecule.
+
+ Dipole and Polarizability Derivatives:
+
+ Harmonic Frequencies (cm^-1), Reduced Masses (amu),
+ IR Intensities (km/mol),
+ Raman Scattering Activities (A^4/amu),
+ Raman Depolarization Ratios,
+ Raman Optical Activities (10^-4)
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
+ | Mode | Freq.   | Mass.  | IR Int. |Raman A. |Raman D.| ROA (90)  | ROA (180) |
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
+ *------*---------*--------*---------*---------*--------*-----------*-----------*
+
+ ====================================================
+ Normal Modes (mass-weighted) and Frequencies (cm^-1)
+ ====================================================
+
+ E =  -128.851160    E0 =  -128.851160
+
+ ZPVE = 0.000000 a.u. =    0.0000 kcal/mol
+
+ ----------------------------------------------------------------------
+ T =  298.150 K      ln(Q)       S          U          H          G
+                              cal/mol*K  kcal/mol   kcal/mol   kcal/mol
+ ----------------------------------------------------------------------
+ translational      15.0713    34.9180     0.8887     1.4812    -8.9296
+ rotational            -inf       -inf     0.5925     0.5925        inf
+ vibrational         0.0000     0.0000     0.0000     0.0000     0.0000
+ total                 -inf       -inf     1.4812     2.0737        inf
+ ----------------------------------------------------------------------
+
+ ============================================================
+
+ Memory used =     4201 KB
+  Disk  used =     6037 KB,           218 KB written,          805 KB read
+
+ CPU  time =    0.71 sec =  0.01 min = 0.00 hr =   99.49%
+ REAL time =    0.71 sec =  0.01 min = 0.00 hr
+ ratio     =   99.49%
+
+ date: Sun Oct 18 11:04:02 2026
+
+ time: Initial Guess                    :     0.0   0.0% 344998750710781360453042645773472222480660863843619259931769380141446210833645252044237746354729272661977346282103557595719219843000732436518206103674674330959297531278614050839512744236511367781245250496979787418326783620022272.0
+ time: atomic calculations              :     0.0   0.0% 100363249704241091960007347051512219767519883816844815549033441913972642382405744170290784350499791163731164440969308949392945369909061150645721688324198433265620427030823237861007246809183624122504431792664702619746304.0
+ time: One-Electron Integrals           :     0.0 100.0%     0.0
+ time: Coulomb-type Integrals           :     0.0  99.9%     0.0
+ time: Diagonalize                      :     0.0  99.0%     0.0
+ time: Matrix Multiply                  :     0.0  97.1%     0.0
+ time: SCF Equations                    :     0.0 100.0%     0.0
+ time: Inversion of V-Matrix            :     0.0   0.0% 707896986634783764097792834087562382381549651055026890852391337875087494987656032676331483424939538382633366481557086095406942359789060917735791845637121235220624000701745554903327938310725173248.0
+ time: Orthogonalize                    :     0.0   0.0% 2832204130262763029867961263600132581772671935051999444205568.0
+ time: Grid Construction                :     0.0  99.9%     0.0
+ time: Numerical Integration            :     0.0 100.0%     0.0
+ time: Rotate                           :     0.0  91.2%     0.0
+ time: scf x                            :     0.0 100.0%     0.0
+ time: One-Electron Gradient            :     0.0  99.8%     0.0
+ time: Coulomb-type Gradient            :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Gradient            :     0.0  99.9%     0.0
+ time: ANALYTIC SECOND DERIVATIVES      :     0.0   0.0% 2828311202546423571565478735843926863872903602436124190965760.0
+ time: One-Electron 2nd Derivatives     :     0.0  99.9%     0.0
+ time: Coulomb-type 2nd Derivatives     :     0.0 100.0%     0.0
+ time: Ex. - Corr.  2nd Derivatives     :     0.0 100.0%     0.0
+ time: Coulomb-type 1st Derivatives     :     0.0  99.9%     0.0
+ time: Ex. - Corr.  Response            :     0.0   0.0% 2833381086835746688268202696617103453082092351130872479481856.0
+ time: Ex. - Corr.  1st Derivatives     :     0.0  98.6%     0.0
+ time: One-Electron 1st Derivatives     :     0.0  99.9%     0.0
+ time: Dot Products                     :     0.0  93.9%     0.0

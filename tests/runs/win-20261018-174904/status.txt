@@ -1,0 +1,21 @@
+w01_energy exit=0 time=1s
+w02a_no_tmpdir exit=1 time=0s
+w02b_tmpdir_cmd exit=0 time=1s
+w02c_tmpdir_cmd_quoted exit=1 time=0s
+w02d_tmpdir_windows_path exit=0 time=1s
+w03_ramdisk exit=0 time=1s
+w04_no_system exit=0 time=1s
+w05a_basis_backslash exit=0 time=1s
+w05b_basis_slash exit=0 time=1s
+w05c_basis_relative exit=0 time=1s
+w06_crlf exit=1 time=0s
+w07_memory_3gb exit=0 time=1s
+w08_stdout exit=0 time=1s
+w09_fullpath exit=0 time=1s
+w10a_space_inside exit=0 time=1s
+w10b_space_quoted exit=0 time=1s
+w11_optimize exit=0 time=2s
+w12_hessian exit=0 time=2s
+w13 skipped: PRIRODA_MPI not set
+no scratch files left in the run folder
+folder above the program after the runs: tmp exists=False

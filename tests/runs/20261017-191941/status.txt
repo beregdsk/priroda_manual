@@ -1,0 +1,4 @@
+t78a_ccsdsd_water_states exit=0
+t78b_ccsdsd_water_no_state exit=0
+t78c_cis_water_states exit=0
+t78d_ccsdsd_oh_uhf exit=0

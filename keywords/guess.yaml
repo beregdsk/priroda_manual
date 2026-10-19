@@ -5,10 +5,12 @@ summary:
 keywords:
   - name: read
     type: switch
-    default: null
+    default: 0
+    default_note:
+      en: "`read=0` is the default in `Dft.rtf`. Version 25 without `read=1` prints `Initial Guess (2)`, the normal guess."
     values:
       - {value: "1", en: "Read SCF vectors from the file named by `$control save=`."}
-      - {value: "0", en: Extended Hückel guess.}
+      - {value: "0", en: Extended Hückel guess., default: true}
     description:
       en: Source of the starting SCF vectors.
     notes:
@@ -17,8 +19,8 @@ keywords:
         follow-up job such as a Hessian after an optimization.
     see_also: [control.save, scf.iterations]
     status: current
-    sources: ["input.txt", "04 #306", "05 §1"]
-    verified_against: null
+    sources: ["input.txt", "Dft.rtf (default)", "04 #306", "05 §5, §7", "08 t27, t71b"]
+    verified_against: "25 (2025.02.28)"
   - name: na
     type: indexed-array
     default: null
@@ -27,10 +29,15 @@ keywords:
     description:
       en: Reordering of the starting vectors for alpha spin.
     example: "$guess na(25)=26,25 $end    # swap the 25th and 26th vectors"
+    notes:
+      en: |
+        Accepted in version 25, also together with `read=1`, where it reorders the vectors read from the file. For
+        closed-shell water, swapping the HOMO and LUMO only slowed the SCF: it returned to the ground state. The
+        effect was seen only in the iteration counts, as the output does not print the reordering.
     see_also: [guess.nb]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t74e", "08 t75b", "08 t75d"]
+    verified_against: "25 (2025.02.28)"
   - name: nb
     type: indexed-array
     default: null
@@ -38,10 +45,12 @@ keywords:
       en: "`nb(1)=1,2,3,…,N`."
     description:
       en: Reordering of the starting vectors for beta spin.
+    notes:
+      en: Accepted in version 25 together with `na`; as for `na`, the output does not print the reordering.
     see_also: [guess.na]
     status: current
-    sources: ["input.txt"]
-    verified_against: null
+    sources: ["input.txt", "08 t74e", "08 t75b"]
+    verified_against: "25 (2025.02.28)"
   - name: mix
     type: switch
     default: 0
@@ -55,8 +64,16 @@ keywords:
     notes:
       en: |
         Users report that with non-RI DFT, `mix=1` can converge back to the restricted solution (same energy as
-        RKS). RI-DFT, or a hybrid, broke the symmetry in the reported cases.
+        RKS). One user saw a lower unrestricted energy with RI-PBE and RI-BLYP, but only by about 3·10⁻⁶ hartree,
+        which is close to the SCF convergence threshold. In version 25, `mix=1` with
+        `restrict=0` returned to the restricted solution for singlet O2 (PBE and RI-PBE1) and for Cr2 (PBE, default
+        and BFGS procedures): no broken-symmetry solution was found in any test. Stretched H2 (2.5 Å) with UHF or
+        UKS also stayed restricted with `mix=1`, `2`, `-1`, `10`, `45` or `90`, with or without `read=1`, although
+        the triplet lies 0.13 hartree lower. So in version 25 `mix` is accepted (integers only; `mix=0.5` is an
+        input error) but had no visible effect. Starting the singlet from saved triplet vectors (`read=1`) did reach
+        a broken-symmetry singlet for O2, 0.048 hartree below the restricted one; it needed more than the default 32
+        iterations (`iterations=300`). This did not work for H2.
     see_also: [scf.restrict]
-    status: undocumented
-    sources: ["input.txt (annotation corrupted)", "03 #0, §7", "06 §3"]
-    verified_against: null
+    status: current
+    sources: ["input.txt (annotation corrupted)", "03 #0, §7", "06 §3 (default 0)", "08 t60, t73, t74a-d, t79, round 14"]
+    verified_against: "25 (2025.02.28)"

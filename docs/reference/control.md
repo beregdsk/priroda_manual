@@ -10,6 +10,7 @@
 Job type, level of theory, basis-set file, Hamiltonian and printing.
 
 (control.task)=
+{.kw}
 ## `task`
 
 ```{index} single: task ($control)
@@ -17,8 +18,8 @@ Job type, level of theory, basis-set file, Hamiltonian and printing.
 
 **Type:** enum\
 **Default:** `gradient`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, version 25 executable, official site files, `input.txt`, `Dft.rtf`, chemport.ru forum, qchem.ru forum, LIMOR page
 
 Job type.
 
@@ -32,33 +33,36 @@ Job type.
 | `hessian` | Second derivatives (force constants) followed by vibrational analysis and thermochemistry. |
 | `optimize` | Geometry optimization, including saddle points with `$optimize saddle=1`. |
 | `optimize+hessian` | Optimization followed by a Hessian at the final geometry. The only combined task that works. Present in v2 and v9 and later, absent in v6. |
-| `irc` | Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (`$Energy`). |
-| `scan` | Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. |
-| `nmr` | NMR shielding tensors. Works only with `theory=dft`. |
-| `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities). |
-| `check` | Process the geometry only. *(undocumented)* |
+| `irc` | Intrinsic reaction coordinate. Needs a Hessian at the TS in the input (`$Energy`). Each point is printed on `IRC>` lines with its distance and energy. |
+| `scan` | Relaxed potential-energy-surface scan over the coordinates in `$optimize fix`. The structures and energies are summarized on `SCAN>` lines at the end. |
+| `nmr` | NMR shielding tensors. Works only with `theory=dft`: with `ridft`, version 25 silently runs only the ground-state SCF. |
+| `dipole` | Numerical dipole polarizabilities and their derivatives with respect to nuclear coordinates (used for Raman intensities), from SCF runs in finite electric fields. The result is a `num>` block. |
+| `check` | Not a task name in the version 25 program. Like any unrecognized task, `task=check` sets up the run (geometry, basis sets, SCF and grid settings) and stops before the SCF without a message, which makes it a usable input check. *(undocumented)* |
 | `extremal` | Gradient-extremal path (v9 banner "Calculation of Gradient Extremal Path"); slow. *(undocumented)* |
-| `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. *(undocumented)* |
-| `saddle` | Approximate saddle-point search from two `$molecule` blocks (start and end). *(undocumented)* |
+| `transit` | Synchronous transit in internal coordinates. Needs two `$molecule` blocks (start and end). Reported working in v8. In version 25 a test with two ammonia structures crashed with a bus error after printing the internal coordinates (08 t81d). *(undocumented)* |
+| `saddle` | Approximate saddle-point search from two `$molecule` blocks (start and end). Version 25 prints `Approximate Saddle Point Search`, then a one-dimensional maximization between the two structures and a two-dimensional saddle search; for the two mirror images of ammonia it stopped at the planar midpoint (08 t81c). *(undocumented)* |
 | `path` | Minimum-energy-path optimization from two `$molecule` blocks (start and end). *(undocumented)* |
 | `conical` | Conical intersection of states 0 and 1 (v9 banner). Untested. *(undocumented)* |
 | `anharmonic` | Anharmonic corrections to vibrational energies; slow. *(undocumented)* |
 | `opt_n1` | Optimizer for very large systems (used for 8060 atoms with `theory=qm_n2`). Pairs with `$optimize mod=1`. *(undocumented)* |
-| `thermostat` | Molecular dynamics with a thermostat; see `$dynamic`. *(undocumented)* |
-| `uniq` | Filter duplicate structures among several `$molecule` blocks; see `$uniq`. *(undocumented)* |
+| `thermostat` | Molecular dynamics with a thermostat; see `$dynamic`. In version 25 it ran with `dft`, `ridft`, `rimp2`, `ccsd`, `tddft` and `qm_n3`. *(undocumented)* |
+| `uniq` | Apparently filters duplicate structures among several `$molecule` blocks; see `$uniq` (inferred from the official example; untested). *(undocumented)* |
 
 ```{note}
 Two `task=` lines do not chain jobs: only the first one runs. Apart from `optimize+hessian`, sequences such
 as optimize→NMR need separate runs or an external driver script.
-`task=critical` does not work; density critical points come from `print=+density`.
+**A misspelled task name gives no error**: version 25 sets up the run and stops quietly, as for `check`.
+`critical` is not a task name in version 25, so it stops silently like any unknown task. Users found that
+`task=crytical` gave nothing; density critical points come from `print=+density`.
 `task=QM` appears only in the header of the shipped `qm.in` parameter file and is not a user task.
-The binary contains further task words (`IRC4`, `PATHX`, `PATHR`, `STERIC`, `POLARIZABILITY`, `MMDYNAMIC`,
-and others) that are untested or need data that is not distributed.
+The version 25 program contains further task names (`irc4`, `pathx`, `pathr`, `chain`, `walk`, `steric`,
+`polarizability`, and others) that are untested or need data that is not distributed.
 ```
 
 **See also:** {ref}`saddle ($optimize) <optimize.saddle>`, {ref}`points ($optimize) <optimize.points>`, {ref}`print ($control) <control.print>`
 
 (control.theory)=
+{.kw}
 ## `theory`
 
 ```{index} single: theory ($control)
@@ -66,8 +70,8 @@ and others) that are untested or need data that is not distributed.
 
 **Type:** enum\
 **Default:** `dft`\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, version 25 executable, official site files, `input.txt`, KNC wiki, `Dft.rtf`, chemport.ru forum, qchem.ru forum
 
 Theoretical method.
 
@@ -77,40 +81,50 @@ Theoretical method.
 | Value | Meaning |
 |---|---|
 | `dft` | GGA DFT with density fitting. Hybrid functionals are **not** applied here: see notes. (**default**) |
-| `ridft` | Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals. |
-| `DFT_n4` | Newer DFT variant, used by the author with `func=LPBEVV` (2025). *(undocumented)* |
+| `ridft` | Hybrid DFT with exact exchange via the resolution-of-identity (RI) approximation. Required for hybrid functionals; the default functional is then `PBE1`. Hessians are numerical. |
+| `DFT_n4` | Newer DFT variant, used in the official example inputs with `func=LPBEVV` (2025). Runs in version 25 (summary box: `DFT_N4`); what it changes is not documented. *(undocumented)* |
 | `tddft` | GGA time-dependent DFT (no hybrid TDDFT). |
-| `rimp2` | RI-MP2. |
-| `hf` | Hartree–Fock. *(undocumented)* |
-| `rihf` | RI Hartree–Fock. *(undocumented)* |
-| `cis` | CIS (RHF/UHF). Slow and disk-hungry. *(undocumented)* |
-| `mp2` | Conventional MP2 (RHF, UHF, ROHF). Very disk-hungry. *(undocumented)* |
-| `mp3` | MP3. *(undocumented)* |
-| `mp4dq` | MP4(DQ). *(undocumented)* |
-| `mp4sdq` | MP4(SDQ). *(undocumented)* |
-| `mp4sdtq` | MP4(SDTQ) (RHF). *(undocumented)* |
-| `ccs` | CCS. *(undocumented)* |
-| `ccd` | CCD. *(undocumented)* |
+| `rimp2` | RI-MP2. Hessians are numerical. |
+| `hf` | Hartree–Fock. |
+| `rihf` | RI Hartree–Fock. |
+| `cis` | CIS (RHF/UHF). Prints a table of excited states; `E =` is the total energy of the first excited state. Slow and disk-hungry. |
+| `mp2` | Conventional MP2 (RHF, UHF, ROHF). Very disk-hungry. |
+| `mp3` | MP3. |
+| `mp4dq` | MP4(DQ). |
+| `mp4sdq` | MP4(SDQ). |
+| `mp4sdtq` | MP4(SDTQ) (RHF). |
+| `ccs` | CCS. Returns the HF energy, as expected: CCS adds no correlation energy to an HF reference. |
+| `ccd` | CCD. |
 | `ccsd` | CCSD (RHF/UHF). |
 | `ccsd4t` | CCSD(T). |
-| `ccsdsd` | Linear-response (EOM) CCSD for excited states (RHF). *(undocumented)* |
-| `qm_n3` | Laikov's semiempirical QM model. Needs `basis=qm.in`; parameters exist for H, Li–F, Na–Cl, Sc–Cu. *(undocumented)* |
+| `ccsdsd` | CCSD for an excited state, closed-shell (RHF) only; the state is chosen with `state=`, as for `cis` and `tddft`. Version 25 first solves CCSD for the ground state, then the excited state, and reports the excited state's total energy in `eng>`. Without `state=` it gives the CCSD ground-state energy. For an open-shell molecule it silently stops after UHF (no CCSD, exit 0). Described as linear-response CCSD for excited states (RHF) by the v5 keyword page. |
+| `qm_n3` | Laikov's semiempirical QM model. Needs `basis=qm.in` and no `set=`; parameters exist for H, Li–F, Na–Cl, Sc–Cu. Runs in version 25, with a short output of its own (no summary box, no `E  =` line). *(undocumented)* |
 | `qm_n2` | Earlier variant of the QM model, used for very large systems with `task=opt_n1`. *(undocumented)* |
 
 ```{note}
-**Hybrid trap.** Hybrid functionals (`PBE1`, `B3LYP`, …) take effect only with `theory=ridft`. With `theory=dft`
-or `tddft`, older versions silently drop the exact exchange and run a pure GGA. Newer ones abort with
-`MPI_Abort` after reading the basis twice.
+**A misspelled theory name gives no error**: version 25 prints it in the summary box and runs Hartree–Fock.
 
-The ab initio list comes from the v6 documentation and a 2011 user test, which was energy-only. These
+**Hybrid trap.** Hybrid functionals (`PBE1`, `B3LYP`, …) take effect only with `theory=ridft`. With `theory=dft`
+or `tddft`, older versions silently drop the exact exchange. In version 25, `theory=dft` stops right after
+printing the basis sets, with no error message in the output and exit status 1. `theory=tddft` still runs:
+it reports `PBE1` in the summary box but leaves out the exact exchange, so the energies are wrong (water:
+`Ex` -6.61 instead of about -8.95 hartree, ground-state total energy about 2.2 hartree above PBE), and the run ends
+normally.
+
+The ab initio list comes from the v5 keyword page and a 2011 user test (v6), which was energy-only. In version 25,
+water energies run to completion with `hf`, `rihf`, `cis`, `mp2`, `mp3`, `mp4dq`, `mp4sdq`, `mp4sdtq`, `ccs`,
+`ccd`, `ccsd` and `ccsd4t`; an `hf` optimization also worked, so HF gradients exist. For `ridft` and
+`rimp2`, `task=hessian` works by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND
+DERIVATIVES`); for `dft` it is analytic. These
 were reported **not** working in v6: `mp4`, `rimp4`, `rimp4sdtq`, `rimp4sdq`, `riccsd`, `riccsd4t`. They
-either crash or return the HF energy. The binary contains many more method words (CASSCF, MRCISD,
-CCSDT, …); none has been reported working.
+either crash or return the HF energy. The version 25 program contains many more method names (`MCSCF`,
+`CASSCF`, `CISD`, `LCCD+MP2`, …); none has been tested.
 ```
 
 **See also:** {ref}`functional ($dft) <dft.functional>`
 
 (control.state)=
+{.kw}
 ## `state`
 
 ```{index} single: state ($control)
@@ -118,13 +132,16 @@ CCSDT, …); none has been reported working.
 
 **Type:** list\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, `input.txt`
 
 For excited-state methods. The first value is the excited state n whose properties are computed; the second
-is the number of states N included in the iterative solution of the equations (`state=n,N`).
+is the number of states N included in the iterative solution of the equations (`state=n,N`). In version 25,
+`theory=tddft` with `state=1,5` printed all five states in an `Electronic Spectrum:` table (excitation energy,
+wavelength, transition moment, oscillator strength), and `E  =` was the total energy of state 1.
 
 (control.basis)=
+{.kw}
 ## `basis`
 
 ```{index} single: basis ($control)
@@ -132,24 +149,27 @@ is the number of states N included in the iterative solution of the equations (`
 
 **Type:** string\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 01 §4.11, §6; 03 §5; 04 §0
-
-Default: basis-set data are read from the input file itself.
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, official site files, `input.txt`, `Dft.rtf`, chemport.ru forum, qchem.ru forum
 
 Name of the file containing the basis-set data (and ECPs, or QM parameters for `qm.in`). The name may be
 double-quoted, which is needed when the path contains special characters. Use straight quotes: typographic
 quotes break parsing.
 
+**About the default:** basis-set data are read from the input file itself.
+
 ```{note}
 Shipped files include `basis.in` (Λ/L family, default set `L1`), `basis4.in` (scalar-relativistic L family;
-needs `four=1`), `3z.bas` (DFT only, Z ≤ 54), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
-`b4s*.in`, and `qm.in`. An absolute path is safest. Chapter "Basis sets" has the full family list.
+needs `four=1`), `3z.bas` (Z ≤ 54; recommended for DFT only, as users report large errors with ab initio methods), `sbk.bas` (SBK ECPs, up to Z = 86), `b2*.in`, `b2u*.in`,
+`b4s*.in`, and `qm.in`. In version 25 a relative name such as `basis=basis.in` works when the file is in the
+directory the program is started from. An absolute path is still the safest choice for parallel and batch
+runs.
 ```
 
 **See also:** {ref}`set ($molecule) <molecule.set>`, {ref}`four ($control) <control.four>`
 
 (control.four)=
+{.kw}
 ## `four`
 
 ```{index} single: four ($control)
@@ -157,8 +177,8 @@ needs `four=1`), `3z.bas` (DFT only, Z ≤ 54), `sbk.bas` (SBK ECPs, up to Z = 8
 
 **Type:** switch\
 **Default:** `0`\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §3.3; 04 #207-#208, #336
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, official site files, `input.txt`, chemport.ru forum
 
 Four-component option.
 
@@ -171,12 +191,13 @@ Four-component option.
 | `1` | Scalar-relativistic theory (K. G. Dyall, J. Chem. Phys. 100 (1994) 2118–2127). The output reports "Hamiltonian: scalar-relativistic". |
 
 ```{note}
-Required with the relativistic basis file `basis4.in`. Forgetting it is a common cause of failed runs with that file.
+Required with the relativistic basis file `basis4.in`. Without it, version 25 stops right after the `Basis set input:` line with `1?`.
 ```
 
 **See also:** {ref}`nucleus ($control) <control.nucleus>`, {ref}`d1small ($scf) <scf.d1small>`
 
 (control.nucleus)=
+{.kw}
 ## `nucleus`
 
 ```{index} single: nucleus ($control)
@@ -184,12 +205,12 @@ Required with the relativistic basis file `basis4.in`. Forgetting it is a common
 
 **Type:** enum\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; 01 §4.2; 06 §1
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, version 25 executable, official site files, `input.txt`, KNC wiki
 
-Default: `finite` for four-component theory, `point` for non-relativistic theory.
+Nuclear model. The official example inputs write it as `nuc=finite`.
 
-Nuclear model. The author's own inputs write it as `nuc=finite`.
+**About the default:** `finite` for four-component theory, `point` for non-relativistic theory.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -198,14 +219,18 @@ Nuclear model. The author's own inputs write it as `nuc=finite`.
 |---|---|
 | `finite` | Gaussian nuclear model (L. Visscher, K. G. Dyall, At. Data Nucl. Data Tables 67 (1997) 207–224). |
 | `point` | Point-nucleus model. |
+| `dual` | Found in the version 25 program; its meaning is unknown. *(undocumented)* |
 
 ```{note}
-A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa.
+A basis optimized for a point nucleus must not be used with the finite-nucleus model, and vice versa. With
+`four=1` and no `nucleus=`, version 25 prints `Finite nucleus model (1):` with the Gaussian parameters of each
+element.
 ```
 
 **See also:** {ref}`four ($control) <control.four>`
 
 (control.print)=
+{.kw}
 ## `print`
 
 ```{index} single: print ($control)
@@ -213,8 +238,8 @@ A basis optimized for a point nucleus must not be used with the finite-nucleus m
 
 **Type:** flags\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, `input.txt`, KNC wiki, `Dft.rtf`, chemport.ru forum
 
 Printing options. Flags are appended one after another; `+` switches an option on and `-` switches it off.
 The leading `+` can be omitted (`print=charges+bonds`).
@@ -224,21 +249,50 @@ The leading `+` can be omitted (`print=charges+bonds`).
 
 | Value | Meaning |
 |---|---|
-| `+charges` | Hirshfeld charges (DFT methods), printed as "Atomic partitions of the density". |
+| `+charges` | Hirshfeld charges (DFT methods), printed as "Atomic partitions of the density". With `theory=hf`, version 25 stops after the SCF with `0: read 'Basis2'` and exit 1. |
 | `+bonds` | Mulliken populations and bond orders (SCF only), printed as "Overlap populations". |
 | `+esr` | ESR parameters. |
 | `+vectors` | SCF vectors. |
-| `+molden` | MOLDEN data: vibrations on `freq>` lines for `task=hessian`; with `+vectors+molden` also orbitals on `mos>` lines. |
+| `+molden` | MOLDEN data: vibrations on `freq>` lines for `task=hessian`; with `+vectors+molden` also orbitals on `mos>` lines (`[Molden Format]`, `[Atoms] AU`, `[5D]`, `[GTO]`, `[MO]` sections). |
 | `+density` | Critical points of the electron density (QTAIM). Combine with `+charges` to label them. *(undocumented)* |
 | `-internals` | Suppress the printout of internal coordinates. *(undocumented)* |
 
 **Example:**
 
-```text
+```priroda
 $control print=+vectors+molden $end
 ```
 
+(control.derivative)=
+{.kw}
+## `derivative`
+
+```{index} single: derivative ($control)
+```
+
+**Type:** enum\
+**Default:** *none stated*\
+**Status:** undocumented · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, version 25 executable
+
+How `task=hessian` computes the second derivatives. Not in any written source; found in the program and
+tested in version 25, where `derivative=numeric` with `theory=dft` gave the same water frequencies as the
+analytic Hessian to within 0.2 cm⁻¹.
+
+**About the default:** analytic second derivatives where the method has them (GGA DFT), numerical otherwise.
+
+```{tabularcolumns} \Y{0.3}\Y{0.7}
+```
+
+| Value | Meaning |
+|---|---|
+| `analytic` | Analytic second derivatives. |
+| `numeric` | Second derivatives by finite differences of the gradient (`NUMERICAL COMPUTATION OF SECOND DERIVATIVES`). |
+
+**See also:** {ref}`steps ($d2edr2) <d2edr2.steps>`
+
 (control.save)=
+{.kw}
 ## `save`
 
 ```{index} single: save ($control)
@@ -246,10 +300,11 @@ $control print=+vectors+molden $end
 
 **Type:** string\
 **Default:** *none stated*\
-**Status:** current · not verified\
-**Sources:** input.txt; Dft.rtf; 04 #306
+**Status:** current · verified on 25 (2025.02.28)\
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, chemport.ru forum
 
 File name for saving SCF vectors. With `$guess read=1` the vectors are read back from the same file.
-This is the basis of the SCF restart technique.
+This is the basis of the SCF restart technique. In version 25, a run with `$guess read=1` prints
+`Initial Guess (-1)` and `vectors from '<file>'`; the normal guess is printed as `Initial Guess (2)`.
 
 **See also:** {ref}`read ($guess) <guess.read>`
