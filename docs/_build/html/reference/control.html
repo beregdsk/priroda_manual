@@ -274,7 +274,7 @@
 <p id="index-1"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">gradient</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09; 08 t50, t57a; 08 t13, t14, t56, t69a-f</p>
+<strong>Sources:</strong> version 25 test runs, version 25 executable, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, qchem.ru forum, LIMOR page</p>
 <p>Job type.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -362,7 +362,7 @@ The version 25 program contains further task names (<code class="docutils litera
 <p id="index-2"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">dft</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46; 08 t50b; 08 t78a-d; 09</p>
+<strong>Sources:</strong> version 25 test runs, version 25 executable, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, qchem.ru forum</p>
 <p>Theoretical method.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -459,7 +459,7 @@ either crash or return the HF energy. The version 25 program contains many more 
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t33</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>For excited-state methods. The first value is the excited state n whose properties are computed; the second
 is the number of states N included in the iterative solution of the equations (<code class="docutils literal notranslate"><span class="pre">state=n,N</span></code>). In version 25,
 <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> with <code class="docutils literal notranslate"><span class="pre">state=1,5</span></code> printed all five states in an <code class="docutils literal notranslate"><span class="pre">Electronic</span> <span class="pre">Spectrum:</span></code> table (excitation energy,
@@ -470,11 +470,11 @@ wavelength, transition moment, oscillator strength), and <code class="docutils l
 <p id="index-4"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 01 §4.11, §6; 03 §5, §6; 04 §0, #257; 08 t03</p>
-<p>Default: basis-set data are read from the input file itself.</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, qchem.ru forum</p>
 <p>Name of the file containing the basis-set data (and ECPs, or QM parameters for <code class="docutils literal notranslate"><span class="pre">qm.in</span></code>). The name may be
 double-quoted, which is needed when the path contains special characters. Use straight quotes: typographic
 quotes break parsing.</p>
+<p><strong>About the default:</strong> basis-set data are read from the input file itself.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Shipped files include <code class="docutils literal notranslate"><span class="pre">basis.in</span></code> (Λ/L family, default set <code class="docutils literal notranslate"><span class="pre">L1</span></code>), <code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> (scalar-relativistic L family;
@@ -490,7 +490,7 @@ runs.</p>
 <p id="index-5"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §3.3; 04 #207-#208, #336; 08 t35, t49</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum</p>
 <p>Four-component option.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -520,9 +520,9 @@ runs.</p>
 <p id="index-6"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.2; 06 §1; 08 t35; 09 (dual)</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">finite</span></code> for four-component theory, <code class="docutils literal notranslate"><span class="pre">point</span></code> for non-relativistic theory.</p>
+<strong>Sources:</strong> version 25 test runs, version 25 executable, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki</p>
 <p>Nuclear model. The official example inputs write it as <code class="docutils literal notranslate"><span class="pre">nuc=finite</span></code>.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">finite</span></code> for four-component theory, <code class="docutils literal notranslate"><span class="pre">point</span></code> for non-relativistic theory.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -556,7 +556,7 @@ element.</p>
 <p id="index-7"><strong>Type:</strong> flags<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509; 08 t01, t45</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>Printing options. Flags are appended one after another; <code class="docutils literal notranslate"><span class="pre">+</span></code> switches an option on and <code class="docutils literal notranslate"><span class="pre">-</span></code> switches it off.
 The leading <code class="docutils literal notranslate"><span class="pre">+</span></code> can be omitted (<code class="docutils literal notranslate"><span class="pre">print=charges+bonds</span></code>).</p>
 <div class="table-wrapper colwidths-auto docutils container">
@@ -601,11 +601,11 @@ The leading <code class="docutils literal notranslate"><span class="pre">+</span
 <p id="index-8"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 09; 08 t53</p>
-<p>Default: analytic second derivatives where the method has them (GGA DFT), numerical otherwise.</p>
+<strong>Sources:</strong> version 25 test runs, version 25 executable</p>
 <p>How <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> computes the second derivatives. Not in any written source; found in the program and
 tested in version 25, where <code class="docutils literal notranslate"><span class="pre">derivative=numeric</span></code> with <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> gave the same water frequencies as the
 analytic Hessian to within 0.2 cm⁻¹.</p>
+<p><strong>About the default:</strong> analytic second derivatives where the method has them (GGA DFT), numerical otherwise.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -630,7 +630,7 @@ analytic Hessian to within 0.2 cm⁻¹.</p>
 <p id="index-9"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #306; 08 t27</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>File name for saving SCF vectors. With <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> the vectors are read back from the same file.
 This is the basis of the SCF restart technique. In version 25, a run with <code class="docutils literal notranslate"><span class="pre">$guess</span> <span class="pre">read=1</span></code> prints
 <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(-1)</span></code> and <code class="docutils literal notranslate"><span class="pre">vectors</span> <span class="pre">from</span> <span class="pre">'&lt;file&gt;'</span></code>; the normal guess is printed as <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(2)</span></code>.</p>

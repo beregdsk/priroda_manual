@@ -391,20 +391,10 @@ and the keyword:</p>
 optimization (<code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">coordinated</span></code>) but was ignored in an energy run, which does not read <code class="docutils literal notranslate"><span class="pre">$optimize</span></code>. A
 clean energy run therefore does not prove that the rest of the input is correct.</p>
 <!-- src: 08 t40, t40b, t40c -->
-<p>The same message can appear for a keyword you spelled correctly. In version 25, <code class="docutils literal notranslate"><span class="pre">convergence=</span></code> with a single value,
-followed by <code class="docutils literal notranslate"><span class="pre">iterations=</span></code>, stops the run with the name of <code class="docutils literal notranslate"><span class="pre">iterations</span></code> cut short:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">convergence=1e-7</span> <span class="pre">iterations=250</span> <span class="pre">$end</span></code> printed <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code> on the machine of the first test
-rounds, also with the two keywords on separate lines;</p></li>
-<li><p>the same input printed <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">erations</span></code> in later runs of the <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> executable on another machine. There
-the message was the same for every value tried (<code class="docutils literal notranslate"><span class="pre">1e-5</span></code>, <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>, <code class="docutils literal notranslate"><span class="pre">1e-7</span></code>, <code class="docutils literal notranslate"><span class="pre">1e-10</span></code>, <code class="docutils literal notranslate"><span class="pre">0.000001</span></code>, <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>, and <code class="docutils literal notranslate"><span class="pre">1e-6,</span></code>
-with a trailing comma), and <code class="docutils literal notranslate"><span class="pre">iter=50</span></code> gave <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">er</span></code>.</p></li>
-</ul>
-<p>Other keywords after a one-value <code class="docutils literal notranslate"><span class="pre">convergence=</span></code> were read normally (<code class="docutils literal notranslate"><span class="pre">procedure</span></code>, <code class="docutils literal notranslate"><span class="pre">restrict</span></code>, <code class="docutils literal notranslate"><span class="pre">xmax</span></code>, <code class="docutils literal notranslate"><span class="pre">diagm</span></code>,
-<code class="docutils literal notranslate"><span class="pre">temperature</span></code>, <code class="docutils literal notranslate"><span class="pre">fraction</span></code>, <code class="docutils literal notranslate"><span class="pre">core</span></code>, <code class="docutils literal notranslate"><span class="pre">eemin</span></code>, <code class="docutils literal notranslate"><span class="pre">aw</span></code>), but <code class="docutils literal notranslate"><span class="pre">n1=</span></code> stopped the run with <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">'$end'</span> <span class="pre">found,</span> <span class="pre">'convergence'</span></code>.
-The problem disappears when <code class="docutils literal notranslate"><span class="pre">convergence</span></code> gets both of its values (<code class="docutils literal notranslate"><span class="pre">convergence=1e-6,1e-3</span> <span class="pre">iterations=50</span></code>) or comes
-after <code class="docutils literal notranslate"><span class="pre">iterations</span></code>. Give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> both values, or put it last in the group; see
-<a class="reference internal" href="../reference/scf.html#scf-convergence"><span class="std std-ref">$scf convergence</span></a>.</p>
+<p>The same message can appear for a keyword you spelled correctly. In version 25, a one-value <code class="docutils literal notranslate"><span class="pre">convergence=</span></code> followed
+by <code class="docutils literal notranslate"><span class="pre">iterations=</span></code> in <code class="docutils literal notranslate"><span class="pre">$scf</span></code> stops the run with <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">name</span> <span class="pre">terations</span></code> (or <code class="docutils literal notranslate"><span class="pre">erations</span></code>): the name of <code class="docutils literal notranslate"><span class="pre">iterations</span></code> is
+cut short. Give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> both of its values (<code class="docutils literal notranslate"><span class="pre">convergence=1e-6,1e-3</span></code>), or put it last in the group; see
+<a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-scf-parser"><span class="std std-ref">$scf settings are ignored or rejected</span></a>.</p>
 <!-- src: 05 §5.1; 08 t07a, t07b, t22a-c; 08 (review check: convergence value series, iter=, n1=, other keywords); slurm s02-s04 first attempt (erations with 1e-10) -->
 </section>
 </section>
@@ -539,7 +529,7 @@ eng&gt;$end
 </div>
 <!-- src: 06 §4; 08 t01 (task=energy prints only E= and D=) -->
 <p>To reuse it, remove the prefix and append the block to the end of the next input, after <code class="docutils literal notranslate"><span class="pre">$molecule</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sed -n 's/^eng&gt;//p' mol.out &gt;&gt; mol.in
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^eng&gt;//p'</span><span class="w"> </span>mol.out<span class="w"> </span>&gt;&gt;<span class="w"> </span>mol.in
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ge</span></code> script on the official site does the same. When the output contains a <code class="docutils literal notranslate"><span class="pre">NUMERICAL</span> <span class="pre">AND</span> <span class="pre">ANALYTICAL</span> <span class="pre">GRADIENT</span></code>
@@ -562,7 +552,7 @@ minimizations, and it lets you redo the vibrational analysis or the thermochemis
 <ul>
 <li><p>A numerical Hessian split over several runs with <a class="reference internal" href="../reference/d2edr2.html#d2edr2-steps"><span class="std std-ref">$d2edr2 steps</span></a>. Collect the <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines of
 all partial outputs into one input, add <code class="docutils literal notranslate"><span class="pre">$d2edr2</span> <span class="pre">steps=-1</span> <span class="pre">$end</span></code>, and run once more:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>grep -h "^num&gt;" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num&gt;//' &gt;&gt; mol.in
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-h<span class="w"> </span><span class="s2">"^num&gt;"</span><span class="w"> </span>mol.out1<span class="w"> </span>mol.out2<span class="w"> </span>mol.out3<span class="w"> </span>mol.out4<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/^num&gt;//'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>mol.in
 </pre></div>
 </div>
 <p>The lines hold numbered <code class="docutils literal notranslate"><span class="pre">$Energy000</span></code>, <code class="docutils literal notranslate"><span class="pre">$Energy001</span></code>, … groups, one per displaced geometry. The combining run does
@@ -619,9 +609,8 @@ unknown <code class="docutils literal notranslate"><span class="pre">theory=</sp
 <code class="docutils literal notranslate"><span class="pre">Theoretical</span> <span class="pre">Method</span></code> line and that the output goes on to an SCF.</p>
 <!-- src: 08 t50, t50b -->
 </dd>
-<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>Older versions ran but gave wrong results. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, version 25 stops after the basis-set echo with no
-message in the output file (stderr shows only <code class="docutils literal notranslate"><span class="pre">MPI_Abort</span></code>); with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> it still runs without the exact exchange and gives wrong energies. See
-<a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+<dt>Hybrid functional without <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code></dt><dd><p>With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code> version 25 stops with no message; with <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code> it silently drops the exact exchange. See
+<a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-hybrid"><span class="std std-ref">Hybrid functional silently ignored</span></a>.</p>
 <!-- src: 04 #96, #310; 08 t08, t46 -->
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">basis4.in</span></code> without <code class="docutils literal notranslate"><span class="pre">four=1</span></code></dt><dd><p>The relativistic basis file needs <code class="docutils literal notranslate"><span class="pre">four=1</span></code> in <code class="docutils literal notranslate"><span class="pre">$control</span></code>. Without it, version 25 stops right after the line

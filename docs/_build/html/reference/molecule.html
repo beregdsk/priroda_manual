@@ -315,7 +315,7 @@ Text after <code class="docutils literal notranslate"><span class="pre">$end</sp
 <p id="index-1"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default); 08 t29</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code></p>
 <p>Molecular charge.</p>
 </section>
 <section id="mult">
@@ -323,7 +323,7 @@ Text after <code class="docutils literal notranslate"><span class="pre">$end</sp
 <p id="index-2"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default); 08 t10</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code></p>
 <p>Spin multiplicity, 2S+1.</p>
 </section>
 <section id="mass">
@@ -332,7 +332,7 @@ Text after <code class="docutils literal notranslate"><span class="pre">$end</sp
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> amu<br />
 <strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Sources:</strong> <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Optional atomic mass for isotopes, written as <code class="docutils literal notranslate"><span class="pre">mass=</span></code> after an atom’s coordinates on the same atom line, in
 both Cartesian and Z-matrix input. Not tested in version 25.</p>
 <p><strong>Example:</strong></p>
@@ -345,11 +345,11 @@ both Cartesian and Z-matrix input. Not tested in version 25.</p>
 <p id="index-4"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 03 §5 (default set); 01 §4.11, §6.2; 06 §1; 08 t01 (set=L1), t70a (set=L2)</p>
-<p>Default: the set named by <code class="docutils literal notranslate"><span class="pre">default=</span></code> in the basis-file header (<code class="docutils literal notranslate"><span class="pre">L1</span></code> in <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>).</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki, qchem.ru forum</p>
 <p>Basis set for the atoms that follow. The name must match one in the basis-set file. It can appear several
 times in the group. The orbital basis is paired with its own auxiliary (fitting) basis, so you cannot
 combine arbitrary orbital and auxiliary sets.</p>
+<p><strong>About the default:</strong> the set named by <code class="docutils literal notranslate"><span class="pre">default=</span></code> in the basis-file header (<code class="docutils literal notranslate"><span class="pre">L1</span></code> in <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>).</p>
 <p><strong>Example:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$molecule
  z-matrix
@@ -368,7 +368,7 @@ $end
 <p id="index-5"><strong>Type:</strong> string<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.7; 08 t47</p>
+<strong>Sources:</strong> version 25 test runs, official site files</p>
 <p>Length unit of the coordinates. The default unit is Å. In version 25, water given in bohr with <code class="docutils literal notranslate"><span class="pre">unit=b</span></code> gave the same geometry and energy as in Å.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -390,7 +390,7 @@ $end
 <p id="index-6"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.7; 04 #481; 08 t15; 08 t30a</p>
+<strong>Sources:</strong> version 25 test runs, official site files, chemport.ru forum</p>
 <p>Used as <code class="docutils literal notranslate"><span class="pre">sym=1,0.01</span></code> in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
 Newer versions report the detected point group (<code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">D6h</span></code>). In version 25, <code class="docutils literal notranslate"><span class="pre">sym=1,0.01</span></code> on a slightly
 distorted NH3 printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span>&#160;&#160;&#160; <span class="pre">6,</span> <span class="pre">unique:</span>&#160;&#160;&#160; <span class="pre">2</span></code> and echoed the geometry symmetrized. On its own it

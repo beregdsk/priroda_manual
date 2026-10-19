@@ -275,7 +275,7 @@
 <p id="index-1"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #216; 03 §9; 08 t25</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, qchem.ru forum</p>
 <p>Type of stationary point sought.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -310,9 +310,9 @@ negative value.</p>
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.0001,0.01</span></code><br />
 <strong>Units:</strong> au<br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.6 (output echo); 08 t11, t12</p>
-<p>Default: if only the first value is given, the second is 100 times larger (the recommended setting).</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Convergence tolerance on the gradient (first value) and on the displacement (second value).</p>
+<p><strong>About the default:</strong> if only the first value is given, the second is 100 times larger (the recommended setting).</p>
 <p><strong>See also:</strong> <a class="reference internal" href="grid.html#grid-accuracy"><span class="std std-ref">accuracy ($grid)</span></a></p>
 </section>
 <section id="trust">
@@ -320,22 +320,22 @@ negative value.</p>
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.125,0.015625</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12, t15, t76b; 08 (review check)</p>
-<p>Default: echoed by version 25 as <code class="docutils literal notranslate"><span class="pre">Trust</span> <span class="pre">radius</span> <span class="pre">=</span> <span class="pre">0.12500000</span> <span class="pre">(max),</span> <span class="pre">0.01562500</span> <span class="pre">(min)</span></code> in internal coordinates, with
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
+<p>Trust radius (the largest allowed step), given as maximum, minimum and initial values.</p>
+<p><strong>About the default:</strong> echoed by version 25 as <code class="docutils literal notranslate"><span class="pre">Trust</span> <span class="pre">radius</span> <span class="pre">=</span> <span class="pre">0.12500000</span> <span class="pre">(max),</span> <span class="pre">0.01562500</span> <span class="pre">(min)</span></code> in internal coordinates, with
 symmetry (<code class="docutils literal notranslate"><span class="pre">sym=1</span></code>) and with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>. v13 and v15 echoed 0.2 / 0.0125 in internal coordinates and
 0.1 / 0.00625 with <code class="docutils literal notranslate"><span class="pre">cartesian=1</span></code>; v6 echoed 0.2 / 0.0125 in Cartesian coordinates. <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.5
 (older version). <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> says that if only the maximum is given, the minimum is 1/16 of it and the initial
 value 1/4. Version 25 uses 1/8 instead: <code class="docutils literal notranslate"><span class="pre">trust=0.2</span></code> alone was echoed as <code class="docutils literal notranslate"><span class="pre">0.20000000</span> <span class="pre">(max),</span> <span class="pre">0.02500000</span> <span class="pre">(min)</span></code>.</p>
-<p>Trust radius (the largest allowed step), given as maximum, minimum and initial values.</p>
 </section>
 <section id="follow">
 <span id="optimize-follow"></span><h2><code class="docutils literal notranslate"><span class="pre">follow</span></code><a class="headerlink" href="#follow" title="Link to this heading">¶</a></h2>
 <p id="index-4"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 08 t25</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>; version 25 echoes <code class="docutils literal notranslate"><span class="pre">Saddle</span> <span class="pre">point</span> <span class="pre">search:</span> <span class="pre">follow</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code></p>
 <p>Follow the n-th Hessian eigenvector in a saddle-point search.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code> according to <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>; version 25 echoes <code class="docutils literal notranslate"><span class="pre">Saddle</span> <span class="pre">point</span> <span class="pre">search:</span> <span class="pre">follow</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#optimize-saddle"><span class="std std-ref">saddle ($optimize)</span></a></p>
 </section>
 <section id="steps">
@@ -343,7 +343,7 @@ value 1/4. Version 25 uses 1/8 instead: <code class="docutils literal notranslat
 <p id="index-5"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">128</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 03 §8 (step/steps bug); 08 t14, t15</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, qchem.ru forum</p>
 <p>Maximum number of optimization cycles.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -361,7 +361,7 @@ given, the value of <code class="docutils literal notranslate"><span class="pre"
 <p id="index-6"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.6; 04 #518; 08 t11; 08 t76a-d</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum</p>
 <p>Coordinate system for the optimization. The output reports <code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">internal</span></code> or <code class="docutils literal notranslate"><span class="pre">cartesian</span></code>.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -393,7 +393,7 @@ also with <code class="docutils literal notranslate"><span class="pre">cartesian
 <p id="index-7"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 02 §3.2; 04 §0; 08 t26, t42</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum, LIMOR page</p>
 <p>IRC direction. A full IRC takes two runs, one per direction: version 25 with the default <code class="docutils literal notranslate"><span class="pre">back=0</span></code>
 followed one direction only (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">back</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">down</span> <span class="pre">=</span> <span class="pre">1</span></code> in the output), and <code class="docutils literal notranslate"><span class="pre">back=1</span></code> the other one
 (negative <code class="docutils literal notranslate"><span class="pre">distance</span></code> values on the <code class="docutils literal notranslate"><span class="pre">IRC&gt;</span></code> lines). Re-optimize the endpoints afterwards, because
@@ -422,7 +422,7 @@ an IRC does not end at a converged minimum.</p>
 <p id="index-8"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t26, t37</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.
 In a scan the points include both ends: <code class="docutils literal notranslate"><span class="pre">points=4</span></code> gives s = 0, 1/3, 2/3 and 1. An IRC can stop before
 <code class="docutils literal notranslate"><span class="pre">points</span></code> is reached when it arrives at a minimum.</p>
@@ -433,10 +433,10 @@ In a scan the points include both ends: <code class="docutils literal notranslat
 <p id="index-9"><strong>Type:</strong> real<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h (t77h: back=0 only)</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">0.1</span></code> as echoed by version 25 (<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">0.1000000000</span></code>); <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.2 (older version).</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
 this distance apart. The IRC coordinate is reported in bohr·amu^1/2.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">0.1</span></code> as echoed by version 25 (<code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">0.1000000000</span></code>); <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 0.2 (older version).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">Vicinity</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">Stationary</span> <span class="pre">Point(?)</span> <span class="pre">---</span> <span class="pre">STOP.</span></code> ends an IRC that has reached the region of a minimum; in
@@ -453,9 +453,9 @@ stopping farther from the minimum than the smaller radii.</p>
 <p id="index-10"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 03 §5 (type 4); 08 t40b</p>
-<p>Default: generated automatically.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, qchem.ru forum</p>
 <p>List of redundant internal coordinates to use, each given as five integers.</p>
+<p><strong>About the default:</strong> generated automatically.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -493,7 +493,7 @@ stopping farther from the minimum than the smaller radii.</p>
 <p id="index-11"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 02 §3.2; 03 §5 (2010 wish list); 04 #372-#373; 08 t37; 09</p>
+<strong>Sources:</strong> version 25 test runs, version 25 executable, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum, qchem.ru forum, LIMOR page</p>
 <p>Internal coordinates to keep fixed during the optimization, in the same five-integer format as
 <code class="docutils literal notranslate"><span class="pre">coordinates</span></code>. Several entries are separated by commas or spaces.</p>
 <div class="admonition note">
@@ -510,11 +510,11 @@ unknown meaning (<code class="docutils literal notranslate"><span class="pre">fr
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> Å and degrees<br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 03 §5, §8; 04 #278-#279, #373; 08 t37</p>
-<p>Default: computed from the input geometry.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum, qchem.ru forum</p>
 <p>Values of the fixed internal coordinates. For <code class="docutils literal notranslate"><span class="pre">task=scan</span></code>, give all the initial values followed by all the
 final values. <code class="docutils literal notranslate"><span class="pre">val(i)=</span></code> fills the list starting at position i, so values left unset keep their input-geometry
 values.</p>
+<p><strong>About the default:</strong> computed from the input geometry.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Priroda’s dihedral angles have the opposite sign to the convention used by Molden, MOPAC and GAMESS.</strong> Flip
@@ -538,7 +538,7 @@ $end
 <p id="index-13"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Sources:</strong> <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Set <code class="docutils literal notranslate"><span class="pre">gradient=0</span></code> when the starting second derivatives were computed with a different method or basis set.
 This excludes the gradient terms from the internal/Cartesian transformation at the first geometry.
 Otherwise keep the default.</p>
@@ -548,7 +548,7 @@ Otherwise keep the default.</p>
 <p id="index-14"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Sources:</strong> <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Amount of optimization output.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -573,7 +573,7 @@ Otherwise keep the default.</p>
 <p id="index-15"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.6; 04 #481; 09; 08 t15; 08 t30b</p>
+<strong>Sources:</strong> version 25 test runs, version 25 executable, official site files, chemport.ru forum</p>
 <p>Keeps point-group symmetry during the optimization (the optimizer switches to Cartesian coordinates); needs
 <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=</span></code> as well. The official 2023–2025 example inputs write it as the prefix <code class="docutils literal notranslate"><span class="pre">sym=1</span></code>. In version 25,
 together with <code class="docutils literal notranslate"><span class="pre">$molecule</span> <span class="pre">sym=1,0.01</span></code>, the optimizer switched to Cartesian coordinates (<code class="docutils literal notranslate"><span class="pre">Coordinates:</span> <span class="pre">cartesian</span></code>), printed <code class="docutils literal notranslate"><span class="pre">symmetry:</span> <span class="pre">C3v</span> <span class="pre">(6)</span></code> at
@@ -587,7 +587,7 @@ so give both options.</p>
 <p id="index-16"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 01 §4.6; 09</p>
+<strong>Sources:</strong> version 25 executable, official site files</p>
 <p>Used as <code class="docutils literal notranslate"><span class="pre">mod=1</span></code> with <code class="docutils literal notranslate"><span class="pre">task=opt_n1</span></code> (very large systems). In version 25, <code class="docutils literal notranslate"><span class="pre">model</span></code> is read only by the separate
 optimizer of <code class="docutils literal notranslate"><span class="pre">task=opt_n1</span></code>, together with <code class="docutils literal notranslate"><span class="pre">function</span></code>, <code class="docutils literal notranslate"><span class="pre">h0</span></code>, <code class="docutils literal notranslate"><span class="pre">delta</span></code>, <code class="docutils literal notranslate"><span class="pre">fragment</span></code>, <code class="docutils literal notranslate"><span class="pre">steps</span></code>, <code class="docutils literal notranslate"><span class="pre">trust</span></code>,
 <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> and <code class="docutils literal notranslate"><span class="pre">print</span></code>. Meaning not documented.</p>

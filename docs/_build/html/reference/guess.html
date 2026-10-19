@@ -274,9 +274,9 @@
 <p id="index-1"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf (default); 04 #306; 05 §5, §7; 08 t27, t71b</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">read=0</span></code> is the default in <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>. Version 25 without <code class="docutils literal notranslate"><span class="pre">read=1</span></code> prints <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(2)</span></code>, the normal guess.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>Source of the starting SCF vectors.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">read=0</span></code> is the default in <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>. Version 25 without <code class="docutils literal notranslate"><span class="pre">read=1</span></code> prints <code class="docutils literal notranslate"><span class="pre">Initial</span> <span class="pre">Guess</span> <span class="pre">(2)</span></code>, the normal guess.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -306,9 +306,9 @@ follow-up job such as a Hessian after an optimization.</p>
 <p id="index-2"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t74e; 08 t75b; 08 t75d</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">na(1)=1,2,3,…,N</span></code> (the natural order).</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Reordering of the starting vectors for alpha spin.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">na(1)=1,2,3,…,N</span></code> (the natural order).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Accepted in version 25, also together with <code class="docutils literal notranslate"><span class="pre">read=1</span></code>, where it reorders the vectors read from the file. For
@@ -326,9 +326,9 @@ effect was seen only in the iteration counts, as the output does not print the r
 <p id="index-3"><strong>Type:</strong> indexed-array<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t74e; 08 t75b</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">nb(1)=1,2,3,…,N</span></code>.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Reordering of the starting vectors for beta spin.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">nb(1)=1,2,3,…,N</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Accepted in version 25 together with <code class="docutils literal notranslate"><span class="pre">na</span></code>; as for <code class="docutils literal notranslate"><span class="pre">na</span></code>, the output does not print the reordering.</p>
@@ -340,7 +340,7 @@ effect was seen only in the iteration counts, as the output does not print the r
 <p id="index-4"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt (annotation corrupted); 03 #0, §7; 06 §3 (default 0); 08 t60, t73, t74a-d, t79, round 14</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, KNC wiki, qchem.ru forum</p>
 <p>Breaks the equivalence of the alpha and beta electrons in the highest occupied orbital. It is meant for
 open-shell singlets (for example singlet biradicals) and is only sensible with <code class="docutils literal notranslate"><span class="pre">$scf</span> <span class="pre">restrict=0</span></code>.</p>
 <div class="table-wrapper colwidths-auto docutils container">

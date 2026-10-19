@@ -18,7 +18,7 @@ Integral evaluation for RI methods.
 **Type:** switch\
 **Default:** `0`\
 **Status:** undocumented · not verified\
-**Sources:** input.txt (annotation corrupted); 03 #0, §3, §17; 05 §4.2
+**Sources:** `input.txt`, chemport.ru forum, qchem.ru forum
 
 Selects direct (recomputed) Coulomb integrals for RI methods.
 
@@ -50,7 +50,7 @@ $integral direct=1 rout=2 $end
 **Type:** integer\
 **Default:** `0`\
 **Status:** undocumented · not verified\
-**Sources:** input.txt (annotation corrupted); 03 #0
+**Sources:** `input.txt`, qchem.ru forum
 
 Algorithm for the two-electron integrals in correlated methods. `input.txt`'s example uses `rout=2`, but no
 source explains the value 2.

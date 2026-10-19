@@ -51,10 +51,41 @@ LABELS = {
         "type": "Type", "default": "Default", "units": "Units", "status": "Status",
         "sources": "Sources", "unverified": "not verified", "verified": "verified on",
         "value": "Value", "meaning": "Meaning", "example": "Example", "see_also": "See also",
-        "relevant": "Relevant when", "notes": "Note", "none": "none stated",
+        "relevant": "Relevant when", "notes": "Note", "default_note": "About the default", "none": "none stated",
         "groups": "Group", "purpose": "Purpose",
     },
 }
+
+
+# Research-note prefixes in `sources` and the names the Sources page uses for them, in the evidence
+# order of CLAUDE.md. The page shows these names only: note numbers, sections and post numbers mean nothing to a reader.
+SOURCE_NAMES = {
+    "08": "version 25 test runs",
+    "09": "version 25 executable",
+    "01": "official site files",
+    "input.txt": "input.txt",
+    "06": "KNC wiki",
+    "Dft.rtf": "Dft.rtf",
+    "04": "chemport.ru forum",
+    "05": "chemport.ru forum",
+    "03": "qchem.ru forum",
+    "02": "LIMOR page",
+}
+
+
+def source_names(sources):
+    out = []
+    for s in sources:
+        key = s.strip().split()[0].split("(")[0]
+        if key not in SOURCE_NAMES:
+            raise SchemaError(f"unknown source prefix {key!r} in {s!r}; add it to SOURCE_NAMES")
+        name = SOURCE_NAMES[key]
+        name = f"`{name}`" if name.endswith((".txt", ".rtf")) else name
+        if name not in out:
+            out.append(name)
+    order = list(dict.fromkeys(SOURCE_NAMES.values()))  # evidence order, strongest first
+    out.sort(key=lambda n: order.index(n.strip("`")))
+    return ", ".join(out)
 
 
 class SchemaError(ValueError):
@@ -141,12 +172,12 @@ def render_keyword(group, kw, lang, lab):
     fields = [(lab["type"], kw["type"]), (lab["default"], fmt_default(kw, lab))]
     if kw.get("units"):
         fields.append((lab["units"], kw["units"]))
-    fields += [(lab["status"], status), (lab["sources"], "; ".join(kw["sources"]))]
+    fields += [(lab["status"], status), (lab["sources"], source_names(kw["sources"]))]
     lines += [f"**{k}:** {v}" + ("\\" if i < len(fields) - 1 else "") for i, (k, v) in enumerate(fields)]
     lines.append("")
-    if kw.get("default_note"):
-        lines += [f"{lab['default']}: {text(kw['default_note'], lang)}", ""]
     lines += [text(kw["description"], lang).strip(), ""]
+    if kw.get("default_note"):
+        lines += [f"**{lab['default_note']}:** {text(kw['default_note'], lang)}", ""]
     if kw.get("values"):
         # Fixed column widths for LaTeX; automatic sizing truncates long values such as optimize+hessian.
         lines += ["```{tabularcolumns} \\Y{0.3}\\Y{0.7}", "```", "",

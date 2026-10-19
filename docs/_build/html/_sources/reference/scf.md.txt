@@ -18,11 +18,11 @@ Spin restriction, convergence, iteration limits and SCF solver.
 **Type:** switch\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t48
-
-Default: `1` for a closed-shell singlet, otherwise `0`. Version 25 ran O2 with `mult=3` (an even number of electrons) unrestricted without being told.
+**Sources:** version 25 test runs, `input.txt`
 
 Spin restriction.
+
+**About the default:** `1` for a closed-shell singlet, otherwise `0`. Version 25 ran O2 with `mult=3` (an even number of electrons) unrestricted without being told.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -43,14 +43,14 @@ Spin restriction.
 **Type:** list\
 **Default:** `1e-6,1e-3`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.5 (output echo, energy gradient); 05 §5.1; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c; 08 t74b (gradient vs threshold); 08 Slurm (erations); 08 review check (convergence value series)
-
-Default: the first value is for SCF and the second for CP-SCF.
+**Sources:** version 25 test runs, official site files, `input.txt`, chemport.ru forum
 
 SCF and CP-SCF convergence thresholds. The SCF value is a threshold on the energy gradient: in version
 25, an SCF whose gradient stayed near 2·10⁻⁶ ended with `no convergence!` at the default 1e-6. The defaults
 are recommended. To save time in difficult cases you may
 loosen the SCF value to `1e-5` for preliminary geometry optimizations.
+
+**About the default:** the first value is for SCF and the second for CP-SCF.
 
 ```{note}
 **Put `iterations=` before `convergence=`, or give `convergence` two values.** A one-value `convergence=`
@@ -73,13 +73,13 @@ every value tried). Other keywords after a one-value `convergence=`, such as `re
 **Type:** list\
 **Default:** `32,16`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306; 08 t01, t10, t28, t71b
-
-Default: Version 25 echoes `iter=32,16` for DFT. v6, v13 and v15 echoed `16,16`, a HF run for CCSD showed `48,16`, and
-`Dft.rtf` gives 30 (older version). The default may depend on the method and version.
-
+**Sources:** version 25 test runs, official site files, `input.txt`, `Dft.rtf`, chemport.ru forum, LIMOR page
 
 Maximum number of iterations and of microiterations (`iterations=it,micro`).
+
+**About the default:** Version 25 echoes `iter=32,16` for DFT. v6, v13 and v15 echoed `16,16`, a HF run for CCSD showed `48,16`, and
+`Dft.rtf` gives 30 (older version). The default may depend on the method and version.
+
 
 ```{note}
 **An unconverged SCF does not stop the run.** Version 25 prints `no convergence!`, then still prints `E =`,
@@ -102,11 +102,11 @@ Raising the limit moderately is fine: an OH radical failed at the default 32 ite
 **Type:** enum\
 **Default:** `nr`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 04 #320; 08 t07b
-
-Default: `nr` for GGA DFT.
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, chemport.ru forum
 
 Algorithm for solving the SCF equations. If one procedure fails, try the other.
+
+**About the default:** `nr` for GGA DFT.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -132,7 +132,7 @@ $grid accuracy=1e-9 $end
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · not verified\
-**Sources:** input.txt
+**Sources:** `input.txt`
 
 Small-component density in quadratically convergent SCF.
 
@@ -155,10 +155,10 @@ Small-component density in quadratically convergent SCF.
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** current · not verified\
-**Sources:** input.txt
-
-Default: computed from the atom table; see `$atoms core`.
+**Sources:** `input.txt`
 
 Number of core electrons for HF-based methods.
+
+**About the default:** computed from the atom table; see `$atoms core`.
 
 **See also:** {ref}`core ($atoms) <atoms.core>`

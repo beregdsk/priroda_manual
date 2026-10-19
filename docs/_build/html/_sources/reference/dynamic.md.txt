@@ -42,7 +42,7 @@ $end
 **Default:** *none stated*\
 **Units:** hartree\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
+**Sources:** version 25 test runs, version 25 executable, official site files, LIMOR page
 
 Thermostat temperature as kT (inferred: a generator script sets e = T/315775). Version 25 echoes it as `e = 0.00100000`.
 
@@ -55,7 +55,7 @@ Thermostat temperature as kT (inferred: a generator script sets e = T/315775). V
 **Type:** real\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
+**Sources:** version 25 test runs, version 25 executable, official site files, LIMOR page
 
 Time step (inferred). The examples write the prefix `d=`; version 25 echoes it as `dx = 0.03000000`.
 
@@ -68,7 +68,7 @@ Time step (inferred). The examples write the prefix `d=`; version 25 echoes it a
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
+**Sources:** version 25 test runs, version 25 executable, official site files, LIMOR page
 
 Two values: the number of production steps, then the number of equilibration steps. In version 25, `n=20,5`
 gave 26 points, `point -5` … `point 20`, and the echo `L = 20,-5;10`.
@@ -82,7 +82,7 @@ gave 26 points, `point -5` … `point 20`, and the echo `L = 20,-5;10`.
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
+**Sources:** version 25 test runs, version 25 executable, official site files, LIMOR page
 
 Meaning not known. With `m=10`, version 25 printed `;10` at the end of the echo `L = 20,-5;10`.
 
@@ -95,7 +95,7 @@ Meaning not known. With `m=10`, version 25 printed `;10` at the end of the echo 
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2; 08 t69; 09
+**Sources:** version 25 test runs, version 25 executable, official site files, LIMOR page
 
 Run index or random seed (inferred). Version 25 does not echo it.
 
@@ -109,7 +109,7 @@ Run index or random seed (inferred). Version 25 does not echo it.
 **Default:** *none stated*\
 **Units:** bohr³ per atom\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2; 09
+**Sources:** version 25 executable, official site files, LIMOR page
 
 Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (inferred). Written as the prefix `v=` in the generator script.
 
@@ -122,7 +122,7 @@ Volume per atom of a spherical confining cavity, e.g. for simulating a liquid (i
 **Type:** real\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8; 02 §3.2; 09
+**Sources:** version 25 executable, official site files, LIMOR page
 
 Stiffness of the cavity wall (inferred). Written as the prefix `h=` in the generator script.
 
@@ -135,6 +135,6 @@ Stiffness of the cavity wall (inferred). Written as the prefix `h=` in the gener
 **Type:** string\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.8
+**Sources:** official site files
 
 printf-style pattern for snapshot files, which are written as ready-to-run inputs; `%06d` is the frame number.

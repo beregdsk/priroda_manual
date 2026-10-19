@@ -127,10 +127,8 @@ values, including the undocumented ones, is in {ref}`$control theory <control.th
 <!-- src: 01 §5.6; 06 §3 (UO2F2 riDFT, O2 riMP2 examples); 05 §14 -->
 
 :::{warning}
-Hybrid functionals work only with `theory=ridft`. With `theory=dft`, older versions silently drop the exact
-exchange, and newer versions, including version 25, stop right after printing the basis sets with no error message
-in the output. With `theory=tddft`, version 25 still runs a hybrid without its exact exchange and gives wrong
-energies with no warning. See {ref}`$control theory <control.theory>`.
+Hybrid functionals work only with `theory=ridft`. With other `theory=` values they either stop the run with no
+message or silently lose their exact exchange; see {ref}`troubleshooting.hybrid`.
 :::
 <!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08, t46 -->
 
@@ -180,8 +178,8 @@ Other gaps reported by users:
 - no multireference methods (CASSCF, MRCI, CASPT2) that users could get working; <!-- src: 04 #156; control.yaml theory notes -->
 - no freezing of atoms in Cartesian space; only internal coordinates can be fixed
   ({ref}`$optimize fix <optimize.fix>`); <!-- src: 04 #372-#373; 03 §5 -->
-- no general job chaining in one input: `task=optimize+hessian` is the only combined task, and two `task=` lines run
-  only the first. <!-- src: 04 #69, #70, #145 -->
+- no general job chaining in one input: `task=optimize+hessian` is the only combined task, and of two `task=` lines
+  version 25 runs only the last. <!-- src: 04 #69, #70, #145; 08 t81b -->
 
 ## Version history
 

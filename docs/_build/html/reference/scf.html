@@ -274,9 +274,9 @@
 <p id="index-1"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t48</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">1</span></code> for a closed-shell singlet, otherwise <code class="docutils literal notranslate"><span class="pre">0</span></code>. Version 25 ran O2 with <code class="docutils literal notranslate"><span class="pre">mult=3</span></code> (an even number of electrons) unrestricted without being told.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Spin restriction.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code> for a closed-shell singlet, otherwise <code class="docutils literal notranslate"><span class="pre">0</span></code>. Version 25 ran O2 with <code class="docutils literal notranslate"><span class="pre">mult=3</span></code> (an even number of electrons) unrestricted without being told.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -301,12 +301,12 @@
 <p id="index-2"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-6,1e-3</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.5 (output echo, energy gradient); 05 §5.1; 04 #322-#324; 08 t01, t07a, t07b; 08 t22a-c; 08 t74b (gradient vs threshold); 08 Slurm (erations); 08 review check (convergence value series)</p>
-<p>Default: the first value is for SCF and the second for CP-SCF.</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, chemport.ru forum</p>
 <p>SCF and CP-SCF convergence thresholds. The SCF value is a threshold on the energy gradient: in version
 25, an SCF whose gradient stayed near 2·10⁻⁶ ended with <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code> at the default 1e-6. The defaults
 are recommended. To save time in difficult cases you may
 loosen the SCF value to <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for preliminary geometry optimizations.</p>
+<p><strong>About the default:</strong> the first value is for SCF and the second for CP-SCF.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Put <code class="docutils literal notranslate"><span class="pre">iterations=</span></code> before <code class="docutils literal notranslate"><span class="pre">convergence=</span></code>, or give <code class="docutils literal notranslate"><span class="pre">convergence</span></code> two values.</strong> A one-value <code class="docutils literal notranslate"><span class="pre">convergence=</span></code>
@@ -324,10 +324,10 @@ every value tried). Other keywords after a one-value <code class="docutils liter
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">32,16</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.5; 04 #319; 05 §5; Dft.rtf; 02 §3.2 (pri help); 04 #306; 08 t01, t10, t28, t71b</p>
-<p>Default: Version 25 echoes <code class="docutils literal notranslate"><span class="pre">iter=32,16</span></code> for DFT. v6, v13 and v15 echoed <code class="docutils literal notranslate"><span class="pre">16,16</span></code>, a HF run for CCSD showed <code class="docutils literal notranslate"><span class="pre">48,16</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 30 (older version). The default may depend on the method and version.</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum, LIMOR page</p>
 <p>Maximum number of iterations and of microiterations (<code class="docutils literal notranslate"><span class="pre">iterations=it,micro</span></code>).</p>
+<p><strong>About the default:</strong> Version 25 echoes <code class="docutils literal notranslate"><span class="pre">iter=32,16</span></code> for DFT. v6, v13 and v15 echoed <code class="docutils literal notranslate"><span class="pre">16,16</span></code>, a HF run for CCSD showed <code class="docutils literal notranslate"><span class="pre">48,16</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives 30 (older version). The default may depend on the method and version.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>An unconverged SCF does not stop the run.</strong> Version 25 prints <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">convergence!</span></code>, then still prints <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span></code>,
@@ -344,9 +344,9 @@ the orbitals and the properties, and exits with status 0. Search the output for 
 <p id="index-4"><strong>Type:</strong> enum<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">nr</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 04 #320; 08 t07b</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">nr</span></code> for GGA DFT.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>Algorithm for solving the SCF equations. If one procedure fails, try the other.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">nr</span></code> for GGA DFT.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -375,7 +375,7 @@ $grid accuracy=1e-9 $end
 <p id="index-5"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code><br />
 <strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
+<strong>Sources:</strong> <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Small-component density in quadratically convergent SCF.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -401,9 +401,9 @@ $grid accuracy=1e-9 $end
 <p id="index-6"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> current · not verified<br />
-<strong>Sources:</strong> input.txt</p>
-<p>Default: computed from the atom table; see <code class="docutils literal notranslate"><span class="pre">$atoms</span> <span class="pre">core</span></code>.</p>
+<strong>Sources:</strong> <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Number of core electrons for HF-based methods.</p>
+<p><strong>About the default:</strong> computed from the atom table; see <code class="docutils literal notranslate"><span class="pre">$atoms</span> <span class="pre">core</span></code>.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="atoms.html#atoms-core"><span class="std std-ref">core ($atoms)</span></a></p>
 </section>
 </section>

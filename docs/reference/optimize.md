@@ -20,7 +20,7 @@ Geometry optimization, saddle-point search, IRC and relaxed scans.
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 04 #216; 03 §9; 08 t25
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, chemport.ru forum, qchem.ru forum
 
 Type of stationary point sought.
 
@@ -52,11 +52,11 @@ negative value.
 **Default:** `0.0001,0.01`\
 **Units:** au\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.6 (output echo); 08 t11, t12
-
-Default: if only the first value is given, the second is 100 times larger (the recommended setting).
+**Sources:** version 25 test runs, official site files, `input.txt`
 
 Convergence tolerance on the gradient (first value) and on the displacement (second value).
+
+**About the default:** if only the first value is given, the second is 100 times larger (the recommended setting).
 
 **See also:** {ref}`accuracy ($grid) <grid.accuracy>`
 
@@ -69,16 +69,16 @@ Convergence tolerance on the gradient (first value) and on the displacement (sec
 **Type:** list\
 **Default:** `0.125,0.015625`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.6; 04 #319; Dft.rtf; 08 t11, t12, t15, t76b; 08 (review check)
+**Sources:** version 25 test runs, official site files, `input.txt`, `Dft.rtf`, chemport.ru forum
 
-Default: echoed by version 25 as `Trust radius = 0.12500000 (max), 0.01562500 (min)` in internal coordinates, with
+Trust radius (the largest allowed step), given as maximum, minimum and initial values.
+
+**About the default:** echoed by version 25 as `Trust radius = 0.12500000 (max), 0.01562500 (min)` in internal coordinates, with
 symmetry (`sym=1`) and with `cartesian=1`. v13 and v15 echoed 0.2 / 0.0125 in internal coordinates and
 0.1 / 0.00625 with `cartesian=1`; v6 echoed 0.2 / 0.0125 in Cartesian coordinates. `Dft.rtf` gives 0.5
 (older version). `input.txt` says that if only the maximum is given, the minimum is 1/16 of it and the initial
 value 1/4. Version 25 uses 1/8 instead: `trust=0.2` alone was echoed as `0.20000000 (max), 0.02500000 (min)`.
 
-
-Trust radius (the largest allowed step), given as maximum, minimum and initial values.
 
 (optimize.follow)=
 ## `follow`
@@ -89,11 +89,11 @@ Trust radius (the largest allowed step), given as maximum, minimum and initial v
 **Type:** integer\
 **Default:** `1`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 08 t25
-
-Default: `1` according to `Dft.rtf`; version 25 echoes `Saddle point search: follow = 1`.
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`
 
 Follow the n-th Hessian eigenvector in a saddle-point search.
+
+**About the default:** `1` according to `Dft.rtf`; version 25 echoes `Saddle point search: follow = 1`.
 
 **See also:** {ref}`saddle ($optimize) <optimize.saddle>`
 
@@ -106,7 +106,7 @@ Follow the n-th Hessian eigenvector in a saddle-point search.
 **Type:** integer\
 **Default:** `128`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 03 §8 (step/steps bug); 08 t14, t15
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, qchem.ru forum
 
 Maximum number of optimization cycles.
 
@@ -130,7 +130,7 @@ given, the value of `step` is used; give only one of them.
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.6; 04 #518; 08 t11; 08 t76a-d
+**Sources:** version 25 test runs, official site files, `input.txt`, chemport.ru forum
 
 Coordinate system for the optimization. The output reports `Coordinates: internal` or `cartesian`.
 
@@ -158,7 +158,7 @@ also with `cartesian=1`.
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 02 §3.2; 04 §0; 08 t26, t42
+**Sources:** version 25 test runs, `input.txt`, chemport.ru forum, LIMOR page
 
 IRC direction. A full IRC takes two runs, one per direction: version 25 with the default `back=0`
 followed one direction only (`n = 1, back = 0, down = 1` in the output), and `back=1` the other one
@@ -184,7 +184,7 @@ an IRC does not end at a converged minimum.
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t26, t37
+**Sources:** version 25 test runs, `input.txt`
 
 Number of points to optimize in an IRC run, or number of constrained geometry optimizations in a scan run.
 In a scan the points include both ends: `points=4` gives s = 0, 1/3, 2/3 and 1. An IRC can stop before
@@ -201,12 +201,12 @@ In a scan the points include both ends: `points=4` gives s = 0, 1/3, 2/3 and 1. 
 **Type:** real\
 **Default:** `0.1`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 04 #298; 08 t26; 08 t77d-h (t77h: back=0 only)
-
-Default: `0.1` as echoed by version 25 (`r = 0.1000000000`); `Dft.rtf` gives 0.2 (older version).
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, chemport.ru forum
 
 Radius, in mass-weighted coordinates, for IRC path optimization. Adjacent IRC points end up roughly twice
 this distance apart. The IRC coordinate is reported in bohr·amu^1/2.
+
+**About the default:** `0.1` as echoed by version 25 (`r = 0.1000000000`); `Dft.rtf` gives 0.2 (older version).
 
 ```{note}
 `Vicinity of a Stationary Point(?) --- STOP.` ends an IRC that has reached the region of a minimum; in
@@ -227,11 +227,11 @@ stopping farther from the minimum than the smaller radii.
 **Type:** list\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 03 §5 (type 4); 08 t40b
-
-Default: generated automatically.
+**Sources:** version 25 test runs, `input.txt`, qchem.ru forum
 
 List of redundant internal coordinates to use, each given as five integers.
+
+**About the default:** generated automatically.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -259,7 +259,7 @@ List of redundant internal coordinates to use, each given as five integers.
 **Type:** list\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 02 §3.2; 03 §5 (2010 wish list); 04 #372-#373; 08 t37; 09
+**Sources:** version 25 test runs, version 25 executable, `input.txt`, chemport.ru forum, qchem.ru forum, LIMOR page
 
 Internal coordinates to keep fixed during the optimization, in the same five-integer format as
 `coordinates`. Several entries are separated by commas or spaces.
@@ -282,13 +282,13 @@ unknown meaning (`fragment`, `weight`, `local`) and restraint groups (`$anchor`,
 **Default:** *none stated*\
 **Units:** Å and degrees\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 03 §5, §8; 04 #278-#279, #373; 08 t37
-
-Default: computed from the input geometry.
+**Sources:** version 25 test runs, `input.txt`, chemport.ru forum, qchem.ru forum
 
 Values of the fixed internal coordinates. For `task=scan`, give all the initial values followed by all the
 final values. `val(i)=` fills the list starting at position i, so values left unset keep their input-geometry
 values.
+
+**About the default:** computed from the input geometry.
 
 ```{note}
 **Priroda's dihedral angles have the opposite sign to the convention used by Molden, MOPAC and GAMESS.** Flip
@@ -319,7 +319,7 @@ $end
 **Type:** switch\
 **Default:** *none stated*\
 **Status:** current · not verified\
-**Sources:** input.txt
+**Sources:** `input.txt`
 
 Set `gradient=0` when the starting second derivatives were computed with a different method or basis set.
 This excludes the gradient terms from the internal/Cartesian transformation at the first geometry.
@@ -334,7 +334,7 @@ Otherwise keep the default.
 **Type:** switch\
 **Default:** *none stated*\
 **Status:** current · not verified\
-**Sources:** input.txt
+**Sources:** `input.txt`
 
 Amount of optimization output.
 
@@ -355,7 +355,7 @@ Amount of optimization output.
 **Type:** switch\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.6; 04 #481; 09; 08 t15; 08 t30b
+**Sources:** version 25 test runs, version 25 executable, official site files, chemport.ru forum
 
 Keeps point-group symmetry during the optimization (the optimizer switches to Cartesian coordinates); needs
 `$molecule sym=` as well. The official 2023–2025 example inputs write it as the prefix `sym=1`. In version 25,
@@ -375,7 +375,7 @@ so give both options.
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 01 §4.6; 09
+**Sources:** version 25 executable, official site files
 
 Used as `mod=1` with `task=opt_n1` (very large systems). In version 25, `model` is read only by the separate
 optimizer of `task=opt_n1`, together with `function`, `h0`, `delta`, `fragment`, `steps`, `trust`,

@@ -18,11 +18,11 @@ Initial guess for the SCF vectors.
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default); 04 #306; 05 §5, §7; 08 t27, t71b
-
-Default: `read=0` is the default in `Dft.rtf`. Version 25 without `read=1` prints `Initial Guess (2)`, the normal guess.
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, chemport.ru forum
 
 Source of the starting SCF vectors.
+
+**About the default:** `read=0` is the default in `Dft.rtf`. Version 25 without `read=1` prints `Initial Guess (2)`, the normal guess.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -48,11 +48,11 @@ follow-up job such as a Hessian after an optimization.
 **Type:** indexed-array\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t74e; 08 t75b; 08 t75d
-
-Default: `na(1)=1,2,3,…,N` (the natural order).
+**Sources:** version 25 test runs, `input.txt`
 
 Reordering of the starting vectors for alpha spin.
+
+**About the default:** `na(1)=1,2,3,…,N` (the natural order).
 
 ```{note}
 Accepted in version 25, also together with `read=1`, where it reorders the vectors read from the file. For
@@ -77,11 +77,11 @@ $guess na(25)=26,25 $end    # swap the 25th and 26th vectors
 **Type:** indexed-array\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t74e; 08 t75b
-
-Default: `nb(1)=1,2,3,…,N`.
+**Sources:** version 25 test runs, `input.txt`
 
 Reordering of the starting vectors for beta spin.
+
+**About the default:** `nb(1)=1,2,3,…,N`.
 
 ```{note}
 Accepted in version 25 together with `na`; as for `na`, the output does not print the reordering.
@@ -98,7 +98,7 @@ Accepted in version 25 together with `na`; as for `na`, the output does not prin
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt (annotation corrupted); 03 #0, §7; 06 §3 (default 0); 08 t60, t73, t74a-d, t79, round 14
+**Sources:** version 25 test runs, `input.txt`, KNC wiki, qchem.ru forum
 
 Breaks the equivalence of the alpha and beta electrons in the highest occupied orbital. It is meant for
 open-shell singlets (for example singlet biradicals) and is only sensible with `$scf restrict=0`.

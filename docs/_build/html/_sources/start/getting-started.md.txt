@@ -7,7 +7,7 @@ the way. To download the program, see {ref}`obtaining-priroda`; for the examples
 `basis.in`. {doc}`running` covers running the program in more detail.
 
 The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. That
-build date matches the file `p4_d` on the download site; the file `p` there is an older build (2023-06-25), so its
+build date matches the file `p4_d` on the official site; the file `p` there is an older build (2023-06-25), so its
 output can differ from the excerpts here. A few excerpts come from outputs posted by users of older versions; the
 text says so where it matters.
 <!-- src: 08 (header: banner date matches p4_d, p dated 2023-06-25); 01 §2.2 -->
@@ -17,9 +17,8 @@ text says so where it matters.
 Three practical points save most first-time failures.
 
 - **Plain text with Unix line endings.** Write inputs as plain ASCII with LF line endings and straight quotes. A file
-  saved with Windows (CRLF) line endings gives errors such as `molecule input: '' 'cartesian ' ?` or `?rtesian`.
-  One user's `task=scan` silently ran an optimization, and CRLF line endings were blamed for it. Convert such files
-  with `dos2unix`.
+  saved with Windows (CRLF) line endings stops with errors such as `?rtesian`. Convert such files with `dos2unix`
+  (see {ref}`running-input-files`).
   <!-- src: 04 §0 (CRLF symptoms), line 379 (#173/#174), #110, #113 (amge's diagnosis, not a confirmed test) -->
 - **Give the basis file by its full path.** The {ref}`basis <control.basis>` keyword names the basis-set file.
   A relative name works in version 25 when the file is in the directory you run from, also in parallel runs, but
@@ -77,9 +76,8 @@ Group by group:
   `L1` from `basis.in`. `L1` is also the default set of that file, and users compare it to cc-pVDZ in size. <!-- src: 01 §6.1, §6.2; 04 §0 (L1 ≈ cc-pVDZ) -->
 
 :::{note}
-Hybrid functionals such as `PBE1` or `B3LYP` need {ref}`theory=ridft <control.theory>`. With `theory=dft`, older
-versions silently drop the exact exchange, and newer ones abort with no error message. With `theory=tddft`,
-version 25 still silently drops it. See {ref}`$control theory <control.theory>`.
+Hybrid functionals such as `PBE1` or `B3LYP` need {ref}`theory=ridft <control.theory>`; with other `theory=` values
+they fail or give wrong energies without a warning (see {ref}`troubleshooting.hybrid`).
 <!-- src: 04 §0, #96, #99, #307-#310; 08 t08, t46 -->
 :::
 
@@ -276,7 +274,7 @@ the block you need; an IRC prints its points as `IRC>` blocks instead.
 :::{note}
 **If the optimization did not converge**, there are no `MOL>` lines, and the program prints no message about it:
 the output just ends after the last step. Do not restart from the original geometry: start from the last one
-reached. Every step prints the geometry for the next step as a `$molecule` group on lines prefixed with lower-case
+reached. Every step prints the geometry for the next step as a `$molecule` group on lines prefixed with lowercase
 `mol>`, so this keeps the last such block:
 
 ```bash
@@ -291,7 +289,7 @@ with `mol?`. Use the command above instead.
 
 #### The official helper scripts `ge` and `gm`
 
-The download site ships two small bash scripts for exactly this loop. Both take a job name (with or without the `.in`
+The official site ships two small bash scripts for exactly this loop. Both take a job name (with or without the `.in`
 or `.out` extension) and work on `name.in` and `name.out` in place:
 <!-- src: 01 §8 -->
 
@@ -406,6 +404,7 @@ The second command appends only the last `$Energy` group, after `$molecule`. Do 
 the file. Then run `nh3_opt2.in` and go back to step 2. (With the official scripts, `ge nh3_freq` appends the group
 to `nh3_freq.in`; then change its task to `optimize`.)
 
+(qs-thermo)=
 ### Step 7: read the thermochemistry
 
 Once all frequencies are real, the end of the Hessian output holds the zero-point energy and a table of thermodynamic
@@ -472,10 +471,10 @@ $end
 ```
 <!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values; 08 t14 (optimize+hessian works in v25) -->
 
-This is the only combined task in version 25. Two `task=` lines do not chain jobs: users report that only the
-first one runs. `optimize+hessian` existed in Priroda 2, was reported missing in versions 6 and 8, and is available
+This is the only combined task in version 25. Two `task=` lines do not chain jobs: version 25 runs only the last
+one (older versions were reported to run only the first). `optimize+hessian` existed in Priroda 2, was reported missing in versions 6 and 8, and is available
 again from version 9. If the resulting Hessian shows an imaginary frequency, you still need step 6.
-<!-- src: 09 (optimize+hessian is the only combined entry in the task table); 04 §0 (two task= lines, forum report); 03 §8 ("gone in v6/v8", back in v9) -->
+<!-- src: 09 (optimize+hessian is the only combined entry in the task table); 08 t81b; 04 §0 (two task= lines, forum report); 03 §8 ("gone in v6/v8", back in v9) -->
 
 (qs-reading-output)=
 ## Reading the output
@@ -573,7 +572,7 @@ structure.
 
 **pri2mol.** The Perl script `pri2mol` by the forum user amge, available from
 `http://limor1.nioch.nsc.ru/quant/program/pri2mol/`, converts a Priroda output into Molden and XYZ files: geometries,
-vibrations, orbitals, NMR shifts and density critical points. The download site also has `xm`, a molecule viewer
+vibrations, orbitals, NMR shifts and density critical points. The official site also has `xm`, a molecule viewer
 that takes a Priroda input file.
 <!-- src: 04 §0, §14 (URL), #502, #508-#509; 02 §7.1; 01 §2.2 (xm) -->
 

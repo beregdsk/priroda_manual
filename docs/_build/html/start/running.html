@@ -426,11 +426,11 @@ The 64-bit <code class="docutils literal notranslate"><span class="pre">p1.exe</
 <section id="serial-runs">
 <h3>Serial runs<a class="headerlink" href="#serial-runs" title="Link to this heading">¶</a></h3>
 <p>Give the input file first and the output file second:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p input.in output.out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>p<span class="w"> </span>input.in<span class="w"> </span>output.out
 </pre></div>
 </div>
 <p>On Windows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>p1.exe input.in output.out
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>p1.exe input.in output.out
 </pre></div>
 </div>
 <!-- src: 01 §2.1; 04 #64, #127, #504 -->
@@ -454,7 +454,7 @@ capital letter. Version 25 writes to an output file with capital letters in its 
 <h3>Parallel runs on Linux<a class="headerlink" href="#parallel-runs-on-linux" title="Link to this heading">¶</a></h3>
 <p>Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. The official site shows the
 <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> that it ships next to <code class="docutils literal notranslate"><span class="pre">p</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>./mpiexec -np 4 ./p input.in output.out
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mpiexec<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>./p<span class="w"> </span>input.in<span class="w"> </span>output.out
 </pre></div>
 </div>
 <!-- src: 01 §2.1; 08 t21b (works in v25) -->
@@ -473,8 +473,8 @@ the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec
 </pre></div>
 </div>
 <!-- src: 04 #152; 01 §2.6 -->
-<p>The official site gives one example for a cluster build, <code class="docutils literal notranslate"><span class="pre">p_l</span></code> under SLURM:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sbatch -p test -n 16 -t 6 impi ~/bin/p_l file.{in,out}
+<p>The official site gives one example for a cluster build, <code class="docutils literal notranslate"><span class="pre">p_l</span></code> under Slurm:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbatch<span class="w"> </span>-p<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-n<span class="w"> </span><span class="m">16</span><span class="w"> </span>-t<span class="w"> </span><span class="m">6</span><span class="w"> </span>impi<span class="w"> </span>~/bin/p_l<span class="w"> </span>file.<span class="o">{</span><span class="k">in</span>,out<span class="o">}</span>
 </pre></div>
 </div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">impi</span></code> is presumably that cluster’s Intel MPI wrapper script; it is not part of Priroda.</p>
@@ -483,7 +483,7 @@ the bundled <code class="docutils literal notranslate"><span class="pre">mpiexec
 <section id="parallel-runs-on-windows">
 <span id="running-windows-parallel"></span><h3>Parallel runs on Windows<a class="headerlink" href="#parallel-runs-on-windows" title="Link to this heading">¶</a></h3>
 <p>The official site shows this command for a two-process run:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mpirun.exe -np 2 p.exe C60.qm.in C60.qm.w.2.out
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>mpirun.exe -np 2 p.exe C60.qm.in C60.qm.w.2.out
 </pre></div>
 </div>
 <p>The current index has no <code class="docutils literal notranslate"><span class="pre">p.exe</span></code>: use <code class="docutils literal notranslate"><span class="pre">p_190306.exe</span></code> in place of <code class="docutils literal notranslate"><span class="pre">p.exe</span></code>, here and in the commands below.</p>
@@ -502,9 +502,9 @@ parent of the directory that holds <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">/Users</span></code>.</p></li>
 <li><p>If the program is in a system directory such as <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span></code>, run it as administrator.</p></li>
 <li><p>Set <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> and start the run from <code class="docutils literal notranslate"><span class="pre">cmd.exe</span></code>, giving the path of the Priroda executable with forward slashes:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd /d C:\Work
-set "TMPDIR=%TEMP%"
-C:\Priroda\orterun.exe -np 2 C:/Priroda/p_190306.exe file.in file.out
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> /d C:\Work
+<span class="k">set</span> <span class="s2">"TMPDIR=</span><span class="nv">%TEMP%</span><span class="s2">"</span>
+C<span class="p">:</span><span class="nl">\Priroda\orterun.exe</span><span class="c1"> -np 2 C:/Priroda/p_190306.exe file.in file.out</span>
 </pre></div>
 </div>
 </li>
@@ -523,7 +523,7 @@ as the DLLs.</p>
 <p>To get the old files, install Cygwin from an archived snapshot instead of the current one. The Cygwin installation
 page (<a class="reference external" href="https://cygwin.com/install.html">https://cygwin.com/install.html</a>) lists archived snapshots for old Windows versions. The 2016 x86_64 snapshot
 there worked:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>setup-x86_64.exe --allow-unsupported-windows --no-verify --site http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2016/08/30/104235
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>setup-x86_64.exe --allow-unsupported-windows --no-verify --site http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2016/08/30/104235
 </pre></div>
 </div>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">openmpi</span></code> package, then copy the files listed in step 2 from the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory of that installation.</p>
@@ -579,7 +579,7 @@ enough.</p>
 </dd>
 </dl>
 <section id="keeping-scratch-in-memory">
-<h3>Keeping scratch in memory<a class="headerlink" href="#keeping-scratch-in-memory" title="Link to this heading">¶</a></h3>
+<span id="running-ram-disk"></span><h3>Keeping scratch in memory<a class="headerlink" href="#keeping-scratch-in-memory" title="Link to this heading">¶</a></h3>
 <p>With a negative <code class="docutils literal notranslate"><span class="pre">disk</span></code>, <code class="docutils literal notranslate"><span class="pre">memory</span></code> plus |<code class="docutils literal notranslate"><span class="pre">disk</span></code>| is taken by every process, so the sum over all processes must fit
 into the node’s physical RAM, or the run stops at once with <code class="docutils literal notranslate"><span class="pre">malloc(...)</span> <span class="pre">failed</span></code>. With <code class="docutils literal notranslate"><span class="pre">mem=a,b</span></code> and <code class="docutils literal notranslate"><span class="pre">disk=a,b</span></code>,
 rank 0 takes the first values and every other rank the second. One user’s setting for a 24 GB node is
@@ -592,7 +592,7 @@ against 72 minutes on 2 cores with scratch on disk and 86 minutes on 8 cores wit
 <!-- src: 04 #462; 03 §3 (v8 benchmark, mpich/Myrinet, 4 nodes x 2 cores) -->
 </section>
 <section id="where-scratch-files-go">
-<h3>Where scratch files go<a class="headerlink" href="#where-scratch-files-go" title="Link to this heading">¶</a></h3>
+<span id="running-scratch"></span><h3>Where scratch files go<a class="headerlink" href="#where-scratch-files-go" title="Link to this heading">¶</a></h3>
 <p>The scratch directory is taken from <code class="docutils literal notranslate"><span class="pre">path=</span></code>, then from the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> environment variable. The files are named
 <code class="docutils literal notranslate"><span class="pre">tmp&lt;number&gt;.&lt;suffix&gt;</span></code>, for example <code class="docutils literal notranslate"><span class="pre">/tmp/tmp2960.0</span></code> or <code class="docutils literal notranslate"><span class="pre">/tmp/tmp9633.11</span></code>. In version 25 each process of a parallel
 run wrote its own file with a different number and the same suffix (<code class="docutils literal notranslate"><span class="pre">tmp5345.0000</span></code>, <code class="docutils literal notranslate"><span class="pre">tmp5346.0000</span></code>). Priroda deletes
@@ -617,7 +617,7 @@ disk and runs.</p></li>
 <!-- src: 04 #20, #21; 03 §2; 08 w02a-d, w03, w04 -->
 </section>
 <section id="disk-speed">
-<h3>Disk speed<a class="headerlink" href="#disk-speed" title="Link to this heading">¶</a></h3>
+<span id="running-disk-speed"></span><h3>Disk speed<a class="headerlink" href="#disk-speed" title="Link to this heading">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Never put scratch files on NFS or another network file system. On most clusters the home directories are on NFS;
@@ -675,7 +675,8 @@ between runs on different numbers of processes, and an unstable TS search once f
 different <code class="docutils literal notranslate"><span class="pre">-np</span></code>.</p>
 <!-- src: 08 t21b, t63 (vs t32a); 03 §3 (amg, Nov 2008) -->
 </li>
-<li><p><strong>Running across nodes gives no gain for DFT.</strong> Use one node per job.</p>
+<li><p><strong>Running across nodes gives no gain for DFT.</strong> Use one node per DFT job. RI-MP2 is the exception: the version 8
+benchmark under <a class="reference internal" href="#running-ram-disk"><span class="std std-ref">Keeping scratch in memory</span></a> ran 6 times faster on 4 nodes with scratch in RAM than on 2 cores of one node.</p>
 <!-- src: 04 #344, #462; 03 §3 -->
 </li>
 <li><p><strong>Memory per process does not drop</strong> when you add processes, and in a parallel Hessian nearly all of the disk use is
@@ -710,32 +711,33 @@ version 7 MP2 run crashed (signal 8) on more than about 24 cores. Use version 17
 <span id="running-batch"></span><h2>Batch systems<a class="headerlink" href="#batch-systems" title="Link to this heading">¶</a></h2>
 <p>Priroda needs nothing special from a batch system. The job script has to:</p>
 <ol class="arabic simple">
-<li><p>request <strong>one node</strong> and the number of cores you will use (see <a class="reference internal" href="#running-parallel-scaling"><span class="std std-ref">parallel performance above</span></a>);</p></li>
+<li><p>request <strong>one node</strong> and the number of cores you will use (for RI-MP2, see
+<a class="reference internal" href="#running-parallel-scaling"><span class="std std-ref">parallel performance</span></a>);</p></li>
 <li><p>point the scratch to the node’s local disk or to RAM, by exporting <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code> or by <code class="docutils literal notranslate"><span class="pre">path=</span></code> in <code class="docutils literal notranslate"><span class="pre">$system</span></code>;</p></li>
 <li><p>make the memory request cover <code class="docutils literal notranslate"><span class="pre">memory</span></code> + |negative <code class="docutils literal notranslate"><span class="pre">disk</span></code>| for every process;</p></li>
 <li><p>start Priroda with the input and output file names.</p></li>
 </ol>
 <!-- src: 06 §7; 04 #462 -->
-<p>This SLURM script was tested in version 25 on a single-node Slurm 23.11. Directory names and module setup are
+<p>This Slurm script was tested in version 25 on a single-node Slurm 23.11. Directory names and module setup are
 site-specific.</p>
 <!-- src: 08 Slurm tests (s01-s05) -->
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
-#SBATCH --job-name=mol
-#SBATCH --nodes=1
-#SBATCH --ntasks=8
-#SBATCH --time=24:00:00
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mol</span>
+<span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks=8</span>
+<span class="c1">#SBATCH --time=24:00:00</span>
 
-PRIRODA=$HOME/priroda/p                      # full path to the executable
-cd "$SLURM_SUBMIT_DIR"
-export TMPDIR=/local/scratch/$SLURM_JOB_ID   # node-local disk; site-specific
-mkdir -p "$TMPDIR"
+<span class="nv">PRIRODA</span><span class="o">=</span><span class="nv">$HOME</span>/priroda/p<span class="w">                      </span><span class="c1"># full path to the executable</span>
+<span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SLURM_SUBMIT_DIR</span><span class="s2">"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span>/local/scratch/<span class="nv">$SLURM_JOB_ID</span><span class="w">   </span><span class="c1"># node-local disk; site-specific</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span>
 
-env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
-  $HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out   # the mpiexec from the official site
-status=$?
+env<span class="w"> </span>-i<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w"> </span><span class="nv">HOME</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">"</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">$HOME</span>/priroda/mpiexec<span class="w"> </span>-np<span class="w"> </span><span class="s2">"</span><span class="nv">$SLURM_NTASKS</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PRIRODA</span><span class="s2">"</span><span class="w"> </span>mol.in<span class="w"> </span>mol.out<span class="w">   </span><span class="c1"># the mpiexec from the official site</span>
+<span class="nv">status</span><span class="o">=</span><span class="nv">$?</span>
 
-rm -rf "$TMPDIR"
-exit $status
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span>
+<span class="nb">exit</span><span class="w"> </span><span class="nv">$status</span>
 </pre></div>
 </div>
 <p>Two lines matter more than they look:</p>
@@ -753,38 +755,38 @@ This is what happened in the test above.</p></li>
 Slurm’s own log file says <code class="docutils literal notranslate"><span class="pre">CANCELLED</span></code> or <code class="docutils literal notranslate"><span class="pre">CANCELLED</span> <span class="pre">...</span> <span class="pre">DUE</span> <span class="pre">TO</span> <span class="pre">TIME</span> <span class="pre">LIMIT</span></code>. The <code class="docutils literal notranslate"><span class="pre">rm</span></code> at the end of the script does
 not run, so the empty scratch directory stays. To remove it as well, set the clean-up as a trap before starting
 Priroda: replace the lines of the script from <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">-i</span></code> through <code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">$status</span></code> with these.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>trap 'rm -rf "$TMPDIR"' EXIT
-trap 'exit 143' TERM
-env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
-  $HOME/priroda/mpiexec -np "$SLURM_NTASKS" "$PRIRODA" mol.in mol.out &amp;
-wait $!
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">trap</span><span class="w"> </span><span class="s1">'rm -rf "$TMPDIR"'</span><span class="w"> </span>EXIT
+<span class="nb">trap</span><span class="w"> </span><span class="s1">'exit 143'</span><span class="w"> </span>TERM
+env<span class="w"> </span>-i<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w"> </span><span class="nv">HOME</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">"</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">$HOME</span>/priroda/mpiexec<span class="w"> </span>-np<span class="w"> </span><span class="s2">"</span><span class="nv">$SLURM_NTASKS</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PRIRODA</span><span class="s2">"</span><span class="w"> </span>mol.in<span class="w"> </span>mol.out<span class="w"> </span><span class="p">&amp;</span>
+<span class="nb">wait</span><span class="w"> </span><span class="nv">$!</span>
 </pre></div>
 </div>
 <!-- src: 08 Slurm tests (s02-s04) -->
 <p>Two jobs of one process each ran side by side on the same node without trouble, each with its own scratch
 directory. <!-- src: 08 Slurm tests (s05) --></p>
 <p>Under PBS/Torque the same steps read the number of cores from <code class="docutils literal notranslate"><span class="pre">$PBS_NODEFILE</span></code>. This script was not tested; it
-uses <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">-i</span></code> and <code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">$status</span></code> for the same reasons as the SLURM one. Some PBS sites (e.g. KNC) provide a
+uses <code class="docutils literal notranslate"><span class="pre">env</span> <span class="pre">-i</span></code> and <code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">$status</span></code> for the same reasons as the Slurm one. Some PBS sites (e.g. KNC) provide a
 per-job local scratch directory and delete it after the job.</p>
 <!-- src: 06 §7 (PBS_Tutorial) -->
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
-#PBS -N mol
-#PBS -l nodes=1:ppn=8,walltime=24:00:00
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#PBS -N mol</span>
+<span class="c1">#PBS -l nodes=1:ppn=8,walltime=24:00:00</span>
 
-cd "$PBS_O_WORKDIR"
-NP=$(wc -l &lt; "$PBS_NODEFILE")
-export TMPDIR=/local/scratch/$PBS_JOBID      # site-specific
-mkdir -p "$TMPDIR"
+<span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PBS_O_WORKDIR</span><span class="s2">"</span>
+<span class="nv">NP</span><span class="o">=</span><span class="k">$(</span>wc<span class="w"> </span>-l<span class="w"> </span>&lt;<span class="w"> </span><span class="s2">"</span><span class="nv">$PBS_NODEFILE</span><span class="s2">"</span><span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span>/local/scratch/<span class="nv">$PBS_JOBID</span><span class="w">      </span><span class="c1"># site-specific</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span>
 
-env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
-  $HOME/priroda/mpiexec -np "$NP" $HOME/priroda/p mol.in mol.out
-status=$?
+env<span class="w"> </span>-i<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w"> </span><span class="nv">HOME</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">"</span><span class="w"> </span><span class="nv">TMPDIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">$HOME</span>/priroda/mpiexec<span class="w"> </span>-np<span class="w"> </span><span class="s2">"</span><span class="nv">$NP</span><span class="s2">"</span><span class="w"> </span><span class="nv">$HOME</span>/priroda/p<span class="w"> </span>mol.in<span class="w"> </span>mol.out
+<span class="nv">status</span><span class="o">=</span><span class="nv">$?</span>
 
-rm -rf "$TMPDIR"
-exit $status
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$TMPDIR</span><span class="s2">"</span>
+<span class="nb">exit</span><span class="w"> </span><span class="nv">$status</span>
 </pre></div>
 </div>
-<!-- verify: PBS not testable on one PC; same steps as the tested SLURM script -->
+<!-- verify: PBS not testable on one PC; same steps as the tested Slurm script -->
 <p>If <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> on the node is small or has a quota, a large job dies writing a scratch file, for example
 <code class="docutils literal notranslate"><span class="pre">0:</span> <span class="pre">write</span> <span class="pre">file</span> <span class="pre">/tmp/tmp9633.11</span> <span class="pre">(leAX):</span> <span class="pre">...</span></code>. Point the scratch at the cluster’s scratch file system or at RAM.</p>
 <!-- src: 04 #460, #462 -->
@@ -803,7 +805,7 @@ core, after a 6-step optimization that had taken most of that hour.</p>
 <!-- src: 08 t72 (timeout kill); 08 Slurm tests (s02, s04) -->
 </section>
 <section id="input-file-requirements">
-<h2>Input file requirements<a class="headerlink" href="#input-file-requirements" title="Link to this heading">¶</a></h2>
+<span id="running-input-files"></span><h2>Input file requirements<a class="headerlink" href="#input-file-requirements" title="Link to this heading">¶</a></h2>
 <p>The input is a plain text file. Write it in a plain-text editor, not a word processor.</p>
 <ul>
 <li><p><strong>Plain ASCII.</strong> Keywords, values and file names should contain ASCII characters only. Do not save the file as
@@ -833,8 +835,8 @@ less obvious case: an input edited in Word ran <code class="docutils literal not
 with the line <code class="docutils literal notranslate"><span class="pre">'cartesian'</span> <span class="pre">?</span></code>, exit status 1. The Windows build <code class="docutils literal notranslate"><span class="pre">p1.exe</span></code> (version 20) stops in the same place, so
 the input needs Unix line endings on Windows too. <!-- src: 08 t81a, w06 --></p>
 <p>To check and fix the line endings on Linux:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file mol.in        # reports "with CRLF line terminators" if the file has Windows endings
-dos2unix mol.in
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>file<span class="w"> </span>mol.in<span class="w">        </span><span class="c1"># reports "with CRLF line terminators" if the file has Windows endings</span>
+dos2unix<span class="w"> </span>mol.in
 </pre></div>
 </div>
 <p>Running <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code> on a file that already has Unix line endings does no harm. On Windows, Notepad++ and the FAR

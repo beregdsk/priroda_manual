@@ -3,9 +3,8 @@
 
 This chapter is arranged by symptom. Each entry names the likely cause and the fix that users have reported.
 
-Almost everything here comes from user forums, not from the developer. Each fix says how well it is supported:
-"confirmed by several users" means more than one person reported that the fix worked, and "single report" means one
-user posted it and nobody confirmed it. Most reports date from Priroda 6 to 10 (about 2009–2015); a few are from 2008
+Almost everything here comes from user forums, not from the developer. Where a fix rests on a single report that
+nobody confirmed, the entry says so. Most reports date from Priroda 6 to 10 (about 2009–2015); a few are from 2008
 or from 2016–2026. Where a problem may have been fixed in later builds, the entry says so.
 
 :::{note}
@@ -51,7 +50,7 @@ integers, and check the `formula:` line and the atom count at the top of every o
 <!-- src: 03 §5 (Evgeniy, Aug 2011); 08 t09 -->
 
 One experienced user also advises avoiding Cyrillic letters and spaces in the computer name, directory names and file
-names. In the case where he gave this advice, fixing the line endings alone was reported to solve the problem.
+names. In the case where this advice was given, fixing the line endings alone was reported to solve the problem.
 <!-- src: 03 §2 (amg, Nov 2011; Dimylko resolved "after fixing line endings", 03 line 517) -->
 
 ### `task=scan` runs an optimization, or nothing works on one machine
@@ -72,7 +71,7 @@ separate jobs.
   `error opening file ''3z.bas''`, and typographic quotes copied from a web page or word processor fail too.
   <!-- src: 03 §2 (denis, Evgeniy); 04 #64 -->
 - Give an absolute path to the basis file if Priroda is not started from the directory that contains it. One user's
-  parallel run aborted with `MPI_Abort` until he wrote the full basis path in the input. In version 25 a relative
+  parallel run aborted with `MPI_Abort` until the input gave the full basis path. In version 25 a relative
   name worked with the file in the current directory, in a serial and in a 2-process run.
   <!-- src: 04 #152-#154; 08 t03, t59 -->
 - The relativistic basis file `basis4.in` needs {ref}`four=1 <control.four>` in {ref}`$control <group.control>`.
@@ -90,7 +89,7 @@ directory in the command line simply did not exist. Work in a directory you own 
 `PATH`:
 <!-- src: 04 #153, #159-#171 -->
 
-```text
+```bash
 cd ~/priroda
 ./p job.in job.out
 ```
@@ -107,18 +106,16 @@ files, such as `p1.exe C:\Work\mol.in C:\Work\mol.out`, works from any folder.
 
 ### Output stops at `0: opening file /tmp/...` (Windows)
 
-Windows builds put scratch files in `/tmp` when nothing else is set (the output echoes `Disk:   1g '/tmp'`), and
-Windows has no `/tmp`. The current `p1.exe` (version 20) still does this: the output ends with
-`0: opening file /tmp/tmp978.0000` and `process 0 got signal 6`. The Linux version 25 has the same default and also
-honours `TMPDIR`. Set the scratch directory explicitly, for example `$system path=. $end`, or set the `TMPDIR`
-environment variable before starting the program. A RAM disk (negative {ref}`disk <system.disk>`) also avoids the
-problem. This is the oldest known problem in both forums. See {ref}`path <system.path>`.
+**Cause.** With no `path=` and no `TMPDIR`, Priroda puts its scratch files in `/tmp`, which Windows does not have.
+The serial `p1.exe` (version 20) still does this; the output ends with `0: opening file /tmp/tmp978.0000` and
+`process 0 got signal 6`. This is the oldest known problem in both forums.
 <!-- src: 03 §2 (#0, GemmaNC 2009); 04 #20, #21, #128; 08 t64a, t64b, w02a-d, w03 -->
 
-In `cmd.exe`, write `set TMPDIR=%TEMP%` or `set "TMPDIR=%TEMP%"`. With `set TMPDIR="%TEMP%"` the quotes become part
-of the value: the `Disk:` echo shows the quoted path appended to the current directory, and the run stops in the same
-way. <!-- src: 08 w02b, w02c -->
+**Fix.** Add `$system path=. $end`, or in `cmd.exe` run `set "TMPDIR=%TEMP%"` first (without quotes inside the value:
+`set TMPDIR="%TEMP%"` fails the same way). The details are in {ref}`running-scratch`.
+<!-- src: 08 w02b, w02c -->
 
+(troubleshooting.scf-parser)=
 ### `$scf` settings are ignored or rejected
 
 The parser has a problem when {ref}`convergence <scf.convergence>` is directly followed by another keyword in
@@ -138,7 +135,7 @@ values are read; one forum user found that the pair worked only with `procedure=
 
 Further tests on version 25 narrowed it down. The problem is a `convergence=` with **one** value followed by
 `iterations=`, also on the next line; other keywords after it, such as `restrict=` or `procedure=`, were read
-correctly. Both of these work:
+correctly, except `n1=`, which stopped the run with `no '$end' found, 'convergence'`. Both of these work:
 
 ```text
 $scf convergence=1e-7,1e-3 iterations=250 $end
@@ -147,7 +144,7 @@ $scf iterations=250 convergence=1e-7 $end
 
 So give `iterations` before `convergence`, or give `convergence` two values, and confirm the values in the `scf:` echo line of the output, for
 example `scf: conv = 1.0e-07, 1.0e-03; iter=250,16`.
-<!-- src: 08 t22a, t22b, t22c -->
+<!-- src: 08 t22a, t22b, t22c; 08 (review check: n1=, other keywords) -->
 
 (troubleshooting.scf)=
 ## SCF does not converge or diverges
@@ -198,8 +195,7 @@ settings, check:
 
 ### Restart from saved vectors
 
-This technique is recommended on both forums (by amg and by amge, who may be the same person), and the limor1 `pri`
-driver script automates it:
+Experienced users recommend this technique on both forums, and the limor1 `pri` driver script automates it:
 <!-- src: 03 §7 (amg 2010, Gd@C60 mult=7); 04 #306 (amge 2014); 02 §5.3 (pri) -->
 
 1. Cap the number of SCF iterations at a moderate value, for example `iterations=10` in {ref}`$scf <group.scf>`.
@@ -343,7 +339,7 @@ asymmetry.
 
 In a 2011 forum report with non-RI pure DFT (`theory=dft`, PBE or BLYP), `restrict=0 mix=1` likewise converged back
 to the restricted solution, with identical energies and identical alpha and beta orbital energies. With RI-DFT the
-same user got an unrestricted energy about 3 microhartree lower, which he took as broken symmetry. Another user notes
+same user got an unrestricted energy about 3 microhartree lower and took it as broken symmetry. Another user notes
 that pure GGA functionals often do not break symmetry, and suggests a hybrid (with `theory=ridft`) or a Hartree–Fock
 calculation first.
 <!-- src: 03 §7 (Evgeniy Feb 2011: RI-PBE 3.3e-6, RI-BLYP 2.8e-6 hartree lower; qadir) -->
@@ -469,7 +465,7 @@ input geometry, and `$optimize sym=1` keeps that symmetry during the optimizatio
 scrambled structure that has nothing to do with the input geometry.
 
 **Fix.** Flip the sign of every dihedral value taken from another program. The user who hit this confirmed that
-flipping the signs fixed it. The user who answered (amge) had reported the sign difference on qchem.ru in 2008, for
+flipping the signs fixed it. The user who answered had reported the sign difference on qchem.ru in 2008, for
 "all versions" of that time. Version 25 still uses the opposite sign: a Z-matrix dihedral of +100° gave Cartesian
 coordinates with a standard (IUPAC) dihedral of −100°, and a scan whose first `value` was −100° instead of +100°
 started by turning the molecule into its mirror image.
@@ -599,8 +595,8 @@ relayed by a user.
 
 ### Thermochemistry of single atoms
 
-For a monoatomic species the enthalpy has an extra RT, and the rotational entropy is printed as `-inf`. Correct these
-by hand and keep only the translational terms.
+For a monoatomic species the enthalpy has an extra RT, and the rotational entropy is printed as `-inf`. Keep only
+the translational row; see the warning in {ref}`qs-thermo`.
 <!-- src: 03 §15 (Evgeniy, Llewule); 04 #80 (EvgeniX) -->
 
 ### Results depend on the number of processes
@@ -676,35 +672,22 @@ $integral direct=1 $end
 
 See {ref}`direct <integral.direct>`. <!-- src: 05 §4.2 (EvgeniX, amge 2015) -->
 
-### Where scratch files go
+### `0: write file /tmp/...`
 
-Priroda writes scratch files to the directory given by {ref}`path <system.path>`; if `path` is not set, to
-`$TMPDIR`; otherwise, in version 25, to `/tmp` (a 2020 user report said the directory of the input file). On a
-cluster, `/tmp` is often too small or quota-limited for large scratch files. Use the cluster's local scratch area, or
-a RAM disk with a negative `disk` value. Never put scratch on NFS.
-<!-- src: 04 #462, #465; 06 §10; 08 t64 -->
-
-A job that stops while writing a scratch file, with a message like
-`0: write file /tmp/tmp9633.11 (leAX): fd=21 ...`, was reported once (2020) during an analytic Hessian on a cluster.
-An experienced user replied that no `path=` was set, so scratch went to `/tmp`, probably on the master node, where
-quotas can make the job fail, and advised the cluster's scratch area. The asker then tried a `tmp` folder and got the
-same error; the case was not resolved. Check the free space, the quotas and the `disk=` setting.
-<!-- src: 04 #460, #462, #463 -->
+A job that stops while writing a scratch file, with a message like `0: write file /tmp/tmp9633.11 (leAX): fd=21 ...`,
+was reported once (2020) during an analytic Hessian on a cluster. No `path=` was set, so the scratch went to `/tmp`,
+which on clusters is often small or has a quota. Point the scratch at the cluster's scratch area or at RAM (see
+{ref}`running-scratch`), and check the free space, the quotas and the `disk=` setting. The case was not resolved.
+<!-- src: 04 #460, #462, #463, #465; 08 t64 -->
 
 If Priroda does not get enough memory or scratch, it stops with an error; it does not fall back to a slower
 algorithm. <!-- src: 04 #199 -->
 
 ### Slow runs: disk speed
 
-Priroda is very demanding of disk speed. For all methods except GGA DFT, `input.txt` warns that performance
-degrades "terribly" if more than one process reads and writes large files on the same physical drive. Options, in order of
-preference:
-
-- keep scratch in RAM with a negative {ref}`disk <system.disk>` value (one cluster reported a 6× speed-up for
-  RI-MP2);
-- give each process its own physical drive with a colon-separated {ref}`path <system.path>` list;
-- if the job is disk-bound, switch to direct integrals with {ref}`direct=1 <integral.direct>`. This costs CPU time but
-  can be much faster overall: one RI-MP2 optimization went from 2 to 20 steps per night.
+For all methods except GGA DFT, several processes writing large scratch files to one drive slow the run down badly.
+Keep the scratch in RAM, give each process its own drive, or switch to {ref}`direct=1 <integral.direct>`; see
+{ref}`running-disk-speed`.
 <!-- src: 04 #181, #192, #194, #293; 03 §3, §17; input.txt lines 39-41 -->
 
 (troubleshooting.parallel)=
@@ -735,19 +718,10 @@ builds run in parallel only from version 16, and that the v6 Hessian uses at mos
 
 ### Little or no speed-up from more cores
 
-- Reports on DFT scaling within one node disagree: one experienced user found at most 10% more from 32 cores than
-  from 6–8, while another measured 101, 63 and 37 s for the same optimization on 8, 12 and 24 cores.
-  <!-- src: 04 #343, #344 (2016) -->
-- For DFT, running across several nodes gives no gain; one experienced user said so on three occasions. RI-MP2 is
-  different: in a v8 benchmark on 4 nodes with scratch in RAM it ran 6× faster than on 2 cores of one node.
-  <!-- src: 04 #344, #417, #462 (all amge); 03 §3 (v8 benchmark, Evgeniy 2008) -->
-- In a DFT run most of the memory and all the disk I/O stay on rank 0, so spreading a DFT job over nodes does not
-  spread its memory. RI-MP2 distributes memory better.
-  <!-- src: 03 §3 (v8 benchmarks); 04 #185, #343 -->
-- For throughput, several single-core jobs at once can beat one multi-core job when the jobs are not disk-bound.
-  <!-- src: 03 §3 (amg) -->
-- For RI-MP2, the v5 documentation suggests a number of processes that divides the number of occupied orbitals.
-  <!-- src: 06 §10 -->
+This is expected beyond a point. DFT gains nothing across nodes and, by some reports, little beyond 6–8 cores of one
+node; several single-core jobs at once often give more throughput than one parallel job. For RI-MP2, choose a number
+of processes that divides the number of occupied orbitals. The measurements are in {ref}`running-parallel-scaling`.
+<!-- src: 04 #343, #344, #417, #462; 03 §3; 06 §10 -->
 
 ### `Environment is too large (max is 193)`
 
@@ -759,7 +733,7 @@ variables of their own; a Slurm job in a version 25 test had 210.
 
 **Fix.** Start it with a minimal environment:
 
-```text
+```bash
 env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" ./mpiexec -np 4 ./p input.in output.out
 ```
 
@@ -791,53 +765,21 @@ program and home directories, and then to rule out causes one by one. <!-- src: 
 
 ### Windows
 
-Old Windows builds were serial only. For a parallel 64-bit run (version 16 or later), users report this setup:
-<!-- src: 04 #66, #99, #370, #397, #401, #472 -->
+The parallel Windows setup is described in {ref}`running-windows-parallel`. Symptoms reported with it:
 
-1. From a 64-bit Cygwin installation with OpenMPI, copy `cygwin1.dll`, `cyggcc_s-seh-1.dll`, `cygmpi-12.dll`,
-   `cygopen-pal-13.dll`, `cygopen-rte-12.dll` and `orterun.exe` next to the Priroda executable. Take
-   `cygwin1.dll` from the same Cygwin installation, because the other DLLs work only with it. These are the names
-   from a 2017 Cygwin. A 2018 report says newer OpenMPI packages ship `cygopen-pal-40.dll` and
-   `cygopen-rte-40.dll` instead. Those do **not** work with `p_190306.exe`, even renamed: see the note below.
-2. To run outside the Cygwin terminal, create a `dev` directory one level above the directory that holds
-   `cygwin1.dll`, with subdirectories `shm` and `mqueue`. For Priroda in `C:\Priroda 16` that means `C:\dev\shm`
-   and `C:\dev\mqueue`. Without them Cygwin prints `Warning: '/dev/shm' does not exists or is not a directory.`
-3. Set `TMPDIR` and start the run from `cmd.exe`. The command as posted was:
-   ```text
-   cd /d "C:\Priroda 16"
-   set TMPDIR="%TEMP%"
-   "orterun.exe" -np 2 ./p16_64_parallel.exe "C:\Work\file.in" "C:\Work\file.out"
-   ```
-   Write `set "TMPDIR=%TEMP%"` instead: with `set TMPDIR="%TEMP%"` the quotes stay in the value, and the run stops
-   at `0: opening file …` unless the input sets `path=`.
-4. If the program is in a system directory such as `C:\Program Files`, run it as administrator.
-<!-- src: 04 #370 (EvgeniX), #360, #362, #472; 08 w02c, w13 -->
-
-:::{note}
-A test in 2026 on Windows 10 got `p_190306.exe` running on 2 processes. It needed the `-12`/`-13` DLLs and
-`orterun.exe` from an older OpenMPI package (files dated 2016-06-21), installed from an archived 2016 Cygwin
-snapshot. With the
-current `-40` DLLs, or those renamed to the old names, the programs exited at once with code -1073741515
-(0xC0000135, a required DLL was not found). The path of the Priroda executable had to be written with forward
-slashes: `orterun.exe -np 2 C:/Priroda/p_190306.exe file.in file.out`. With backslashes, `orterun.exe` stopped with
-`orterun:exe-not-found`. The full setup is in {ref}`running-windows-parallel`.
-:::
-<!-- src: 08 w13 -->
-
-Network problems reported with this setup:
-
-- On a PC connected by WiFi that also has a LAN adapter, OpenMPI failed with
-  `tcp_peer_send_blocking: send() to socket 12 failed`. Disabling the LAN adapter fixed it (single report).
-  <!-- src: 04 #397 --> <!-- verify -->
-- With the Ethernet cable unplugged, only some cores were used. Plugging it back in fixed it (single report).
+- **The program and `orterun.exe` exit at once and print nothing** (exit code -1073741515, 0xC0000135). The OpenMPI
+  DLLs are too new: `p_190306.exe` needs `cygmpi-12.dll`, `cygopen-pal-13.dll` and `cygopen-rte-12.dll`, and
+  renaming the current `-40` files does not help. A 2021 report of the recipe failing on Windows 10, with no fix
+  posted, probably had this cause. <!-- src: 08 w13; 04 #472 (cause inferred) -->
+- **`orterun:exe-not-found`.** Write the path of the Priroda executable with forward slashes
+  (`C:/Priroda/p_190306.exe`). <!-- src: 08 w13a -->
+- **`Warning: '/dev/shm' does not exists or is not a directory.`** Create the `dev\shm` and `dev\mqueue` directories
+  described there, or start from a Cygwin shell. <!-- src: 04 #360, #370 -->
+- **`agent-not-found` with version 6.** Old builds were serial only; parallel Windows runs need version 16 or later.
+  <!-- src: 04 #398, #401 -->
+- **`tcp_peer_send_blocking: send() to socket 12 failed`** on a Wi-Fi computer that also has a wired adapter:
+  disable the wired adapter (single report). <!-- src: 04 #397 --> <!-- verify -->
+- **Only some cores are used** with the Ethernet cable unplugged: plugging it back in helped (single report).
   <!-- src: 04 #374 --> <!-- verify -->
 
-A 2021 attempt to follow this recipe on Windows 10 failed with an error that was posted only as a screenshot; no fix
-was posted. The `-40` DLLs described in the note above may have been the cause. One user runs Priroda under WSL on Windows instead; no details of that setup were posted.
-<!-- src: 04 #472, #508; cause inferred from 08 w13 -->
-
-:::{warning}
-Not every build on the official site is reliable. A note there once said that the `w64/*.exe` 64-bit Cygwin builds
-had a DFT/ECP bug. If a Windows build misbehaves, ask the developer which build you should be running.
-:::
-<!-- src: 04 #366 -->
+One user runs the Linux build under WSL instead; no details of that setup were posted. <!-- src: 04 #508 -->

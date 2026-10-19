@@ -274,11 +274,11 @@
 <p id="index-1"><strong>Type:</strong> integer<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t13; 08 t44</p>
-<p>Default: 1 (version 25 does not detect the symmetry number).</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Rotational symmetry number for thermochemistry. Version 25 does not detect it and uses 1 unless <code class="docutils literal notranslate"><span class="pre">sigma=</span></code> is
 given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) for NH3, σ = 3). With
 <code class="docutils literal notranslate"><span class="pre">sigma=3</span></code>, NH3 gave S = 46.03 cal/(mol·K) at 298.15 K.</p>
+<p><strong>About the default:</strong> 1 (version 25 does not detect the symmetry number).</p>
 </section>
 <section id="temperature">
 <span id="thermo-temperature"></span><h2><code class="docutils literal notranslate"><span class="pre">temperature</span></code><a class="headerlink" href="#temperature" title="Link to this heading">¶</a></h2>
@@ -286,11 +286,11 @@ given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) 
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">298.15</span></code><br />
 <strong>Units:</strong> K<br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; Dft.rtf; 08 t13; 08 t44; 04 #80, #476</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">298.15</span></code>: version 25 prints <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span>&#160; <span class="pre">298.150</span> <span class="pre">K</span></code>, as <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> states. Older posted outputs also show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code>
-(2011, 2021), so set <code class="docutils literal notranslate"><span class="pre">temperature=</span></code> explicitly when comparing with other versions.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code>, chemport.ru forum</p>
 <p>Temperatures at which thermochemistry is printed, up to 50 values. Each temperature gets its own table:
 <code class="docutils literal notranslate"><span class="pre">temperature=200,298.15,400</span></code> printed three.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">298.15</span></code>: version 25 prints <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span>&#160; <span class="pre">298.150</span> <span class="pre">K</span></code>, as <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> states. Older posted outputs also show <code class="docutils literal notranslate"><span class="pre">298.000</span> <span class="pre">K</span></code>
+(2011, 2021), so set <code class="docutils literal notranslate"><span class="pre">temperature=</span></code> explicitly when comparing with other versions.</p>
 </section>
 <section id="mass">
 <span id="thermo-mass"></span><h2><code class="docutils literal notranslate"><span class="pre">mass</span></code><a class="headerlink" href="#mass" title="Link to this heading">¶</a></h2>
@@ -298,7 +298,7 @@ given, which overestimates the rotational entropy by R ln σ (2.18 cal/(mol·K) 
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> amu<br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> Dft.rtf</p>
+<strong>Sources:</strong> <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code></p>
 <p>Atomic masses for vibrational analysis and thermochemistry. Use it to redo the analysis for other isotopes
 from a stored Hessian (<code class="docutils literal notranslate"><span class="pre">$Energy</span></code>) without recomputing it.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="molecule.html#molecule-mass"><span class="std std-ref">mass ($molecule)</span></a>, <a class="reference internal" href="Energy.html#energy-h"><span class="std std-ref">H ($Energy)</span></a></p>

@@ -26,7 +26,7 @@ copy with one H moved by 0.043 Å counted as a new structure.
 **Type:** real\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.9; 09; 08 (review check)
+**Sources:** version 25 test runs, version 25 executable, official site files
 
 Threshold for treating two structures as identical: structures closer than this count as copies. The official
 example uses `dist=0.01` on 157 MD snapshots, each in its own `$molecule` block. How the distance is measured

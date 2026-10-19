@@ -18,7 +18,7 @@ Job type, level of theory, basis-set file, Hamiltonian and printing.
 **Type:** enum\
 **Default:** `gradient`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default gradient, check); 02 §3.2 (pri: default gradient); 03 §5; 04 #69-#73, #145, #478, #497; 01 §4.2; 08 t02, t18, t26, t34, t36, t37; 09; 08 t50, t57a; 08 t13, t14, t56, t69a-f
+**Sources:** version 25 test runs, version 25 executable, official site files, `input.txt`, `Dft.rtf`, chemport.ru forum, qchem.ru forum, LIMOR page
 
 Job type.
 
@@ -69,7 +69,7 @@ The version 25 program contains further task names (`irc4`, `pathx`, `pathr`, `c
 **Type:** enum\
 **Default:** `dft`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default dft); 06 §3 (v5 ab initio list); 03 §5 (Evgeniy 2011 test); 04 #96, #99, #307-#310; 01 §3.1, §4.2; 08 t02, t08, t17, t31-t33, t38, t39, t46; 08 t50b; 08 t78a-d; 09
+**Sources:** version 25 test runs, version 25 executable, official site files, `input.txt`, KNC wiki, `Dft.rtf`, chemport.ru forum, qchem.ru forum
 
 Theoretical method.
 
@@ -130,7 +130,7 @@ either crash or return the HF energy. The version 25 program contains many more 
 **Type:** list\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t33
+**Sources:** version 25 test runs, `input.txt`
 
 For excited-state methods. The first value is the excited state n whose properties are computed; the second
 is the number of states N included in the iterative solution of the equations (`state=n,N`). In version 25,
@@ -146,13 +146,13 @@ wavelength, transition moment, oscillator strength), and `E  =` was the total en
 **Type:** string\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 01 §4.11, §6; 03 §5, §6; 04 §0, #257; 08 t03
-
-Default: basis-set data are read from the input file itself.
+**Sources:** version 25 test runs, official site files, `input.txt`, `Dft.rtf`, chemport.ru forum, qchem.ru forum
 
 Name of the file containing the basis-set data (and ECPs, or QM parameters for `qm.in`). The name may be
 double-quoted, which is needed when the path contains special characters. Use straight quotes: typographic
 quotes break parsing.
+
+**About the default:** basis-set data are read from the input file itself.
 
 ```{note}
 Shipped files include `basis.in` (Λ/L family, default set `L1`), `basis4.in` (scalar-relativistic L family;
@@ -173,7 +173,7 @@ runs.
 **Type:** switch\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §3.3; 04 #207-#208, #336; 08 t35, t49
+**Sources:** version 25 test runs, official site files, `input.txt`, chemport.ru forum
 
 Four-component option.
 
@@ -200,11 +200,11 @@ Required with the relativistic basis file `basis4.in`. Without it, version 25 st
 **Type:** enum\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §4.2; 06 §1; 08 t35; 09 (dual)
-
-Default: `finite` for four-component theory, `point` for non-relativistic theory.
+**Sources:** version 25 test runs, version 25 executable, official site files, `input.txt`, KNC wiki
 
 Nuclear model. The official example inputs write it as `nuc=finite`.
+
+**About the default:** `finite` for four-component theory, `point` for non-relativistic theory.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -232,7 +232,7 @@ element.
 **Type:** flags\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 06 §3; 04 #376, #460, #498-#502, #509; 08 t01, t45
+**Sources:** version 25 test runs, `input.txt`, KNC wiki, `Dft.rtf`, chemport.ru forum
 
 Printing options. Flags are appended one after another; `+` switches an option on and `-` switches it off.
 The leading `+` can be omitted (`print=charges+bonds`).
@@ -265,13 +265,13 @@ $control print=+vectors+molden $end
 **Type:** enum\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 09; 08 t53
-
-Default: analytic second derivatives where the method has them (GGA DFT), numerical otherwise.
+**Sources:** version 25 test runs, version 25 executable
 
 How `task=hessian` computes the second derivatives. Not in any written source; found in the program and
 tested in version 25, where `derivative=numeric` with `theory=dft` gave the same water frequencies as the
 analytic Hessian to within 0.2 cm⁻¹.
+
+**About the default:** analytic second derivatives where the method has them (GGA DFT), numerical otherwise.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```
@@ -292,7 +292,7 @@ analytic Hessian to within 0.2 cm⁻¹.
 **Type:** string\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf; 04 #306; 08 t27
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`, chemport.ru forum
 
 File name for saving SCF vectors. With `$guess read=1` the vectors are read back from the same file.
 This is the basis of the SCF restart technique. In version 25, a run with `$guess read=1` prints

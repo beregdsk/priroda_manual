@@ -48,7 +48,7 @@ Text after `$end`, such as the `Energy = …` lines that helper scripts append, 
 **Type:** integer\
 **Default:** `0`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default); 08 t29
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`
 
 Molecular charge.
 
@@ -61,7 +61,7 @@ Molecular charge.
 **Type:** integer\
 **Default:** `1`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; Dft.rtf (default); 08 t10
+**Sources:** version 25 test runs, `input.txt`, `Dft.rtf`
 
 Spin multiplicity, 2S+1.
 
@@ -75,7 +75,7 @@ Spin multiplicity, 2S+1.
 **Default:** *none stated*\
 **Units:** amu\
 **Status:** current · not verified\
-**Sources:** input.txt
+**Sources:** `input.txt`
 
 Optional atomic mass for isotopes, written as `mass=` after an atom's coordinates on the same atom line, in
 both Cartesian and Z-matrix input. Not tested in version 25.
@@ -95,13 +95,13 @@ both Cartesian and Z-matrix input. Not tested in version 25.
 **Type:** string\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 03 §5 (default set); 01 §4.11, §6.2; 06 §1; 08 t01 (set=L1), t70a (set=L2)
-
-Default: the set named by `default=` in the basis-file header (`L1` in `basis.in`).
+**Sources:** version 25 test runs, official site files, `input.txt`, KNC wiki, qchem.ru forum
 
 Basis set for the atoms that follow. The name must match one in the basis-set file. It can appear several
 times in the group. The orbital basis is paired with its own auxiliary (fitting) basis, so you cannot
 combine arbitrary orbital and auxiliary sets.
+
+**About the default:** the set named by `default=` in the basis-file header (`L1` in `basis.in`).
 
 **Example:**
 
@@ -127,7 +127,7 @@ $end
 **Type:** string\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.7; 08 t47
+**Sources:** version 25 test runs, official site files
 
 Length unit of the coordinates. The default unit is Å. In version 25, water given in bohr with `unit=b` gave the same geometry and energy as in Å.
 
@@ -147,7 +147,7 @@ Length unit of the coordinates. The default unit is Å. In version 25, water giv
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.7; 04 #481; 08 t15; 08 t30a
+**Sources:** version 25 test runs, official site files, chemport.ru forum
 
 Used as `sym=1,0.01` in the official 2023–2025 example inputs, apparently to enable symmetry with tolerance 0.01.
 Newer versions report the detected point group (`symmetry: D6h`). In version 25, `sym=1,0.01` on a slightly

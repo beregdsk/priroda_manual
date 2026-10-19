@@ -272,7 +272,7 @@ followed by a Hessian that confirms the structure is a minimum, and the parts of
 the way. To download the program, see <a class="reference internal" href="running.html#obtaining-priroda"><span class="std std-ref">Obtaining Priroda</span></a>; for the examples you need one Linux executable and
 <code class="docutils literal notranslate"><span class="pre">basis.in</span></code>. <a class="reference internal" href="running.html"><span class="doc">Installing and running</span></a> covers running the program in more detail.</p>
 <p>The example inputs were run on Priroda 25 (2025.02.28), and most output excerpts are copied from those runs. That
-build date matches the file <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> on the download site; the file <code class="docutils literal notranslate"><span class="pre">p</span></code> there is an older build (2023-06-25), so its
+build date matches the file <code class="docutils literal notranslate"><span class="pre">p4_d</span></code> on the official site; the file <code class="docutils literal notranslate"><span class="pre">p</span></code> there is an older build (2023-06-25), so its
 output can differ from the excerpts here. A few excerpts come from outputs posted by users of older versions; the
 text says so where it matters.</p>
 <!-- src: 08 (header: banner date matches p4_d, p dated 2023-06-25); 01 §2.2 -->
@@ -281,9 +281,8 @@ text says so where it matters.</p>
 <p>Three practical points save most first-time failures.</p>
 <ul>
 <li><p><strong>Plain text with Unix line endings.</strong> Write inputs as plain ASCII with LF line endings and straight quotes. A file
-saved with Windows (CRLF) line endings gives errors such as <code class="docutils literal notranslate"><span class="pre">molecule</span> <span class="pre">input:</span> <span class="pre">''</span> <span class="pre">'cartesian</span> <span class="pre">'</span> <span class="pre">?</span></code> or <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code>.
-One user’s <code class="docutils literal notranslate"><span class="pre">task=scan</span></code> silently ran an optimization, and CRLF line endings were blamed for it. Convert such files
-with <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code>.</p>
+saved with Windows (CRLF) line endings stops with errors such as <code class="docutils literal notranslate"><span class="pre">?rtesian</span></code>. Convert such files with <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code>
+(see <a class="reference internal" href="running.html#running-input-files"><span class="std std-ref">Input file requirements</span></a>).</p>
 <!-- src: 04 §0 (CRLF symptoms), line 379 (#173/#174), #110, #113 (amge's diagnosis, not a confirmed test) -->
 </li>
 <li><p><strong>Give the basis file by its full path.</strong> The <a class="reference internal" href="../reference/control.html#control-basis"><span class="std std-ref">basis</span></a> keyword names the basis-set file.
@@ -343,9 +342,8 @@ coordinates (Å), one line per atom: atomic number, then x, y, z. <a class="refe
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Hybrid functionals such as <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> or <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> need <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=ridft</span></a>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, older
-versions silently drop the exact exchange, and newer ones abort with no error message. With <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>,
-version 25 still silently drops it. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+<p>Hybrid functionals such as <code class="docutils literal notranslate"><span class="pre">PBE1</span></code> or <code class="docutils literal notranslate"><span class="pre">B3LYP</span></code> need <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">theory=ridft</span></a>; with other <code class="docutils literal notranslate"><span class="pre">theory=</span></code> values
+they fail or give wrong energies without a warning (see <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-hybrid"><span class="std std-ref">Hybrid functional silently ignored</span></a>).</p>
 <!-- src: 04 §0, #96, #99, #307-#310; 08 t08, t46 -->
 </div>
 <p>Run it:</p>
@@ -518,7 +516,7 @@ the block you need; an IRC prints its points as <code class="docutils literal no
 <p class="admonition-title">Note</p>
 <p><strong>If the optimization did not converge</strong>, there are no <code class="docutils literal notranslate"><span class="pre">MOL&gt;</span></code> lines, and the program prints no message about it:
 the output just ends after the last step. Do not restart from the original geometry: start from the last one
-reached. Every step prints the geometry for the next step as a <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group on lines prefixed with lower-case
+reached. Every step prints the geometry for the next step as a <code class="docutils literal notranslate"><span class="pre">$molecule</span></code> group on lines prefixed with lowercase
 <code class="docutils literal notranslate"><span class="pre">mol&gt;</span></code>, so this keeps the last such block:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^mol&gt;//p'</span><span class="w"> </span>nh3.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'/\$molecule/{buf=""} {buf=buf $0 "\n"} END{printf "%s", buf}'</span>
 </pre></div>
@@ -530,7 +528,7 @@ with <code class="docutils literal notranslate"><span class="pre">mol?</span></c
 </div>
 <section id="the-official-helper-scripts-ge-and-gm">
 <h4>The official helper scripts <code class="docutils literal notranslate"><span class="pre">ge</span></code> and <code class="docutils literal notranslate"><span class="pre">gm</span></code><a class="headerlink" href="#the-official-helper-scripts-ge-and-gm" title="Link to this heading">¶</a></h4>
-<p>The download site ships two small bash scripts for exactly this loop. Both take a job name (with or without the <code class="docutils literal notranslate"><span class="pre">.in</span></code>
+<p>The official site ships two small bash scripts for exactly this loop. Both take a job name (with or without the <code class="docutils literal notranslate"><span class="pre">.in</span></code>
 or <code class="docutils literal notranslate"><span class="pre">.out</span></code> extension) and work on <code class="docutils literal notranslate"><span class="pre">name.in</span></code> and <code class="docutils literal notranslate"><span class="pre">name.out</span></code> in place:</p>
 <!-- src: 01 §8 -->
 <ul class="simple">
@@ -635,7 +633,7 @@ the file. Then run <code class="docutils literal notranslate"><span class="pre">
 to <code class="docutils literal notranslate"><span class="pre">nh3_freq.in</span></code>; then change its task to <code class="docutils literal notranslate"><span class="pre">optimize</span></code>.)</p>
 </section>
 <section id="step-7-read-the-thermochemistry">
-<h3>Step 7: read the thermochemistry<a class="headerlink" href="#step-7-read-the-thermochemistry" title="Link to this heading">¶</a></h3>
+<span id="qs-thermo"></span><h3>Step 7: read the thermochemistry<a class="headerlink" href="#step-7-read-the-thermochemistry" title="Link to this heading">¶</a></h3>
 <p>Once all frequencies are real, the end of the Hessian output holds the zero-point energy and a table of thermodynamic
 functions. The KNC wiki points to the string <code class="docutils literal notranslate"><span class="pre">ZPVE</span></code>. For <code class="docutils literal notranslate"><span class="pre">nh3_freq.in</span></code> (with <code class="docutils literal notranslate"><span class="pre">sigma=3</span></code>), version 25 printed:</p>
 <!-- src: 06 §5 step 14; 08 (review check) -->
@@ -694,10 +692,10 @@ $end
 </pre></div>
 </div>
 <!-- src: 04 #73, #478 (Metalian); keywords/control.yaml task values; 08 t14 (optimize+hessian works in v25) -->
-<p>This is the only combined task in version 25. Two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines do not chain jobs: users report that only the
-first one runs. <code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code> existed in Priroda 2, was reported missing in versions 6 and 8, and is available
+<p>This is the only combined task in version 25. Two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines do not chain jobs: version 25 runs only the last
+one (older versions were reported to run only the first). <code class="docutils literal notranslate"><span class="pre">optimize+hessian</span></code> existed in Priroda 2, was reported missing in versions 6 and 8, and is available
 again from version 9. If the resulting Hessian shows an imaginary frequency, you still need step 6.</p>
-<!-- src: 09 (optimize+hessian is the only combined entry in the task table); 04 §0 (two task= lines, forum report); 03 §8 ("gone in v6/v8", back in v9) -->
+<!-- src: 09 (optimize+hessian is the only combined entry in the task table); 08 t81b; 04 §0 (two task= lines, forum report); 03 §8 ("gone in v6/v8", back in v9) -->
 </section>
 </section>
 <section id="reading-the-output">
@@ -812,7 +810,7 @@ Molden reads (the symbol list covers H to Ar; extend it for heavier elements):</
 structure.</p>
 <p><strong>pri2mol.</strong> The Perl script <code class="docutils literal notranslate"><span class="pre">pri2mol</span></code> by the forum user amge, available from
 <code class="docutils literal notranslate"><span class="pre">http://limor1.nioch.nsc.ru/quant/program/pri2mol/</span></code>, converts a Priroda output into Molden and XYZ files: geometries,
-vibrations, orbitals, NMR shifts and density critical points. The download site also has <code class="docutils literal notranslate"><span class="pre">xm</span></code>, a molecule viewer
+vibrations, orbitals, NMR shifts and density critical points. The official site also has <code class="docutils literal notranslate"><span class="pre">xm</span></code>, a molecule viewer
 that takes a Priroda input file.</p>
 <!-- src: 04 §0, §14 (URL), #502, #508-#509; 02 §7.1; 01 §2.2 (xm) -->
 </section>

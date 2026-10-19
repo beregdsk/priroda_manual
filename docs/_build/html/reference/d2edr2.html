@@ -276,16 +276,16 @@
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0.001</span></code><br />
 <strong>Units:</strong> au (bohr)<br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t32a, t55 (raw output)</p>
-<p>Default: version 25 prints <code class="docutils literal notranslate"><span class="pre">Step</span> <span class="pre">0.00100000</span> <span class="pre">au</span> <span class="pre">FORWARD</span>&#160; <span class="pre">for</span> <span class="pre">coordinate</span>&#160;&#160; <span class="pre">1:</span></code> for each displacement.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Step length for numerical differentiation of the potential-energy surface.</p>
+<p><strong>About the default:</strong> version 25 prints <code class="docutils literal notranslate"><span class="pre">Step</span> <span class="pre">0.00100000</span> <span class="pre">au</span> <span class="pre">FORWARD</span>&#160; <span class="pre">for</span> <span class="pre">coordinate</span>&#160;&#160; <span class="pre">1:</span></code> for each displacement.</p>
 </section>
 <section id="displace">
 <span id="d2edr2-displace"></span><h2><code class="docutils literal notranslate"><span class="pre">displace</span></code><a class="headerlink" href="#displace" title="Link to this heading">¶</a></h2>
 <p id="index-2"><strong>Type:</strong> switch<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">2</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t32a; 08 t55</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -315,11 +315,11 @@
 <p id="index-3"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">0,-1</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 08 t55; 08 t32a, t32b, t53, t65</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">0,-1</span></code> runs every step from 0 to 3N (or 6N) in a single run.</p>
+<strong>Sources:</strong> version 25 test runs, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code></p>
 <p>The first and last displacement steps to do in this run. The reference geometry is step 0, and the displaced
 geometries are 1 … 3N (one displacement) or 1 … 6N (two displacements). This lets a numerical Hessian be split
 across separate runs and then combined.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">0,-1</span></code> runs every step from 0 to 3N (or 6N) in a single run.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Not the same keyword as <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">steps</span></code>. Tested in version 25 with water (<code class="docutils literal notranslate"><span class="pre">ridft</span></code>, <code class="docutils literal notranslate"><span class="pre">displace=1</span></code>, steps 0–9):

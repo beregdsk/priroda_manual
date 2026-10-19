@@ -21,11 +21,11 @@ Numerical Hessian by finite differences of the gradient.
 **Default:** `0.001`\
 **Units:** au (bohr)\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t32a, t55 (raw output)
-
-Default: version 25 prints `Step 0.00100000 au FORWARD  for coordinate   1:` for each displacement.
+**Sources:** version 25 test runs, `input.txt`
 
 Step length for numerical differentiation of the potential-energy surface.
+
+**About the default:** version 25 prints `Step 0.00100000 au FORWARD  for coordinate   1:` for each displacement.
 
 (d2edr2.displace)=
 ## `displace`
@@ -36,7 +36,7 @@ Step length for numerical differentiation of the potential-energy surface.
 **Type:** switch\
 **Default:** `2`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t32a; 08 t55
+**Sources:** version 25 test runs, `input.txt`
 
 Number of displacements per coordinate. More accurate numerical Hessians may also need tighter SCF convergence.
 
@@ -63,13 +63,13 @@ With the default, version 25 printed a FORWARD and a BACKWARD step for every coo
 **Type:** list\
 **Default:** `0,-1`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t55; 08 t32a, t32b, t53, t65
-
-Default: `0,-1` runs every step from 0 to 3N (or 6N) in a single run.
+**Sources:** version 25 test runs, `input.txt`
 
 The first and last displacement steps to do in this run. The reference geometry is step 0, and the displaced
 geometries are 1 … 3N (one displacement) or 1 … 6N (two displacements). This lets a numerical Hessian be split
 across separate runs and then combined.
+
+**About the default:** `0,-1` runs every step from 0 to 3N (or 6N) in a single run.
 
 ```{note}
 Not the same keyword as `$optimize steps`. Tested in version 25 with water (`ridft`, `displace=1`, steps 0–9):

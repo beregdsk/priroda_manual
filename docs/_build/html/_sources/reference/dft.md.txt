@@ -18,11 +18,11 @@ Exchange–correlation functional.
 **Type:** enum\
 **Default:** `PBE`\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 01 §3.2; 03 §5 (strings); 04 §0, #347 (no D3); 08 t02; 08 t31, t38
-
-Default: `PBE` (the default GGA); `PBE1` for `theory=ridft`.
+**Sources:** version 25 test runs, official site files, `input.txt`, chemport.ru forum, qchem.ru forum
 
 Exchange–correlation approximation for DFT methods.
+
+**About the default:** `PBE` (the default GGA); `PBE1` for `theory=ridft`.
 
 ```{tabularcolumns} \Y{0.3}\Y{0.7}
 ```

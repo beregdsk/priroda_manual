@@ -37,7 +37,7 @@ eng>$end
 **Default:** *none stated*\
 **Units:** hartree\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.10; 02 §3.2; 08 t01
+**Sources:** version 25 test runs, official site files, LIMOR page
 
 Total energy.
 
@@ -51,7 +51,7 @@ Total energy.
 **Default:** *none stated*\
 **Units:** au\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.10; 02 §3.2; 08 t02
+**Sources:** version 25 test runs, official site files, LIMOR page
 
 Cartesian gradient (3N values).
 
@@ -65,7 +65,7 @@ Cartesian gradient (3N values).
 **Default:** *none stated*\
 **Units:** au\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 02 §3.2; 08 t13; 08 t24, t25, t41, t41b; 08 t55
+**Sources:** version 25 test runs, LIMOR page
 
 Hessian as a lower triangle, 3N(3N+1)/2 values. Written by `task=hessian` on `eng>` lines; in version 25 a
 `saddle=1` optimization and an IRC read it back from an appended `$Energy` group. If the input holds several
@@ -84,7 +84,7 @@ numerical Hessian are all read by the combining run (`$d2edr2 steps=-1`).
 **Default:** *none stated*\
 **Units:** au\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 01 §4.10; 02 §3.2; 08 t01
+**Sources:** version 25 test runs, official site files, LIMOR page
 
 Dipole moment (3 values), written next to `E=`.
 
@@ -97,7 +97,7 @@ Dipole moment (3 values), written next to `E=`.
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 02 §3.2 (inferred); 08 t13; 08 t36
+**Sources:** version 25 test runs, LIMOR page
 
 Dipole derivatives with respect to nuclear coordinates (inferred from use: IR/Raman intensities).
 
@@ -110,7 +110,7 @@ Dipole derivatives with respect to nuclear coordinates (inferred from use: IR/Ra
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · not verified\
-**Sources:** 02 §3.2; 08 t13; 08 t36
+**Sources:** version 25 test runs, LIMOR page
 
 Static dipole polarizability as a lower triangle (6 values), written with a negative sign (inferred: the
 second derivative of the energy with respect to the field). Written by an analytic Hessian (`eng>`) and by
@@ -127,7 +127,7 @@ second derivative of the energy with respect to the field). Written by an analyt
 **Type:** list\
 **Default:** *none stated*\
 **Status:** undocumented · verified on 25 (2025.02.28)\
-**Sources:** 08 t36; 08 t56; 04 #381 (relayed); 09
+**Sources:** version 25 test runs, version 25 executable, chemport.ru forum
 
 Polarizability derivatives with respect to the nuclear coordinates. Written by `task=dipole` on `num>` lines;
 appended to a Hessian input, they give the Raman activities and depolarization ratios.

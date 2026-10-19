@@ -25,7 +25,9 @@ The extension validates on every build:
 - `type` and `status` enums;
 - at least one entry in `sources`;
 - no duplicate names;
-- every `see_also` anchor exists.
+- every `see_also` anchor exists;
+- every `sources` prefix (`08`, `input.txt`, …) is in `SOURCE_NAMES`. The page shows only those reader-facing names,
+  in evidence order; note sections and post numbers stay in the YAML.
 
 Anchors are `group.keyword` (e.g. `optimize.steps`). Use them from chapter prose with ``{ref}`text <optimize.steps>` ``. Group order in the reference comes from each file's `order:` field (input-writing order, in steps of 10).
 

@@ -274,13 +274,13 @@
 <p id="index-1"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-8,1e-5</span></code><br />
 <strong>Status:</strong> current · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> input.txt; 01 §4.4 (output echo); Dft.rtf; 08 t01, t04</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">1e-8</span></code> for the final grid and <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for the coarse grid used in the first SCF iterations, as echoed by v13, v15
-and v25 (<code class="docutils literal notranslate"><span class="pre">grid:</span> <span class="pre">accuracy=1.0e-08,1.0e-05</span></code>). <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives <code class="docutils literal notranslate"><span class="pre">1e-7</span></code> (older version).</p>
+<strong>Sources:</strong> version 25 test runs, official site files, <code class="docutils literal notranslate"><span class="pre">input.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code></p>
 <p>Target accuracy of the exchange–correlation energy per atom for the adaptively generated grid (DFT
 methods). The default, 1e-8, is a fine grid. <code class="docutils literal notranslate"><span class="pre">input.txt</span></code> suggests 1e-7 to speed up geometry optimizations
 with the default <code class="docutils literal notranslate"><span class="pre">$optimize</span> <span class="pre">tolerance=1e-4</span></code> or looser, and 1e-9 for very accurate calculations. The grid grows during the SCF; the output
 reports each size on a line such as <code class="docutils literal notranslate"><span class="pre">grid:</span>&#160;&#160;&#160; <span class="pre">34000</span>&#160;&#160; <span class="pre">53</span></code> (number of points) in the SCF table.</p>
+<p><strong>About the default:</strong> <code class="docutils literal notranslate"><span class="pre">1e-8</span></code> for the final grid and <code class="docutils literal notranslate"><span class="pre">1e-5</span></code> for the coarse grid used in the first SCF iterations, as echoed by v13, v15
+and v25 (<code class="docutils literal notranslate"><span class="pre">grid:</span> <span class="pre">accuracy=1.0e-08,1.0e-05</span></code>). <code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> gives <code class="docutils literal notranslate"><span class="pre">1e-7</span></code> (older version).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">Dft.rtf</span></code> suggests 1e-6 for rough optimizations (<code class="docutils literal notranslate"><span class="pre">tol=1e-3</span></code>) and 1e-8 for floppy molecules optimized to

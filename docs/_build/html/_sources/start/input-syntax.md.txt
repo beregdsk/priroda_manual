@@ -118,20 +118,10 @@ optimization (`unknown name coordinated`) but was ignored in an energy run, whic
 clean energy run therefore does not prove that the rest of the input is correct.
 <!-- src: 08 t40, t40b, t40c -->
 
-The same message can appear for a keyword you spelled correctly. In version 25, `convergence=` with a single value,
-followed by `iterations=`, stops the run with the name of `iterations` cut short:
-
-- `$scf convergence=1e-7 iterations=250 $end` printed `unknown name terations` on the machine of the first test
-  rounds, also with the two keywords on separate lines;
-- the same input printed `unknown name erations` in later runs of the `p4_d` executable on another machine. There
-  the message was the same for every value tried (`1e-5`, `1e-6`, `1e-7`, `1e-10`, `0.000001`, `1.0e-6`, and `1e-6,`
-  with a trailing comma), and `iter=50` gave `unknown name er`.
-
-Other keywords after a one-value `convergence=` were read normally (`procedure`, `restrict`, `xmax`, `diagm`,
-`temperature`, `fraction`, `core`, `eemin`, `aw`), but `n1=` stopped the run with `no '$end' found, 'convergence'`.
-The problem disappears when `convergence` gets both of its values (`convergence=1e-6,1e-3 iterations=50`) or comes
-after `iterations`. Give `convergence` both values, or put it last in the group; see
-{ref}`$scf convergence <scf.convergence>`.
+The same message can appear for a keyword you spelled correctly. In version 25, a one-value `convergence=` followed
+by `iterations=` in `$scf` stops the run with `unknown name terations` (or `erations`): the name of `iterations` is
+cut short. Give `convergence` both of its values (`convergence=1e-6,1e-3`), or put it last in the group; see
+{ref}`troubleshooting.scf-parser`.
 <!-- src: 05 §5.1; 08 t07a, t07b, t22a-c; 08 (review check: convergence value series, iter=, n1=, other keywords); slurm s02-s04 first attempt (erations with 1e-10) -->
 
 
@@ -280,7 +270,7 @@ eng>$end
 
 To reuse it, remove the prefix and append the block to the end of the next input, after `$molecule`:
 
-```text
+```bash
 sed -n 's/^eng>//p' mol.out >> mol.in
 ```
 
@@ -306,7 +296,7 @@ Partial results of a numerical calculation are printed on lines prefixed with `n
 - A numerical Hessian split over several runs with {ref}`$d2edr2 steps <d2edr2.steps>`. Collect the `num>` lines of
   all partial outputs into one input, add `$d2edr2 steps=-1 $end`, and run once more:
 
-  ```text
+  ```bash
   grep -h "^num>" mol.out1 mol.out2 mol.out3 mol.out4 | sed 's/^num>//' >> mol.in
   ```
 
@@ -369,9 +359,8 @@ Misspelled task or theory name
   <!-- src: 08 t50, t50b -->
 
 Hybrid functional without `theory=ridft`
-: Older versions ran but gave wrong results. With `theory=dft`, version 25 stops after the basis-set echo with no
-  message in the output file (stderr shows only `MPI_Abort`); with `theory=tddft` it still runs without the exact exchange and gives wrong energies. See
-  {ref}`$control theory <control.theory>`.
+: With `theory=dft` version 25 stops with no message; with `theory=tddft` it silently drops the exact exchange. See
+  {ref}`troubleshooting.hybrid`.
   <!-- src: 04 #96, #310; 08 t08, t46 -->
 
 `basis4.in` without `four=1`

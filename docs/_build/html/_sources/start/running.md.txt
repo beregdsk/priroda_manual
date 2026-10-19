@@ -110,13 +110,13 @@ The 64-bit `p1.exe` ran with `mem=3000` without trouble.
 
 Give the input file first and the output file second:
 
-```text
+```bash
 p input.in output.out
 ```
 
 On Windows:
 
-```text
+```bat
 p1.exe input.in output.out
 ```
 
@@ -147,7 +147,7 @@ If no output file is given (`p input.in`), the output goes to standard output. <
 Priroda is parallelized with MPI. Start a parallel run through an MPI launcher. The official site shows the
 `mpiexec` that it ships next to `p`:
 
-```text
+```bash
 ./mpiexec -np 4 ./p input.in output.out
 ```
 
@@ -173,9 +173,9 @@ Check the start of the output. A parallel run prints the number of processes and
 
 <!-- src: 04 #152; 01 §2.6 -->
 
-The official site gives one example for a cluster build, `p_l` under SLURM:
+The official site gives one example for a cluster build, `p_l` under Slurm:
 
-```text
+```bash
 sbatch -p test -n 16 -t 6 impi ~/bin/p_l file.{in,out}
 ```
 
@@ -187,7 +187,7 @@ Here `impi` is presumably that cluster's Intel MPI wrapper script; it is not par
 
 The official site shows this command for a two-process run:
 
-```text
+```bat
 mpirun.exe -np 2 p.exe C60.qm.in C60.qm.w.2.out
 ```
 
@@ -209,7 +209,7 @@ The MPI runtime is not on the site. Users assembled it from Cygwin as follows:
 4. If the program is in a system directory such as `C:\Program Files`, run it as administrator.
 5. Set `TMPDIR` and start the run from `cmd.exe`, giving the path of the Priroda executable with forward slashes:
 
-   ```text
+   ```bat
    cd /d C:\Work
    set "TMPDIR=%TEMP%"
    C:\Priroda\orterun.exe -np 2 C:/Priroda/p_190306.exe file.in file.out
@@ -231,7 +231,7 @@ To get the old files, install Cygwin from an archived snapshot instead of the cu
 page (<https://cygwin.com/install.html>) lists archived snapshots for old Windows versions. The 2016 x86_64 snapshot
 there worked:
 
-```text
+```bat
 setup-x86_64.exe --allow-unsupported-windows --no-verify --site http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2016/08/30/104235
 ```
 
@@ -290,6 +290,7 @@ $system memory=2048 disk=-2048 path=/scratch/user $end
   enough.
   <!-- src: input.txt; 04 #66 -->
 
+(running-ram-disk)=
 ### Keeping scratch in memory
 
 With a negative `disk`, `memory` plus |`disk`| is taken by every process, so the sum over all processes must fit
@@ -304,6 +305,7 @@ benchmark the gain was larger: a version 8 RI-MP2 job on 8 cores (4 nodes) took 
 against 72 minutes on 2 cores with scratch on disk and 86 minutes on 8 cores with direct SCF and scratch on disk.
 <!-- src: 04 #462; 03 §3 (v8 benchmark, mpich/Myrinet, 4 nodes x 2 cores) -->
 
+(running-scratch)=
 ### Where scratch files go
 
 The scratch directory is taken from `path=`, then from the `TMPDIR` environment variable. The files are named
@@ -330,6 +332,7 @@ still happens with `p1.exe` (version 20). Any of these avoids it:
   disk and runs.
 <!-- src: 04 #20, #21; 03 §2; 08 w02a-d, w03, w04 -->
 
+(running-disk-speed)=
 ### Disk speed
 
 :::{warning}
@@ -390,7 +393,8 @@ What is known about parallel performance:
   between runs on different numbers of processes, and an unstable TS search once followed different paths for
   different `-np`.
   <!-- src: 08 t21b, t63 (vs t32a); 03 §3 (amg, Nov 2008) -->
-- **Running across nodes gives no gain for DFT.** Use one node per job.
+- **Running across nodes gives no gain for DFT.** Use one node per DFT job. RI-MP2 is the exception: the version 8
+  benchmark under {ref}`running-ram-disk` ran 6 times faster on 4 nodes with scratch in RAM than on 2 cores of one node.
   <!-- src: 04 #344, #462; 03 §3 -->
 - **Memory per process does not drop** when you add processes, and in a parallel Hessian nearly all of the disk use is
   on rank 0.
@@ -421,18 +425,19 @@ Hangs, crashes and poor speed-up in parallel runs are covered in {ref}`troublesh
 
 Priroda needs nothing special from a batch system. The job script has to:
 
-1. request **one node** and the number of cores you will use (see {ref}`parallel performance above <running-parallel-scaling>`);
+1. request **one node** and the number of cores you will use (for RI-MP2, see
+   {ref}`parallel performance <running-parallel-scaling>`);
 2. point the scratch to the node's local disk or to RAM, by exporting `TMPDIR` or by `path=` in `$system`;
 3. make the memory request cover `memory` + |negative `disk`| for every process;
 4. start Priroda with the input and output file names.
 
 <!-- src: 06 §7; 04 #462 -->
 
-This SLURM script was tested in version 25 on a single-node Slurm 23.11. Directory names and module setup are
+This Slurm script was tested in version 25 on a single-node Slurm 23.11. Directory names and module setup are
 site-specific.
 <!-- src: 08 Slurm tests (s01-s05) -->
 
-```text
+```bash
 #!/bin/bash
 #SBATCH --job-name=mol
 #SBATCH --nodes=1
@@ -468,7 +473,7 @@ Slurm's own log file says `CANCELLED` or `CANCELLED ... DUE TO TIME LIMIT`. The 
 not run, so the empty scratch directory stays. To remove it as well, set the clean-up as a trap before starting
 Priroda: replace the lines of the script from `env -i` through `exit $status` with these.
 
-```text
+```bash
 trap 'rm -rf "$TMPDIR"' EXIT
 trap 'exit 143' TERM
 env -i PATH="$PATH" HOME="$HOME" TMPDIR="$TMPDIR" \
@@ -482,11 +487,11 @@ Two jobs of one process each ran side by side on the same node without trouble, 
 directory. <!-- src: 08 Slurm tests (s05) -->
 
 Under PBS/Torque the same steps read the number of cores from `$PBS_NODEFILE`. This script was not tested; it
-uses `env -i` and `exit $status` for the same reasons as the SLURM one. Some PBS sites (e.g. KNC) provide a
+uses `env -i` and `exit $status` for the same reasons as the Slurm one. Some PBS sites (e.g. KNC) provide a
 per-job local scratch directory and delete it after the job.
 <!-- src: 06 §7 (PBS_Tutorial) -->
 
-```text
+```bash
 #!/bin/bash
 #PBS -N mol
 #PBS -l nodes=1:ppn=8,walltime=24:00:00
@@ -504,7 +509,7 @@ rm -rf "$TMPDIR"
 exit $status
 ```
 
-<!-- verify: PBS not testable on one PC; same steps as the tested SLURM script -->
+<!-- verify: PBS not testable on one PC; same steps as the tested Slurm script -->
 
 If `/tmp` on the node is small or has a quota, a large job dies writing a scratch file, for example
 `0: write file /tmp/tmp9633.11 (leAX): ...`. Point the scratch at the cluster's scratch file system or at RAM.
@@ -525,6 +530,7 @@ above. Give long jobs enough wall time: in a version 25 test, the analytic Hessi
 core, after a 6-step optimization that had taken most of that hour.
 <!-- src: 08 t72 (timeout kill); 08 Slurm tests (s02, s04) -->
 
+(running-input-files)=
 ## Input file requirements
 
 The input is a plain text file. Write it in a plain-text editor, not a word processor.
@@ -558,7 +564,7 @@ the input needs Unix line endings on Windows too. <!-- src: 08 t81a, w06 -->
 
 To check and fix the line endings on Linux:
 
-```text
+```bash
 file mol.in        # reports "with CRLF line terminators" if the file has Windows endings
 dos2unix mol.in
 ```

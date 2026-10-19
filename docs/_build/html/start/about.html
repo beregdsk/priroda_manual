@@ -479,10 +479,8 @@ values, including the undocumented ones, is in <a class="reference internal" hre
 <!-- src: 01 §5.6; 06 §3 (UO2F2 riDFT, O2 riMP2 examples); 05 §14 -->
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Hybrid functionals work only with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>. With <code class="docutils literal notranslate"><span class="pre">theory=dft</span></code>, older versions silently drop the exact
-exchange, and newer versions, including version 25, stop right after printing the basis sets with no error message
-in the output. With <code class="docutils literal notranslate"><span class="pre">theory=tddft</span></code>, version 25 still runs a hybrid without its exact exchange and gives wrong
-energies with no warning. See <a class="reference internal" href="../reference/control.html#control-theory"><span class="std std-ref">$control theory</span></a>.</p>
+<p>Hybrid functionals work only with <code class="docutils literal notranslate"><span class="pre">theory=ridft</span></code>. With other <code class="docutils literal notranslate"><span class="pre">theory=</span></code> values they either stop the run with no
+message or silently lose their exact exchange; see <a class="reference internal" href="../troubleshooting/common-problems.html#troubleshooting-hybrid"><span class="std std-ref">Hybrid functional silently ignored</span></a>.</p>
 </div>
 <!-- src: 03 §11; 04 #96, #99, #307-#310; 08 t08, t46 -->
 </section>
@@ -526,8 +524,8 @@ warning above this section). <!-- src: 03 §11; 08 t46 --></p>
 <li><p>no multireference methods (CASSCF, MRCI, CASPT2) that users could get working; <!-- src: 04 #156; control.yaml theory notes --></p></li>
 <li><p>no freezing of atoms in Cartesian space; only internal coordinates can be fixed
 (<a class="reference internal" href="../reference/optimize.html#optimize-fix"><span class="std std-ref">$optimize fix</span></a>); <!-- src: 04 #372-#373; 03 §5 --></p></li>
-<li><p>no general job chaining in one input: <code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> is the only combined task, and two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines run
-only the first. <!-- src: 04 #69, #70, #145 --></p></li>
+<li><p>no general job chaining in one input: <code class="docutils literal notranslate"><span class="pre">task=optimize+hessian</span></code> is the only combined task, and of two <code class="docutils literal notranslate"><span class="pre">task=</span></code> lines
+version 25 runs only the last. <!-- src: 04 #69, #70, #145; 08 t81b --></p></li>
 </ul>
 </section>
 <section id="version-history">

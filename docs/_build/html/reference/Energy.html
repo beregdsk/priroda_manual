@@ -290,7 +290,7 @@ eng&gt;$end
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> hartree<br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.10; 02 §3.2; 08 t01</p>
+<strong>Sources:</strong> version 25 test runs, official site files, LIMOR page</p>
 <p>Total energy.</p>
 </section>
 <section id="g">
@@ -299,7 +299,7 @@ eng&gt;$end
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> au<br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.10; 02 §3.2; 08 t02</p>
+<strong>Sources:</strong> version 25 test runs, official site files, LIMOR page</p>
 <p>Cartesian gradient (3N values).</p>
 </section>
 <section id="h">
@@ -308,7 +308,7 @@ eng&gt;$end
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> au<br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 02 §3.2; 08 t13; 08 t24, t25, t41, t41b; 08 t55</p>
+<strong>Sources:</strong> version 25 test runs, LIMOR page</p>
 <p>Hessian as a lower triangle, 3N(3N+1)/2 values. Written by <code class="docutils literal notranslate"><span class="pre">task=hessian</span></code> on <code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code> lines; in version 25 a
 <code class="docutils literal notranslate"><span class="pre">saddle=1</span></code> optimization and an IRC read it back from an appended <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> group. If the input holds several
 plain <code class="docutils literal notranslate"><span class="pre">$Energy</span></code> groups, the last one is used. The numbered groups <code class="docutils literal notranslate"><span class="pre">$Energy000</span></code>, <code class="docutils literal notranslate"><span class="pre">$Energy001</span></code>, … of a split
@@ -321,7 +321,7 @@ numerical Hessian are all read by the combining run (<code class="docutils liter
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Units:</strong> au<br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 01 §4.10; 02 §3.2; 08 t01</p>
+<strong>Sources:</strong> version 25 test runs, official site files, LIMOR page</p>
 <p>Dipole moment (3 values), written next to <code class="docutils literal notranslate"><span class="pre">E=</span></code>.</p>
 </section>
 <section id="dx">
@@ -329,7 +329,7 @@ numerical Hessian are all read by the combining run (<code class="docutils liter
 <p id="index-5"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 02 §3.2 (inferred); 08 t13; 08 t36</p>
+<strong>Sources:</strong> version 25 test runs, LIMOR page</p>
 <p>Dipole derivatives with respect to nuclear coordinates (inferred from use: IR/Raman intensities).</p>
 </section>
 <section id="a">
@@ -337,7 +337,7 @@ numerical Hessian are all read by the combining run (<code class="docutils liter
 <p id="index-6"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · not verified<br />
-<strong>Sources:</strong> 02 §3.2; 08 t13; 08 t36</p>
+<strong>Sources:</strong> version 25 test runs, LIMOR page</p>
 <p>Static dipole polarizability as a lower triangle (6 values), written with a negative sign (inferred: the
 second derivative of the energy with respect to the field). Written by an analytic Hessian (<code class="docutils literal notranslate"><span class="pre">eng&gt;</span></code>) and by
 <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> (<code class="docutils literal notranslate"><span class="pre">num&gt;</span></code>).</p>
@@ -348,7 +348,7 @@ second derivative of the energy with respect to the field). Written by an analyt
 <p id="index-7"><strong>Type:</strong> list<br />
 <strong>Default:</strong> <em>none stated</em><br />
 <strong>Status:</strong> undocumented · verified on 25 (2025.02.28)<br />
-<strong>Sources:</strong> 08 t36; 08 t56; 04 #381 (relayed); 09</p>
+<strong>Sources:</strong> version 25 test runs, version 25 executable, chemport.ru forum</p>
 <p>Polarizability derivatives with respect to the nuclear coordinates. Written by <code class="docutils literal notranslate"><span class="pre">task=dipole</span></code> on <code class="docutils literal notranslate"><span class="pre">num&gt;</span></code> lines;
 appended to a Hessian input, they give the Raman activities and depolarization ratios.</p>
 <p><strong>See also:</strong> <a class="reference internal" href="#energy-a"><span class="std std-ref">A ($Energy)</span></a>, <a class="reference internal" href="#energy-dx"><span class="std std-ref">Dx ($Energy)</span></a></p>

@@ -20,7 +20,7 @@ Reference shieldings and extra points for NMR shielding calculations.
 **Type:** indexed-array\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 04 #69; 02 §5.7; 08 t34; 08 t57b
+**Sources:** version 25 test runs, `input.txt`, chemport.ru forum, LIMOR page
 
 Reference shielding constants, indexed by atomic number, for computing chemical shifts. Values are needed
 only for the elements present in the molecule.
@@ -53,7 +53,7 @@ $end
 **Default:** *none stated*\
 **Units:** Å\
 **Status:** current · not verified\
-**Sources:** input.txt; 02 §3.2; 03 §12
+**Sources:** `input.txt`, qchem.ru forum, LIMOR page
 
 Extra points in space, given as x,y,z triples, at which magnetic shielding tensors are computed in
 addition to the nuclear centres. This is the way to compute NICS: NICS is the negative of the isotropic

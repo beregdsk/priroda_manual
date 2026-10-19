@@ -18,7 +18,7 @@ Per-element core definitions for correlated (HF-based) methods.
 **Type:** indexed-array\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 t16; 01 §7; 08 (review check)
+**Sources:** version 25 test runs, official site files, `input.txt`
 
 For HF-based methods, the number of core shells for L=0,1,2,3, given for each atomic number. The values are
 used only to compute the total number of core electrons in the molecule.
@@ -49,7 +49,7 @@ $atoms core(280)=2,1,0,0 $end
 **Type:** integer\
 **Default:** *none stated*\
 **Status:** current · verified on 25 (2025.02.28)\
-**Sources:** input.txt; 08 (review check)
+**Sources:** version 25 test runs, `input.txt`
 
 A simple way to add outer-core shells to the correlation treatment: `mcore=M` correlates every core shell
 whose principal quantum number is at least n(valence) − M. In version 25, for Cl in an RI-MP2 run of HCl, the
