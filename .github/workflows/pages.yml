@@ -22,19 +22,19 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
       - name: Install Sphinx
         run: python -m venv .venv && .venv/bin/pip install -r requirements.txt
 
-      - name: Install LaTeX
+      - name: Install Graphviz and LaTeX
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-base \
+          sudo apt-get install -y --no-install-recommends graphviz latexmk texlive-latex-base \
             texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended tex-gyre
 
       - name: Build HTML and PDF
@@ -45,7 +45,7 @@ jobs:
           cp docs/_build/latex/priroda-manual.pdf docs/_build/html/
           rm -rf docs/_build/html/.doctrees
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: docs/_build/html
 
